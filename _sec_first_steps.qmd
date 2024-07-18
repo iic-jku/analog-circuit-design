@@ -4,9 +4,11 @@ In this first chapter we will learn to use Xschem for schematic entry, and how t
 
 A first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $V_\mathrm{GS}$ and $V_\mathrm{DS}$ and looking at $I_\mathrm{DS}$ and other large- and small-signal parameters.
 
+As this is an intermediate-level course, some basic knowledge about MOSFET operation, basic device equations, and small-signal equivalent circuits is assumed. This knowledge will be practiced, though, throughout the course, by doing exercises to compare hand calculation with actual simulation results. JKU students should be familiar with the MOSFET chapter from "Design of Complex Integrated Circuits" (VL 336.048).
+
 In order to get started, basic Xschem testbenches are prepared.
 
-#### Student Exersize
+#### Student Exercise
 
 1. Try to get the LV NMOS testbench at <https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch> operating.
 2. Make yourself familiar with Xschem (change the schematic, run a simulation, graph the result).
@@ -17,9 +19,13 @@ In order to get started, basic Xschem testbenches are prepared.
    3. Change $W$ and $L$ of the MOSFET. What is the impact on the above parameters? Can you explain the variations?
    4. How is $V_\mathrm{th}$ changing with $W$ and $L$? Can you explain what you are seeing.
    5. Take a look at the device capacitances $C_\mathrm{GG}$ and $C_\mathrm{GD}$. Why are they important? What is the relation to $f_\mathrm{T}$?
-   6. When looking at the model parameters in ngspice, you see that there is a $C_\mathrm{GD}$ and a $C_\_mathrm{DG}$. Why, what is the difference? Sometimes these capacitors show a negative value, why?
+   6. When looking at the model parameters in ngspice, you see that there is a $C_\mathrm{GD}$ and a $C_\mathrm{DG}$. Why, what is the difference? Sometimes these capacitors show a negative value, why?
    7. In this course we will only consider the drain-source current noise of the MOSFET. Look at the simulated value and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
 5. Build test benches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
    1. Which is the fastest device? Why?
    2. What is the difference in $g_\mathrm{m}$ and other parameters between these four different MOSFETs? Why?
-6. Build a test bench to explore the body effect, start with LV NMOS. What happens when $V_\mathrm{BS} \neq 0$?
+   3. If you would have to size an inverter, what would be the ideal ratio of $W_p/W_n$? Will you exactly design this ratio, or are the reasons to deviate?
+   4. There are LV and HV MOSFETs, and you investigated the difference in performance. What is the rationale when designing circuits for selection either an LV type, and when to choose an HV type?
+6. Build a test bench to explore the body effect, start with LV NMOS.
+   1. What happens when $V_\mathrm{BS} \neq 0$?
+   2. What is the ratio of $g_\mathrm{m}$ to $g_\mathrm{mB}$? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?
