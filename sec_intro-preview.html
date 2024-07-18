@@ -1,30 +1,117 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="generator" content="quarto-1.5.54">
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2024-07-18">
-
-<title>Analog Circuit Design</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
+    <title>sec_intro</title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+        vertical-align: middle;
+      }
+    </style>
+
+    <style>
+      body.hypothesis-enabled #quarto-embed-header {
+        padding-right: 36px;
+      }
+
+      #quarto-embed-header {
+        height: 3em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px;
+      }
+
+      #quarto-embed-header h6 {
+        font-size: 1.1em;
+        padding-top: 0.6em;
+        margin-left: 1em;
+        margin-right: 1em;
+        font-weight: 400;
+      }
+
+      #quarto-embed-header a.quarto-back-link,
+      #quarto-embed-header a.quarto-download-embed {
+        font-size: 0.8em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+
+      .quarto-back-container {
+        padding-left: 0.5em;
+        display: flex;
+      }
+
+      .headroom {
+          will-change: transform;
+          transition: transform 200ms linear;
+      }
+
+      .headroom--pinned {
+          transform: translateY(0%);
+      }
+
+      .headroom--unpinned {
+          transform: translateY(-100%);
+      }      
+    </style>
+
+    <script>
+    window.document.addEventListener("DOMContentLoaded", function () {
+
+      var header = window.document.querySelector("#quarto-embed-header");
+      const titleBannerEl = window.document.querySelector("body > #title-block-header");
+      if (titleBannerEl) {
+        titleBannerEl.style.paddingTop = header.clientHeight + "px";
+      }
+      const contentEl = window.document.getElementById('quarto-content');
+      for (const child of contentEl.children) {
+        child.style.paddingTop = header.clientHeight + "px";
+        child.style.marginTop = "1em";
+      }
+
+      // Use the article root if the `back` call doesn't work. This isn't perfect
+      // but should typically work
+      window.quartoBackToArticle = () => {
+        var currentUrl = window.location.href;
+        window.history.back();
+        setTimeout(() => {
+            // if location was not changed in 100 ms, then there is no history back
+            if(currentUrl === window.location.href){              
+                // redirect to site root
+                window.location.href = "index.html";
+            }
+        }, 100);
+      }
+
+      const headroom = new window.Headroom(header, {
+        tolerance: 5,
+        onPin: function () {
+        },
+        onUnpin: function () {
+        },
+      });
+      headroom.init();
+    });
+    </script>
+
+    
+<script src="site_libs/manuscript-notebook/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -35,138 +122,34 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script> 
+      </head>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <body class="quarto-notebook">
+    <div id="quarto-embed-header" class="headroom fixed-top bg-primary">
+      
+      <a onclick="window.quartoBackToArticle(); return false;" class="btn btn-primary quarto-back-link" href=""><i class="bi bi-caret-left"></i> Back to Article</a>
+      <h6><i class="bi bi-journal-code"></i> IHP’s SG13G2 130nm CMOS Technology</h6>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta name="citation_title" content="Analog Circuit Design">
-<meta name="citation_author" content="Harald Pretl">
-<meta name="citation_publication_date" content="2024-07-18">
-<meta name="citation_cover_date" content="2024-07-18">
-<meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-07-18">
-<meta name="citation_language" content="en">
-</head>
-
-<body>
-
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Analog Circuit Design</h1>
+            <a href="./sec_intro.qmd" class="btn btn-primary quarto-download-embed" download="sec_intro.qmd">Download Source</a>
           </div>
 
-    
-    <div class="quarto-title-meta-container">
-      <div class="quarto-title-meta-column-start">
-            <div class="quarto-title-meta-author">
-          <div class="quarto-title-meta-heading">Author</div>
-          <div class="quarto-title-meta-heading">Affiliation</div>
-          
-                <div class="quarto-title-meta-contents">
-            <p class="author">Harald Pretl <a href="mailto:harald.pretl@jku.at" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-          </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        <a href="www.jku.at">
-                        Johannes Kepler University
-                        </a>
-                      </p>
-                  </div>
-                    </div>
-        
-        <div class="quarto-title-meta">
-
-                      
-                <div>
-            <div class="quarto-title-meta-heading">Published</div>
-            <div class="quarto-title-meta-contents">
-              <p class="date">July 18, 2024</p>
-            </div>
-          </div>
-          
-                
-              </div>
-      </div>
-      <div class="quarto-title-meta-column-end quarto-other-formats-target">
-      <div class="quarto-alternate-formats"><div class="quarto-title-meta-heading">Other Formats</div><div class="quarto-title-meta-contents"><p><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></p></div></div></div>
-    </div>
-
-
-
-    <div class="quarto-other-links-text-target">
-    </div>  </div>
-</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+     <div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
 <div id="quarto-sidebar-toc-left" class="sidebar toc-left">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link active" data-scroll-target="#sec-intro">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#ihps-sg13g2-130nm-cmos-technology" id="toc-ihps-sg13g2-130nm-cmos-technology" class="nav-link" data-scroll-target="#ihps-sg13g2-130nm-cmos-technology">IHP’s SG13G2 130nm CMOS Technology</a></li>
+  <li><a href="#ihps-sg13g2-130nm-cmos-technology" id="toc-ihps-sg13g2-130nm-cmos-technology" class="nav-link active" data-scroll-target="#ihps-sg13g2-130nm-cmos-technology">IHP’s SG13G2 130nm CMOS Technology</a></li>
   <li><a href="#schematic-entry-using-xschem" id="toc-schematic-entry-using-xschem" class="nav-link" data-scroll-target="#schematic-entry-using-xschem">Schematic Entry Using Xschem</a></li>
   <li><a href="#circuit-simulation-using-ngspice" id="toc-circuit-simulation-using-ngspice" class="nav-link" data-scroll-target="#circuit-simulation-using-ngspice">Circuit Simulation Using ngspice</a></li>
   <li><a href="#integrated-ic-design-environment-iic-osic-tools" id="toc-integrated-ic-design-environment-iic-osic-tools" class="nav-link" data-scroll-target="#integrated-ic-design-environment-iic-osic-tools">Integrated IC Design Environment (IIC-OSIC-TOOLS)</a></li>
-  </ul></li>
-  <li><a href="#first-steps" id="toc-first-steps" class="nav-link" data-scroll-target="#first-steps">First Steps</a>
-  <ul class="collapse">
-  <li><a href="#sec-mosfet" id="toc-sec-mosfet" class="nav-link" data-scroll-target="#sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</a></li>
-  <li><a href="#sec-mosfet-diode" id="toc-sec-mosfet-diode" class="nav-link" data-scroll-target="#sec-mosfet-diode">First Circuit: MOSFET Diode</a></li>
-  </ul></li>
-  <li><a href="#transistor-sizing-using-inversion-coefficient" id="toc-transistor-sizing-using-inversion-coefficient" class="nav-link" data-scroll-target="#transistor-sizing-using-inversion-coefficient">Transistor Sizing Using Inversion Coefficient</a></li>
-  <li><a href="#current-mirror" id="toc-current-mirror" class="nav-link" data-scroll-target="#current-mirror">Current Mirror</a></li>
-  <li><a href="#differential-pair" id="toc-differential-pair" class="nav-link" data-scroll-target="#differential-pair">Differential Pair</a></li>
-  <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
-  <li><a href="#a-basic-5-transistor-ota" id="toc-a-basic-5-transistor-ota" class="nav-link" data-scroll-target="#a-basic-5-transistor-ota">A Basic 5-Transistor OTA</a></li>
-  <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota">A Fully-Differential OTA</a></li>
-  <li><a href="#biasing-the-ota" id="toc-biasing-the-ota" class="nav-link" data-scroll-target="#biasing-the-ota">Biasing the OTA</a></li>
-  <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter">An RC-OPAMP Filter</a></li>
-  <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion">Summary &amp; Conclusion</a></li>
-  <li><a href="#appendix-ngspice-cheat-sheet" id="toc-appendix-ngspice-cheat-sheet" class="nav-link" data-scroll-target="#appendix-ngspice-cheat-sheet">Appendix: ngspice Cheat Sheet</a></li>
-  <li><a href="#appendix-xschem-cheat-sheet" id="toc-appendix-xschem-cheat-sheet" class="nav-link" data-scroll-target="#appendix-xschem-cheat-sheet">Appendix: Xschem Cheat Sheet</a></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sec_intro-preview.html"><i class="bi bi-journal-code"></i>IHP's SG13G2 130nm CMOS Technology</a></li><li><a href="sec_first_steps-preview.html"><i class="bi bi-journal-code"></i>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</a></li></ul></div></nav>
+</nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-  
-
-
-<section id="sec-intro" class="level2">
-<h2 class="anchored" data-anchor-id="sec-intro">Introduction</h2>
-<p>This is the material for an intermediate-level MOSFET circuit design course, held at JKU under course number 336.009 (“KV Analoge Schaltungstechnik”).</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">      <p>This is the material for an intermediate-level MOSFET circuit design course, held at JKU under course number 336.009 (“KV Analoge Schaltungstechnik”).</p>
 <p>The course makes heavy use of circuit simulation, using <strong>Xschem</strong> for schematic entry and <strong>ngspice</strong> for simulation. The 130nm CMOS technology <strong>SG13G2</strong> from IHP Microelectronics is used.</p>
 <p>Tools and PDK are integrated in the <strong>IIC-OSIC-TOOLS</strong> Docker image, which will be used during the coursework.</p>
 <p>All course material is made publicly available and shared under the Apache-2.0 license.</p>
@@ -199,80 +182,8 @@ window.Quarto = {
 <p>In order to make usage of the various required components (tools like Xschem, PDK like SG13G2) easier, we will use the IIC-OSIC-TOOLS. This is a pre-setup Docker image which allows to design on a virtual machine on virtually any type of computing equipment. For further information like installed tools, how to setup a VM, etc. please look at <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS">IIC-OSIC-TOOLS GitHub page</a>.</p>
 <p>Experienced users can install this image on their personal computer, for JKU students the IIC will host a VM on our compute cluster and provide personal login credentials.</p>
 </section>
-</section>
-<section id="first-steps" class="level2">
-<h2 class="anchored" data-anchor-id="first-steps">First Steps</h2>
-<p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.</p>
-<section id="sec-mosfet" class="level3">
-<h3 class="anchored" data-anchor-id="sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
-<p>A first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{DS}\)</span> and other large- and small-signal parameters.</p>
-<p>In order to get started, basic Xschem testbenches are prepared.</p>
-<section id="student-exersize" class="level4">
-<h4 class="anchored" data-anchor-id="student-exersize">Student Exersize</h4>
-<ol type="1">
-<li>Try to get the LV NMOS testbench at <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch" class="uri">https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch</a> operating.</li>
-<li>Make yourself familiar with Xschem (change the schematic, run a simulation, graph the result).</li>
-<li>Make youself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look and MOSFET model parameters).</li>
-<li>Explore the LV NMOS
-<ol type="1">
-<li>How are <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(g_\mathrm{ds}\)</span>, and <span class="math inline">\(V_\mathrm{th}\)</span> changing when you change the dc node voltages?</li>
-<li>Can you hand-calculate <span class="math inline">\(g_\mathrm{m}\)</span>? Does it fit? See what happens when <span class="math inline">\(V_\mathrm{GS} &gt; V_\mathrm{th}\)</span> or <span class="math inline">\(V_\mathrm{GS} &lt; V_\mathrm{th}\)</span>, and concurrently vary <span class="math inline">\(V_\mathrm{DS}\)</span>.</li>
-<li>Change <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of the MOSFET. What is the impact on the above parameters? Can you explain the variations?</li>
-<li>How is <span class="math inline">\(V_\mathrm{th}\)</span> changing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>? Can you explain what you are seeing.</li>
-<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{GG}\)</span> and <span class="math inline">\(C_\mathrm{GD}\)</span>. Why are they important? What is the relation to <span class="math inline">\(f_\mathrm{T}\)</span>?</li>
-<li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\_mathrm{DG}\)</span>. Why, what is the difference? Sometimes these capacitors show a negative value, why?</li>
-<li>In this course we will only consider the drain-source current noise of the MOSFET. Look at the simulated value and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
-</ol></li>
-<li>Build test benches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
-<ol type="1">
-<li>Which is the fastest device? Why?</li>
-<li>What is the difference in <span class="math inline">\(g_\mathrm{m}\)</span> and other parameters between these four different MOSFETs? Why?</li>
-</ol></li>
-<li>Build a test bench to explore the body effect, start with LV NMOS. What happens when <span class="math inline">\(V_\mathrm{BS} \neq 0\)</span>?</li>
-</ol>
-</section>
-</section>
-<section id="sec-mosfet-diode" class="level3">
-<h3 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h3>
-</section>
-</section>
-<section id="transistor-sizing-using-inversion-coefficient" class="level2">
-<h2 class="anchored" data-anchor-id="transistor-sizing-using-inversion-coefficient">Transistor Sizing Using Inversion Coefficient</h2>
-</section>
-<section id="current-mirror" class="level2">
-<h2 class="anchored" data-anchor-id="current-mirror">Current Mirror</h2>
-</section>
-<section id="differential-pair" class="level2">
-<h2 class="anchored" data-anchor-id="differential-pair">Differential Pair</h2>
-</section>
-<section id="cascode-stage" class="level2">
-<h2 class="anchored" data-anchor-id="cascode-stage">Cascode Stage</h2>
-</section>
-<section id="a-basic-5-transistor-ota" class="level2">
-<h2 class="anchored" data-anchor-id="a-basic-5-transistor-ota">A Basic 5-Transistor OTA</h2>
-</section>
-<section id="a-fully-differential-ota" class="level2">
-<h2 class="anchored" data-anchor-id="a-fully-differential-ota">A Fully-Differential OTA</h2>
-</section>
-<section id="biasing-the-ota" class="level2">
-<h2 class="anchored" data-anchor-id="biasing-the-ota">Biasing the OTA</h2>
-</section>
-<section id="an-rc-opamp-filter" class="level2">
-<h2 class="anchored" data-anchor-id="an-rc-opamp-filter">An RC-OPAMP Filter</h2>
-</section>
-<section id="summary-conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="summary-conclusion">Summary &amp; Conclusion</h2>
-</section>
-<section id="appendix-ngspice-cheat-sheet" class="level2">
-<h2 class="anchored" data-anchor-id="appendix-ngspice-cheat-sheet">Appendix: ngspice Cheat Sheet</h2>
-</section>
-<section id="appendix-xschem-cheat-sheet" class="level2">
-<h2 class="anchored" data-anchor-id="appendix-xschem-cheat-sheet">Appendix: Xschem Cheat Sheet</h2>
-</section>
-
-</main>
-<!-- /main column -->
-<script id="quarto-html-after-body" type="application/javascript">
+     </main>
+<!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -691,10 +602,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-</div> <!-- /content -->
-
-
-
-
+</script>  </div> <!-- /content --> 
+  
 </body></html>

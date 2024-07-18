@@ -167,7 +167,7 @@
 \tableofcontents
 }
 
-\subsection{Introduction}\label{introduction}
+\subsection{Introduction}\label{sec-intro}
 
 This is the material for an intermediate-level MOSFET circuit design
 course, held at JKU under course number 336.009 (``KV Analoge
@@ -182,15 +182,6 @@ image, which will be used during the coursework.
 
 All course material is made publicly available and shared under the
 Apache-2.0 license.
-
-\subsection{The MOSFET}\label{sec-mosfet}
-
-In this first chapter we will learn to use Xschem for schematic entry,
-and how to operate the ngspice SPICE simulator for circuit simulations.
-Further, we will make ourself familiar with the transistor and other
-passive components available in the IHP Microelectronics SG13G2
-technology. While this is strictly speaking a BiCMOS technology offering
-MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.
 
 \subsubsection{IHP's SG13G2 130nm CMOS
 Technology}\label{ihps-sg13g2-130nm-cmos-technology}
@@ -247,6 +238,162 @@ devices are summarized in the following:
   \textbf{MOM capacitor}: Well-suited metal stack due to 5 thin metal
   layers, but no primitive capacitor available.
 \end{itemize}
+
+\subsubsection{Schematic Entry Using
+Xschem}\label{schematic-entry-using-xschem}
+
+Xschem is an open-source schematic entry tool with emphasis on
+integrated circuits. For up-to-date information of the many features of
+Xschem please look at the
+\href{https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html}{online
+documentation}. Usage of Xschem will be learned with the first few basic
+examples, essentially a single MOSFET. The usage model of Xschem is that
+the schematic is hierarchically drawn, and the simulation and evaluation
+statements are contained in the schematics. Further, Xschem offers
+embedded graphing, which we will mostly use.
+
+\subsubsection{Circuit Simulation Using
+ngspice}\label{circuit-simulation-using-ngspice}
+
+ngspice is an open-source circuit simulator with SPICE dependency.
+Besides the usual simulated types like \texttt{op} (operating point),
+\texttt{dc} (dc sweeps), \texttt{tran} (time-domain), or \texttt{ac}
+(for small-signal frquency sweeps), ngspice offers a script-like control
+interface, where many different simulation controls and result
+evaluations can be done. For detailed information please refer to the
+latest
+\href{https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf}{manual}.
+
+\subsubsection{Integrated IC Design Environment
+(IIC-OSIC-TOOLS)}\label{integrated-ic-design-environment-iic-osic-tools}
+
+In order to make usage of the various required components (tools like
+Xschem, PDK like SG13G2) easier, we will use the IIC-OSIC-TOOLS. This is
+a pre-setup Docker image which allows to design on a virtual machine on
+virtually any type of computing equipment. For further information like
+installed tools, how to setup a VM, etc. please look at
+\href{https://github.com/iic-jku/IIC-OSIC-TOOLS}{IIC-OSIC-TOOLS GitHub
+page}.
+
+Experienced users can install this image on their personal computer, for
+JKU students the IIC will host a VM on our compute cluster and provide
+personal login credentials.
+
+\subsection{First Steps}\label{first-steps}
+
+In this first chapter we will learn to use Xschem for schematic entry,
+and how to operate the ngspice SPICE simulator for circuit simulations.
+Further, we will make ourself familiar with the transistor and other
+passive components available in the IHP Microelectronics SG13G2
+technology. While this is strictly speaking a BiCMOS technology offering
+MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.
+
+\subsubsection{The Metal-Oxide-Semiconductor Field-Effect-Transistor
+(MOSFET)}\label{sec-mosfet}
+
+A first step in any new IC technology should be to investigate basic
+MOSFET performance, by doing simple dc sweeps of \(V_\mathrm{GS}\) and
+\(V_\mathrm{DS}\) and looking at \(I_\mathrm{DS}\) and other large- and
+small-signal parameters.
+
+In order to get started, basic Xschem testbenches are prepared.
+
+\paragraph{Student Exersize}\label{student-exersize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Try to get the LV NMOS testbench at
+  \url{https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch}
+  operating.
+\item
+  Make yourself familiar with Xschem (change the schematic, run a
+  simulation, graph the result).
+\item
+  Make youself familiar with ngspice (run various simulations, save nets
+  and parameters, use the embedded Xschem graphing, explore the
+  interactive ngspice shell to look and MOSFET model parameters).
+\item
+  Explore the LV NMOS
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    How are \(g_\mathrm{m}\), \(g_\mathrm{ds}\), and \(V_\mathrm{th}\)
+    changing when you change the dc node voltages?
+  \item
+    Can you hand-calculate \(g_\mathrm{m}\)? Does it fit? See what
+    happens when \(V_\mathrm{GS} > V_\mathrm{th}\) or
+    \(V_\mathrm{GS} < V_\mathrm{th}\), and concurrently vary
+    \(V_\mathrm{DS}\).
+  \item
+    Change \(W\) and \(L\) of the MOSFET. What is the impact on the
+    above parameters? Can you explain the variations?
+  \item
+    How is \(V_\mathrm{th}\) changing with \(W\) and \(L\)? Can you
+    explain what you are seeing.
+  \item
+    Take a look at the device capacitances \(C_\mathrm{GG}\) and
+    \(C_\mathrm{GD}\). Why are they important? What is the relation to
+    \(f_\mathrm{T}\)?
+  \item
+    When looking at the model parameters in ngspice, you see that there
+    is a \(C_\mathrm{GD}\) and a \(C_\_mathrm{DG}\). Why, what is the
+    difference? Sometimes these capacitors show a negative value, why?
+  \item
+    In this course we will only consider the drain-source current noise
+    of the MOSFET. Look at the simulated value and compare with a hand
+    calculation of the noise. In the noise equation there is the factor
+    \(\gamma\), which in triode is \(\gamma=1\) and in saturation is
+    \(\gamma=2/3\) according to basic text books. Which value of
+    \(\gamma\) are you calculating? Why might it be different?
+  \end{enumerate}
+\item
+  Build test benches in Xschem for the LV PMOS, the HV NMOS, and the HV
+  PMOS. Explore the different results.
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Which is the fastest device? Why?
+  \item
+    What is the difference in \(g_\mathrm{m}\) and other parameters
+    between these four different MOSFETs? Why?
+  \end{enumerate}
+\item
+  Build a test bench to explore the body effect, start with LV NMOS.
+  What happens when \(V_\mathrm{BS} \neq 0\)?
+\end{enumerate}
+
+\subsubsection{First Circuit: MOSFET Diode}\label{sec-mosfet-diode}
+
+\subsection{Transistor Sizing Using Inversion
+Coefficient}\label{transistor-sizing-using-inversion-coefficient}
+
+\subsection{Current Mirror}\label{current-mirror}
+
+\subsection{Differential Pair}\label{differential-pair}
+
+\subsection{Cascode Stage}\label{cascode-stage}
+
+\subsection{A Basic 5-Transistor OTA}\label{a-basic-5-transistor-ota}
+
+\subsection{A Fully-Differential OTA}\label{a-fully-differential-ota}
+
+\subsection{Biasing the OTA}\label{biasing-the-ota}
+
+\subsection{An RC-OPAMP Filter}\label{an-rc-opamp-filter}
+
+\subsection{Summary \& Conclusion}\label{summary-conclusion}
+
+\subsection{Appendix: ngspice Cheat
+Sheet}\label{appendix-ngspice-cheat-sheet}
+
+\subsection{Appendix: Xschem Cheat
+Sheet}\label{appendix-xschem-cheat-sheet}
 
 
 
