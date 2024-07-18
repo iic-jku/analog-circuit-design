@@ -1,0 +1,25 @@
+In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.
+
+### The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET) {#sec-mosfet}
+
+A first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $V_\mathrm{GS}$ and $V_\mathrm{DS}$ and looking at $I_\mathrm{DS}$ and other large- and small-signal parameters.
+
+In order to get started, basic Xschem testbenches are prepared.
+
+#### Student Exersize
+
+1. Try to get the LV NMOS testbench at <https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch> operating.
+2. Make yourself familiar with Xschem (change the schematic, run a simulation, graph the result).
+3. Make youself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look and MOSFET model parameters).
+4. Explore the LV NMOS
+   1. How are $g_\mathrm{m}$, $g_\mathrm{ds}$, and $V_\mathrm{th}$ changing when you change the dc node voltages?
+   2. Can you hand-calculate $g_\mathrm{m}$? Does it fit? See what happens when $V_\mathrm{GS} > V_\mathrm{th}$ or $V_\mathrm{GS} < V_\mathrm{th}$, and concurrently vary $V_\mathrm{DS}$. 
+   3. Change $W$ and $L$ of the MOSFET. What is the impact on the above parameters? Can you explain the variations?
+   4. How is $V_\mathrm{th}$ changing with $W$ and $L$? Can you explain what you are seeing.
+   5. Take a look at the device capacitances $C_\mathrm{GG}$ and $C_\mathrm{GD}$. Why are they important? What is the relation to $f_\mathrm{T}$?
+   6. When looking at the model parameters in ngspice, you see that there is a $C_\mathrm{GD}$ and a $C_\_mathrm{DG}$. Why, what is the difference? Sometimes these capacitors show a negative value, why?
+   7. In this course we will only consider the drain-source current noise of the MOSFET. Look at the simulated value and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
+5. Build test benches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
+   1. Which is the fastest device? Why?
+   2. What is the difference in $g_\mathrm{m}$ and other parameters between these four different MOSFETs? Why?
+6. Build a test bench to explore the body effect, start with LV NMOS. What happens when $V_\mathrm{BS} \neq 0$?
