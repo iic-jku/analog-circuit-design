@@ -296,9 +296,17 @@ MOSFET performance, by doing simple dc sweeps of \(V_\mathrm{GS}\) and
 \(V_\mathrm{DS}\) and looking at \(I_\mathrm{DS}\) and other large- and
 small-signal parameters.
 
+As this is an intermediate-level course, some basic knowledge about
+MOSFET operation, basic device equations, and small-signal equivalent
+circuits is assumed. This knowledge will be practiced, though,
+throughout the course, by doing exercises to compare hand calculation
+with actual simulation results. JKU students should be familiar with the
+MOSFET chapter from ``Design of Complex Integrated Circuits'' (VL
+336.048).
+
 In order to get started, basic Xschem testbenches are prepared.
 
-\paragraph{Student Exersize}\label{student-exersize}
+\paragraph{Student Exercise}\label{student-exercise}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -340,7 +348,7 @@ In order to get started, basic Xschem testbenches are prepared.
     \(f_\mathrm{T}\)?
   \item
     When looking at the model parameters in ngspice, you see that there
-    is a \(C_\mathrm{GD}\) and a \(C_\_mathrm{DG}\). Why, what is the
+    is a \(C_\mathrm{GD}\) and a \(C_\mathrm{DG}\). Why, what is the
     difference? Sometimes these capacitors show a negative value, why?
   \item
     In this course we will only consider the drain-source current noise
@@ -362,10 +370,28 @@ In order to get started, basic Xschem testbenches are prepared.
   \item
     What is the difference in \(g_\mathrm{m}\) and other parameters
     between these four different MOSFETs? Why?
+  \item
+    If you would have to size an inverter, what would be the ideal ratio
+    of \(W_p/W_n\)? Will you exactly design this ratio, or are the
+    reasons to deviate?
+  \item
+    There are LV and HV MOSFETs, and you investigated the difference in
+    performance. What is the rationale when designing circuits for
+    selection either an LV type, and when to choose an HV type?
   \end{enumerate}
 \item
   Build a test bench to explore the body effect, start with LV NMOS.
-  What happens when \(V_\mathrm{BS} \neq 0\)?
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    What happens when \(V_\mathrm{BS} \neq 0\)?
+  \item
+    What is the ratio of \(g_\mathrm{m}\) to \(g_\mathrm{mB}\)? What is
+    the physical reason behind this ratio (you might want to revisit
+    MOSFET device physics at this point)?
+  \end{enumerate}
 \end{enumerate}
 
 \subsubsection{First Circuit: MOSFET Diode}\label{sec-mosfet-diode}

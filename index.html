@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -206,9 +206,10 @@ window.Quarto = {
 <section id="sec-mosfet" class="level3">
 <h3 class="anchored" data-anchor-id="sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
 <p>A first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{DS}\)</span> and other large- and small-signal parameters.</p>
+<p>As this is an intermediate-level course, some basic knowledge about MOSFET operation, basic device equations, and small-signal equivalent circuits is assumed. This knowledge will be practiced, though, throughout the course, by doing exercises to compare hand calculation with actual simulation results. JKU students should be familiar with the MOSFET chapter from “Design of Complex Integrated Circuits” (VL 336.048).</p>
 <p>In order to get started, basic Xschem testbenches are prepared.</p>
-<section id="student-exersize" class="level4">
-<h4 class="anchored" data-anchor-id="student-exersize">Student Exersize</h4>
+<section id="student-exercise" class="level4">
+<h4 class="anchored" data-anchor-id="student-exercise">Student Exercise</h4>
 <ol type="1">
 <li>Try to get the LV NMOS testbench at <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch" class="uri">https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch</a> operating.</li>
 <li>Make yourself familiar with Xschem (change the schematic, run a simulation, graph the result).</li>
@@ -220,15 +221,21 @@ window.Quarto = {
 <li>Change <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of the MOSFET. What is the impact on the above parameters? Can you explain the variations?</li>
 <li>How is <span class="math inline">\(V_\mathrm{th}\)</span> changing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>? Can you explain what you are seeing.</li>
 <li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{GG}\)</span> and <span class="math inline">\(C_\mathrm{GD}\)</span>. Why are they important? What is the relation to <span class="math inline">\(f_\mathrm{T}\)</span>?</li>
-<li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\_mathrm{DG}\)</span>. Why, what is the difference? Sometimes these capacitors show a negative value, why?</li>
+<li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\mathrm{DG}\)</span>. Why, what is the difference? Sometimes these capacitors show a negative value, why?</li>
 <li>In this course we will only consider the drain-source current noise of the MOSFET. Look at the simulated value and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
 </ol></li>
 <li>Build test benches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
 <ol type="1">
 <li>Which is the fastest device? Why?</li>
 <li>What is the difference in <span class="math inline">\(g_\mathrm{m}\)</span> and other parameters between these four different MOSFETs? Why?</li>
+<li>If you would have to size an inverter, what would be the ideal ratio of <span class="math inline">\(W_p/W_n\)</span>? Will you exactly design this ratio, or are the reasons to deviate?</li>
+<li>There are LV and HV MOSFETs, and you investigated the difference in performance. What is the rationale when designing circuits for selection either an LV type, and when to choose an HV type?</li>
 </ol></li>
-<li>Build a test bench to explore the body effect, start with LV NMOS. What happens when <span class="math inline">\(V_\mathrm{BS} \neq 0\)</span>?</li>
+<li>Build a test bench to explore the body effect, start with LV NMOS.
+<ol type="1">
+<li>What happens when <span class="math inline">\(V_\mathrm{BS} \neq 0\)</span>?</li>
+<li>What is the ratio of <span class="math inline">\(g_\mathrm{m}\)</span> to <span class="math inline">\(g_\mathrm{mB}\)</span>? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?</li>
+</ol></li>
 </ol>
 </section>
 </section>
