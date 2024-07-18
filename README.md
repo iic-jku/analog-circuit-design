@@ -2,7 +2,7 @@
 
 **(c) 2024 Harald Pretl, Institute for Integrated Circuits (IIC), Johannes Kepler University, Linz (JKU)**
 
-This is the material for a basic-level MOSFET circuit design course, held at JKU under course number 336.009 ("KV Analoge Schaltungstechnik").
+This is the material for an intermediate-level MOSFET circuit design course, held at JKU under course number 336.009 ("KV Analoge Schaltungstechnik").
 
 The course makes heavy use of circuit simulation, using **Xschem** for schematic entry and **ngspice** for simulation. The 130nm CMOS technology **SG13G2** from IHP Microelectronics is used.
 
