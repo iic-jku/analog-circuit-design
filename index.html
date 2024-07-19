@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2024-07-18">
+<meta name="dcterms.date" content="2024-07-19">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -35,6 +35,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -68,10 +71,10 @@ window.Quarto = {
 
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
-<meta name="citation_publication_date" content="2024-07-18">
-<meta name="citation_cover_date" content="2024-07-18">
+<meta name="citation_publication_date" content="2024-07-19">
+<meta name="citation_cover_date" content="2024-07-19">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-07-18">
+<meta name="citation_online_date" content="2024-07-19">
 <meta name="citation_language" content="en">
 </head>
 
@@ -108,7 +111,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">July 18, 2024</p>
+              <p class="date">July 19, 2024</p>
             </div>
           </div>
           
@@ -242,6 +245,15 @@ window.Quarto = {
 </section>
 <section id="sec-mosfet-diode" class="level3">
 <h3 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h3>
+<div id="e58a8795" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/cell-2-output-1.svg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="transistor-sizing-using-inversion-coefficient" class="level2">
@@ -701,6 +713,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
