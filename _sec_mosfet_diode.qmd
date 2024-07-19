@@ -1,9 +1,8 @@
 
 ```{python}
-import schemdraw
+import schemdraw as sd
 import schemdraw.elements as elm
-
-with schemdraw.Drawing():
+with sd.Drawing(canvas='svg'):
     elm.Vdd()
     elm.SourceI().down().label(r'$I_\mathrm{bias}$')
     elm.Dot()
