@@ -19,6 +19,14 @@ jobs:
         with:
           tinytex: true
 
+      - name: Install Python and Dependencies
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - run: pip install jupyter
+      - run: pip install -r requirements.txt
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
