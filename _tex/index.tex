@@ -4,7 +4,7 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
-  letterpaper,
+  a4paper,
   DIV=11,
   numbers=noendperiod]{scrartcl}
 
@@ -136,6 +136,15 @@
 \makeatother
 
 \ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{american}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage{bookmark}
@@ -145,6 +154,7 @@
 \hypersetup{
   pdftitle={Analog Circuit Design},
   pdfauthor={Harald Pretl},
+  pdflang={en-US},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
