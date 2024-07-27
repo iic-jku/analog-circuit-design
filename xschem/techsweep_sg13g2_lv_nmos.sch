@@ -31,7 +31,7 @@ C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib $::SG13G2_MODELS/cornerMOSlv.lib mos_tt
 "}
-C {devices/code_shown.sym} 560 -930 0 0 {name=NGSPICE_CTRL only_toplevel=true 
+C {devices/code_shown.sym} 560 -950 0 0 {name=NGSPICE_CTRL only_toplevel=true 
 value="
 .param temp=27
 .param wx=5u lx=0.13u vbx=0
@@ -108,7 +108,7 @@ C {devices/vsource.sym} 380 -210 2 1 {name=vsb value=\{vbx\}}
 C {devices/lab_wire.sym} 180 -290 0 0 {name=p1 sig_type=std_logic lab=g}
 C {devices/lab_wire.sym} 310 -400 0 0 {name=p2 sig_type=std_logic lab=d}
 C {devices/lab_wire.sym} 380 -290 0 1 {name=p3 sig_type=std_logic lab=b}
-C {devices/code_shown.sym} 60 -930 0 0 {name=NGSPICE_SAVE only_toplevel=true 
+C {devices/code_shown.sym} 60 -950 0 0 {name=NGSPICE_SAVE only_toplevel=true 
 value="
 .save b d g
 .save @n.xm1.nsg13_lv_nmos[cgsol]
@@ -128,4 +128,6 @@ value="
 .save @n.xm1.nsg13_lv_nmos[vdss]
 .save @n.xm1.nsg13_lv_nmos[fug]
 .save @n.xm1.nsg13_lv_nmos[sid]
+.save @n.xm1.nsg13_lv_nmos[cjd]
+.save @n.xm1.nsg13_lv_nmos[cjs]
 "}

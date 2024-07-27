@@ -31,7 +31,7 @@ C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib $::SG13G2_MODELS/cornerMOSlv.lib mos_tt
 "}
-C {devices/code_shown.sym} 560 -930 0 0 {name=NGSPICE_CTRL only_toplevel=true 
+C {devices/code_shown.sym} 560 -950 0 0 {name=NGSPICE_CTRL only_toplevel=true 
 value="
 .param temp=27
 .param wx=5u lx=0.13u vbx=0
@@ -90,7 +90,7 @@ C {devices/ngspice_get_value.sym} 320 -520 0 1 {name=r10 node=v(@n.xm1.nsg13_lv_
 descr="sid="}
 C {devices/ngspice_get_value.sym} 220 -430 0 1 {name=r11 node=v(@n.xm1.nsg13_lv_nmos[rg])
 descr="rg="}
-C {devices/code_shown.sym} 60 -930 0 0 {name=NGSPICE_SAVE only_toplevel=true 
+C {devices/code_shown.sym} 60 -950 0 0 {name=NGSPICE_SAVE only_toplevel=true 
 value="
 .save b d g
 .save @n.xm1.nsg13_lv_pmos[cgsol]
@@ -110,6 +110,8 @@ value="
 .save @n.xm1.nsg13_lv_pmos[vdss]
 .save @n.xm1.nsg13_lv_pmos[fug]
 .save @n.xm1.nsg13_lv_pmos[sid]
+.save @n.xm1.nsg13_lv_pmos[cjd]
+.save @n.xm1.nsg13_lv_pmos[cjs]
 "}
 C {sg13g2_pr/sg13_lv_pmos.sym} 290 -230 0 0 {name=M1
 l=\{lx\}
