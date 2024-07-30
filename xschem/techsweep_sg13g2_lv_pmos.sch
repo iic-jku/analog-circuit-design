@@ -110,6 +110,7 @@ value="
 .save @n.xm1.nsg13_lv_pmos[vdss]
 .save @n.xm1.nsg13_lv_pmos[fug]
 .save @n.xm1.nsg13_lv_pmos[sid]
+.save @n.xm1.nsg13_lv_pmos[sfl]
 .save @n.xm1.nsg13_lv_pmos[cjd]
 .save @n.xm1.nsg13_lv_pmos[cjs]
 "}

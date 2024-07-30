@@ -128,6 +128,7 @@ value="
 .save @n.xm1.nsg13_lv_nmos[vdss]
 .save @n.xm1.nsg13_lv_nmos[fug]
 .save @n.xm1.nsg13_lv_nmos[sid]
+.save @n.xm1.nsg13_lv_nmos[sfl]
 .save @n.xm1.nsg13_lv_nmos[cjd]
 .save @n.xm1.nsg13_lv_nmos[cjs]
 "}
