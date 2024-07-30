@@ -570,19 +570,23 @@
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>css <span class="op">=</span> np.reshape(df[<span class="st">'css'</span>].values, dims, order<span class="op">=</span><span class="st">'F'</span>) <span class="op">\</span></span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      <span class="op">+</span> np.reshape(df[<span class="st">'cjs'</span>].values, dims, order<span class="op">=</span><span class="st">'F'</span>) <span class="op">\</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="op">+</span> np.reshape(df[<span class="st">'cgsol'</span>].values, dims, order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># output order for standard mat file is l, vgs, vds, vsb</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span> <span class="op">=</span> np.transpose(<span class="bu">id</span>, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>vt <span class="op">=</span> np.transpose(vt, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>gm <span class="op">=</span> np.transpose(gm, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>gmb <span class="op">=</span> np.transpose(gmb, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>gds <span class="op">=</span> np.transpose(gds, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>cgg <span class="op">=</span> np.transpose(cgg, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>cgb <span class="op">=</span> np.transpose(cgb, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>cgd <span class="op">=</span> np.transpose(cgd, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>cgs <span class="op">=</span> np.transpose(cgs, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>cdd <span class="op">=</span> np.transpose(cdd, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>css <span class="op">=</span> np.transpose(css, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>sth <span class="op">=</span> np.reshape(df[<span class="st">'sid'</span>].values, dims, order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>sfl <span class="op">=</span> np.reshape(df[<span class="st">'sfl'</span>].values, dims, order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># output order for standard mat file is l, vgs, vds, vsb</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span> <span class="op">=</span> np.transpose(<span class="bu">id</span>, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>vt <span class="op">=</span> np.transpose(vt, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>gm <span class="op">=</span> np.transpose(gm, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>gmb <span class="op">=</span> np.transpose(gmb, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>gds <span class="op">=</span> np.transpose(gds, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>cgg <span class="op">=</span> np.transpose(cgg, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>cgb <span class="op">=</span> np.transpose(cgb, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>cgd <span class="op">=</span> np.transpose(cgd, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>cgs <span class="op">=</span> np.transpose(cgs, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>cdd <span class="op">=</span> np.transpose(cdd, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>css <span class="op">=</span> np.transpose(css, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>sth <span class="op">=</span> np.transpose(sth, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>sfl <span class="op">=</span> np.transpose(sfl, (<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dic <span class="op">=</span> {</span>
@@ -605,10 +609,12 @@
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CGD"</span>: cgd,</span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CGS"</span>: cgs,</span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CDD"</span>: cdd,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CSS"</span>: css</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>savemat(devices[choice]<span class="op">+</span><span class="st">'.mat'</span>, {devices[choice]: dic})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CSS"</span>: css,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"STH"</span>: sth,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SFL"</span>: sfl</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>savemat(devices[choice]<span class="op">+</span><span class="st">'.mat'</span>, {devices[choice]: dic})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
      </main>
 <!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
