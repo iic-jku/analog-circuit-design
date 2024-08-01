@@ -1,0 +1,17 @@
+```{python}
+#| label: fig-mosfet-large-signal-model
+#| echo: false
+#| fig-cap: "The MOSFET large-signal model."
+import schemdraw as sd
+import schemdraw.elements as elm
+with sd.Drawing(canvas='svg'):
+    elm.Vdd()
+    elm.SourceI().down().label(r'$I_\mathrm{bias}$', ofst=-2)
+    elm.Dot()
+    M1 = elm.AnalogNFet().drop('source').theta(0).reverse().label('$W/L$', loc='right')
+    elm.Ground()
+    elm.Line().left().at(M1.gate).length(0.5)
+    elm.Line().up().toy(M1.drain)
+    elm.Line().right().to(M1.drain)
+    elm.Arrow().at(M1.drain, dx=1.5).down().length(2).label(r'$V_\mathrm{GS}$', ofst=-1)
+```
