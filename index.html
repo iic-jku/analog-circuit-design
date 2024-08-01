@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
-<meta name="dcterms.date" content="2024-07-30">
+<meta name="dcterms.date" content="2024-08-01">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -91,10 +91,10 @@ window.Quarto = {
 
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
-<meta name="citation_publication_date" content="2024-07-30">
-<meta name="citation_cover_date" content="2024-07-30">
+<meta name="citation_publication_date" content="2024-08-01">
+<meta name="citation_cover_date" content="2024-08-01">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-07-30">
+<meta name="citation_online_date" content="2024-08-01">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Systematic design of analog CMOS circuits: Using pre-computed lookup tables;,citation_author=Paul G. A. Jespers;,citation_author=Boris Murmann;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
 </head>
@@ -132,7 +132,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">July 30, 2024</p>
+              <p class="date">August 1, 2024</p>
             </div>
           </div>
           
@@ -196,17 +196,17 @@ window.Quarto = {
 <p>All course material is made publicly available and shared under the Apache-2.0 license.</p>
 <section id="ihps-sg13g2-130nm-cmos-technology" class="level3">
 <h3 class="anchored" data-anchor-id="ihps-sg13g2-130nm-cmos-technology">IHP’s SG13G2 130nm CMOS Technology</h3>
-<p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin, 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
+<p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin, 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
 <p>For our circuit design, the most important parameters of the available devices are summarized in the following:</p>
 <ul>
-<li><strong>Low-voltage NMOS</strong>: Operating voltage nom. <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx 0.5\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
-<li><strong>Low-voltage PMOS</strong>: Operating voltage nom. <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx -0.47\,\text{V}\)</span>.</li>
-<li><strong>High-voltage NMOS</strong>: Operating voltage nom. <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx 0.7\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
-<li><strong>High-voltage PMOS</strong>: Operating voltage nom. <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx -0.65\,\text{V}\)</span>.</li>
-<li><strong>Silicided poly resistor</strong>: <span class="math inline">\(R_\square=7\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=3100\,\text{ppm/K}\)</span></li>
-<li><strong>Poly resistor</strong>: <span class="math inline">\(R_\square=260\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=170\,\text{ppm/K}\)</span></li>
-<li><strong>Poly resistor high</strong>: <span class="math inline">\(R_\square=1360\,\Omega \pm 15\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=-2300\,\text{ppm/K}\)</span></li>
-<li><strong>MIM capacitor</strong>: <span class="math inline">\(C=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\)</span>, <span class="math inline">\(\mathrm{VC}_1=-26\text{ppm/V}\)</span>, <span class="math inline">\(\mathrm{TC}_1=3.6\text{ppm/K}\)</span>, breakdown voltage <span class="math inline">\(&gt;15\,\mathrm{V}\)</span></li>
+<li><strong>Low-voltage NMOS</strong>: Device <code>sg13_lv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx 0.5\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
+<li><strong>Low-voltage PMOS</strong>: Device <code>sg13_lv_pmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx -0.47\,\text{V}\)</span>.</li>
+<li><strong>High-voltage NMOS</strong>: Device <code>sg13_hv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx 0.7\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
+<li><strong>High-voltage PMOS</strong>: Device <code>sg13_hv_pmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx -0.65\,\text{V}\)</span>.</li>
+<li><strong>Silicided poly resistor</strong>: Device <code>rsil</code>; <span class="math inline">\(R_\square=7\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=3100\,\text{ppm/K}\)</span></li>
+<li><strong>Poly resistor</strong>: Device <code>rppd</code>; <span class="math inline">\(R_\square=260\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=170\,\text{ppm/K}\)</span></li>
+<li><strong>Poly resistor high</strong>: Device <code>rhigh</code>; <span class="math inline">\(R_\square=1360\,\Omega \pm 15\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=-2300\,\text{ppm/K}\)</span></li>
+<li><strong>MIM capacitor</strong>: Device <code>cap_cmim</code>; <span class="math inline">\(C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\)</span>, <span class="math inline">\(\mathrm{VC}_1=-26\text{ppm/V}\)</span>, <span class="math inline">\(\mathrm{TC}_1=3.6\text{ppm/K}\)</span>, breakdown voltage <span class="math inline">\(&gt;15\,\mathrm{V}\)</span></li>
 <li><strong>MOM capacitor</strong>: Well-suited metal stack due to 5 thin metal layers, but no primitive capacitor available.</li>
 </ul>
 </section>
@@ -229,6 +229,21 @@ window.Quarto = {
 <p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.</p>
 <section id="sec-mosfet" class="level3">
 <h3 class="anchored" data-anchor-id="sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<p>In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model. For hand calculations and theoretical discussions we will use the following simplified large-signal model.</p>
+<div id="cell-fig-mosfet-large-signal-model" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-large-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-large-signal-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-mosfet-large-signal-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: The MOSFET large-signal model."><img src="index_files/figure-html/fig-mosfet-large-signal-model-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-large-signal-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The MOSFET large-signal model.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>A first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{DS}\)</span> and other large- and small-signal parameters.</p>
 <p>As this is an intermediate-level course, some basic knowledge about MOSFET operation, basic device equations, and small-signal equivalent circuits is assumed. This knowledge will be practiced, though, throughout the course, by doing exercises to compare hand calculation with actual simulation results. JKU students should be familiar with the MOSFET chapter from “Design of Complex Integrated Circuits” (VL 336.048).</p>
 <p>In order to get started, basic Xschem testbenches are prepared.</p>
@@ -267,15 +282,15 @@ window.Quarto = {
 <section id="sec-mosfet-diode" class="level3">
 <h3 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h3>
 <p>This sections need to be written, but here is a first figure.</p>
-<div id="cell-fig-mosfet-diode" class="cell" data-execution_count="1">
+<div id="cell-fig-mosfet-diode" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-diode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mosfet-diode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: A MOSFET connected as a diode."><img src="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: A MOSFET connected as a diode."><img src="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: A MOSFET connected as a diode.
+Figure&nbsp;2: A MOSFET connected as a diode.
 </figcaption>
 </figure>
 </div>
@@ -286,29 +301,29 @@ Figure&nbsp;1: A MOSFET connected as a diode.
 <section id="transistor-sizing-using-gmid-methodoloy" class="level2">
 <h2 class="anchored" data-anchor-id="transistor-sizing-using-gmid-methodoloy">Transistor Sizing Using gm/ID Methodoloy</h2>
 <p>When designing circuits it is an important question how to select various parameters of a MOSFET, like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, or the bias current <span class="math inline">\(I_\mathrm{D}\)</span>. As a very practical approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodoloy introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
-<div id="cell-fig-nmos-gmid-vs-ft" class="cell" data-execution_count="2">
+<div id="cell-fig-nmos-gmid-vs-ft" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div id="fig-nmos-gmid-vs-ft" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-nmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: LV NMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
+<a href="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: LV NMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: LV NMOS gm/ID vs.&nbsp;transit frequency.
+Figure&nbsp;3: LV NMOS gm/ID vs.&nbsp;transit frequency.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-pmos-gmid-vs-ft" class="cell" data-execution_count="3">
+<div id="cell-fig-pmos-gmid-vs-ft" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div id="fig-pmos-gmid-vs-ft" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: LV PMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
+<a href="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: LV PMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: LV PMOS gm/ID vs.&nbsp;transit frequency.
+Figure&nbsp;4: LV PMOS gm/ID vs.&nbsp;transit frequency.
 </figcaption>
 </figure>
 </div>
@@ -774,7 +789,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

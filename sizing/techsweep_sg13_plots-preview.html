@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
     <meta charset="utf-8">
-    <meta name="generator" content="quarto-1.5.55">
+    <meta name="generator" content="quarto-1.5.56">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -209,50 +209,62 @@
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
 <p>This notebook displays various important metrics for the SG13G2 CMOS technology. The corresponding Xschem testbenches are named <code>techsweep_sg13g2_lv_nmos.sch</code> and <code>techsweep_sg13g2_lv_pmos.sch</code> (to be found in the <code>xschem</code> folder).</p>
 </div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="cell-2" class="cell" data-execution_count="1">
+<div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="cell-2" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:08.793947Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:08.790755Z&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devices <span class="op">=</span> [<span class="st">'sg13_lv_nmos'</span>, <span class="st">'sg13_lv_pmos'</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>choice <span class="op">=</span> <span class="dv">0</span> <span class="co"># select which device to plot, start from 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="cell-3" class="cell" data-execution_count="2">
+<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="cell-3" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:09.283550Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:08.795473Z&quot;}" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># widths used for characterization</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="cell-4" class="cell" data-execution_count="3">
+<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="cell-4" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:09.811811Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:09.284430Z&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read ngspice data</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'./techsweep_'</span><span class="op">+</span>devices[choice]<span class="op">+</span><span class="st">'.txt'</span>, sep<span class="op">=</span><span class="vs">r'\s+'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>par_names <span class="op">=</span> df_raw.columns.to_list()</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>par_prefix <span class="op">=</span> par_names[<span class="dv">1</span>].split(<span class="st">'['</span>)[<span class="dv">0</span>]</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># remove extra headers in file body and unwanted columns</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> df_raw[<span class="op">~</span>df_raw[<span class="st">'v-sweep'</span>].<span class="bu">str</span>.contains(<span class="st">'v-sweep'</span>)]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_raw.drop([<span class="st">'v-sweep'</span>, <span class="st">'v-sweep.1'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#df_raw = df_raw[~df_raw['v-sweep'].str.contains('v-sweep')]</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_raw.drop([<span class="st">'frequency'</span>, <span class="st">'frequency.1'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.<span class="bu">apply</span>(pd.to_numeric)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># rename columns for readability</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.removeprefix(par_prefix<span class="op">+</span><span class="st">'['</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.removesuffix(<span class="st">']'</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.replace(par_prefix[<span class="dv">1</span>:], <span class="st">''</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.replace(<span class="st">'onoise__'</span>, <span class="st">'n'</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.removesuffix(<span class="st">']'</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># round sweep vectors to easily addressable values</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'l'</span>] <span class="op">=</span> df[<span class="st">'l'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vgs'</span>] <span class="op">=</span> df[<span class="st">'vgs'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vds'</span>] <span class="op">=</span> df[<span class="st">'vds'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vsb'</span>] <span class="op">=</span> df[<span class="st">'vsb'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Note on noise data: </span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.: sid, sfl are thermal and flicker noise current densities at 1 Hz in A^2/Hz from operating point</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.: nidid, nflicker are thermal and flicker noise current densities at 1Hz in A/sqrt(Hz) from noise simulation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Index(['cdd', 'cgb', 'cgd', 'cgdol', 'cgg', 'cgs', 'cgsol', 'cjd', 'cjs',
-       'css', 'fug', 'gds', 'gm', 'gmb', 'ids', 'l', 'sid', 'vdss', 'vth', 'b',
-       'd', 'g'],
+       'css', 'fug', 'gds', 'gm', 'gmb', 'ids', 'l', 'rg', 'sfl', 'sid', 'vds',
+       'vdss', 'vgs', 'vsb', 'vth', 'nflicker', 'nidid'],
       dtype='object')</code></pre>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="cell-5" class="cell" data-execution_count="4">
+<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="cell-5" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:09.823389Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:09.813011Z&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sweep variable vectors</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> (np.unique(<span class="bu">abs</span>(df[<span class="st">'l'</span>]))<span class="op">*</span><span class="fl">1e6</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>vgs <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'g'</span>]))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>vds <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'d'</span>]))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vsb <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'b'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'l'</span>]))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>vgs <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vgs'</span>]))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>vds <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vds'</span>]))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vsb <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="cell-6" class="cell" data-execution_count="5">
+<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="cell-6" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:10.185562Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:09.824275Z&quot;}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/ID and fT versus gate bias</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> <span class="bu">min</span>(l)<span class="op">;</span> VDS1<span class="op">=</span><span class="fl">0.75</span><span class="op">;</span> VSB1<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df.loc[(df[<span class="st">'l'</span>] <span class="op">==</span> L1<span class="op">*</span><span class="fl">1e-6</span>) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'d'</span>]) <span class="op">==</span> VDS1) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'b'</span>]) <span class="op">==</span> VSB1)]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df.loc[(df[<span class="st">'l'</span>] <span class="op">==</span> L1) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vds'</span>]) <span class="op">==</span> VDS1) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]) <span class="op">==</span> VSB1)]</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>gm_id1 <span class="op">=</span> df1[<span class="st">'gm'</span>].values<span class="op">/</span>df1[<span class="st">'ids'</span>].values</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cgg1 <span class="op">=</span> df1[<span class="st">'cgg'</span>].values <span class="op">+</span> df1[<span class="st">'cgdol'</span>].values<span class="op">+</span>df1[<span class="st">'cgsol'</span>].values </span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ft1 <span class="op">=</span> df1[<span class="st">'gm'</span>].values<span class="op">/</span>cgg1<span class="op">/</span><span class="dv">2</span><span class="op">/</span>np.pi</span>
@@ -284,7 +296,7 @@
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-7" class="cell" data-execution_count="6">
+<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-7" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:10.383152Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:10.186421Z&quot;}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot product of gm/ID and fT versus gm/ID</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.plot(gm_id1, gm_id1<span class="op">*</span>ft1<span class="op">/</span><span class="fl">1e9</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
@@ -301,7 +313,7 @@
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-execution_count="7">
+<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:10.533687Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:10.384389Z&quot;}" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.plot(gm_id1, ft1<span class="op">/</span><span class="fl">1e9</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
@@ -318,10 +330,10 @@
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-9" class="cell" data-execution_count="8">
+<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:10.691053Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:10.534523Z&quot;}" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID for all L</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>VDS2<span class="op">=</span><span class="fl">0.75</span><span class="op">;</span> VSB2<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.loc[(<span class="bu">abs</span>(df[<span class="st">'d'</span>]) <span class="op">==</span> VDS2) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'b'</span>]) <span class="op">==</span> VSB2)]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.loc[(<span class="bu">abs</span>(df[<span class="st">'vds'</span>]) <span class="op">==</span> VDS2) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]) <span class="op">==</span> VSB2)]</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>gm_id2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>df2[<span class="st">'ids'</span>].values</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>gm_id2 <span class="op">=</span> np.reshape(gm_id2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ft2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>(df2[<span class="st">'cgg'</span>].values<span class="op">+</span>df2[<span class="st">'cgdol'</span>].values<span class="op">+</span>df2[<span class="st">'cgsol'</span>].values)<span class="op">/</span><span class="dv">2</span><span class="op">/</span>np.pi</span>
@@ -344,7 +356,7 @@
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div id="cell-10" class="cell" data-execution_count="9">
+<div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:10.822726Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:10.692506Z&quot;}" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/gds versus gm/ID for all L</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gm_gds2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>df2[<span class="st">'gds'</span>].values</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gm_gds2 <span class="op">=</span> np.reshape(gm_gds2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
@@ -367,7 +379,7 @@
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [10]:</pre></div><div id="cell-11" class="cell" data-execution_count="10">
+<div class="cell-container"><div class="cell-decorator"><pre>In [10]:</pre></div><div id="cell-11" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:11.022222Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:10.824211Z&quot;}" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Id/W (Jd) versus gm/ID for all L</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>jd2 <span class="op">=</span> df2[<span class="st">'ids'</span>].values<span class="op">/</span>w[choice]<span class="op">/</span><span class="fl">1e-6</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>jd2 <span class="op">=</span> np.reshape(jd2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
@@ -391,7 +403,7 @@
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div id="cell-12" class="cell" data-execution_count="11">
+<div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:11.128196Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:11.023411Z&quot;}" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Vdss versus gm/ID for all L</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>vdss2 <span class="op">=</span> df2[<span class="st">'vdss'</span>]</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>vdss2 <span class="op">=</span> np.reshape(vdss2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
@@ -414,7 +426,7 @@
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [12]:</pre></div><div id="cell-13" class="cell" data-execution_count="12">
+<div class="cell-container"><div class="cell-decorator"><pre>In [12]:</pre></div><div id="cell-13" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:11.326031Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:11.128842Z&quot;}" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Sid versus gm/ID for all L</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sid2 <span class="op">=</span> np.sqrt(df2[<span class="st">'sid'</span>].values)<span class="op">*</span><span class="fl">1e12</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sid2 <span class="op">=</span> np.reshape(sid2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
@@ -436,7 +448,7 @@
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [13]:</pre></div><div id="cell-14" class="cell" data-execution_count="13">
+<div class="cell-container"><div class="cell-decorator"><pre>In [13]:</pre></div><div id="cell-14" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-07-31T07:04:11.544268Z&quot;,&quot;start_time&quot;:&quot;2024-07-31T07:04:11.326809Z&quot;}" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Svgs versus gm/ID for all L</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>svgs2 <span class="op">=</span> np.sqrt(df2[<span class="st">'sid'</span>].values)<span class="op">/</span>df2[<span class="st">'gm'</span>].values<span class="op">*</span><span class="fl">1e9</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>svgs2 <span class="op">=</span> np.reshape(svgs2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
@@ -879,7 +891,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox"});
+</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
