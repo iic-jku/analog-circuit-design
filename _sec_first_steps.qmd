@@ -2,37 +2,103 @@ In this first chapter we will learn to use Xschem for schematic entry, and how t
 
 ### The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET) {#sec-mosfet}
 
-In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model. For hand calculations and theoretical discussions we will use the following simplified large-signal model.
+In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET as a macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model. 
+
+The circuit symbol that we will use for the n-channel MOSFET is shown in @fig-nmos-symbol, and for the p-channel MOSFET it is shown in @fig-pmos-symbol. A control voltage between gate ("G") and source ("S") causes a current to flow between drain ("D") and source. The MOSFET is a 4-terminal device, so the bulk ("B") can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.
+
+::: {.callout-note}
+Strictly speaking is the drain-source current of a MOSFET controlled by the voltage between gate and bulk and the voltage between drain and source. Since bulk is often connected to source anyway, and many circuit designers historically were already familiar with the operation of the bipolar junction transistor, it is common to consider the gate-source voltage (besides the drain-source voltage) as the controlling voltage.
+
+This focus on gate-source implies that the source is special compared to the drain. In a typical physical MOSFET, however, the drain and source are constructed exactly the same, and which terminal is drain, and which terminal is source, is only determined by the applied voltage potentials, and can change dynamically during operation (think of a MOSFET operating as a switch... which side is the drain, which side is the source?).
+
+Unfortunately, this focus on a "special" source has made its way into some MOSFET compact models. The model that is used in SG13G2 luckily uses the PSP model, which is formulated symmetrically with regards to drain and source, and is thus very well suited for analog and RF circuit design. For a detailed understanding of the PSP model please refer to the [model documentation](https://www.nxp.com/wcm_documents/models/mos-models/model-psp/psp102p4_summary.pdf).
+:::
+
+{{< include figures/_fig_nmos_symbol.qmd >}}
+{{< include figures/_fig_pmos_symbol.qmd >}}
+
+For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in @fig-mosfet-large-signal-model. A current source $I_\mathrm{DS}$ models the current flow between drain and source, and it is controlled by the three control voltages $V_\mathrm{GS}$, $V_\mathrm{DS}$, and $V_\mathrm{SB}$. Note that in this way (since $I_\mathrm{DS} = f(V_\mathrm{DS})$) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply $V_\mathrm{SB} = 0$.
 
 {{< include figures/_fig_mosfet_large_signal_model.qmd >}}
 
+In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $C_\mathrm{GG}$ is the capacitance when looking into the gate of the MOSFET. $C_\mathrm{GD}$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $C_\mathrm{GS}$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect). In hand calculations we will often set $C_\mathrm{GD} = 0$.
 
-A first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $V_\mathrm{GS}$ and $V_\mathrm{DS}$ and looking at $I_\mathrm{DS}$ and other large- and small-signal parameters.
+::: {.callout-note}
+The bulk connection in @fig-mosfet-large-signal-model seems floating as we only consider it a control terminal, where the potential difference between source and bulk influences the behaviour of the MOSFET. However, we do not consider resistive or capacitive effects associated with this node, which is of course a gross simplification, but nevertheless one we will make in this course.
+:::
 
-As this is an intermediate-level course, some basic knowledge about MOSFET operation, basic device equations, and small-signal equivalent circuits is assumed. This knowledge will be practiced, though, throughout the course, by doing exercises to compare hand calculation with actual simulation results. JKU students should be familiar with the MOSFET chapter from "Design of Complex Integrated Circuits" (VL 336.048).
+Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behaviour from basic principles, we need to understand the behaviour of the elements of the large-signal model in @fig-mosfet-large-signal-model by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $V_\mathrm{GS}$ and $V_\mathrm{DS}$ and looking at $I_\mathrm{DS}$ and other large- and small-signal parameters.
 
-In order to get started, basic Xschem testbenches are prepared.
+As a side note, the students who want to understand MOSFET behaviour from a physical angle should consult the MOSFET chapter from the JKU course "Design of Complex Integrated Circuits" (VL 336.048). A great introduction into MOSFET operation and fabrication is given in [@Chenming_Hu_2010], which is available freely [online](https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/) and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in [@Tsividis_McAndrew_2011].
 
-#### Student Exercise
+Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!
 
-We start with a simple testbench for the LV NMOS, see [here](https://xschem-viewer.com/?file=https%3A%2F%2Fgithub.com%2Fiic-jku%2Fanalog-circuit-design%2Fblob%2Fmain%2Fxschem%2Fdc_lv_nmos.sch).
+::: {.callout-important}
+Throughout this material, we will stick to the following notations:
 
-1. Try to get the LV NMOS testbench at <https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch> working in your IIC-OSIC-TOOLS environment.
-2. Make yourself familiar with Xschem (change the schematic, run a simulation, graph the result).
-3. Make youself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look and MOSFET model parameters).
-4. Explore the LV NMOS
-   1. How are $g_\mathrm{m}$, $g_\mathrm{ds}$, and $V_\mathrm{th}$ changing when you change the dc node voltages?
-   2. Can you hand-calculate $g_\mathrm{m}$? Does it fit? See what happens when $V_\mathrm{GS} > V_\mathrm{th}$ or $V_\mathrm{GS} < V_\mathrm{th}$, and concurrently vary $V_\mathrm{DS}$. 
-   3. Change $W$ and $L$ of the MOSFET. What is the impact on the above parameters? Can you explain the variations?
-   4. How is $V_\mathrm{th}$ changing with $W$ and $L$? Can you explain what you are seeing.
-   5. Take a look at the device capacitances $C_\mathrm{GG}$ and $C_\mathrm{GD}$. Why are they important? What is the relation to $f_\mathrm{T}$?
-   6. When looking at the model parameters in ngspice, you see that there is a $C_\mathrm{GD}$ and a $C_\mathrm{DG}$. Why, what is the difference? Sometimes these capacitors show a negative value, why?
-   7. In this course we will only consider the drain-source current noise of the MOSFET. Look at the simulated value and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
-5. Build test benches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
+* A **dc quantity** is shown with an upper-case letter with upper-case subscripts, like $V_\mathrm{GS}$.
+* Double-subscripts denote **dc sources**, like $V_\mathrm{DD}$ and $V_\mathrm{SS}$.
+* An **ac (small-signal) quantity** is a lower-case letter with a lower-case subscript, like $g_\mathrm{m}$.
+* A **total quantity** (dc plus ac) is shown as a lowercase letter with upper-case subscript, like $i_\mathrm{DS}$.
+* A upper-case letter with a lower-case subscript is used to denote **RMS quantities**, like $I_\mathrm{ds}$.
+:::
+
+#### Large-Signal MOSFET Model
+
+We start with an investigation into the large-signal MOSFET model shown in @fig-mosfet-large-signal-model by using the simple testbench for the LV NMOS shown in @fig-simple-nmos-tb.
+
+![Testbench for NMOS dc sweeps.](./xschem/dc_lv_nmos.png){#fig-simple-nmos-tb}
+
+::: {.callout-tip title="Exercise"}
+Please try to execute the following steps and answer these questions:
+
+1. Get the LV NMOS testbench (available at <https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch>) working in your IIC-OSIC-TOOLS environment.
+2. Make yourself familiar with Xschem (change the schematic in various ways, run a simulation, graph the result).
+3. Make youself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look at MOSFET model parameters).
+4. Explore the LV NMOS `sg13_lv_nmos`:
+   1. How is $I_\mathrm{DS}$ affected by $V_\mathrm{GS}$ and $V_\mathrm{DS}$?
+   2. Change $W$ and $L$ of the MOSFET. What is the impact on the above parameters? Can you explain the variations?
+   3. How is $V_\mathrm{th}$ changing with $W$ and $L$? Can you explain what you are seeing?
+   4. Take a look at the device capacitances $C_\mathrm{GG}$ and $C_\mathrm{GD}$. Why are they important? What is the relation to $f_\mathrm{T}$?
+   5. When looking at the model parameters in ngspice, you see that there is a $C_\mathrm{GD}$ and a $C_\mathrm{DG}$. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?
+5. Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
    1. Which is the fastest device? Why?
-   2. What is the difference in $g_\mathrm{m}$ and other parameters between these four different MOSFETs? Why?
-   3. If you would have to size an inverter, what would be the ideal ratio of $W_p/W_n$? Will you exactly design this ratio, or are the reasons to deviate?
-   4. There are LV and HV MOSFETs, and you investigated the difference in performance. What is the rationale when designing circuits for selection either an LV type, and when to choose an HV type?
+   2. If you would have to size an inverter, what would be the ideal ratio of $W_p/W_n$? Will you exactly design this ratio, or are the reasons to deviate?
+   3. There are LV and HV MOSFETs, and you investigated the difference in performance. What is the rationale when designing circuits for selection either an LV type, and when to choose an HV type?
 6. Build a test bench to explore the body effect, start with LV NMOS.
    1. What happens when $V_\mathrm{BS} \neq 0$?
-   2. What is the ratio of $g_\mathrm{m}$ to $g_\mathrm{mB}$? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?
+:::
+
+#### Small-Signal MOSFET Model
+
+As you have seen in the previous investigations, the large-signal model of @fig-mosfet-large-signal-model describes the behaviour of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.
+
+However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.
+
+We will use the small-signal MOSFET model shown in @fig-mosfet-small-signal-model for this course. The current-source $i_\mathrm{ds} = g_\mathrm{m} v_\mathrm{gs}$ models the drain current as a function of $v_\mathrm{gs}$, and the resistor $g_\mathrm{ds}$ models the dependency of the drain current by $v_\mathrm{ds}$. The drain current dependency on the source-bulk voltage (the so-called "body effect") is introduced by the current source $i_\mathrm{ds} = g_\mathrm{mb} v_\mathrm{sb}$.
+
+{{< include figures/_fig_mosfet_small_signal_model.qmd >}}
+
+As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by $\overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0}$ ($\overline{I_\mathrm{n}^2}$ is the power-spectral density of the noise in A$^2$/Hz; $k$ is the Boltzmann constant; $T$ is the absolute temperature; $\gamma$ is a parameter in simplified theory changing between $\gamma = 2/3$ in saturation and $\gamma =1$ for triode operation; $g_\mathrm{d0}$ is equal to $g_\mathrm{m}$ in saturation and $g_\mathrm{ds}$ in triode).
+
+::: {.callout-note}
+Sometimes we will refer to different operating modes of the MOSFET like "saturation" or "triode". Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call "triode" mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called "saturation" mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximative sense.
+:::
+
+Now we need to see how the small-signal parameters seen in @fig-mosfet-small-signal-model can be investigated and estimated using circuit simulation.
+
+::: {.callout-tip title="Exercise"}
+Please try to execute the following steps and answer the following questions:
+
+1. Reuse the LV NMOS testbench (available at <https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch>).
+2. Explore the LV NMOS `sg13_lv_nmos`:
+   1. How are $g_\mathrm{m}$ and $g_\mathrm{ds}$ changing when you change the dc node voltages?
+   2. What is the ratio of $g_\mathrm{m}$ to $g_\mathrm{mb}$? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?
+   3. Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
+3. Go back to your testbench for the LVS PMOS `sg13_lv_pmos`:
+   1. What is the difference in $g_\mathrm{m}$, $g_\mathrm{ds}$, and other parameters between the NMOS and the PMOS? Why could they be different?
+:::
+
+#### Conclusion
+
+Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of @sec-mosfet and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in [@Chenming_Hu_2010].

@@ -4,11 +4,13 @@ The course makes heavy use of circuit simulation, using **Xschem** for schematic
 
 Tools and PDK are integrated in the **IIC-OSIC-TOOLS** Docker image, which will be used during the coursework.
 
-All course material is made publicly available and shared under the Apache-2.0 license.
+::: {.callout-note}
+All course material is made publicly available on GitHub and shared under the Apache-2.0 license.
+:::
 
 ### IHP's SG13G2 130nm CMOS Technology
 
-SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin, 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at [SG13G2 process specification](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf). While we will not do layouts in this course, the layout rules can be found at [SG13G2 layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf).
+SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at [SG13G2 process specification](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf). While we will not do layouts in this course, the layout rules can be found at [SG13G2 layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf).
 
 For our circuit design, the most important parameters of the available devices are summarized in the following:
 
@@ -20,18 +22,26 @@ For our circuit design, the most important parameters of the available devices a
 * **Poly resistor**: Device `rppd`; $R_\square=260\,\Omega \pm 10\%$, $\mathrm{TC}_1=170\,\text{ppm/K}$
 * **Poly resistor high**: Device `rhigh`; $R_\square=1360\,\Omega \pm 15\%$, $\mathrm{TC}_1=-2300\,\text{ppm/K}$ 
 * **MIM capacitor**: Device `cap_cmim`; $C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%$, $\mathrm{VC}_1=-26\text{ppm/V}$, $\mathrm{TC}_1=3.6\text{ppm/K}$, breakdown voltage $>15\,\mathrm{V}$
-* **MOM capacitor**: Well-suited metal stack due to 5 thin metal layers, but no primitive capacitor available.
+* **MOM capacitor**: The metal stack is well-suited for MOM capacitors due to 5 thin metal layers, but no primitive capacitor device is available at this point.
 
 ### Schematic Entry Using Xschem
 
-Xschem is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem please look at the [online documentation](https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html). Usage of Xschem will be learned with the first few basic examples, essentially a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.
+Xschem is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem and the basic operation of it please look at the available [online documentation](https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html). Usage of Xschem will be learned with the first few basic examples, essentially using a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.
 
 ### Circuit Simulation Using ngspice
 
-ngspice is an open-source circuit simulator with SPICE dependency. Besides the usual simulated types like `op` (operating point), `dc` (dc sweeps), `tran` (time-domain), or `ac` (for small-signal frquency sweeps), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest [manual](https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf).
+ngspice is an open-source circuit simulator with SPICE dependency [@Nagel_1975]. Besides the usual simulated types like `op` (operating point), `dc` (dc sweeps), `tran` (time-domain), or `ac` (small-signal frquency sweeps), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest [online manual](https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf).
 
 ### Integrated IC Design Environment (IIC-OSIC-TOOLS)
 
-In order to make usage of the various required components (tools like Xschem, PDK like SG13G2) easier, we will use the IIC-OSIC-TOOLS. This is a pre-setup Docker image which allows to design on a virtual machine on virtually any type of computing equipment. For further information like installed tools, how to setup a VM, etc. please look at [IIC-OSIC-TOOLS GitHub page](https://github.com/iic-jku/IIC-OSIC-TOOLS).
+In order to make use of the various required components (tools like Xschem and ngspice, PDKs like SG13G2) easier, we will use the **IIC-OSIC-TOOLS**. This is a pre-compiled Docker image which allows to do circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc. please look at [IIC-OSIC-TOOLS GitHub page](https://github.com/iic-jku/IIC-OSIC-TOOLS).
+
+::: {.callout-tip}
+Please make sure to receive information about your personal VM access ahead of the course start.
+:::
 
 Experienced users can install this image on their personal computer, for JKU students the IIC will host a VM on our compute cluster and provide personal login credentials.
+
+::: {.callout-note}
+In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal. If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many ressources available.
+:::
