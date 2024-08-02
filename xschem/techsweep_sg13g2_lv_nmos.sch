@@ -152,8 +152,6 @@ value="
 .save @n.xm1.nsg13_lv_nmos[cjd]
 .save @n.xm1.nsg13_lv_nmos[cjs]
 .save @n.xm1.nsg13_lv_nmos[rg]
-.save onoise_n.xm1.nsg13_lv_nmos_flicker
-.save onoise_n.xm1.nsg13_lv_nmos_idid
 "}
 C {devices/ccvs.sym} 870 -160 0 0 {name=H4 vnam=vd value=1}
 C {devices/gnd.sym} 870 -110 0 0 {name=l6 lab=GND}
