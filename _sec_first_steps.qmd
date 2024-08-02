@@ -21,7 +21,7 @@ For hand calculations and theoretical discussions we will use the following simp
 
 {{< include figures/_fig_mosfet_large_signal_model.qmd >}}
 
-In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $C_\mathrm{GG}$ is the capacitance when looking into the gate of the MOSFET. $C_\mathrm{GD}$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $C_\mathrm{GS}$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect). In hand calculations we will often set $C_\mathrm{GD} = 0$.
+In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $C_\mathrm{GG} = C_\mathrm{GS} + C_\mathrm{GD}$ is the total capacitance when looking into the gate of the MOSFET. $C_\mathrm{GS}$ is usually the dominant capacitance, and $C_\mathrm{GD}$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $C_\mathrm{GS}$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect). In hand calculations we will often set $C_\mathrm{GD} = 0$.
 
 ::: {.callout-note}
 The bulk connection in @fig-mosfet-large-signal-model seems floating as we only consider it a control terminal, where the potential difference between source and bulk influences the behaviour of the MOSFET. However, we do not consider resistive or capacitive effects associated with this node, which is of course a gross simplification, but nevertheless one we will make in this course.
@@ -58,11 +58,9 @@ Please try to execute the following steps and answer these questions:
 4. Explore the LV NMOS `sg13_lv_nmos`:
    1. How is $I_\mathrm{DS}$ affected by $V_\mathrm{GS}$ and $V_\mathrm{DS}$?
    2. Change $W$ and $L$ of the MOSFET. What is the impact on the above parameters? Can you explain the variations?
-   3. How is $V_\mathrm{th}$ changing with $W$ and $L$? Can you explain what you are seeing?
-   4. Take a look at the device capacitances $C_\mathrm{GG}$ and $C_\mathrm{GD}$. Why are they important? What is the relation to $f_\mathrm{T}$?
-   5. When looking at the model parameters in ngspice, you see that there is a $C_\mathrm{GD}$ and a $C_\mathrm{DG}$. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?
+   3. When looking at the model parameters in ngspice, you see that there is a $C_\mathrm{GD}$ and a $C_\mathrm{DG}$. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?
 5. Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
-   1. Which is the fastest device? Why?
+   1. For a given $W$ and $L$, which device provides more drain current? How are the capacitances related?
    2. If you would have to size an inverter, what would be the ideal ratio of $W_p/W_n$? Will you exactly design this ratio, or are the reasons to deviate?
    3. There are LV and HV MOSFETs, and you investigated the difference in performance. What is the rationale when designing circuits for selection either an LV type, and when to choose an HV type?
 6. Build a test bench to explore the body effect, start with LV NMOS.
@@ -94,7 +92,8 @@ Please try to execute the following steps and answer the following questions:
 2. Explore the LV NMOS `sg13_lv_nmos`:
    1. How are $g_\mathrm{m}$ and $g_\mathrm{ds}$ changing when you change the dc node voltages?
    2. What is the ratio of $g_\mathrm{m}$ to $g_\mathrm{mb}$? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?
-   3. Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
+   3. Take a look at the device capacitances $C_\mathrm{gs}$ and $C_\mathrm{gd}$. Why are they important? What is the relation to $f_\mathrm{T}$? *Note: $f_\mathrm{T}$ is the transit frequency where the current gain of the MOSFET drops to 1, and can be approximated by $2 \pi f_\mathrm{T} = g_\mathrm{m} / C_\mathrm{gg}$.*
+   4. Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
 3. Go back to your testbench for the LVS PMOS `sg13_lv_pmos`:
    1. What is the difference in $g_\mathrm{m}$, $g_\mathrm{ds}$, and other parameters between the NMOS and the PMOS? Why could they be different?
 :::
