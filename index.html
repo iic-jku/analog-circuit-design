@@ -342,7 +342,7 @@ Figure&nbsp;3: The MOSFET large-signal model.
 </div>
 </div>
 </div>
-<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}\)</span> is the capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a>. In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD} = 0\)</span>.</p>
+<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG} = C_\mathrm{GS} + C_\mathrm{GD}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a>. In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD} = 0\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -411,13 +411,11 @@ Exercise
 <ol type="1">
 <li>How is <span class="math inline">\(I_\mathrm{DS}\)</span> affected by <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>?</li>
 <li>Change <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of the MOSFET. What is the impact on the above parameters? Can you explain the variations?</li>
-<li>How is <span class="math inline">\(V_\mathrm{th}\)</span> changing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>? Can you explain what you are seeing?</li>
-<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{GG}\)</span> and <span class="math inline">\(C_\mathrm{GD}\)</span>. Why are they important? What is the relation to <span class="math inline">\(f_\mathrm{T}\)</span>?</li>
 <li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\mathrm{DG}\)</span>. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?</li>
 </ol></li>
 <li>Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
 <ol type="1">
-<li>Which is the fastest device? Why?</li>
+<li>For a given <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>, which device provides more drain current? How are the capacitances related?</li>
 <li>If you would have to size an inverter, what would be the ideal ratio of <span class="math inline">\(W_p/W_n\)</span>? Will you exactly design this ratio, or are the reasons to deviate?</li>
 <li>There are LV and HV MOSFETs, and you investigated the difference in performance. What is the rationale when designing circuits for selection either an LV type, and when to choose an HV type?</li>
 </ol></li>
@@ -480,6 +478,7 @@ Exercise
 <ol type="1">
 <li>How are <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span> changing when you change the dc node voltages?</li>
 <li>What is the ratio of <span class="math inline">\(g_\mathrm{m}\)</span> to <span class="math inline">\(g_\mathrm{mb}\)</span>? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?</li>
+<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{gs}\)</span> and <span class="math inline">\(C_\mathrm{gd}\)</span>. Why are they important? What is the relation to <span class="math inline">\(f_\mathrm{T}\)</span>? <em>Note: <span class="math inline">\(f_\mathrm{T}\)</span> is the transit frequency where the current gain of the MOSFET drops to 1, and can be approximated by <span class="math inline">\(2 \pi f_\mathrm{T} = g_\mathrm{m} / C_\mathrm{gg}\)</span>.</em></li>
 <li>Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
 </ol></li>
 <li>Go back to your testbench for the LVS PMOS <code>sg13_lv_pmos</code>:
@@ -1014,7 +1013,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -239,7 +239,7 @@ technology \textbf{SG13G2} from IHP Microelectronics is used.
 Tools and PDK are integrated in the \textbf{IIC-OSIC-TOOLS} Docker
 image, which will be used during the coursework.
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 All course material is made publicly available on GitHub and shared
 under the Apache-2.0 license.
@@ -349,7 +349,7 @@ information like installed tools, how to setup a VM, etc. please look at
 \href{https://github.com/iic-jku/IIC-OSIC-TOOLS}{IIC-OSIC-TOOLS GitHub
 page}.
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 Please make sure to receive information about your personal VM access
 ahead of the course start.
@@ -360,7 +360,7 @@ Experienced users can install this image on their personal computer, for
 JKU students the IIC will host a VM on our compute cluster and provide
 personal login credentials.
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 In this course, we assume that students have a basic knowledge of Linux
 and how to operate it using the terminal. If you are not yet familiar
@@ -399,7 +399,7 @@ control the drain-source current flow. Often, the bulk is connected to
 source, and then the bulk terminal is not shown to declutter the
 schematics.
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 Strictly speaking is the drain-source current of a MOSFET controlled by
 the voltage between gate and bulk and the voltage between drain and
@@ -491,17 +491,19 @@ model.}
 Notebook}}
 
 In an ideal MOSFET no dc current is flowing into the gate, the behavior
-is purely capacitive. We model this by two capacitors: \(C_\mathrm{GG}\)
-is the capacitance when looking into the gate of the MOSFET.
-\(C_\mathrm{GD}\) models the capacitive feedback between D and G,
-usually induced by a topological overlap capacitance in the physical
-construction of the MOSFET. This capacitance is often small compared to
-\(C_\mathrm{GS}\), but in situations where we have a large voltage swing
-at the drain this capacitance will be affected by the
+is purely capacitive. We model this by two capacitors:
+\(C_\mathrm{GG} = C_\mathrm{GS} + C_\mathrm{GD}\) is the total
+capacitance when looking into the gate of the MOSFET. \(C_\mathrm{GS}\)
+is usually the dominant capacitance, and \(C_\mathrm{GD}\) models the
+capacitive feedback between D and G, usually induced by a topological
+overlap capacitance in the physical construction of the MOSFET. This
+capacitance is often small compared to \(C_\mathrm{GS}\), but in
+situations where we have a large voltage swing at the drain this
+capacitance will be affected by the
 \href{https://en.wikipedia.org/wiki/Miller_effect}{Miller effect}. In
 hand calculations we will often set \(C_\mathrm{GD} = 0\).
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 The bulk connection in Figure~\ref{fig-mosfet-large-signal-model} seems
 floating as we only consider it a control terminal, where the potential
@@ -535,7 +537,7 @@ Now, in order to get started, basic Xschem testbenches are prepared, and
 first simple dc sweeps of various voltages and currents will be done.
 But before that, please look at the import note below!
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-important-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-important-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colbacktitle=quarto-callout-important-color!10!white, leftrule=.75mm, colframe=quarto-callout-important-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 Throughout this material, we will stick to the following notations:
 
@@ -578,7 +580,7 @@ testbench for the LV NMOS shown in Figure~\ref{fig-simple-nmos-tb}.
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 Please try to execute the following steps and answer these questions:
 
@@ -609,13 +611,6 @@ Please try to execute the following steps and answer these questions:
     Change \(W\) and \(L\) of the MOSFET. What is the impact on the
     above parameters? Can you explain the variations?
   \item
-    How is \(V_\mathrm{th}\) changing with \(W\) and \(L\)? Can you
-    explain what you are seeing?
-  \item
-    Take a look at the device capacitances \(C_\mathrm{GG}\) and
-    \(C_\mathrm{GD}\). Why are they important? What is the relation to
-    \(f_\mathrm{T}\)?
-  \item
     When looking at the model parameters in ngspice, you see that there
     is a \(C_\mathrm{GD}\) and a \(C_\mathrm{DG}\). Why is this, what
     could be the difference? Sometimes these capacitors show a negative
@@ -629,7 +624,8 @@ Please try to execute the following steps and answer these questions:
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    Which is the fastest device? Why?
+    For a given \(W\) and \(L\), which device provides more drain
+    current? How are the capacitances related?
   \item
     If you would have to size an inverter, what would be the ideal ratio
     of \(W_p/W_n\)? Will you exactly design this ratio, or are the
@@ -711,7 +707,7 @@ changing between \(\gamma = 2/3\) in saturation and \(\gamma =1\) for
 triode operation; \(g_\mathrm{d0}\) is equal to \(g_\mathrm{m}\) in
 saturation and \(g_\mathrm{ds}\) in triode).
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, colframe=quarto-callout-note-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 Sometimes we will refer to different operating modes of the MOSFET like
 ``saturation'' or ``triode''. Generally speaking, when the drain-source
@@ -731,7 +727,7 @@ Now we need to see how the small-signal parameters seen in
 Figure~\ref{fig-mosfet-small-signal-model} can be investigated and
 estimated using circuit simulation.
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-tip-color!10!white, colback=white, arc=.35mm, leftrule=.75mm, coltitle=black, titlerule=0mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, bottomrule=.15mm, breakable, toptitle=1mm, left=2mm, opacityback=0, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, toprule=.15mm, bottomtitle=1mm]
+\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, arc=.35mm, bottomrule=.15mm, left=2mm, coltitle=black, toptitle=1mm, breakable, titlerule=0mm, rightrule=.15mm, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colbacktitle=quarto-callout-tip-color!10!white, leftrule=.75mm, colframe=quarto-callout-tip-color-frame, opacitybacktitle=0.6, opacityback=0, colback=white]
 
 Please try to execute the following steps and answer the following
 questions:
@@ -755,6 +751,13 @@ questions:
     What is the ratio of \(g_\mathrm{m}\) to \(g_\mathrm{mb}\)? What is
     the physical reason behind this ratio (you might want to revisit
     MOSFET device physics at this point)?
+  \item
+    Take a look at the device capacitances \(C_\mathrm{gs}\) and
+    \(C_\mathrm{gd}\). Why are they important? What is the relation to
+    \(f_\mathrm{T}\)? \emph{Note: \(f_\mathrm{T}\) is the transit
+    frequency where the current gain of the MOSFET drops to 1, and can
+    be approximated by
+    \(2 \pi f_\mathrm{T} = g_\mathrm{m} / C_\mathrm{gg}\).}
   \item
     Look at the drain noise current according to the MOSFET model and
     compare with a hand calculation of the noise. In the noise equation
