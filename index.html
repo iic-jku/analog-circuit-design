@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
+<meta name="author" content="Michael Koefinger">
 <meta name="dcterms.date" content="2024-08-02">
 
 <title>Analog Circuit Design</title>
@@ -91,12 +92,16 @@ window.Quarto = {
 
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
+<meta name="citation_author" content="Michael Koefinger">
 <meta name="citation_publication_date" content="2024-08-02">
 <meta name="citation_cover_date" content="2024-08-02">
 <meta name="citation_year" content="2024">
 <meta name="citation_online_date" content="2024-08-02">
 <meta name="citation_language" content="en-US">
+<meta name="citation_reference" content="citation_title=SPICE2: A computer program to simulate semiconductor circuits;,citation_author=Laurence W. Nagel;,citation_publication_date=1975-05;,citation_cover_date=1975-05;,citation_year=1975;,citation_fulltext_html_url=http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html;,citation_dissertation_institution=EECS Department, University of California, Berkeley;">
 <meta name="citation_reference" content="citation_title=Systematic design of analog CMOS circuits: Using pre-computed lookup tables;,citation_author=Paul G. A. Jespers;,citation_author=Boris Murmann;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
+<meta name="citation_reference" content="citation_title=Modern semiconductor devices for integrated circuits;,citation_author=Chenming Hu;,citation_publication_date=2010;,citation_cover_date=2010;,citation_year=2010;">
+<meta name="citation_reference" content="citation_title=Operation and modeling of the MOS transistor;,citation_author=Yannis Tsividis;,citation_author=Colin McAndrew;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;">
 </head>
 
 <body>
@@ -111,11 +116,21 @@ window.Quarto = {
     <div class="quarto-title-meta-container">
       <div class="quarto-title-meta-column-start">
             <div class="quarto-title-meta-author">
-          <div class="quarto-title-meta-heading">Author</div>
+          <div class="quarto-title-meta-heading">Authors</div>
           <div class="quarto-title-meta-heading">Affiliation</div>
           
                 <div class="quarto-title-meta-contents">
             <p class="author">Harald Pretl <a href="mailto:harald.pretl@jku.at" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        <a href="www.jku.at">
+                        Johannes Kepler University
+                        </a>
+                      </p>
+                  </div>
+                      <div class="quarto-title-meta-contents">
+            <p class="author">Michael Koefinger <a href="mailto:michael.koefinger@jku.at" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
           </div>
                 <div class="quarto-title-meta-contents">
                     <p class="affiliation">
@@ -193,10 +208,22 @@ window.Quarto = {
 <p>This is the material for an intermediate-level MOSFET circuit design course, held at JKU under course number 336.009 (“KV Analoge Schaltungstechnik”).</p>
 <p>The course makes heavy use of circuit simulation, using <strong>Xschem</strong> for schematic entry and <strong>ngspice</strong> for simulation. The 130nm CMOS technology <strong>SG13G2</strong> from IHP Microelectronics is used.</p>
 <p>Tools and PDK are integrated in the <strong>IIC-OSIC-TOOLS</strong> Docker image, which will be used during the coursework.</p>
-<p>All course material is made publicly available and shared under the Apache-2.0 license.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All course material is made publicly available on GitHub and shared under the Apache-2.0 license.</p>
+</div>
+</div>
 <section id="ihps-sg13g2-130nm-cmos-technology" class="level3">
 <h3 class="anchored" data-anchor-id="ihps-sg13g2-130nm-cmos-technology">IHP’s SG13G2 130nm CMOS Technology</h3>
-<p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin, 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
+<p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
 <p>For our circuit design, the most important parameters of the available devices are summarized in the following:</p>
 <ul>
 <li><strong>Low-voltage NMOS</strong>: Device <code>sg13_lv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx 0.5\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
@@ -207,21 +234,47 @@ window.Quarto = {
 <li><strong>Poly resistor</strong>: Device <code>rppd</code>; <span class="math inline">\(R_\square=260\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=170\,\text{ppm/K}\)</span></li>
 <li><strong>Poly resistor high</strong>: Device <code>rhigh</code>; <span class="math inline">\(R_\square=1360\,\Omega \pm 15\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=-2300\,\text{ppm/K}\)</span></li>
 <li><strong>MIM capacitor</strong>: Device <code>cap_cmim</code>; <span class="math inline">\(C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\)</span>, <span class="math inline">\(\mathrm{VC}_1=-26\text{ppm/V}\)</span>, <span class="math inline">\(\mathrm{TC}_1=3.6\text{ppm/K}\)</span>, breakdown voltage <span class="math inline">\(&gt;15\,\mathrm{V}\)</span></li>
-<li><strong>MOM capacitor</strong>: Well-suited metal stack due to 5 thin metal layers, but no primitive capacitor available.</li>
+<li><strong>MOM capacitor</strong>: The metal stack is well-suited for MOM capacitors due to 5 thin metal layers, but no primitive capacitor device is available at this point.</li>
 </ul>
 </section>
 <section id="schematic-entry-using-xschem" class="level3">
 <h3 class="anchored" data-anchor-id="schematic-entry-using-xschem">Schematic Entry Using Xschem</h3>
-<p>Xschem is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem please look at the <a href="https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html">online documentation</a>. Usage of Xschem will be learned with the first few basic examples, essentially a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.</p>
+<p>Xschem is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem and the basic operation of it please look at the available <a href="https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html">online documentation</a>. Usage of Xschem will be learned with the first few basic examples, essentially using a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.</p>
 </section>
 <section id="circuit-simulation-using-ngspice" class="level3">
 <h3 class="anchored" data-anchor-id="circuit-simulation-using-ngspice">Circuit Simulation Using ngspice</h3>
-<p>ngspice is an open-source circuit simulator with SPICE dependency. Besides the usual simulated types like <code>op</code> (operating point), <code>dc</code> (dc sweeps), <code>tran</code> (time-domain), or <code>ac</code> (for small-signal frquency sweeps), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest <a href="https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf">manual</a>.</p>
+<p>ngspice is an open-source circuit simulator with SPICE dependency <span class="citation" data-cites="Nagel_1975">(<a href="#ref-Nagel_1975" role="doc-biblioref">Nagel 1975</a>)</span>. Besides the usual simulated types like <code>op</code> (operating point), <code>dc</code> (dc sweeps), <code>tran</code> (time-domain), or <code>ac</code> (small-signal frquency sweeps), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest <a href="https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf">online manual</a>.</p>
 </section>
 <section id="integrated-ic-design-environment-iic-osic-tools" class="level3">
 <h3 class="anchored" data-anchor-id="integrated-ic-design-environment-iic-osic-tools">Integrated IC Design Environment (IIC-OSIC-TOOLS)</h3>
-<p>In order to make usage of the various required components (tools like Xschem, PDK like SG13G2) easier, we will use the IIC-OSIC-TOOLS. This is a pre-setup Docker image which allows to design on a virtual machine on virtually any type of computing equipment. For further information like installed tools, how to setup a VM, etc. please look at <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS">IIC-OSIC-TOOLS GitHub page</a>.</p>
+<p>In order to make use of the various required components (tools like Xschem and ngspice, PDKs like SG13G2) easier, we will use the <strong>IIC-OSIC-TOOLS</strong>. This is a pre-compiled Docker image which allows to do circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc. please look at <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS">IIC-OSIC-TOOLS GitHub page</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please make sure to receive information about your personal VM access ahead of the course start.</p>
+</div>
+</div>
 <p>Experienced users can install this image on their personal computer, for JKU students the IIC will host a VM on our compute cluster and provide personal login credentials.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal. If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many ressources available.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="first-steps" class="level2">
@@ -229,68 +282,231 @@ window.Quarto = {
 <p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.</p>
 <section id="sec-mosfet" class="level3">
 <h3 class="anchored" data-anchor-id="sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
-<p>In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model. For hand calculations and theoretical discussions we will use the following simplified large-signal model.</p>
-<div id="cell-fig-mosfet-large-signal-model" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div id="fig-mosfet-large-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-mosfet-large-signal-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-mosfet-large-signal-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: The MOSFET large-signal model."><img src="index_files/figure-html/fig-mosfet-large-signal-model-output-1.svg" class="img-fluid figure-img"></a>
+<p>In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET as a macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model.</p>
+<p>The circuit symbol that we will use for the n-channel MOSFET is shown in <a href="#fig-nmos-symbol" class="quarto-xref">Figure&nbsp;1</a>, and for the p-channel MOSFET it is shown in <a href="#fig-pmos-symbol" class="quarto-xref">Figure&nbsp;2</a>. A control voltage between gate (“G”) and source (“S”) causes a current to flow between drain (“D”) and source. The MOSFET is a 4-terminal device, so the bulk (“B”) can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-large-signal-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The MOSFET large-signal model.
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Strictly speaking is the drain-source current of a MOSFET controlled by the voltage between gate and bulk and the voltage between drain and source. Since bulk is often connected to source anyway, and many circuit designers historically were already familiar with the operation of the bipolar junction transistor, it is common to consider the gate-source voltage (besides the drain-source voltage) as the controlling voltage.</p>
+<p>This focus on gate-source implies that the source is special compared to the drain. In a typical physical MOSFET, however, the drain and source are constructed exactly the same, and which terminal is drain, and which terminal is source, is only determined by the applied voltage potentials, and can change dynamically during operation (think of a MOSFET operating as a switch… which side is the drain, which side is the source?).</p>
+<p>Unfortunately, this focus on a “special” source has made its way into some MOSFET compact models. The model that is used in SG13G2 luckily uses the PSP model, which is formulated symmetrically with regards to drain and source, and is thus very well suited for analog and RF circuit design. For a detailed understanding of the PSP model please refer to the <a href="https://www.nxp.com/wcm_documents/models/mos-models/model-psp/psp102p4_summary.pdf">model documentation</a>.</p>
+</div>
+</div>
+<div id="cell-fig-nmos-symbol" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="fig-nmos-symbol" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nmos-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-nmos-symbol-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Circuit symbol of n-channel MOSFET."><img src="index_files/figure-html/fig-nmos-symbol-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Circuit symbol of n-channel MOSFET.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{DS}\)</span> and other large- and small-signal parameters.</p>
-<p>As this is an intermediate-level course, some basic knowledge about MOSFET operation, basic device equations, and small-signal equivalent circuits is assumed. This knowledge will be practiced, though, throughout the course, by doing exercises to compare hand calculation with actual simulation results. JKU students should be familiar with the MOSFET chapter from “Design of Complex Integrated Circuits” (VL 336.048).</p>
-<p>In order to get started, basic Xschem testbenches are prepared.</p>
-<section id="student-exercise" class="level4">
-<h4 class="anchored" data-anchor-id="student-exercise">Student Exercise</h4>
-<p>We start with a simple testbench for the LV NMOS, see <a href="https://xschem-viewer.com/?file=https%3A%2F%2Fgithub.com%2Fiic-jku%2Fanalog-circuit-design%2Fblob%2Fmain%2Fxschem%2Fdc_lv_nmos.sch">here</a>.</p>
+<div id="cell-fig-pmos-symbol" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-pmos-symbol" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pmos-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-pmos-symbol-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Circuit symbol of p-channel MOSFET."><img src="index_files/figure-html/fig-pmos-symbol-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pmos-symbol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Circuit symbol of p-channel MOSFET.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a>. A current source <span class="math inline">\(I_\mathrm{DS}\)</span> models the current flow between drain and source, and it is controlled by the three control voltages <span class="math inline">\(V_\mathrm{GS}\)</span>, <span class="math inline">\(V_\mathrm{DS}\)</span>, and <span class="math inline">\(V_\mathrm{SB}\)</span>. Note that in this way (since <span class="math inline">\(I_\mathrm{DS} = f(V_\mathrm{DS})\)</span>) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply <span class="math inline">\(V_\mathrm{SB} = 0\)</span>.</p>
+<div id="cell-fig-mosfet-large-signal-model" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-large-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-large-signal-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-mosfet-large-signal-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: The MOSFET large-signal model."><img src="index_files/figure-html/fig-mosfet-large-signal-model-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-large-signal-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The MOSFET large-signal model.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}\)</span> is the capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a>. In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD} = 0\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The bulk connection in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> seems floating as we only consider it a control terminal, where the potential difference between source and bulk influences the behaviour of the MOSFET. However, we do not consider resistive or capacitive effects associated with this node, which is of course a gross simplification, but nevertheless one we will make in this course.</p>
+</div>
+</div>
+<p>Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behaviour from basic principles, we need to understand the behaviour of the elements of the large-signal model in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{DS}\)</span> and other large- and small-signal parameters.</p>
+<p>As a side note, the students who want to understand MOSFET behaviour from a physical angle should consult the MOSFET chapter from the JKU course “Design of Complex Integrated Circuits” (VL 336.048). A great introduction into MOSFET operation and fabrication is given in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>, which is available freely <a href="https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/">online</a> and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in <span class="citation" data-cites="Tsividis_McAndrew_2011">(<a href="#ref-Tsividis_McAndrew_2011" role="doc-biblioref">Tsividis and McAndrew 2011</a>)</span>.</p>
+<p>Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Throughout this material, we will stick to the following notations:</p>
+<ul>
+<li>A <strong>dc quantity</strong> is shown with an upper-case letter with upper-case subscripts, like <span class="math inline">\(V_\mathrm{GS}\)</span>.</li>
+<li>Double-subscripts denote <strong>dc sources</strong>, like <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>.</li>
+<li>An <strong>ac (small-signal) quantity</strong> is a lower-case letter with a lower-case subscript, like <span class="math inline">\(g_\mathrm{m}\)</span>.</li>
+<li>A <strong>total quantity</strong> (dc plus ac) is shown as a lowercase letter with upper-case subscript, like <span class="math inline">\(i_\mathrm{DS}\)</span>.</li>
+<li>A upper-case letter with a lower-case subscript is used to denote <strong>RMS quantities</strong>, like <span class="math inline">\(I_\mathrm{ds}\)</span>.</li>
+</ul>
+</div>
+</div>
+<section id="large-signal-mosfet-model" class="level4">
+<h4 class="anchored" data-anchor-id="large-signal-mosfet-model">Large-Signal MOSFET Model</h4>
+<p>We start with an investigation into the large-signal MOSFET model shown in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> by using the simple testbench for the LV NMOS shown in <a href="#fig-simple-nmos-tb" class="quarto-xref">Figure&nbsp;4</a>.</p>
+<div id="fig-simple-nmos-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-simple-nmos-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="./xschem/dc_lv_nmos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Testbench for NMOS dc sweeps."><img src="./xschem/dc_lv_nmos.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simple-nmos-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Testbench for NMOS dc sweeps.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please try to execute the following steps and answer these questions:</p>
 <ol type="1">
-<li>Try to get the LV NMOS testbench at <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch" class="uri">https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch</a> working in your IIC-OSIC-TOOLS environment.</li>
-<li>Make yourself familiar with Xschem (change the schematic, run a simulation, graph the result).</li>
-<li>Make youself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look and MOSFET model parameters).</li>
-<li>Explore the LV NMOS
+<li>Get the LV NMOS testbench (available at <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch" class="uri">https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch</a>) working in your IIC-OSIC-TOOLS environment.</li>
+<li>Make yourself familiar with Xschem (change the schematic in various ways, run a simulation, graph the result).</li>
+<li>Make youself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look at MOSFET model parameters).</li>
+<li>Explore the LV NMOS <code>sg13_lv_nmos</code>:
 <ol type="1">
-<li>How are <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(g_\mathrm{ds}\)</span>, and <span class="math inline">\(V_\mathrm{th}\)</span> changing when you change the dc node voltages?</li>
-<li>Can you hand-calculate <span class="math inline">\(g_\mathrm{m}\)</span>? Does it fit? See what happens when <span class="math inline">\(V_\mathrm{GS} &gt; V_\mathrm{th}\)</span> or <span class="math inline">\(V_\mathrm{GS} &lt; V_\mathrm{th}\)</span>, and concurrently vary <span class="math inline">\(V_\mathrm{DS}\)</span>.</li>
+<li>How is <span class="math inline">\(I_\mathrm{DS}\)</span> affected by <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>?</li>
 <li>Change <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of the MOSFET. What is the impact on the above parameters? Can you explain the variations?</li>
-<li>How is <span class="math inline">\(V_\mathrm{th}\)</span> changing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>? Can you explain what you are seeing.</li>
+<li>How is <span class="math inline">\(V_\mathrm{th}\)</span> changing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>? Can you explain what you are seeing?</li>
 <li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{GG}\)</span> and <span class="math inline">\(C_\mathrm{GD}\)</span>. Why are they important? What is the relation to <span class="math inline">\(f_\mathrm{T}\)</span>?</li>
-<li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\mathrm{DG}\)</span>. Why, what is the difference? Sometimes these capacitors show a negative value, why?</li>
-<li>In this course we will only consider the drain-source current noise of the MOSFET. Look at the simulated value and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
+<li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\mathrm{DG}\)</span>. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?</li>
 </ol></li>
-<li>Build test benches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
+<li>Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
 <ol type="1">
 <li>Which is the fastest device? Why?</li>
-<li>What is the difference in <span class="math inline">\(g_\mathrm{m}\)</span> and other parameters between these four different MOSFETs? Why?</li>
 <li>If you would have to size an inverter, what would be the ideal ratio of <span class="math inline">\(W_p/W_n\)</span>? Will you exactly design this ratio, or are the reasons to deviate?</li>
 <li>There are LV and HV MOSFETs, and you investigated the difference in performance. What is the rationale when designing circuits for selection either an LV type, and when to choose an HV type?</li>
 </ol></li>
 <li>Build a test bench to explore the body effect, start with LV NMOS.
 <ol type="1">
 <li>What happens when <span class="math inline">\(V_\mathrm{BS} \neq 0\)</span>?</li>
-<li>What is the ratio of <span class="math inline">\(g_\mathrm{m}\)</span> to <span class="math inline">\(g_\mathrm{mB}\)</span>? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?</li>
 </ol></li>
 </ol>
+</div>
+</div>
+</section>
+<section id="small-signal-mosfet-model" class="level4">
+<h4 class="anchored" data-anchor-id="small-signal-mosfet-model">Small-Signal MOSFET Model</h4>
+<p>As you have seen in the previous investigations, the large-signal model of <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> describes the behaviour of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.</p>
+<p>However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.</p>
+<p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{ds} = g_\mathrm{m} v_\mathrm{gs}\)</span> models the drain current as a function of <span class="math inline">\(v_\mathrm{gs}\)</span>, and the resistor <span class="math inline">\(g_\mathrm{ds}\)</span> models the dependency of the drain current by <span class="math inline">\(v_\mathrm{ds}\)</span>. The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{ds} = g_\mathrm{mb} v_\mathrm{sb}\)</span>.</p>
+<div id="cell-fig-mosfet-small-signal-model" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-small-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-small-signal-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-mosfet-small-signal-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: The MOSFET small-signal model."><img src="index_files/figure-html/fig-mosfet-small-signal-model-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-small-signal-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: The MOSFET small-signal model.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by <span class="math inline">\(\overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0}\)</span> (<span class="math inline">\(\overline{I_\mathrm{n}^2}\)</span> is the power-spectral density of the noise in A<span class="math inline">\(^2\)</span>/Hz; <span class="math inline">\(k\)</span> is the Boltzmann constant; <span class="math inline">\(T\)</span> is the absolute temperature; <span class="math inline">\(\gamma\)</span> is a parameter in simplified theory changing between <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma =1\)</span> for triode operation; <span class="math inline">\(g_\mathrm{d0}\)</span> is equal to <span class="math inline">\(g_\mathrm{m}\)</span> in saturation and <span class="math inline">\(g_\mathrm{ds}\)</span> in triode).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sometimes we will refer to different operating modes of the MOSFET like “saturation” or “triode”. Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call “triode” mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called “saturation” mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like “triode” and “saturation” only in an approximative sense.</p>
+</div>
+</div>
+<p>Now we need to see how the small-signal parameters seen in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> can be investigated and estimated using circuit simulation.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please try to execute the following steps and answer the following questions:</p>
+<ol type="1">
+<li>Reuse the LV NMOS testbench (available at <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch" class="uri">https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch</a>).</li>
+<li>Explore the LV NMOS <code>sg13_lv_nmos</code>:
+<ol type="1">
+<li>How are <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span> changing when you change the dc node voltages?</li>
+<li>What is the ratio of <span class="math inline">\(g_\mathrm{m}\)</span> to <span class="math inline">\(g_\mathrm{mb}\)</span>? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?</li>
+<li>Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
+</ol></li>
+<li>Go back to your testbench for the LVS PMOS <code>sg13_lv_pmos</code>:
+<ol type="1">
+<li>What is the difference in <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(g_\mathrm{ds}\)</span>, and other parameters between the NMOS and the PMOS? Why could they be different?</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level4">
+<h4 class="anchored" data-anchor-id="conclusion">Conclusion</h4>
+<p>Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of <a href="#sec-mosfet" class="quarto-xref">Section&nbsp;2.1</a> and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>.</p>
 </section>
 </section>
 <section id="sec-mosfet-diode" class="level3">
 <h3 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h3>
 <p>This sections need to be written, but here is a first figure.</p>
-<div id="cell-fig-mosfet-diode" class="cell" data-execution_count="2">
+<div id="cell-fig-mosfet-diode" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-diode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mosfet-diode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: A MOSFET connected as a diode."><img src="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: A MOSFET connected as a diode."><img src="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: A MOSFET connected as a diode.
+Figure&nbsp;6: A MOSFET connected as a diode.
 </figcaption>
 </figure>
 </div>
@@ -301,29 +517,29 @@ Figure&nbsp;2: A MOSFET connected as a diode.
 <section id="transistor-sizing-using-gmid-methodoloy" class="level2">
 <h2 class="anchored" data-anchor-id="transistor-sizing-using-gmid-methodoloy">Transistor Sizing Using gm/ID Methodoloy</h2>
 <p>When designing circuits it is an important question how to select various parameters of a MOSFET, like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, or the bias current <span class="math inline">\(I_\mathrm{D}\)</span>. As a very practical approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodoloy introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
-<div id="cell-fig-nmos-gmid-vs-ft" class="cell" data-execution_count="3">
+<div id="cell-fig-nmos-gmid-vs-ft" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div id="fig-nmos-gmid-vs-ft" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-nmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: LV NMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
+<a href="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: LV NMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: LV NMOS gm/ID vs.&nbsp;transit frequency.
+Figure&nbsp;7: LV NMOS gm/ID vs.&nbsp;transit frequency.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-pmos-gmid-vs-ft" class="cell" data-execution_count="4">
+<div id="cell-fig-pmos-gmid-vs-ft" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div id="fig-pmos-gmid-vs-ft" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: LV PMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
+<a href="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;8: LV PMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: LV PMOS gm/ID vs.&nbsp;transit frequency.
+Figure&nbsp;8: LV PMOS gm/ID vs.&nbsp;transit frequency.
 </figcaption>
 </figure>
 </div>
@@ -363,8 +579,17 @@ Figure&nbsp;4: LV PMOS gm/ID vs.&nbsp;transit frequency.
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Appendix: Xschem Cheat Sheet</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Chenming_Hu_2010" class="csl-entry" role="listitem">
+Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em>. Pearson.
+</div>
 <div id="ref-Jespers_Murmann_2017" class="csl-entry" role="listitem">
 Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CMOS Circuits: Using Pre-Computed Lookup Tables</em>. Cambridge University Press.
+</div>
+<div id="ref-Nagel_1975" class="csl-entry" role="listitem">
+Nagel, Laurence W. 1975. <span>“SPICE2: A Computer Program to Simulate Semiconductor Circuits.”</span> PhD thesis, EECS Department, University of California, Berkeley. <a href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html">http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html</a>.
+</div>
+<div id="ref-Tsividis_McAndrew_2011" class="csl-entry" role="listitem">
+Tsividis, Yannis, and Colin McAndrew. 2011. <em>Operation and Modeling of the MOS Transistor</em>. Oxford University Press.
 </div>
 </div></section></div></main>
 <!-- /main column -->
@@ -789,7 +1014,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
