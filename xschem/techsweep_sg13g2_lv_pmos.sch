@@ -89,8 +89,6 @@ value="
 .save @n.xm1.nsg13_lv_pmos[cjd]
 .save @n.xm1.nsg13_lv_pmos[cjs]
 .save @n.xm1.nsg13_lv_pmos[rg]
-.save onoise_n.xm1.nsg13_lv_pmos_flicker
-.save onoise_n.xm1.nsg13_lv_pmos_idid
 "}
 C {sg13g2_pr/sg13_lv_pmos.sym} 560 -170 0 0 {name=M1
 l=\{lx\}
