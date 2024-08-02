@@ -168,7 +168,7 @@
       <a onclick="window.quartoBackToArticle(); return false;" class="btn btn-primary quarto-back-link" href=""><i class="bi bi-caret-left"></i> Back to Article</a>
       <h6><i class="bi bi-journal-code"></i> MOSFET gm/ID Evaluation Script for IHP SG13G2</h6>
 
-            <a href="../sizing/techsweep_sg13_plots.ipynb" class="btn btn-primary quarto-download-embed" download="techsweep_sg13_plots.ipynb">Download Notebook</a>
+            <a href="../sizing/techsweep_sg13_plots_pmos.ipynb" class="btn btn-primary quarto-download-embed" download="techsweep_sg13_plots_pmos.ipynb">Download Notebook</a>
           </div>
 
      <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
@@ -211,7 +211,7 @@
 </div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="cell-2" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:06.633703Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:06.630544Z&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devices <span class="op">=</span> [<span class="st">'sg13_lv_nmos'</span>, <span class="st">'sg13_lv_pmos'</span>]</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>choice <span class="op">=</span> <span class="dv">0</span> <span class="co"># select which device to plot, start from 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>choice <span class="op">=</span> <span class="dv">1</span> <span class="co"># select which device to plot, start from 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="cell-3" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:07.236438Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:06.635041Z&quot;}" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -259,37 +259,39 @@
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>vds <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vds'</span>]))</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vsb <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="cell-6" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}" data-execution_count="5">
+<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="cell-6" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}" data-tags="[&quot;fig-pmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/ID and fT versus gate bias</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> <span class="bu">min</span>(l)<span class="op">;</span> VDS1<span class="op">=</span><span class="fl">0.75</span><span class="op">;</span> VSB1<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df.loc[(df[<span class="st">'l'</span>] <span class="op">==</span> L1) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vds'</span>]) <span class="op">==</span> VDS1) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]) <span class="op">==</span> VSB1)]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>gm_id1 <span class="op">=</span> df1[<span class="st">'gm'</span>].values<span class="op">/</span>df1[<span class="st">'ids'</span>].values</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cgg1 <span class="op">=</span> df1[<span class="st">'cgg'</span>].values <span class="op">+</span> df1[<span class="st">'cgdol'</span>].values<span class="op">+</span>df1[<span class="st">'cgsol'</span>].values </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ft1 <span class="op">=</span> df1[<span class="st">'gm'</span>].values<span class="op">/</span>cgg1<span class="op">/</span><span class="dv">2</span><span class="op">/</span>np.pi</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ft2 <span class="op">=</span> df1[<span class="st">'fug'</span>].values</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots()</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ax1.grid(axis<span class="op">=</span><span class="st">'x'</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="vs">r'$V_\mathrm</span><span class="sc">{GS}</span><span class="vs">$ (V)'</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'tab:blue'</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>, color<span class="op">=</span>color)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>ax1.plot(vgs, gm_id1, color<span class="op">=</span>color)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>color)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'tab:red'</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="vs">r'$f_\mathrm</span><span class="sc">{T}</span><span class="vs">$ (GHz)'</span>, color<span class="op">=</span>color)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax2.plot(vgs, ft1<span class="op">/</span><span class="fl">1e9</span>, color<span class="op">=</span>color)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>ax2.plot(vgs, ft2<span class="op">/</span><span class="fl">1e9</span>, color<span class="op">=</span>color)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>color)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="st">', $L$='</span><span class="op">+</span><span class="bu">str</span>(L1)<span class="op">+</span><span class="vs">r'µm, $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.5</span>)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>plt.axvline(x <span class="op">=</span> df1[<span class="st">'vth'</span>].values[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'k'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-gmid-ft-vs-vgs</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $g_m/I_D$ and $f_T$ as a function of the gate-source voltage.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> <span class="bu">min</span>(l)<span class="op">;</span> VDS1<span class="op">=</span><span class="fl">0.75</span><span class="op">;</span> VSB1<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df.loc[(df[<span class="st">'l'</span>] <span class="op">==</span> L1) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vds'</span>]) <span class="op">==</span> VDS1) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]) <span class="op">==</span> VSB1)]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>gm_id1 <span class="op">=</span> df1[<span class="st">'gm'</span>].values<span class="op">/</span>df1[<span class="st">'ids'</span>].values</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>cgg1 <span class="op">=</span> df1[<span class="st">'cgg'</span>].values <span class="op">+</span> df1[<span class="st">'cgdol'</span>].values<span class="op">+</span>df1[<span class="st">'cgsol'</span>].values </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ft1 <span class="op">=</span> df1[<span class="st">'gm'</span>].values<span class="op">/</span>cgg1<span class="op">/</span><span class="dv">2</span><span class="op">/</span>np.pi</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ft2 <span class="op">=</span> df1[<span class="st">'fug'</span>].values</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>ax1.grid(axis<span class="op">=</span><span class="st">'x'</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="vs">r'$V_\mathrm</span><span class="sc">{GS}</span><span class="vs">$ (V)'</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'tab:blue'</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>, color<span class="op">=</span>color)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>ax1.plot(vgs, gm_id1, color<span class="op">=</span>color)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>color)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'tab:red'</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="vs">r'$f_\mathrm</span><span class="sc">{T}</span><span class="vs">$ (GHz)'</span>, color<span class="op">=</span>color)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ax2.plot(vgs, ft1<span class="op">/</span><span class="fl">1e9</span>, color<span class="op">=</span>color)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>ax2.plot(vgs, ft2<span class="op">/</span><span class="fl">1e9</span>, color<span class="op">=</span>color)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>color)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="st">', $L$='</span><span class="op">+</span><span class="bu">str</span>(L1)<span class="op">+</span><span class="vs">r'µm, $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.5</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>plt.axvline(x <span class="op">=</span> df1[<span class="st">'vth'</span>].values[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'k'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="techsweep_sg13_plots_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -306,177 +308,191 @@
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="techsweep_sg13_plots_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.495380Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.307983Z&quot;}" data-execution_count="7">
+<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.495380Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.307983Z&quot;}" data-tags="[&quot;fig-pmos-ft-vs-gmid&quot;]" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.plot(gm_id1, ft1<span class="op">/</span><span class="fl">1e9</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$f_\mathrm</span><span class="sc">{T}</span><span class="vs">$ (GHz)'</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="st">', $L$='</span><span class="op">+</span><span class="bu">str</span>(L1)<span class="op">+</span><span class="vs">r'µm, $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-ft-vs-gmid</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $f_T$ vs. $g_m/I_D$.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.plot(gm_id1, ft1<span class="op">/</span><span class="fl">1e9</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$f_\mathrm</span><span class="sc">{T}</span><span class="vs">$ (GHz)'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="st">', $L$='</span><span class="op">+</span><span class="bu">str</span>(L1)<span class="op">+</span><span class="vs">r'µm, $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="techsweep_sg13_plots_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-execution_count="8">
+<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-pmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID for all L</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>VDS2<span class="op">=</span><span class="fl">0.75</span><span class="op">;</span> VSB2<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.loc[(<span class="bu">abs</span>(df[<span class="st">'vds'</span>]) <span class="op">==</span> VDS2) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]) <span class="op">==</span> VSB2)]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>gm_id2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>df2[<span class="st">'ids'</span>].values</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>gm_id2 <span class="op">=</span> np.reshape(gm_id2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ft2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>(df2[<span class="st">'cgg'</span>].values<span class="op">+</span>df2[<span class="st">'cgdol'</span>].values<span class="op">+</span>df2[<span class="st">'cgsol'</span>].values)<span class="op">/</span><span class="dv">2</span><span class="op">/</span>np.pi</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ft2 <span class="op">=</span> np.reshape(ft2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ax.plot(gm_id2, ft2<span class="op">/</span><span class="fl">1e9</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$f_\mathrm</span><span class="sc">{T}</span><span class="vs">$ (GHz)'</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-ft-vs-gmid-vs-l</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $f_T$ vs. $g_m/I_D$ as a function of $L$.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>VDS2<span class="op">=</span><span class="fl">0.75</span><span class="op">;</span> VSB2<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.loc[(<span class="bu">abs</span>(df[<span class="st">'vds'</span>]) <span class="op">==</span> VDS2) <span class="op">&amp;</span> (<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]) <span class="op">==</span> VSB2)]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>gm_id2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>df2[<span class="st">'ids'</span>].values</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>gm_id2 <span class="op">=</span> np.reshape(gm_id2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ft2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>(df2[<span class="st">'cgg'</span>].values<span class="op">+</span>df2[<span class="st">'cgdol'</span>].values<span class="op">+</span>df2[<span class="st">'cgsol'</span>].values)<span class="op">/</span><span class="dv">2</span><span class="op">/</span>np.pi</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>ft2 <span class="op">=</span> np.reshape(ft2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ax.plot(gm_id2, ft2<span class="op">/</span><span class="fl">1e9</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$f_\mathrm</span><span class="sc">{T}</span><span class="vs">$ (GHz)'</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="techsweep_sg13_plots_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}" data-execution_count="9">
+<div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}" data-tags="[&quot;fig-pmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/gds versus gm/ID for all L</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gm_gds2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>df2[<span class="st">'gds'</span>].values</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gm_gds2 <span class="op">=</span> np.reshape(gm_gds2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax.plot(gm_id2, gm_gds2)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">200</span>)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/g_\mathrm</span><span class="sc">{ds}</span><span class="vs">$ (V/V)'</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-gmgds-vs-gmid-vs-l</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $g_m/g_{ds}$ vs. $g_m/I_D$ as a function of $L$.</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>gm_gds2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>df2[<span class="st">'gds'</span>].values</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>gm_gds2 <span class="op">=</span> np.reshape(gm_gds2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax.plot(gm_id2, gm_gds2)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">200</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/g_\mathrm</span><span class="sc">{ds}</span><span class="vs">$ (V/V)'</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="techsweep_sg13_plots_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [10]:</pre></div><div id="cell-11" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}" data-execution_count="10">
+<div class="cell-container"><div class="cell-decorator"><pre>In [10]:</pre></div><div id="cell-11" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}" data-tags="[&quot;fig-pmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Id/W (Jd) versus gm/ID for all L</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>jd2 <span class="op">=</span> df2[<span class="st">'ids'</span>].values<span class="op">/</span>w[choice]<span class="op">/</span><span class="fl">1e-6</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>jd2 <span class="op">=</span> np.reshape(jd2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ax.semilogy(gm_id2, jd2)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> choice <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="fl">1e-1</span>, <span class="fl">1e3</span>)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="fl">1e-2</span>,<span class="fl">1e3</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$I_\mathrm</span><span class="sc">{D}</span><span class="vs">/W$ ($\mu$A/$\mu$m)'</span>)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'minor'</span>)</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-jd-vs-gmid-vs-l</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $I_D/W$ vs. $g_m/I_D$ as a function of $L$.</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>jd2 <span class="op">=</span> df2[<span class="st">'ids'</span>].values<span class="op">/</span>w[choice]<span class="op">/</span><span class="fl">1e-6</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>jd2 <span class="op">=</span> np.reshape(jd2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>ax.semilogy(gm_id2, jd2)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> choice <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="fl">1e-1</span>, <span class="fl">1e3</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="fl">1e-2</span>,<span class="fl">1e3</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$I_\mathrm</span><span class="sc">{D}</span><span class="vs">/W$ ($\mu$A/$\mu$m)'</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'minor'</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="techsweep_sg13_plots_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}" data-execution_count="11">
+<div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}" data-tags="[&quot;fig-pmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Vdss versus gm/ID for all L</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>vdss2 <span class="op">=</span> df2[<span class="st">'vdss'</span>]</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>vdss2 <span class="op">=</span> np.reshape(vdss2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.plot(gm_id2, vdss2)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$V_\mathrm{ds,sat}$ (V)'</span>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'minor'</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-vdsat-vs-gmid-vs-l</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $V_{ds,sat}$ vs. $g_m/I_D$ as a function of $L$.</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>vdss2 <span class="op">=</span> df2[<span class="st">'vdss'</span>]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>vdss2 <span class="op">=</span> np.reshape(vdss2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.plot(gm_id2, vdss2)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$V_\mathrm{ds,sat}$ (V)'</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'minor'</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="techsweep_sg13_plots_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [12]:</pre></div><div id="cell-13" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Sid versus gm/ID for all L</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sid2 <span class="op">=</span> df2[<span class="st">'sid'</span>].values</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>gm2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sid2 <span class="op">=</span> np.reshape(sid2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>gm2 <span class="op">=</span> np.reshape(gm2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>gamma2 <span class="op">=</span> sid2<span class="op">/</span><span class="dv">4</span><span class="op">/</span><span class="fl">1.38e-23</span><span class="op">/</span><span class="dv">300</span><span class="op">/</span>gm2</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ax.plot(gm_id2, gamma2)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> choice <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="fl">0.6</span>,<span class="fl">1.2</span>)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="dv">1</span>,<span class="fl">2.5</span>)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'Noise factor $\gamma$ (1)'</span>)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'minor'</span>)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [12]:</pre></div><div id="cell-13" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-pmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gamma versus gm/ID for all L</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-gamma-vs-gmid-vs-l</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $\gamma$ vs. $g_m/I_D$ as a function of $L$.</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sid2 <span class="op">=</span> df2[<span class="st">'sid'</span>].values</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>gm2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>sid2 <span class="op">=</span> np.reshape(sid2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>gm2 <span class="op">=</span> np.reshape(gm2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>gamma2 <span class="op">=</span> sid2<span class="op">/</span><span class="dv">4</span><span class="op">/</span><span class="fl">1.38e-23</span><span class="op">/</span><span class="dv">300</span><span class="op">/</span>gm2</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ax.plot(gm_id2, gamma2)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">20</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> choice <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="fl">0.6</span>,<span class="fl">1.2</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="dv">1</span>,<span class="fl">2.5</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'Noise factor $\gamma$ (1)'</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'minor'</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="techsweep_sg13_plots_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [13]:</pre></div><div id="cell-14" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Svgs versus gm/ID for all L</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sfl2 <span class="op">=</span> df2[<span class="st">'sfl'</span>].values</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sfl2 <span class="op">=</span> np.reshape(sfl2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>fco <span class="op">=</span> sfl2<span class="op">/</span>sid2</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ax.semilogy(gm_id2, fco)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">25</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="fl">1e2</span>, <span class="fl">1e8</span>)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$f_\mathrm</span><span class="sc">{co}</span><span class="vs">$ (Hz)'</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'minor'</span>)</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [13]:</pre></div><div id="cell-14" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}" data-tags="[&quot;fig-pmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fco versus gm/ID for all L</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-fco-vs-gmid-vs-l</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Flicker-noise corner frequency vs. $g_m/I_D$ as a </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sfl2 <span class="op">=</span> df2[<span class="st">'sfl'</span>].values</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>sfl2 <span class="op">=</span> np.reshape(sfl2, (<span class="bu">len</span>(vgs), <span class="op">-</span><span class="dv">1</span>), order<span class="op">=</span><span class="st">'F'</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>fco <span class="op">=</span> sfl2<span class="op">/</span>sid2</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>ax.semilogy(gm_id2, fco)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'center right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.5</span>), title<span class="op">=</span><span class="st">'L (µm)'</span>, labels<span class="op">=</span>l.tolist())</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">25</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="fl">1e2</span>, <span class="fl">1e8</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$g_\mathrm</span><span class="sc">{m}</span><span class="vs">/I_\mathrm</span><span class="sc">{D}</span><span class="vs">$ (S/A)'</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$f_\mathrm</span><span class="sc">{co}</span><span class="vs">$ (Hz)'</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'minor'</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', $V_\mathrm</span><span class="sc">{DS}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, $V_\mathrm</span><span class="sc">{SB}</span><span class="vs">$='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="techsweep_sg13_plots_files/figure-html/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="techsweep_sg13_plots_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></a></p>
+<p class=""><a href="techsweep_sg13_plots_pmos_files/figure-html/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="techsweep_sg13_plots_pmos_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -901,7 +917,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

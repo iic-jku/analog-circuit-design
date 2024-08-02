@@ -180,7 +180,11 @@ window.Quarto = {
   <li><a href="#sec-mosfet" id="toc-sec-mosfet" class="nav-link" data-scroll-target="#sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</a></li>
   <li><a href="#sec-mosfet-diode" id="toc-sec-mosfet-diode" class="nav-link" data-scroll-target="#sec-mosfet-diode">First Circuit: MOSFET Diode</a></li>
   </ul></li>
-  <li><a href="#transistor-sizing-using-gmid-methodoloy" id="toc-transistor-sizing-using-gmid-methodoloy" class="nav-link" data-scroll-target="#transistor-sizing-using-gmid-methodoloy">Transistor Sizing Using gm/ID Methodoloy</a></li>
+  <li><a href="#transistor-sizing-using-gmid-methodoloy" id="toc-transistor-sizing-using-gmid-methodoloy" class="nav-link" data-scroll-target="#transistor-sizing-using-gmid-methodoloy">Transistor Sizing Using gm/ID Methodoloy</a>
+  <ul class="collapse">
+  <li><a href="#nmos" id="toc-nmos" class="nav-link" data-scroll-target="#nmos">NMOS</a></li>
+  <li><a href="#pmos" id="toc-pmos" class="nav-link" data-scroll-target="#pmos">PMOS</a></li>
+  </ul></li>
   <li><a href="#current-mirror" id="toc-current-mirror" class="nav-link" data-scroll-target="#current-mirror">Current Mirror</a></li>
   <li><a href="#differential-pair" id="toc-differential-pair" class="nav-link" data-scroll-target="#differential-pair">Differential Pair</a></li>
   <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
@@ -192,7 +196,7 @@ window.Quarto = {
   <li><a href="#appendix-ngspice-cheat-sheet" id="toc-appendix-ngspice-cheat-sheet" class="nav-link" data-scroll-target="#appendix-ngspice-cheat-sheet">Appendix: ngspice Cheat Sheet</a></li>
   <li><a href="#appendix-xschem-cheat-sheet" id="toc-appendix-xschem-cheat-sheet" class="nav-link" data-scroll-target="#appendix-xschem-cheat-sheet">Appendix: Xschem Cheat Sheet</a></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_txt_to_mat-preview.html"><i class="bi bi-journal-code"></i>Conversion of TXT to MAT for gm/ID result files for SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/lookup_sg13-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2</a></li></ul></div></nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_txt_to_mat-preview.html"><i class="bi bi-journal-code"></i>Conversion of TXT to MAT for gm/ID result files for SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/lookup_sg13-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2</a></li></ul></div></nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
@@ -516,34 +520,166 @@ Figure&nbsp;6: A MOSFET connected as a diode.
 <section id="transistor-sizing-using-gmid-methodoloy" class="level2">
 <h2 class="anchored" data-anchor-id="transistor-sizing-using-gmid-methodoloy">Transistor Sizing Using gm/ID Methodoloy</h2>
 <p>When designing circuits it is an important question how to select various parameters of a MOSFET, like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, or the bias current <span class="math inline">\(I_\mathrm{D}\)</span>. As a very practical approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodoloy introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
-<div id="cell-fig-nmos-gmid-vs-ft" class="cell" data-execution_count="6">
+<section id="nmos" class="level3">
+<h3 class="anchored" data-anchor-id="nmos">NMOS</h3>
+<div class="quarto-embed-nb-cell">
+<div id="cell-5" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}" data-tags="[&quot;fig-nmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
 <div class="cell-output cell-output-display">
-<div id="fig-nmos-gmid-vs-ft" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-nmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: LV NMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-nmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: LV NMOS gm/ID vs.&nbsp;transit frequency.
-</figcaption>
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-pmos-gmid-vs-ft" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display">
-<div id="fig-pmos-gmid-vs-ft" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-pmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;8: LV PMOS gm/ID vs.&nbsp;transit frequency."><img src="index_files/figure-html/fig-pmos-gmid-vs-ft-output-1.png" width="658" height="490" class="figure-img"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pmos-gmid-vs-ft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: LV PMOS gm/ID vs.&nbsp;transit frequency.
-</figcaption>
+<div class="quarto-embed-nb-cell">
+<div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-nmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}" data-tags="[&quot;fig-nmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}" data-tags="[&quot;fig-nmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-11" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}" data-tags="[&quot;fig-nmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-13" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}" data-tags="[&quot;fig-nmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="pmos" class="level3">
+<h3 class="anchored" data-anchor-id="pmos">PMOS</h3>
+<div class="quarto-embed-nb-cell">
+<div id="cell-5" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}" data-tags="[&quot;fig-pmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-pmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}" data-tags="[&quot;fig-pmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}" data-tags="[&quot;fig-pmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-11" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}" data-tags="[&quot;fig-pmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-pmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell">
+<div id="cell-13" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}" data-tags="[&quot;fig-pmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="current-mirror" class="level2">
 <h2 class="anchored" data-anchor-id="current-mirror">Current Mirror</h2>
@@ -1013,7 +1149,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
