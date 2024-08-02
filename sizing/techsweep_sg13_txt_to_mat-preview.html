@@ -234,15 +234,14 @@
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rename columns for readability</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.removeprefix(par_prefix<span class="op">+</span><span class="st">'['</span>)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.replace(par_prefix[<span class="dv">1</span>:], <span class="st">''</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.replace(<span class="st">'onoise__'</span>, <span class="st">'n'</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.removesuffix(<span class="st">']'</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># round sweep vectors to easily addressable values</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'l'</span>] <span class="op">=</span> df[<span class="st">'l'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x<span class="op">*</span><span class="fl">1e6</span>, <span class="dv">3</span>))</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vgs'</span>] <span class="op">=</span> df[<span class="st">'vgs'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vds'</span>] <span class="op">=</span> df[<span class="st">'vds'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vsb'</span>] <span class="op">=</span> df[<span class="st">'vsb'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.removesuffix(<span class="st">']'</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># round sweep vectors to easily addressable values</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'l'</span>] <span class="op">=</span> df[<span class="st">'l'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x<span class="op">*</span><span class="fl">1e6</span>, <span class="dv">3</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vgs'</span>] <span class="op">=</span> df[<span class="st">'vgs'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vds'</span>] <span class="op">=</span> df[<span class="st">'vds'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vsb'</span>] <span class="op">=</span> df[<span class="st">'vsb'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -262,6 +261,8 @@
 <th data-quarto-table-cell-role="th">cjs</th>
 <th data-quarto-table-cell-role="th">css</th>
 <th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">ids</th>
+<th data-quarto-table-cell-role="th">l</th>
 <th data-quarto-table-cell-role="th">rg</th>
 <th data-quarto-table-cell-role="th">sfl</th>
 <th data-quarto-table-cell-role="th">sid</th>
@@ -270,8 +271,6 @@
 <th data-quarto-table-cell-role="th">vgs</th>
 <th data-quarto-table-cell-role="th">vsb</th>
 <th data-quarto-table-cell-role="th">vth</th>
-<th data-quarto-table-cell-role="th">nflicker</th>
-<th data-quarto-table-cell-role="th">nidid</th>
 </tr>
 </thead>
 <tbody>
@@ -288,6 +287,8 @@
 <td>1.998000e-15</td>
 <td>6.818000e-21</td>
 <td>...</td>
+<td>0.000000e+00</td>
+<td>0.13</td>
 <td>20.0400</td>
 <td>0.000000e+00</td>
 <td>2.834000e-29</td>
@@ -296,8 +297,6 @@
 <td>0.0</td>
 <td>0.0</td>
 <td>0.4360</td>
-<td>0.000000e+00</td>
-<td>5.324000e-15</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
@@ -312,6 +311,8 @@
 <td>1.727000e-15</td>
 <td>1.367000e-21</td>
 <td>...</td>
+<td>0.000000e+00</td>
+<td>0.13</td>
 <td>20.0400</td>
 <td>0.000000e+00</td>
 <td>5.621000e-30</td>
@@ -320,8 +321,6 @@
 <td>-0.0</td>
 <td>0.4</td>
 <td>0.4746</td>
-<td>0.000000e+00</td>
-<td>2.371000e-15</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
@@ -336,6 +335,8 @@
 <td>1.565000e-15</td>
 <td>3.731000e-22</td>
 <td>...</td>
+<td>0.000000e+00</td>
+<td>0.13</td>
 <td>20.0400</td>
 <td>0.000000e+00</td>
 <td>1.519000e-30</td>
@@ -344,8 +345,6 @@
 <td>-0.0</td>
 <td>0.8</td>
 <td>0.5078</td>
-<td>0.000000e+00</td>
-<td>1.232000e-15</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
@@ -360,6 +359,8 @@
 <td>1.453000e-15</td>
 <td>1.222000e-22</td>
 <td>...</td>
+<td>0.000000e+00</td>
+<td>0.13</td>
 <td>20.0400</td>
 <td>0.000000e+00</td>
 <td>4.927000e-31</td>
@@ -368,8 +369,6 @@
 <td>-0.0</td>
 <td>1.2</td>
 <td>0.5375</td>
-<td>0.000000e+00</td>
-<td>7.019000e-16</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
@@ -384,6 +383,8 @@
 <td>1.998000e-15</td>
 <td>6.916000e-21</td>
 <td>...</td>
+<td>2.946000e-11</td>
+<td>0.13</td>
 <td>20.0400</td>
 <td>1.046000e-28</td>
 <td>2.090000e-29</td>
@@ -392,8 +393,6 @@
 <td>0.0</td>
 <td>0.0</td>
 <td>0.4360</td>
-<td>1.023000e-14</td>
-<td>4.467000e-15</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">...</td>
@@ -432,6 +431,8 @@
 <td>1.453000e-15</td>
 <td>2.724000e-13</td>
 <td>...</td>
+<td>1.135000e-04</td>
+<td>10.00</td>
 <td>0.2605</td>
 <td>2.918000e-19</td>
 <td>2.417000e-24</td>
@@ -440,8 +441,6 @@
 <td>1.5</td>
 <td>1.2</td>
 <td>0.2935</td>
-<td>5.402000e-10</td>
-<td>1.452000e-12</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">119068</td>
@@ -456,6 +455,8 @@
 <td>1.998000e-15</td>
 <td>2.808000e-13</td>
 <td>...</td>
+<td>1.360000e-04</td>
+<td>10.00</td>
 <td>0.2605</td>
 <td>3.562000e-19</td>
 <td>2.708000e-24</td>
@@ -464,8 +465,6 @@
 <td>1.5</td>
 <td>0.0</td>
 <td>0.1808</td>
-<td>5.968000e-10</td>
-<td>1.542000e-12</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">119069</td>
@@ -480,6 +479,8 @@
 <td>1.727000e-15</td>
 <td>2.771000e-13</td>
 <td>...</td>
+<td>1.274000e-04</td>
+<td>10.00</td>
 <td>0.2605</td>
 <td>3.321000e-19</td>
 <td>2.595000e-24</td>
@@ -488,8 +489,6 @@
 <td>1.5</td>
 <td>0.4</td>
 <td>0.2238</td>
-<td>5.763000e-10</td>
-<td>1.507000e-12</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">119070</td>
@@ -504,6 +503,8 @@
 <td>1.565000e-15</td>
 <td>2.744000e-13</td>
 <td>...</td>
+<td>1.200000e-04</td>
+<td>10.00</td>
 <td>0.2605</td>
 <td>3.109000e-19</td>
 <td>2.501000e-24</td>
@@ -512,8 +513,6 @@
 <td>1.5</td>
 <td>0.8</td>
 <td>0.2607</td>
-<td>5.575000e-10</td>
-<td>1.478000e-12</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">119071</td>
@@ -528,6 +527,8 @@
 <td>1.453000e-15</td>
 <td>2.724000e-13</td>
 <td>...</td>
+<td>1.135000e-04</td>
+<td>10.00</td>
 <td>0.2605</td>
 <td>2.920000e-19</td>
 <td>2.418000e-24</td>
@@ -536,13 +537,11 @@
 <td>1.5</td>
 <td>1.2</td>
 <td>0.2935</td>
-<td>5.404000e-10</td>
-<td>1.452000e-12</td>
 </tr>
 </tbody>
 </table>
 
-<p>119072 rows × 26 columns</p>
+<p>119072 rows × 24 columns</p>
 </div>
 </div>
 </div></div>
@@ -577,8 +576,8 @@
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>css <span class="op">=</span> np.reshape(df[<span class="st">'css'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>) <span class="op">\</span></span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      <span class="op">+</span> np.reshape(df[<span class="st">'cjs'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>) <span class="op">\</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="op">+</span> np.reshape(df[<span class="st">'cgsol'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>sth <span class="op">=</span> np.reshape(df[<span class="st">'nidid'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>sfl <span class="op">=</span> np.reshape(df[<span class="st">'nflicker'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>sth <span class="op">=</span> np.sqrt(np.reshape(df[<span class="st">'sid'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>))</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>sfl <span class="op">=</span> np.sqrt(np.reshape(df[<span class="st">'sfl'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dic <span class="op">=</span> {</span>
