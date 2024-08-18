@@ -73,6 +73,7 @@ C {devices/lab_wire.sym} 610 -350 0 0 {name=p2 sig_type=std_logic lab=d}
 C {devices/lab_wire.sym} 610 -300 0 0 {name=p3 sig_type=std_logic lab=b}
 C {devices/code_shown.sym} 5 -1150 0 0 {name=COMMANDS1 only_toplevel=false
 value="
+.option sparse
 .param wx=5u lx=0.13u vbx=0
 .save all
 .save @n.xm1.nsg13_lv_nmos[gm]
@@ -156,7 +157,7 @@ xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]
 }
 C {devices/code_shown.sym} 5 -112.5 0 0 {name=MODEL1 only_toplevel=true
 format="tcleval( @value )"
-value=".lib $::SG13G2_MODELS/cornerMOSlv.lib mos_tt
+value=".lib cornerMOSlv.lib mos_tt
 "}
 C {sg13g2_pr/sg13_lv_nmos.sym} 490 -300 2 1 {name=M1
 l=\{lx\}

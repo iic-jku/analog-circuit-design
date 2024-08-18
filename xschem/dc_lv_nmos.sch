@@ -50,7 +50,7 @@ N 440 -400 440 -320 {
 lab=#net3}
 C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
-value=".lib $::SG13G2_MODELS/cornerMOSlv.lib mos_tt
+value=".lib cornerMOSlv.lib mos_tt
 "}
 C {devices/code_shown.sym} 0 -930 0 0 {name=NGSPICE only_toplevel=true 
 value="

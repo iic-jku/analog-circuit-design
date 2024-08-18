@@ -33,7 +33,7 @@ N 830 -210 830 -160 {
 lab=n}
 C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
-value=".lib $::SG13G2_MODELS/cornerMOSlv.lib mos_tt
+value=".lib cornerMOSlv.lib mos_tt
 "}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 Harald Pretl (adapted from Boris Murmann)"}
 C {devices/launcher.sym} 480 -420 0 0 {name=h2
@@ -62,7 +62,7 @@ C {devices/ngspice_get_value.sym} 970 -100 0 1 {name=r10 node=v(@n.xm1.nsg13_lv_
 descr="sid="}
 C {devices/ngspice_get_value.sym} 970 -130 0 1 {name=r11 node=v(@n.xm1.nsg13_lv_pmos[rg])
 descr="rg="}
-C {devices/code_shown.sym} 680 -930 0 0 {name=NGSPICE_SAVE only_toplevel=true 
+C {devices/code_shown.sym} 680 -950 0 0 {name=NGSPICE_SAVE only_toplevel=true 
 value="
 .save b d g n
 .save @n.xm1.nsg13_lv_pmos[cgsol]
@@ -111,8 +111,9 @@ C {devices/lab_wire.sym} 650 -170 0 1 {name=p6 sig_type=std_logic lab=b}
 C {devices/ccvs.sym} 830 -240 0 0 {name=H1 vnam=vd value=1}
 C {devices/gnd.sym} 830 -300 2 1 {name=l1 lab=GND}
 C {devices/lab_pin.sym} 830 -170 0 0 {name=p1 sig_type=std_logic lab=n}
-C {devices/code_shown.sym} 0 -940 0 0 {name=NGSPICE_CTRL only_toplevel=true 
+C {devices/code_shown.sym} 0 -950 0 0 {name=NGSPICE_CTRL only_toplevel=true 
 value="
+.option sparse
 .param temp=27
 .param wx=5u lx=0.13u vbx=0
 .noise v(n) vg lin 1 1 1 1
