@@ -98,6 +98,7 @@ window.Quarto = {
 <meta name="citation_year" content="2024">
 <meta name="citation_online_date" content="2024-08-19">
 <meta name="citation_language" content="en-US">
+<meta name="citation_reference" content="citation_title=Verifying the diode–capacitor circuit voltage decay;,citation_author=Edward H. Hellen;,citation_publication_date=2003-08;,citation_cover_date=2003-08;,citation_year=2003;,citation_issue=8;,citation_doi=10.1119/1.1578070;,citation_volume=71;,citation_journal_title=American Journal of Physics;">
 <meta name="citation_reference" content="citation_title=SPICE2: A computer program to simulate semiconductor circuits;,citation_author=Laurence W. Nagel;,citation_publication_date=1975-05;,citation_cover_date=1975-05;,citation_year=1975;,citation_fulltext_html_url=http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html;,citation_dissertation_institution=EECS Department, University of California, Berkeley;">
 <meta name="citation_reference" content="citation_title=Systematic design of analog CMOS circuits: Using pre-computed lookup tables;,citation_author=Paul G. A. Jespers;,citation_author=Boris Murmann;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
 <meta name="citation_reference" content="citation_title=Modern semiconductor devices for integrated circuits;,citation_author=Chenming Hu;,citation_publication_date=2010;,citation_cover_date=2010;,citation_year=2010;">
@@ -185,7 +186,14 @@ window.Quarto = {
   <li><a href="#sec-techsweep-nmos" id="toc-sec-techsweep-nmos" class="nav-link" data-scroll-target="#sec-techsweep-nmos">NMOS Characterization</a></li>
   <li><a href="#sec-techsweep-pmos" id="toc-sec-techsweep-pmos" class="nav-link" data-scroll-target="#sec-techsweep-pmos">PMOS Characterization</a></li>
   </ul></li>
-  <li><a href="#sec-mosfet-diode" id="toc-sec-mosfet-diode" class="nav-link" data-scroll-target="#sec-mosfet-diode">First Circuit: MOSFET Diode</a></li>
+  <li><a href="#sec-mosfet-diode" id="toc-sec-mosfet-diode" class="nav-link" data-scroll-target="#sec-mosfet-diode">First Circuit: MOSFET Diode</a>
+  <ul class="collapse">
+  <li><a href="#mosfet-diode-sizing" id="toc-mosfet-diode-sizing" class="nav-link" data-scroll-target="#mosfet-diode-sizing">MOSFET Diode Sizing</a></li>
+  <li><a href="#mosfet-diode-large-signal-behaviour" id="toc-mosfet-diode-large-signal-behaviour" class="nav-link" data-scroll-target="#mosfet-diode-large-signal-behaviour">MOSFET Diode Large-Signal Behaviour</a></li>
+  <li><a href="#mosfet-diode-small-signal-analysis" id="toc-mosfet-diode-small-signal-analysis" class="nav-link" data-scroll-target="#mosfet-diode-small-signal-analysis">MOSFET Diode Small-Signal Analysis</a></li>
+  <li><a href="#mosfet-diode-stability-analysis" id="toc-mosfet-diode-stability-analysis" class="nav-link" data-scroll-target="#mosfet-diode-stability-analysis">MOSFET Diode Stability Analysis</a></li>
+  <li><a href="#mosfet-diode-noise-calculation" id="toc-mosfet-diode-noise-calculation" class="nav-link" data-scroll-target="#mosfet-diode-noise-calculation">MOSFET Diode Noise Calculation</a></li>
+  </ul></li>
   <li><a href="#current-mirror" id="toc-current-mirror" class="nav-link" data-scroll-target="#current-mirror">Current Mirror</a></li>
   <li><a href="#differential-pair" id="toc-differential-pair" class="nav-link" data-scroll-target="#differential-pair">Differential Pair</a></li>
   <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
@@ -197,7 +205,7 @@ window.Quarto = {
   <li><a href="#appendix-ngspice-cheat-sheet" id="toc-appendix-ngspice-cheat-sheet" class="nav-link" data-scroll-target="#appendix-ngspice-cheat-sheet">Appendix: ngspice Cheat Sheet</a></li>
   <li><a href="#appendix-xschem-cheat-sheet" id="toc-appendix-xschem-cheat-sheet" class="nav-link" data-scroll-target="#appendix-xschem-cheat-sheet">Appendix: Xschem Cheat Sheet</a></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_txt_to_mat-preview.html"><i class="bi bi-journal-code"></i>Conversion of TXT to MAT for gm/ID result files for SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/lookup_sg13-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2</a></li></ul></div></nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_txt_to_mat-preview.html"><i class="bi bi-journal-code"></i>Conversion of TXT to MAT for gm/ID result files for SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/lookup_sg13-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2</a></li><li><a href="sizing/sizing_mosfet_diode-preview.html"><i class="bi bi-journal-code"></i>Sizing for MOSFET Diode Example</a></li></ul></div></nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
@@ -817,7 +825,7 @@ Important
 </section>
 <section id="sec-mosfet-diode" class="level2">
 <h2 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h2>
-<p>This sections need to be written, but here is a first figure.</p>
+<p>The first (simple) circuit we will investigate is a MOSFET, where the gate is shorted with a drain, a so-called MOSFET “diode”, which is shown in <a href="#fig-mosfet-diode" class="quarto-xref">Figure&nbsp;8</a>. This diode is one half of a current mirror, which we will investigate in a future section. This diode is usually biased by a current source, shown as <span class="math inline">\(I_\mathrm{bias}\)</span> in the figure. Depending on MOSFET sizing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>, a certain gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span> will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.</p>
 <div id="cell-fig-mosfet-diode" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-diode" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -832,6 +840,87 @@ Figure&nbsp;8: A MOSFET connected as a diode.
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is important to realize that this configuration essentially employs a feedback loop for operation. The voltage at the drain of the MOSFET is sensed by the gate, and the gate voltage changes until the <span class="math inline">\(I_\mathrm{D}\)</span> is exactly equal to <span class="math inline">\(I_\mathrm{bias}\)</span>. In this sense this is probably the smallest feedback circuit one can build.</p>
+</div>
+</div>
+<section id="mosfet-diode-sizing" class="level3">
+<h3 class="anchored" data-anchor-id="mosfet-diode-sizing">MOSFET Diode Sizing</h3>
+<p>We will now build this circuit in Xschem. For sizing the MOSFET we will use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set <span class="math inline">\(I_\mathrm{bias} = 20\,\mu\text{A}\)</span>, <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>, and we want to use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D} = 10\)</span> (often a suitable compromise between transistor speed and <span class="math inline">\(g_\mathrm{m}\)</span> efficiency).</p>
+<ol type="1">
+<li>Use the figures in <a href="#sec-techsweep-nmos" class="quarto-xref">Section&nbsp;3.2</a> to find out the proper value for <span class="math inline">\(W\)</span>.</li>
+<li>What is <span class="math inline">\(f_\mathrm{T}\)</span> for this MOSFET? What is the value for <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span>?</li>
+<li>Draw the circuit in Xschem, and simulate the operating point. Do the values match to the values found out before during circuit sizing?</li>
+</ol>
+</div>
+</div>
+<p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D} = 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m} = 0.2\,\text{mS}\)</span>.</li>
+<li>Using the self-gain plot, we see that <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds} \approx 21\)</span>, so <span class="math inline">\(g_\mathrm{ds} \approx 9.5\,\mu\text{S}\)</span>. The <span class="math inline">\(f_\mathrm{T}\)</span> can easily be found in the respective plot to be <span class="math inline">\(f_\mathrm{T} = 23\,\text{GHz}\)</span>.</li>
+<li>The <span class="math inline">\(W\)</span> of the MOSFET we find using the drain current density plot and the given bias current. Rounding to half-microns results in <span class="math inline">\(W = 1\,\mu\text{m}\)</span>.</li>
+<li>Since we are looking at the graphs, we further find <span class="math inline">\(\gamma = 0.84\)</span>, <span class="math inline">\(V_\mathrm{ds,sat} = 0.18\,\text{V}\)</span>, and <span class="math inline">\(f_\mathrm{co} \approx 15\,\text{MHz}\)</span>.</li>
+<li>In addition, we expect <span class="math inline">\(V_\mathrm{GS} \approx 0.6\,\text{V}\)</span>.</li>
+</ol>
+<p>An example Jupyter notebook to extract these values accurately you can find <a href="./sizing/sizing_mosfet_diode-preview.html">here</a>. An Xschem schematic for this exercise is provide <a href="./xschem/mosfet_diode_sizing.sch">as well</a>.</p>
+</div>
+</div>
+</section>
+<section id="mosfet-diode-large-signal-behaviour" class="level3">
+<h3 class="anchored" data-anchor-id="mosfet-diode-large-signal-behaviour">MOSFET Diode Large-Signal Behaviour</h3>
+<p>As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyse this loop in small-signal, we want to investgate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behaviour. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some ns. The resulting Xschem testbench is shown in <a href="#fig-mosfet-diode-settling-tb" class="quarto-xref">Figure&nbsp;9</a>.</p>
+<div id="fig-mosfet-diode-settling-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-diode-settling-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="./xschem/mosfet_diode_settling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="Figure&nbsp;9: Testbench for MOSFET diode transient settling."><img src="./xschem/mosfet_diode_settling.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-settling-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Testbench for MOSFET diode transient settling.
+</figcaption>
+</figure>
+</div>
+<p>In <a href="#fig-mosfet-diode-settling-tb" class="quarto-xref">Figure&nbsp;9</a> another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current the <span class="math inline">\(V_\mathrm{GS}\)</span> drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to the capacitor discharge by a diode <span class="citation" data-cites="Hellen_2003">(<a href="#ref-Hellen_2003" role="doc-biblioref">Hellen 2003</a>)</span>.</p>
+<p>It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually <span class="math inline">\(V_\mathrm{DD}\)</span> or <span class="math inline">\(V_\mathrm{SS}\)</span>) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.</p>
+</section>
+<section id="mosfet-diode-small-signal-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="mosfet-diode-small-signal-analysis">MOSFET Diode Small-Signal Analysis</h3>
+</section>
+<section id="mosfet-diode-stability-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="mosfet-diode-stability-analysis">MOSFET Diode Stability Analysis</h3>
+</section>
+<section id="mosfet-diode-noise-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="mosfet-diode-noise-calculation">MOSFET Diode Noise Calculation</h3>
+</section>
 </section>
 <section id="current-mirror" class="level2">
 <h2 class="anchored" data-anchor-id="current-mirror">Current Mirror</h2>
@@ -866,6 +955,9 @@ Figure&nbsp;8: A MOSFET connected as a diode.
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Appendix: Xschem Cheat Sheet</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Hellen_2003" class="csl-entry" role="listitem">
+Hellen, Edward H. 2003. <span>“<span class="nocase">Verifying the diode–capacitor circuit voltage decay</span>.”</span> <em>American Journal of Physics</em> 71 (8): 797–800. <a href="https://doi.org/10.1119/1.1578070">https://doi.org/10.1119/1.1578070</a>.
+</div>
 <div id="ref-Chenming_Hu_2010" class="csl-entry" role="listitem">
 Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em>. Pearson.
 </div>
@@ -1301,7 +1393,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
