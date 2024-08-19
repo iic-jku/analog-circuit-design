@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-08-18">
+<meta name="dcterms.date" content="2024-08-19">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -93,10 +93,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-08-18">
-<meta name="citation_cover_date" content="2024-08-18">
+<meta name="citation_publication_date" content="2024-08-19">
+<meta name="citation_cover_date" content="2024-08-19">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-08-18">
+<meta name="citation_online_date" content="2024-08-19">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=SPICE2: A computer program to simulate semiconductor circuits;,citation_author=Laurence W. Nagel;,citation_publication_date=1975-05;,citation_cover_date=1975-05;,citation_year=1975;,citation_fulltext_html_url=http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html;,citation_dissertation_institution=EECS Department, University of California, Berkeley;">
 <meta name="citation_reference" content="citation_title=Systematic design of analog CMOS circuits: Using pre-computed lookup tables;,citation_author=Paul G. A. Jespers;,citation_author=Boris Murmann;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
@@ -147,7 +147,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">August 18, 2024</p>
+              <p class="date">August 19, 2024</p>
             </div>
           </div>
           
@@ -178,13 +178,14 @@ window.Quarto = {
   <li><a href="#first-steps" id="toc-first-steps" class="nav-link" data-scroll-target="#first-steps">First Steps</a>
   <ul class="collapse">
   <li><a href="#sec-mosfet" id="toc-sec-mosfet" class="nav-link" data-scroll-target="#sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</a></li>
-  <li><a href="#sec-mosfet-diode" id="toc-sec-mosfet-diode" class="nav-link" data-scroll-target="#sec-mosfet-diode">First Circuit: MOSFET Diode</a></li>
   </ul></li>
-  <li><a href="#transistor-sizing-using-gmid-methodology" id="toc-transistor-sizing-using-gmid-methodology" class="nav-link" data-scroll-target="#transistor-sizing-using-gmid-methodology">Transistor Sizing Using gm/ID Methodology</a>
+  <li><a href="#sec-gmid-method" id="toc-sec-gmid-method" class="nav-link" data-scroll-target="#sec-gmid-method">Transistor Sizing Using gm/ID Methodology</a>
   <ul class="collapse">
-  <li><a href="#nmos" id="toc-nmos" class="nav-link" data-scroll-target="#nmos">NMOS</a></li>
-  <li><a href="#pmos" id="toc-pmos" class="nav-link" data-scroll-target="#pmos">PMOS</a></li>
+  <li><a href="#mosfet-characterization-testbench" id="toc-mosfet-characterization-testbench" class="nav-link" data-scroll-target="#mosfet-characterization-testbench">MOSFET Characterization Testbench</a></li>
+  <li><a href="#sec-techsweep-nmos" id="toc-sec-techsweep-nmos" class="nav-link" data-scroll-target="#sec-techsweep-nmos">NMOS Characterization</a></li>
+  <li><a href="#sec-techsweep-pmos" id="toc-sec-techsweep-pmos" class="nav-link" data-scroll-target="#sec-techsweep-pmos">PMOS Characterization</a></li>
   </ul></li>
+  <li><a href="#sec-mosfet-diode" id="toc-sec-mosfet-diode" class="nav-link" data-scroll-target="#sec-mosfet-diode">First Circuit: MOSFET Diode</a></li>
   <li><a href="#current-mirror" id="toc-current-mirror" class="nav-link" data-scroll-target="#current-mirror">Current Mirror</a></li>
   <li><a href="#differential-pair" id="toc-differential-pair" class="nav-link" data-scroll-target="#differential-pair">Differential Pair</a></li>
   <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
@@ -498,130 +499,259 @@ Exercise
 <p>Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of <a href="#sec-mosfet" class="quarto-xref">Section&nbsp;2.1</a> and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>.</p>
 </section>
 </section>
-<section id="sec-mosfet-diode" class="level3">
-<h3 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h3>
-<p>This sections need to be written, but here is a first figure.</p>
-<div id="cell-fig-mosfet-diode" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div id="fig-mosfet-diode" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-mosfet-diode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: A MOSFET connected as a diode."><img src="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="img-fluid figure-img"></a>
+</section>
+<section id="sec-gmid-method" class="level2">
+<h2 class="anchored" data-anchor-id="sec-gmid-method">Transistor Sizing Using gm/ID Methodology</h2>
+<p>When designing integrated circuits it is an important question how to select various parameters of a MOSFET, like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, or the bias current <span class="math inline">\(I_\mathrm{D}\)</span>. In comparison to using discrete components in PCB design, or also compared to a bipolar junction transistor (BJT), we have these degrees of freedom, which make integrated circuit design so interesting.</p>
+<p>Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behaviour is much more complex than these simple models. Also, this highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: A MOSFET connected as a diode.
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One of the many simplifactions of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existance of a threshold voltage is assumed, but in fact this voltage is just existing given a certain definition, and depending on definition, its value changed. In addition, in nm CMOS, the threshold voltage is a function on many thing, like <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>.</p>
+</div>
+</div>
+<p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behaviour over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complext MOSFET behaviour and use it for MOSFET sizing.</p>
+<p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
+<p>The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, form micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.</p>
+<section id="mosfet-characterization-testbench" class="level3">
+<h3 class="anchored" data-anchor-id="mosfet-characterization-testbench">MOSFET Characterization Testbench</h3>
+<p>In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in <a href="#fig-techsweep-nmos-tb" class="quarto-xref">Figure&nbsp;6</a>, and the TB for the LV PMOS is shown in <a href="#fig-techsweep-pmos-tb" class="quarto-xref">Figure&nbsp;7</a>.</p>
+<div id="fig-techsweep-nmos-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-techsweep-nmos-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="./xschem/techsweep_sg13g2_lv_nmos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: Testbench for LV NMOS g_\mathrm{m}/I_\mathrm{D} characterization."><img src="./xschem/techsweep_sg13g2_lv_nmos.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-techsweep-nmos-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Testbench for LV NMOS <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> characterization.
 </figcaption>
 </figure>
 </div>
+<div id="fig-techsweep-pmos-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-techsweep-pmos-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="./xschem/techsweep_sg13g2_lv_pmos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: Testbench for LV PMOS g_\mathrm{m}/I_\mathrm{D} characterization."><img src="./xschem/techsweep_sg13g2_lv_pmos.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-techsweep-pmos-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Testbench for LV PMOS <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> characterization.
+</figcaption>
+</figure>
+</div>
+<p>We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behaviour.</p>
+</section>
+<section id="sec-techsweep-nmos" class="level3">
+<h3 class="anchored" data-anchor-id="sec-techsweep-nmos">NMOS Characterization</h3>
+<p>First, we will start looking at the LV NMOS. In <a href="#sec-techsweep-pmos" class="quarto-xref">Section&nbsp;3.3</a> we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of <span class="math inline">\(1.5\,\text{V}\)</span>, so only the LV types are of interest to us.</p>
+<p>The first import graph is the plot of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(f_\mathrm{T}\)</span> versus the gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span>. First let us answer the question why <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good parameter to look at, and actually this is also the central parameter in the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see <a href="https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A">biasing</a>) we want to get a large amplification from a MOSFET, which corresponds to a large <span class="math inline">\(g_\mathrm{m}\)</span>. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> ratio is good.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
 </div>
 </div>
-</section>
-</section>
-<section id="transistor-sizing-using-gmid-methodology" class="level2">
-<h2 class="anchored" data-anchor-id="transistor-sizing-using-gmid-methodology">Transistor Sizing Using gm/ID Methodology</h2>
-<p>When designing circuits it is an important question how to select various parameters of a MOSFET, like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, or the bias current <span class="math inline">\(I_\mathrm{D}\)</span>. As a very practical approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
-<section id="nmos" class="level3">
-<h3 class="anchored" data-anchor-id="nmos">NMOS</h3>
+<div class="callout-body-container callout-body">
+<p>Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severly limited by the cooling capabilities of the electrical system.</p>
+</div>
+</div>
+<p>However, as can be seen in the below plot, there exists a strong and unfortunate trade-off with device speed, characterized here by the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span>. It would be ideal if there exists a design point where we get high transconductance per bias current concurrently to having the fastest operation, but unfortunately, this is clearly not the case. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> peaks for <span class="math inline">\(V_\mathrm{GS} &lt; 0.3\,\text{V}\)</span>, and the highest speed we get at <span class="math inline">\(V_\mathrm{GS} \approx 1.2\,\text{V}\)</span>. The dashed vertical line plots the nominal threshold voltage, as you can see in this continuum of parameter space, it marks not a particularly special point.</p>
+<p>Note that <span id="eq-mosfet-gmid-weakinversion"><span class="math display">\[
+\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{1}{n V_\mathrm{T}}
+\tag{1}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
+<p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
+\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS} - V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
+\tag{2}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.”</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why are we so often using <span class="math inline">\(300\,\text{K}\)</span> for a typical condition? As this corresponds to roughly <span class="math inline">\(27^{\circ}\text{C}\)</span>, this accounts for some self heating compared to otherwise usual room temperatures. Further, engineers like round numbers which are easy to remember, so <span class="math inline">\(300\,\text{K}\)</span> is used as a proxy for room temperature.</p>
+</div>
+</div>
+<p>As we can also see from belows plot, the peak transit frequency of the LV NMOS is about <span class="math inline">\(75\,\text{GHz}\)</span>, which allows building radio-frequency circuits up to ca. <span class="math inline">\(f_\mathrm{T} / 10 = 7.5\,\text{GHz}\)</span>, which is a respectible number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the timeframe when 130nm CMOS became available (ca. 2000).</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-5" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}" data-tags="[&quot;fig-nmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>The following figure plots <span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. As you can see, device speeds maximizes for a low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and a short <span class="math inline">\(L\)</span>. As you can see the drain-source voltage is kept at <span class="math inline">\(V_\mathrm{DS} = 0.75\,\text{V} = V_\mathrm{DD}/2\)</span>, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at <span class="math inline">\(V_\mathrm{SB} = 0\,\text{V}\)</span>, which means bulk and source terminals are connected.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-nmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>The next plot shows the ratio of <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. The ratio <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> is the so-called “self-gain” of the MOSFET, and shows the maximum voltage gain we can achieve in a single transistor configuration. As one can see the self gain increases for increasing <span class="math inline">\(L\)</span>, but this also gives a slower transistor, so again there is a trade-off. This plot allows us to select the proper <span class="math inline">\(L\)</span> of a MOSFET if we know which amount of self gain we need.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}" data-tags="[&quot;fig-nmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>The following figure plots the drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> as a function of <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> and <span class="math inline">\(L\)</span>. With this plot we can find out how to set the <span class="math inline">\(W\)</span> of a MOSFET once we know the biasing current <span class="math inline">\(I_\mathrm{D}\)</span>, the <span class="math inline">\(L\)</span> (selected according to self gain, <span class="math inline">\(f_\mathrm{T}\)</span>, and other considerations) and the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> design point we selected. The drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> is a very useful nomalized metric to use, because the physical action in the MOSFET establishes a charge density in the channel below the gate, and the changing of the <span class="math inline">\(W\)</span> of the device merely transforms this charge density into an absolute parameter (together with <span class="math inline">\(L\)</span>).</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}" data-tags="[&quot;fig-nmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>The following plot shows the minimum drain-source voltage <span class="math inline">\(V_\mathrm{ds,sat}\)</span> that we need to establish in order to keep the MOSFET in saturation. As you can see, this value is almost independent of <span class="math inline">\(L\)</span>, and increases for small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. So for low-voltage circuits, where headroom is precious, we tend to bias at <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D} \ge 10\)</span>, wheres for fast circuits we need to go to small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D} \le 5\)</span> requiring substantial voltage headroom per MOSFET stage that we stack on top of each other.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-11" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}" data-tags="[&quot;fig-nmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>For analog circuits the noise performance is usually quite important. Thermal noise of a resistor (the Johnson-Nyquist noise) has a flat power-spectral density (PSD) given by <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f = 4 k T R\)</span>, where <span class="math inline">\(k\)</span> is Boltzmann’s constant, <span class="math inline">\(T\)</span> absolute temperature, and <span class="math inline">\(R\)</span> the value of the resistor (the unit of <span class="math inline">\(\overline{V_\mathrm{n}^2}/df\)</span> is <span class="math inline">\(\text{V}^2/\text{Hz}\)</span>). This PSD is essentially flat until very high frequencies where <a href="https://en.wikipedia.org/wiki/Johnson–Nyquist_noise">quantum effects</a> start to kick in.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We usually leave the <span class="math inline">\(\Delta f\)</span> away for a shorter notation, so we write <span class="math inline">\(\overline{V_\mathrm{n}^2}\)</span> when we actually mean <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f\)</span>.</p>
+<p>Please also note that the pair of <span class="math inline">\(k T\)</span> pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation.</p>
+<p>Fuerther, when working with PSD there is the usage of a one-sided (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(0\)</span> to <span class="math inline">\(\infty\)</span>) or two-sided PSD (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>). The default in this lecture is the usage of a <strong>one-sided PSD</strong>.</p>
+</div>
+</div>
+<p>In this lecture the only MOSFET noise we consider is the drain noise, showing up as a current noise between drain and source, and given by <span id="eq-mosfet-noise"><span class="math display">\[
+\overline{I_\mathrm{d,n}^2} = 4 k T \gamma g_\mathrm{d0}
+\tag{3}\]</span></span> In saturation (the MOSFET operating as a current source), <span class="math inline">\(g_\mathrm{d0} = g_\mathrm{m}\)</span>, whereas in triode (the MOSFET operating as a switch), <span class="math inline">\(g_\mathrm{d0} = g_\mathrm{ds}\)</span>.</p>
+<p>The factor <span class="math inline">\(\gamma\)</span> is a function of many things (in classical theory, <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma = 1\)</span> in triode), and it is characterized in the following plot as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. So when calculating MOSFET noise we can lookup <span class="math inline">\(\gamma\)</span> in the below plot, and use <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;3</a> to calculate the effective drain current noise.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>In a MOSFET, unfortunately, besides the thermal noise according to <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;3</a>, there is also a substantial low-frequency excess noise, called “flicker noise” due to its characteristic <span class="math inline">\(\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f\)</span> behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency <span class="math inline">\(f_\mathrm{co}\)</span>, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of <span class="math inline">\(L\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Generally, the flicker noise is proportional to <span class="math inline">\((W L)^{-1}\)</span>, so the larger the device is, the lower the flicker noise. The parameter <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> largely stays constant when we keep <span class="math inline">\(W/L\)</span> constant, so for a given <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> flicker noise is proportinal to <span class="math inline">\(1/L^2\)</span>. However, increasing <span class="math inline">\(L\)</span> lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The physical origin of flicker noise is the crystal interface between silicon (Si) and the silicondioxide (SiO<sub>2</sub>). Since these are different materials, there are dangling bonds, which can capture charge charriers travelling in the channel. After a random time, these carriers are released, and flicker noise is the result. The amount of flicker noise is a function of the manufacturing process, and will generally be different between device types and wafer foundries.</p>
+</div>
+</div>
+<p>As you can see in the following plot, <span class="math inline">\(f_\mathrm{co}\)</span> can reach well into the 10’s of MHz for short MOSFETs, significantly degrading the noise performance of a circuit.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-13" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}" data-tags="[&quot;fig-nmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="pmos" class="level3">
-<h3 class="anchored" data-anchor-id="pmos">PMOS</h3>
+<section id="sec-techsweep-pmos" class="level3">
+<h3 class="anchored" data-anchor-id="sec-techsweep-pmos">PMOS Characterization</h3>
+<p>In the following, we have the same plots as discussed in <a href="#sec-techsweep-nmos" class="quarto-xref">Section&nbsp;3.2</a>, but now for the PMOS.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In all PMOS plots we plot positive values for voltages and currents, to have compatible plots to the NMOS. Of course, in a PMOS, voltages and currents have different polarity compared to the PMOS.</p>
+</div>
+</div>
+<p><span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(f_\mathrm{T}\)</span> versus the gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span>:</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-5" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}" data-tags="[&quot;fig-pmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p><span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. One can see significantly lower top speed for the PMOS compared to the NMOS, which means for high-speed circuits the NMOS should be used.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-pmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
+</div>
+</div>
+<p><span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Unfortunately, one can see a modelling error for the PMOS in this plot. The self gain <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> reaches non-physical values, which indicates an issue with the <span class="math inline">\(g_\mathrm{ds}\)</span> modelling for the PMOS. We can not use these values for our circuit sizing, so we will use the respective NMOS plots also for the PMOS.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite often happening, as setting up the device compact models and parametrizing them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are using!</p>
 </div>
 </div>
 <div class="quarto-embed-nb-cell">
@@ -629,57 +759,79 @@ Figure&nbsp;6: A MOSFET connected as a diode.
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>Drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> as a function of <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> and <span class="math inline">\(L\)</span>:</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}" data-tags="[&quot;fig-pmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>Minimum drain-source voltage <span class="math inline">\(V_\mathrm{ds,sat}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>:</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-11" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}" data-tags="[&quot;fig-pmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>Noise factor <span class="math inline">\(\gamma\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>:</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-pmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
+<p>Flicker noise corner frequency <span class="math inline">\(f_\mathrm{co}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. If you compare this figure carefully with the NMOS figure you can see that for some operating points the flicker noise for the PMOS is lower than for the NMOS. This is often true for CMOS technologies, so it can be an advantage to use a PMOS transistor in places where flicker noise is critical, like an OTA input stage. Using PMOS has the further advantage that the bulk node can be tied to source (which for NMOS is only possible in a triple-well technology, which is often not available), which gets rid of the <a href="https://en.wikipedia.org/wiki/Threshold_voltage">body effect</a>.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-13" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}" data-tags="[&quot;fig-pmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img src="index_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </section>
+</section>
+<section id="sec-mosfet-diode" class="level2">
+<h2 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h2>
+<p>This sections need to be written, but here is a first figure.</p>
+<div id="cell-fig-mosfet-diode" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-diode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-diode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure&nbsp;8: A MOSFET connected as a diode."><img src="index_files/figure-html/fig-mosfet-diode-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: A MOSFET connected as a diode.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="current-mirror" class="level2">
 <h2 class="anchored" data-anchor-id="current-mirror">Current Mirror</h2>
@@ -1149,7 +1301,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
