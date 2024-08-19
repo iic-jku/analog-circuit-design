@@ -1,3 +1,50 @@
-This sections need to be written, but here is a first figure.
+The first (simple) circuit we will investigate is a MOSFET, where the gate is shorted with a drain, a so-called MOSFET "diode", which is shown in @fig-mosfet-diode. This diode is one half of a current mirror, which we will investigate in a future section. This diode is usually biased by a current source, shown as $I_\mathrm{bias}$ in the figure. Depending on MOSFET sizing with $W$ and $L$, a certain gate-source voltage $V_\mathrm{GS}$ will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.
 
 {{< include figures/_fig_mosfet_diode.qmd >}}
+
+::: {.callout-note}
+It is important to realize that this configuration essentially employs a feedback loop for operation. The voltage at the drain of the MOSFET is sensed by the gate, and the gate voltage changes until the $I_\mathrm{D}$ is exactly equal to $I_\mathrm{bias}$. In this sense this is probably the smallest feedback circuit one can build. 
+:::
+
+### MOSFET Diode Sizing
+
+We will now build this circuit in Xschem. For sizing the MOSFET we will use the $g_\mathrm{m}/I_\mathrm{D}$ methodology introduced in @sec-gmid-method.
+
+::: {.callout-tip title="Exercise"}
+Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set $I_\mathrm{bias} = 20\,\mu\text{A}$, $L = 0.13\,\mu\text{m}$, and we want to use $g_\mathrm{m}/I_\mathrm{D} = 10$ (often a suitable compromise between transistor speed and $g_\mathrm{m}$ efficiency).
+
+1. Use the figures in @sec-techsweep-nmos to find out the proper value for $W$.
+2. What is $f_\mathrm{T}$ for this MOSFET? What is the value for $g_\mathrm{m}$ and $g_\mathrm{ds}$?
+3. Draw the circuit in Xschem, and simulate the operating point. Do the values match to the values found out before during circuit sizing?
+:::
+
+Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.
+
+::: {.callout-tip title="Solution"}
+1. Using the fact that $I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}$ and $g_\mathrm{m}/I_\mathrm{D} = 10$ directly provides $g_\mathrm{m} = 0.2\,\text{mS}$.
+2. Using the self-gain plot, we see that $g_\mathrm{m}/g_\mathrm{ds} \approx 21$, so $g_\mathrm{ds} \approx 9.5\,\mu\text{S}$. The $f_\mathrm{T}$ can easily be found in the respective plot to be $f_\mathrm{T} = 23\,\text{GHz}$.
+3. The $W$ of the MOSFET we find using the drain current density plot and the given bias current. Rounding to half-microns results in $W = 1\,\mu\text{m}$.
+4. Since we are looking at the graphs, we further find $\gamma = 0.84$, $V_\mathrm{ds,sat} = 0.18\,\text{V}$, and $f_\mathrm{co} \approx 15\,\text{MHz}$.
+5. In addition, we expect $V_\mathrm{GS} \approx 0.6\,\text{V}$.
+
+An example Jupyter notebook to extract these values accurately you can find [here](./sizing/sizing_mosfet_diode.ipynb). An Xschem schematic for this exercise is provide [as well](./xschem/mosfet_diode_sizing.sch).
+:::
+
+### MOSFET Diode Large-Signal Behaviour
+
+As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyse this loop in small-signal, we want to investgate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behaviour. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some ns. The resulting Xschem testbench is shown in @fig-mosfet-diode-settling-tb.
+
+![Testbench for MOSFET diode transient settling.](./xschem/mosfet_diode_settling.png){#fig-mosfet-diode-settling-tb}
+
+In @fig-mosfet-diode-settling-tb another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current the $V_\mathrm{GS}$ drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to the capacitor discharge by a diode [@Hellen_2003].
+
+It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually $V_\mathrm{DD}$ or $V_\mathrm{SS}$) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.
+
+### MOSFET Diode Small-Signal Analysis
+
+
+### MOSFET Diode Stability Analysis
+
+
+### MOSFET Diode Noise Calculation
+
