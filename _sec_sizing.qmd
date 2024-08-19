@@ -1,33 +1,141 @@
-When designing circuits it is an important question how to select various parameters of a MOSFET, like $W$, $L$, or the bias current $I_\mathrm{D}$. As a very practical approach we select the $g_\mathrm{m}/I_\mathrm{D}$ methodology introduced by P. Jespers and B. Murmann in [@Jespers_Murmann_2017]. A brief introduction is available [here](https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf) as well.
+When designing integrated circuits it is an important question how to select various parameters of a MOSFET, like $W$, $L$, or the bias current $I_\mathrm{D}$. In comparison to using discrete components in PCB design, or also compared to a bipolar junction transistor (BJT), we have these degrees of freedom, which make integrated circuit design so interesting.
 
-### NMOS
+Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behaviour is much more complex than these simple models. Also, this highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.
+
+::: {.callout-note}
+One of the many simplifactions of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existance of a threshold voltage is assumed, but in fact this voltage is just existing given a certain definition, and depending on definition, its value changed. In addition, in nm CMOS, the threshold voltage is a function on many thing, like $W$ and $L$.
+:::
+
+An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e. for large $V_\mathrm{GS}$ where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behaviour over a wide range of parameters like $W$, $L$, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complext MOSFET behaviour and use it for MOSFET sizing.
+
+Being a well-established approach we select the $g_\mathrm{m}/I_\mathrm{D}$ methodology introduced by P. Jespers and B. Murmann in [@Jespers_Murmann_2017]. A brief introduction is available [here](https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf) as well.
+
+The $g_\mathrm{m}/I_\mathrm{D}$ methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, form micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.
+
+### MOSFET Characterization Testbench
+
+In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in @fig-techsweep-nmos-tb, and the TB for the LV PMOS is shown in @fig-techsweep-pmos-tb.
+
+![Testbench for LV NMOS $g_\mathrm{m}/I_\mathrm{D}$ characterization.](./xschem/techsweep_sg13g2_lv_nmos.png){#fig-techsweep-nmos-tb}
+
+![Testbench for LV PMOS $g_\mathrm{m}/I_\mathrm{D}$ characterization.](./xschem/techsweep_sg13g2_lv_pmos.png){#fig-techsweep-pmos-tb}
+
+We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behaviour.
+
+### NMOS Characterization {#sec-techsweep-nmos}
+
+First, we will start looking at the LV NMOS. In @sec-techsweep-pmos we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of $1.5\,\text{V}$, so only the LV types are of interest to us.
+
+The first import graph is the plot of $g_\mathrm{m}/I_\mathrm{D}$ and $f_\mathrm{T}$ versus the gate-source voltage $V_\mathrm{GS}$. First let us answer the question why $g_\mathrm{m}/I_\mathrm{D}$ is a good parameter to look at, and actually this is also the central parameter in the $g_\mathrm{m}/I_\mathrm{D}$ methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see [biasing](https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A)) we want to get a large amplification from a MOSFET, which corresponds to a large $g_\mathrm{m}$. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high $g_\mathrm{m}/I_\mathrm{D}$ ratio is good.
+
+::: {.callout-note}
+Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severly limited by the cooling capabilities of the electrical system.
+:::
+
+However, as can be seen in the below plot, there exists a strong and unfortunate trade-off with device speed, characterized here by the transit frequency $f_\mathrm{T}. It would be ideal if there exists a design point where we get high transconductance per bias current concurrently to having the fastest operation, but unfortunately, this is clearly not the case. The $g_\mathrm{m}/I_\mathrm{D}$ peaks for $V_\mathrm{GS} < 0.3\,\text{V}$, and the highest speed we get at $V_\mathrm{GS} \approx 1.2\,\text{V}$. The dashed vertical line plots the nominal threshold voltage, as you can see in this continuum of parameter space, it marks not a particularly special point.
+
+Note that
+$$
+\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{1}{n V_\mathrm{T}}
+$$ {#eq-mosfet-gmid-weakinversion}
+for a MOSFET in weak inversion (i.e., small gate-source voltage). $n$ is the subthreshold slope, and $V_\mathrm{T} = k T / q$ which is $25.8\,\text{mV}$ at $300\,\text{K}$. We thus have $n \approx 1.38$ for this LV NMOS, which falls nicely into the usual range for $n$ of $1.3$ to $1.5$ for bulk CMOS (FinFET have $n$ very close to $1$).
+
+For the classical square-law model of the MOSFET in strong inversion, $g_\mathrm{m}/I_\mathrm{D}$ is given as
+$$
+\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS} - V_\mathrm{th}} = \frac{2}{V_\mathrm{od}} 
+$$ {#eq-mosfet-gmid-stronginversion}
+with $V_\mathrm{th}$ the threshold voltage and $V_\mathrm{od}$ the so-called "overdrive voltage."
+
+::: {.callout-note}
+Why are we so often using $300\,\text{K}$ for a typical condition? As this corresponds to roughly $27\degree\text{C}$, this accounts for some self heating compared to otherwise usual room temperatures. Further, engineers like round numbers which are easy to remember, so $300\,\text{K}$ is used as a proxy for room temperature.
+:::
+
+As we can also see from belows plot, the peak transit frequency of the LV NMOS is about $75\,\text{GHz}$, which allows building radio-frequency circuits up to ca. $f_\mathrm{T} / 10 = 7.5\,\text{GHz}$, which is a respectible number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the timeframe when 130nm CMOS became available (ca. 2000). 
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gmid-ft-vs-vgs >}}
 
+The following figure plots $f_\mathrm{T}$ against $g_\mathrm{m}/I_\mathrm{D}$ for several different $L$. As you can see, device speeds maximizes for a low $g_\mathrm{m}/I_\mathrm{D}$ and a short $L$. As you can see the drain-source voltage is kept at $V_\mathrm{DS} = 0.75\,\text{V} = V_\mathrm{DD}/2$, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at $V_\mathrm{SB} = 0\,\text{V}$, which means bulk and source terminals are connected.
+
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-ft-vs-gmid-vs-l >}}
+
+The next plot shows the ratio of $g_\mathrm{m}/g_\mathrm{ds}$ versus $g_\mathrm{m}/I_\mathrm{D}$. The ratio $g_\mathrm{m}/g_\mathrm{ds}$ is the so-called "self-gain" of the MOSFET, and shows the maximum voltage gain we can achieve in a single transistor configuration. As one can see the self gain increases for increasing $L$, but this also gives a slower transistor, so again there is a trade-off. This plot allows us to select the proper $L$ of a MOSFET if we know which amount of self gain we need.
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gmgds-vs-gmid-vs-l >}}
 
+The following figure plots the drain current density $I_\mathrm{D}/W$ as a function of $g_\mathrm{m}/g_\mathrm{ds}$ and $L$. With this plot we can find out how to set the $W$ of a MOSFET once we know the biasing current $I_\mathrm{D}$, the $L$ (selected according to self gain, $f_\mathrm{T}$, and other considerations) and the $g_\mathrm{m}/I_\mathrm{D}$ design point we selected. The drain current density $I_\mathrm{D}/W$ is a very useful nomalized metric to use, because the physical action in the MOSFET establishes a charge density in the channel below the gate, and the changing of the $W$ of the device merely transforms this charge density into an absolute parameter (together with $L$).
+
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-jd-vs-gmid-vs-l >}}
+
+The following plot shows the minimum drain-source voltage $V_\mathrm{ds,sat}$ that we need to establish in order to keep the MOSFET in saturation. As you can see, this value is almost independent of $L$, and increases for small $g_\mathrm{m}/I_\mathrm{D}$. So for low-voltage circuits, where headroom is precious, we tend to bias at $g_\mathrm{m}/I_\mathrm{D} \ge 10$, wheres for fast circuits we need to go to small $g_\mathrm{m}/I_\mathrm{D} \le 5$ requiring substantial voltage headroom per MOSFET stage that we stack on top of each other.
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-vdsat-vs-gmid-vs-l >}}
 
+For analog circuits the noise performance is usually quite important. Thermal noise of a resistor (the Johnson-Nyquist noise) has a flat power-spectral density (PSD) given by $\overline{V_\mathrm{n}^2}/\Delta f = 4 k T R$, where $k$ is Boltzmann's constant, $T$ absolute temperature, and $R$ the value of the resistor (the unit of $\overline{V_\mathrm{n}^2}/df$ is $\text{V}^2/\text{Hz}$). This PSD is essentially flat until very high frequencies where [quantum effects](https://en.wikipedia.org/wiki/Johnson–Nyquist_noise) start to kick in.
+
+::: {.callout-note}
+We usually leave the $\Delta f$ away for a shorter notation, so we write $\overline{V_\mathrm{n}^2}$ when we actually mean $\overline{V_\mathrm{n}^2}/\Delta f$.
+
+Please also note that the pair of $k T$ pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation.
+
+Fuerther, when working with PSD there is the usage of a one-sided ($f$ runs from $0$ to $\infty$) or two-sided PSD ($f$ runs from $-\infty$ to $\infty$). The default in this lecture is the usage of a **one-sided PSD**.
+:::
+
+In this lecture the only MOSFET noise we consider is the drain noise, showing up as a current noise between drain and source, and given by
+$$
+\overline{I_\mathrm{d,n}^2} = 4 k T \gamma g_\mathrm{d0}
+$$ {#eq-mosfet-noise}
+In saturation (the MOSFET operating as a current source), $g_\mathrm{d0} = g_\mathrm{m}$, whereas in triode (the MOSFET operating as a switch), $g_\mathrm{d0} = g_\mathrm{ds}$. 
+
+The factor $\gamma$ is a function of many things (in classical theory, $\gamma = 2/3$ in saturation and $\gamma = 1$ in triode), and it is characterized in the following plot as a function of $g_\mathrm{m}/I_\mathrm{D}$ and $L$. So when calculating MOSFET noise we can lookup $\gamma$ in the below plot, and use @eq-mosfet-noise to calculate the effective drain current noise.
+
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gamma-vs-gmid-vs-l >}}
+
+In a MOSFET, unfortunately, besides the thermal noise according to @eq-mosfet-noise, there is also a substantial low-frequency excess noise, called "flicker noise" due to its characteristic $\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f$ behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency $f_\mathrm{co}$, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of $L$ and $g_\mathrm{m}/I_\mathrm{D}$. Generally, the flicker noise is proportional to $(W L)^{-1}$, so the larger the device is, the lower the flicker noise. The parameter $g_\mathrm{m}/I_\mathrm{D}$ largely stays constant when we keep $W/L$ constant, so for a given $g_\mathrm{m}/I_\mathrm{D}$ flicker noise is proportinal to $1/L^2$. However, increasing $L$ lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.
+
+::: {.callout-note}
+The physical origin of flicker noise is the crystal interface between silicon (Si) and the silicondioxide (SiO~2~). Since these are different materials, there are dangling bonds, which can capture charge charriers travelling in the channel. After a random time, these carriers are released, and flicker noise is the result. The amount of flicker noise is a function of the manufacturing process, and will generally be different between device types and wafer foundries.
+:::
+
+As you can see in the following plot, $f_\mathrm{co}$ can reach well into the 10's of MHz for short MOSFETs, significantly degrading the noise performance of a circuit.
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-fco-vs-gmid-vs-l >}}
 
-### PMOS
+### PMOS Characterization {#sec-techsweep-pmos}
+
+In the following, we have the same plots as discussed in @sec-techsweep-nmos, but now for the PMOS.
+
+::: {.callout-note}
+In all PMOS plots we plot positive values for voltages and currents, to have compatible plots to the NMOS. Of course, in a PMOS, voltages and currents have different polarity compared to the PMOS.
+:::
+
+$g_\mathrm{m}/I_\mathrm{D}$ and $f_\mathrm{T}$ versus the gate-source voltage $V_\mathrm{GS}$:
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-gmid-ft-vs-vgs >}}
 
+$f_\mathrm{T}$ against $g_\mathrm{m}/I_\mathrm{D}$ for several different $L$. One can see significantly lower top speed for the PMOS compared to the NMOS, which means for high-speed circuits the NMOS should be used.
+
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-ft-vs-gmid-vs-l >}}
+
+$g_\mathrm{m}/g_\mathrm{ds}$ versus $g_\mathrm{m}/I_\mathrm{D}$. Unfortunately, one can see a modelling error for the PMOS in this plot. The self gain $g_\mathrm{m}/g_\mathrm{ds}$ reaches non-physical values, which indicates an issue with the $g_\mathrm{ds}$ modelling for the PMOS. We can not use these values for our circuit sizing, so we will use the respective NMOS plots also for the PMOS.
+
+::: {.callout-important}
+This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite often happening, as setting up the device compact models and parametrizing them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are using!
+:::
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-gmgds-vs-gmid-vs-l >}}
 
+Drain current density $I_\mathrm{D}/W$ as a function of $g_\mathrm{m}/g_\mathrm{ds}$ and $L$:
+
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-jd-vs-gmid-vs-l >}}
+
+Minimum drain-source voltage $V_\mathrm{ds,sat}$ versus $g_\mathrm{m}/I_\mathrm{D}$ and $L$:
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-vdsat-vs-gmid-vs-l >}}
 
+Noise factor $\gamma$ versus $g_\mathrm{m}/I_\mathrm{D}$ and $L$:
+
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-gamma-vs-gmid-vs-l >}}
+
+Flicker noise corner frequency $f_\mathrm{co}$ versus $g_\mathrm{m}/I_\mathrm{D}$ and $L$. If you compare this figure carefully with the NMOS figure you can see that for some operating points the flicker noise for the PMOS is lower than for the NMOS. This is often true for CMOS technologies, so it can be an advantage to use a PMOS transistor in places where flicker noise is critical, like an OTA input stage. Using PMOS has the further advantage that the bulk node can be tied to source (which for NMOS is only possible in a triple-well technology, which is often not available), which gets rid of the [body effect](https://en.wikipedia.org/wiki/Threshold_voltage). 
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-fco-vs-gmid-vs-l >}}
