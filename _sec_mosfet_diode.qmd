@@ -4,7 +4,7 @@ The first (simple) circuit we will investigate is a MOSFET, where the gate is sh
 
 Why looking at a single-transistor circuit at all? By starting with the simplest possible circuit we can develop important skills in circuit analysis (setting up and calculating a small-signal model, calculating open-loop gain, calculate noise) and Xschem/ngspice simulation testbench creation. We safely assume that also the Mona Lisa was not Leonardo da Vinci's first painting, so let's start slow.
 
-This diode is usually biased by a current source, shown as $I_\mathrm{bias}$ in the figure. Depending on MOSFET sizing with $W$ and $L$, a certain gate-source voltage $V_\mathrm{GS}$ will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.
+This diode is usually biased by a current source, shown as $I_\mathrm{bias}$ in the figure. Depending on MOSFET sizing with $W$ and $L$, a certain gate-source voltage $\VGS$ will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.
 
 ::: {.callout-note}
 It is important to realize that this configuration essentially employs a feedback loop for operation. The voltage at the drain of the MOSFET is sensed by the gate, and the gate voltage changes until the $I_\mathrm{D}$ is exactly equal to $I_\mathrm{bias}$. In this sense this is probably the smallest feedback circuit one can build. 
@@ -15,18 +15,18 @@ It is important to realize that this configuration essentially employs a feedbac
 We will now build this circuit in Xschem. For sizing the MOSFET we will use the $g_\mathrm{m}/I_\mathrm{D}$ methodology introduced in @sec-gmid-method.
 
 ::: {.callout-tip title="Exercise"}
-Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set $I_\mathrm{bias} = 20\,\mu\text{A}$, $L = 0.13\,\mu\text{m}$, and we want to use $g_\mathrm{m}/I_\mathrm{D} = 10$ (often a suitable compromise between transistor speed and $g_\mathrm{m}$ efficiency).
+Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set $I_\mathrm{bias} = 20\,\mu\text{A}$, $L = 0.13\,\mu\text{m}$, and we want to use $\gmid = 10$ (often a suitable compromise between transistor speed and $g_\mathrm{m}$ efficiency).
 
 1. Use the figures in @sec-techsweep-nmos to find out the proper value for $W$.
-2. What is $f_\mathrm{T}$ for this MOSFET? What is the value for $g_\mathrm{m}$ and $g_\mathrm{ds}$?
+2. What is $f_\mathrm{T}$ for this MOSFET? What is the value for $\gm$ and $\gds$?
 3. Draw the circuit in Xschem, and simulate the operating point. Do the values match to the values found out before during circuit sizing?
 :::
 
 Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.
 
 ::: {.callout-tip title="Solution"}
-1. Using the fact that $I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}$ and $g_\mathrm{m}/I_\mathrm{D} = 10$ directly provides $g_\mathrm{m} = 0.2\,\text{mS}$.
-2. Using the self-gain plot, we see that $g_\mathrm{m}/g_\mathrm{ds} \approx 21$, so $g_\mathrm{ds} \approx 9.5\,\mu\text{S}$. The $f_\mathrm{T}$ can easily be found in the respective plot to be $f_\mathrm{T} = 23\,\text{GHz}$.
+1. Using the fact that $I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}$ and $\gmid = 10$ directly provides $\gm = 0.2\,\text{mS}$.
+2. Using the self-gain plot, we see that $\gm/\gds \approx 21$, so $\gds \approx 9.5\,\mu\text{S}$. The $f_\mathrm{T}$ can easily be found in the respective plot to be $f_\mathrm{T} = 23\,\text{GHz}$.
 3. The $W$ of the MOSFET we find using the drain current density plot and the given bias current. Rounding to half-microns results in $W = 1\,\mu\text{m}$.
 4. Since we are looking at the graphs, we further find $\gamma = 0.84$, $V_\mathrm{ds,sat} = 0.18\,\text{V}$, and $f_\mathrm{co} \approx 15\,\text{MHz}$.
 5. In addition, we expect $V_\mathrm{GS} \approx 0.6\,\text{V}$.
@@ -56,15 +56,15 @@ For small-signal analysis we would not need to declare one node as the ground po
 
 For calculating the small-signal impedance of the MOSFET diode we formulate KCL at the top node to get
 $$
-i_\mathrm{bias} - s C_\mathrm{gs} v_\mathrm{gs} - g_\mathrm{m} v_\mathrm{gs} - g_\mathrm{ds} v_\mathrm{gs} = 0.
+i_\mathrm{bias} - s \Cgs \vgs - \gm \vgs - \gds \vgs = 0.
 $$
 
 It follows that
 $$
-Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm{m} + g_\mathrm{ds} + s C_\mathrm{gs}}.
+Z_\mathrm{diode}(s) = \frac{\vgs}{i_\mathrm{bias}} = \frac{1}{\gm + \gds + s \Cgs}.
 $$ {#eq-mosfet-diode-impedance}
 
-When neglecting $g_\mathrm{ds}$ and at dc we get $Z_\mathrm{diode} = 1/g_\mathrm{m}$, which is an important result and should be memorized.
+When neglecting $\gds$ and at dc we get $Z_\mathrm{diode} = 1 / \gm$, which is an important result and should be memorized.
 
 ::: {.callout-important}
 In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm's law for a conductance is $I = G U$, and for a capacitance is $I = s C U$. When writing equations, it is also practical to keep $s C$ together, so we will strive to sort terms accordingly.
@@ -72,30 +72,30 @@ In circuit analysis it is often algebraically easier to work with conductances i
 
 Looking at @eq-mosfet-diode-impedance we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as
 $$
-\omega_\mathrm{c} = \frac{g_\mathrm{m} + g_\mathrm{ds}}{C_\mathrm{gs}} \approx \omega_\mathrm{T}
+\omega_\mathrm{c} = \frac{\gm + \gds}{\Cgs} \approx \omega_\mathrm{T}
 $$
 which is pretty much the transit frequency of the MOSFET!
 
 ### MOSFET Diode Stability Analysis
 
-The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy $C_\mathrm{gs}^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
+The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy $\Cgs^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
 
 {{< include figures/_fig_mosfet_diode_openloop.qmd >}}
 
 By inspecting @fig-mosfet-diode-openloop we see that 
 $$
-v_\mathrm{out} = - g_\mathrm{m} v_\mathrm{in} \frac{1}{g_\mathrm{ds} + s C_\mathrm{gs}}.
+v_\mathrm{out} = - \gm v_\mathrm{in} \frac{1}{\gds + s \Cgs}.
 $$
 
 The open-loop gain $H_\mathrm{ol}(s)$ is thus
 $$
-H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds} + s C_\mathrm{gs}}.
+H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{\gm}{\gds + s \Cgs}.
 $$ {#eq-mosfet-diode-openloop-gain}
 
 Inspecting @eq-mosfet-diode-openloop-gain we realize that
 
-1. the dc gain $g_\mathrm{m} / g_\mathrm{ds}$ is the self-gain of the MOSFET, so $20 \log(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}$, and
-2. there is a pole at $\omega_\mathrm{p} = -g_\mathrm{ds} / C_\mathrm{gs}$, which is at $9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}$.
+1. the dc gain $\gm / \gds$ is the self-gain of the MOSFET, so $20 \log(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}$, and
+2. there is a pole at $\omega_\mathrm{p} = -\gds / \Cgs$, which is at $9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}$.
 
 With this single pole location in $H_\mathrm{ol}(s)$ this loop is perfectly stable at under all conditions.
 
@@ -154,13 +154,13 @@ $$
 
 For low frequencies (ignoring $g_\mathrm{ds}$ and $C_\mathrm{gs}$) we get
 $$
-\overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2} = \frac{1}{g_\mathrm{m}^2} 4 k T \gamma g_\mathrm{m} = \frac{4 k T \gamma}{g_\mathrm{m}}
+\overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2} = \frac{1}{\gm^2} 4 k T \gamma \gm = \frac{4 k T \gamma}{\gm}
 $$
 which is the thermal noise of a resistor of value $1/g_\mathrm{m}$ enhanced by the factor $\gamma$.
 
 We now calculate the full equation, and after a bit of algebra arrive at
 $$
-\overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma g_\mathrm{m}}{(g_\mathrm{m} + g_\mathrm{ds})^2 + (2 \pi f C_\mathrm{gs})^2}.
+\overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma \gm}{(\gm + \gds)^2 + (2 \pi f \Cgs)^2}.
 $$ {#eq-mosfet-diode-noise-psd}
 
 If we are interested in the PSD of the noise then @eq-mosfet-diode-noise-psd gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation.
@@ -173,12 +173,12 @@ $$
 
 Using the integral help from the previous info box, we can easily get at
 $$
-V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma g_\mathrm{m}}{(g_\mathrm{m} + g_\mathrm{ds}) C_\mathrm{gs}}.
+V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma \gm}{(\gm + \gds) \Cgs}.
 $$ {#eq-mosfet-diode-noise-rms}
 
 The form of @eq-mosfet-diode-noise-rms is the exact solution, but we gain additional insight if we assume that $g_\mathrm{m} + g_\mathrm{ds} \approx g_\mathrm{m}$ and then
 $$
-V_\mathrm{n,rms}^2 = \frac{k T \gamma }{C_\mathrm{gs}}.
+V_\mathrm{n,rms}^2 = \frac{k T \gamma }{\Cgs}.
 $$ {#eq-mosfet-diode-noise-rms-simplified}
 
 Inspecting @eq-mosfet-diode-noise-rms-simplified we see our familiar $kT/C$ noise enhanced by the factor $\gamma$! Calculating this value for our MOSFET diode we get $\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}$, which is a sizeable value! We run circuits in this technology at $V_\mathrm{DD} = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$, resulting in a dynamic range in this case of $20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}$.
