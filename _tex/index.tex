@@ -214,7 +214,7 @@
 
 \title{Analog Circuit Design}
 \author{Harald Pretl \and Michael Koefinger}
-\date{2024-08-19}
+\date{2024-08-20}
 
 \begin{document}
 \maketitle
@@ -239,7 +239,7 @@ technology \textbf{SG13G2} from IHP Microelectronics is used.
 Tools and PDK are integrated in the \textbf{IIC-OSIC-TOOLS} Docker
 image, which will be used during the coursework.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 All course material is made publicly available on GitHub and shared
 under the Apache-2.0 license.
@@ -270,40 +270,39 @@ devices are summarized in the following:
   \textbf{Low-voltage NMOS}: Device \texttt{sg13\_lv\_nmos}; operating
   voltage nominal \(V_\mathrm{DD}=1.5\,\text{V}\),
   \(L_\mathrm{min}=0.13\,\mu\text{m}\),
-  \(V_\mathrm{th} \approx 0.5\,\text{V}\); a triple-well option for the
+  \(V_\mathrm{th}\approx 0.5\,\text{V}\); a triple-well option for the
   NMOS is available.
 \item
   \textbf{Low-voltage PMOS}: Device \texttt{sg13\_lv\_pmos}; operating
   voltage nominal \(V_\mathrm{DD}=1.5\,\text{V}\),
   \(L_\mathrm{min}=0.13\,\mu\text{m}\),
-  \(V_\mathrm{th} \approx -0.47\,\text{V}\).
+  \(V_\mathrm{th}\approx -0.47\,\text{V}\).
 \item
   \textbf{High-voltage NMOS}: Device \texttt{sg13\_hv\_nmos}; operating
   voltage nominal \(V_\mathrm{DD}=3.3\,\text{V}\),
   \(L_\mathrm{min}=0.45\,\mu\text{m}\),
-  \(V_\mathrm{th} \approx 0.7\,\text{V}\); a triple-well option for the
+  \(V_\mathrm{th}\approx 0.7\,\text{V}\); a triple-well option for the
   NMOS is available.
 \item
   \textbf{High-voltage PMOS}: Device \texttt{sg13\_hv\_pmos}; operating
   voltage nominal \(V_\mathrm{DD}=3.3\,\text{V}\),
   \(L_\mathrm{min}=0.45\,\mu\text{m}\),
-  \(V_\mathrm{th} \approx -0.65\,\text{V}\).
+  \(V_\mathrm{th}\approx -0.65\,\text{V}\).
 \item
   \textbf{Silicided poly resistor}: Device \texttt{rsil};
-  \(R_\square=7\,\Omega \pm 10\%\), \(\mathrm{TC}_1=3100\,\text{ppm/K}\)
+  \(R_\square=7\,\Omega \pm 10\%\), \(\text{TC}_1=3100\,\text{ppm/K}\)
 \item
   \textbf{Poly resistor}: Device \texttt{rppd};
-  \(R_\square=260\,\Omega \pm 10\%\),
-  \(\mathrm{TC}_1=170\,\text{ppm/K}\)
+  \(R_\square=260\,\Omega \pm 10\%\), \(\text{TC}_1=170\,\text{ppm/K}\)
 \item
   \textbf{Poly resistor high}: Device \texttt{rhigh};
   \(R_\square=1360\,\Omega \pm 15\%\),
-  \(\mathrm{TC}_1=-2300\,\text{ppm/K}\)
+  \(\text{TC}_1=-2300\,\text{ppm/K}\)
 \item
   \textbf{MIM capacitor}: Device \texttt{cap\_cmim};
   \(C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\),
-  \(\mathrm{VC}_1=-26\text{ppm/V}\), \(\mathrm{TC}_1=3.6\text{ppm/K}\),
-  breakdown voltage \(>15\,\mathrm{V}\)
+  \(\text{VC}_1=-26\text{ppm/V}\), \(\text{TC}_1=3.6\text{ppm/K}\),
+  breakdown voltage \(>15\,\text{V}\)
 \item
   \textbf{MOM capacitor}: The metal stack is well-suited for MOM
   capacitors due to 5 thin metal layers, but no primitive capacitor
@@ -349,7 +348,7 @@ information like installed tools, how to setup a VM, etc. please look at
 \href{https://github.com/iic-jku/IIC-OSIC-TOOLS}{IIC-OSIC-TOOLS GitHub
 page}.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-tip-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Please make sure to receive information about your personal VM access
 ahead of the course start.
@@ -360,7 +359,7 @@ Experienced users can install this image on their personal computer, for
 JKU students the IIC will host a VM on our compute cluster and provide
 personal login credentials.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 In this course, we assume that students have a basic knowledge of Linux
 and how to operate it using the terminal. If you are not yet familiar
@@ -399,7 +398,7 @@ control the drain-source current flow. Often, the bulk is connected to
 source, and then the bulk terminal is not shown to declutter the
 schematics.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Strictly speaking is the drain-source current of a MOSFET controlled by
 the voltage between gate and bulk and the voltage between drain and
@@ -465,8 +464,8 @@ Figure~\ref{fig-mosfet-large-signal-model}. A current source
 \(I_\mathrm{DS}\) models the current flow between drain and source, and
 it is controlled by the three control voltages \(V_\mathrm{GS}\),
 \(V_\mathrm{DS}\), and \(V_\mathrm{SB}\). Note that in this way (since
-\(I_\mathrm{DS} = f(V_\mathrm{DS})\)) also a resistive behavior between
-D and S can be modelled. In case that B and S are shorted then simply
+\(I_\mathrm{DS}= f(V_\mathrm{DS})\)) also a resistive behavior between D
+and S can be modelled. In case that B and S are shorted then simply
 \(V_\mathrm{SB} = 0\).
 
 \textsubscript{Source:
@@ -492,18 +491,18 @@ Notebook}}
 
 In an ideal MOSFET no dc current is flowing into the gate, the behavior
 is purely capacitive. We model this by two capacitors:
-\(C_\mathrm{GG} = C_\mathrm{GS} + C_\mathrm{GD}\) is the total
-capacitance when looking into the gate of the MOSFET. \(C_\mathrm{GS}\)
-is usually the dominant capacitance, and \(C_\mathrm{GD}\) models the
-capacitive feedback between D and G, usually induced by a topological
-overlap capacitance in the physical construction of the MOSFET. This
-capacitance is often small compared to \(C_\mathrm{GS}\), but in
-situations where we have a large voltage swing at the drain this
-capacitance will be affected by the
+\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}\) is the total capacitance
+when looking into the gate of the MOSFET. \(C_\mathrm{GS}\) is usually
+the dominant capacitance, and \(C_\mathrm{GD}\) models the capacitive
+feedback between D and G, usually induced by a topological overlap
+capacitance in the physical construction of the MOSFET. This capacitance
+is often small compared to \(C_\mathrm{GS}\), but in situations where we
+have a large voltage swing at the drain this capacitance will be
+affected by the
 \href{https://en.wikipedia.org/wiki/Miller_effect}{Miller effect}. In
-hand calculations we will often set \(C_\mathrm{GD} = 0\).
+hand calculations we will often set \(C_\mathrm{GD}= 0\).
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 The bulk connection in Figure~\ref{fig-mosfet-large-signal-model} seems
 floating as we only consider it a control terminal, where the potential
@@ -537,7 +536,7 @@ Now, in order to get started, basic Xschem testbenches are prepared, and
 first simple dc sweeps of various voltages and currents will be done.
 But before that, please look at the import note below!
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-important-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-important-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Throughout this material, we will stick to the following notations:
 
@@ -580,7 +579,7 @@ testbench for the LV NMOS shown in Figure~\ref{fig-simple-nmos-tb}.
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-tip-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Please try to execute the following steps and answer these questions:
 
@@ -648,7 +647,8 @@ Please try to execute the following steps and answer these questions:
 
 \end{tcolorbox}
 
-\paragraph{Small-Signal MOSFET Model}\label{small-signal-mosfet-model}
+\paragraph{Small-Signal MOSFET
+Model}\label{sec-mosfet-smallsignal-model}
 
 As you have seen in the previous investigations, the large-signal model
 of Figure~\ref{fig-mosfet-large-signal-model} describes the behaviour of
@@ -668,12 +668,12 @@ between parameters.
 
 We will use the small-signal MOSFET model shown in
 Figure~\ref{fig-mosfet-small-signal-model} for this course. The
-current-source \(i_\mathrm{ds} = g_\mathrm{m} v_\mathrm{gs}\) models the
+current-source \(i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\) models the
 drain current as a function of \(v_\mathrm{gs}\), and the resistor
 \(g_\mathrm{ds}\) models the dependency of the drain current by
 \(v_\mathrm{ds}\). The drain current dependency on the source-bulk
 voltage (the so-called ``body effect'') is introduced by the current
-source \(i_\mathrm{ds} = g_\mathrm{mb} v_\mathrm{sb}\).
+source \(i_\mathrm{ds}= g_\mathrm{mb} v_\mathrm{sb}\).
 
 \textsubscript{Source:
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
@@ -707,7 +707,7 @@ changing between \(\gamma = 2/3\) in saturation and \(\gamma =1\) for
 triode operation; \(g_\mathrm{d0}\) is equal to \(g_\mathrm{m}\) in
 saturation and \(g_\mathrm{ds}\) in triode).
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Sometimes we will refer to different operating modes of the MOSFET like
 ``saturation'' or ``triode''. Generally speaking, when the drain-source
@@ -727,7 +727,7 @@ Now we need to see how the small-signal parameters seen in
 Figure~\ref{fig-mosfet-small-signal-model} can be investigated and
 estimated using circuit simulation.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-tip-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Please try to execute the following steps and answer the following
 questions:
@@ -757,7 +757,7 @@ questions:
     \(f_\mathrm{T}\)? \emph{Note: \(f_\mathrm{T}\) is the transit
     frequency where the current gain of the MOSFET drops to 1, and can
     be approximated by
-    \(2 \pi f_\mathrm{T} = g_\mathrm{m} / C_\mathrm{gg}\).}
+    \(2 \pi f_\mathrm{T} = g_\mathrm{m}/ C_\mathrm{gg}\).}
   \item
     Look at the drain noise current according to the MOSFET model and
     compare with a hand calculation of the noise. In the noise equation
@@ -780,7 +780,7 @@ questions:
 
 \end{tcolorbox}
 
-\paragraph{Conclusion}\label{conclusion}
+\subsubsection{Conclusion}\label{conclusion}
 
 Congratulations for making it thus far! By now you should have a solid
 grasp of the tool handling of Xschem and ngspice, and you should be
@@ -809,7 +809,7 @@ simplified derivations introduce concepts like the threshold voltage or
 the overdrive voltage, which are interesting from a theoretical
 viewpoint, but bear little practical use.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 One of the many simplifactions of the square-law model is that the
 mobility of the charge carriers is assumed constant (it is not).
@@ -911,7 +911,7 @@ a large \(g_\mathrm{m}\). We want this by spending the minimum biasing
 current possible (ideally zero), as we always design for minimum power
 consumption. Thus, a high \(g_\mathrm{m}/I_\mathrm{D}\) ratio is good.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Designing for minimum power consumption is pretty much always mandated.
 For battery-operated equipment it is a paramount requirement, but also
@@ -926,8 +926,8 @@ transit frequency \(f_\mathrm{T}\). It would be ideal if there exists a
 design point where we get high transconductance per bias current
 concurrently to having the fastest operation, but unfortunately, this is
 clearly not the case. The \(g_\mathrm{m}/I_\mathrm{D}\) peaks for
-\(V_\mathrm{GS} < 0.3\,\text{V}\), and the highest speed we get at
-\(V_\mathrm{GS} \approx 1.2\,\text{V}\). The dashed vertical line plots
+\(V_\mathrm{GS}< 0.3\,\text{V}\), and the highest speed we get at
+\(V_\mathrm{GS}\approx 1.2\,\text{V}\). The dashed vertical line plots
 the nominal threshold voltage, as you can see in this continuum of
 parameter space, it marks not a particularly special point.
 
@@ -944,11 +944,11 @@ for bulk CMOS (FinFET have \(n\) very close to \(1\)).
 For the classical square-law model of the MOSFET in strong inversion,
 \(g_\mathrm{m}/I_\mathrm{D}\) is given as
 \begin{equation}\phantomsection\label{eq-mosfet-gmid-stronginversion}{
-\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS} - V_\mathrm{th}} = \frac{2}{V_\mathrm{od}} 
+\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}} 
 }\end{equation} with \(V_\mathrm{th}\) the threshold voltage and
 \(V_\mathrm{od}\) the so-called ``overdrive voltage.''
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Why are we so often using \(300\,\text{K}\) for a typical condition? As
 this corresponds to roughly \(27^{\circ}\text{C}\), this accounts for
@@ -976,7 +976,7 @@ The following figure plots \(f_\mathrm{T}\) against
 \(g_\mathrm{m}/I_\mathrm{D}\) for several different \(L\). As you can
 see, device speeds maximizes for a low \(g_\mathrm{m}/I_\mathrm{D}\) and
 a short \(L\). As you can see the drain-source voltage is kept at
-\(V_\mathrm{DS} = 0.75\,\text{V} = V_\mathrm{DD}/2\), which is a typical
+\(V_\mathrm{DS}= 0.75\,\text{V} = V_\mathrm{DD}/ 2\), which is a typical
 value keeping the MOSFET in saturation across the characterization
 sweeps. Further, the source-bulk voltage is kept at
 \(V_\mathrm{SB} = 0\,\text{V}\), which means bulk and source terminals
@@ -988,14 +988,14 @@ are connected.
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-The next plot shows the ratio of \(g_\mathrm{m}/g_\mathrm{ds}\) versus
-\(g_\mathrm{m}/I_\mathrm{D}\). The ratio \(g_\mathrm{m}/g_\mathrm{ds}\)
-is the so-called ``self-gain'' of the MOSFET, and shows the maximum
-voltage gain we can achieve in a single transistor configuration. As one
-can see the self gain increases for increasing \(L\), but this also
-gives a slower transistor, so again there is a trade-off. This plot
-allows us to select the proper \(L\) of a MOSFET if we know which amount
-of self gain we need.
+The next plot shows the ratio of \(g_\mathrm{m}/ g_\mathrm{ds}\) versus
+\(g_\mathrm{m}/I_\mathrm{D}\). The ratio \(g_\mathrm{m}/ g_\mathrm{ds}\)
+is the so-called \textbf{``self-gain''} of the MOSFET, and shows the
+maximum voltage gain we can achieve in a single transistor
+configuration. As one can see the self gain increases for increasing
+\(L\), but this also gives a slower transistor, so again there is a
+trade-off. This plot allows us to select the proper \(L\) of a MOSFET if
+we know which amount of self gain we need.
 
 \includegraphics{index_files/figure-latex/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png}
 
@@ -1004,8 +1004,8 @@ of self gain we need.
 Notebook}}
 
 The following figure plots the drain current density \(I_\mathrm{D}/W\)
-as a function of \(g_\mathrm{m}/g_\mathrm{ds}\) and \(L\). With this
-plot we can find out how to set the \(W\) of a MOSFET once we know the
+as a function of \(g_\mathrm{m}/I_\mathrm{D}\) and \(L\). With this plot
+we can find out how to set the \(W\) of a MOSFET once we know the
 biasing current \(I_\mathrm{D}\), the \(L\) (selected according to self
 gain, \(f_\mathrm{T}\), and other considerations) and the
 \(g_\mathrm{m}/I_\mathrm{D}\) design point we selected. The drain
@@ -1026,8 +1026,8 @@ The following plot shows the minimum drain-source voltage
 MOSFET in saturation. As you can see, this value is almost independent
 of \(L\), and increases for small \(g_\mathrm{m}/I_\mathrm{D}\). So for
 low-voltage circuits, where headroom is precious, we tend to bias at
-\(g_\mathrm{m}/I_\mathrm{D} \ge 10\), wheres for fast circuits we need
-to go to small \(g_\mathrm{m}/I_\mathrm{D} \le 5\) requiring substantial
+\(g_\mathrm{m}/I_\mathrm{D}\ge 10\), wheres for fast circuits we need to
+go to small \(g_\mathrm{m}/I_\mathrm{D}\le 5\) requiring substantial
 voltage headroom per MOSFET stage that we stack on top of each other.
 
 \includegraphics{index_files/figure-latex/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png}
@@ -1047,7 +1047,7 @@ frequencies where
 \href{https://en.wikipedia.org/wiki/Johnson–Nyquist_noise}{quantum
 effects} start to kick in.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 We usually leave the \(\Delta f\) away for a shorter notation, so we
 write \(\overline{V_\mathrm{n}^2}\) when we actually mean
@@ -1104,7 +1104,7 @@ However, increasing \(L\) lowers device speed dramatically, so here we
 have a trade-off between flicker-noise performance and MOSFET speed, and
 this can have dramatic consequences for high-speed circuits.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 The physical origin of flicker noise is the crystal interface between
 silicon (Si) and the silicondioxide (SiO\textsubscript{2}). Since these
@@ -1131,7 +1131,7 @@ Notebook}}
 In the following, we have the same plots as discussed in
 Section~\ref{sec-techsweep-nmos}, but now for the PMOS.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 In all PMOS plots we plot positive values for voltages and currents, to
 have compatible plots to the NMOS. Of course, in a PMOS, voltages and
@@ -1159,14 +1159,14 @@ should be used.
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-\(g_\mathrm{m}/g_\mathrm{ds}\) versus \(g_\mathrm{m}/I_\mathrm{D}\).
+\(g_\mathrm{m}/ g_\mathrm{ds}\) versus \(g_\mathrm{m}/I_\mathrm{D}\).
 Unfortunately, one can see a modelling error for the PMOS in this plot.
-The self gain \(g_\mathrm{m}/g_\mathrm{ds}\) reaches non-physical
+The self gain \(g_\mathrm{m}/ g_\mathrm{ds}\) reaches non-physical
 values, which indicates an issue with the \(g_\mathrm{ds}\) modelling
 for the PMOS. We can not use these values for our circuit sizing, so we
 will use the respective NMOS plots also for the PMOS.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-important-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-important-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 This example shows how important it is to benchmark the device models
 when starting to use a new technology. Modelling artifacts like the one
@@ -1184,7 +1184,7 @@ whatever PDK you are using!
 Notebook}}
 
 Drain current density \(I_\mathrm{D}/W\) as a function of
-\(g_\mathrm{m}/g_\mathrm{ds}\) and \(L\):
+\(g_\mathrm{m}/I_\mathrm{D}\) and \(L\):
 
 \includegraphics{index_files/figure-latex/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png}
 
@@ -1231,12 +1231,7 @@ Notebook}}
 The first (simple) circuit we will investigate is a MOSFET, where the
 gate is shorted with a drain, a so-called MOSFET ``diode'', which is
 shown in Figure~\ref{fig-mosfet-diode}. This diode is one half of a
-current mirror, which we will investigate in a future section. This
-diode is usually biased by a current source, shown as
-\(I_\mathrm{bias}\) in the figure. Depending on MOSFET sizing with \(W\)
-and \(L\), a certain gate-source voltage \(V_\mathrm{GS}\) will develop.
-This voltage can be used as a biasing voltage for other circuit parts,
-for example.
+current mirror, which we will investigate in a future section.
 
 \textsubscript{Source:
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
@@ -1258,7 +1253,20 @@ Notebook}}
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-note-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacityback=0, opacitybacktitle=0.6]
+Why looking at a single-transistor circuit at all? By starting with the
+simplest possible circuit we can develop important skills in circuit
+analysis (setting up and calculating a small-signal model, calculating
+open-loop gain, calculate noise) and Xschem/ngspice simulation testbench
+creation. We safely assume that also the Mona Lisa was not Leonardo da
+Vinci's first painting, so let's start slow.
+
+This diode is usually biased by a current source, shown as
+\(I_\mathrm{bias}\) in the figure. Depending on MOSFET sizing with \(W\)
+and \(L\), a certain gate-source voltage \(V_\mathrm{GS}\) will develop.
+This voltage can be used as a biasing voltage for other circuit parts,
+for example.
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 It is important to realize that this configuration essentially employs a
 feedback loop for operation. The voltage at the drain of the MOSFET is
@@ -1274,11 +1282,11 @@ We will now build this circuit in Xschem. For sizing the MOSFET we will
 use the \(g_\mathrm{m}/I_\mathrm{D}\) methodology introduced in
 Section~\ref{sec-gmid-method}.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-tip-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 Please build a MOSFET diode circuit in Xschem where you use an LV NMOS,
 set \(I_\mathrm{bias} = 20\,\mu\text{A}\), \(L = 0.13\,\mu\text{m}\),
-and we want to use \(g_\mathrm{m}/I_\mathrm{D} = 10\) (often a suitable
+and we want to use \(g_\mathrm{m}/I_\mathrm{D}= 10\) (often a suitable
 compromise between transistor speed and \(g_\mathrm{m}\) efficiency).
 
 \begin{enumerate}
@@ -1300,7 +1308,7 @@ compromise between transistor speed and \(g_\mathrm{m}\) efficiency).
 Before continuing, please finish the previous exercise. Once you are
 done, compare with the below provided solution.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, coltitle=black, arc=.35mm, breakable, colframe=quarto-callout-tip-color-frame, titlerule=0mm, bottomrule=.15mm, toprule=.15mm, colback=white, left=2mm, toptitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solution}, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, opacityback=0, opacitybacktitle=0.6]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solution}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1308,12 +1316,12 @@ done, compare with the below provided solution.
 \item
   Using the fact that
   \(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\) and
-  \(g_\mathrm{m}/I_\mathrm{D} = 10\) directly provides
-  \(g_\mathrm{m} = 0.2\,\text{mS}\).
+  \(g_\mathrm{m}/I_\mathrm{D}= 10\) directly provides
+  \(g_\mathrm{m}= 0.2\,\text{mS}\).
 \item
   Using the self-gain plot, we see that
-  \(g_\mathrm{m}/g_\mathrm{ds} \approx 21\), so
-  \(g_\mathrm{ds} \approx 9.5\,\mu\text{S}\). The \(f_\mathrm{T}\) can
+  \(g_\mathrm{m}/g_\mathrm{ds}\approx 21\), so
+  \(g_\mathrm{ds}\approx 9.5\,\mu\text{S}\). The \(f_\mathrm{T}\) can
   easily be found in the respective plot to be
   \(f_\mathrm{T} = 23\,\text{GHz}\).
 \item
@@ -1325,7 +1333,7 @@ done, compare with the below provided solution.
   \(V_\mathrm{ds,sat} = 0.18\,\text{V}\), and
   \(f_\mathrm{co} \approx 15\,\text{MHz}\).
 \item
-  In addition, we expect \(V_\mathrm{GS} \approx 0.6\,\text{V}\).
+  In addition, we expect \(V_\mathrm{GS}\approx 0.6\,\text{V}\).
 \end{enumerate}
 
 An example Jupyter notebook to extract these values accurately you can
@@ -1379,11 +1387,364 @@ allow a turn-on from a well-defined off-state.
 \subsubsection{MOSFET Diode Small-Signal
 Analysis}\label{mosfet-diode-small-signal-analysis}
 
+We now want to investigate the small-signal behaviour of the MOSFET
+diode. Based on the small-signal model of the MOSFET in
+Figure~\ref{fig-mosfet-small-signal-model} we realize that gate and
+drain are shorted, and we also connect bulk to source. We can thus
+simplify the circit to the one shown in
+Figure~\ref{fig-mosfet-diode-small-signal}.
+
+\textsubscript{Source:
+\href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
+Notebook}}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{index_files/mediabag/index_files/figure-pdf/fig-mosfet-diode-small-signal-output-1.pdf}
+
+}
+
+\caption{\label{fig-mosfet-diode-small-signal}The MOSFET diode
+small-signal model.}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
+Notebook}}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-note-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
+
+For small-signal analysis we would not need to declare one node as the
+ground potential. However, when doing so, and selecting the ground node
+strategically, we can simplify the analysis, as we usually do not
+formulate KCL for the ground node (as we have only \(N-1\) independent
+KCL equations, \(N\) being the number of nodes of a circuit), and the
+potential difference equations are simpler if one node is at \(0\,V\).
+
+\end{tcolorbox}
+
+For calculating the small-signal impedance of the MOSFET diode we
+formulate KCL at the top node to get \[
+i_\mathrm{bias} - s C_\mathrm{gs}v_\mathrm{gs}- g_\mathrm{m}v_\mathrm{gs}- g_\mathrm{ds}v_\mathrm{gs}= 0.
+\]
+
+It follows that
+\begin{equation}\phantomsection\label{eq-mosfet-diode-impedance}{
+Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm{m}+ g_\mathrm{ds}+ s C_\mathrm{gs}}.
+}\end{equation}
+
+When neglecting \(g_\mathrm{ds}\) and at dc we get
+\(Z_\mathrm{diode} = 1 / g_\mathrm{m}\), which is an important result
+and should be memorized.
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-important-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
+
+In circuit analysis it is often algebraically easier to work with
+conductances instead of impedances, so please remember that Ohm's law
+for a conductance is \(I = G U\), and for a capacitance is
+\(I = s C U\). When writing equations, it is also practical to keep
+\(s C\) together, so we will strive to sort terms accordingly.
+
+\end{tcolorbox}
+
+Looking at Equation~\ref{eq-mosfet-diode-impedance} we see that for low
+frequencies, the diode impedance is resistive, and for high frequencies
+it becomes capactive as the gate-source capacitance starts to dominate.
+The corner frequeny of this low-pass can be calculated as \[
+\omega_\mathrm{c} = \frac{g_\mathrm{m}+ g_\mathrm{ds}}{C_\mathrm{gs}} \approx \omega_\mathrm{T}
+\] which is pretty much the transit frequency of the MOSFET!
+
 \subsubsection{MOSFET Diode Stability
 Analysis}\label{mosfet-diode-stability-analysis}
 
+The diode-connected MOSFET forms a feedback loop. What is the open-loop
+gain? For calculating it, we are breaking the loop, and apply a dummy
+\(C_\mathrm{gs}^{*}\) at the right side to keep the impedances correct.
+A circuit diagram is shown in Figure~\ref{fig-mosfet-diode-openloop}, we
+break the loop at the dotted connection. As we can see in this example,
+it is critically important when breaking up a loop for analysis (also
+for simulation!) to keep the terminal impedances the same. Only in
+special cases where the load impedance is very high or the driving
+impedance is very low is it acceptable to disregard loading effects!
+
+\textsubscript{Source:
+\href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
+Notebook}}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{index_files/mediabag/index_files/figure-pdf/fig-mosfet-diode-openloop-output-1.pdf}
+
+}
+
+\caption{\label{fig-mosfet-diode-openloop}The MOSFET diode small-signal
+circuit for open-loop analysis.}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
+Notebook}}
+
+By inspecting Figure~\ref{fig-mosfet-diode-openloop} we see that \[
+v_\mathrm{out} = - g_\mathrm{m}v_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
+\]
+
+The open-loop gain \(H_\mathrm{ol}(s)\) is thus
+\begin{equation}\phantomsection\label{eq-mosfet-diode-openloop-gain}{
+H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
+}\end{equation}
+
+Inspecting Equation~\ref{eq-mosfet-diode-openloop-gain} we realize that
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  the dc gain \(g_\mathrm{m}/ g_\mathrm{ds}\) is the self-gain of the
+  MOSFET, so
+  \(20 \log(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}\),
+  and
+\item
+  there is a pole at
+  \(\omega_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\), which is at
+  \(9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\).
+\end{enumerate}
+
+With this single pole location in \(H_\mathrm{ol}(s)\) this loop is
+perfectly stable at under all conditions.
+
+The question is now how to simulate this open-loop gain, and how to
+break the loop open in simulation? In general there are various methods,
+as we can use artificially large (ideal) inductors and capacitors to
+break loops open and still establish the correct dc operating points for
+the ac loop analysis. However, mimicking the correct loading can be an
+issue, and requires a lot of careful consideration. There is an
+alternative method which breaks the loop open only by adding an ac
+voltage source in series (thus keeps the dc operating point intact), or
+injects current using a current source. Based on both measurements the
+open-loop gain can be calculated. This is called \textbf{Middlebrook's
+method} (Middlebrook 1975) which is based on double injection, and we
+will use it for our loop simulations.
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Middlebrook's Method}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
+
+When we want to do an open-loop gain analysis, we break the loop at one
+point by inserting (1) an ac voltage source, and (2) attach an ac
+current source, as shown in Figure~\ref{fig-middlebrook-voltage} and
+Figure~\ref{fig-middlebrook-current}.
+
+\end{tcolorbox}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{index_files/mediabag/index_files/figure-pdf/fig-middlebrook-voltage-output-1.pdf}
+
+}
+
+\caption{\label{fig-middlebrook-voltage}Middlebrook voltage loop gain
+simulation.}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{index_files/mediabag/index_files/figure-pdf/fig-middlebrook-current-output-1.pdf}
+
+}
+
+\caption{\label{fig-middlebrook-current}Middlebrook current loop gain
+simulation.}
+
+\end{figure}%
+
+For both cases we do an ac analysis, and find the corresponding transfer
+functions \(T_\mathrm{v}\) and \(T_\mathrm{i}\): \[
+T_\mathrm{v} = -\frac{V_\mathrm{r}}{V_\mathrm{f}}
+\] and \[
+T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}
+\]
+
+Then, we can calculate the closed-loop transfer function \(T(s)\) as \[
+T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}
+\]
+
+We now want to simulate the open-loop transfer function
+\(H_\mathrm{ol}(s)\) by using Middlebrook's method and confirm our
+analysis above.
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
+
+Please build a simulation testbench in Xschem to simulate the open-loop
+transfer function of the MOSFET diode. Confirm the dc gain and pole
+location as given by Equation~\ref{eq-mosfet-diode-openloop-gain}.
+
+If you are getting stuck you can look at this Xschem
+\href{./xschem/mosfet_diode_loopgain.sch}{testbench}, shown in
+Figure~\ref{fig-mosfet-diode-loopgain-tb}.
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{./xschem/mosfet_diode_loopgain.png}
+
+}
+
+\caption{\label{fig-mosfet-diode-loopgain-tb}Testbench for MOSFET diode
+stability analysis.}
+
+\end{figure}%
+
+\end{tcolorbox}
+
+From simulation we see that the open-loop gain is \(24.9\,\text{dB}\) at
+low frequencies, which matches quite well our prediction of
+\(26.4\,\text{dB}\). In the Bode plot we see a low-pass with a
+\(-3\,\text{dB}\) corner frequency of \(1.4\,\text{GHz}\), which again
+is fairly close to our prediction of \(1.1\,\text{GHz}\).
+
 \subsubsection{MOSFET Diode Noise
 Calculation}\label{mosfet-diode-noise-calculation}
+
+As a final exercise on the MOSFET diode circuit we want to calculate the
+output noise when we consider \(V_\mathrm{GS}\) the output reference
+voltage which is created when passing a bias current through the MOSFET
+diode. The bias current we will assume noiseless.
+
+We will use the small-signal circuit shown in
+Figure~\ref{fig-mosfet-diode-small-signal-w-noise}.
+
+\textsubscript{Source:
+\href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
+Notebook}}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{index_files/mediabag/index_files/figure-pdf/fig-mosfet-diode-small-signal-w-noise-output-1.pdf}
+
+}
+
+\caption{\label{fig-mosfet-diode-small-signal-w-noise}The MOSFET diode
+small-signal model with drain noise source.}
+
+\end{figure}%
+
+\textsubscript{Source:
+\href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
+Notebook}}
+
+As we have already calculated the small-signal diode impedance in
+Equation~\ref{eq-mosfet-diode-impedance} we will use this result, and
+just note that the drain current noise of the MOSFET flows through this
+impedance. The noise voltage at \(v_\mathrm{gs}\) is this given as \[
+\overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
+\]
+
+The drain current noise of the MOSFET is given as (introduced in
+@\#sec-mosfet-smallsignal-model) \[
+\overline{I_\mathrm{n,d}^2} = 4 k T \gamma g_\mathrm{m}.
+\]
+
+For low frequencies (ignoring \(g_\mathrm{ds}\) and \(C_\mathrm{gs}\))
+we get \[
+\overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2} = \frac{1}{g_\mathrm{m}^2} 4 k T \gamma g_\mathrm{m}= \frac{4 k T \gamma}{g_\mathrm{m}}
+\] which is the thermal noise of a resistor of value
+\(1 / g_\mathrm{m}\) enhanced by the factor \(\gamma\).
+
+We now calculate the full equation, and after a bit of algebra arrive at
+\begin{equation}\phantomsection\label{eq-mosfet-diode-noise-psd}{
+\overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds})^2 + (2 \pi f C_\mathrm{gs})^2}.
+}\end{equation}
+
+If we are interested in the PSD of the noise then
+Equation~\ref{eq-mosfet-diode-noise-psd} gives us the result. If we are
+interested in the rms value (the total noise) we need to integrate this
+equation.
+
+\[
+\int_0^\infty {\frac{a}{b^2 + (c f)^2} df} = \frac{\pi a}{2 b c}
+\]
+
+Using the integral help from the previous info box, we can easily get at
+\begin{equation}\phantomsection\label{eq-mosfet-diode-noise-rms}{
+V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds}) C_\mathrm{gs}}.
+}\end{equation}
+
+The form of Equation~\ref{eq-mosfet-diode-noise-rms} is the exact
+solution, but we gain additional insight if we assume that
+\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\) and then
+\begin{equation}\phantomsection\label{eq-mosfet-diode-noise-rms-simplified}{
+V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
+}\end{equation}
+
+Inspecting Equation~\ref{eq-mosfet-diode-noise-rms-simplified} we see
+our familiar \(kT/C\) noise enhanced by the factor \(\gamma\)!
+Calculating this value for our MOSFET diode we get
+\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\),
+which is a sizeable value! We run circuits in this technology at
+\(V_\mathrm{DD}= 1.5\,\mathrm{V}\), which leaves us with a signal swing
+of ca. \(1.1\,\mathrm{V_{pp}}\), resulting in a dynamic range in this
+case of \(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\).
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-important-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-important-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
+
+Large BW circuits can integrate noise over a wide bandwidth resulting in
+considerable rms noise.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, toptitle=1mm, left=2mm, colframe=quarto-callout-tip-color-frame, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, bottomrule=.15mm, breakable, opacitybacktitle=0.6, coltitle=black, bottomtitle=1mm, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, rightrule=.15mm, arc=.35mm, colback=white]
+
+Please build a simulation testbench in Xschem to simulate the noise
+performance of the MOSFET diode, and confirm the rms noise value that we
+just calculated. Look at the rms value and the PSD of the noise, and
+play around with the integration limits. What is the effect? Can you see
+the flicker noise in the PSD? How much is its contribution to the rms
+noise?
+
+If you are getting stuck you can look at this Xschem
+\href{./xschem/mosfet_diode_noise.sch}{testbench}, shown in
+Figure~\ref{fig-mosfet-diode-noise-tb}.
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{./xschem/mosfet_diode_noise.png}
+
+}
+
+\caption{\label{fig-mosfet-diode-noise-tb}Testbench for MOSFET diode
+noise analysis.}
+
+\end{figure}%
+
+\end{tcolorbox}
+
+\subsubsection{Conclusion}\label{conclusion-1}
+
+In this section we investigated the simple MOSFET-diode circuit. We
+learned important skills like how to derive a small-signal model, how to
+calculate important features like noise and open-loop gain for stability
+analysis. We introduced Middlebrook's method to have a mechanism to open
+up loops in simulation (and calculation) without disturbing operating
+points for change loading conditions.
+
+If you feel that you have not yet mastered these topics or are uncertain
+in the operation of ngspice, please go back to the beginning of the
+section and read through the theory and redo the exercises.
 
 \subsection{Current Mirror}\label{current-mirror}
 
@@ -1426,6 +1787,11 @@ Circuits}. Pearson.
 Jespers, Paul G. A., and Boris Murmann. 2017. \emph{Systematic Design of
 Analog CMOS Circuits: Using Pre-Computed Lookup Tables}. Cambridge
 University Press.
+
+\bibitem[\citeproctext]{ref-Middlebrook_1975}
+Middlebrook, R. D. 1975. {``{Measurement of loop gain in feedback
+systems}.''} \emph{International Journal of Electronics} 38 (4):
+485--512. \url{https://doi.org/10.1080/00207217508920421}.
 
 \bibitem[\citeproctext]{ref-Nagel_1975}
 Nagel, Laurence W. 1975. {``SPICE2: A Computer Program to Simulate

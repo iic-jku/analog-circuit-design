@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-08-19">
+<meta name="dcterms.date" content="2024-08-20">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -93,11 +93,12 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-08-19">
-<meta name="citation_cover_date" content="2024-08-19">
+<meta name="citation_publication_date" content="2024-08-20">
+<meta name="citation_cover_date" content="2024-08-20">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-08-19">
+<meta name="citation_online_date" content="2024-08-20">
 <meta name="citation_language" content="en-US">
+<meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_abstract=In this design of a feedback system it is desirable to make experimental measurements of the loop gain as a function of frequency to ensure that the physical system operates as analytically predicted or, if not, to supply information upon which a design correction can be based. In high loop-gain systems it is desirable that the loop-gain measurement be made without opening the loop. This paper discusses practical methods of measuring and interpreting the results for loop gain of the closed-loop system by a voltage injection or a current-injection technique ; extension to the case in which the measurement can be made even though the system is unstable ; and extension to the case in which neither the voltage nor current-injection technique alone is adequate, but in which a combination of both permits the true loop gain to be derived. These techniques have been found useful not only in linear feedback systems but also in describing-function analysis of switching-mode converters and regulators.;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
 <meta name="citation_reference" content="citation_title=Verifying the diode–capacitor circuit voltage decay;,citation_author=Edward H. Hellen;,citation_publication_date=2003-08;,citation_cover_date=2003-08;,citation_year=2003;,citation_issue=8;,citation_doi=10.1119/1.1578070;,citation_volume=71;,citation_journal_title=American Journal of Physics;">
 <meta name="citation_reference" content="citation_title=SPICE2: A computer program to simulate semiconductor circuits;,citation_author=Laurence W. Nagel;,citation_publication_date=1975-05;,citation_cover_date=1975-05;,citation_year=1975;,citation_fulltext_html_url=http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html;,citation_dissertation_institution=EECS Department, University of California, Berkeley;">
 <meta name="citation_reference" content="citation_title=Systematic design of analog CMOS circuits: Using pre-computed lookup tables;,citation_author=Paul G. A. Jespers;,citation_author=Boris Murmann;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
@@ -148,7 +149,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">August 19, 2024</p>
+              <p class="date">August 20, 2024</p>
             </div>
           </div>
           
@@ -179,6 +180,7 @@ window.Quarto = {
   <li><a href="#first-steps" id="toc-first-steps" class="nav-link" data-scroll-target="#first-steps">First Steps</a>
   <ul class="collapse">
   <li><a href="#sec-mosfet" id="toc-sec-mosfet" class="nav-link" data-scroll-target="#sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
   <li><a href="#sec-gmid-method" id="toc-sec-gmid-method" class="nav-link" data-scroll-target="#sec-gmid-method">Transistor Sizing Using gm/ID Methodology</a>
   <ul class="collapse">
@@ -193,6 +195,7 @@ window.Quarto = {
   <li><a href="#mosfet-diode-small-signal-analysis" id="toc-mosfet-diode-small-signal-analysis" class="nav-link" data-scroll-target="#mosfet-diode-small-signal-analysis">MOSFET Diode Small-Signal Analysis</a></li>
   <li><a href="#mosfet-diode-stability-analysis" id="toc-mosfet-diode-stability-analysis" class="nav-link" data-scroll-target="#mosfet-diode-stability-analysis">MOSFET Diode Stability Analysis</a></li>
   <li><a href="#mosfet-diode-noise-calculation" id="toc-mosfet-diode-noise-calculation" class="nav-link" data-scroll-target="#mosfet-diode-noise-calculation">MOSFET Diode Noise Calculation</a></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
   </ul></li>
   <li><a href="#current-mirror" id="toc-current-mirror" class="nav-link" data-scroll-target="#current-mirror">Current Mirror</a></li>
   <li><a href="#differential-pair" id="toc-differential-pair" class="nav-link" data-scroll-target="#differential-pair">Differential Pair</a></li>
@@ -239,14 +242,14 @@ Note
 <p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
 <p>For our circuit design, the most important parameters of the available devices are summarized in the following:</p>
 <ul>
-<li><strong>Low-voltage NMOS</strong>: Device <code>sg13_lv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx 0.5\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
-<li><strong>Low-voltage PMOS</strong>: Device <code>sg13_lv_pmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx -0.47\,\text{V}\)</span>.</li>
-<li><strong>High-voltage NMOS</strong>: Device <code>sg13_hv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx 0.7\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
-<li><strong>High-voltage PMOS</strong>: Device <code>sg13_hv_pmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th} \approx -0.65\,\text{V}\)</span>.</li>
-<li><strong>Silicided poly resistor</strong>: Device <code>rsil</code>; <span class="math inline">\(R_\square=7\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=3100\,\text{ppm/K}\)</span></li>
-<li><strong>Poly resistor</strong>: Device <code>rppd</code>; <span class="math inline">\(R_\square=260\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=170\,\text{ppm/K}\)</span></li>
-<li><strong>Poly resistor high</strong>: Device <code>rhigh</code>; <span class="math inline">\(R_\square=1360\,\Omega \pm 15\%\)</span>, <span class="math inline">\(\mathrm{TC}_1=-2300\,\text{ppm/K}\)</span></li>
-<li><strong>MIM capacitor</strong>: Device <code>cap_cmim</code>; <span class="math inline">\(C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\)</span>, <span class="math inline">\(\mathrm{VC}_1=-26\text{ppm/V}\)</span>, <span class="math inline">\(\mathrm{TC}_1=3.6\text{ppm/K}\)</span>, breakdown voltage <span class="math inline">\(&gt;15\,\mathrm{V}\)</span></li>
+<li><strong>Low-voltage NMOS</strong>: Device <code>sg13_lv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.5\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
+<li><strong>Low-voltage PMOS</strong>: Device <code>sg13_lv_pmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx -0.47\,\text{V}\)</span>.</li>
+<li><strong>High-voltage NMOS</strong>: Device <code>sg13_hv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.7\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
+<li><strong>High-voltage PMOS</strong>: Device <code>sg13_hv_pmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx -0.65\,\text{V}\)</span>.</li>
+<li><strong>Silicided poly resistor</strong>: Device <code>rsil</code>; <span class="math inline">\(R_\square=7\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\text{TC}_1=3100\,\text{ppm/K}\)</span></li>
+<li><strong>Poly resistor</strong>: Device <code>rppd</code>; <span class="math inline">\(R_\square=260\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\text{TC}_1=170\,\text{ppm/K}\)</span></li>
+<li><strong>Poly resistor high</strong>: Device <code>rhigh</code>; <span class="math inline">\(R_\square=1360\,\Omega \pm 15\%\)</span>, <span class="math inline">\(\text{TC}_1=-2300\,\text{ppm/K}\)</span></li>
+<li><strong>MIM capacitor</strong>: Device <code>cap_cmim</code>; <span class="math inline">\(C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\)</span>, <span class="math inline">\(\text{VC}_1=-26\text{ppm/V}\)</span>, <span class="math inline">\(\text{TC}_1=3.6\text{ppm/K}\)</span>, breakdown voltage <span class="math inline">\(&gt;15\,\text{V}\)</span></li>
 <li><strong>MOM capacitor</strong>: The metal stack is well-suited for MOM capacitors due to 5 thin metal layers, but no primitive capacitor device is available at this point.</li>
 </ul>
 </section>
@@ -340,7 +343,7 @@ Figure&nbsp;2: Circuit symbol of p-channel MOSFET.
 </div>
 </div>
 </div>
-<p>For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a>. A current source <span class="math inline">\(I_\mathrm{DS}\)</span> models the current flow between drain and source, and it is controlled by the three control voltages <span class="math inline">\(V_\mathrm{GS}\)</span>, <span class="math inline">\(V_\mathrm{DS}\)</span>, and <span class="math inline">\(V_\mathrm{SB}\)</span>. Note that in this way (since <span class="math inline">\(I_\mathrm{DS} = f(V_\mathrm{DS})\)</span>) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply <span class="math inline">\(V_\mathrm{SB} = 0\)</span>.</p>
+<p>For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a>. A current source <span class="math inline">\(I_\mathrm{DS}\)</span> models the current flow between drain and source, and it is controlled by the three control voltages <span class="math inline">\(V_\mathrm{GS}\)</span>, <span class="math inline">\(V_\mathrm{DS}\)</span>, and <span class="math inline">\(V_\mathrm{SB}\)</span>. Note that in this way (since <span class="math inline">\(I_\mathrm{DS}= f(V_\mathrm{DS})\)</span>) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply <span class="math inline">\(V_\mathrm{SB} = 0\)</span>.</p>
 <div id="cell-fig-mosfet-large-signal-model" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-large-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -355,7 +358,7 @@ Figure&nbsp;3: The MOSFET large-signal model.
 </div>
 </div>
 </div>
-<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG} = C_\mathrm{GS} + C_\mathrm{GD}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a>. In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD} = 0\)</span>.</p>
+<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a>. In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= 0\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -440,11 +443,11 @@ Exercise
 </div>
 </div>
 </section>
-<section id="small-signal-mosfet-model" class="level4">
-<h4 class="anchored" data-anchor-id="small-signal-mosfet-model">Small-Signal MOSFET Model</h4>
+<section id="sec-mosfet-smallsignal-model" class="level4">
+<h4 class="anchored" data-anchor-id="sec-mosfet-smallsignal-model">Small-Signal MOSFET Model</h4>
 <p>As you have seen in the previous investigations, the large-signal model of <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> describes the behaviour of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.</p>
 <p>However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.</p>
-<p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{ds} = g_\mathrm{m} v_\mathrm{gs}\)</span> models the drain current as a function of <span class="math inline">\(v_\mathrm{gs}\)</span>, and the resistor <span class="math inline">\(g_\mathrm{ds}\)</span> models the dependency of the drain current by <span class="math inline">\(v_\mathrm{ds}\)</span>. The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{ds} = g_\mathrm{mb} v_\mathrm{sb}\)</span>.</p>
+<p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> models the drain current as a function of <span class="math inline">\(v_\mathrm{gs}\)</span>, and the resistor <span class="math inline">\(g_\mathrm{ds}\)</span> models the dependency of the drain current by <span class="math inline">\(v_\mathrm{ds}\)</span>. The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{mb} v_\mathrm{sb}\)</span>.</p>
 <div id="cell-fig-mosfet-small-signal-model" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-small-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -491,7 +494,7 @@ Exercise
 <ol type="1">
 <li>How are <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span> changing when you change the dc node voltages?</li>
 <li>What is the ratio of <span class="math inline">\(g_\mathrm{m}\)</span> to <span class="math inline">\(g_\mathrm{mb}\)</span>? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?</li>
-<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{gs}\)</span> and <span class="math inline">\(C_\mathrm{gd}\)</span>. Why are they important? What is the relation to <span class="math inline">\(f_\mathrm{T}\)</span>? <em>Note: <span class="math inline">\(f_\mathrm{T}\)</span> is the transit frequency where the current gain of the MOSFET drops to 1, and can be approximated by <span class="math inline">\(2 \pi f_\mathrm{T} = g_\mathrm{m} / C_\mathrm{gg}\)</span>.</em></li>
+<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{gs}\)</span> and <span class="math inline">\(C_\mathrm{gd}\)</span>. Why are they important? What is the relation to <span class="math inline">\(f_\mathrm{T}\)</span>? <em>Note: <span class="math inline">\(f_\mathrm{T}\)</span> is the transit frequency where the current gain of the MOSFET drops to 1, and can be approximated by <span class="math inline">\(2 \pi f_\mathrm{T} = g_\mathrm{m}/ C_\mathrm{gg}\)</span>.</em></li>
 <li>Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
 </ol></li>
 <li>Go back to your testbench for the LVS PMOS <code>sg13_lv_pmos</code>:
@@ -502,10 +505,10 @@ Exercise
 </div>
 </div>
 </section>
-<section id="conclusion" class="level4">
-<h4 class="anchored" data-anchor-id="conclusion">Conclusion</h4>
-<p>Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of <a href="#sec-mosfet" class="quarto-xref">Section&nbsp;2.1</a> and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>.</p>
 </section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of <a href="#sec-mosfet" class="quarto-xref">Section&nbsp;2.1</a> and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>.</p>
 </section>
 </section>
 <section id="sec-gmid-method" class="level2">
@@ -570,12 +573,12 @@ Note
 <p>Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severly limited by the cooling capabilities of the electrical system.</p>
 </div>
 </div>
-<p>However, as can be seen in the below plot, there exists a strong and unfortunate trade-off with device speed, characterized here by the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span>. It would be ideal if there exists a design point where we get high transconductance per bias current concurrently to having the fastest operation, but unfortunately, this is clearly not the case. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> peaks for <span class="math inline">\(V_\mathrm{GS} &lt; 0.3\,\text{V}\)</span>, and the highest speed we get at <span class="math inline">\(V_\mathrm{GS} \approx 1.2\,\text{V}\)</span>. The dashed vertical line plots the nominal threshold voltage, as you can see in this continuum of parameter space, it marks not a particularly special point.</p>
+<p>However, as can be seen in the below plot, there exists a strong and unfortunate trade-off with device speed, characterized here by the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span>. It would be ideal if there exists a design point where we get high transconductance per bias current concurrently to having the fastest operation, but unfortunately, this is clearly not the case. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> peaks for <span class="math inline">\(V_\mathrm{GS}&lt; 0.3\,\text{V}\)</span>, and the highest speed we get at <span class="math inline">\(V_\mathrm{GS}\approx 1.2\,\text{V}\)</span>. The dashed vertical line plots the nominal threshold voltage, as you can see in this continuum of parameter space, it marks not a particularly special point.</p>
 <p>Note that <span id="eq-mosfet-gmid-weakinversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{1}{n V_\mathrm{T}}
 \tag{1}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
 <p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
-\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS} - V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
+\frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
 \tag{2}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.”</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -602,7 +605,7 @@ Note
 </div>
 </div>
 </div>
-<p>The following figure plots <span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. As you can see, device speeds maximizes for a low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and a short <span class="math inline">\(L\)</span>. As you can see the drain-source voltage is kept at <span class="math inline">\(V_\mathrm{DS} = 0.75\,\text{V} = V_\mathrm{DD}/2\)</span>, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at <span class="math inline">\(V_\mathrm{SB} = 0\,\text{V}\)</span>, which means bulk and source terminals are connected.</p>
+<p>The following figure plots <span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. As you can see, device speeds maximizes for a low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and a short <span class="math inline">\(L\)</span>. As you can see the drain-source voltage is kept at <span class="math inline">\(V_\mathrm{DS}= 0.75\,\text{V} = V_\mathrm{DD}/ 2\)</span>, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at <span class="math inline">\(V_\mathrm{SB} = 0\,\text{V}\)</span>, which means bulk and source terminals are connected.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-nmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
@@ -614,7 +617,7 @@ Note
 </div>
 </div>
 </div>
-<p>The next plot shows the ratio of <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. The ratio <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> is the so-called “self-gain” of the MOSFET, and shows the maximum voltage gain we can achieve in a single transistor configuration. As one can see the self gain increases for increasing <span class="math inline">\(L\)</span>, but this also gives a slower transistor, so again there is a trade-off. This plot allows us to select the proper <span class="math inline">\(L\)</span> of a MOSFET if we know which amount of self gain we need.</p>
+<p>The next plot shows the ratio of <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. The ratio <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the so-called <strong>“self-gain”</strong> of the MOSFET, and shows the maximum voltage gain we can achieve in a single transistor configuration. As one can see the self gain increases for increasing <span class="math inline">\(L\)</span>, but this also gives a slower transistor, so again there is a trade-off. This plot allows us to select the proper <span class="math inline">\(L\)</span> of a MOSFET if we know which amount of self gain we need.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}" data-tags="[&quot;fig-nmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
 <div class="cell-output cell-output-display">
@@ -626,7 +629,7 @@ Note
 </div>
 </div>
 </div>
-<p>The following figure plots the drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> as a function of <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> and <span class="math inline">\(L\)</span>. With this plot we can find out how to set the <span class="math inline">\(W\)</span> of a MOSFET once we know the biasing current <span class="math inline">\(I_\mathrm{D}\)</span>, the <span class="math inline">\(L\)</span> (selected according to self gain, <span class="math inline">\(f_\mathrm{T}\)</span>, and other considerations) and the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> design point we selected. The drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> is a very useful nomalized metric to use, because the physical action in the MOSFET establishes a charge density in the channel below the gate, and the changing of the <span class="math inline">\(W\)</span> of the device merely transforms this charge density into an absolute parameter (together with <span class="math inline">\(L\)</span>).</p>
+<p>The following figure plots the drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. With this plot we can find out how to set the <span class="math inline">\(W\)</span> of a MOSFET once we know the biasing current <span class="math inline">\(I_\mathrm{D}\)</span>, the <span class="math inline">\(L\)</span> (selected according to self gain, <span class="math inline">\(f_\mathrm{T}\)</span>, and other considerations) and the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> design point we selected. The drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> is a very useful nomalized metric to use, because the physical action in the MOSFET establishes a charge density in the channel below the gate, and the changing of the <span class="math inline">\(W\)</span> of the device merely transforms this charge density into an absolute parameter (together with <span class="math inline">\(L\)</span>).</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}" data-tags="[&quot;fig-nmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="cell-output cell-output-display">
@@ -638,7 +641,7 @@ Note
 </div>
 </div>
 </div>
-<p>The following plot shows the minimum drain-source voltage <span class="math inline">\(V_\mathrm{ds,sat}\)</span> that we need to establish in order to keep the MOSFET in saturation. As you can see, this value is almost independent of <span class="math inline">\(L\)</span>, and increases for small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. So for low-voltage circuits, where headroom is precious, we tend to bias at <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D} \ge 10\)</span>, wheres for fast circuits we need to go to small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D} \le 5\)</span> requiring substantial voltage headroom per MOSFET stage that we stack on top of each other.</p>
+<p>The following plot shows the minimum drain-source voltage <span class="math inline">\(V_\mathrm{ds,sat}\)</span> that we need to establish in order to keep the MOSFET in saturation. As you can see, this value is almost independent of <span class="math inline">\(L\)</span>, and increases for small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. So for low-voltage circuits, where headroom is precious, we tend to bias at <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\ge 10\)</span>, wheres for fast circuits we need to go to small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\le 5\)</span> requiring substantial voltage headroom per MOSFET stage that we stack on top of each other.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-11" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}" data-tags="[&quot;fig-nmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
 <div class="cell-output cell-output-display">
@@ -748,7 +751,7 @@ Note
 </div>
 </div>
 </div>
-<p><span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Unfortunately, one can see a modelling error for the PMOS in this plot. The self gain <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> reaches non-physical values, which indicates an issue with the <span class="math inline">\(g_\mathrm{ds}\)</span> modelling for the PMOS. We can not use these values for our circuit sizing, so we will use the respective NMOS plots also for the PMOS.</p>
+<p><span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Unfortunately, one can see a modelling error for the PMOS in this plot. The self gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> reaches non-physical values, which indicates an issue with the <span class="math inline">\(g_\mathrm{ds}\)</span> modelling for the PMOS. We can not use these values for our circuit sizing, so we will use the respective NMOS plots also for the PMOS.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -773,7 +776,7 @@ Important
 </div>
 </div>
 </div>
-<p>Drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> as a function of <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> and <span class="math inline">\(L\)</span>:</p>
+<p>Drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>:</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-10" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}" data-tags="[&quot;fig-pmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="cell-output cell-output-display">
@@ -825,7 +828,7 @@ Important
 </section>
 <section id="sec-mosfet-diode" class="level2">
 <h2 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h2>
-<p>The first (simple) circuit we will investigate is a MOSFET, where the gate is shorted with a drain, a so-called MOSFET “diode”, which is shown in <a href="#fig-mosfet-diode" class="quarto-xref">Figure&nbsp;8</a>. This diode is one half of a current mirror, which we will investigate in a future section. This diode is usually biased by a current source, shown as <span class="math inline">\(I_\mathrm{bias}\)</span> in the figure. Depending on MOSFET sizing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>, a certain gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span> will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.</p>
+<p>The first (simple) circuit we will investigate is a MOSFET, where the gate is shorted with a drain, a so-called MOSFET “diode”, which is shown in <a href="#fig-mosfet-diode" class="quarto-xref">Figure&nbsp;8</a>. This diode is one half of a current mirror, which we will investigate in a future section.</p>
 <div id="cell-fig-mosfet-diode" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-diode" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -840,6 +843,8 @@ Figure&nbsp;8: A MOSFET connected as a diode.
 </div>
 </div>
 </div>
+<p>Why looking at a single-transistor circuit at all? By starting with the simplest possible circuit we can develop important skills in circuit analysis (setting up and calculating a small-signal model, calculating open-loop gain, calculate noise) and Xschem/ngspice simulation testbench creation. We safely assume that also the Mona Lisa was not Leonardo da Vinci’s first painting, so let’s start slow.</p>
+<p>This diode is usually biased by a current source, shown as <span class="math inline">\(I_\mathrm{bias}\)</span> in the figure. Depending on MOSFET sizing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>, a certain gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span> will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -866,7 +871,7 @@ Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set <span class="math inline">\(I_\mathrm{bias} = 20\,\mu\text{A}\)</span>, <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>, and we want to use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D} = 10\)</span> (often a suitable compromise between transistor speed and <span class="math inline">\(g_\mathrm{m}\)</span> efficiency).</p>
+<p>Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set <span class="math inline">\(I_\mathrm{bias} = 20\,\mu\text{A}\)</span>, <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>, and we want to use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> (often a suitable compromise between transistor speed and <span class="math inline">\(g_\mathrm{m}\)</span> efficiency).</p>
 <ol type="1">
 <li>Use the figures in <a href="#sec-techsweep-nmos" class="quarto-xref">Section&nbsp;3.2</a> to find out the proper value for <span class="math inline">\(W\)</span>.</li>
 <li>What is <span class="math inline">\(f_\mathrm{T}\)</span> for this MOSFET? What is the value for <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span>?</li>
@@ -886,11 +891,11 @@ Solution
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D} = 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m} = 0.2\,\text{mS}\)</span>.</li>
-<li>Using the self-gain plot, we see that <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds} \approx 21\)</span>, so <span class="math inline">\(g_\mathrm{ds} \approx 9.5\,\mu\text{S}\)</span>. The <span class="math inline">\(f_\mathrm{T}\)</span> can easily be found in the respective plot to be <span class="math inline">\(f_\mathrm{T} = 23\,\text{GHz}\)</span>.</li>
+<li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
+<li>Using the self-gain plot, we see that <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\approx 21\)</span>, so <span class="math inline">\(g_\mathrm{ds}\approx 9.5\,\mu\text{S}\)</span>. The <span class="math inline">\(f_\mathrm{T}\)</span> can easily be found in the respective plot to be <span class="math inline">\(f_\mathrm{T} = 23\,\text{GHz}\)</span>.</li>
 <li>The <span class="math inline">\(W\)</span> of the MOSFET we find using the drain current density plot and the given bias current. Rounding to half-microns results in <span class="math inline">\(W = 1\,\mu\text{m}\)</span>.</li>
 <li>Since we are looking at the graphs, we further find <span class="math inline">\(\gamma = 0.84\)</span>, <span class="math inline">\(V_\mathrm{ds,sat} = 0.18\,\text{V}\)</span>, and <span class="math inline">\(f_\mathrm{co} \approx 15\,\text{MHz}\)</span>.</li>
-<li>In addition, we expect <span class="math inline">\(V_\mathrm{GS} \approx 0.6\,\text{V}\)</span>.</li>
+<li>In addition, we expect <span class="math inline">\(V_\mathrm{GS}\approx 0.6\,\text{V}\)</span>.</li>
 </ol>
 <p>An example Jupyter notebook to extract these values accurately you can find <a href="./sizing/sizing_mosfet_diode-preview.html">here</a>. An Xschem schematic for this exercise is provide <a href="./xschem/mosfet_diode_sizing.sch">as well</a>.</p>
 </div>
@@ -914,12 +919,249 @@ Figure&nbsp;9: Testbench for MOSFET diode transient settling.
 </section>
 <section id="mosfet-diode-small-signal-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="mosfet-diode-small-signal-analysis">MOSFET Diode Small-Signal Analysis</h3>
+<p>We now want to investigate the small-signal behaviour of the MOSFET diode. Based on the small-signal model of the MOSFET in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circit to the one shown in <a href="#fig-mosfet-diode-small-signal" class="quarto-xref">Figure&nbsp;10</a>.</p>
+<div id="cell-fig-mosfet-diode-small-signal" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-diode-small-signal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-diode-small-signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-mosfet-diode-small-signal-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Figure&nbsp;10: The MOSFET diode small-signal model."><img src="index_files/figure-html/fig-mosfet-diode-small-signal-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-small-signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: The MOSFET diode small-signal model.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only <span class="math inline">\(N-1\)</span> independent KCL equations, <span class="math inline">\(N\)</span> being the number of nodes of a circuit), and the potential difference equations are simpler if one node is at <span class="math inline">\(0\,V\)</span>.</p>
+</div>
+</div>
+<p>For calculating the small-signal impedance of the MOSFET diode we formulate KCL at the top node to get <span class="math display">\[
+i_\mathrm{bias} - s C_\mathrm{gs}v_\mathrm{gs}- g_\mathrm{m}v_\mathrm{gs}- g_\mathrm{ds}v_\mathrm{gs}= 0.
+\]</span></p>
+<p>It follows that <span id="eq-mosfet-diode-impedance"><span class="math display">\[
+Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm{m}+ g_\mathrm{ds}+ s C_\mathrm{gs}}.
+\tag{4}\]</span></span></p>
+<p>When neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and at dc we get <span class="math inline">\(Z_\mathrm{diode} = 1 / g_\mathrm{m}\)</span>, which is an important result and should be memorized.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G U\)</span>, and for a capacitance is <span class="math inline">\(I = s C U\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
+</div>
+</div>
+<p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as <span class="math display">\[
+\omega_\mathrm{c} = \frac{g_\mathrm{m}+ g_\mathrm{ds}}{C_\mathrm{gs}} \approx \omega_\mathrm{T}
+\]</span> which is pretty much the transit frequency of the MOSFET!</p>
 </section>
 <section id="mosfet-diode-stability-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="mosfet-diode-stability-analysis">MOSFET Diode Stability Analysis</h3>
+<p>The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy <span class="math inline">\(C_\mathrm{gs}^{*}\)</span> at the right side to keep the impedances correct. A circuit diagram is shown in <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;11</a>, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!</p>
+<div id="cell-fig-mosfet-diode-openloop" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-diode-openloop" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-diode-openloop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-mosfet-diode-openloop-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-25" title="Figure&nbsp;11: The MOSFET diode small-signal circuit for open-loop analysis."><img src="index_files/figure-html/fig-mosfet-diode-openloop-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-openloop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: The MOSFET diode small-signal circuit for open-loop analysis.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>By inspecting <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;11</a> we see that <span class="math display">\[
+v_\mathrm{out} = - g_\mathrm{m}v_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
+\]</span></p>
+<p>The open-loop gain <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is thus <span id="eq-mosfet-diode-openloop-gain"><span class="math display">\[
+H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
+\tag{5}\]</span></span></p>
+<p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;5</a> we realize that</p>
+<ol type="1">
+<li>the dc gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the self-gain of the MOSFET, so <span class="math inline">\(20 \log(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}\)</span>, and</li>
+<li>there is a pole at <span class="math inline">\(\omega_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\)</span>, which is at <span class="math inline">\(9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\)</span>.</li>
+</ol>
+<p>With this single pole location in <span class="math inline">\(H_\mathrm{ol}(s)\)</span> this loop is perfectly stable at under all conditions.</p>
+<p>The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Middlebrook's Method">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Middlebrook’s Method
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When we want to do an open-loop gain analysis, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;12</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;13</a>.</p>
+</div>
+</div>
+<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="Figure&nbsp;12: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Middlebrook voltage loop gain simulation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Figure&nbsp;13: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Middlebrook current loop gain simulation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For both cases we do an ac analysis, and find the corresponding transfer functions <span class="math inline">\(T_\mathrm{v}\)</span> and <span class="math inline">\(T_\mathrm{i}\)</span>: <span class="math display">\[
+T_\mathrm{v} = -\frac{V_\mathrm{r}}{V_\mathrm{f}}
+\]</span> and <span class="math display">\[
+T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}
+\]</span></p>
+<p>Then, we can calculate the closed-loop transfer function <span class="math inline">\(T(s)\)</span> as <span class="math display">\[
+T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}
+\]</span></p>
+<p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s method and confirm our analysis above.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;5</a>.</p>
+<p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_loopgain.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;14</a>.</p>
+<div id="fig-mosfet-diode-loopgain-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-diode-loopgain-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="./xschem/mosfet_diode_loopgain.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" title="Figure&nbsp;14: Testbench for MOSFET diode stability analysis."><img src="./xschem/mosfet_diode_loopgain.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-loopgain-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14: Testbench for MOSFET diode stability analysis.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>From simulation we see that the open-loop gain is <span class="math inline">\(24.9\,\text{dB}\)</span> at low frequencies, which matches quite well our prediction of <span class="math inline">\(26.4\,\text{dB}\)</span>. In the Bode plot we see a low-pass with a <span class="math inline">\(-3\,\text{dB}\)</span> corner frequency of <span class="math inline">\(1.4\,\text{GHz}\)</span>, which again is fairly close to our prediction of <span class="math inline">\(1.1\,\text{GHz}\)</span>.</p>
 </section>
 <section id="mosfet-diode-noise-calculation" class="level3">
 <h3 class="anchored" data-anchor-id="mosfet-diode-noise-calculation">MOSFET Diode Noise Calculation</h3>
+<p>As a final exercise on the MOSFET diode circuit we want to calculate the output noise when we consider <span class="math inline">\(V_\mathrm{GS}\)</span> the output reference voltage which is created when passing a bias current through the MOSFET diode. The bias current we will assume noiseless.</p>
+<p>We will use the small-signal circuit shown in <a href="#fig-mosfet-diode-small-signal-w-noise" class="quarto-xref">Figure&nbsp;15</a>.</p>
+<div id="cell-fig-mosfet-diode-small-signal-w-noise" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-mosfet-diode-small-signal-w-noise" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-diode-small-signal-w-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-mosfet-diode-small-signal-w-noise-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Figure&nbsp;15: The MOSFET diode small-signal model with drain noise source."><img src="index_files/figure-html/fig-mosfet-diode-small-signal-w-noise-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-small-signal-w-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: The MOSFET diode small-signal model with drain noise source.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is this given as <span class="math display">\[
+\overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
+\]</span></p>
+<p>The drain current noise of the MOSFET is given as (introduced in @#sec-mosfet-smallsignal-model) <span class="math display">\[
+\overline{I_\mathrm{n,d}^2} = 4 k T \gamma g_\mathrm{m}.
+\]</span></p>
+<p>For low frequencies (ignoring <span class="math inline">\(g_\mathrm{ds}\)</span> and <span class="math inline">\(C_\mathrm{gs}\)</span>) we get <span class="math display">\[
+\overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2} = \frac{1}{g_\mathrm{m}^2} 4 k T \gamma g_\mathrm{m}= \frac{4 k T \gamma}{g_\mathrm{m}}
+\]</span> which is the thermal noise of a resistor of value <span class="math inline">\(1 / g_\mathrm{m}\)</span> enhanced by the factor <span class="math inline">\(\gamma\)</span>.</p>
+<p>We now calculate the full equation, and after a bit of algebra arrive at <span id="eq-mosfet-diode-noise-psd"><span class="math display">\[
+\overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds})^2 + (2 \pi f C_\mathrm{gs})^2}.
+\tag{6}\]</span></span></p>
+<p>If we are interested in the PSD of the noise then <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;6</a> gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation.</p>
+<div class="callout-info">
+<p><span class="math display">\[
+\int_0^\infty {\frac{a}{b^2 + (c f)^2} df} = \frac{\pi a}{2 b c}
+\]</span></p>
+</div>
+<p>Using the integral help from the previous info box, we can easily get at <span id="eq-mosfet-diode-noise-rms"><span class="math display">\[
+V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds}) C_\mathrm{gs}}.
+\tag{7}\]</span></span></p>
+<p>The form of <a href="#eq-mosfet-diode-noise-rms" class="quarto-xref">Equation&nbsp;7</a> is the exact solution, but we gain additional insight if we assume that <span class="math inline">\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span> and then <span id="eq-mosfet-diode-noise-rms-simplified"><span class="math display">\[
+V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
+\tag{8}\]</span></span></p>
+<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;8</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Large BW circuits can integrate noise over a wide bandwidth resulting in considerable rms noise.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please build a simulation testbench in Xschem to simulate the noise performance of the MOSFET diode, and confirm the rms noise value that we just calculated. Look at the rms value and the PSD of the noise, and play around with the integration limits. What is the effect? Can you see the flicker noise in the PSD? How much is its contribution to the rms noise?</p>
+<p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_noise.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-noise-tb" class="quarto-xref">Figure&nbsp;16</a>.</p>
+<div id="fig-mosfet-diode-noise-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mosfet-diode-noise-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="./xschem/mosfet_diode_noise.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure&nbsp;16: Testbench for MOSFET diode noise analysis."><img src="./xschem/mosfet_diode_noise.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-noise-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: Testbench for MOSFET diode noise analysis.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion-1" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-1">Conclusion</h3>
+<p>In this section we investigated the simple MOSFET-diode circuit. We learned important skills like how to derive a small-signal model, how to calculate important features like noise and open-loop gain for stability analysis. We introduced Middlebrook’s method to have a mechanism to open up loops in simulation (and calculation) without disturbing operating points for change loading conditions.</p>
+<p>If you feel that you have not yet mastered these topics or are uncertain in the operation of ngspice, please go back to the beginning of the section and read through the theory and redo the exercises.</p>
 </section>
 </section>
 <section id="current-mirror" class="level2">
@@ -963,6 +1205,9 @@ Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em
 </div>
 <div id="ref-Jespers_Murmann_2017" class="csl-entry" role="listitem">
 Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CMOS Circuits: Using Pre-Computed Lookup Tables</em>. Cambridge University Press.
+</div>
+<div id="ref-Middlebrook_1975" class="csl-entry" role="listitem">
+Middlebrook, R. D. 1975. <span>“<span class="nocase">Measurement of loop gain in feedback systems</span>.”</span> <em>International Journal of Electronics</em> 38 (4): 485–512. <a href="https://doi.org/10.1080/00207217508920421">https://doi.org/10.1080/00207217508920421</a>.
 </div>
 <div id="ref-Nagel_1975" class="csl-entry" role="listitem">
 Nagel, Laurence W. 1975. <span>“SPICE2: A Computer Program to Simulate Semiconductor Circuits.”</span> PhD thesis, EECS Department, University of California, Berkeley. <a href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html">http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html</a>.
@@ -1393,7 +1638,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
