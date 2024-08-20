@@ -1,0 +1,37 @@
+```{python}
+#| label: fig-mosfet-diode-openloop
+#| echo: false
+#| fig-cap: "The MOSFET diode small-signal circuit for open-loop analysis."
+import schemdraw as sd
+import schemdraw.elements as elm
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    Cgs = elm.Capacitor().up().label(r'$C_\mathrm{gs}$')
+    d.push()
+    elm.Line().right().length(0.5)
+    elm.DotDotDot()
+    elm.Line().right().length(0.5).dot()
+
+    Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} \cdot v_\mathrm{in}$').dot()
+    elm.Ground()
+    d.push()
+    elm.Line().left().length(3)
+    d.pop()
+    elm.Line().right().length(3).dot()
+    Gds = elm.Resistor().up().dot().label(r'$g_\mathrm{ds}$')
+    d.push()
+    elm.Line().left().length(3)
+    d.pop()
+    elm.Line().right().length(3)
+    d.move(dx=0, dy=-2)
+    d.push()
+    Cgs_dummy = elm.Capacitor().up().label(r'$C_\mathrm{gs}^{*}$')
+    d.move(dx=1.5, dy=0)
+    elm.Arrow().down().length(2).label(r'$v_\mathrm{out}$')
+    d.pop()
+    elm.Line().left().length(3)
+    d.pop()
+    d.move(dx=-1.5, dy=0)
+    elm.Arrow().down().length(2).label(r'$v_\mathrm{in}$')
+```
