@@ -6,19 +6,19 @@ Often, transistor sizing in entry-level courses is based on the square-law model
 One of the many simplifactions of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existance of a threshold voltage is assumed, but in fact this voltage is just existing given a certain definition, and depending on definition, its value changed. In addition, in nm CMOS, the threshold voltage is a function on many thing, like $W$ and $L$.
 :::
 
-An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e. for large $V_\mathrm{GS}$ where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behaviour over a wide range of parameters like $W$, $L$, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complext MOSFET behaviour and use it for MOSFET sizing.
+An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e. for large $\VGS$ where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behaviour over a wide range of parameters like $W$, $L$, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complext MOSFET behaviour and use it for MOSFET sizing.
 
 Being a well-established approach we select the $\gmid$ methodology introduced by P. Jespers and B. Murmann in [@Jespers_Murmann_2017]. A brief introduction is available [here](https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf) as well.
 
-The $g_\mathrm{m}/I_\mathrm{D}$ methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, form micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.
+The $\gmid$ methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, form micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.
 
 ### MOSFET Characterization Testbench
 
 In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in @fig-techsweep-nmos-tb, and the TB for the LV PMOS is shown in @fig-techsweep-pmos-tb.
 
-![Testbench for LV NMOS $g_\mathrm{m}/I_\mathrm{D}$ characterization.](./xschem/techsweep_sg13g2_lv_nmos.png){#fig-techsweep-nmos-tb}
+![Testbench for LV NMOS $\gmid$ characterization.](./xschem/techsweep_sg13g2_lv_nmos.png){#fig-techsweep-nmos-tb}
 
-![Testbench for LV PMOS $g_\mathrm{m}/I_\mathrm{D}$ characterization.](./xschem/techsweep_sg13g2_lv_pmos.png){#fig-techsweep-pmos-tb}
+![Testbench for LV PMOS $\gmid$ characterization.](./xschem/techsweep_sg13g2_lv_pmos.png){#fig-techsweep-pmos-tb}
 
 We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behaviour.
 
@@ -26,7 +26,7 @@ We will use Jupyter notebooks to inspect the resulting data, and interpret some 
 
 First, we will start looking at the LV NMOS. In @sec-techsweep-pmos we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of $1.5\,\text{V}$, so only the LV types are of interest to us.
 
-The first import graph is the plot of $g_\mathrm{m}/I_\mathrm{D}$ and $f_\mathrm{T}$ versus the gate-source voltage $\VGS$. First let us answer the question why $\gmid$ is a good parameter to look at, and actually this is also the central parameter in the $\gmid$ methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see [biasing](https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A)) we want to get a large amplification from a MOSFET, which corresponds to a large $g_\mathrm{m}$. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high $\gmid$ ratio is good.
+The first import graph is the plot of $\gmid$ and $f_\mathrm{T}$ versus the gate-source voltage $\VGS$. First let us answer the question why $\gmid$ is a good parameter to look at, and actually this is also the central parameter in the $\gmid$ methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see [biasing](https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A)) we want to get a large amplification from a MOSFET, which corresponds to a large $\gm$. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high $\gmid$ ratio is good.
 
 ::: {.callout-note}
 Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severly limited by the cooling capabilities of the electrical system.
@@ -40,7 +40,7 @@ $$
 $$ {#eq-mosfet-gmid-weakinversion}
 for a MOSFET in weak inversion (i.e., small gate-source voltage). $n$ is the subthreshold slope, and $V_\mathrm{T} = k T / q$ which is $25.8\,\text{mV}$ at $300\,\text{K}$. We thus have $n \approx 1.38$ for this LV NMOS, which falls nicely into the usual range for $n$ of $1.3$ to $1.5$ for bulk CMOS (FinFET have $n$ very close to $1$).
 
-For the classical square-law model of the MOSFET in strong inversion, $g_\mathrm{m}/I_\mathrm{D}$ is given as
+For the classical square-law model of the MOSFET in strong inversion, $\gmid$ is given as
 $$
 \frac{\gm}{I_\mathrm{D}} = \frac{2}{\VGS - \Vth} = \frac{2}{V_\mathrm{od}} 
 $$ {#eq-mosfet-gmid-stronginversion}

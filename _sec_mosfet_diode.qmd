@@ -12,10 +12,10 @@ It is important to realize that this configuration essentially employs a feedbac
 
 ### MOSFET Diode Sizing
 
-We will now build this circuit in Xschem. For sizing the MOSFET we will use the $g_\mathrm{m}/I_\mathrm{D}$ methodology introduced in @sec-gmid-method.
+We will now build this circuit in Xschem. For sizing the MOSFET we will use the $\gmid$ methodology introduced in @sec-gmid-method.
 
 ::: {.callout-tip title="Exercise"}
-Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set $I_\mathrm{bias} = 20\,\mu\text{A}$, $L = 0.13\,\mu\text{m}$, and we want to use $\gmid = 10$ (often a suitable compromise between transistor speed and $g_\mathrm{m}$ efficiency).
+Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set $I_\mathrm{bias} = 20\,\mu\text{A}$, $L = 0.13\,\mu\text{m}$, and we want to use $\gmid = 10$ (often a suitable compromise between transistor speed and $\gm$ efficiency).
 
 1. Use the figures in @sec-techsweep-nmos to find out the proper value for $W$.
 2. What is $f_\mathrm{T}$ for this MOSFET? What is the value for $\gm$ and $\gds$?
@@ -29,7 +29,7 @@ Before continuing, please finish the previous exercise. Once you are done, compa
 2. Using the self-gain plot, we see that $\gm/\gds \approx 21$, so $\gds \approx 9.5\,\mu\text{S}$. The $f_\mathrm{T}$ can easily be found in the respective plot to be $f_\mathrm{T} = 23\,\text{GHz}$.
 3. The $W$ of the MOSFET we find using the drain current density plot and the given bias current. Rounding to half-microns results in $W = 1\,\mu\text{m}$.
 4. Since we are looking at the graphs, we further find $\gamma = 0.84$, $V_\mathrm{ds,sat} = 0.18\,\text{V}$, and $f_\mathrm{co} \approx 15\,\text{MHz}$.
-5. In addition, we expect $V_\mathrm{GS} \approx 0.6\,\text{V}$.
+5. In addition, we expect $\VGS \approx 0.6\,\text{V}$.
 
 An example Jupyter notebook to extract these values accurately you can find [here](./sizing/sizing_mosfet_diode.ipynb). An Xschem schematic for this exercise is provide [as well](./xschem/mosfet_diode_sizing.sch).
 :::
@@ -40,9 +40,9 @@ As discussed above, the MOSFET diode configuration is essentially a feedback loo
 
 ![Testbench for MOSFET diode transient settling.](./xschem/mosfet_diode_settling.png){#fig-mosfet-diode-settling-tb}
 
-In @fig-mosfet-diode-settling-tb another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current the $V_\mathrm{GS}$ drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to the capacitor discharge by a diode [@Hellen_2003].
+In @fig-mosfet-diode-settling-tb another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current the $\VGS$ drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to the capacitor discharge by a diode [@Hellen_2003].
 
-It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually $V_\mathrm{DD}$ or $V_\mathrm{SS}$) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.
+It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually $\VDD$ or $\VSS$) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.
 
 ### MOSFET Diode Small-Signal Analysis
 
@@ -122,10 +122,10 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}
 $$
 :::
 
-We now want to simulate the closed-loop transfer function $H_\mathrm{cl}(s)$ by using Middlebrook's method and confirm our analysis above.
+We now want to simulate the open-loop transfer function $H_\mathrm{ol}(s)$ by using Middlebrook's method and confirm our analysis above.
 
 ::: {.callout-tip title="Exercise"}
-Please build a simulation testbench in Xschem to simulate the closed-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by @eq-mosfet-diode-closedloop-gain.
+Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by @eq-mosfet-diode-openloop-gain.
 
 If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_loopgain.sch), shown in @fig-mosfet-diode-loopgain-tb.
 
@@ -136,27 +136,27 @@ From simulation we see that the open-loop gain is $24.9\,\text{dB}$ at low frequ
 
 ### MOSFET Diode Noise Calculation
 
-As a final exercise on the MOSFET diode circuit we want to calculate the output noise when we consider $V_\mathrm{GS}$ the output reference voltage which is created when passing a bias current through the MOSFET diode. The bias current we will assume noiseless.
+As a final exercise on the MOSFET diode circuit we want to calculate the output noise when we consider $\VGS$ the output reference voltage which is created when passing a bias current through the MOSFET diode. The bias current we will assume noiseless.
 
 We will use the small-signal circuit shown in @fig-mosfet-diode-small-signal-w-noise.
 
 {{< include figures/_fig_mosfet_diode_small_signal_w_noise.qmd >}}
 
-As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $v_\mathrm{gs}$ is this given as
+As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $\vgs$ is this given as
 $$
 \overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
 $$
 
 The drain current noise of the MOSFET is given as (introduced in @#sec-mosfet-smallsignal-model)
 $$
-\overline{I_\mathrm{n,d}^2 = 4 k T \gamma g_\mathrm{m}.
+\overline{I_\mathrm{n,d}^2} = 4 k T \gamma \gm.
 $$
 
-For low frequencies (ignoring $g_\mathrm{ds}$ and $C_\mathrm{gs}$) we get
+For low frequencies (ignoring $\gds$ and $\Cgs$) we get
 $$
 \overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2} = \frac{1}{\gm^2} 4 k T \gamma \gm = \frac{4 k T \gamma}{\gm}
 $$
-which is the thermal noise of a resistor of value $1/g_\mathrm{m}$ enhanced by the factor $\gamma$.
+which is the thermal noise of a resistor of value $1 / \gm$ enhanced by the factor $\gamma$.
 
 We now calculate the full equation, and after a bit of algebra arrive at
 $$
@@ -176,12 +176,12 @@ $$
 V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma \gm}{(\gm + \gds) \Cgs}.
 $$ {#eq-mosfet-diode-noise-rms}
 
-The form of @eq-mosfet-diode-noise-rms is the exact solution, but we gain additional insight if we assume that $g_\mathrm{m} + g_\mathrm{ds} \approx g_\mathrm{m}$ and then
+The form of @eq-mosfet-diode-noise-rms is the exact solution, but we gain additional insight if we assume that $\gm + \gds \approx \gm$ and then
 $$
-V_\mathrm{n,rms}^2 = \frac{k T \gamma }{\Cgs}.
+V_\mathrm{n,rms}^2 = \frac{k T \gamma}{\Cgs}.
 $$ {#eq-mosfet-diode-noise-rms-simplified}
 
-Inspecting @eq-mosfet-diode-noise-rms-simplified we see our familiar $kT/C$ noise enhanced by the factor $\gamma$! Calculating this value for our MOSFET diode we get $\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}$, which is a sizeable value! We run circuits in this technology at $V_\mathrm{DD} = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$, resulting in a dynamic range in this case of $20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}$.
+Inspecting @eq-mosfet-diode-noise-rms-simplified we see our familiar $kT/C$ noise enhanced by the factor $\gamma$! Calculating this value for our MOSFET diode we get $\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}$, which is a sizeable value! We run circuits in this technology at $\VDD = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$, resulting in a dynamic range in this case of $20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}$.
 
 ::: {.callout-important}
 Large BW circuits can integrate noise over a wide bandwidth resulting in considerable rms noise.

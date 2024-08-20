@@ -17,17 +17,17 @@ Unfortunately, this focus on a "special" source has made its way into some MOSFE
 {{< include figures/_fig_nmos_symbol.qmd >}}
 {{< include figures/_fig_pmos_symbol.qmd >}}
 
-For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in @fig-mosfet-large-signal-model. A current source $I_\mathrm{DS}$ models the current flow between drain and source, and it is controlled by the three control voltages $V_\mathrm{GS}$, $V_\mathrm{DS}$, and $V_\mathrm{SB}$. Note that in this way (since $I_\mathrm{DS} = f(V_\mathrm{DS})$) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply $V_\mathrm{SB} = 0$.
+For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in @fig-mosfet-large-signal-model. A current source $\IDS$ models the current flow between drain and source, and it is controlled by the three control voltages $\VGS$, $\VDS$, and $V_\mathrm{SB}$. Note that in this way (since $\IDS = f(\VDS)$) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply $V_\mathrm{SB} = 0$.
 
 {{< include figures/_fig_mosfet_large_signal_model.qmd >}}
 
-In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $C_\mathrm{GG} = C_\mathrm{GS} + C_\mathrm{GD}$ is the total capacitance when looking into the gate of the MOSFET. $C_\mathrm{GS}$ is usually the dominant capacitance, and $C_\mathrm{GD}$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $C_\mathrm{GS}$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect). In hand calculations we will often set $C_\mathrm{GD} = 0$.
+In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $\CGG = \CGS + \CGD$ is the total capacitance when looking into the gate of the MOSFET. $\CGS$ is usually the dominant capacitance, and $\CGD$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $\CGS$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect). In hand calculations we will often set $\CGD = 0$.
 
 ::: {.callout-note}
 The bulk connection in @fig-mosfet-large-signal-model seems floating as we only consider it a control terminal, where the potential difference between source and bulk influences the behaviour of the MOSFET. However, we do not consider resistive or capacitive effects associated with this node, which is of course a gross simplification, but nevertheless one we will make in this course.
 :::
 
-Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behaviour from basic principles, we need to understand the behaviour of the elements of the large-signal model in @fig-mosfet-large-signal-model by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $V_\mathrm{GS}$ and $V_\mathrm{DS}$ and looking at $I_\mathrm{DS}$ and other large- and small-signal parameters.
+Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behaviour from basic principles, we need to understand the behaviour of the elements of the large-signal model in @fig-mosfet-large-signal-model by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $\VGS$ and $\VDS$ and looking at $\IDS$ and other large- and small-signal parameters.
 
 As a side note, the students who want to understand MOSFET behaviour from a physical angle should consult the MOSFET chapter from the JKU course "Design of Complex Integrated Circuits" (VL 336.048). A great introduction into MOSFET operation and fabrication is given in [@Chenming_Hu_2010], which is available freely [online](https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/) and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in [@Tsividis_McAndrew_2011].
 
@@ -36,9 +36,9 @@ Now, in order to get started, basic Xschem testbenches are prepared, and first s
 ::: {.callout-important}
 Throughout this material, we will stick to the following notations:
 
-* A **dc quantity** is shown with an upper-case letter with upper-case subscripts, like $V_\mathrm{GS}$.
-* Double-subscripts denote **dc sources**, like $V_\mathrm{DD}$ and $V_\mathrm{SS}$.
-* An **ac (small-signal) quantity** is a lower-case letter with a lower-case subscript, like $g_\mathrm{m}$.
+* A **dc quantity** is shown with an upper-case letter with upper-case subscripts, like $\VGS$.
+* Double-subscripts denote **dc sources**, like $\VDD$ and $\VSS$.
+* An **ac (small-signal) quantity** is a lower-case letter with a lower-case subscript, like $\gm$.
 * A **total quantity** (dc plus ac) is shown as a lowercase letter with upper-case subscript, like $i_\mathrm{DS}$.
 * A upper-case letter with a lower-case subscript is used to denote **RMS quantities**, like $I_\mathrm{ds}$.
 :::
@@ -56,9 +56,9 @@ Please try to execute the following steps and answer these questions:
 2. Make yourself familiar with Xschem (change the schematic in various ways, run a simulation, graph the result).
 3. Make youself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look at MOSFET model parameters).
 4. Explore the LV NMOS `sg13_lv_nmos`:
-   1. How is $I_\mathrm{DS}$ affected by $V_\mathrm{GS}$ and $V_\mathrm{DS}$?
+   1. How is $\IDS$ affected by $\VGS$ and $\VDS$?
    2. Change $W$ and $L$ of the MOSFET. What is the impact on the above parameters? Can you explain the variations?
-   3. When looking at the model parameters in ngspice, you see that there is a $C_\mathrm{GD}$ and a $C_\mathrm{DG}$. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?
+   3. When looking at the model parameters in ngspice, you see that there is a $\CGD$ and a $\CDG$. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?
 5. Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
    1. For a given $W$ and $L$, which device provides more drain current? How are the capacitances related?
    2. If you would have to size an inverter, what would be the ideal ratio of $W_p/W_n$? Will you exactly design this ratio, or are the reasons to deviate?
@@ -73,11 +73,11 @@ As you have seen in the previous investigations, the large-signal model of @fig-
 
 However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.
 
-We will use the small-signal MOSFET model shown in @fig-mosfet-small-signal-model for this course. The current-source $i_\mathrm{ds} = g_\mathrm{m} v_\mathrm{gs}$ models the drain current as a function of $v_\mathrm{gs}$, and the resistor $g_\mathrm{ds}$ models the dependency of the drain current by $v_\mathrm{ds}$. The drain current dependency on the source-bulk voltage (the so-called "body effect") is introduced by the current source $i_\mathrm{ds} = g_\mathrm{mb} v_\mathrm{sb}$.
+We will use the small-signal MOSFET model shown in @fig-mosfet-small-signal-model for this course. The current-source $\ids = \gm \vgs$ models the drain current as a function of $\vgs$, and the resistor $\gds$ models the dependency of the drain current by $\vds$. The drain current dependency on the source-bulk voltage (the so-called "body effect") is introduced by the current source $\ids = g_\mathrm{mb} v_\mathrm{sb}$.
 
 {{< include figures/_fig_mosfet_small_signal_model.qmd >}}
 
-As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by $\overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0}$ ($\overline{I_\mathrm{n}^2}$ is the power-spectral density of the noise in A$^2$/Hz; $k$ is the Boltzmann constant; $T$ is the absolute temperature; $\gamma$ is a parameter in simplified theory changing between $\gamma = 2/3$ in saturation and $\gamma =1$ for triode operation; $g_\mathrm{d0}$ is equal to $g_\mathrm{m}$ in saturation and $g_\mathrm{ds}$ in triode).
+As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by $\overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0}$ ($\overline{I_\mathrm{n}^2}$ is the power-spectral density of the noise in A$^2$/Hz; $k$ is the Boltzmann constant; $T$ is the absolute temperature; $\gamma$ is a parameter in simplified theory changing between $\gamma = 2/3$ in saturation and $\gamma =1$ for triode operation; $g_\mathrm{d0}$ is equal to $\gm$ in saturation and $\gds$ in triode).
 
 ::: {.callout-note}
 Sometimes we will refer to different operating modes of the MOSFET like "saturation" or "triode". Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call "triode" mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called "saturation" mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximative sense.
@@ -92,7 +92,7 @@ Please try to execute the following steps and answer the following questions:
 2. Explore the LV NMOS `sg13_lv_nmos`:
    1. How are $\gm$ and $\gds$ changing when you change the dc node voltages?
    2. What is the ratio of $\gm$ to $g_\mathrm{mb}$? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?
-   3. Take a look at the device capacitances $C_\mathrm{gs}$ and $C_\mathrm{gd}$. Why are they important? What is the relation to $f_\mathrm{T}$? *Note: $f_\mathrm{T}$ is the transit frequency where the current gain of the MOSFET drops to 1, and can be approximated by $2 \pi f_\mathrm{T} = g_\mathrm{m} / C_\mathrm{gg}$.*
+   3. Take a look at the device capacitances $\Cgs$ and $\Cgd$. Why are they important? What is the relation to $f_\mathrm{T}$? *Note: $f_\mathrm{T}$ is the transit frequency where the current gain of the MOSFET drops to 1, and can be approximated by $2 \pi f_\mathrm{T} = \gm / \Cgg$.*
    4. Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
 3. Go back to your testbench for the LVS PMOS `sg13_lv_pmos`:
    1. What is the difference in $\gm$, $\gds$, and other parameters between the NMOS and the PMOS? Why could they be different?
