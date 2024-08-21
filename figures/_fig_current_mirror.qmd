@@ -1,0 +1,33 @@
+```{python}
+#| label: fig-current-mirror
+#| echo: false
+#| fig-cap: "A current mirror with two output branches."
+import schemdraw as sd
+import schemdraw.elements as elm
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    elm.Vdd()
+    elm.SourceI().down().label('Ibias')
+    elm.Dot()
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('W1/L1')
+    elm.Ground()
+    elm.Line().right().at(M1.gate).length(0.5).dot()
+    elm.Line().up().toy(M1.drain).dot()
+    d.push()
+    elm.Line().left().to(M1.drain)
+
+    elm.Line().right().at(M1.gate).length(1.5)
+    M2 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).reverse().label('W2/L2', ofst=-2)
+    elm.Ground()
+    elm.Line().at(M2.drain).up().length(1).dot(open=True).label('Iout1', 'right')
+
+    d.pop()
+    elm.Line().right().length(3.5)
+    elm.Line().down().toy(M1.gate)
+    elm.Line().right().length(1)
+    d.push()
+    M3 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).reverse().label('W3/L3', ofst=-2)
+    elm.Ground()
+    elm.Line().at(M3.drain).up().length(1).dot(open=True).label('Iout2', 'right')
+```

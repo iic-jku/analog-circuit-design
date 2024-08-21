@@ -1,0 +1,26 @@
+In this section we will look into a fundamental building block which is often used in integrated circuit design, the current mirror. A diagram is shown in @fig-current-mirror with one MOSFET diode converting the incoming bias current into a voltage, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all $W$ and $L$ the input current can be scaled, and multiple copies can be created atn once. Shown in the figure are two output currents, but any number of parallel branches can be realized.
+
+{{< include figures/_fig_current_mirror.qmd >}}
+
+The output current $I_\mathrm{out1}$ is then given by
+$$
+I_\mathrm{out1} = I_\mathrm{bias} \frac{W_2}{L_2} \frac{L_1}{W_1}
+$$
+and the output current $I_\mathrm{out2}$ is given by
+$$
+I_\mathrm{out2} = I_\mathrm{bias} \frac{W_3}{L_3} \frac{L_1}{W_1}.
+$$
+
+For good matching in layout care has to be taken that the MOSFET widths and lengths are constructed out of **unit elements** of identical size, where an appropiate amount of these single units are then arranged in series or parallel configuration to arrive at the target $W$ and $L$.
+
+As we know from earlier investigations of the MOSFET performance in @sec-gmid-method the drain current of a MOSFET is a function of $\VGS$ and $\VDS$. As long as the MOSFET stays in saturation (i.e., $\VDS > V_\mathrm{ds,dsat}$) the drain current is just a mild function of $\VDS$ (essentially the effect of $\gds$, which is the output conductance of the MOSFET). A fundamental flaw of the basic current mirror shown in @fig-current-mirror is the mismatch of the $\VDS$ of the MOSFET. The input-side diode has $\VGS = \VDS$, whereas the output current sources have a $\VDS$ depending on the connected circuitry. Improved current mirrors exist (basically fixing this flaw), still, when just a simple current mirror is required this structure is used for its simplicity.
+
+::: {.callout-tip title="Exercise"}
+Please construct a current mirror based on the MOSFET-diode which we sized in @sec-mosfet-diode. The input current $I_\mathrm{bias} = 20\,\mu\text{A}$, and we want three output currents of size $10\,\mu\text{A}$, $20\,\mu\text{A}$, and $40\,\mu\text{A}$.
+
+Sweep the output voltage of all three current branches and see over which voltage range an acceptable current is created. For which output voltage range is the current departing from its ideal value, and why?
+
+You see that the slope of the output current is quite bad, as $\gds$ is too large. We can improve this by changing the length to $L = 5\,\mu\text{m}$ (for motivation, please look at the graphs in @sec-gmid-method). In addition, for a current mirror we are not interested in a high $\gmid$ value, so we can use $\gmid = 5$ in this case. Please size the current mirror MOSFETs accordinly (please round the $W$ to half micron, to keep sizes a bit more practical). Compare this result to the previous one, what changed?
+
+In case you get stuck, here are Xschem schematics for the [original](./xschem/current_mirror.sch) and the [improved](./xschem/current_mirror_improved.sch) current mirrors.
+:::
