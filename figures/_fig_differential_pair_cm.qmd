@@ -1,0 +1,54 @@
+```{python}
+#| label: fig-differential-pair-cm
+#| echo: false
+#| fig-cap: "Small-signal model of the differential pair half-circuit in common-mode operation."
+import schemdraw as sd
+import schemdraw.elements as elm
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    d.push()
+    elm.Line().left().length(1).dot(open=True).label('vin', 'left')
+    d.pop()
+    elm.Gap().down().label(['+', 'vgs', '-'])
+    elm.Line().right().length(3).dot()
+    d.push()
+    Ids = elm.SourceI().up().label('gm vgs').reverse()
+    elm.Line().up().dot(open=True).length(1).label('iout', 'right')
+    d.pop()
+    Gds = elm.Resistor().down().label('gtail')
+    elm.Ground()
+    
+    
+    
+    
+    #d.pop()
+    #d.push()
+    ##Cgs = elm.Capacitor().down().label(r'$C_\mathrm{gs}$')
+    #Cgs = elm.Capacitor().down().label('Cgs')
+    #elm.Line().right().length(3).dot()
+    #l1 = elm.Line().down().length(1).dot(open=True).label('S', 'left')
+    #d.pop()
+    #Cgd = elm.Capacitor().right().length(3).label(r'$C_\mathrm{gd}$').dot()
+    #Cgd = elm.Capacitor().right().length(3).label('Cgd').dot()
+    #d.push()
+    #Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} \cdot v_\mathrm{gs}$')
+    #Ids1 = elm.SourceI().down().label('gm vgs')
+    #elm.Line().right().length(3).dot()
+    #d.push()
+    #Ids2 = elm.SourceI().up().label(r'$g_\mathrm{mb} \cdot v_\mathrm{sb}$').dot()
+    #Ids2 = elm.SourceI().up().label('gmb vsb').dot()
+    #d.pop()
+    #elm.Line().right().length(3).dot()
+    #d.push()
+    ##Rds = elm.Resistor().up().dot().label(r'$g_\mathrm{ds}$')
+    #Rds = elm.Resistor().up().dot().label('gds')
+    #d.pop()
+    #elm.Line().right().length(3)
+    #In = elm.SourceSin().up().label(r'$\overline{I_\mathrm{n}^2}$').dot()
+    #In = elm.SourceSin().up().label('/In2').dot()
+    #d.pop()
+    #elm.Line().right().dot(open=True).length(12).label('D', 'right')
+    #d.move(dy=-2, dx=0)
+    #elm.Line().down().toy(l1.end).dot(open=True).label('B', 'left')
+```

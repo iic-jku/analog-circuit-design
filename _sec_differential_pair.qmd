@@ -1,0 +1,58 @@
+Like the current mirror in @sec-current-mirror the **differential pair** is an ubiquitous building block often used in integrated circuit design. The fundamental structure is given in @fig-differential-pair.
+
+{{< include figures/_fig_differential_pair.qmd >}}
+
+In order to understand its operation it is instructive to separate the input condition into (1) a purely differential voltage, and (2) into a common-mode voltage, and see what the impact on the output currents is.
+
+### Differential Operation of the Diffpair
+
+For a differential mode of operation we assume that the input common mode voltage is constant, i.e. $V_\mathrm{in,p} + V_\mathrm{in,n} = V_\mathrm{CM}$. A differential input voltage $v_\mathrm{in}$ then results in
+$$
+V_\mathrm{in,p} = V_\mathrm{CM} + \frac{v_\mathrm{in}}{2}
+$$
+and
+$$
+V_\mathrm{in,n} = V_\mathrm{CM} - \frac{v_\mathrm{in}}{2}.
+$$
+
+For a small-signal differential drive the potential at the tail point stays constant and we can treat it as a virtual ground. The output current on each side is then given by (neglecting $\gds$ and $\gmb$ of $M_1$ and $M_2$)
+$$
+i_\mathrm{out,p} = g_\mathrm{m1} \left( \frac{v_\mathrm{in}}{2} \right)
+$$
+and
+$$
+i_\mathrm{out,n} = g_\mathrm{m2} \left( -\frac{v_\mathrm{in}}{2} \right).
+$$
+
+Usually we assume symmetry in the differential pair, so $g_\mathrm{m1} = g_\mathrm{m2} = \gm$. The differential output current $i_\mathrm{out}$ is then given by
+$$
+i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = \gm v_\mathrm{in}
+$$ {#eq-differential-pair-dm}
+
+We see in @eq-differential-pair-dm that the differential output current is simply the differential input voltage multiplied by the $\gm$ of the individual transistor. We also note that the bottom conductance $g_\mathrm{tail}$ plays no role for the small-signal differential operation.
+
+### Common-Mode Operation of the Diffpair
+
+Usually, the source conductance $g_\mathrm{tail}$ is realized by a current source and ideally should be $g_\mathrm{tail} = 0$. If this is the case, then the output currents are not a function of the common-mode input voltage (at least as long as bias points keep the MOSFET in triode), and ($I_\mathrm{tail}$ is set by the tail current source)
+$$
+I_\mathrm{out,p} = I_\mathrm{out,n} = \frac{I_\mathrm{tail}}{2}.
+$$
+
+However, if we assume a realistic tail current source then $g_\mathrm{tail} > 0$. For analysis we can simply look at a half circuit since everything is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set $\gds = \gmb = 0$. We arrive then at the small-signal equivalent circuit shown in @fig-differential-pair-cm (note that we set $v_\mathrm{in,p} = v_\mathrm{in,n} = v_\mathrm{in}$ and $i_\mathrm{out,p} = i_\mathrm{out,n} = i_\mathrm{out}$ under symmetry considerations).
+
+{{< include figures/_fig_differential_pair_cm.qmd >}}
+
+Formulating KVL for the input-side loop we get
+$$
+v_\mathrm{in} = \vgs + \frac{\ids}{g_\mathrm{tail}}.
+$$
+
+With $i_\mathrm{out} = \ids = \gm \vgs$ we arrive at
+$$
+i_\mathrm{out} = \frac{\gm g_\mathrm{tail}}{\gm + g_\mathrm{tail}} v_\mathrm{in}
+$$ {#eq-differential-pair-cm}
+
+Interpreting @eq-differential-pair-cm we can distinguish the following extreme cases:
+
+1. If $g_\mathrm{tail} = 0$ (ideal tail current source) then $i_\mathrm{out} = 0$, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.
+2. If $g_\mathrm{tail} = \infty$ then $i_\mathrm{out} = \gm v_\mathrm{in}$, which means the output current is a function of the MOSFET $\gm$. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behaviour, this configuration is called a "pseudo-differential pair."
