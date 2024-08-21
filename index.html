@@ -177,7 +177,7 @@ window.Quarto = {
   <li><a href="#circuit-simulation-using-ngspice" id="toc-circuit-simulation-using-ngspice" class="nav-link" data-scroll-target="#circuit-simulation-using-ngspice">Circuit Simulation Using ngspice</a></li>
   <li><a href="#integrated-ic-design-environment-iic-osic-tools" id="toc-integrated-ic-design-environment-iic-osic-tools" class="nav-link" data-scroll-target="#integrated-ic-design-environment-iic-osic-tools">Integrated IC Design Environment (IIC-OSIC-TOOLS)</a></li>
   </ul></li>
-  <li><a href="#first-steps" id="toc-first-steps" class="nav-link" data-scroll-target="#first-steps">First Steps</a>
+  <li><a href="#sec-first-steps" id="toc-sec-first-steps" class="nav-link" data-scroll-target="#sec-first-steps">First Steps</a>
   <ul class="collapse">
   <li><a href="#sec-mosfet" id="toc-sec-mosfet" class="nav-link" data-scroll-target="#sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -203,7 +203,12 @@ window.Quarto = {
   <li><a href="#differential-operation-of-the-diffpair" id="toc-differential-operation-of-the-diffpair" class="nav-link" data-scroll-target="#differential-operation-of-the-diffpair">Differential Operation of the Diffpair</a></li>
   <li><a href="#common-mode-operation-of-the-diffpair" id="toc-common-mode-operation-of-the-diffpair" class="nav-link" data-scroll-target="#common-mode-operation-of-the-diffpair">Common-Mode Operation of the Diffpair</a></li>
   </ul></li>
-  <li><a href="#a-basic-5-transistor-ota" id="toc-a-basic-5-transistor-ota" class="nav-link" data-scroll-target="#a-basic-5-transistor-ota">A Basic 5-Transistor OTA</a></li>
+  <li><a href="#sec-basic-ota" id="toc-sec-basic-ota" class="nav-link" data-scroll-target="#sec-basic-ota">A Basic 5-Transistor OTA</a>
+  <ul class="collapse">
+  <li><a href="#voltage-buffer-with-ota" id="toc-voltage-buffer-with-ota" class="nav-link" data-scroll-target="#voltage-buffer-with-ota">Voltage Buffer with OTA</a></li>
+  <li><a href="#large-signal-analysis-of-the-ota" id="toc-large-signal-analysis-of-the-ota" class="nav-link" data-scroll-target="#large-signal-analysis-of-the-ota">Large-Signal Analysis of the OTA</a></li>
+  <li><a href="#small-signal-analysis-of-the-ota" id="toc-small-signal-analysis-of-the-ota" class="nav-link" data-scroll-target="#small-signal-analysis-of-the-ota">Small-Signal Analysis of the OTA</a></li>
+  </ul></li>
   <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
   <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota">A Fully-Differential OTA</a></li>
   <li><a href="#biasing-the-ota" id="toc-biasing-the-ota" class="nav-link" data-scroll-target="#biasing-the-ota">Biasing the OTA</a></li>
@@ -297,8 +302,8 @@ Note
 </div>
 </section>
 </section>
-<section id="first-steps" class="level2">
-<h2 class="anchored" data-anchor-id="first-steps">First Steps</h2>
+<section id="sec-first-steps" class="level2">
+<h2 class="anchored" data-anchor-id="sec-first-steps">First Steps</h2>
 <p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.</p>
 <section id="sec-mosfet" class="level3">
 <h3 class="anchored" data-anchor-id="sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
@@ -1277,8 +1282,140 @@ i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail
 </ol>
 </section>
 </section>
-<section id="a-basic-5-transistor-ota" class="level2">
-<h2 class="anchored" data-anchor-id="a-basic-5-transistor-ota">A Basic 5-Transistor OTA</h2>
+<section id="sec-basic-ota" class="level2">
+<h2 class="anchored" data-anchor-id="sec-basic-ota">A Basic 5-Transistor OTA</h2>
+<p>Suited with the knowledge of basic transitor operation (<a href="#sec-first-steps" class="quarto-xref">Section&nbsp;2</a> and <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>) and the working knowledge of the current mirror (<a href="#sec-mosfet-diode" class="quarto-xref">Section&nbsp;4</a> and <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;5</a>) as well as the differential pair (<a href="#sec-diff-pair" class="quarto-xref">Section&nbsp;6</a>) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;20</a>.</p>
+<div id="cell-fig-basic-ota" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div id="fig-basic-ota" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-basic-ota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-basic-ota-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-34" title="Figure&nbsp;20: The 5-transistor OTA."><img src="index_files/figure-html/fig-basic-ota-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20: The 5-transistor OTA.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The operation is as follows: <span class="math inline">\(M_{1,2}\)</span> form a differential pair which is biased by the current source <span class="math inline">\(M_6\)</span>. <span class="math inline">\(M_{5,6}\)</span> form a current mirror, thus the input bias current <span class="math inline">\(I_\mathrm{bias}\)</span> sets the bias current in the OTA. The differential pair <span class="math inline">\(M_{1,2}\)</span> is loaded by the current mirror <span class="math inline">\(M_{3,4}\)</span> which mirrors the output current of <span class="math inline">\(M_1\)</span> to the right side. Here, the currents from <span class="math inline">\(M_4\)</span> and <span class="math inline">\(M_2\)</span> are summed, and together with the conductance effective at the output node a voltage builds up.</p>
+<p>As this is an OTA the output is a current; if the load impedance is high (i.e., purely capacitive) then the voltage gain of the OTA can be high (of course, in this simple OTA it is limited). With a high-impedance loading this OTA can provide a voltage output, and this is actually how OTAs are mostly operated.</p>
+<section id="voltage-buffer-with-ota" class="level3">
+<h3 class="anchored" data-anchor-id="voltage-buffer-with-ota">Voltage Buffer with OTA</h3>
+<p>In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lighly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;21</a>.</p>
+<div id="cell-fig-voltage-buffer-ota" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div id="fig-voltage-buffer-ota" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-voltage-buffer-ota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-voltage-buffer-ota-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-35" title="Figure&nbsp;21: A voltage buffer (based on OTA) driving a capacitive load."><img src="index_files/figure-html/fig-voltage-buffer-ota-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-voltage-buffer-ota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21: A voltage buffer (based on OTA) driving a capacitive load.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>If the voltage gain of the OTA is <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;21</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application for the following spefication values (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a>).</p>
+<div id="tbl-voltage-buffer-spec" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-voltage-buffer-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Voltage buffer specification
+</figcaption>
+<div aria-describedby="tbl-voltage-buffer-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 54%">
+<col style="width: 36%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Specification</th>
+<th style="text-align: center;">Value</th>
+<th style="text-align: center;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Load capacitance <span class="math inline">\(C_\mathrm{load}\)</span></td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">fF</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Input voltage range (for buffering bandgap voltage)</td>
+<td style="text-align: center;">1.1—1.3</td>
+<td style="text-align: center;">V</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Signal bandwidth (3dB)</td>
+<td style="text-align: center;">&gt;1</td>
+<td style="text-align: center;">MHz</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Voltage gain error</td>
+<td style="text-align: center;">&lt;1</td>
+<td style="text-align: center;">%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total output noise (rms)</td>
+<td style="text-align: center;">&lt;1</td>
+<td style="text-align: center;">mV<sub>rms</sub></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Supply voltage</td>
+<td style="text-align: center;">1.45—1.5—1.55</td>
+<td style="text-align: center;">V</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Supply current (as low as possible)</td>
+<td style="text-align: center;">&lt;100</td>
+<td style="text-align: center;">µA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Stability</td>
+<td style="text-align: center;">stable for rated <span class="math inline">\(C_\mathrm{load}\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Turn-on time (settled to with 1%)</td>
+<td style="text-align: center;">&lt;10</td>
+<td style="text-align: center;">µs</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Externally provided bias current (nominal)</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">µA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="large-signal-analysis-of-the-ota" class="level3">
+<h3 class="anchored" data-anchor-id="large-signal-analysis-of-the-ota">Large-Signal Analysis of the OTA</h3>
+<p>The first step when receiving a design task is to look at the specifications, and see whether they make sense. Detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) allows to do back-of-the-envelope gauging if the specification makes sense, and (b) the derived analytical equations will serve as guide for the sizing procedure.</p>
+<ul>
+<li>In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met.</li>
+<li>When the input is at its maximum of <span class="math inline">\(1.3\,\text{V}\)</span>, we see that we need to keep <span class="math inline">\(M_1\)</span> in saturation. We can calculate that <span class="math inline">\(V_\mathrm{DS1} = V_\mathrm{DD}- V_\mathrm{GS3} + V_\mathrm{GS1} - V_\mathrm{in} = 1.45 - 0.6 + 0.6 - 1.3 = 0.15\,\text{V}\)</span>, which barely leaves enough margin, so we must keep the gate-source voltages of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_3\)</span> resonably small.</li>
+<li>When the input is at its minimum of <span class="math inline">\(1.1\,\text{V}\)</span>, we see that the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_6\)</span> is calculated as <span class="math inline">\(V_\mathrm{DS6} = V_\mathrm{in} - V_\mathrm{GS1} = 1.1 - 0.6 = 0.5\,\text{V}\)</span>, so this leaves plenty of margin.</li>
+<li>For the output voltage, when the output voltage is on the high side, it leaves <span class="math inline">\(V_\mathrm{DS4} = V_\mathrm{DD}- V_\mathrm{out} = 1.45 - 1.3 = 0.15\,\text{V}\)</span>, whis is on the edge.</li>
+<li>When the output voltage is on the low side, it leaves <span class="math inline">\(V_\mathrm{DS2} = V_\mathrm{out} - V_\mathrm{in} + V_\mathrm{GS2} = 1.3 - 1.55 + 0.6 = 0.35\,\text{V}\)</span>, so this should work.</li>
+</ul>
+<p>In summary, we think that we can make an NMOS-input OTA like the one in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;20</a> work for the required supply and input- and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.</p>
+<p>Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, we complete bias current in the OTA is steered towards the output (try to understand why this is the case), so when the output capacitor is fully discharged, and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is <span class="math display">\[
+T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 1.3}{100 \cdot 10^{-6}} = 0.65\,\text{ns}
+\]</span> so this leaves plenty of margin for additional slow-signal settling due to the limited bandwidth, as well as reducing the supply current.</p>
+<p>The small-signal settling (assuming one pole at the bandwidth corner frequency) leads to an approximate settling time (1% error corresponds to <span class="math inline">\(\approx 5 \tau\)</span>) of <span class="math display">\[
+T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \cdot 10^{-6}} = 0.8\,\mu\text{s}.
+\]</span> which also checks out.</p>
+</section>
+<section id="small-signal-analysis-of-the-ota" class="level3">
+<h3 class="anchored" data-anchor-id="small-signal-analysis-of-the-ota">Small-Signal Analysis of the OTA</h3>
+</section>
 </section>
 <section id="cascode-stage" class="level2">
 <h2 class="anchored" data-anchor-id="cascode-stage">Cascode Stage</h2>
@@ -1745,7 +1882,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
