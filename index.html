@@ -198,7 +198,11 @@ window.Quarto = {
   <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
   </ul></li>
   <li><a href="#sec-current-mirror" id="toc-sec-current-mirror" class="nav-link" data-scroll-target="#sec-current-mirror">Current Mirror</a></li>
-  <li><a href="#differential-pair" id="toc-differential-pair" class="nav-link" data-scroll-target="#differential-pair">Differential Pair</a></li>
+  <li><a href="#sec-diff-pair" id="toc-sec-diff-pair" class="nav-link" data-scroll-target="#sec-diff-pair">Differential Pair</a>
+  <ul class="collapse">
+  <li><a href="#differential-operation-of-the-diffpair" id="toc-differential-operation-of-the-diffpair" class="nav-link" data-scroll-target="#differential-operation-of-the-diffpair">Differential Operation of the Diffpair</a></li>
+  <li><a href="#common-mode-operation-of-the-diffpair" id="toc-common-mode-operation-of-the-diffpair" class="nav-link" data-scroll-target="#common-mode-operation-of-the-diffpair">Common-Mode Operation of the Diffpair</a></li>
+  </ul></li>
   <li><a href="#a-basic-5-transistor-ota" id="toc-a-basic-5-transistor-ota" class="nav-link" data-scroll-target="#a-basic-5-transistor-ota">A Basic 5-Transistor OTA</a></li>
   <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
   <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota">A Fully-Differential OTA</a></li>
@@ -1166,7 +1170,7 @@ Figure&nbsp;16: Testbench for MOSFET diode noise analysis.
 </section>
 <section id="sec-current-mirror" class="level2">
 <h2 class="anchored" data-anchor-id="sec-current-mirror">Current Mirror</h2>
-<p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the current mirror. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;17</a> with one MOSFET diode converting the incoming bias current into a voltage, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created atn once. Shown in the figure are two output currents, but any number of parallel branches can be realized.</p>
+<p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the <strong>current mirror</strong>. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;17</a> with one MOSFET diode converting the incoming bias current into a voltage, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created atn once. Shown in the figure are two output currents, but any number of parallel branches can be realized.</p>
 <div id="cell-fig-current-mirror" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div id="fig-current-mirror" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1205,8 +1209,73 @@ Exercise
 </div>
 </div>
 </section>
-<section id="differential-pair" class="level2">
-<h2 class="anchored" data-anchor-id="differential-pair">Differential Pair</h2>
+<section id="sec-diff-pair" class="level2">
+<h2 class="anchored" data-anchor-id="sec-diff-pair">Differential Pair</h2>
+<p>Like the current mirror in <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;5</a> the <strong>differential pair</strong> is an ubiquitous building block often used in integrated circuit design. The fundamental structure is given in <a href="#fig-differential-pair" class="quarto-xref">Figure&nbsp;18</a>.</p>
+<div id="cell-fig-differential-pair" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div id="fig-differential-pair" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-differential-pair-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-differential-pair-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Figure&nbsp;18: A differential pair."><img src="index_files/figure-html/fig-differential-pair-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-differential-pair-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18: A differential pair.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to understand its operation it is instructive to separate the input condition into (1) a purely differential voltage, and (2) into a common-mode voltage, and see what the impact on the output currents is.</p>
+<section id="differential-operation-of-the-diffpair" class="level3">
+<h3 class="anchored" data-anchor-id="differential-operation-of-the-diffpair">Differential Operation of the Diffpair</h3>
+<p>For a differential mode of operation we assume that the input common mode voltage is constant, i.e.&nbsp;<span class="math inline">\(V_\mathrm{in,p} + V_\mathrm{in,n} = V_\mathrm{CM}\)</span>. A differential input voltage <span class="math inline">\(v_\mathrm{in}\)</span> then results in <span class="math display">\[
+V_\mathrm{in,p} = V_\mathrm{CM} + \frac{v_\mathrm{in}}{2}
+\]</span> and <span class="math display">\[
+V_\mathrm{in,n} = V_\mathrm{CM} - \frac{v_\mathrm{in}}{2}.
+\]</span></p>
+<p>For a small-signal differential drive the potential at the tail point stays constant and we can treat it as a virtual ground. The output current on each side is then given by (neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and <span class="math inline">\(g_\mathrm{mb}\)</span> of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>) <span class="math display">\[
+i_\mathrm{out,p} = g_\mathrm{m1} \left( \frac{v_\mathrm{in}}{2} \right)
+\]</span> and <span class="math display">\[
+i_\mathrm{out,n} = g_\mathrm{m2} \left( -\frac{v_\mathrm{in}}{2} \right).
+\]</span></p>
+<p>Usually we assume symmetry in the differential pair, so <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m}\)</span>. The differential output current <span class="math inline">\(i_\mathrm{out}\)</span> is then given by <span id="eq-differential-pair-dm"><span class="math display">\[
+i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = g_\mathrm{m}v_\mathrm{in}
+\tag{9}\]</span></span></p>
+<p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;9</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
+</section>
+<section id="common-mode-operation-of-the-diffpair" class="level3">
+<h3 class="anchored" data-anchor-id="common-mode-operation-of-the-diffpair">Common-Mode Operation of the Diffpair</h3>
+<p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>. If this is the case, then the output currents are not a function of the common-mode input voltage (at least as long as bias points keep the MOSFET in triode), and (<span class="math inline">\(I_\mathrm{tail}\)</span> is set by the tail current source) <span class="math display">\[
+I_\mathrm{out,p} = I_\mathrm{out,n} = \frac{I_\mathrm{tail}}{2}.
+\]</span></p>
+<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since everything is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We arrive then at the small-signal equivalent circuit shown in <a href="#fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;19</a> (note that we set <span class="math inline">\(v_\mathrm{in,p} = v_\mathrm{in,n} = v_\mathrm{in}\)</span> and <span class="math inline">\(i_\mathrm{out,p} = i_\mathrm{out,n} = i_\mathrm{out}\)</span> under symmetry considerations).</p>
+<div id="cell-fig-differential-pair-cm" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div id="fig-differential-pair-cm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-differential-pair-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-differential-pair-cm-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-33" title="Figure&nbsp;19: Small-signal model of the differential pair half-circuit in common-mode operation."><img src="index_files/figure-html/fig-differential-pair-cm-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-differential-pair-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19: Small-signal model of the differential pair half-circuit in common-mode operation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Formulating KVL for the input-side loop we get <span class="math display">\[
+v_\mathrm{in} = v_\mathrm{gs}+ \frac{i_\mathrm{ds}}{g_\mathrm{tail}}.
+\]</span></p>
+<p>With <span class="math inline">\(i_\mathrm{out} = i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
+i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} v_\mathrm{in}
+\tag{10}\]</span></span></p>
+<p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;10</a> we can distinguish the following extreme cases:</p>
+<ol type="1">
+<li>If <span class="math inline">\(g_\mathrm{tail} = 0\)</span> (ideal tail current source) then <span class="math inline">\(i_\mathrm{out} = 0\)</span>, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.</li>
+<li>If <span class="math inline">\(g_\mathrm{tail} = \infty\)</span> then <span class="math inline">\(i_\mathrm{out} = g_\mathrm{m}v_\mathrm{in}\)</span>, which means the output current is a function of the MOSFET <span class="math inline">\(g_\mathrm{m}\)</span>. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behaviour, this configuration is called a “pseudo-differential pair.”</li>
+</ol>
+</section>
 </section>
 <section id="a-basic-5-transistor-ota" class="level2">
 <h2 class="anchored" data-anchor-id="a-basic-5-transistor-ota">A Basic 5-Transistor OTA</h2>
@@ -1676,7 +1745,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
