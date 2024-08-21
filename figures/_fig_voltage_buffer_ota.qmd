@@ -1,0 +1,24 @@
+```{python}
+#| label: fig-voltage-buffer-ota
+#| echo: false
+#| fig-cap: "A voltage buffer (based on OTA) driving a capacitive load."
+import schemdraw as sd
+import schemdraw.elements as elm
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    op = elm.Opamp().flip()
+    elm.Line().left().length(2).at(op.in2).dot(open=True).label('Vin', 'left')
+
+    elm.Line().at(op.out).right().length(1).dot()
+    d.push()
+    elm.Line().right().length(2).label('Vout')
+    Cload = elm.Capacitor().down().label('Cload')
+    elm.Ground()
+    
+    d.pop()
+    elm.Line().down()
+    elm.Line().left().length(4)
+    elm.Line().up().toy(op.in1)
+    elm.Line().right().to(op.in1)
+```

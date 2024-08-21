@@ -1,0 +1,57 @@
+Suited with the knowledge of basic transitor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
+
+{{< include figures/_fig_basic_ota.qmd >}}
+
+The operation is as follows: $M_{1,2}$ form a differential pair which is biased by the current source $M_6$. $M_{5,6}$ form a current mirror, thus the input bias current $I_\mathrm{bias}$ sets the bias current in the OTA. The differential pair $M_{1,2}$ is loaded by the current mirror $M_{3,4}$ which mirrors the output current of $M_1$ to the right side. Here, the currents from $M_4$ and $M_2$ are summed, and together with the conductance effective at the output node a voltage builds up.
+
+As this is an OTA the output is a current; if the load impedance is high (i.e., purely capacitive) then the voltage gain of the OTA can be high (of course, in this simple OTA it is limited). With a high-impedance loading this OTA can provide a voltage output, and this is actually how OTAs are mostly operated.
+
+### Voltage Buffer with OTA
+
+In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lighly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in @fig-voltage-buffer-ota.
+
+{{< include figures/_fig_voltage_buffer_ota.qmd >}}
+
+If the voltage gain of the OTA is @fig-voltage-buffer-ota is high, then $V_\mathrm{out} \approx V_\mathrm{in}$. We now want to design an OTA for this application for the following spefication values (see @tbl-voltage-buffer-spec).
+
+| Specification                                       | Value                              | Unit    |
+|:----------------------------------------------------|:----------------------------------:|:-------:|
+| Load capacitance $C_\mathrm{load}$                  | 50                                 | fF      |
+| Input voltage range (for buffering bandgap voltage) | 1.1---1.3                          | V       |
+| Signal bandwidth (3dB)                              | >1                                 | MHz     |
+| Voltage gain error                                  | <1                                 | %       |
+| Total output noise (rms)                            | <1                                 | mV~rms~ |
+| Supply voltage                                      | 1.45---1.5---1.55                  | V       |
+| Supply current (as low as possible)                 | <100                               | µA      |
+| Stability                                           | stable for rated $C_\mathrm{load}$ |         |
+| Turn-on time (settled to with 1%)                   | <10                                | µs      |
+| Externally provided bias current (nominal)          | 20                                 | µA      |
+
+: Voltage buffer specification {#tbl-voltage-buffer-spec}
+
+### Large-Signal Analysis of the OTA
+
+The first step when receiving a design task is to look at the specifications, and see whether they make sense. Detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) allows to do back-of-the-envelope gauging if the specification makes sense, and (b) the derived analytical equations will serve as guide for the sizing procedure.
+
+- In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met.
+- When the input is at its maximum of $1.3\,\text{V}$, we see that we need to keep $M_1$ in saturation. We can calculate that $V_\mathrm{DS1} = \VDD - V_\mathrm{GS3} + V_\mathrm{GS1} - V_\mathrm{in} = 1.45 - 0.6 + 0.6 - 1.3 = 0.15\,\text{V}$, which barely leaves enough margin, so we must keep the gate-source voltages of $M_1$ and $M_3$ resonably small.
+- When the input is at its minimum of $1.1\,\text{V}$, we see that the $\VDS$ of $M_6$ is calculated as $V_\mathrm{DS6} = V_\mathrm{in} - V_\mathrm{GS1} = 1.1 - 0.6 = 0.5\,\text{V}$, so this leaves plenty of margin.
+- For the output voltage, when the output voltage is on the high side, it leaves $V_\mathrm{DS4} = \VDD - V_\mathrm{out} = 1.45 - 1.3 = 0.15\,\text{V}$, whis is on the edge.
+- When the output voltage is on the low side, it leaves $V_\mathrm{DS2} = V_\mathrm{out} - V_\mathrm{in} + V_\mathrm{GS2} = 1.3 - 1.55 + 0.6 = 0.35\,\text{V}$, so this should work.
+
+In summary, we think that we can make an NMOS-input OTA like the one in @fig-basic-ota work for the required supply and input- and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.
+
+Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, we complete bias current in the OTA is steered towards the output (try to understand why this is the case), so when the output capacitor is fully discharged, and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is
+$$
+T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 1.3}{100 \cdot 10^{-6}} = 0.65\,\text{ns}
+$$
+so this leaves plenty of margin for additional slow-signal settling due to the limited bandwidth, as well as reducing the supply current.
+
+The small-signal settling (assuming one pole at the bandwidth corner frequency) leads to an approximate settling time (1% error corresponds to $\approx 5 \tau$) of
+$$
+T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \cdot 10^{-6}} = 0.8\,\mu\text{s}.
+$$
+which also checks out.
+
+### Small-Signal Analysis of the OTA
+
