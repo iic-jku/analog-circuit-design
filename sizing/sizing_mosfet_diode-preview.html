@@ -242,16 +242,18 @@
 <pre><code>gds = 10.87927113537607 uS</code></pre>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="cell-7" class="cell" data-execution_count="5">
+<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find f_T (which is not stored directly, but we can find the gm to gate capacitance ratio)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gm_cgg <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_CGG'</span>, GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>f_T <span class="op">=</span> gm_cgg <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'f_T ='</span>, f_T<span class="op">/</span><span class="fl">1e9</span>, <span class="st">'GHz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Cgg ='</span>, gm<span class="op">/</span>gm_cgg<span class="op">/</span><span class="fl">1e-15</span>, <span class="st">'fF'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'f_T ='</span>, f_T<span class="op">/</span><span class="fl">1e9</span>, <span class="st">'GHz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>f_T = 22.982035015607114 GHz</code></pre>
+<pre><code>Cgg = 1.3850378609536809 fF
+f_T = 22.982035015607114 GHz</code></pre>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-8" class="cell" data-execution_count="6">
+<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the W of the diode transistor</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>id_w <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> id_spec <span class="op">/</span> id_w</span>
@@ -260,7 +262,7 @@
 <pre><code>W = 0.8609408128056297 um, rounded W = 1.0 um</code></pre>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-9" class="cell" data-execution_count="7">
+<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-9" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's now find the other interesting values</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Lookup normalized noise power spectral densisties and denormalize with the gm from above</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sth <span class="op">=</span> lv_nmos.lookup(<span class="st">'STH_GM'</span>, VGS<span class="op">=</span>vgs, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="dv">0</span>)<span class="op">*</span>gm</span>

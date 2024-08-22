@@ -230,50 +230,53 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="cell-5" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The gm_gds we look up and calculate gds from it</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gm_gds <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>gds <span class="op">=</span> gm <span class="op">/</span> gm_gds</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gds ='</span>, gds<span class="op">/</span><span class="fl">1e-6</span>, <span class="st">'uS'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>gds = 1.8605125381715726 uS</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>vgs <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="fl">0.0</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>vgs <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="cell-6" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find f_T (which is not stored directly, but we can find the gm to gate capacitance ratio)</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gm_cgg <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_CGG'</span>, GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>f_T <span class="op">=</span> gm_cgg <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Cgg ='</span>, gm<span class="op">/</span>gm_cgg<span class="op">/</span><span class="fl">1e-15</span>, <span class="st">'fF'</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'f_T ='</span>, f_T<span class="op">/</span><span class="fl">1e6</span>, <span class="st">'MHz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The gm_gds we look up and calculate gds from it</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gm_gds <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>gds <span class="op">=</span> gm <span class="op">/</span> gm_gds</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gds ='</span>, gds<span class="op">/</span><span class="fl">1e-6</span>, <span class="st">'uS'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cgg = 152.09963774170419 fF
-f_T = 104.63860759627349 MHz</code></pre>
+<pre><code>gds = 2.264457804554568 uS</code></pre>
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-7" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the W of the diode transistor</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>id_w <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> id_spec <span class="op">/</span> id_w</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'W ='</span>, w, <span class="st">'um, rounded W ='</span>, <span class="bu">round</span>(w<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="st">'um'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find f_T (which is not stored directly, but we can find the gm to gate capacitance ratio)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gm_cgg <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_CGG'</span>, GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>f_T <span class="op">=</span> gm_cgg <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Cgg ='</span>, gm<span class="op">/</span>gm_cgg<span class="op">/</span><span class="fl">1e-15</span>, <span class="st">'fF'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'f_T ='</span>, f_T<span class="op">/</span><span class="fl">1e6</span>, <span class="st">'MHz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>W = 3.6516417714659495 um, rounded W = 3.5 um</code></pre>
+<pre><code>Cgg = 153.30045640359663 fF
+f_T = 103.81896233425785 MHz</code></pre>
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's now find the other interesting values</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>vgs <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="fl">0.0</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sth <span class="op">=</span> lv_nmos.lookup(<span class="st">'STH'</span>, VGS<span class="op">=</span>vgs, L<span class="op">=</span>L_spec, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>sfl <span class="op">=</span> lv_nmos.lookup(<span class="st">'SFL'</span>, VGS<span class="op">=</span>vgs, L<span class="op">=</span>L_spec, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> (sth<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">4</span><span class="op">*</span><span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span><span class="op">*</span>gm)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>f_co <span class="op">=</span> sfl<span class="op">**</span><span class="dv">2</span><span class="op">/</span>sth<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'V_GS ='</span>, vgs, <span class="st">'V'</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gamma ='</span>, gamma)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'f_co ='</span>, f_co<span class="op">/</span><span class="fl">1e6</span>, <span class="st">'MHz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the W of the diode transistor</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>id_w <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_spec, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> id_spec <span class="op">/</span> id_w</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'W ='</span>, w, <span class="st">'um, rounded W ='</span>, <span class="bu">round</span>(w<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="st">'um'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>V_GS = 0.5912200307058603 V
-gamma = 1.0946142921484647
-f_co = 0.1269030886927012 MHz</code></pre>
+<pre><code>W = 3.675135021264145 um, rounded W = 3.5 um</code></pre>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-9" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's now find the other interesting values</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sth <span class="op">=</span> lv_nmos.lookup(<span class="st">'STH_GM'</span>, VGS<span class="op">=</span>vgs, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="dv">0</span>)<span class="op">*</span>gm</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sfl <span class="op">=</span> lv_nmos.lookup(<span class="st">'SFL_GM'</span>, VGS<span class="op">=</span>vgs, L<span class="op">=</span>L_spec, VDS<span class="op">=</span>vgs, VSB<span class="op">=</span><span class="dv">0</span>)<span class="op">*</span>gm</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> sth<span class="op">/</span>(<span class="dv">4</span><span class="op">*</span><span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span><span class="op">*</span>gm)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>f_co <span class="op">=</span> sfl<span class="op">/</span>sth</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'V_GS ='</span>, vgs, <span class="st">'V'</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gamma ='</span>, gamma)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'f_co ='</span>, f_co<span class="op">/</span><span class="fl">1e6</span>, <span class="st">'MHz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>V_GS = 0.5931718831430878 V
+gamma = 0.7961029901519836
+f_co = 0.12753226224181363 MHz</code></pre>
 </div>
 </div></div>
      </main>
