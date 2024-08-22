@@ -664,7 +664,7 @@ Note
 </div>
 </div>
 </div>
-<p>For analog circuits the noise performance is usually quite important. Thermal noise of a resistor (the Johnson-Nyquist noise) has a flat power-spectral density (PSD) given by <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f = 4 k T R\)</span>, where <span class="math inline">\(k\)</span> is Boltzmann’s constant, <span class="math inline">\(T\)</span> absolute temperature, and <span class="math inline">\(R\)</span> the value of the resistor (the unit of <span class="math inline">\(\overline{V_\mathrm{n}^2}/df\)</span> is <span class="math inline">\(\text{V}^2/\text{Hz}\)</span>). This PSD is essentially flat until very high frequencies where <a href="https://en.wikipedia.org/wiki/Johnson–Nyquist_noise">quantum effects</a> start to kick in.</p>
+<p>For analog circuits the noise performance is usually quite important. Thermal noise of a resistor (the Johnson-Nyquist noise) has a flat power-spectral density (PSD) given by <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f = 4 k T R\)</span>, where <span class="math inline">\(k\)</span> is Boltzmann’s constant, <span class="math inline">\(T\)</span> absolute temperature, and <span class="math inline">\(R\)</span> the value of the resistor (the unit of <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f\)</span> is <span class="math inline">\(\text{V}^2/\text{Hz}\)</span>). This PSD is essentially flat until very high frequencies where <a href="https://en.wikipedia.org/wiki/Johnson–Nyquist_noise">quantum effects</a> start to kick in.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -677,7 +677,7 @@ Note
 <div class="callout-body-container callout-body">
 <p>We usually leave the <span class="math inline">\(\Delta f\)</span> away for a shorter notation, so we write <span class="math inline">\(\overline{V_\mathrm{n}^2}\)</span> when we actually mean <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f\)</span>.</p>
 <p>Please also note that the pair of <span class="math inline">\(k T\)</span> pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation.</p>
-<p>Fuerther, when working with PSD there is the usage of a one-sided (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(0\)</span> to <span class="math inline">\(\infty\)</span>) or two-sided PSD (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>). The default in this lecture is the usage of a <strong>one-sided PSD</strong>.</p>
+<p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(0\)</span> to <span class="math inline">\(\infty\)</span>) or two-sided PSD (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>). The default in this lecture is the usage of a <strong>one-sided PSD</strong>.</p>
 </div>
 </div>
 <p>In this lecture the only MOSFET noise we consider is the drain noise, showing up as a current noise between drain and source, and given by <span id="eq-mosfet-noise"><span class="math display">\[
@@ -735,7 +735,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In all PMOS plots we plot positive values for voltages and currents, to have compatible plots to the NMOS. Of course, in a PMOS, voltages and currents have different polarity compared to the PMOS.</p>
+<p>In all PMOS plots we plot positive values for voltages and currents, to have compatible plots to the NMOS. Of course, in a PMOS, voltages and currents have different polarity compared to the NMOS.</p>
 </div>
 </div>
 <p><span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(f_\mathrm{T}\)</span> versus the gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span>:</p>
@@ -975,7 +975,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G U\)</span>, and for a capacitance is <span class="math inline">\(I = s C U\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
+<p>In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G V\)</span>, and for a capacitance is <span class="math inline">\(I = s C V\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
 </div>
 </div>
 <p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as <span class="math display">\[
@@ -1106,10 +1106,10 @@ Figure&nbsp;15: The MOSFET diode small-signal model with drain noise source.
 </div>
 </div>
 </div>
-<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is this given as <span class="math display">\[
+<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is thus given as <span class="math display">\[
 \overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
 \]</span></p>
-<p>The drain current noise of the MOSFET is given as (introduced in @#sec-mosfet-smallsignal-model) <span class="math display">\[
+<p>The drain current noise of the MOSFET is given as (introduced in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>) <span class="math display">\[
 \overline{I_\mathrm{n,d}^2} = 4 k T \gamma g_\mathrm{m}.
 \]</span></p>
 <p>For low frequencies (ignoring <span class="math inline">\(g_\mathrm{ds}\)</span> and <span class="math inline">\(C_\mathrm{gs}\)</span>) we get <span class="math display">\[
@@ -1881,7 +1881,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
