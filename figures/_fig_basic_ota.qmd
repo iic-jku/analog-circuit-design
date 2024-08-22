@@ -14,19 +14,19 @@ with sd.Drawing(canvas='svg') as d:
     d.push()
 
     elm.Line().down().length(0.5)
-    M6 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('M6', ofst=-1.5).reverse()
+    M5 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('M5', ofst=-1.5).reverse()
     elm.Ground()
-    elm.Line().left().length(4).at(M6.gate)
-    M5 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).label('M5')
+    elm.Line().left().length(4).at(M5.gate)
+    M6 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).label('M6')
     elm.Ground()
-    elm.Line().up().dot().at(M5.drain).length(0.5)
+    elm.Line().up().dot().at(M6.drain).length(0.5)
     d.push()
     elm.Line().up().length(1.5)
     Ibias = elm.SourceI().up().label('Ibias').reverse()
     elm.Vdd()
     d.pop()
     elm.Line().right().length(1.5)
-    elm.Line().down().toy(M5.gate).dot()
+    elm.Line().down().toy(M6.gate).dot()
 
     d.pop()
     elm.Line().right().length(1.5)
@@ -53,6 +53,6 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().at(M4.gate).tox(M3.gate)
     
     d.pop()
-    elm.Line().right().tox(M6.drain)
+    elm.Line().right().tox(M5.drain)
     elm.Line().up().toy(M3.gate).dot()
 ```
