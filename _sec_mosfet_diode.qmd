@@ -164,15 +164,12 @@ $$
 \overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma \gm}{(\gm + \gds)^2 + (2 \pi f \Cgs)^2}.
 $$ {#eq-mosfet-diode-noise-psd}
 
-If we are interested in the PSD of the noise then @eq-mosfet-diode-noise-psd gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation.
-
-::: {.callout-info}
+If we are interested in the PSD of the noise then @eq-mosfet-diode-noise-psd gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation, using the following identity:
 $$
-\int_0^\infty {\frac{a}{b^2 + (c f)^2} df} = \frac{\pi a}{2 b c}
-$$
-:::
+\int_0^\infty {\frac{a}{b^2 + c^2 f^2} df} = \frac{\pi a}{2 b c}
+$$ {#eq-integral-identity}
 
-Using the integral help from the previous info box, we can easily get at
+Using the integral help in @eq-integral-identity, we can easily transform @eq-mosfet-diode-noise-psd to
 $$
 V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma \gm}{(\gm + \gds) \Cgs}.
 $$ {#eq-mosfet-diode-noise-rms}
