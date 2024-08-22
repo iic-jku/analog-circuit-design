@@ -70,14 +70,14 @@ The following plot shows the minimum drain-source voltage $V_\mathrm{ds,sat}$ th
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-vdsat-vs-gmid-vs-l >}}
 
-For analog circuits the noise performance is usually quite important. Thermal noise of a resistor (the Johnson-Nyquist noise) has a flat power-spectral density (PSD) given by $\overline{V_\mathrm{n}^2}/\Delta f = 4 k T R$, where $k$ is Boltzmann's constant, $T$ absolute temperature, and $R$ the value of the resistor (the unit of $\overline{V_\mathrm{n}^2}/df$ is $\text{V}^2/\text{Hz}$). This PSD is essentially flat until very high frequencies where [quantum effects](https://en.wikipedia.org/wiki/Johnson–Nyquist_noise) start to kick in.
+For analog circuits the noise performance is usually quite important. Thermal noise of a resistor (the Johnson-Nyquist noise) has a flat power-spectral density (PSD) given by $\overline{V_\mathrm{n}^2}/\Delta f = 4 k T R$, where $k$ is Boltzmann's constant, $T$ absolute temperature, and $R$ the value of the resistor (the unit of $\overline{V_\mathrm{n}^2}/\Delta f$ is $\text{V}^2/\text{Hz}$). This PSD is essentially flat until very high frequencies where [quantum effects](https://en.wikipedia.org/wiki/Johnson–Nyquist_noise) start to kick in.
 
 ::: {.callout-note}
 We usually leave the $\Delta f$ away for a shorter notation, so we write $\overline{V_\mathrm{n}^2}$ when we actually mean $\overline{V_\mathrm{n}^2}/\Delta f$.
 
 Please also note that the pair of $k T$ pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation.
 
-Fuerther, when working with PSD there is the usage of a one-sided ($f$ runs from $0$ to $\infty$) or two-sided PSD ($f$ runs from $-\infty$ to $\infty$). The default in this lecture is the usage of a **one-sided PSD**.
+Further, when working with PSD there is the usage of a one-sided ($f$ runs from $0$ to $\infty$) or two-sided PSD ($f$ runs from $-\infty$ to $\infty$). The default in this lecture is the usage of a **one-sided PSD**.
 :::
 
 In this lecture the only MOSFET noise we consider is the drain noise, showing up as a current noise between drain and source, and given by
@@ -105,7 +105,7 @@ As you can see in the following plot, $f_\mathrm{co}$ can reach well into the 10
 In the following, we have the same plots as discussed in @sec-techsweep-nmos, but now for the PMOS.
 
 ::: {.callout-note}
-In all PMOS plots we plot positive values for voltages and currents, to have compatible plots to the NMOS. Of course, in a PMOS, voltages and currents have different polarity compared to the PMOS.
+In all PMOS plots we plot positive values for voltages and currents, to have compatible plots to the NMOS. Of course, in a PMOS, voltages and currents have different polarity compared to the NMOS.
 :::
 
 $\gmid$ and $f_\mathrm{T}$ versus the gate-source voltage $\VGS$:
