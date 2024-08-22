@@ -471,7 +471,9 @@ Figure&nbsp;5: The MOSFET small-signal model.
 </div>
 </div>
 </div>
-<p>As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by <span class="math inline">\(\overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0}\)</span> (<span class="math inline">\(\overline{I_\mathrm{n}^2}\)</span> is the power-spectral density of the noise in A<span class="math inline">\(^2\)</span>/Hz; <span class="math inline">\(k\)</span> is the Boltzmann constant; <span class="math inline">\(T\)</span> is the absolute temperature; <span class="math inline">\(\gamma\)</span> is a parameter in simplified theory changing between <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma =1\)</span> for triode operation; <span class="math inline">\(g_\mathrm{d0}\)</span> is equal to <span class="math inline">\(g_\mathrm{m}\)</span> in saturation and <span class="math inline">\(g_\mathrm{ds}\)</span> in triode).</p>
+<p>As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by <span id="eq-mosfet-noise"><span class="math display">\[
+\overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0},
+\tag{1}\]</span></span> where <span class="math inline">\(\overline{I_\mathrm{n}^2}\)</span> is the power-spectral density of the noise in A<span class="math inline">\(^2\)</span>/Hz; <span class="math inline">\(k\)</span> is the Boltzmann constant; <span class="math inline">\(T\)</span> is the absolute temperature; <span class="math inline">\(\gamma\)</span> is a parameter in simplified theory changing between <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma =1\)</span> for triode operation; <span class="math inline">\(g_\mathrm{d0}\)</span> is equal to <span class="math inline">\(g_\mathrm{m}\)</span> in saturation and <span class="math inline">\(g_\mathrm{ds}\)</span> in triode).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -585,10 +587,10 @@ Note
 <p>However, as can be seen in the below plot, there exists a strong and unfortunate trade-off with device speed, characterized here by the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span>. It would be ideal if there exists a design point where we get high transconductance per bias current concurrently to having the fastest operation, but unfortunately, this is clearly not the case. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> peaks for <span class="math inline">\(V_\mathrm{GS}&lt; 0.3\,\text{V}\)</span>, and the highest speed we get at <span class="math inline">\(V_\mathrm{GS}\approx 1.2\,\text{V}\)</span>. The dashed vertical line plots the nominal threshold voltage, as you can see in this continuum of parameter space, it marks not a particularly special point.</p>
 <p>Note that <span id="eq-mosfet-gmid-weakinversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{1}{n V_\mathrm{T}}
-\tag{1}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
+\tag{2}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
 <p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
-\tag{2}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.”</p>
+\tag{3}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.”</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -680,8 +682,8 @@ Note
 </div>
 <p>In this lecture the only MOSFET noise we consider is the drain noise, showing up as a current noise between drain and source, and given by <span id="eq-mosfet-noise"><span class="math display">\[
 \overline{I_\mathrm{d,n}^2} = 4 k T \gamma g_\mathrm{d0}
-\tag{3}\]</span></span> In saturation (the MOSFET operating as a current source), <span class="math inline">\(g_\mathrm{d0} = g_\mathrm{m}\)</span>, whereas in triode (the MOSFET operating as a switch), <span class="math inline">\(g_\mathrm{d0} = g_\mathrm{ds}\)</span>.</p>
-<p>The factor <span class="math inline">\(\gamma\)</span> is a function of many things (in classical theory, <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma = 1\)</span> in triode), and it is characterized in the following plot as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. So when calculating MOSFET noise we can lookup <span class="math inline">\(\gamma\)</span> in the below plot, and use <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;3</a> to calculate the effective drain current noise.</p>
+\tag{4}\]</span></span> In saturation (the MOSFET operating as a current source), <span class="math inline">\(g_\mathrm{d0} = g_\mathrm{m}\)</span>, whereas in triode (the MOSFET operating as a switch), <span class="math inline">\(g_\mathrm{d0} = g_\mathrm{ds}\)</span>.</p>
+<p>The factor <span class="math inline">\(\gamma\)</span> is a function of many things (in classical theory, <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma = 1\)</span> in triode), and it is characterized in the following plot as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. So when calculating MOSFET noise we can lookup <span class="math inline">\(\gamma\)</span> in the below plot, and use <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;4</a> to calculate the effective drain current noise.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
 <div class="cell-output cell-output-display">
@@ -693,7 +695,7 @@ Note
 </div>
 </div>
 </div>
-<p>In a MOSFET, unfortunately, besides the thermal noise according to <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;3</a>, there is also a substantial low-frequency excess noise, called “flicker noise” due to its characteristic <span class="math inline">\(\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f\)</span> behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency <span class="math inline">\(f_\mathrm{co}\)</span>, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of <span class="math inline">\(L\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Generally, the flicker noise is proportional to <span class="math inline">\((W L)^{-1}\)</span>, so the larger the device is, the lower the flicker noise. The parameter <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> largely stays constant when we keep <span class="math inline">\(W/L\)</span> constant, so for a given <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> flicker noise is proportinal to <span class="math inline">\(1/L^2\)</span>. However, increasing <span class="math inline">\(L\)</span> lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.</p>
+<p>In a MOSFET, unfortunately, besides the thermal noise according to <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;4</a>, there is also a substantial low-frequency excess noise, called “flicker noise” due to its characteristic <span class="math inline">\(\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f\)</span> behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency <span class="math inline">\(f_\mathrm{co}\)</span>, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of <span class="math inline">\(L\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Generally, the flicker noise is proportional to <span class="math inline">\((W L)^{-1}\)</span>, so the larger the device is, the lower the flicker noise. The parameter <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> largely stays constant when we keep <span class="math inline">\(W/L\)</span> constant, so for a given <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> flicker noise is proportinal to <span class="math inline">\(1/L^2\)</span>. However, increasing <span class="math inline">\(L\)</span> lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -961,7 +963,7 @@ i_\mathrm{bias} - s C_\mathrm{gs}v_\mathrm{gs}- g_\mathrm{m}v_\mathrm{gs}- g_\ma
 \]</span></p>
 <p>It follows that <span id="eq-mosfet-diode-impedance"><span class="math display">\[
 Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm{m}+ g_\mathrm{ds}+ s C_\mathrm{gs}}.
-\tag{4}\]</span></span></p>
+\tag{5}\]</span></span></p>
 <p>When neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and at dc we get <span class="math inline">\(Z_\mathrm{diode} = 1 / g_\mathrm{m}\)</span>, which is an important result and should be memorized.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -976,7 +978,7 @@ Important
 <p>In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G U\)</span>, and for a capacitance is <span class="math inline">\(I = s C U\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
 </div>
 </div>
-<p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as <span class="math display">\[
+<p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as <span class="math display">\[
 \omega_\mathrm{c} = \frac{g_\mathrm{m}+ g_\mathrm{ds}}{C_\mathrm{gs}} \approx \omega_\mathrm{T}
 \]</span> which is pretty much the transit frequency of the MOSFET!</p>
 </section>
@@ -1002,8 +1004,8 @@ v_\mathrm{out} = - g_\mathrm{m}v_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm
 \]</span></p>
 <p>The open-loop gain <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is thus <span id="eq-mosfet-diode-openloop-gain"><span class="math display">\[
 H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
-\tag{5}\]</span></span></p>
-<p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;5</a> we realize that</p>
+\tag{6}\]</span></span></p>
+<p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;6</a> we realize that</p>
 <ol type="1">
 <li>the dc gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the self-gain of the MOSFET, so <span class="math inline">\(20 \log(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}\)</span>, and</li>
 <li>there is a pole at <span class="math inline">\(\omega_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\)</span>, which is at <span class="math inline">\(9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\)</span>.</li>
@@ -1070,7 +1072,7 @@ Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;5</a>.</p>
+<p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;6</a>.</p>
 <p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_loopgain.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;14</a>.</p>
 <div id="fig-mosfet-diode-loopgain-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1104,7 +1106,7 @@ Figure&nbsp;15: The MOSFET diode small-signal model with drain noise source.
 </div>
 </div>
 </div>
-<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is this given as <span class="math display">\[
+<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is this given as <span class="math display">\[
 \overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
 \]</span></p>
 <p>The drain current noise of the MOSFET is given as (introduced in @#sec-mosfet-smallsignal-model) <span class="math display">\[
@@ -1115,20 +1117,17 @@ Figure&nbsp;15: The MOSFET diode small-signal model with drain noise source.
 \]</span> which is the thermal noise of a resistor of value <span class="math inline">\(1 / g_\mathrm{m}\)</span> enhanced by the factor <span class="math inline">\(\gamma\)</span>.</p>
 <p>We now calculate the full equation, and after a bit of algebra arrive at <span id="eq-mosfet-diode-noise-psd"><span class="math display">\[
 \overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds})^2 + (2 \pi f C_\mathrm{gs})^2}.
-\tag{6}\]</span></span></p>
-<p>If we are interested in the PSD of the noise then <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;6</a> gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation.</p>
-<div class="callout-info">
-<p><span class="math display">\[
-\int_0^\infty {\frac{a}{b^2 + (c f)^2} df} = \frac{\pi a}{2 b c}
-\]</span></p>
-</div>
-<p>Using the integral help from the previous info box, we can easily get at <span id="eq-mosfet-diode-noise-rms"><span class="math display">\[
-V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds}) C_\mathrm{gs}}.
 \tag{7}\]</span></span></p>
-<p>The form of <a href="#eq-mosfet-diode-noise-rms" class="quarto-xref">Equation&nbsp;7</a> is the exact solution, but we gain additional insight if we assume that <span class="math inline">\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span> and then <span id="eq-mosfet-diode-noise-rms-simplified"><span class="math display">\[
-V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
+<p>If we are interested in the PSD of the noise then <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;7</a> gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation, using the following identity: <span id="eq-integral-identity"><span class="math display">\[
+\int_0^\infty {\frac{a}{b^2 + c^2 f^2} df} = \frac{\pi a}{2 b c}
 \tag{8}\]</span></span></p>
-<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;8</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
+<p>Using the integral help in <a href="#eq-integral-identity" class="quarto-xref">Equation&nbsp;8</a>, we can easily transform <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;7</a> to <span id="eq-mosfet-diode-noise-rms"><span class="math display">\[
+V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds}) C_\mathrm{gs}}.
+\tag{9}\]</span></span></p>
+<p>The form of <a href="#eq-mosfet-diode-noise-rms" class="quarto-xref">Equation&nbsp;9</a> is the exact solution, but we gain additional insight if we assume that <span class="math inline">\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span> and then <span id="eq-mosfet-diode-noise-rms-simplified"><span class="math display">\[
+V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
+\tag{10}\]</span></span></p>
+<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;10</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1246,8 +1245,8 @@ i_\mathrm{out,n} = g_\mathrm{m2} \left( -\frac{v_\mathrm{in}}{2} \right).
 \]</span></p>
 <p>Usually we assume symmetry in the differential pair, so <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m}\)</span>. The differential output current <span class="math inline">\(i_\mathrm{out}\)</span> is then given by <span id="eq-differential-pair-dm"><span class="math display">\[
 i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = g_\mathrm{m}v_\mathrm{in}
-\tag{9}\]</span></span></p>
-<p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;9</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
+\tag{11}\]</span></span></p>
+<p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;11</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
 </section>
 <section id="common-mode-operation-of-the-diffpair" class="level3">
 <h3 class="anchored" data-anchor-id="common-mode-operation-of-the-diffpair">Common-Mode Operation of the Diffpair</h3>
@@ -1274,8 +1273,8 @@ v_\mathrm{in} = v_\mathrm{gs}+ \frac{i_\mathrm{ds}}{g_\mathrm{tail}}.
 \]</span></p>
 <p>With <span class="math inline">\(i_\mathrm{out} = i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
 i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} v_\mathrm{in}
-\tag{10}\]</span></span></p>
-<p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;10</a> we can distinguish the following extreme cases:</p>
+\tag{12}\]</span></span></p>
+<p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;12</a> we can distinguish the following extreme cases:</p>
 <ol type="1">
 <li>If <span class="math inline">\(g_\mathrm{tail} = 0\)</span> (ideal tail current source) then <span class="math inline">\(i_\mathrm{out} = 0\)</span>, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.</li>
 <li>If <span class="math inline">\(g_\mathrm{tail} = \infty\)</span> then <span class="math inline">\(i_\mathrm{out} = g_\mathrm{m}v_\mathrm{in}\)</span>, which means the output current is a function of the MOSFET <span class="math inline">\(g_\mathrm{m}\)</span>. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behaviour, this configuration is called a “pseudo-differential pair.”</li>
@@ -1882,7 +1881,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
