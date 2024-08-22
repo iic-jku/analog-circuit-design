@@ -67,7 +67,7 @@ $$ {#eq-mosfet-diode-impedance}
 When neglecting $\gds$ and at dc we get $Z_\mathrm{diode} = 1 / \gm$, which is an important result and should be memorized.
 
 ::: {.callout-important}
-In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm's law for a conductance is $I = G U$, and for a capacitance is $I = s C U$. When writing equations, it is also practical to keep $s C$ together, so we will strive to sort terms accordingly.
+In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm's law for a conductance is $I = G V$, and for a capacitance is $I = s C V$. When writing equations, it is also practical to keep $s C$ together, so we will strive to sort terms accordingly.
 :::
 
 Looking at @eq-mosfet-diode-impedance we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as
@@ -143,12 +143,12 @@ We will use the small-signal circuit shown in @fig-mosfet-diode-small-signal-w-n
 
 {{< include figures/_fig_mosfet_diode_small_signal_w_noise.qmd >}}
 
-As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $\vgs$ is this given as
+As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $\vgs$ is thus given as
 $$
 \overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
 $$
 
-The drain current noise of the MOSFET is given as (introduced in @#sec-mosfet-smallsignal-model)
+The drain current noise of the MOSFET is given as (introduced in @sec-mosfet-smallsignal-model)
 $$
 \overline{I_\mathrm{n,d}^2} = 4 k T \gamma \gm.
 $$
