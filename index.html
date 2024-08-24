@@ -206,16 +206,23 @@ window.Quarto = {
   <li><a href="#sec-basic-ota" id="toc-sec-basic-ota" class="nav-link" data-scroll-target="#sec-basic-ota">A Basic 5-Transistor OTA</a>
   <ul class="collapse">
   <li><a href="#voltage-buffer-with-ota" id="toc-voltage-buffer-with-ota" class="nav-link" data-scroll-target="#voltage-buffer-with-ota">Voltage Buffer with OTA</a></li>
-  <li><a href="#large-signal-analysis-of-the-ota" id="toc-large-signal-analysis-of-the-ota" class="nav-link" data-scroll-target="#large-signal-analysis-of-the-ota">Large-Signal Analysis of the OTA</a></li>
-  <li><a href="#small-signal-analysis-of-the-ota" id="toc-small-signal-analysis-of-the-ota" class="nav-link" data-scroll-target="#small-signal-analysis-of-the-ota">Small-Signal Analysis of the OTA</a></li>
+  <li><a href="#sec-basic-ota-large-signal" id="toc-sec-basic-ota-large-signal" class="nav-link" data-scroll-target="#sec-basic-ota-large-signal">Large-Signal Analysis of the OTA</a></li>
+  <li><a href="#sec-basic-ota-small-signal" id="toc-sec-basic-ota-small-signal" class="nav-link" data-scroll-target="#sec-basic-ota-small-signal">Small-Signal Analysis of the OTA</a></li>
+  <li><a href="#ota-small-signal-transfer-function" id="toc-ota-small-signal-transfer-function" class="nav-link" data-scroll-target="#ota-small-signal-transfer-function">OTA Small-Signal Transfer Function</a></li>
   </ul></li>
   <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
   <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota">A Fully-Differential OTA</a></li>
   <li><a href="#biasing-the-ota" id="toc-biasing-the-ota" class="nav-link" data-scroll-target="#biasing-the-ota">Biasing the OTA</a></li>
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter">An RC-OPAMP Filter</a></li>
   <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion">Summary &amp; Conclusion</a></li>
-  <li><a href="#appendix-ngspice-cheat-sheet" id="toc-appendix-ngspice-cheat-sheet" class="nav-link" data-scroll-target="#appendix-ngspice-cheat-sheet">Appendix: ngspice Cheat Sheet</a></li>
-  <li><a href="#appendix-xschem-cheat-sheet" id="toc-appendix-xschem-cheat-sheet" class="nav-link" data-scroll-target="#appendix-xschem-cheat-sheet">Appendix: Xschem Cheat Sheet</a></li>
+  <li><a href="#sec-middlebrook-method" id="toc-sec-middlebrook-method" class="nav-link" data-scroll-target="#sec-middlebrook-method">Appendix: Middlebrook’s Method</a></li>
+  <li><a href="#appendix-ngspice-cheatsheet" id="toc-appendix-ngspice-cheatsheet" class="nav-link" data-scroll-target="#appendix-ngspice-cheatsheet">Appendix: ngspice Cheatsheet</a>
+  <ul class="collapse">
+  <li><a href="#commands" id="toc-commands" class="nav-link" data-scroll-target="#commands">Commands</a></li>
+  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options">Options</a></li>
+  <li><a href="#convergence-helper" id="toc-convergence-helper" class="nav-link" data-scroll-target="#convergence-helper">Convergence Helper</a></li>
+  </ul></li>
+  <li><a href="#appendix-xschem-cheatsheet" id="toc-appendix-xschem-cheatsheet" class="nav-link" data-scroll-target="#appendix-xschem-cheatsheet">Appendix: Xschem Cheatsheet</a></li>
   </ul>
 <div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_txt_to_mat-preview.html"><i class="bi bi-journal-code"></i>Conversion of TXT to MAT for gm/ID result files for SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/lookup_sg13-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2</a></li><li><a href="sizing/sizing_current_mirror-preview.html"><i class="bi bi-journal-code"></i>Sizing for Improved Current Mirror</a></li><li><a href="sizing/sizing_mosfet_diode-preview.html"><i class="bi bi-journal-code"></i>Sizing for MOSFET Diode Example</a></li></ul></div></nav>
 </div>
@@ -680,10 +687,8 @@ Note
 <p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(0\)</span> to <span class="math inline">\(\infty\)</span>) or two-sided PSD (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>). The default in this lecture is the usage of a <strong>one-sided PSD</strong>.</p>
 </div>
 </div>
-<p>In this lecture the only MOSFET noise we consider is the drain noise, showing up as a current noise between drain and source, and given by <span id="eq-mosfet-noise"><span class="math display">\[
-\overline{I_\mathrm{d,n}^2} = 4 k T \gamma g_\mathrm{d0}
-\tag{4}\]</span></span> In saturation (the MOSFET operating as a current source), <span class="math inline">\(g_\mathrm{d0} = g_\mathrm{m}\)</span>, whereas in triode (the MOSFET operating as a switch), <span class="math inline">\(g_\mathrm{d0} = g_\mathrm{ds}\)</span>.</p>
-<p>The factor <span class="math inline">\(\gamma\)</span> is a function of many things (in classical theory, <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma = 1\)</span> in triode), and it is characterized in the following plot as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. So when calculating MOSFET noise we can lookup <span class="math inline">\(\gamma\)</span> in the below plot, and use <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;4</a> to calculate the effective drain current noise.</p>
+<p>In this lecture the only MOSFET noise we consider is the drain noise (as discussed in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>), showing up as a current noise between drain and source. For a for realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.</p>
+<p>The factor <span class="math inline">\(\gamma\)</span> (<a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a>) is a function of many things (in classical theory, <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma = 1\)</span> in triode), and it is characterized in the following plot as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. So when calculating MOSFET noise we can lookup <span class="math inline">\(\gamma\)</span> in the below plot, and use <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a> to calculate the effective drain current noise.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
 <div class="cell-output cell-output-display">
@@ -695,7 +700,7 @@ Note
 </div>
 </div>
 </div>
-<p>In a MOSFET, unfortunately, besides the thermal noise according to <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;4</a>, there is also a substantial low-frequency excess noise, called “flicker noise” due to its characteristic <span class="math inline">\(\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f\)</span> behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency <span class="math inline">\(f_\mathrm{co}\)</span>, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of <span class="math inline">\(L\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Generally, the flicker noise is proportional to <span class="math inline">\((W L)^{-1}\)</span>, so the larger the device is, the lower the flicker noise. The parameter <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> largely stays constant when we keep <span class="math inline">\(W/L\)</span> constant, so for a given <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> flicker noise is proportinal to <span class="math inline">\(1/L^2\)</span>. However, increasing <span class="math inline">\(L\)</span> lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.</p>
+<p>In a MOSFET, unfortunately, besides the thermal noise according to <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a>, there is also a substantial low-frequency excess noise, called “flicker noise” due to its characteristic <span class="math inline">\(\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f\)</span> behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency <span class="math inline">\(f_\mathrm{co}\)</span>, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of <span class="math inline">\(L\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Generally, the flicker noise is proportional to <span class="math inline">\((W L)^{-1}\)</span>, so the larger the device is, the lower the flicker noise. The parameter <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> largely stays constant when we keep <span class="math inline">\(W/L\)</span> constant, so for a given <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> flicker noise is proportinal to <span class="math inline">\(1/L^2\)</span>. However, increasing <span class="math inline">\(L\)</span> lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -963,7 +968,7 @@ i_\mathrm{bias} - s C_\mathrm{gs}v_\mathrm{gs}- g_\mathrm{m}v_\mathrm{gs}- g_\ma
 \]</span></p>
 <p>It follows that <span id="eq-mosfet-diode-impedance"><span class="math display">\[
 Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm{m}+ g_\mathrm{ds}+ s C_\mathrm{gs}}.
-\tag{5}\]</span></span></p>
+\tag{4}\]</span></span></p>
 <p>When neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and at dc we get <span class="math inline">\(Z_\mathrm{diode} = 1 / g_\mathrm{m}\)</span>, which is an important result and should be memorized.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -978,7 +983,7 @@ Important
 <p>In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G V\)</span>, and for a capacitance is <span class="math inline">\(I = s C V\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
 </div>
 </div>
-<p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as <span class="math display">\[
+<p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as <span class="math display">\[
 \omega_\mathrm{c} = \frac{g_\mathrm{m}+ g_\mathrm{ds}}{C_\mathrm{gs}} \approx \omega_\mathrm{T}
 \]</span> which is pretty much the transit frequency of the MOSFET!</p>
 </section>
@@ -1004,15 +1009,15 @@ v_\mathrm{out} = - g_\mathrm{m}v_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm
 \]</span></p>
 <p>The open-loop gain <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is thus <span id="eq-mosfet-diode-openloop-gain"><span class="math display">\[
 H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
-\tag{6}\]</span></span></p>
-<p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;6</a> we realize that</p>
+\tag{5}\]</span></span></p>
+<p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;5</a> we realize that</p>
 <ol type="1">
 <li>the dc gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the self-gain of the MOSFET, so <span class="math inline">\(20 \log(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}\)</span>, and</li>
 <li>there is a pole at <span class="math inline">\(\omega_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\)</span>, which is at <span class="math inline">\(9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\)</span>.</li>
 </ol>
 <p>With this single pole location in <span class="math inline">\(H_\mathrm{ol}(s)\)</span> this loop is perfectly stable at under all conditions.</p>
 <p>The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
-<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <strong>?@sec-middlebrook-method</strong>.</p>
+<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;13</a>.</p>
 <p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s method and confirm our analysis above.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center">
@@ -1024,7 +1029,7 @@ Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;6</a>.</p>
+<p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;5</a>.</p>
 <p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_loopgain.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;12</a>.</p>
 <div id="fig-mosfet-diode-loopgain-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1058,7 +1063,7 @@ Figure&nbsp;13: The MOSFET diode small-signal model with drain noise source.
 </div>
 </div>
 </div>
-<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is thus given as <span class="math display">\[
+<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is thus given as <span class="math display">\[
 \overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
 \]</span></p>
 <p>The drain current noise of the MOSFET is given as (introduced in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>) <span class="math display">\[
@@ -1069,8 +1074,8 @@ Figure&nbsp;13: The MOSFET diode small-signal model with drain noise source.
 \]</span> which is the thermal noise of a resistor of value <span class="math inline">\(1 / g_\mathrm{m}\)</span> enhanced by the factor <span class="math inline">\(\gamma\)</span>.</p>
 <p>We now calculate the full equation, and after a bit of algebra arrive at <span id="eq-mosfet-diode-noise-psd"><span class="math display">\[
 \overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds})^2 + (2 \pi f C_\mathrm{gs})^2}.
-\tag{7}\]</span></span></p>
-<p>If we are interested in the PSD of the noise then <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;7</a> gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation, using the following identity:</p>
+\tag{6}\]</span></span></p>
+<p>If we are interested in the PSD of the noise then <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;6</a> gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation, using the following identity:</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Useful Integral for Noise Calculations">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1083,16 +1088,16 @@ Useful Integral for Noise Calculations
 <div class="callout-body-container callout-body">
 <p><span id="eq-integral-identity"><span class="math display">\[
 \int_0^\infty {\frac{a}{b^2 + c^2 f^2} df} = \frac{\pi}{2} \frac{a}{b \cdot c}
-\tag{8}\]</span></span></p>
+\tag{7}\]</span></span></p>
 </div>
 </div>
-<p>Using the integral help in <a href="#eq-integral-identity" class="quarto-xref">Equation&nbsp;8</a>, we can easily transform <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;7</a> to <span id="eq-mosfet-diode-noise-rms"><span class="math display">\[
+<p>Using the integral help in <a href="#eq-integral-identity" class="quarto-xref">Equation&nbsp;7</a>, we can easily transform <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;6</a> to <span id="eq-mosfet-diode-noise-rms"><span class="math display">\[
 V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds}) C_\mathrm{gs}}.
-\tag{9}\]</span></span></p>
-<p>The form of <a href="#eq-mosfet-diode-noise-rms" class="quarto-xref">Equation&nbsp;9</a> is the exact solution, but we gain additional insight if we assume that <span class="math inline">\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span> and then <span id="eq-mosfet-diode-noise-rms-simplified"><span class="math display">\[
+\tag{8}\]</span></span></p>
+<p>The form of <a href="#eq-mosfet-diode-noise-rms" class="quarto-xref">Equation&nbsp;8</a> is the exact solution, but we gain additional insight if we assume that <span class="math inline">\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span> and then <span id="eq-mosfet-diode-noise-rms-simplified"><span class="math display">\[
 V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
-\tag{10}\]</span></span></p>
-<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;10</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
+\tag{9}\]</span></span></p>
+<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;9</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1210,8 +1215,8 @@ i_\mathrm{out,n} = g_\mathrm{m2} \left( -\frac{v_\mathrm{in}}{2} \right).
 \]</span></p>
 <p>Usually we assume symmetry in the differential pair, so <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m}\)</span>. The differential output current <span class="math inline">\(i_\mathrm{out}\)</span> is then given by <span id="eq-differential-pair-dm"><span class="math display">\[
 i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = g_\mathrm{m}v_\mathrm{in}
-\tag{11}\]</span></span></p>
-<p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;11</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
+\tag{10}\]</span></span></p>
+<p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;10</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
 </section>
 <section id="common-mode-operation-of-the-diffpair" class="level3">
 <h3 class="anchored" data-anchor-id="common-mode-operation-of-the-diffpair">Common-Mode Operation of the Diffpair</h3>
@@ -1238,8 +1243,8 @@ v_\mathrm{in} = v_\mathrm{gs}+ \frac{i_\mathrm{ds}}{g_\mathrm{tail}}.
 \]</span></p>
 <p>With <span class="math inline">\(i_\mathrm{out} = i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
 i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} v_\mathrm{in}
-\tag{12}\]</span></span></p>
-<p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;12</a> we can distinguish the following extreme cases:</p>
+\tag{11}\]</span></span></p>
+<p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;11</a> we can distinguish the following extreme cases:</p>
 <ol type="1">
 <li>If <span class="math inline">\(g_\mathrm{tail} = 0\)</span> (ideal tail current source) then <span class="math inline">\(i_\mathrm{out} = 0\)</span>, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.</li>
 <li>If <span class="math inline">\(g_\mathrm{tail} = \infty\)</span> then <span class="math inline">\(i_\mathrm{out} = g_\mathrm{m}v_\mathrm{in}\)</span>, which means the output current is a function of the MOSFET <span class="math inline">\(g_\mathrm{m}\)</span>. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behaviour, this configuration is called a “pseudo-differential pair.”</li>
@@ -1263,8 +1268,9 @@ Figure&nbsp;18: The 5-transistor OTA.
 </div>
 </div>
 </div>
-<p>The operation is as follows: <span class="math inline">\(M_{1,2}\)</span> form a differential pair which is biased by the current source <span class="math inline">\(M_6\)</span>. <span class="math inline">\(M_{5,6}\)</span> form a current mirror, thus the input bias current <span class="math inline">\(I_\mathrm{bias}\)</span> sets the bias current in the OTA. The differential pair <span class="math inline">\(M_{1,2}\)</span> is loaded by the current mirror <span class="math inline">\(M_{3,4}\)</span> which mirrors the output current of <span class="math inline">\(M_1\)</span> to the right side. Here, the currents from <span class="math inline">\(M_4\)</span> and <span class="math inline">\(M_2\)</span> are summed, and together with the conductance effective at the output node a voltage builds up.</p>
-<p>As this is an OTA the output is a current; if the load impedance is high (i.e., purely capacitive) then the voltage gain of the OTA can be high (of course, in this simple OTA it is limited). With a high-impedance loading this OTA can provide a voltage output, and this is actually how OTAs are mostly operated.</p>
+<p>The operation is as follows: <span class="math inline">\(M_{1,2}\)</span> form a differential pair which is biased by the current source <span class="math inline">\(M_5\)</span>. <span class="math inline">\(M_{5,6}\)</span> form a current mirror, thus the input bias current <span class="math inline">\(I_\mathrm{bias}\)</span> sets the bias current in the OTA. The differential pair <span class="math inline">\(M_{1,2}\)</span> is loaded by the current mirror <span class="math inline">\(M_{3,4}\)</span> which mirrors the output current of <span class="math inline">\(M_1\)</span> to the right side. Here, the currents from <span class="math inline">\(M_4\)</span> and <span class="math inline">\(M_2\)</span> are summed, and together with the conductance effective at the output node a voltage builds up.</p>
+<p>We note that <span class="math inline">\(M_{1,2}\)</span> and <span class="math inline">\(M_{3,4}\)</span> need to be symmetric, thus will have the same <span class="math inline">\(W \&amp; L\)</span> dimensionsing. <span class="math inline">\(M_{5,6}\)</span> we scale accordingly to set the correct bias current in the OTA.</p>
+<p>As this is an OTA the output is a current; if the load impedance is high (i.e., purely capacitive, which is often the case in integrated circuits when driving MOSFET inputs) then the voltage gain of the OTA can be high (of course, in this simple OTA it is limited). With a high-impedance loading this OTA can provide a voltage output, and this is actually how OTAs are mostly operated.</p>
 <section id="voltage-buffer-with-ota" class="level3">
 <h3 class="anchored" data-anchor-id="voltage-buffer-with-ota">Voltage Buffer with OTA</h3>
 <p>In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lighly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a>.</p>
@@ -1320,7 +1326,7 @@ Table&nbsp;1: Voltage buffer specification
 </tr>
 <tr class="even">
 <td style="text-align: left;">Voltage gain error</td>
-<td style="text-align: center;">&lt;1</td>
+<td style="text-align: center;">&lt;5</td>
 <td style="text-align: center;">%</td>
 </tr>
 <tr class="odd">
@@ -1359,14 +1365,14 @@ Table&nbsp;1: Voltage buffer specification
 </figure>
 </div>
 </section>
-<section id="large-signal-analysis-of-the-ota" class="level3">
-<h3 class="anchored" data-anchor-id="large-signal-analysis-of-the-ota">Large-Signal Analysis of the OTA</h3>
+<section id="sec-basic-ota-large-signal" class="level3">
+<h3 class="anchored" data-anchor-id="sec-basic-ota-large-signal">Large-Signal Analysis of the OTA</h3>
 <p>The first step when receiving a design task is to look at the specifications, and see whether they make sense. Detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) allows to do back-of-the-envelope gauging if the specification makes sense, and (b) the derived analytical equations will serve as guide for the sizing procedure.</p>
 <ul>
 <li>In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met.</li>
-<li>When the input is at its maximum of <span class="math inline">\(1.3\,\text{V}\)</span>, we see that we need to keep <span class="math inline">\(M_1\)</span> in saturation. We can calculate that <span class="math inline">\(V_\mathrm{DS1} = V_\mathrm{DD}- V_\mathrm{GS3} + V_\mathrm{GS1} - V_\mathrm{in} = 1.45 - 0.6 + 0.6 - 1.3 = 0.15\,\text{V}\)</span>, which barely leaves enough margin, so we must keep the gate-source voltages of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_3\)</span> resonably small.</li>
-<li>When the input is at its minimum of <span class="math inline">\(1.1\,\text{V}\)</span>, we see that the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_6\)</span> is calculated as <span class="math inline">\(V_\mathrm{DS6} = V_\mathrm{in} - V_\mathrm{GS1} = 1.1 - 0.6 = 0.5\,\text{V}\)</span>, so this leaves plenty of margin.</li>
-<li>For the output voltage, when the output voltage is on the high side, it leaves <span class="math inline">\(V_\mathrm{DS4} = V_\mathrm{DD}- V_\mathrm{out} = 1.45 - 1.3 = 0.15\,\text{V}\)</span>, whis is on the edge.</li>
+<li>When the input is at its maximum of <span class="math inline">\(1.3\,\text{V}\)</span>, we see that we need to keep <span class="math inline">\(M_1\)</span> in saturation. We can calculate that <span class="math inline">\(V_\mathrm{DS1} = V_\mathrm{DD}- |V_\mathrm{GS3}| + V_\mathrm{GS1} - V_\mathrm{in} = 1.45 - 0.6 + 0.6 - 1.3 = 0.15\,\text{V}\)</span>, which barely leaves enough margin, so we must keep the gate-source voltages of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_3\)</span> resonably small.</li>
+<li>When the input is at its minimum of <span class="math inline">\(1.1\,\text{V}\)</span>, we see that the <span class="math inline">\(V_\mathrm{DS5}\)</span> of <span class="math inline">\(M_5\)</span> is calculated as <span class="math inline">\(V_\mathrm{GS5} = V_\mathrm{in} - V_\mathrm{GS1} = 1.1 - 0.6 = 0.5\,\text{V}\)</span>, so this leaves plenty of margin.</li>
+<li>For the output voltage, when the output voltage is on the high side, it leaves <span class="math inline">\(|V_\mathrm{DS4}| = V_\mathrm{DD}- V_\mathrm{out} = 1.45 - 1.3 = 0.15\,\text{V}\)</span>, whis is on the edge.</li>
 <li>When the output voltage is on the low side, it leaves <span class="math inline">\(V_\mathrm{DS2} = V_\mathrm{out} - V_\mathrm{in} + V_\mathrm{GS2} = 1.3 - 1.55 + 0.6 = 0.35\,\text{V}\)</span>, so this should work.</li>
 </ul>
 <p>In summary, we think that we can make an NMOS-input OTA like the one in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;18</a> work for the required supply and input- and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.</p>
@@ -1377,8 +1383,168 @@ T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} =
 T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \cdot 10^{-6}} = 0.8\,\mu\text{s}.
 \]</span> which also checks out.</p>
 </section>
-<section id="small-signal-analysis-of-the-ota" class="level3">
-<h3 class="anchored" data-anchor-id="small-signal-analysis-of-the-ota">Small-Signal Analysis of the OTA</h3>
+<section id="sec-basic-ota-small-signal" class="level3">
+<h3 class="anchored" data-anchor-id="sec-basic-ota-small-signal">Small-Signal Analysis of the OTA</h3>
+<p>In order to size the OTA components we need to see derive how MOSFET parameters define the performance. The important small-signal metrics are</p>
+<ul>
+<li>dc gain <span class="math inline">\(A_0\)</span></li>
+<li>gain-bandwidth product (GBW)</li>
+<li>output noise</li>
+</ul>
+<p>The specification for GBW is given in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a>, the dc gain we have to calculate from the voltage accuracy specification. For a voltage follower in the configuration shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a> the voltage gain is given by <span class="math display">\[
+\frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
+\]</span></p>
+<p>So in order to reach an output voltage accuracy of at least 5% we need a dc gain of <span class="math inline">\(A_0 &gt; 25.6\,\text{dB}\)</span>. To allow for process and temperature variation we will strive for <span class="math inline">\(A_0 = 30\,\text{dB}\)</span></p>
+</section>
+<section id="ota-small-signal-transfer-function" class="level3">
+<h3 class="anchored" data-anchor-id="ota-small-signal-transfer-function">OTA Small-Signal Transfer Function</h3>
+<p>In order to derive the governing equations for the OTA we will make a few simplififcations:</p>
+<ul>
+<li>We will set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> for all MOSFET.</li>
+<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFET except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span>. Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;14</a>).</li>
+<li>We assume <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, so we set <span class="math inline">\(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\)</span>.</li>
+<li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> we can add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span>.</li>
+</ul>
+<p>The resulting small-signal equivalent circuit is shown in <a href="#fig-basic-ota-small-signal" class="quarto-xref">Figure&nbsp;20</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please review the MOSFET small-signal equivalent model in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> at this point. For the PMOS just flip the model upside-down.</p>
+</div>
+</div>
+<div id="cell-fig-basic-ota-small-signal" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div id="fig-basic-ota-small-signal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-basic-ota-small-signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-basic-ota-small-signal-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-34" title="Figure&nbsp;20: 5-transistor OTA small-signal model."><img src="index_files/figure-html/fig-basic-ota-small-signal-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20: 5-transistor OTA small-signal model.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We can further simplify the output side by recognizing that the impedance looking from the output down we have <span class="math inline">\(g_\mathrm{ds2}\)</span> in series with <span class="math inline">\(g_\mathrm{ds5} + g_\mathrm{m12}\)</span> (since we treat <span class="math inline">\(M_1\)</span> as a common-gate stage when looking from the output, and since it is loaded by a low impedance of <span class="math inline">\(g_\mathrm{m34}^{-1}\)</span> we can approximate the impedance looking into <span class="math inline">\(M_1\)</span> with <span class="math inline">\(g_\mathrm{m12}^{-1}\)</span>). With the approximation that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span> we can move <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span>. Further assuming a differential drive with a virtual ground at the tailpoint we can remove <span class="math inline">\(g_\mathrm{ds5}\)</span>. The current source <span class="math inline">\(g_\mathrm{m34} v_\mathrm{gs34}\)</span> with replace with the equivalent conductance <span class="math inline">\(g_\mathrm{m34}\)</span>. This results in the further simplified equivalent circuit shown in <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;21</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For repetition and as a reference, here the simplified relationships for the common-source, common-gate, and the common-drain single transistor stages:</p>
+<p>FIXME – to be done</p>
+</div>
+</div>
+<div id="cell-fig-basic-ota-small-signal-simplified" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div id="fig-basic-ota-small-signal-simplified" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-basic-ota-small-signal-simplified-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-basic-ota-small-signal-simplified-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-35" title="Figure&nbsp;21: 5-transistor OTA small-signal model with further simplifications."><img src="index_files/figure-html/fig-basic-ota-small-signal-simplified-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-simplified-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21: 5-transistor OTA small-signal model with further simplifications.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In the simplified circuit model in <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;21</a> we can see that we have two poles in the circuit, one at the gate note of <span class="math inline">\(M_{3,4}\)</span>, and one at the output. Realizing that <span class="math inline">\(v_\mathrm{in,p} = v_\mathrm{in}/2\)</span> and <span class="math inline">\(v_\mathrm{in,n} = - v_\mathrm{in}/2\)</span> we can formulate KCL at the output node to <span id="eq-simple-ota-eq1"><span class="math display">\[
+-g_\mathrm{m34} V_\mathrm{gs34} - \left( -g_\mathrm{m12} \frac{V_\mathrm{in}}{2} \right) - V_\mathrm{out} (g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}) = 0.
+\tag{12}\]</span></span> We further realize that <span id="eq-simple-ota-eq2"><span class="math display">\[
+V_\mathrm{gs34} = -g_\mathrm{m12} \frac{V_\mathrm{in}}{2} \frac{1}{g_\mathrm{m34} + s C_\mathrm{gs34}}.
+  \tag{13}\]</span></span></p>
+<p>By combining <a href="#eq-simple-ota-eq1" class="quarto-xref">Equation&nbsp;12</a> and <a href="#eq-simple-ota-eq2" class="quarto-xref">Equation&nbsp;13</a> and after a bit of algebraic manipulation we arrive at <span id="eq-simple-ota-gain"><span class="math display">\[
+A(s) = \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m12}}{2} \frac{2 g_\mathrm{m34} + s C_\mathrm{gs34}}{(g_\mathrm{m34} + s C_\mathrm{gs34}) (g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load})}.
+\tag{14}\]</span></span></p>
+<p>When we now inspect <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;14</a> we can see that for low frequencies the gain is <span class="math display">\[
+A(s \rightarrow 0) = A_0 = \frac{g_\mathrm{m12}}{g_\mathrm{ds2} + g_\mathrm{ds4}}
+\]</span> which is plausible, and confirms the requirement of a high impedance at the output node. For very large frequencies we get <span id="eq-simple-ota-highf"><span class="math display">\[
+A (s \rightarrow \infty) = \frac{g_\mathrm{m12}}{2 s C_\mathrm{load}}
+\tag{15}\]</span></span> which is essentially the behaviour of an integrator, and we can use <a href="#eq-simple-ota-highf" class="quarto-xref">Equation&nbsp;15</a> to calculate the frequency where the gain drops to <span class="math inline">\(1\)</span>: <span class="math display">\[
+f_\mathrm{ug} = \frac{g_\mathrm{m12}}{4 \pi C_\mathrm{load}}
+\]</span></p>
+<p>when looking at <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;14</a> we see that we have a dominant pole at <span class="math inline">\(s_\mathrm{p}\)</span> and a pole-zero doublet with <span class="math inline">\(s_\mathrm{pd}\)</span>/<span class="math inline">\(s_\mathrm{zd}\)</span>: <span class="math display">\[
+s_\mathrm{p} = -\frac{g_\mathrm{ds2} + g_\mathrm{ds4}}{C_\mathrm{load}}
+\]</span> <span class="math display">\[
+s_\mathrm{pd} = -\frac{g_\mathrm{m34}}{C_\mathrm{gs34}}
+\]</span> <span class="math display">\[
+s_\mathrm{zd} = -\frac{2 g_\mathrm{m34}}{C_\mathrm{gs34}}
+\]</span></p>
+<section id="ota-noise" class="level4">
+<h4 class="anchored" data-anchor-id="ota-noise">OTA Noise</h4>
+<p>For the noise analysis we ignore the pole-zero doublet due to <span class="math inline">\(C_\mathrm{gs34}\)</span> (we assume minor impact due to this) and just consider the dominant pole. For the noise analysis at the output we set the input signal to zero, and thus we arrive at the simplified small-signal circuit shown in <a href="#fig-basic-ota-small-signal-noise" class="quarto-xref">Figure&nbsp;22</a>.</p>
+<div id="cell-fig-basic-ota-small-signal-noise" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<div id="fig-basic-ota-small-signal-noise" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-basic-ota-small-signal-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-basic-ota-small-signal-noise-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-36" title="Figure&nbsp;22: 5-transistor OTA small-signal model for noise calculation."><img src="index_files/figure-html/fig-basic-ota-small-signal-noise-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;22: 5-transistor OTA small-signal model for noise calculation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We see that <span class="math display">\[
+\overline{V_\mathrm{gs34}^2} = \frac{1}{g_\mathrm{m34}^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right).
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that <strong>uncorrelated</strong> noise quantities need to be power-summed (i.e., <span class="math inline">\(I^2 = I_1^2 + I_2^2\)</span>)!</p>
+</div>
+</div>
+<p>We can then sum the output noise current <span class="math inline">\(\overline{I_\mathrm{n}}\)</span> as <span class="math display">\[
+\overline{I_\mathrm{n}^2} = \overline{I_\mathrm{n2}^2} + \overline{I_\mathrm{n4}^2} + g_\mathrm{m34}^2 \frac{1}{g_\mathrm{m34}^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right) = 2 \left( \overline{I_\mathrm{n12}^2} + \overline{I_\mathrm{n34}^2} \right).
+\]</span></p>
+<p>As a next step, let us rewrite the OTA transfer function <span class="math inline">\(A(s)\)</span> (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;14</a>) by getting rid of the pole-zero doublet as a simplyfing assumption to get <span id="eq-simple-ota-gain-simplified"><span class="math display">\[
+A'(s) = \frac{g_\mathrm{m12}}{g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}}.
+\tag{16}\]</span></span></p>
+<p>Inspecting <a href="#eq-simple-ota-gain-simplified" class="quarto-xref">Equation&nbsp;16</a> we can interpret the OTA transfer function as a transconductor <span class="math inline">\(g_\mathrm{m12}\)</span> driving a load of <span class="math inline">\(Y_\mathrm{load} = g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}\)</span>. We can thus redraw <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a> in the following way, injecting the previously calculated noise current into the output node. The result is shown in <a href="#fig-voltage-buffer-ota-noise" class="quarto-xref">Figure&nbsp;23</a>.</p>
+<div id="cell-fig-voltage-buffer-ota-noise" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<div id="fig-voltage-buffer-ota-noise" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-voltage-buffer-ota-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-voltage-buffer-ota-noise-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-37" title="Figure&nbsp;23: A voltage buffer redrawn for noise analysis."><img src="index_files/figure-html/fig-voltage-buffer-ota-noise-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-voltage-buffer-ota-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;23: A voltage buffer redrawn for noise analysis.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We see that the feedback around the transconductor <span class="math inline">\(g_\mathrm{m}\)</span> creates an impedance of <span class="math inline">\(1/g_\mathrm{m}\)</span>. We can now calculate the effective load conductance of <span class="math display">\[
+Y'_\mathrm{load} = g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load} + g_\mathrm{m}\approx g_\mathrm{m}+ s C_\mathrm{load}.
+\]</span></p>
+<p>The output noise voltage is then <span class="math display">\[
+\overline{V_\mathrm{n,out}^2}(s) = \frac{\overline{I_\mathrm{n}^2}}{|g_\mathrm{m}+ s C_\mathrm{load}|^2} =
+\]</span></p>
+</section>
 </section>
 </section>
 <section id="cascode-stage" class="level2">
@@ -1396,15 +1562,158 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 <section id="summary-conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="summary-conclusion">Summary &amp; Conclusion</h2>
 </section>
-<section id="appendix-ngspice-cheat-sheet" class="level2">
-<h2 class="anchored" data-anchor-id="appendix-ngspice-cheat-sheet">Appendix: ngspice Cheat Sheet</h2>
+<section id="sec-middlebrook-method" class="level2">
+<h2 class="anchored" data-anchor-id="sec-middlebrook-method">Appendix: Middlebrook’s Method</h2>
+<p>When we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;24</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;25</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed, and the bias points are also correct.</p>
+<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display">
+<div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-38" title="Figure&nbsp;24: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;24: Middlebrook voltage loop gain simulation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-39" title="Figure&nbsp;25: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;25: Middlebrook current loop gain simulation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For both cases we do an ac analysis, and find the corresponding transfer functions <span class="math inline">\(T_\mathrm{v}\)</span> and <span class="math inline">\(T_\mathrm{i}\)</span> as <span class="math display">\[
+T_\mathrm{v} = -\frac{V_\mathrm{r}}{V_\mathrm{f}}
+\]</span> and <span class="math display">\[
+T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}.
+\]</span></p>
+<p>Then, we can calculate the closed-loop transfer function <span class="math inline">\(T(s) = H_\mathrm{ol(s)}\)</span> as <span class="math display">\[
+T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}.
+\]</span></p>
 </section>
-<section id="appendix-xschem-cheat-sheet" class="level2 unnumbered">
-
+<section id="appendix-ngspice-cheatsheet" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-ngspice-cheatsheet">Appendix: ngspice Cheatsheet</h2>
+<p>Here is an unsorted list of useful ngspice settings and command:</p>
+<section id="commands" class="level3">
+<h3 class="anchored" data-anchor-id="commands">Commands</h3>
+<ul>
+<li><code>ac dec|lin points fstart fstop</code> performs a small-signal ac analysis with either linear or decade sweep</li>
+<li><code>dc sourcename vstart vstop vincr [src2 start2 stop2 incr2]</code> runs a dc-sweep, optionally across two variables</li>
+<li><code>display</code> shows the available data vectors in the current plot</li>
+<li><code>echo</code> can be used to display text, <code>$variable</code> or <code>$&amp;vector</code>, can be useful for debugging</li>
+<li><code>let name = expr</code> to create a new vector; <code>unlet vector</code> deletes a specified vector; access vector data with <code>$&amp;vec</code></li>
+<li><code>linearize vec</code> linearizes a vector on an equidistant time scale, do this before an FFT; with <code>set specwindow=windowtype</code> a proper windowing function can be set</li>
+<li><code>meas</code> can be used for various evaluations of measurement results (see ngspice manual for details)</li>
+<li><code>noise v(output &lt;ref&gt;) src (dec|lin) pts fstart fstop</code> runs a small-signal noise analysis</li>
+<li><code>op</code> calculates the operating point, useful for checking bias points and device parameters</li>
+<li><code>plot expr vs scale</code> to plot something</li>
+<li><code>print expr</code> to print it, use <code>print all</code> to print everything</li>
+<li><code>remzerovec</code> can be useful to remove vectors with zero length, which otherwise cause issues when saving or plotting data</li>
+<li><code>rusage</code> plot information about resource usage like memory</li>
+<li><code>save all</code> or <code>save signal</code> specifies which data is saved during simulation; this lowers RAM usage during simulation and size of RAW file; do save before the actual simulation statement</li>
+<li><code>setplot</code> show a list of available plots</li>
+<li><code>set var = value</code> to set the value of a variable; use variable with <code>$var</code>; <code>unset var</code> removes a variable</li>
+<li><code>set enable_noisy_r</code> to enable noise of behavioral resistors; usually, this is a good idea</li>
+<li><code>shell cmd</code> to run a shell command</li>
+<li><code>show : param</code>, like <code>show : gm</code> shows the <span class="math inline">\(g_\mathrm{m}\)</span> of all devices after running an operating point with <code>op</code></li>
+<li><code>spec</code> plots a spectrum (i.e.&nbsp;frequency domain plot)</li>
+<li><code>status</code> shows the saved parameters and nodes</li>
+<li><code>tf</code> runs a transfer function analysis, returning transfer function, input and output resistance</li>
+<li><code>tran tstep tstop &lt;tstart &lt;tmax&gt;&gt;</code> runs a transient analysis until <code>tstop</code>, reporting results with <code>tstep</code> stepsize, starting to plot at <code>tstart</code> and performs time steps not larger then <code>tmax</code></li>
+<li><code>wrdata</code> writes data into a file in a tabular ASCII format; easy to further process</li>
+<li><code>write</code> writes simulation data (the saved nodes) into a RAW file; default is binary, can be changed to ASCII with <code>set filetype=ascii</code>; with <code>set appendwrite</code> data is added to an existing file</li>
+</ul>
+</section>
+<section id="options" class="level3">
+<h3 class="anchored" data-anchor-id="options">Options</h3>
+<p>Use <code>option option=val option=val</code> to set various options; important ones are:</p>
+<ul>
+<li><code>abstol</code> sets the absolute current error tolerance (default is 1pA)</li>
+<li><code>gmin</code> is the conductance applied at every node for convergence improvement (default is 1e-12); this can be critical for very high impedance circuits</li>
+<li><code>klu</code> sets the KLU matrix solver</li>
+<li><code>list</code> print the summary listing of the input data</li>
+<li><code>maxord</code> sets the numerical order of the integration method (default is 2 for Gear)</li>
+<li><code>method</code> set the numerical integration method to <code>gear</code> or <code>trap</code> (default is <code>trap</code>)</li>
+<li><code>node</code> prints the node table</li>
+<li><code>opts</code> prints the option values</li>
+<li><code>temp</code> sets the simulation temperature</li>
+<li><code>reltol</code> set the relative error tolerance (default is 0.001 = 0.1%)</li>
+<li><code>savecurrents</code> saves the terminal currents of all devices</li>
+<li><code>sparse</code> sets the sparse matrix solver, which can run noise analysis, but is slower than <code>klu</code></li>
+<li><code>vntol</code> sets the absolute voltage error tolerance (default is 1µV)</li>
+<li><code>warn</code> enables the priting of the SOA warning messages</li>
+</ul>
+</section>
+<section id="convergence-helper" class="level3">
+<h3 class="anchored" data-anchor-id="convergence-helper">Convergence Helper</h3>
+<ul>
+<li><code>option gmin</code> can be used to increase the conductance applied at every node</li>
+<li><code>option method=gear</code> can lead to improved convergence</li>
+<li><code>.nodeset</code> can be used to specify initial node voltage guesses</li>
+<li><code>.ic</code> can be used to set initial conditions</li>
+</ul>
+</section>
+</section>
+<section id="appendix-xschem-cheatsheet" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-xschem-cheatsheet">Appendix: Xschem Cheatsheet</h2>
+<p>When opening Xschem, using <code>Help -&gt; Keys</code> a pop-up windows comes up with many useful shortcuts. The most useful are:</p>
+<section id="moving-around-in-a-schematic" class="level4">
+<h4 class="anchored" data-anchor-id="moving-around-in-a-schematic">Moving around in a schematic:</h4>
+<ul>
+<li><code>Cursor keys</code> to move around</li>
+<li><code>Ctrl-e</code> to go back to parent schematic</li>
+<li><code>e</code> to descend into selected symbol</li>
+<li><code>f</code> full zoom on schematic</li>
+<li><code>Shift-z</code> to zoom in</li>
+<li><code>Ctrl-z</code> to zoom out</li>
+</ul>
+</section>
+<section id="editing-schematics" class="level4">
+<h4 class="anchored" data-anchor-id="editing-schematics">Editing schematics:</h4>
+<ul>
+<li><code>Del</code> to delete elements</li>
+<li><code>Ins</code> to insert elements from library</li>
+<li><code>Escape</code> to abort an operation</li>
+<li><code>Ctrl-#</code> to rename components with duplicate names</li>
+<li><code>c</code> to copy elements</li>
+<li><code>Alt-Shift-l</code> to add wire lable</li>
+<li><code>Alt-l</code> to add lable pin</li>
+<li><code>m</code> move selected objects</li>
+<li><code>q</code> to edit properties</li>
+<li><code>Ctrl-s</code> to save schematic</li>
+<li><code>t</code> to place a text</li>
+<li><code>Shift-T</code> to toggle the <code>ignore</code> flag on an instance</li>
+<li><code>u</code> to undo an operation</li>
+<li><code>w</code> to draw a wire</li>
+<li><code>Shift-W</code> draw wire and snap to close pin or netpoint</li>
+<li><code>&amp;</code> to join, break, and collapse wires</li>
+</ul>
+</section>
+<section id="viewingsimulating-schematics" class="level4">
+<h4 class="anchored" data-anchor-id="viewingsimulating-schematics">Viewing/Simulating Schematics</h4>
+<ul>
+<li><code>5</code> to only view probes</li>
+<li><code>k</code> to highlight selected net</li>
+<li><code>Shift-K</code> to unhighlight all nets</li>
+<li><code>Shift-o</code> to toggle light/dark color scheme</li>
+<li><code>s</code> to run a simulation</li>
+</ul>
 
 </section>
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Appendix: Xschem Cheat Sheet</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Hellen_2003" class="csl-entry" role="listitem">
 Hellen, Edward H. 2003. <span>“<span class="nocase">Verifying the diode–capacitor circuit voltage decay</span>.”</span> <em>American Journal of Physics</em> 71 (8): 797–800. <a href="https://doi.org/10.1119/1.1578070">https://doi.org/10.1119/1.1578070</a>.
 </div>
@@ -1846,7 +2155,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
