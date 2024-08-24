@@ -23,6 +23,8 @@ with sd.Drawing(canvas='svg') as d:
     Ids = elm.SourceI().down().label('IDS = f(VGS, VDS, VSB)')
     d.pop()
     elm.Line().right().dot(open=True).length(2).label('D', 'right')
-    d.move(dy=-2, dx=0)
-    elm.Line().down().toy(l1.end).dot(open=True).label('B', 'left')
+    d.move(dy=-2, dx=-2)
+    d.move(dy=0, dx=2)
+    #elm.Gap().right().label(['+', 'VSB', '-'])
+    elm.Line().down().toy(l1.end).dot(open=True).label('B', 'left').idot(open=True)
 ```
