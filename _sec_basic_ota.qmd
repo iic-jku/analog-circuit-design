@@ -37,7 +37,7 @@ The first step when receiving a design task is to look at the specifications, an
 
 - In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met.
 - When the input is at its maximum of $1.3\,\text{V}$, we see that we need to keep $M_1$ in saturation. We can calculate that $\VDS[1] = \VDD - |\VGS[3]| + \VGS[1] - V_\mathrm{in} = 1.45 - 0.6 + 0.6 - 1.3 = 0.15\,\text{V}$, which barely leaves enough margin, so we must keep the gate-source voltages of $M_1$ and $M_3$ resonably small.
-- When the input is at its minimum of $1.1\,\text{V}$, we see that the $\VDS[6]$ of $M_6$ is calculated as $\V[5] = V_\mathrm{in} - \VGS[1] = 1.1 - 0.6 = 0.5\,\text{V}$, so this leaves plenty of margin.
+- When the input is at its minimum of $1.1\,\text{V}$, we see that the $\VDS[5]$ of $M_5$ is calculated as $\VGS[5] = V_\mathrm{in} - \VGS[1] = 1.1 - 0.6 = 0.5\,\text{V}$, so this leaves plenty of margin.
 - For the output voltage, when the output voltage is on the high side, it leaves $|\VDS[4]| = \VDD - V_\mathrm{out} = 1.45 - 1.3 = 0.15\,\text{V}$, whis is on the edge.
 - When the output voltage is on the low side, it leaves $\VDS[2] = V_\mathrm{out} - V_\mathrm{in} + \VGS[2] = 1.3 - 1.55 + 0.6 = 0.35\,\text{V}$, so this should work.
 
