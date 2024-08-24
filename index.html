@@ -1011,56 +1011,8 @@ H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g
 <li>there is a pole at <span class="math inline">\(\omega_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\)</span>, which is at <span class="math inline">\(9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\)</span>.</li>
 </ol>
 <p>With this single pole location in <span class="math inline">\(H_\mathrm{ol}(s)\)</span> this loop is perfectly stable at under all conditions.</p>
-<p>The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Middlebrook's Method">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Middlebrook’s Method
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When we want to do an open-loop gain analysis, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;12</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;13</a>.</p>
-</div>
-</div>
-<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-display">
-<div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="Figure&nbsp;12: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12: Middlebrook voltage loop gain simulation.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="9">
-<div class="cell-output cell-output-display">
-<div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Figure&nbsp;13: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13: Middlebrook current loop gain simulation.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>For both cases we do an ac analysis, and find the corresponding transfer functions <span class="math inline">\(T_\mathrm{v}\)</span> and <span class="math inline">\(T_\mathrm{i}\)</span>: <span class="math display">\[
-T_\mathrm{v} = -\frac{V_\mathrm{r}}{V_\mathrm{f}}
-\]</span> and <span class="math display">\[
-T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}
-\]</span></p>
-<p>Then, we can calculate the closed-loop transfer function <span class="math inline">\(T(s) = H_\mathrm{ol(s)}\)</span> as <span class="math display">\[
-T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}
-\]</span></p>
+<p>The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
+<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <strong>?@sec-middlebrook-method</strong>.</p>
 <p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s method and confirm our analysis above.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center">
@@ -1073,14 +1025,14 @@ Exercise
 </div>
 <div class="callout-body-container callout-body">
 <p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;6</a>.</p>
-<p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_loopgain.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;14</a>.</p>
+<p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_loopgain.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;12</a>.</p>
 <div id="fig-mosfet-diode-loopgain-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mosfet-diode-loopgain-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/mosfet_diode_loopgain.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" title="Figure&nbsp;14: Testbench for MOSFET diode stability analysis."><img src="./xschem/mosfet_diode_loopgain.png" class="img-fluid figure-img"></a>
+<a href="./xschem/mosfet_diode_loopgain.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="Figure&nbsp;12: Testbench for MOSFET diode stability analysis."><img src="./xschem/mosfet_diode_loopgain.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-loopgain-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14: Testbench for MOSFET diode stability analysis.
+Figure&nbsp;12: Testbench for MOSFET diode stability analysis.
 </figcaption>
 </figure>
 </div>
@@ -1091,16 +1043,16 @@ Figure&nbsp;14: Testbench for MOSFET diode stability analysis.
 <section id="mosfet-diode-noise-calculation" class="level3">
 <h3 class="anchored" data-anchor-id="mosfet-diode-noise-calculation">MOSFET Diode Noise Calculation</h3>
 <p>As a final exercise on the MOSFET diode circuit we want to calculate the output noise when we consider <span class="math inline">\(V_\mathrm{GS}\)</span> the output reference voltage which is created when passing a bias current through the MOSFET diode. The bias current we will assume noiseless.</p>
-<p>We will use the small-signal circuit shown in <a href="#fig-mosfet-diode-small-signal-w-noise" class="quarto-xref">Figure&nbsp;15</a>.</p>
-<div id="cell-fig-mosfet-diode-small-signal-w-noise" class="cell" data-execution_count="10">
+<p>We will use the small-signal circuit shown in <a href="#fig-mosfet-diode-small-signal-w-noise" class="quarto-xref">Figure&nbsp;13</a>.</p>
+<div id="cell-fig-mosfet-diode-small-signal-w-noise" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-diode-small-signal-w-noise" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mosfet-diode-small-signal-w-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-mosfet-diode-small-signal-w-noise-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Figure&nbsp;15: The MOSFET diode small-signal model with drain noise source."><img src="index_files/figure-html/fig-mosfet-diode-small-signal-w-noise-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-mosfet-diode-small-signal-w-noise-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Figure&nbsp;13: The MOSFET diode small-signal model with drain noise source."><img src="index_files/figure-html/fig-mosfet-diode-small-signal-w-noise-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-small-signal-w-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15: The MOSFET diode small-signal model with drain noise source.
+Figure&nbsp;13: The MOSFET diode small-signal model with drain noise source.
 </figcaption>
 </figure>
 </div>
@@ -1165,14 +1117,14 @@ Exercise
 </div>
 <div class="callout-body-container callout-body">
 <p>Please build a simulation testbench in Xschem to simulate the noise performance of the MOSFET diode, and confirm the rms noise value that we just calculated. Look at the rms value and the PSD of the noise, and play around with the integration limits. What is the effect? Can you see the flicker noise in the PSD? How much is its contribution to the rms noise?</p>
-<p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_noise.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-noise-tb" class="quarto-xref">Figure&nbsp;16</a>.</p>
+<p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_noise.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-noise-tb" class="quarto-xref">Figure&nbsp;14</a>.</p>
 <div id="fig-mosfet-diode-noise-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mosfet-diode-noise-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/mosfet_diode_noise.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure&nbsp;16: Testbench for MOSFET diode noise analysis."><img src="./xschem/mosfet_diode_noise.png" class="img-fluid figure-img"></a>
+<a href="./xschem/mosfet_diode_noise.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" title="Figure&nbsp;14: Testbench for MOSFET diode noise analysis."><img src="./xschem/mosfet_diode_noise.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-noise-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;16: Testbench for MOSFET diode noise analysis.
+Figure&nbsp;14: Testbench for MOSFET diode noise analysis.
 </figcaption>
 </figure>
 </div>
@@ -1187,16 +1139,16 @@ Figure&nbsp;16: Testbench for MOSFET diode noise analysis.
 </section>
 <section id="sec-current-mirror" class="level2">
 <h2 class="anchored" data-anchor-id="sec-current-mirror">Current Mirror</h2>
-<p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the <strong>current mirror</strong>. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;17</a> with one MOSFET diode converting the incoming bias current into a voltage, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created atn once. Shown in the figure are two output currents, but any number of parallel branches can be realized.</p>
-<div id="cell-fig-current-mirror" class="cell" data-execution_count="11">
+<p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the <strong>current mirror</strong>. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;15</a> with one MOSFET diode converting the incoming bias current into a voltage, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created atn once. Shown in the figure are two output currents, but any number of parallel branches can be realized.</p>
+<div id="cell-fig-current-mirror" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div id="fig-current-mirror" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-current-mirror-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-current-mirror-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-31" title="Figure&nbsp;17: A current mirror with two output branches."><img src="index_files/figure-html/fig-current-mirror-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-current-mirror-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Figure&nbsp;15: A current mirror with two output branches."><img src="index_files/figure-html/fig-current-mirror-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-current-mirror-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17: A current mirror with two output branches.
+Figure&nbsp;15: A current mirror with two output branches.
 </figcaption>
 </figure>
 </div>
@@ -1208,7 +1160,7 @@ I_\mathrm{out1} = I_\mathrm{bias} \frac{W_2}{L_2} \frac{L_1}{W_1}
 I_\mathrm{out2} = I_\mathrm{bias} \frac{W_3}{L_3} \frac{L_1}{W_1}.
 \]</span></p>
 <p>For good matching in layout care has to be taken that the MOSFET widths and lengths are constructed out of <strong>unit elements</strong> of identical size, where an appropiate amount of these single units are then arranged in series or parallel configuration to arrive at the target <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>.</p>
-<p>As we know from earlier investigations of the MOSFET performance in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> the drain current of a MOSFET is a function of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>. As long as the MOSFET stays in saturation (i.e., <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{ds,dsat}\)</span>) the drain current is just a mild function of <span class="math inline">\(V_\mathrm{DS}\)</span> (essentially the effect of <span class="math inline">\(g_\mathrm{ds}\)</span>, which is the output conductance of the MOSFET). A fundamental flaw of the basic current mirror shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;17</a> is the mismatch of the <span class="math inline">\(V_\mathrm{DS}\)</span> of the MOSFET. The input-side diode has <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{DS}\)</span>, whereas the output current sources have a <span class="math inline">\(V_\mathrm{DS}\)</span> depending on the connected circuitry. Improved current mirrors exist (basically fixing this flaw), still, when just a simple current mirror is required this structure is used for its simplicity.</p>
+<p>As we know from earlier investigations of the MOSFET performance in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> the drain current of a MOSFET is a function of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>. As long as the MOSFET stays in saturation (i.e., <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{ds,dsat}\)</span>) the drain current is just a mild function of <span class="math inline">\(V_\mathrm{DS}\)</span> (essentially the effect of <span class="math inline">\(g_\mathrm{ds}\)</span>, which is the output conductance of the MOSFET). A fundamental flaw of the basic current mirror shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;15</a> is the mismatch of the <span class="math inline">\(V_\mathrm{DS}\)</span> of the MOSFET. The input-side diode has <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{DS}\)</span>, whereas the output current sources have a <span class="math inline">\(V_\mathrm{DS}\)</span> depending on the connected circuitry. Improved current mirrors exist (basically fixing this flaw), still, when just a simple current mirror is required this structure is used for its simplicity.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1228,16 +1180,16 @@ Exercise
 </section>
 <section id="sec-diff-pair" class="level2">
 <h2 class="anchored" data-anchor-id="sec-diff-pair">Differential Pair</h2>
-<p>Like the current mirror in <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;5</a> the <strong>differential pair</strong> is an ubiquitous building block often used in integrated circuit design. The fundamental structure is given in <a href="#fig-differential-pair" class="quarto-xref">Figure&nbsp;18</a>.</p>
-<div id="cell-fig-differential-pair" class="cell" data-execution_count="12">
+<p>Like the current mirror in <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;5</a> the <strong>differential pair</strong> is an ubiquitous building block often used in integrated circuit design. The fundamental structure is given in <a href="#fig-differential-pair" class="quarto-xref">Figure&nbsp;16</a>.</p>
+<div id="cell-fig-differential-pair" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-differential-pair" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-differential-pair-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-differential-pair-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Figure&nbsp;18: A differential pair."><img src="index_files/figure-html/fig-differential-pair-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-differential-pair-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure&nbsp;16: A differential pair."><img src="index_files/figure-html/fig-differential-pair-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-differential-pair-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18: A differential pair.
+Figure&nbsp;16: A differential pair.
 </figcaption>
 </figure>
 </div>
@@ -1263,19 +1215,19 @@ i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = g_\mathrm{m}v_\mathrm{in}
 </section>
 <section id="common-mode-operation-of-the-diffpair" class="level3">
 <h3 class="anchored" data-anchor-id="common-mode-operation-of-the-diffpair">Common-Mode Operation of the Diffpair</h3>
-<p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>. If this is the case, then the output currents are not a function of the common-mode input voltage (at least as long as bias points keep the MOSFET in triode), and (<span class="math inline">\(I_\mathrm{tail}\)</span> is set by the tail current source) <span class="math display">\[
+<p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>. If this is the case, then the output currents are not a function of the common-mode input voltage, and (<span class="math inline">\(I_\mathrm{tail}\)</span> is set by the tail current source) <span class="math display">\[
 I_\mathrm{out,p} = I_\mathrm{out,n} = \frac{I_\mathrm{tail}}{2}.
 \]</span></p>
-<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since everything is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We arrive then at the small-signal equivalent circuit shown in <a href="#fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;19</a> (note that we set <span class="math inline">\(v_\mathrm{in,p} = v_\mathrm{in,n} = v_\mathrm{in}\)</span> and <span class="math inline">\(i_\mathrm{out,p} = i_\mathrm{out,n} = i_\mathrm{out}\)</span> under symmetry considerations).</p>
-<div id="cell-fig-differential-pair-cm" class="cell" data-execution_count="13">
+<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since everything is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We arrive then at the small-signal equivalent circuit shown in <a href="#fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;17</a> (note that we set <span class="math inline">\(v_\mathrm{in,p} = v_\mathrm{in,n} = v_\mathrm{in}\)</span> and <span class="math inline">\(i_\mathrm{out,p} = i_\mathrm{out,n} = i_\mathrm{out}\)</span> under symmetry considerations).</p>
+<div id="cell-fig-differential-pair-cm" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div id="fig-differential-pair-cm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-differential-pair-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-differential-pair-cm-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-33" title="Figure&nbsp;19: Small-signal model of the differential pair half-circuit in common-mode operation."><img src="index_files/figure-html/fig-differential-pair-cm-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-differential-pair-cm-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-31" title="Figure&nbsp;17: Small-signal model of the differential pair half-circuit in common-mode operation."><img src="index_files/figure-html/fig-differential-pair-cm-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-differential-pair-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;19: Small-signal model of the differential pair half-circuit in common-mode operation.
+Figure&nbsp;17: Small-signal model of the differential pair half-circuit in common-mode operation.
 </figcaption>
 </figure>
 </div>
@@ -1296,16 +1248,16 @@ i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail
 </section>
 <section id="sec-basic-ota" class="level2">
 <h2 class="anchored" data-anchor-id="sec-basic-ota">A Basic 5-Transistor OTA</h2>
-<p>Suited with the knowledge of basic transitor operation (<a href="#sec-first-steps" class="quarto-xref">Section&nbsp;2</a> and <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>) and the working knowledge of the current mirror (<a href="#sec-mosfet-diode" class="quarto-xref">Section&nbsp;4</a> and <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;5</a>) as well as the differential pair (<a href="#sec-diff-pair" class="quarto-xref">Section&nbsp;6</a>) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;20</a>.</p>
-<div id="cell-fig-basic-ota" class="cell" data-execution_count="14">
+<p>Suited with the knowledge of basic transitor operation (<a href="#sec-first-steps" class="quarto-xref">Section&nbsp;2</a> and <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>) and the working knowledge of the current mirror (<a href="#sec-mosfet-diode" class="quarto-xref">Section&nbsp;4</a> and <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;5</a>) as well as the differential pair (<a href="#sec-diff-pair" class="quarto-xref">Section&nbsp;6</a>) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;18</a>.</p>
+<div id="cell-fig-basic-ota" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-basic-ota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-basic-ota-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-34" title="Figure&nbsp;20: The 5-transistor OTA."><img src="index_files/figure-html/fig-basic-ota-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-basic-ota-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Figure&nbsp;18: The 5-transistor OTA."><img src="index_files/figure-html/fig-basic-ota-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;20: The 5-transistor OTA.
+Figure&nbsp;18: The 5-transistor OTA.
 </figcaption>
 </figure>
 </div>
@@ -1315,22 +1267,22 @@ Figure&nbsp;20: The 5-transistor OTA.
 <p>As this is an OTA the output is a current; if the load impedance is high (i.e., purely capacitive) then the voltage gain of the OTA can be high (of course, in this simple OTA it is limited). With a high-impedance loading this OTA can provide a voltage output, and this is actually how OTAs are mostly operated.</p>
 <section id="voltage-buffer-with-ota" class="level3">
 <h3 class="anchored" data-anchor-id="voltage-buffer-with-ota">Voltage Buffer with OTA</h3>
-<p>In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lighly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;21</a>.</p>
-<div id="cell-fig-voltage-buffer-ota" class="cell" data-execution_count="15">
+<p>In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lighly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a>.</p>
+<div id="cell-fig-voltage-buffer-ota" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div id="fig-voltage-buffer-ota" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-voltage-buffer-ota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-voltage-buffer-ota-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-35" title="Figure&nbsp;21: A voltage buffer (based on OTA) driving a capacitive load."><img src="index_files/figure-html/fig-voltage-buffer-ota-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-voltage-buffer-ota-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-33" title="Figure&nbsp;19: A voltage buffer (based on OTA) driving a capacitive load."><img src="index_files/figure-html/fig-voltage-buffer-ota-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-voltage-buffer-ota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;21: A voltage buffer (based on OTA) driving a capacitive load.
+Figure&nbsp;19: A voltage buffer (based on OTA) driving a capacitive load.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>If the voltage gain of the OTA is <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;21</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application for the following spefication values (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a>).</p>
+<p>If the voltage gain of the OTA is <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application for the following spefication values (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a>).</p>
 <div id="tbl-voltage-buffer-spec" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-voltage-buffer-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1417,7 +1369,7 @@ Table&nbsp;1: Voltage buffer specification
 <li>For the output voltage, when the output voltage is on the high side, it leaves <span class="math inline">\(V_\mathrm{DS4} = V_\mathrm{DD}- V_\mathrm{out} = 1.45 - 1.3 = 0.15\,\text{V}\)</span>, whis is on the edge.</li>
 <li>When the output voltage is on the low side, it leaves <span class="math inline">\(V_\mathrm{DS2} = V_\mathrm{out} - V_\mathrm{in} + V_\mathrm{GS2} = 1.3 - 1.55 + 0.6 = 0.35\,\text{V}\)</span>, so this should work.</li>
 </ul>
-<p>In summary, we think that we can make an NMOS-input OTA like the one in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;20</a> work for the required supply and input- and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.</p>
+<p>In summary, we think that we can make an NMOS-input OTA like the one in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;18</a> work for the required supply and input- and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.</p>
 <p>Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, we complete bias current in the OTA is steered towards the output (try to understand why this is the case), so when the output capacitor is fully discharged, and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is <span class="math display">\[
 T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 1.3}{100 \cdot 10^{-6}} = 0.65\,\text{ns}
 \]</span> so this leaves plenty of margin for additional slow-signal settling due to the limited bandwidth, as well as reducing the supply current.</p>
@@ -1894,7 +1846,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
