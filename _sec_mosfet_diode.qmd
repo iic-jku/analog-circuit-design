@@ -99,29 +99,9 @@ Inspecting @eq-mosfet-diode-openloop-gain we realize that
 
 With this single pole location in $H_\mathrm{ol}(s)$ this loop is perfectly stable at under all conditions.
 
-The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called **Middlebrook's method** [@Middlebrook_1975] which is based on double injection, and we will use it for our loop simulations.
+The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. 
 
-::: {.callout-note title="Middlebrook's Method"}
-When we want to do an open-loop gain analysis, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in @fig-middlebrook-voltage and @fig-middlebrook-current. 
-
-{{< include figures/_fig_middlebrook_voltage.qmd >}}
-{{< include figures/_fig_middlebrook_current.qmd >}}
-
-For both cases we do an ac analysis, and find the corresponding transfer functions $T_\mathrm{v}$ and $T_\mathrm{i}$:
-$$
-T_\mathrm{v} = -\frac{V_\mathrm{r}}{V_\mathrm{f}}
-$$
-and
-$$
-T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}
-$$
-
-Then, we can calculate the closed-loop transfer function $T(s) = H_\mathrm{ol(s)}$ as
-$$
-T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}
-$$
-
-:::
+There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called **Middlebrook's method** [@Middlebrook_1975] which is based on double injection, and we will use it for our loop simulations. This method is detailed in @sec-middlebrook-method.
 
 We now want to simulate the open-loop transfer function $H_\mathrm{ol}(s)$ by using Middlebrook's method and confirm our analysis above.
 
