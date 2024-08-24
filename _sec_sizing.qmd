@@ -80,13 +80,9 @@ Please also note that the pair of $k T$ pretty much always shows up together, so
 Further, when working with PSD there is the usage of a one-sided ($f$ runs from $0$ to $\infty$) or two-sided PSD ($f$ runs from $-\infty$ to $\infty$). The default in this lecture is the usage of a **one-sided PSD**.
 :::
 
-In this lecture the only MOSFET noise we consider is the drain noise, showing up as a current noise between drain and source, and given by
-$$
-\overline{I_\mathrm{d,n}^2} = 4 k T \gamma g_\mathrm{d0}
-$$ {#eq-mosfet-noise}
-In saturation (the MOSFET operating as a current source), $g_\mathrm{d0} = \gm$, whereas in triode (the MOSFET operating as a switch), $g_\mathrm{d0} = \gds$. 
+In this lecture the only MOSFET noise we consider is the drain noise (as discussed in @sec-mosfet-smallsignal-model), showing up as a current noise between drain and source. For a for realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.
 
-The factor $\gamma$ is a function of many things (in classical theory, $\gamma = 2/3$ in saturation and $\gamma = 1$ in triode), and it is characterized in the following plot as a function of $\gmid$ and $L$. So when calculating MOSFET noise we can lookup $\gamma$ in the below plot, and use @eq-mosfet-noise to calculate the effective drain current noise.
+The factor $\gamma$ (@eq-mosfet-noise) is a function of many things (in classical theory, $\gamma = 2/3$ in saturation and $\gamma = 1$ in triode), and it is characterized in the following plot as a function of $\gmid$ and $L$. So when calculating MOSFET noise we can lookup $\gamma$ in the below plot, and use @eq-mosfet-noise to calculate the effective drain current noise.
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gamma-vs-gmid-vs-l >}}
 
