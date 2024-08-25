@@ -7,7 +7,7 @@ import schemdraw.elements as elm
 with sd.Drawing(canvas='svg') as d:
     d.config(unit=2)
     d.config(fontsize=16)
-    op = elm.Opamp().flip().label('gm', loc='center', ofst=0)
+    op = elm.Opamp().flip().label('gm12', loc='center', ofst=0)
     elm.Line().left().length(2).at(op.in2)
     elm.Ground()
 
@@ -18,7 +18,7 @@ with sd.Drawing(canvas='svg') as d:
     noise = d.here
 
     elm.Line().right().length(3).label('Vout')
-    Cload = elm.Capacitor().down().label('Zload')
+    Cload = elm.Capacitor().down().label('Yload')
     elm.Ground()
     
     d.pop()
@@ -27,7 +27,7 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().up().toy(op.in1)
     elm.Line().right().to(op.in1)
 
-    elm.ZLabel().at(nc).left().label('1/gm', ofst=(0,-0.5))
+    elm.ZLabel().at(nc).left().label('1/gm12', ofst=(0,-0.5))
 
     In = elm.SourceI().at(noise).down().label('In')
     elm.Ground()
