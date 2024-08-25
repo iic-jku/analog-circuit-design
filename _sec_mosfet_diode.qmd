@@ -38,7 +38,7 @@ An example Jupyter notebook to extract these values accurately you can find [her
 
 As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyse this loop in small-signal, we want to investgate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behaviour. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some ns. The resulting Xschem testbench is shown in @fig-mosfet-diode-settling-tb.
 
-![Testbench for MOSFET diode transient settling.](./xschem/mosfet_diode_settling.png){#fig-mosfet-diode-settling-tb}
+![Testbench for MOSFET diode transient settling.](./xschem/mosfet_diode_settling.svg){#fig-mosfet-diode-settling-tb}
 
 In @fig-mosfet-diode-settling-tb another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current the $\VGS$ drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to the capacitor discharge by a diode [@Hellen_2003].
 
@@ -110,7 +110,7 @@ Please build a simulation testbench in Xschem to simulate the open-loop transfer
 
 If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_loopgain.sch), shown in @fig-mosfet-diode-loopgain-tb.
 
-![Testbench for MOSFET diode stability analysis.](./xschem/mosfet_diode_loopgain.png){#fig-mosfet-diode-loopgain-tb}
+![Testbench for MOSFET diode stability analysis.](./xschem/mosfet_diode_loopgain.svg){#fig-mosfet-diode-loopgain-tb}
 :::
 
 From simulation we see that the open-loop gain is $24.9\,\text{dB}$ at low frequencies, which matches quite well our prediction of $26.4\,\text{dB}$. In the Bode plot we see a low-pass with a $-3\,\text{dB}$ corner frequency of $1.4\,\text{GHz}$, which again is fairly close to our prediction of $1.1\,\text{GHz}$. 
@@ -175,7 +175,7 @@ Please build a simulation testbench in Xschem to simulate the noise performance 
 
 If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_noise.sch), shown in @fig-mosfet-diode-noise-tb.
 
-![Testbench for MOSFET diode noise analysis.](./xschem/mosfet_diode_noise.png){#fig-mosfet-diode-noise-tb}
+![Testbench for MOSFET diode noise analysis.](./xschem/mosfet_diode_noise.svg){#fig-mosfet-diode-noise-tb}
 :::
 
 ### Conclusion
