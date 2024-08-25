@@ -66,6 +66,46 @@
 \fi
 \makeatother
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -239,7 +279,7 @@ technology \textbf{SG13G2} from IHP Microelectronics is used.
 Tools and PDK are integrated in the \textbf{IIC-OSIC-TOOLS} Docker
 image, which will be used during the coursework.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 All course material is made publicly available on GitHub and shared
 under the Apache-2.0 license.
@@ -348,7 +388,7 @@ information like installed tools, how to setup a VM, etc. please look at
 \href{https://github.com/iic-jku/IIC-OSIC-TOOLS}{IIC-OSIC-TOOLS GitHub
 page}.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
 
 Please make sure to receive information about your personal VM access
 ahead of the course start.
@@ -359,7 +399,7 @@ Experienced users can install this image on their personal computer, for
 JKU students the IIC will host a VM on our compute cluster and provide
 personal login credentials.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 In this course, we assume that students have a basic knowledge of Linux
 and how to operate it using the terminal. If you are not yet familiar
@@ -398,7 +438,7 @@ control the drain-source current flow. Often, the bulk is connected to
 source, and then the bulk terminal is not shown to declutter the
 schematics.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 Strictly speaking is the drain-source current of a MOSFET controlled by
 the voltage between gate and bulk and the voltage between drain and
@@ -502,7 +542,7 @@ affected by the
 \href{https://en.wikipedia.org/wiki/Miller_effect}{Miller effect}. In
 hand calculations we will often set \(C_\mathrm{GD}= 0\).
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 The bulk connection in Figure~\ref{fig-mosfet-large-signal-model} seems
 floating as we only consider it a control terminal, where the potential
@@ -536,7 +576,7 @@ Now, in order to get started, basic Xschem testbenches are prepared, and
 first simple dc sweeps of various voltages and currents will be done.
 But before that, please look at the import note below!
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colframe=quarto-callout-important-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white]
 
 Throughout this material, we will stick to the following notations:
 
@@ -579,7 +619,7 @@ testbench for the LV NMOS shown in Figure~\ref{fig-simple-nmos-tb}.
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
 
 Please try to execute the following steps and answer these questions:
 
@@ -709,7 +749,7 @@ saturation and \(\gamma =1\) for triode operation; \(g_\mathrm{d0}\) is
 equal to \(g_\mathrm{m}\) in saturation and \(g_\mathrm{ds}\) in
 triode).
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 Sometimes we will refer to different operating modes of the MOSFET like
 ``saturation'' or ``triode''. Generally speaking, when the drain-source
@@ -729,7 +769,7 @@ Now we need to see how the small-signal parameters seen in
 Figure~\ref{fig-mosfet-small-signal-model} can be investigated and
 estimated using circuit simulation.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
 
 Please try to execute the following steps and answer the following
 questions:
@@ -811,7 +851,7 @@ simplified derivations introduce concepts like the threshold voltage or
 the overdrive voltage, which are interesting from a theoretical
 viewpoint, but bear little practical use.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 One of the many simplifactions of the square-law model is that the
 mobility of the charge carriers is assumed constant (it is not).
@@ -913,7 +953,7 @@ a large \(g_\mathrm{m}\). We want this by spending the minimum biasing
 current possible (ideally zero), as we always design for minimum power
 consumption. Thus, a high \(g_\mathrm{m}/I_\mathrm{D}\) ratio is good.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 Designing for minimum power consumption is pretty much always mandated.
 For battery-operated equipment it is a paramount requirement, but also
@@ -950,7 +990,7 @@ For the classical square-law model of the MOSFET in strong inversion,
 }\end{equation} with \(V_\mathrm{th}\) the threshold voltage and
 \(V_\mathrm{od}\) the so-called ``overdrive voltage.''
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 Why are we so often using \(300\,\text{K}\) for a typical condition? As
 this corresponds to roughly \(27^{\circ}\text{C}\), this accounts for
@@ -1049,7 +1089,7 @@ frequencies where
 \href{https://en.wikipedia.org/wiki/Johnson–Nyquist_noise}{quantum
 effects} start to kick in.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 We usually leave the \(\Delta f\) away for a shorter notation, so we
 write \(\overline{V_\mathrm{n}^2}\) when we actually mean
@@ -1104,7 +1144,7 @@ However, increasing \(L\) lowers device speed dramatically, so here we
 have a trade-off between flicker-noise performance and MOSFET speed, and
 this can have dramatic consequences for high-speed circuits.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 The physical origin of flicker noise is the crystal interface between
 silicon (Si) and the silicondioxide (SiO\textsubscript{2}). Since these
@@ -1131,7 +1171,7 @@ Notebook}}
 In the following, we have the same plots as discussed in
 Section~\ref{sec-techsweep-nmos}, but now for the PMOS.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 In all PMOS plots we plot positive values for voltages and currents, to
 have compatible plots to the NMOS. Of course, in a PMOS, voltages and
@@ -1166,7 +1206,7 @@ values, which indicates an issue with the \(g_\mathrm{ds}\) modelling
 for the PMOS. We can not use these values for our circuit sizing, so we
 will use the respective NMOS plots also for the PMOS.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colframe=quarto-callout-important-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white]
 
 This example shows how important it is to benchmark the device models
 when starting to use a new technology. Modelling artifacts like the one
@@ -1266,7 +1306,7 @@ and \(L\), a certain gate-source voltage \(V_\mathrm{GS}\) will develop.
 This voltage can be used as a biasing voltage for other circuit parts,
 for example.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 It is important to realize that this configuration essentially employs a
 feedback loop for operation. The voltage at the drain of the MOSFET is
@@ -1282,7 +1322,7 @@ We will now build this circuit in Xschem. For sizing the MOSFET we will
 use the \(g_\mathrm{m}/I_\mathrm{D}\) methodology introduced in
 Section~\ref{sec-gmid-method}.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
 
 Please build a MOSFET diode circuit in Xschem where you use an LV NMOS,
 set \(I_\mathrm{bias} = 20\,\mu\text{A}\), \(L = 0.13\,\mu\text{m}\),
@@ -1308,7 +1348,7 @@ compromise between transistor speed and \(g_\mathrm{m}\) efficiency).
 Before continuing, please finish the previous exercise. Once you are
 done, compare with the below provided solution.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solution}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solution}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1415,7 +1455,7 @@ small-signal model.}
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 For small-signal analysis we would not need to declare one node as the
 ground potential. However, when doing so, and selecting the ground node
@@ -1440,7 +1480,7 @@ When neglecting \(g_\mathrm{ds}\) and at dc we get
 \(Z_\mathrm{diode} = 1 / g_\mathrm{m}\), which is an important result
 and should be memorized.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colframe=quarto-callout-important-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white]
 
 In circuit analysis it is often algebraically easier to work with
 conductances instead of impedances, so please remember that Ohm's law
@@ -1538,7 +1578,7 @@ We now want to simulate the open-loop transfer function
 \(H_\mathrm{ol}(s)\) by using Middlebrook's method and confirm our
 analysis above.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
 
 Please build a simulation testbench in Xschem to simulate the open-loop
 transfer function of the MOSFET diode. Confirm the dc gain and pole
@@ -1629,7 +1669,7 @@ Equation~\ref{eq-mosfet-diode-noise-psd} gives us the result. If we are
 interested in the rms value (the total noise) we need to integrate this
 equation, using the following identity:
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Useful Integral for Noise Calculations}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Useful Integral for Noise Calculations}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 \begin{equation}\phantomsection\label{eq-integral-identity}{
 \int_0^\infty {\frac{a}{b^2 + c^2 f^2} df} = \frac{\pi}{2} \frac{a}{b \cdot c}
@@ -1659,14 +1699,14 @@ which is a sizeable value! We run circuits in this technology at
 of ca. \(1.1\,\mathrm{V_{pp}}\), resulting in a dynamic range in this
 case of \(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\).
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-important-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, colframe=quarto-callout-important-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white]
 
 Large BW circuits can integrate noise over a wide bandwidth resulting in
 considerable rms noise.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
 
 Please build a simulation testbench in Xschem to simulate the noise
 performance of the MOSFET diode, and confirm the rms noise value that we
@@ -1767,7 +1807,7 @@ current mirrors exist (basically fixing this flaw), still, when just a
 simple current mirror is required this structure is used for its
 simplicity.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-tip-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
 
 Please construct a current mirror based on the MOSFET-diode which we
 sized in Section~\ref{sec-mosfet-diode}. The input current
@@ -1977,8 +2017,8 @@ summed, and together with the conductance effective at the output node a
 voltage builds up.
 
 We note that \(M_{1,2}\) and \(M_{3,4}\) need to be symmetric, thus will
-have the same \(W \& L\) dimensionsing. \(M_{5,6}\) we scale accordingly
-to set the correct bias current in the OTA.
+have the same \(W\) and \(L\) dimensioning. \(M_{5,6}\) we scale
+accordingly to set the correct bias current in the OTA.
 
 As this is an OTA the output is a current; if the load impedance is high
 (i.e., purely capacitive, which is often the case in integrated circuits
@@ -2021,12 +2061,13 @@ Notebook}}
 If the voltage gain of the OTA is Figure~\ref{fig-voltage-buffer-ota} is
 high, then \(V_\mathrm{out} \approx V_\mathrm{in}\). We now want to
 design an OTA for this application for the following spefication values
-(see Table~\ref{tbl-voltage-buffer-spec}).
+(see Table~\ref{tbl-voltage-buffer-spec}). These values are rather
+typical of what could be expected for such a buffer design.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.5408}}
-  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3673}}
-  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0918}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.5588}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3529}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0882}}@{}}
 \caption{Voltage buffer
 specification}\label{tbl-voltage-buffer-spec}\tabularnewline
 \toprule\noalign{}
@@ -2052,12 +2093,13 @@ Unit
 \bottomrule\noalign{}
 \endlastfoot
 Load capacitance \(C_\mathrm{load}\) & 50 & fF \\
-Input voltage range (for buffering bandgap voltage) & 1.1---1.3 & V \\
-Signal bandwidth (3dB) & \textgreater1 & MHz \\
+Input voltage range (for buffering 2/3 bandgap voltage) & 0.7
+\textless{} \textbf{0.8} \textless{} 0.9 & V \\
+Signal bandwidth (3dB) & \textgreater10 & MHz \\
 Voltage gain error & \textless5 & \% \\
 Total output noise (rms) & \textless1 & mV\textsubscript{rms} \\
-Supply voltage & 1.45---1.5---1.55 & V \\
-Supply current (as low as possible) & \textless100 & µA \\
+Supply voltage & 1.45 \textless{} \textbf{1.5} \textless{} 1.55 & V \\
+Supply current (as low as possible) & \textless10 & µA \\
 Stability & stable for rated \(C_\mathrm{load}\) & \\
 Turn-on time (settled to with 1\%) & \textless10 & µs \\
 Externally provided bias current (nominal) & 20 & µA \\
@@ -2081,25 +2123,21 @@ procedure.
   input and output voltage range, as well as the settling time can be
   roughly met.
 \item
-  When the input is at its maximum of \(1.3\,\text{V}\), we see that we
+  When the input is at its maximum of \(0.9\,\text{V}\), we see that we
   need to keep \(M_1\) in saturation. We can calculate that
-  \(V_\mathrm{DS1} = V_\mathrm{DD}- |V_\mathrm{GS3}| + V_\mathrm{GS1} - V_\mathrm{in} = 1.45 - 0.6 + 0.6 - 1.3 = 0.15\,\text{V}\),
-  which barely leaves enough margin, so we must keep the gate-source
-  voltages of \(M_1\) and \(M_3\) resonably small.
+  \(V_\mathrm{DS1} = V_\mathrm{DD}- |V_\mathrm{GS3}| + V_\mathrm{GS1} - V_\mathrm{in} = 1.45 - 0.6 + 0.6 - 0.9 = 0.55\,\text{V}\),
+  which leaves enough margin.
 \item
-  When the input is at its minimum of \(1.1\,\text{V}\), we see that the
+  When the input is at its minimum of \(0.7\,\text{V}\), we see that the
   \(V_\mathrm{DS5}\) of \(M_5\) is calculated as
-  \(V_\mathrm{GS5} = V_\mathrm{in} - V_\mathrm{GS1} = 1.1 - 0.6 = 0.5\,\text{V}\),
-  so this leaves plenty of margin.
+  \(V_\mathrm{DS5} = V_\mathrm{in} - V_\mathrm{GS1} = 0.7 - 0.6 = 0.1\,\text{V}\),
+  so this leaves little margin, but likely \(V_\mathrm{GS1}\) will be
+  smaller, so it should work out.
 \item
   For the output voltage, when the output voltage is on the high side,
   it leaves
-  \(|V_\mathrm{DS4}| = V_\mathrm{DD}- V_\mathrm{out} = 1.45 - 1.3 = 0.15\,\text{V}\),
-  whis is on the edge.
-\item
-  When the output voltage is on the low side, it leaves
-  \(V_\mathrm{DS2} = V_\mathrm{out} - V_\mathrm{in} + V_\mathrm{GS2} = 1.3 - 1.55 + 0.6 = 0.35\,\text{V}\),
-  so this should work.
+  \(|V_\mathrm{DS4}| = V_\mathrm{DD}- V_\mathrm{out} = 1.45 - 0.9 = 0.55\,\text{V}\),
+  which is enough margin.
 \end{itemize}
 
 In summary, we think that we can make an NMOS-input OTA like the one in
@@ -2113,7 +2151,7 @@ OTA is steered towards the output (try to understand why this is the
 case), so when the output capacitor is fully discharged, and we assume
 just a linear ramp due to constant-current charging of the output
 capacitor, the settling time is \[
-T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 1.3}{100 \cdot 10^{-6}} = 0.65\,\text{ns}
+T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 1.3}{10 \cdot 10^{-6}} = 6.5\,\text{ns}
 \] so this leaves plenty of margin for additional slow-signal settling
 due to the limited bandwidth, as well as reducing the supply current.
 
@@ -2150,9 +2188,9 @@ gain is given by \[
 
 So in order to reach an output voltage accuracy of at least 5\% we need
 a dc gain of \(A_0 > 25.6\,\text{dB}\). To allow for process and
-temperature variation we will strive for \(A_0 = 30\,\text{dB}\)
+temperature variation we will strive for \(A_0 \ge 30\,\text{dB}\)
 
-\subsubsection{OTA Small-Signal Transfer
+\paragraph{OTA Small-Signal Transfer
 Function}\label{ota-small-signal-transfer-function}
 
 In order to derive the governing equations for the OTA we will make a
@@ -2173,14 +2211,15 @@ few simplififcations:
   We assume \(g_\mathrm{m}\gg g_\mathrm{ds}\), so we set
   \(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\).
 \item
-  The drain capacitance of \(M_2\) and \(M_4\) we can add to the load
-  capacitance \(C_\mathrm{load}\).
+  The drain capacitance of \(M_2\) and \(M_4\), as well as the gate
+  capacitance of \(M_2\) we can add to the load capacitance
+  \(C_\mathrm{load}\).
 \end{itemize}
 
 The resulting small-signal equivalent circuit is shown in
 Figure~\ref{fig-basic-ota-small-signal}.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 Please review the MOSFET small-signal equivalent model in
 Figure~\ref{fig-mosfet-small-signal-model} at this point. For the PMOS
@@ -2217,22 +2256,12 @@ loaded by a low impedance of \(g_\mathrm{m34}^{-1}\) we can approximate
 the impedance looking into \(M_1\) with \(g_\mathrm{m12}^{-1}\)). With
 the approximation that \(g_\mathrm{m}\gg g_\mathrm{ds}\) we can move
 \(g_\mathrm{ds2} + g_\mathrm{ds4}\) in parallel to \(C_\mathrm{load}\).
-Further assuming a differential drive with a virtual ground at the
+Further, assuming a differential drive with a virtual ground at the
 tailpoint we can remove \(g_\mathrm{ds5}\). The current source
 \(g_\mathrm{m34} v_\mathrm{gs34}\) with replace with the equivalent
 conductance \(g_\mathrm{m34}\). This results in the further simplified
 equivalent circuit shown in
 Figure~\ref{fig-basic-ota-small-signal-simplified}.
-
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
-
-For repetition and as a reference, here the simplified relationships for
-the common-source, common-gate, and the common-drain single transistor
-stages:
-
-FIXME -- to be done
-
-\end{tcolorbox}
 
 \textsubscript{Source:
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
@@ -2275,10 +2304,11 @@ A(s) = \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m12}}{2} \frac{2 g
 }\end{equation}
 
 When we now inspect Equation~\ref{eq-simple-ota-gain} we can see that
-for low frequencies the gain is \[
+for low frequencies the gain is
+\begin{equation}\phantomsection\label{eq-simple-ota-gain-dc}{
 A(s \rightarrow 0) = A_0 = \frac{g_\mathrm{m12}}{g_\mathrm{ds2} + g_\mathrm{ds4}}
-\] which is plausible, and confirms the requirement of a high impedance
-at the output node. For very large frequencies we get
+}\end{equation} which is plausible, and confirms the requirement of a
+high impedance at the output node. For very large frequencies we get
 \begin{equation}\phantomsection\label{eq-simple-ota-highf}{
 A (s \rightarrow \infty) = \frac{g_\mathrm{m12}}{2 s C_\mathrm{load}}
 }\end{equation} which is essentially the behaviour of an integrator, and
@@ -2331,7 +2361,7 @@ We see that \[
 \overline{V_\mathrm{gs34}^2} = \frac{1}{g_\mathrm{m34}^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right).
 \]
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, bottomtitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, opacityback=0, leftrule=.75mm, left=2mm, breakable]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
 
 Remember that \textbf{uncorrelated} noise quantities need to be
 power-summed (i.e., \(I^2 = I_1^2 + I_2^2\))!
@@ -2379,15 +2409,340 @@ for noise analysis.}
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-We see that the feedback around the transconductor \(g_\mathrm{m}\)
-creates an impedance of \(1/g_\mathrm{m}\). We can now calculate the
+We see that the feedback around the transconductor \(g_\mathrm{m12}\)
+creates an impedance of \(1/g_\mathrm{m12}\). We can now calculate the
 effective load conductance of \[
-Y'_\mathrm{load} = g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load} + g_\mathrm{m}\approx g_\mathrm{m}+ s C_\mathrm{load}.
+Y'_\mathrm{load} = g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load} + g_\mathrm{m12} \approx g_\mathrm{m12} + s C_\mathrm{load}.
 \]
 
-The output noise voltage is then \[
-\overline{V_\mathrm{n,out}^2}(s) = \frac{\overline{I_\mathrm{n}^2}}{|g_\mathrm{m}+ s C_\mathrm{load}|^2} = 
+The output noise voltage is then (using Equation~\ref{eq-mosfet-noise})
+\[
+\overline{V_\mathrm{n,out}^2}(f) = \frac{\overline{I_\mathrm{n}^2}}{|Y'_\mathrm{load}|^2} = \frac{\overline{I_\mathrm{n}^2}}{g_\mathrm{m12}^2 + (2 \pi f C_\mathrm{load})2^2} = \frac{8 k T (\gamma_{12} g_\mathrm{m12} + \gamma_{34} g_\mathrm{m34})}{g_\mathrm{m12}^2 + (2 \pi f C_\mathrm{load})^2}.
 \]
+
+We can use the identity Equation~\ref{eq-integral-identity} to calculate
+the rms output noise to
+\begin{equation}\phantomsection\label{eq-basic-ota-output-noise}{
+V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{12} + 2 \gamma_{34} \frac{g_\mathrm{m34}}{g_\mathrm{m12}} \right).
+}\end{equation}
+
+Inspecting Equation~\ref{eq-basic-ota-output-noise} we can see that the
+integrated output noise is the \(k T / C\) noise of the output load
+capacitor, enhanced by the \(\gamma_{12}\) of the input differential
+pair, plus a (smaller) contribution of the current mirror load
+\(M_{3,4}\). Intuitevly, this result makes sense.
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
+
+Please take your time and carefully go through the explanations and
+derivations for the 5-transistor-OTA in
+Section~\ref{sec-basic-ota-large-signal} and
+Section~\ref{sec-basic-ota-small-signal}. Try to do the calculations
+yourself; if you get stuck, review the previous chapters.
+
+\end{tcolorbox}
+
+\subsubsection{5T-OTA Sizing}\label{t-ota-sizing}
+
+Outfitted with the governing equations derived in
+Section~\ref{sec-basic-ota-small-signal} we can now size the MOSFETs in
+the OTA, we remember that we have to size \(M_{1,2}\) and \(M_{3,4}\)
+equally.
+
+First, we need to select a proper \(g_\mathrm{m}/I_\mathrm{D}\) for the
+MOSFET. Remembering Section~\ref{sec-gmid-method} we see that for the
+input differential pair we should go for a large \(g_\mathrm{m}\), thus
+we select a \(g_\mathrm{m}/I_\mathrm{D}= 10\). As \(g_\mathrm{ds}\) of
+\(M_2\) could limit the dc gain (Equation~\ref{eq-simple-ota-gain-dc})
+we go with a rather long \(L = 5\,\mu\text{m}\). For current sources a
+small \(g_\mathrm{m}/I_\mathrm{D}\) is a good idea, so we start with
+\(g_\mathrm{m}/I_\mathrm{D}=5\) (because we can not go too low because
+of \(V_\mathrm{ds,sat}\)) and also an \(L = 5\,\mu\text{m}\).
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise}, colframe=quarto-callout-tip-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white]
+
+Please size the 5T-OTA according to the previous
+\(g_\mathrm{m}/I_\mathrm{D}\) and \(L\) suggestions. Please calculate
+the \(W\) of \(M_{1-6}\) and the total supply current. Please check
+wether gain error, total output noise, and turn-on settling is met with
+the calculated devices sizes and bias currents.
+
+\end{tcolorbox}
+
+The sizing procedure and its calculation are best performed in a Jupyter
+notebook, as we can easily look up the exact data from the pre-computed
+tables:
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, leftrule=.75mm, breakable, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, coltitle=black, colback=white, rightrule=.15mm, bottomtitle=1mm, titlerule=0mm, arc=.35mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white]
+
+\section{Sizing for Basic 5T-OTA}\label{sizing-for-basic-5t-ota}
+
+\textbf{Copyright 2024 Harald Pretl}
+
+Licensed under the Apache License, Version 2.0 (the ``License''); you
+may not use this file except in compliance with the License. You may
+obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Read table data}
+\ImportTok{from}\NormalTok{ pygmid }\ImportTok{import}\NormalTok{ Lookup }\ImportTok{as}\NormalTok{ lk}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{lv\_nmos }\OperatorTok{=}\NormalTok{ lk(}\StringTok{\textquotesingle{}sg13\_lv\_nmos.mat\textquotesingle{}}\NormalTok{)}
+\NormalTok{lv\_pmos }\OperatorTok{=}\NormalTok{ lk(}\StringTok{\textquotesingle{}sg13\_lv\_pmos.mat\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# List of parameters: VGS, VDS, VSB, L, W, NFING, ID, VT, GM, GMB, GDS, CGG, CGB, CGD, CGS, CDD, CSS, STH, SFL}
+\CommentTok{\# If not specified, minimum L, VDS=max(vgs)/2=0.9 and VSB=0 are used }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define the given parameters as taken from the specification table or inital guesses}
+\NormalTok{c\_load }\OperatorTok{=} \FloatTok{50e{-}15}
+\NormalTok{gm\_id\_m12 }\OperatorTok{=} \DecValTok{10}
+\NormalTok{gm\_id\_m34 }\OperatorTok{=} \DecValTok{5}
+\NormalTok{gm\_id\_m56 }\OperatorTok{=} \DecValTok{5}
+\NormalTok{l\_12 }\OperatorTok{=} \DecValTok{5}
+\NormalTok{l\_34 }\OperatorTok{=} \DecValTok{5}
+\NormalTok{l\_56 }\OperatorTok{=} \DecValTok{5}
+\NormalTok{f\_bw }\OperatorTok{=} \FloatTok{10e6}
+\NormalTok{i\_total\_limit }\OperatorTok{=} \FloatTok{10e{-}6}
+\NormalTok{i\_bias\_in }\OperatorTok{=} \FloatTok{20e{-}6}
+\NormalTok{output\_voltage }\OperatorTok{=} \FloatTok{1.3}
+\NormalTok{vin\_min }\OperatorTok{=} \FloatTok{0.7}
+\NormalTok{vin\_max }\OperatorTok{=} \FloatTok{0.9}
+\NormalTok{vdd\_min }\OperatorTok{=} \FloatTok{1.45}
+\NormalTok{vdd\_max }\OperatorTok{=} \FloatTok{1.55}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# We get the required gm of M1/2 from the bandwidth requirement}
+\CommentTok{\# We add a factor of 3 to allow for PVT variation plus additional MOSFET parasitic loading}
+\NormalTok{gm\_m12 }\OperatorTok{=}\NormalTok{ f\_bw }\OperatorTok{*} \DecValTok{3} \OperatorTok{*} \DecValTok{4}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{*}\NormalTok{c\_load}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}gm12 =\textquotesingle{}}\NormalTok{, gm\_m12}\OperatorTok{/}\FloatTok{1e{-}3}\NormalTok{, }\StringTok{\textquotesingle{}mS\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+gm12 = 0.01884955592153876 mS
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Since we know gm12 and the gmid we can calculate the bias current}
+\NormalTok{id\_m12 }\OperatorTok{=}\NormalTok{ gm\_m12 }\OperatorTok{/}\NormalTok{ gm\_id\_m12}
+\NormalTok{i\_total }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{id\_m12}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}i\_total (exact) =\textquotesingle{}}\NormalTok{, i\_total}\OperatorTok{/}\FloatTok{1e{-}6}\NormalTok{, }\StringTok{\textquotesingle{}µA\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# we round to 0.5µA bias currents}
+\NormalTok{i\_total }\OperatorTok{=} \BuiltInTok{max}\NormalTok{(}\BuiltInTok{round}\NormalTok{(i\_total }\OperatorTok{/} \FloatTok{1e{-}6} \OperatorTok{*} \DecValTok{2}\NormalTok{) }\OperatorTok{/} \DecValTok{2} \OperatorTok{*} \FloatTok{1e{-}6}\NormalTok{, }\FloatTok{0.5e{-}6}\NormalTok{)}
+\NormalTok{id\_m12 }\OperatorTok{=}\NormalTok{ i\_total}\OperatorTok{/}\DecValTok{2}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}i\_total (rounded) =\textquotesingle{}}\NormalTok{, i\_total}\OperatorTok{/}\FloatTok{1e{-}6}\NormalTok{, }\StringTok{\textquotesingle{}µA\textquotesingle{}}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{ i\_total }\OperatorTok{\textless{}}\NormalTok{ i\_total\_limit:}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}[info] power consumption target is met!\textquotesingle{}}\NormalTok{)}
+\ControlFlowTok{else}\NormalTok{:}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}[info] power consumption target is NOT met!\textquotesingle{}}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+i_total (exact) = 3.7699111843077517 µA
+i_total (rounded) = 4.0 µA
+[info] power consumption target is met!
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# We calculate the dc gain}
+\NormalTok{gm\_gds\_m12 }\OperatorTok{=}\NormalTok{ lv\_nmos.lookup(}\StringTok{\textquotesingle{}GM\_GDS\textquotesingle{}}\NormalTok{, GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m12, L}\OperatorTok{=}\NormalTok{l\_12, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{gm\_gds\_m34 }\OperatorTok{=}\NormalTok{ lv\_pmos.lookup(}\StringTok{\textquotesingle{}GM\_GDS\textquotesingle{}}\NormalTok{, GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m34, L}\OperatorTok{=}\NormalTok{l\_34, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{gds\_m12 }\OperatorTok{=}\NormalTok{ gm\_m12 }\OperatorTok{/}\NormalTok{ gm\_gds\_m12}
+\NormalTok{gm\_m34 }\OperatorTok{=}\NormalTok{ gm\_id\_m34 }\OperatorTok{*}\NormalTok{ i\_total}\OperatorTok{/}\DecValTok{2}
+\NormalTok{gds\_m34 }\OperatorTok{=}\NormalTok{ gm\_m34 }\OperatorTok{/}\NormalTok{ gm\_gds\_m34}
+
+\NormalTok{a0 }\OperatorTok{=}\NormalTok{ gm\_m12 }\OperatorTok{/}\NormalTok{ (gds\_m12 }\OperatorTok{+}\NormalTok{ gds\_m34)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}a0 =\textquotesingle{}}\NormalTok{, }\DecValTok{20}\OperatorTok{*}\NormalTok{np.log10(a0), }\StringTok{\textquotesingle{}dB\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+a0 = 34.78458740352468 dB
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# We calculate the MOSFET capacitance which adds to Cload, to see the impact on the BW}
+\NormalTok{gm\_cgs\_m12 }\OperatorTok{=}\NormalTok{ lv\_nmos.lookup(}\StringTok{\textquotesingle{}GM\_CGS\textquotesingle{}}\NormalTok{, GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m12, L}\OperatorTok{=}\NormalTok{l\_12, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{gm\_cdd\_m12 }\OperatorTok{=}\NormalTok{ lv\_nmos.lookup(}\StringTok{\textquotesingle{}GM\_CDD\textquotesingle{}}\NormalTok{, GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m12, L}\OperatorTok{=}\NormalTok{l\_12, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{gm\_cdd\_m34 }\OperatorTok{=}\NormalTok{ lv\_pmos.lookup(}\StringTok{\textquotesingle{}GM\_CDD\textquotesingle{}}\NormalTok{, GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m34, L}\OperatorTok{=}\NormalTok{l\_34, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{c\_load\_parasitic }\OperatorTok{=} \BuiltInTok{abs}\NormalTok{(gm\_m12}\OperatorTok{/}\NormalTok{gm\_cgs\_m12) }\OperatorTok{+} \BuiltInTok{abs}\NormalTok{(gm\_m12}\OperatorTok{/}\NormalTok{gm\_cdd\_m12) }\OperatorTok{+} \BuiltInTok{abs}\NormalTok{(gm\_m34}\OperatorTok{/}\NormalTok{gm\_cdd\_m34)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}additional load capacitance =\textquotesingle{}}\NormalTok{, c\_load\_parasitic}\OperatorTok{/}\FloatTok{1e{-}15}\NormalTok{, }\StringTok{\textquotesingle{}fF\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{f\_bw }\OperatorTok{=}\NormalTok{ gm\_m12 }\OperatorTok{/}\NormalTok{ (}\DecValTok{4}\OperatorTok{*}\NormalTok{np.pi }\OperatorTok{*}\NormalTok{ (c\_load }\OperatorTok{+}\NormalTok{ c\_load\_parasitic))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}{-}3dB bandwidth incl. parasitics =\textquotesingle{}}\NormalTok{, f\_bw}\OperatorTok{/}\FloatTok{1e6}\NormalTok{, }\StringTok{\textquotesingle{}MHz\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+additional load capacitance = 54.92854674560976 fF
+-3dB bandwidth incl. parasitics = 14.295442437000684 MHz
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# We can now look up the VGS of the MOSFET}
+\NormalTok{vgs\_m12 }\OperatorTok{=}\NormalTok{ lv\_nmos.look\_upVGS(GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m12, L}\OperatorTok{=}\NormalTok{l\_12, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\FloatTok{0.0}\NormalTok{)}
+\NormalTok{vgs\_m34 }\OperatorTok{=}\NormalTok{ lv\_pmos.look\_upVGS(GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m34, L}\OperatorTok{=}\NormalTok{l\_34, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\FloatTok{0.0}\NormalTok{) }
+\NormalTok{vgs\_m56 }\OperatorTok{=}\NormalTok{ lv\_nmos.look\_upVGS(GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m56, L}\OperatorTok{=}\NormalTok{l\_56, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\FloatTok{0.0}\NormalTok{) }
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}vgs\_12 =\textquotesingle{}}\NormalTok{, vgs\_m12, }\StringTok{\textquotesingle{}V\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}vgs\_34 =\textquotesingle{}}\NormalTok{, vgs\_m34, }\StringTok{\textquotesingle{}V\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}vgs\_56 =\textquotesingle{}}\NormalTok{, vgs\_m56, }\StringTok{\textquotesingle{}V\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+vgs_12 = 0.36710119710062455 V
+vgs_34 = 0.7287454603526495 V
+vgs_56 = 0.5912200307058603 V
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate settling time due to slewing with the calculated bias current}
+\NormalTok{t\_slew }\OperatorTok{=}\NormalTok{ (c\_load }\OperatorTok{+}\NormalTok{ c\_load\_parasitic) }\OperatorTok{*}\NormalTok{ output\_voltage }\OperatorTok{/}\NormalTok{ i\_total}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}slewing time =\textquotesingle{}}\NormalTok{, t\_slew}\OperatorTok{/}\FloatTok{1e{-}6}\NormalTok{, }\StringTok{\textquotesingle{}µs\textquotesingle{}}\NormalTok{)}
+\NormalTok{t\_settle }\OperatorTok{=} \DecValTok{5}\OperatorTok{/}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{*}\NormalTok{f\_bw)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}settling time =\textquotesingle{}}\NormalTok{, t\_settle}\OperatorTok{/}\FloatTok{1e{-}6}\NormalTok{, }\StringTok{\textquotesingle{}µs\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+slewing time = 0.034101777692323185 µs
+settling time = 0.055666322953376014 µs
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate voltage gain error}
+\NormalTok{gain\_error }\OperatorTok{=}\NormalTok{ a0 }\OperatorTok{/}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ a0)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}voltage gain error =\textquotesingle{}}\NormalTok{, (gain\_error}\OperatorTok{{-}}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\StringTok{\textquotesingle{}\%\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+voltage gain error = -1.7902967715882068 %
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate total rms output noise}
+\NormalTok{sth\_m12 }\OperatorTok{=}\NormalTok{ lv\_nmos.lookup(}\StringTok{\textquotesingle{}STH\_GM\textquotesingle{}}\NormalTok{, VGS}\OperatorTok{=}\NormalTok{vgs\_m12, L}\OperatorTok{=}\NormalTok{l\_12, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{) }\OperatorTok{*}\NormalTok{ gm\_m12}
+\NormalTok{gamma\_m12 }\OperatorTok{=}\NormalTok{ sth\_m12}\OperatorTok{/}\NormalTok{(}\DecValTok{4}\OperatorTok{*}\FloatTok{1.38e{-}23}\OperatorTok{*}\DecValTok{300}\OperatorTok{*}\NormalTok{gm\_m12)}
+
+\NormalTok{sth\_m34 }\OperatorTok{=}\NormalTok{ lv\_pmos.lookup(}\StringTok{\textquotesingle{}STH\_GM\textquotesingle{}}\NormalTok{, VGS}\OperatorTok{=}\NormalTok{vgs\_m34, L}\OperatorTok{=}\NormalTok{l\_34, VDS}\OperatorTok{=}\FloatTok{0.75}\NormalTok{, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{) }\OperatorTok{*}\NormalTok{ gm\_m34}
+\NormalTok{gamma\_m34 }\OperatorTok{=}\NormalTok{ sth\_m34}\OperatorTok{/}\NormalTok{(}\DecValTok{4}\OperatorTok{*}\FloatTok{1.38e{-}23}\OperatorTok{*}\DecValTok{300}\OperatorTok{*}\NormalTok{gm\_m34)}
+
+\NormalTok{output\_noise\_rms }\OperatorTok{=} \FloatTok{1.38e{-}23}\OperatorTok{*}\DecValTok{300} \OperatorTok{/}\NormalTok{ (c\_load }\OperatorTok{+}\NormalTok{ c\_load\_parasitic) }\OperatorTok{*}\NormalTok{ (}\DecValTok{2}\OperatorTok{*}\NormalTok{gamma\_m12 }\OperatorTok{+} \DecValTok{2}\OperatorTok{*}\NormalTok{gamma\_m34 }\OperatorTok{*}\NormalTok{ gm\_m34}\OperatorTok{/}\NormalTok{gm\_m12)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}output noise (rms) =\textquotesingle{}}\NormalTok{, output\_noise\_rms}\OperatorTok{/}\FloatTok{1e{-}6}\NormalTok{, }\StringTok{\textquotesingle{}µV\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+output noise (rms) = 0.12543377043178017 µV
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate all widths}
+\NormalTok{id\_w\_m12 }\OperatorTok{=}\NormalTok{ lv\_nmos.lookup(}\StringTok{\textquotesingle{}ID\_W\textquotesingle{}}\NormalTok{, GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m12, L}\OperatorTok{=}\NormalTok{l\_12, VDS}\OperatorTok{=}\NormalTok{vgs\_m12, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{w\_12 }\OperatorTok{=}\NormalTok{ id\_m12 }\OperatorTok{/}\NormalTok{ id\_w\_m12}
+\NormalTok{w\_12\_round }\OperatorTok{=} \BuiltInTok{max}\NormalTok{(}\BuiltInTok{round}\NormalTok{(w\_12}\OperatorTok{*}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}M1/2 W =\textquotesingle{}}\NormalTok{, w\_12, }\StringTok{\textquotesingle{}um, rounded W =\textquotesingle{}}\NormalTok{, w\_12\_round, }\StringTok{\textquotesingle{}um\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{id\_m34 }\OperatorTok{=}\NormalTok{ id\_m12}
+\NormalTok{id\_w\_m34 }\OperatorTok{=}\NormalTok{ lv\_pmos.lookup(}\StringTok{\textquotesingle{}ID\_W\textquotesingle{}}\NormalTok{, GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m34, L}\OperatorTok{=}\NormalTok{l\_34, VDS}\OperatorTok{=}\NormalTok{vgs\_m34, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{w\_34 }\OperatorTok{=}\NormalTok{ id\_m34 }\OperatorTok{/}\NormalTok{ id\_w\_m34}
+\NormalTok{w\_34\_round }\OperatorTok{=} \BuiltInTok{max}\NormalTok{(}\BuiltInTok{round}\NormalTok{(w\_34}\OperatorTok{*}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\FloatTok{0.5}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}M3/4 W =\textquotesingle{}}\NormalTok{, w\_34, }\StringTok{\textquotesingle{}um, rounded W =\textquotesingle{}}\NormalTok{, w\_34\_round, }\StringTok{\textquotesingle{}um\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{id\_w\_m5 }\OperatorTok{=}\NormalTok{ lv\_nmos.lookup(}\StringTok{\textquotesingle{}ID\_W\textquotesingle{}}\NormalTok{, GM\_ID}\OperatorTok{=}\NormalTok{gm\_id\_m56, L}\OperatorTok{=}\NormalTok{l\_56, VDS}\OperatorTok{=}\NormalTok{vgs\_m56, VSB}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{w\_5 }\OperatorTok{=}\NormalTok{ i\_total }\OperatorTok{/}\NormalTok{ id\_w\_m5}
+\NormalTok{w\_5\_round }\OperatorTok{=} \BuiltInTok{max}\NormalTok{(}\BuiltInTok{round}\NormalTok{(w\_5}\OperatorTok{*}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}M5 W =\textquotesingle{}}\NormalTok{, w\_5, }\StringTok{\textquotesingle{}um, rounded W =\textquotesingle{}}\NormalTok{, w\_5\_round, }\StringTok{\textquotesingle{}um\textquotesingle{}}\NormalTok{)}
+\NormalTok{w\_6 }\OperatorTok{=}\NormalTok{ w\_5\_round }\OperatorTok{*}\NormalTok{ i\_bias\_in }\OperatorTok{/}\NormalTok{ i\_total}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}M6 W =\textquotesingle{}}\NormalTok{, w\_6, }\StringTok{\textquotesingle{}um\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+M1/2 W = 1.7713641972645868 um, rounded W = 2.0 um
+M3/4 W = 1.641014110777885 um, rounded W = 1.5 um
+M5 W = 0.7351148286825442 um, rounded W = 0.5 um
+M6 W = 2.5000000000000004 um
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print out final design values}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}5T{-}OTA dimensioning:\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}M1/2 W=\textquotesingle{}}\NormalTok{, w\_12\_round, }\StringTok{\textquotesingle{}, L=\textquotesingle{}}\NormalTok{, l\_12)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}M3/4 W=\textquotesingle{}}\NormalTok{, w\_34\_round, }\StringTok{\textquotesingle{}, L=\textquotesingle{}}\NormalTok{, l\_34)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}M5   W=\textquotesingle{}}\NormalTok{, w\_5\_round, }\StringTok{\textquotesingle{}, L=\textquotesingle{}}\NormalTok{, l\_56)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}M6   W=\textquotesingle{}}\NormalTok{, w\_6, }\StringTok{\textquotesingle{}, L=\textquotesingle{}}\NormalTok{, l\_56)}
+\BuiltInTok{print}\NormalTok{()}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}5T{-}OTA performance summary:\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}supply current =\textquotesingle{}}\NormalTok{, i\_total}\OperatorTok{/}\FloatTok{1e{-}6}\NormalTok{, }\StringTok{\textquotesingle{}µA\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}output noise =\textquotesingle{}}\NormalTok{, output\_noise\_rms}\OperatorTok{/}\FloatTok{1e{-}6}\NormalTok{, }\StringTok{\textquotesingle{}µVrms\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}voltage gain error =\textquotesingle{}}\NormalTok{, (gain\_error}\OperatorTok{{-}}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\StringTok{\textquotesingle{}\%\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}{-}3dB bandwidth incl. parasitics =\textquotesingle{}}\NormalTok{, f\_bw}\OperatorTok{/}\FloatTok{1e6}\NormalTok{, }\StringTok{\textquotesingle{}MHz\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}turn{-}on time (slewing+settling) =\textquotesingle{}}\NormalTok{, (t\_slew}\OperatorTok{+}\NormalTok{t\_settle)}\OperatorTok{/}\FloatTok{1e{-}6}\NormalTok{, }\StringTok{\textquotesingle{}µs\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{()}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}5T{-}OTA bias point check:\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}headroom M1 =\textquotesingle{}}\NormalTok{, vdd\_min}\OperatorTok{{-}}\NormalTok{vgs\_m34}\OperatorTok{+}\NormalTok{vgs\_m12}\OperatorTok{{-}}\NormalTok{vin\_max, }\StringTok{\textquotesingle{}V\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}headroom M4 =\textquotesingle{}}\NormalTok{, vdd\_min}\OperatorTok{{-}}\NormalTok{vin\_max, }\StringTok{\textquotesingle{}V\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}headroom M5 =\textquotesingle{}}\NormalTok{, vin\_min}\OperatorTok{{-}}\NormalTok{vgs\_m12, }\StringTok{\textquotesingle{}V\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+5T-OTA dimensioning:
+--------------------
+M1/2 W= 2.0 , L= 5
+M3/4 W= 1.5 , L= 5
+M5   W= 0.5 , L= 5
+M6   W= 2.5000000000000004 , L= 5
+
+5T-OTA performance summary:
+---------------------------
+supply current = 4.0 µA
+output noise = 0.12543377043178017 µVrms
+voltage gain error = -1.7902967715882068 %
+-3dB bandwidth incl. parasitics = 14.295442437000684 MHz
+turn-on time (slewing+settling) = 0.08976810064569919 µs
+
+5T-OTA bias point check:
+------------------------
+headroom M1 = 0.188355736747975 V
+headroom M4 = 0.5499999999999999 V
+headroom M5 = 0.3328988028993754 V
+\end{verbatim}
+
+\textsubscript{Source:
+\href{https://iic-jku.github.io/analog-circuit-design/sizing/sizing_basic_ota-preview.html\#cell-0}{Sizing
+for Basic 5T-OTA}}
+
+\end{tcolorbox}
+
+\subsubsection{5T-OTA Simulation}\label{t-ota-simulation}
 
 \subsection{Cascode Stage}\label{cascode-stage}
 
