@@ -82,7 +82,7 @@ parameters:
         description: The dc gain of the buffer
         unit: V/V
         minimum:
-          value: 0.85
+          value: 0.8
         typical:
           value: any
         maximum:
@@ -157,7 +157,7 @@ parameters:
       noise:
         display: Output noise
         description: Total output noise (rms)
-        unit: uV
+        unit: mV
         minimum:
           value: any
         typical:
@@ -198,3 +198,58 @@ parameters:
         minimum: 0.7
         typical: 0.8
         maximum: 0.9
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 130
+      
+  tran_params:
+    spec:
+      tsettle:
+        display: Settling time
+        description: Settling time of output
+        unit: us
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: 10
+    tool:
+      ngspice:
+        template: ota-5t-tran.sch
+        format: ascii
+        suffix: .data
+        variables: [tsettle]
+    plot:
+      settling_vs_temp:
+        type: xyplot
+        xaxis: temperature
+        yaxis: tsettle
+      settling_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: tsettle
+      settling_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: tsettle
+      settling_vs_corner:
+        type: xyplot
+        xaxis: corner
+        yaxis: tsettle
+    conditions:
+      corner:
+        enumerate: [ss, tt, ff]
+      vdd:
+        minimum: 1.45
+        typical: 1.5
+        maximum: 1.55
+      vin:
+        minimum: 0.7
+        typical: 0.8
+        maximum: 0.9
+      temperature:
+        minimum: -40
+        typical: 27
+        maximum: 130

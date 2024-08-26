@@ -69,7 +69,7 @@ value="
 .option SEED=CACE[CACE\{seed=12345\} + CACE\{iterations=0\}]
 
 .control
-op
+set num_threads=1
 ac dec 101 1k 100MEG
 
 meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k

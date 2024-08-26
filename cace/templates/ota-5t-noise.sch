@@ -70,7 +70,8 @@ value="
 .option sparse
 
 .control
-op
+set num_threads=1
+save all
 noise v(v_out) Vin dec 101 1k 100MEG
 
 let noise=onoise_total
