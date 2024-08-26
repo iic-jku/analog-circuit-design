@@ -68,31 +68,19 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .param temp=27
+.ic v(v_vout)=0
 .control
-option sparse
-save all
-op
-write ota-5t_tb.raw
-set appendwrite
 
-ac dec 101 1k 100MEG
-write ota-5t_tb.raw
-plot 20*log10(v_out)
+tran 0.005u 15u uic
+plot v_ena v_out
 
-meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k
-let f3db = dcgain/sqrt(2)
-meas ac fbw WHEN vmag(v_out)=f3db FALL=1
-let gainerror=(dcgain-1)/1
-print dcgain
-print fbw
-print gainerror
+let vout_limit=0.8*0.99
+meas tran tcross WHEN v(v_out)=vout_limit
+let vena_limit=0.5*1.5
+meas tran tstart WHEN v(v_ena)=vena_limit
+let tsettle=tcross-tstart
+print tsettle
 
-noise v(v_out) Vin dec 101 1k 100MEG
-print onoise_total
-
-tran 0.001u 25u
-plot v_ena
-plot v_out
 .endc
 "}
 C {devices/vsource.sym} 520 -330 0 0 {name=Vdd value=1.5}
@@ -114,10 +102,10 @@ C {lab_pin.sym} 600 -380 0 0 {name=p1 sig_type=std_logic lab=v_ss}
 C {capa.sym} 1300 -560 0 0 {name=C1
 value=50f}
 C {lab_wire.sym} 1300 -630 0 0 {name=p3 sig_type=std_logic lab=v_out}
-C {devices/vsource.sym} 700 -540 0 0 {name=Vin value="dc 0.8 ac 1"}
+C {devices/vsource.sym} 700 -540 0 0 {name=Vin value=0.8}
 C {lab_wire.sym} 760 -660 0 0 {name=p4 sig_type=std_logic lab=v_in}
-C {isource.sym} 1090 -780 0 0 {name=I0 value="dc 20u pwl(0 0 10u 0 11u 20u)"}
-C {vsource.sym} 1090 -430 0 0 {name=Venable value="dc 1.5 pwl(0 0 10u 0 11u 1.5)" savecurrent=false}
+C {isource.sym} 1090 -780 0 0 {name=I0 value="dc 0 pwl(0 0 1.1u 0 1.2u 20u)"}
+C {vsource.sym} 1090 -430 0 0 {name=Venable value="dc 0 pwl(0 0 1u 0 1.1u 1.5)" savecurrent=false}
 C {spice_probe.sym} 820 -660 0 0 {name=p5 attrs=""}
 C {spice_probe.sym} 1180 -630 0 0 {name=p6 attrs=""}
 C {spice_probe.sym} 1090 -470 0 0 {name=p7 attrs=""}
