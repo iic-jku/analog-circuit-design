@@ -1,0 +1,255 @@
+#--------------------------------------------------------------
+# CACE circuit characterization file
+#--------------------------------------------------------------
+
+name:           ota-5t 
+description:    Simple voltage buffer for capacitive load realized with 5T-OTA
+PDK:            sg13g2
+
+cace_format:    5.2
+
+authorship:
+  designer:         Harald Pretl
+  company:          Johannes Kepler University
+  creation_date:    August 25, 2024
+  license:          Apache 2.0
+
+paths:
+  root:             ..
+  schematic:        xschem
+  netlist:          cace/netlist
+  documentation:    cace/_docs
+
+pins:
+  vdd:
+    description: Positive analog power supply
+    type: power
+    direction: inout
+    Vmin: 1.45
+    Vmax: 1.55
+  vss:
+    description: Analog ground
+    type: ground
+    direction: inout
+  ibias_20u:
+    description: Bias current input 20uA nom.
+    type: signal
+    direction: input
+  vinp:
+    description: Voltage positive input
+    type: signal
+    direction: input
+  vinn:
+    description: Voltage negative input
+    type: signal
+    direction: input
+  vout:
+    description: Voltage output
+    type: signal
+    direction: output
+
+default_conditions:
+  vdd:
+    description: Analog power supply voltage
+    display: Vdd
+    unit: V
+    typical: 1.5
+  ibias:
+    description: Bias current
+    display: Ibias
+    unit: uA
+    typical: 20
+  corner:
+    description: Process corner
+    display: Corner
+    typical: tt
+  temp:
+    description: Ambient temperature
+    display: Temperature
+    unit: °C
+    typical: 27
+  cload:
+    description: Load capacitance
+    display: Cload
+    unit: fF
+    typical: 50
+
+parameters:
+  ac_params:
+    spec:
+      gain:
+        display: Gain
+        description: The dc gain of the buffer
+        unit: V/V
+        minimum:
+          value: 0.8
+        typical:
+          value: any
+        maximum:
+          value: 1.05
+      bw:
+        display: Bandwidth
+        description: The -3dB bandwidth of the buffer
+        unit: Hz
+        minimum:
+          value: 10e6
+        typical:
+          value: any
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: ota-5t-ac.sch
+        format: ascii
+        suffix: .data
+        variables: [gain, bw]
+    plot:
+      gain_vs_temp:
+        type: xyplot
+        xaxis: temp
+        yaxis: gain
+      gain_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: gain
+      gain_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: gain
+      gain_vs_corner:
+        type: xyplot
+        xaxis: corner
+        yaxis: gain
+      bw_vs_temp:
+        type: xyplot
+        xaxis: temp
+        yaxis: bw
+      bw_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: bw
+      bw_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: bw
+      bw_vs_corner:
+        type: xyplot
+        xaxis: corner
+        yaxis: bw
+    conditions:
+      corner:
+        enumerate: [ss, sf, tt, fs, ff]
+      vdd:
+        minimum: 1.45
+        typical: 1.5
+        maximum: 1.55
+      vin:
+        minimum: 0.7
+        typical: 0.8
+        maximum: 0.9
+      temp:
+        minimum: -40
+        typical: 27
+        maximum: 130
+
+  noise_params:
+    spec:
+      noise:
+        display: Output noise
+        description: Total output noise (rms)
+        unit: mV
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: 1
+    tool:
+      ngspice:
+        template: ota-5t-noise.sch
+        format: ascii
+        suffix: .data
+        variables: [noise]
+    plot:
+      noise_vs_temp:
+        type: xyplot
+        xaxis: temp
+        yaxis: noise
+      noise_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: noise
+      noise_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: noise
+      noise_vs_corner:
+        type: xyplot
+        xaxis: corner
+        yaxis: noise
+    conditions:
+      corner:
+        enumerate: [ss, sf, tt, fs, ff]
+      vdd:
+        minimum: 1.45
+        typical: 1.5
+        maximum: 1.55
+      vin:
+        minimum: 0.7
+        typical: 0.8
+        maximum: 0.9
+      temp:
+        minimum: -40
+        typical: 27
+        maximum: 130
+      
+  tran_params:
+    spec:
+      tsettle:
+        display: Settling time
+        description: Settling time of output
+        unit: us
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: 10
+    tool:
+      ngspice:
+        template: ota-5t-tran.sch
+        format: ascii
+        suffix: .data
+        variables: [tsettle]
+    plot:
+      settling_vs_temp:
+        type: xyplot
+        xaxis: temp
+        yaxis: tsettle
+      settling_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: tsettle
+      settling_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: tsettle
+      settling_vs_corner:
+        type: xyplot
+        xaxis: corner
+        yaxis: tsettle
+    conditions:
+      corner:
+        enumerate: [ss, sf, tt, fs, ff]
+      vdd:
+        minimum: 1.45
+        typical: 1.5
+        maximum: 1.55
+      vin:
+        minimum: 0.7
+        typical: 0.8
+        maximum: 0.9
+      temp:
+        minimum: -40
+        typical: 27
+        maximum: 130

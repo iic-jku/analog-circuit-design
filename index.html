@@ -243,7 +243,8 @@ window.Quarto = {
   <li><a href="#sec-basic-ota-large-signal" id="toc-sec-basic-ota-large-signal" class="nav-link" data-scroll-target="#sec-basic-ota-large-signal">Large-Signal Analysis of the OTA</a></li>
   <li><a href="#sec-basic-ota-small-signal" id="toc-sec-basic-ota-small-signal" class="nav-link" data-scroll-target="#sec-basic-ota-small-signal">Small-Signal Analysis of the OTA</a></li>
   <li><a href="#t-ota-sizing" id="toc-t-ota-sizing" class="nav-link" data-scroll-target="#t-ota-sizing">5T-OTA Sizing</a></li>
-  <li><a href="#t-ota-simulation" id="toc-t-ota-simulation" class="nav-link" data-scroll-target="#t-ota-simulation">5T-OTA Simulation</a></li>
+  <li><a href="#sec-basic-ota-simulation" id="toc-sec-basic-ota-simulation" class="nav-link" data-scroll-target="#sec-basic-ota-simulation">5T-OTA Simulation</a></li>
+  <li><a href="#t-ota-simulation-versus-pvt" id="toc-t-ota-simulation-versus-pvt" class="nav-link" data-scroll-target="#t-ota-simulation-versus-pvt">5T-OTA Simulation versus PVT</a></li>
   </ul></li>
   <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
   <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota">A Fully-Differential OTA</a></li>
@@ -1052,7 +1053,7 @@ H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g
 </ol>
 <p>With this single pole location in <span class="math inline">\(H_\mathrm{ol}(s)\)</span> this loop is perfectly stable at under all conditions.</p>
 <p>The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
-<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;1.6</a>.</p>
+<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;1.23</a>.</p>
 <p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s method and confirm our analysis above.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center">
@@ -1345,53 +1346,58 @@ Table&nbsp;1: Voltage buffer specification
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">Supply voltage</td>
+<td style="text-align: center;"><span class="math inline">\(1.45 &lt; \underline{1.5} &lt; 1.55\)</span></td>
+<td style="text-align: center;">V</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Temperature range (industrial)</td>
+<td style="text-align: center;"><span class="math inline">\(-40 &lt; \underline{27} &lt; 125\)</span></td>
+<td style="text-align: center;">degC</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">Load capacitance <span class="math inline">\(C_\mathrm{load}\)</span></td>
-<td style="text-align: center;">50</td>
+<td style="text-align: center;"><span class="math inline">\(50\)</span></td>
 <td style="text-align: center;">fF</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Input voltage range (for buffering 2/3 bandgap voltage)</td>
-<td style="text-align: center;">0.7 &lt; <strong>0.8</strong> &lt; 0.9</td>
+<td style="text-align: center;"><span class="math inline">\(0.7 &lt; \underline{0.8} &lt; 0.9\)</span></td>
 <td style="text-align: center;">V</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Signal bandwidth (3dB)</td>
-<td style="text-align: center;">&gt;10</td>
+<td style="text-align: center;"><span class="math inline">\(&gt;10\)</span></td>
 <td style="text-align: center;">MHz</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Voltage gain error</td>
-<td style="text-align: center;">&lt;5</td>
+<td style="text-align: center;"><span class="math inline">\(&lt;5\)</span></td>
 <td style="text-align: center;">%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Total output noise (rms)</td>
-<td style="text-align: center;">&lt;1</td>
+<td style="text-align: center;"><span class="math inline">\(&lt;1\)</span></td>
 <td style="text-align: center;">mV<sub>rms</sub></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Supply voltage</td>
-<td style="text-align: center;">1.45 &lt; <strong>1.5</strong> &lt; 1.55</td>
-<td style="text-align: center;">V</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Supply current (as low as possible)</td>
-<td style="text-align: center;">&lt;10</td>
+<td style="text-align: center;"><span class="math inline">\(&lt;10\)</span></td>
 <td style="text-align: center;">µA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Stability</td>
 <td style="text-align: center;">stable for rated <span class="math inline">\(C_\mathrm{load}\)</span></td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Turn-on time (settled to with 1%)</td>
-<td style="text-align: center;">&lt;10</td>
+<td style="text-align: center;"><span class="math inline">\(&lt;10\)</span></td>
 <td style="text-align: center;">µs</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Externally provided bias current (nominal)</td>
-<td style="text-align: center;">20</td>
+<td style="text-align: center;"><span class="math inline">\(20\)</span></td>
 <td style="text-align: center;">µA</td>
 </tr>
 </tbody>
@@ -1825,8 +1831,279 @@ headroom M5 = 0.3328988028993754 V</code></pre>
 </div>
 </div>
 </section>
-<section id="t-ota-simulation" class="level3">
-<h3 class="anchored" data-anchor-id="t-ota-simulation">5T-OTA Simulation</h3>
+<section id="sec-basic-ota-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="sec-basic-ota-simulation">5T-OTA Simulation</h3>
+<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can setup a simulation testbench and check the performance parameters.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please setup a testbench in Xschem for the 5T-OTA used as a voltage buffer as schown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a>. Use typical conditions for the simulation, and check how well the specification in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a> is met, and how well the derivations in <a href="#sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;0.7.2</a> and <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;0.7.3</a> fit to the simulation results.</p>
+<p>If you get stuck, you can find the tesbench <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the large-signal settling simulation).</p>
+</div>
+</div>
+</section>
+<section id="t-ota-simulation-versus-pvt" class="level3">
+<h3 class="anchored">5T-OTA Simulation versus PVT</h3>
+<p>As you have seen in <a href="#sec-basic-ota-simulation" class="quarto-xref">Section&nbsp;1.0.1</a> running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:</p>
+<ol type="1">
+<li>The supply voltage of the circuit has tolerances, and thus we need to check the performance against this variation.</li>
+<li>The temperature at which the circuit is operated is likely changing. Also the performance against this has to be verified.</li>
+<li>When manufacturing the wafers random variations in various process parameters lead to changed parameters of the integrated circuit components. In order to check for this effect, wafer foundries provide model files which shall cover these manufacturing excursions. Simplified, this leads to a slower or faster MOSFET, and usually NMOS and PMOS are not correlated, so we have the process corners <strong>SS</strong>, <strong>SF</strong>, <strong>TT</strong>, <strong>FS</strong>, and <strong>FF</strong>. So far, we have only used the <strong>TT</strong> models in our simulations.</li>
+</ol>
+<p>The variations listed in the previous list are abbreviated as <strong>PVT</strong> (process, voltage, temperature) variations. In order to finalize a circuit all combinations of these (plus the variations in operating conditions like input voltage) have to be simulated. As you can imagine, this leads to a huge number of simulations, and simulation results which have to evaluated for pass/fail.</p>
+<p>There are two options how to tackle this efficiently:</p>
+<ol type="1">
+<li>As an experienced designer you have a very solid understanding of the circuit, plus based on the analytic equations you can identify which combination of operating conditions will lead to a worst case performance. Thus, you can drastically reduce the number of corners to simulate, and you run them by hand.</li>
+<li>You are using a framework which highly automates this task of running a plethora of different simulations and evaluating the outcome. These frameworks are called simulation runners.</li>
+</ol>
+<p>Luckily, there are open-source versions of simulation runners available, and we will use <a href="https://github.com/efabless/cace">CACE</a> in this lecture. CACE is written in Python and allows to setup a datasheet in <a href="https://yaml.org">YAML</a> which defines the simulation problem and the performance parameters to evaluate against which limits. The resulting simulations are then run in parallel and the simulation data is evaluated and summarized in various forms.</p>
+<p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
+<p>After a successul run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+CACE Summary for ota-5t
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>netlist source</strong>: schematic</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Result</th>
+<th style="text-align: right;">Min Limit</th>
+<th style="text-align: right;">Min Value</th>
+<th style="text-align: right;">Typ Target</th>
+<th style="text-align: right;">Typ Value</th>
+<th style="text-align: right;">Max Limit</th>
+<th style="text-align: right;">Max Value</th>
+<th style="text-align: center;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Gain</td>
+<td style="text-align: left;">ngspice</td>
+<td style="text-align: left;">gain</td>
+<td style="text-align: right;">0.8 V/V</td>
+<td style="text-align: right;">0.832 V/V</td>
+<td style="text-align: right;">any</td>
+<td style="text-align: right;">0.971 V/V</td>
+<td style="text-align: right;">1.05 V/V</td>
+<td style="text-align: right;">0.980 V/V</td>
+<td style="text-align: center;">Pass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bandwidth</td>
+<td style="text-align: left;">ngspice</td>
+<td style="text-align: left;">bw</td>
+<td style="text-align: right;">10e6 Hz</td>
+<td style="text-align: right;">15551000.000 Hz</td>
+<td style="text-align: right;">any</td>
+<td style="text-align: right;">26912100.000 Hz</td>
+<td style="text-align: right;">any</td>
+<td style="text-align: right;">34051700.000 Hz</td>
+<td style="text-align: center;">Pass</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Output noise</td>
+<td style="text-align: left;">ngspice</td>
+<td style="text-align: left;">noise</td>
+<td style="text-align: right;">any</td>
+<td style="text-align: right;">0.308 mV</td>
+<td style="text-align: right;">any</td>
+<td style="text-align: right;">0.371 mV</td>
+<td style="text-align: right;">1 mV</td>
+<td style="text-align: right;">0.455 mV</td>
+<td style="text-align: center;">Pass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Settling time</td>
+<td style="text-align: left;">ngspice</td>
+<td style="text-align: left;">tsettle</td>
+<td style="text-align: right;">any</td>
+<td style="text-align: right;">0.135 us</td>
+<td style="text-align: right;">any</td>
+<td style="text-align: right;">0.142 us</td>
+<td style="text-align: right;">10 us</td>
+<td style="text-align: right;">0.155 us</td>
+<td style="text-align: center;">Pass</td>
+</tr>
+</tbody>
+</table>
+<section id="plots" class="level2">
+<h2 class="anchored" data-anchor-id="plots">Plots</h2>
+</section>
+<section id="gain_vs_temp" class="level2">
+<h2 class="anchored" data-anchor-id="gain_vs_temp">gain_vs_temp</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/gain_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38" title="gain_vs_temp"><img src="./cace/_docs/ota-5t/schematic/gain_vs_temp.png" class="img-fluid figure-img" alt="gain_vs_temp"></a></p>
+<figcaption>gain_vs_temp</figcaption>
+</figure>
+</div>
+</section>
+<section id="gain_vs_vin" class="level2">
+<h2 class="anchored" data-anchor-id="gain_vs_vin">gain_vs_vin</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/gain_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39" title="gain_vs_vin"><img src="./cace/_docs/ota-5t/schematic/gain_vs_vin.png" class="img-fluid figure-img" alt="gain_vs_vin"></a></p>
+<figcaption>gain_vs_vin</figcaption>
+</figure>
+</div>
+</section>
+<section id="gain_vs_vdd" class="level2">
+<h2 class="anchored" data-anchor-id="gain_vs_vdd">gain_vs_vdd</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/gain_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40" title="gain_vs_vdd"><img src="./cace/_docs/ota-5t/schematic/gain_vs_vdd.png" class="img-fluid figure-img" alt="gain_vs_vdd"></a></p>
+<figcaption>gain_vs_vdd</figcaption>
+</figure>
+</div>
+</section>
+<section id="gain_vs_corner" class="level2">
+<h2 class="anchored" data-anchor-id="gain_vs_corner">gain_vs_corner</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/gain_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41" title="gain_vs_corner"><img src="./cace/_docs/ota-5t/schematic/gain_vs_corner.png" class="img-fluid figure-img" alt="gain_vs_corner"></a></p>
+<figcaption>gain_vs_corner</figcaption>
+</figure>
+</div>
+</section>
+<section id="bw_vs_temp" class="level2">
+<h2 class="anchored" data-anchor-id="bw_vs_temp">bw_vs_temp</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/bw_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42" title="bw_vs_temp"><img src="./cace/_docs/ota-5t/schematic/bw_vs_temp.png" class="img-fluid figure-img" alt="bw_vs_temp"></a></p>
+<figcaption>bw_vs_temp</figcaption>
+</figure>
+</div>
+</section>
+<section id="bw_vs_vin" class="level2">
+<h2 class="anchored" data-anchor-id="bw_vs_vin">bw_vs_vin</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/bw_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-43" title="bw_vs_vin"><img src="./cace/_docs/ota-5t/schematic/bw_vs_vin.png" class="img-fluid figure-img" alt="bw_vs_vin"></a></p>
+<figcaption>bw_vs_vin</figcaption>
+</figure>
+</div>
+</section>
+<section id="bw_vs_vdd" class="level2">
+<h2 class="anchored" data-anchor-id="bw_vs_vdd">bw_vs_vdd</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/bw_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-44" title="bw_vs_vdd"><img src="./cace/_docs/ota-5t/schematic/bw_vs_vdd.png" class="img-fluid figure-img" alt="bw_vs_vdd"></a></p>
+<figcaption>bw_vs_vdd</figcaption>
+</figure>
+</div>
+</section>
+<section id="bw_vs_corner" class="level2">
+<h2 class="anchored" data-anchor-id="bw_vs_corner">bw_vs_corner</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/bw_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45" title="bw_vs_corner"><img src="./cace/_docs/ota-5t/schematic/bw_vs_corner.png" class="img-fluid figure-img" alt="bw_vs_corner"></a></p>
+<figcaption>bw_vs_corner</figcaption>
+</figure>
+</div>
+</section>
+<section id="noise_vs_temp" class="level2">
+<h2 class="anchored" data-anchor-id="noise_vs_temp">noise_vs_temp</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/noise_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-46" title="noise_vs_temp"><img src="./cace/_docs/ota-5t/schematic/noise_vs_temp.png" class="img-fluid figure-img" alt="noise_vs_temp"></a></p>
+<figcaption>noise_vs_temp</figcaption>
+</figure>
+</div>
+</section>
+<section id="noise_vs_vin" class="level2">
+<h2 class="anchored" data-anchor-id="noise_vs_vin">noise_vs_vin</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/noise_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-47" title="noise_vs_vin"><img src="./cace/_docs/ota-5t/schematic/noise_vs_vin.png" class="img-fluid figure-img" alt="noise_vs_vin"></a></p>
+<figcaption>noise_vs_vin</figcaption>
+</figure>
+</div>
+</section>
+<section id="noise_vs_vdd" class="level2">
+<h2 class="anchored" data-anchor-id="noise_vs_vdd">noise_vs_vdd</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/noise_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-48" title="noise_vs_vdd"><img src="./cace/_docs/ota-5t/schematic/noise_vs_vdd.png" class="img-fluid figure-img" alt="noise_vs_vdd"></a></p>
+<figcaption>noise_vs_vdd</figcaption>
+</figure>
+</div>
+</section>
+<section id="noise_vs_corner" class="level2">
+<h2 class="anchored" data-anchor-id="noise_vs_corner">noise_vs_corner</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/noise_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-49" title="noise_vs_corner"><img src="./cace/_docs/ota-5t/schematic/noise_vs_corner.png" class="img-fluid figure-img" alt="noise_vs_corner"></a></p>
+<figcaption>noise_vs_corner</figcaption>
+</figure>
+</div>
+</section>
+<section id="settling_vs_temp" class="level2">
+<h2 class="anchored" data-anchor-id="settling_vs_temp">settling_vs_temp</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/settling_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-50" title="settling_vs_temp"><img src="./cace/_docs/ota-5t/schematic/settling_vs_temp.png" class="img-fluid figure-img" alt="settling_vs_temp"></a></p>
+<figcaption>settling_vs_temp</figcaption>
+</figure>
+</div>
+</section>
+<section id="settling_vs_vin" class="level2">
+<h2 class="anchored" data-anchor-id="settling_vs_vin">settling_vs_vin</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/settling_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-51" title="settling_vs_vin"><img src="./cace/_docs/ota-5t/schematic/settling_vs_vin.png" class="img-fluid figure-img" alt="settling_vs_vin"></a></p>
+<figcaption>settling_vs_vin</figcaption>
+</figure>
+</div>
+</section>
+<section id="settling_vs_vdd" class="level2">
+<h2 class="anchored" data-anchor-id="settling_vs_vdd">settling_vs_vdd</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/settling_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-52" title="settling_vs_vdd"><img src="./cace/_docs/ota-5t/schematic/settling_vs_vdd.png" class="img-fluid figure-img" alt="settling_vs_vdd"></a></p>
+<figcaption>settling_vs_vdd</figcaption>
+</figure>
+</div>
+</section>
+<section id="settling_vs_corner" class="level2">
+<h2 class="anchored" data-anchor-id="settling_vs_corner">settling_vs_corner</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./cace/_docs/ota-5t/schematic/settling_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-53" title="settling_vs_corner"><img src="./cace/_docs/ota-5t/schematic/settling_vs_corner.png" class="img-fluid figure-img" alt="settling_vs_corner"></a></p>
+<figcaption>settling_vs_corner</figcaption>
+</figure>
+</div>
+</section>
+</div>
+</div>
 </section>
 </section>
 <section id="cascode-stage" class="level2">
@@ -1852,7 +2129,7 @@ headroom M5 = 0.3328988028993754 V</code></pre>
 <div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-38" title="Figure&nbsp;24: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-54" title="Figure&nbsp;24: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;24: Middlebrook voltage loop gain simulation.
@@ -1866,7 +2143,7 @@ Figure&nbsp;24: Middlebrook voltage loop gain simulation.
 <div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-39" title="Figure&nbsp;25: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-55" title="Figure&nbsp;25: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;25: Middlebrook current loop gain simulation.
@@ -2437,7 +2714,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","loop":false,"selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
