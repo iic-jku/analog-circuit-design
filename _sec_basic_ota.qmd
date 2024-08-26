@@ -18,16 +18,17 @@ If the voltage gain of the OTA is @fig-voltage-buffer-ota is high, then $V_\math
 
 | Specification                                           | Value                              | Unit    |
 |:--------------------------------------------------------|:----------------------------------:|:-------:|
-| Load capacitance $C_\mathrm{load}$                      | 50                                 | fF      |
-| Input voltage range (for buffering 2/3 bandgap voltage) | 0.7 < **0.8** < 0.9                | V       |
-| Signal bandwidth (3dB)                                  | >10                                | MHz     |
-| Voltage gain error                                      | <5                                 | %       |
-| Total output noise (rms)                                | <1                                 | mV~rms~ |
-| Supply voltage                                          | 1.45 < **1.5** < 1.55              | V       |
-| Supply current (as low as possible)                     | <10                                | µA      |
+| Supply voltage                                          | $1.45 < \underline{1.5} < 1.55$    | V       |
+| Temperature range (industrial)                          | $-40 < \underline{27} < 125$       | degC    |
+| Load capacitance $C_\mathrm{load}$                      | $50$                               | fF      |
+| Input voltage range (for buffering 2/3 bandgap voltage) | $0.7 < \underline{0.8} < 0.9$      | V       |
+| Signal bandwidth (3dB)                                  | $>10$                              | MHz     |
+| Voltage gain error                                      | $<5$                               | %       |
+| Total output noise (rms)                                | $<1$                               | mV~rms~ |
+| Supply current (as low as possible)                     | $<10$                              | µA      |
 | Stability                                               | stable for rated $C_\mathrm{load}$ |         |
-| Turn-on time (settled to with 1%)                       | <10                                | µs      |
-| Externally provided bias current (nominal)              | 20                                 | µA      |
+| Turn-on time (settled to with 1%)                       | $<10$                              | µs      |
+| Externally provided bias current (nominal)              | $20$                               | µA      |
 
 : Voltage buffer specification {#tbl-voltage-buffer-spec}
 
@@ -194,5 +195,38 @@ The sizing procedure and its calculation are best performed in a Jupyter noteboo
 {{< embed ./sizing/sizing_basic_ota.ipynb echo=true >}}
 :::
 
-### 5T-OTA Simulation
+### 5T-OTA Simulation {#sec-basic-ota-simulation}
+
+With the initial sizing of the MOSFETs of the 5T-OTA done, we can setup a simulation testbench and check the performance parameters.
+
+::: {.callout-tip title="Exercise"}
+Please setup a testbench in Xschem for the 5T-OTA used as a voltage buffer as schown in @fig-voltage-buffer-ota. Use typical conditions for the simulation, and check how well the specification in @tbl-voltage-buffer-spec is met, and how well the derivations in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal fit to the simulation results.
+
+If you get stuck, you can find the tesbench [here](./xschem/ota-5t_tb-ac.svg) (for the small-signal analysis) and [here](./xschem/ota-5t_tb-ac.svg) (for the large-signal settling simulation).
+:::
+
+### 5T-OTA Simulation versus PVT
+
+As you have seen in @sec-basic-ota-simulation running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:
+
+1. The supply voltage of the circuit has tolerances, and thus we need to check the performance against this variation.
+2. The temperature at which the circuit is operated is likely changing. Also the performance against this has to be verified.
+3. When manufacturing the wafers random variations in various process parameters lead to changed parameters of the integrated circuit components. In order to check for this effect, wafer foundries provide model files which shall cover these manufacturing excursions. Simplified, this leads to a slower or faster MOSFET, and usually NMOS and PMOS are not correlated, so we have the process corners **SS**, **SF**, **TT**, **FS**, and **FF**. So far, we have only used the **TT** models in our simulations.
+
+The variations listed in the previous list are abbreviated as **PVT** (process, voltage, temperature) variations. In order to finalize a circuit all combinations of these (plus the variations in operating conditions like input voltage) have to be simulated. As you can imagine, this leads to a huge number of simulations, and simulation results which have to evaluated for pass/fail.
+
+There are two options how to tackle this efficiently:
+
+1. As an experienced designer you have a very solid understanding of the circuit, plus based on the analytic equations you can identify which combination of operating conditions will lead to a worst case performance. Thus, you can drastically reduce the number of corners to simulate, and you run them by hand.
+2. You are using a framework which highly automates this task of running a plethora of different simulations and evaluating the outcome. These frameworks are called simulation runners.
+
+Luckily, there are open-source versions of simulation runners available, and we will use [CACE](https://github.com/efabless/cace) in this lecture. CACE is written in Python and allows to setup a datasheet in [YAML](https://yaml.org) which defines the simulation problem and the performance parameters to evaluate against which limits. The resulting simulations are then run in parallel and the simulation data is evaluated and summarized in various forms.
+
+There is a CACE setup available for our 5T-OTA. The [datasheet](./cace/voltage-buffer-ota.yaml) describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, [this one](./cace/templates/ota-5t-ac.sch) is used for ac simulations, [this one](./cace/templates/ota-5t-noise.sch) is used for noise simulation, and [this one](./cace/templates/ota-5t-tran.sch) is used for transient simulation.
+
+After a successul run, a documentation is automatically generated. The result of a full run of this [OTA design](./xschem/ota-5t.svg) is presented here:
+
+::: {.callout-note}
+{{< include ./cace/_docs/ota-5t_schematic.md >}}
+:::
 

@@ -18,7 +18,7 @@ paths:
   root:             ..
   schematic:        xschem
   netlist:          cace/netlist
-  documentation:    cace/docs
+  documentation:    cace/_docs
 
 pins:
   vdd:
@@ -63,9 +63,9 @@ default_conditions:
     description: Process corner
     display: Corner
     typical: tt
-  temperature:
+  temp:
     description: Ambient temperature
-    display: Temp
+    display: Temperature
     unit: °C
     typical: 27
   cload:
@@ -106,7 +106,7 @@ parameters:
     plot:
       gain_vs_temp:
         type: xyplot
-        xaxis: temperature
+        xaxis: temp
         yaxis: gain
       gain_vs_vin:
         type: xyplot
@@ -122,7 +122,7 @@ parameters:
         yaxis: gain
       bw_vs_temp:
         type: xyplot
-        xaxis: temperature
+        xaxis: temp
         yaxis: bw
       bw_vs_vin:
         type: xyplot
@@ -138,7 +138,7 @@ parameters:
         yaxis: bw
     conditions:
       corner:
-        enumerate: [ss, tt, ff]
+        enumerate: [ss, sf, tt, fs, ff]
       vdd:
         minimum: 1.45
         typical: 1.5
@@ -147,7 +147,7 @@ parameters:
         minimum: 0.7
         typical: 0.8
         maximum: 0.9
-      temperature:
+      temp:
         minimum: -40
         typical: 27
         maximum: 130
@@ -173,7 +173,7 @@ parameters:
     plot:
       noise_vs_temp:
         type: xyplot
-        xaxis: temperature
+        xaxis: temp
         yaxis: noise
       noise_vs_vin:
         type: xyplot
@@ -189,7 +189,7 @@ parameters:
         yaxis: noise
     conditions:
       corner:
-        enumerate: [ss, tt, ff]
+        enumerate: [ss, sf, tt, fs, ff]
       vdd:
         minimum: 1.45
         typical: 1.5
@@ -198,7 +198,7 @@ parameters:
         minimum: 0.7
         typical: 0.8
         maximum: 0.9
-      temperature:
+      temp:
         minimum: -40
         typical: 27
         maximum: 130
@@ -224,7 +224,7 @@ parameters:
     plot:
       settling_vs_temp:
         type: xyplot
-        xaxis: temperature
+        xaxis: temp
         yaxis: tsettle
       settling_vs_vin:
         type: xyplot
@@ -240,7 +240,7 @@ parameters:
         yaxis: tsettle
     conditions:
       corner:
-        enumerate: [ss, tt, ff]
+        enumerate: [ss, sf, tt, fs, ff]
       vdd:
         minimum: 1.45
         typical: 1.5
@@ -249,7 +249,7 @@ parameters:
         minimum: 0.7
         typical: 0.8
         maximum: 0.9
-      temperature:
+      temp:
         minimum: -40
         typical: 27
         maximum: 130

@@ -65,7 +65,7 @@ C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true
 value="
 .lib cornerMOSlv.lib mos_CACE\{corner\}
 .include CACE\{DUT_path\}
-.temp CACE\{temperature\}
+.temp CACE\{temp\}
 .option SEED=CACE[CACE\{seed=12345\} + CACE\{iterations=0\}]
 .ic v(v_vout)=0
 
