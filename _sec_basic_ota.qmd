@@ -43,7 +43,7 @@ The first step when receiving a design task is to look at the specifications, an
 
 In summary, we think that we can make an NMOS-input OTA like the one in @fig-basic-ota work for the required supply and input- and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.
 
-Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, we complete bias current in the OTA is steered towards the output (try to understand why this is the case), so when the output capacitor is fully discharged, and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is
+Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, the complete bias current in the OTA is steered towards the output (try to understand why this is the case), so when the output capacitor is fully discharged, and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is
 $$
 T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 1.3}{10 \cdot 10^{-6}} = 6.5\,\text{ns}
 $$
@@ -57,7 +57,7 @@ which also checks out.
 
 ### Small-Signal Analysis of the OTA {#sec-basic-ota-small-signal}
 
-In order to size the OTA components we need to see derive how MOSFET parameters define the performance. The important small-signal metrics are
+In order to size the OTA components we need to derive how MOSFET parameters define the performance. The important small-signal metrics are
 
 - dc gain $A_0$
 - gain-bandwidth product (GBW)
@@ -72,10 +72,10 @@ So in order to reach an output voltage accuracy of at least 5% we need a dc gain
 
 #### OTA Small-Signal Transfer Function
 
-In order to derive the governing equations for the OTA we will make a few simplififcations:
+In order to derive the governing equations for the OTA we will make a few simplifications:
 
-- We will set $\gmb = 0$ for all MOSFET.
-- We will further set $\Cgd = 0$ for all MOSFET except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$. Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain).
+- We will set $\gmb = 0$ for all MOSFETs.
+- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$. Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain).
 - We assume $\gm \gg \gds$, so we set $\gds[1] = \gds[3] = 0$.
 - The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$ we can add to the load capacitance $C_\mathrm{load}$.
 
@@ -213,7 +213,7 @@ As you have seen in @sec-basic-ota-simulation running simulations by hand is ted
 2. The temperature at which the circuit is operated is likely changing. Also the performance against this has to be verified.
 3. When manufacturing the wafers random variations in various process parameters lead to changed parameters of the integrated circuit components. In order to check for this effect, wafer foundries provide model files which shall cover these manufacturing excursions. Simplified, this leads to a slower or faster MOSFET, and usually NMOS and PMOS are not correlated, so we have the process corners **SS**, **SF**, **TT**, **FS**, and **FF**. So far, we have only used the **TT** models in our simulations.
 
-The variations listed in the previous list are abbreviated as **PVT** (process, voltage, temperature) variations. In order to finalize a circuit all combinations of these (plus the variations in operating conditions like input voltage) have to be simulated. As you can imagine, this leads to a huge number of simulations, and simulation results which have to evaluated for pass/fail.
+The variations listed in the previous list are abbreviated as **PVT** (process, voltage, temperature) variations. In order to finalize a circuit all combinations of these (plus the variations in operating conditions like input voltage) have to be simulated. As you can imagine, this leads to a huge number of simulations, and simulation results which have to be evaluated for pass/fail.
 
 There are two options how to tackle this efficiently:
 
