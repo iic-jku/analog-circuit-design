@@ -70,13 +70,16 @@ value="
 
 .control
 set num_threads=1
-ac dec 101 10 100MEG
 
-meas ac dcgain MAX vmag(v_out) FROM=10 TO=100
-let f3db = dcgain/sqrt(2)
+op
+let dcgain=v(v_out)/v(v_in)
+
+ac dec 101 10 100MEG
+meas ac acgain MAX vmag(v_out) FROM=10 TO=100
+let f3db = acgain/sqrt(2)
 meas ac fbw WHEN vmag(v_out)=f3db FALL=1
 
-echo $&dcgain $&fbw > CACE\{simpath\}/CACE\{filename\}_CACE\{N\}.data
+echo $&op1.dcgain $&fbw > CACE\{simpath\}/CACE\{filename\}_CACE\{N\}.data
 .endc
 "}
 C {devices/vsource.sym} 780 -270 0 0 {name=Vdd value=CACE\{vdd\}}

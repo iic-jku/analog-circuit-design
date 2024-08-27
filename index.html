@@ -1866,13 +1866,13 @@ Exercise
 <p>Luckily, there are open-source versions of simulation runners available, and we will use <a href="https://github.com/efabless/cace">CACE</a> in this lecture. CACE is written in Python and allows to setup a datasheet in <a href="https://yaml.org">YAML</a> which defines the simulation problem and the performance parameters to evaluate against which limits. The resulting simulations are then run in parallel and the simulation data is evaluated and summarized in various forms.</p>
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successul run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-CACE Summary for ota-5t
+Note&nbsp;1: CACE Summary for ota-5t
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1910,12 +1910,12 @@ CACE Summary for ota-5t
 <td style="text-align: left;">ngspice</td>
 <td style="text-align: left;">gain</td>
 <td style="text-align: right;">0.95 V/V</td>
-<td style="text-align: right;">0.832 V/V</td>
+<td style="text-align: right;">0.987 V/V</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">0.971 V/V</td>
+<td style="text-align: right;">1.000 V/V</td>
 <td style="text-align: right;">1.05 V/V</td>
-<td style="text-align: right;">0.980 V/V</td>
-<td style="text-align: center;">Fail ❌</td>
+<td style="text-align: right;">1.006 V/V</td>
+<td style="text-align: center;">Pass ✅</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Bandwidth</td>
@@ -2104,6 +2104,10 @@ CACE Summary for ota-5t
 </section>
 </div>
 </div>
+<section id="pvt-simulation-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="pvt-simulation-analysis">PVT Simulation Analysis</h4>
+<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;1</a> we see that (luckily) the specifiction is met for all parameters. This is great! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like n-well proximity. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
+</section>
 </section>
 </section>
 <section id="cascode-stage" class="level2">
@@ -2714,7 +2718,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
