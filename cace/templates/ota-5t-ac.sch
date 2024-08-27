@@ -70,9 +70,9 @@ value="
 
 .control
 set num_threads=1
-ac dec 101 1k 100MEG
+ac dec 101 10 100MEG
 
-meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k
+meas ac dcgain MAX vmag(v_out) FROM=10 TO=100
 let f3db = dcgain/sqrt(2)
 meas ac fbw WHEN vmag(v_out)=f3db FALL=1
 
