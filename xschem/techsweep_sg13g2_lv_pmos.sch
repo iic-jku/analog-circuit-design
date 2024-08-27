@@ -114,7 +114,7 @@ C {devices/lab_pin.sym} 830 -170 0 0 {name=p1 sig_type=std_logic lab=n}
 C {devices/code_shown.sym} 0 -950 0 0 {name=NGSPICE_CTRL only_toplevel=true 
 value="
 .option sparse
-.param temp=27
+.temp 27
 .param wx=5u lx=0.13u vbx=0
 .noise v(n) vg lin 1 1 1 1
 .control

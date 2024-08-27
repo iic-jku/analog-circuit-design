@@ -67,7 +67,7 @@ value=".lib cornerMOSlv.lib mos_tt
 "}
 C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true 
 value="
-.param temp=27
+.temp 27
 .ic v(v_vout)=0
 .control
 

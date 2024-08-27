@@ -38,7 +38,7 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -940 0 0 {name=NGSPICE_CTRL only_toplevel=true 
 value="
 .option sparse
-.param temp=27
+.temp 27
 .param wx=5u lx=0.13u vbx=0
 .noise v(n) vg lin 1 1 1 1
 .control

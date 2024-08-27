@@ -66,7 +66,7 @@ value=".lib cornerMOShv.lib mos_tt
 "}
 C {devices/code_shown.sym} 0 -930 0 0 {name=NGSPICE only_toplevel=true 
 value="
-.param temp=27
+.temp 27
 .control
 save all
 save @n.xm1.nsg13_hv_pmos[gm]
