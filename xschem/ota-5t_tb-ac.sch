@@ -67,16 +67,16 @@ value=".lib cornerMOSlv.lib mos_tt
 "}
 C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true 
 value="
-.param temp=27
+.temp 27
 .control
 option sparse
 save all
 op
-write ota-5t_tb.raw
+write ota-5t_tb-ac.raw
 set appendwrite
 
 ac dec 101 1k 100MEG
-write ota-5t_tb.raw
+write ota-5t_tb-ac.raw
 plot 20*log10(v_out)
 
 meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k
