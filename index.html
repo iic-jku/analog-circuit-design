@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-08-27">
+<meta name="dcterms.date" content="2024-08-28">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-08-27">
-<meta name="citation_cover_date" content="2024-08-27">
+<meta name="citation_publication_date" content="2024-08-28">
+<meta name="citation_cover_date" content="2024-08-28">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-08-27">
+<meta name="citation_online_date" content="2024-08-28">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_abstract=In this design of a feedback system it is desirable to make experimental measurements of the loop gain as a function of frequency to ensure that the physical system operates as analytically predicted or, if not, to supply information upon which a design correction can be based. In high loop-gain systems it is desirable that the loop-gain measurement be made without opening the loop. This paper discusses practical methods of measuring and interpreting the results for loop gain of the closed-loop system by a voltage injection or a current-injection technique ; extension to the case in which the measurement can be made even though the system is unstable ; and extension to the case in which neither the voltage nor current-injection technique alone is adequate, but in which a combination of both permits the true loop gain to be derived. These techniques have been found useful not only in linear feedback systems but also in describing-function analysis of switching-mode converters and regulators.;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
 <meta name="citation_reference" content="citation_title=Verifying the diode–capacitor circuit voltage decay;,citation_author=Edward H. Hellen;,citation_publication_date=2003-08;,citation_cover_date=2003-08;,citation_year=2003;,citation_issue=8;,citation_doi=10.1119/1.1578070;,citation_volume=71;,citation_journal_title=American Journal of Physics;">
@@ -183,7 +183,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">August 27, 2024</p>
+              <p class="date">August 28, 2024</p>
             </div>
           </div>
           
@@ -1371,8 +1371,8 @@ Table&nbsp;1: Voltage buffer specification
 <td style="text-align: center;">MHz</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Voltage gain error</td>
-<td style="text-align: center;"><span class="math inline">\(&lt;5\)</span></td>
+<td style="text-align: left;">Output voltage error</td>
+<td style="text-align: center;"><span class="math inline">\(&lt;3\)</span></td>
 <td style="text-align: center;">%</td>
 </tr>
 <tr class="odd">
@@ -1434,7 +1434,7 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 <p>The specification for GBW is given in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a>, the dc gain we have to calculate from the voltage accuracy specification. For a voltage follower in the configuration shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a> the voltage gain is given by <span class="math display">\[
 \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
 \]</span></p>
-<p>So in order to reach an output voltage accuracy of at least 5% we need a dc gain of <span class="math inline">\(A_0 &gt; 25.6\,\text{dB}\)</span>. To allow for process and temperature variation we will strive for <span class="math inline">\(A_0 \ge 30\,\text{dB}\)</span></p>
+<p>So in order to reach an output voltage accuracy of at least 3% we need a dc gain of <span class="math inline">\(A_0 &gt; 30.2\,\text{dB}\)</span>. To allow for process and temperature variation we need to add a bit of extra gain as margin.</p>
 <section id="ota-small-signal-transfer-function" class="level4">
 <h4 class="anchored" data-anchor-id="ota-small-signal-transfer-function">OTA Small-Signal Transfer Function</h4>
 <p>In order to derive the governing equations for the OTA we will make a few simplifications:</p>
@@ -1906,14 +1906,14 @@ Note&nbsp;1: CACE Summary for ota-5t
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Gain</td>
+<td style="text-align: left;">Output voltage ratio</td>
 <td style="text-align: left;">ngspice</td>
 <td style="text-align: left;">gain</td>
-<td style="text-align: right;">0.95 V/V</td>
+<td style="text-align: right;">0.97 V/V</td>
 <td style="text-align: right;">0.987 V/V</td>
 <td style="text-align: right;">any</td>
 <td style="text-align: right;">1.000 V/V</td>
-<td style="text-align: right;">1.05 V/V</td>
+<td style="text-align: right;">1.03 V/V</td>
 <td style="text-align: right;">1.006 V/V</td>
 <td style="text-align: center;">Pass ✅</td>
 </tr>
@@ -2106,7 +2106,7 @@ Note&nbsp;1: CACE Summary for ota-5t
 </div>
 <section id="pvt-simulation-analysis" class="level4">
 <h4 class="anchored" data-anchor-id="pvt-simulation-analysis">PVT Simulation Analysis</h4>
-<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;1</a> we see that (luckily) the specifiction is met for all parameters. This is great! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
+<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;1</a> we see that (luckily) the specifiction is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
 </section>
 </section>
 </section>
@@ -2718,7 +2718,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
