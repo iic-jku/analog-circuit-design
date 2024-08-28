@@ -23,7 +23,7 @@ If the voltage gain of the OTA is @fig-voltage-buffer-ota is high, then $V_\math
 | Load capacitance $C_\mathrm{load}$                      | $50$                               | fF      |
 | Input voltage range (for buffering 2/3 bandgap voltage) | $0.7 < \underline{0.8} < 0.9$      | V       |
 | Signal bandwidth (3dB)                                  | $>10$                              | MHz     |
-| Voltage gain error                                      | $<5$                               | %       |
+| Output voltage error                                    | $<3$                               | %       |
 | Total output noise (rms)                                | $<1$                               | mV~rms~ |
 | Supply current (as low as possible)                     | $<10$                              | µA      |
 | Stability                                               | stable for rated $C_\mathrm{load}$ |         |
@@ -68,7 +68,7 @@ $$
 \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
 $$
 
-So in order to reach an output voltage accuracy of at least 5% we need a dc gain of $A_0 > 25.6\,\text{dB}$. To allow for process and temperature variation we will strive for $A_0 \ge 30\,\text{dB}$ 
+So in order to reach an output voltage accuracy of at least 3% we need a dc gain of $A_0 > 30.2\,\text{dB}$. To allow for process and temperature variation we need to add a bit of extra gain as margin. 
 
 #### OTA Small-Signal Transfer Function
 
@@ -232,4 +232,4 @@ After a successul run, a documentation is automatically generated. The result of
 
 #### PVT Simulation Analysis
 
-Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) the specifiction is met for all parameters. This is great! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.
+Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) the specifiction is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.

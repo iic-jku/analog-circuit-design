@@ -5,7 +5,7 @@
 
 |      Parameter       |         Tool         |     Result      | Min Limit  |  Min Value   | Typ Target |  Typ Value   | Max Limit  |  Max Value   |  Status  |
 | :------------------- | :------------------- | :-------------- | ---------: | -----------: | ---------: | -----------: | ---------: | -----------: | :------: |
-| Gain                 | ngspice              | gain                 |        0.95 V/V |  0.987 V/V |          any |  1.000 V/V |     1.05 V/V |  1.006 V/V |   Pass ✅    |
+| Output voltage ratio | ngspice              | gain                 |        0.97 V/V |  0.987 V/V |          any |  1.000 V/V |     1.03 V/V |  1.006 V/V |   Pass ✅    |
 | Bandwidth            | ngspice              | bw                   |         10e6 Hz | 15551000.000 Hz |          any | 26912100.000 Hz |          any | 34051700.000 Hz |   Pass ✅    |
 | Output noise         | ngspice              | noise                |             any |   0.308 mV |          any |   0.371 mV |         1 mV |   0.455 mV |   Pass ✅    |
 | Settling time        | ngspice              | tsettle              |             any |   0.135 us |          any |   0.142 us |        10 us |   0.155 us |   Pass ✅    |
