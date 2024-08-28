@@ -2,7 +2,7 @@ When designing integrated circuits it is an important question how to select var
 
 Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behaviour is much more complex than these simple models. Also, this highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.
 
-::: {.callout-note}
+::: {.callout-note title="MOSFET Square-Law Model"}
 One of the many simplifactions of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existance of a threshold voltage is assumed, but in fact this voltage is just existing given a certain definition, and depending on definition, its value changed. In addition, in nm CMOS, the threshold voltage is a function on many thing, like $W$ and $L$.
 :::
 
@@ -12,7 +12,7 @@ Being a well-established approach we select the $\gmid$ methodology introduced b
 
 The $\gmid$ methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, form micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.
 
-### MOSFET Characterization Testbench
+## MOSFET Characterization Testbench
 
 In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in @fig-techsweep-nmos-tb, and the TB for the LV PMOS is shown in @fig-techsweep-pmos-tb.
 
@@ -22,13 +22,13 @@ In order to get the required tabulated data we use a testbench in Xschem which s
 
 We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behaviour.
 
-### NMOS Characterization {#sec-techsweep-nmos}
+## NMOS Characterization {#sec-techsweep-nmos}
 
 First, we will start looking at the LV NMOS. In @sec-techsweep-pmos we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of $1.5\,\text{V}$, so only the LV types are of interest to us.
 
 The first import graph is the plot of $\gmid$ and $f_\mathrm{T}$ versus the gate-source voltage $\VGS$. First let us answer the question why $\gmid$ is a good parameter to look at, and actually this is also the central parameter in the $\gmid$ methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see [biasing](https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A)) we want to get a large amplification from a MOSFET, which corresponds to a large $\gm$. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high $\gmid$ ratio is good.
 
-::: {.callout-note}
+::: {.callout-note title="Power Consumption"}
 Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severly limited by the cooling capabilities of the electrical system.
 :::
 
@@ -46,8 +46,8 @@ $$
 $$ {#eq-mosfet-gmid-stronginversion}
 with $\Vth$ the threshold voltage and $V_\mathrm{od}$ the so-called "overdrive voltage."
 
-::: {.callout-note}
-Why are we so often using $300\,\text{K}$ for a typical condition? As this corresponds to roughly $27^{\circ}\text{C}$, this accounts for some self heating compared to otherwise usual room temperatures. Further, engineers like round numbers which are easy to remember, so $300\,\text{K}$ is used as a proxy for room temperature.
+::: {.callout-note title="Why 300K?"}
+Why are we so often using a temperature of $300\,\text{K}$ for a typical condition? As this corresponds to roughly $27^{\circ}\text{C}$, this accounts for some self heating compared to otherwise cooler usual room temperatures. Further, engineers like round numbers which are easy to remember, so $300\,\text{K}$ is used as a proxy for room temperature.
 :::
 
 As we can also see from belows plot, the peak transit frequency of the LV NMOS is about $75\,\text{GHz}$, which allows building radio-frequency circuits up to ca. $f_\mathrm{T} / 10 = 7.5\,\text{GHz}$, which is a respectible number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the timeframe when 130nm CMOS became available (ca. 2000). 
@@ -72,12 +72,12 @@ The following plot shows the minimum drain-source voltage $V_\mathrm{ds,sat}$ th
 
 For analog circuits the noise performance is usually quite important. Thermal noise of a resistor (the Johnson-Nyquist noise) has a flat power-spectral density (PSD) given by $\overline{V_\mathrm{n}^2}/\Delta f = 4 k T R$, where $k$ is Boltzmann's constant, $T$ absolute temperature, and $R$ the value of the resistor (the unit of $\overline{V_\mathrm{n}^2}/\Delta f$ is $\text{V}^2/\text{Hz}$). This PSD is essentially flat until very high frequencies where [quantum effects](https://en.wikipedia.org/wiki/Johnson–Nyquist_noise) start to kick in.
 
-::: {.callout-note}
-We usually leave the $\Delta f$ away for a shorter notation, so we write $\overline{V_\mathrm{n}^2}$ when we actually mean $\overline{V_\mathrm{n}^2}/\Delta f$.
+::: {.callout-note title="Noise Notation"}
+We usually leave the $\Delta f$ away for a shorter notation, so we write $\overline{V_\mathrm{n}^2}$ when we actually mean $\overline{V_\mathrm{n}^2}/\Delta f$. In case of doubt look at the unit of a quantity, whether is shows $\text{V}^2$ or $\text{V}^2/\text{Hz}$ or $\text{V}/\sqrt{\text{Hz}}$ (or $\text{I}^2$ or $\text{I}^2/\text{Hz}$ or $\text{I}/\sqrt{\text{Hz}}$).
 
-Please also note that the pair of $k T$ pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation.
+Please also note that the pair of $k T$ pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation. Boltzmann's constant $k = 1.38 \cdot 10^{-23}\,\text{J/K}$ is just a scaling factor from thermal energy expressed as a temperature $T$ to energy $E = k T$ expressed in Joule.
 
-Further, when working with PSD there is the usage of a one-sided ($f$ runs from $0$ to $\infty$) or two-sided PSD ($f$ runs from $-\infty$ to $\infty$). The default in this lecture is the usage of a **one-sided PSD**.
+Further, when working with PSD there is the usage of a one-sided ($0 \ge f < \infty$) or two-sided power spectral density (PSD) ($-\infty < f < \infty$). The default in this lecture is the usage of the **one-sided PSD**.
 :::
 
 In this lecture the only MOSFET noise we consider is the drain noise (as discussed in @sec-mosfet-smallsignal-model), showing up as a current noise between drain and source. For a for realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.
@@ -88,7 +88,7 @@ The factor $\gamma$ (@eq-mosfet-noise) is a function of many things (in classica
 
 In a MOSFET, unfortunately, besides the thermal noise according to @eq-mosfet-noise, there is also a substantial low-frequency excess noise, called "flicker noise" due to its characteristic $\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f$ behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency $f_\mathrm{co}$, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of $L$ and $\gmid$. Generally, the flicker noise is proportional to $(W L)^{-1}$, so the larger the device is, the lower the flicker noise. The parameter $\gmid$ largely stays constant when we keep $W/L$ constant, so for a given $\gmid$ flicker noise is proportinal to $1/L^2$. However, increasing $L$ lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.
 
-::: {.callout-note}
+::: {.callout-note title="MOSFET Flicker Noise"}
 The physical origin of flicker noise is the crystal interface between silicon (Si) and the silicondioxide (SiO~2~). Since these are different materials, there are dangling bonds, which can capture charge charriers travelling in the channel. After a random time, these carriers are released, and flicker noise is the result. The amount of flicker noise is a function of the manufacturing process, and will generally be different between device types and wafer foundries.
 :::
 
@@ -96,11 +96,11 @@ As you can see in the following plot, $f_\mathrm{co}$ can reach well into the 10
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-fco-vs-gmid-vs-l >}}
 
-### PMOS Characterization {#sec-techsweep-pmos}
+## PMOS Characterization {#sec-techsweep-pmos}
 
 In the following, we have the same plots as discussed in @sec-techsweep-nmos, but now for the PMOS.
 
-::: {.callout-note}
+::: {.callout-note title="PMOS Sign Convention"}
 In all PMOS plots we plot positive values for voltages and currents, to have compatible plots to the NMOS. Of course, in a PMOS, voltages and currents have different polarity compared to the NMOS.
 :::
 
@@ -114,8 +114,8 @@ $f_\mathrm{T}$ against $\gmid$ for several different $L$. One can see significan
 
 $\gm / \gds$ versus $\gmid$. Unfortunately, one can see a modelling error for the PMOS in this plot. The self gain $\gm / \gds$ reaches non-physical values, which indicates an issue with the $\gds$ modelling for the PMOS. We can not use these values for our circuit sizing, so we will use the respective NMOS plots also for the PMOS.
 
-::: {.callout-important}
-This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite often happening, as setting up the device compact models and parametrizing them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are using!
+::: {.callout-important title="Beware of Modelling Issues"}
+This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite often happening, as setting up the device compact models and parametrizing them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are going to use!
 :::
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-gmgds-vs-gmid-vs-l >}}

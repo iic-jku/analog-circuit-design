@@ -8,7 +8,7 @@ We note that $M_{1,2}$ and $M_{3,4}$ need to be symmetric, thus will have the sa
 
 As this is an OTA the output is a current; if the load impedance is high (i.e., purely capacitive, which is often the case in integrated circuits when driving MOSFET inputs) then the voltage gain of the OTA can be high (of course, in this simple OTA it is limited). With a high-impedance loading this OTA can provide a voltage output, and this is actually how OTAs are mostly operated.
 
-### Voltage Buffer with OTA
+## Voltage Buffer with OTA
 
 In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lighly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in @fig-voltage-buffer-ota.
 
@@ -32,7 +32,7 @@ If the voltage gain of the OTA is @fig-voltage-buffer-ota is high, then $V_\math
 
 : Voltage buffer specification {#tbl-voltage-buffer-spec}
 
-### Large-Signal Analysis of the OTA {#sec-basic-ota-large-signal}
+## Large-Signal Analysis of the OTA {#sec-basic-ota-large-signal}
 
 The first step when receiving a design task is to look at the specifications, and see whether they make sense. Detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) allows to do back-of-the-envelope gauging if the specification makes sense, and (b) the derived analytical equations will serve as guide for the sizing procedure.
 
@@ -55,7 +55,7 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 $$
 which also checks out.
 
-### Small-Signal Analysis of the OTA {#sec-basic-ota-small-signal}
+## Small-Signal Analysis of the OTA {#sec-basic-ota-small-signal}
 
 In order to size the OTA components we need to derive how MOSFET parameters define the performance. The important small-signal metrics are
 
@@ -70,7 +70,7 @@ $$
 
 So in order to reach an output voltage accuracy of at least 3% we need a dc gain of $A_0 > 30.2\,\text{dB}$. To allow for process and temperature variation we need to add a bit of extra gain as margin. 
 
-#### OTA Small-Signal Transfer Function
+### OTA Small-Signal Transfer Function
 
 In order to derive the governing equations for the OTA we will make a few simplifications:
 
@@ -81,7 +81,7 @@ In order to derive the governing equations for the OTA we will make a few simpli
 
 The resulting small-signal equivalent circuit is shown in @fig-basic-ota-small-signal.
 
-::: {.callout-note}
+::: {.callout-warning title="Refresh MOSFET Small-Signal Model"}
 Please review the MOSFET small-signal equivalent model in @fig-mosfet-small-signal-model at this point. For the PMOS just flip the model upside-down.
 :::
 
@@ -129,7 +129,7 @@ $$
 s_\mathrm{zd} = -\frac{2 \gm[34]}{\Cgs[34]}
 $$
 
-#### OTA Noise
+### OTA Noise
 
 For the noise analysis we ignore the pole-zero doublet due to $\Cgs[34]$ (we assume minor impact due to this) and just consider the dominant pole. For the noise analysis at the output we set the input signal to zero, and thus we arrive at the simplified small-signal circuit shown in @fig-basic-ota-small-signal-noise.
 
@@ -140,7 +140,7 @@ $$
 \overline{\Vgs[34]^2} = \frac{1}{\gm[34]^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right).
 $$
 
-::: {.callout-note}
+::: {.callout-important title="Noise Addition"}
 Remember that **uncorrelated** noise quantities need to be power-summed (i.e., $I^2 = I_1^2 + I_2^2$)!
 :::
 
@@ -175,37 +175,37 @@ $$ {#eq-basic-ota-output-noise}
 
 Inspecting @eq-basic-ota-output-noise we can see that the integrated output noise is the $k T / C$ noise of the output load capacitor, enhanced by the $\gamma_{12}$ of the input differential pair, plus a (smaller) contribution of the current mirror load $M_{3,4}$. Intuitevly, this result makes sense.
 
-::: {.callout-tip title="Exercise"}
+::: {.callout-tip title="Exercise: Derivation of 5T-OTA Performance"}
 Please take your time and carefully go through the explanations and derivations for the 5-transistor-OTA in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal. Try to do the calculations yourself; if you get stuck, review the previous chapters.
 :::
 
-### 5T-OTA Sizing
+## 5T-OTA Sizing
 
 Outfitted with the governing equations derived in @sec-basic-ota-small-signal we can now size the MOSFETs in the OTA, we remember that we have to size $M_{1,2}$ and $M_{3,4}$ equally.
 
 First, we need to select a proper $\gmid$ for the MOSFET. Remembering @sec-gmid-method we see that for the input differential pair we should go for a large $\gm$, thus we select a $\gmid = 10$. As $\gds$ of $M_2$ could limit the dc gain (@eq-simple-ota-gain-dc) we go with a rather long $L = 5\,\mu\text{m}$. For current sources a small $\gmid$ is a good idea, so we start with $\gmid=5$ (because we can not go too low because of $V_\mathrm{ds,sat}$) and also an $L = 5\,\mu\text{m}$.
 
-::: {.callout-tip title="Exercise"}
+::: {.callout-tip title="Exercise: 5T-OTA Sizing"}
 Please size the 5T-OTA according to the previous $\gmid$ and $L$ suggestions. Please calculate the $W$ of $M_{1-6}$ and the total supply current. Please check wether gain error, total output noise, and turn-on settling is met with the calculated devices sizes and bias currents.
 :::
 
 The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:
 
-::: {.callout-note}
+::: {.callout-tip title="Solution: 5T-OTA Sizing" collapse="true"}
 {{< embed ./sizing/sizing_basic_ota.ipynb echo=true >}}
 :::
 
-### 5T-OTA Simulation {#sec-basic-ota-simulation}
+## 5T-OTA Simulation {#sec-basic-ota-simulation}
 
-With the initial sizing of the MOSFETs of the 5T-OTA done, we can setup a simulation testbench and check the performance parameters.
+With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters.
 
-::: {.callout-tip title="Exercise"}
-Please setup a testbench in Xschem for the 5T-OTA used as a voltage buffer as schown in @fig-voltage-buffer-ota. Use typical conditions for the simulation, and check how well the specification in @tbl-voltage-buffer-spec is met, and how well the derivations in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal fit to the simulation results.
+::: {.callout-tip title="Exercise: 5T-OTA Design and Testbench"}
+Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as schown in @fig-voltage-buffer-ota. Use typical conditions for the simulation, and check how well the specification in @tbl-voltage-buffer-spec is met, and how well the derivations in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal fit to the simulation results.
 
-If you get stuck, you can find the tesbench [here](./xschem/ota-5t_tb-ac.svg) (for the small-signal analysis) and [here](./xschem/ota-5t_tb-ac.svg) (for the large-signal settling simulation).
+If you get stuck, you can find the testbench and 5T-OTA schematic [here](./xschem/ota-5t_tb-ac.svg) (for the small-signal analysis) and [here](./xschem/ota-5t_tb-ac.svg) (for the large-signal settling simulation).
 :::
 
-### 5T-OTA Simulation versus PVT
+## 5T-OTA Simulation versus PVT
 
 As you have seen in @sec-basic-ota-simulation running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:
 
@@ -226,10 +226,11 @@ There is a CACE setup available for our 5T-OTA. The [datasheet](./cace/voltage-b
 
 After a successul run, a documentation is automatically generated. The result of a full run of this [OTA design](./xschem/ota-5t.svg) is presented here:
 
-::: {#nte-basic-ota-cace-result .callout-note}
+::: {#nte-basic-ota-cace-result .callout-note title="CACE Summary for 5T-OTA"}
+
 {{< include ./cace/_docs/ota-5t_schematic.md >}}
 :::
 
-#### PVT Simulation Analysis
+### PVT Simulation Analysis
 
 Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) the specifiction is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.

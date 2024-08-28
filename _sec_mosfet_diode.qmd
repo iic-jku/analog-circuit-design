@@ -6,15 +6,15 @@ Why looking at a single-transistor circuit at all? By starting with the simplest
 
 This diode is usually biased by a current source, shown as $I_\mathrm{bias}$ in the figure. Depending on MOSFET sizing with $W$ and $L$, a certain gate-source voltage $\VGS$ will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.
 
-::: {.callout-note}
+::: {.callout-note title="Feedback in the MOSFET Diode"}
 It is important to realize that this configuration essentially employs a feedback loop for operation. The voltage at the drain of the MOSFET is sensed by the gate, and the gate voltage changes until the $I_\mathrm{D}$ is exactly equal to $I_\mathrm{bias}$. In this sense this is probably the smallest feedback circuit one can build. 
 :::
 
-### MOSFET Diode Sizing
+## MOSFET Diode Sizing
 
 We will now build this circuit in Xschem. For sizing the MOSFET we will use the $\gmid$ methodology introduced in @sec-gmid-method.
 
-::: {.callout-tip title="Exercise"}
+::: {.callout-tip title="Exercise: MOSFET Diode Sizing"}
 Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set $I_\mathrm{bias} = 20\,\mu\text{A}$, $L = 0.13\,\mu\text{m}$, and we want to use $\gmid = 10$ (often a suitable compromise between transistor speed and $\gm$ efficiency).
 
 1. Use the figures in @sec-techsweep-nmos to find out the proper value for $W$.
@@ -24,7 +24,7 @@ Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set $I_\
 
 Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.
 
-::: {.callout-tip title="Solution"}
+::: {.callout-tip title="Solution: MOSFET Diode Sizing" collapse="true"}
 1. Using the fact that $I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}$ and $\gmid = 10$ directly provides $\gm = 0.2\,\text{mS}$.
 2. Using the self-gain plot, we see that $\gm/\gds \approx 21$, so $\gds \approx 9.5\,\mu\text{S}$. The $f_\mathrm{T}$ can easily be found in the respective plot to be $f_\mathrm{T} = 23\,\text{GHz}$.
 3. The $W$ of the MOSFET we find using the drain current density plot and the given bias current. Rounding to half-microns results in $W = 1\,\mu\text{m}$.
@@ -34,7 +34,7 @@ Before continuing, please finish the previous exercise. Once you are done, compa
 An example Jupyter notebook to extract these values accurately you can find [here](./sizing/sizing_mosfet_diode.ipynb). An Xschem schematic for this exercise is provide [as well](./xschem/mosfet_diode_sizing.sch).
 :::
 
-### MOSFET Diode Large-Signal Behaviour
+## MOSFET Diode Large-Signal Behaviour
 
 As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyse this loop in small-signal, we want to investgate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behaviour. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some ns. The resulting Xschem testbench is shown in @fig-mosfet-diode-settling-tb.
 
@@ -44,14 +44,14 @@ In @fig-mosfet-diode-settling-tb another interesting effect can be observed: Whi
 
 It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually $\VDD$ or $\VSS$) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.
 
-### MOSFET Diode Small-Signal Analysis
+## MOSFET Diode Small-Signal Analysis
 
 We now want to investigate the small-signal behaviour of the MOSFET diode. Based on the small-signal model of the MOSFET in @fig-mosfet-small-signal-model we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circit to the one shown in @fig-mosfet-diode-small-signal.
 
 {{< include figures/_fig_mosfet_diode_small_signal.qmd >}}
 
-::: {.callout-note}
-For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only $N-1$ independent KCL equations, $N$ being the number of nodes of a circuit), and the potential difference equations are simpler if one node is at $0\,V$.
+::: {.callout-note title="Ground Node Selection"}
+For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only $N-1$ independent KCL equations, $N$ being the number of nodes in the circuit), and the potential difference equations are simpler if one node is at $0\,V$.
 :::
 
 For calculating the small-signal impedance of the MOSFET diode we formulate KCL at the top node to get
@@ -66,8 +66,8 @@ $$ {#eq-mosfet-diode-impedance}
 
 When neglecting $\gds$ and at dc we get $Z_\mathrm{diode} = 1 / \gm$, which is an important result and should be memorized.
 
-::: {.callout-important}
-In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm's law for a conductance is $I = G V$, and for a capacitance is $I = s C V$. When writing equations, it is also practical to keep $s C$ together, so we will strive to sort terms accordingly.
+::: {.callout-important title="The Admittance is Your Friend"}
+In circuit analysis it is often algebraically easier to work with admittance instead of impedance, so please remember that Ohm's law for a conductance is $I = G \cdot V$, and for a capacitance is $I = s C \cdot V$. When writing equations, it is also practical to keep $s C$ together, so we will strive to sort terms accordingly.
 :::
 
 Looking at @eq-mosfet-diode-impedance we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as
@@ -76,7 +76,7 @@ $$
 $$
 which is pretty much the transit frequency of the MOSFET!
 
-### MOSFET Diode Stability Analysis
+## MOSFET Diode Stability Analysis
 
 The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy $\Cgs^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
 
@@ -105,7 +105,7 @@ There is an alternative method which breaks the loop open only by adding an ac v
 
 We now want to simulate the open-loop transfer function $H_\mathrm{ol}(s)$ by using Middlebrook's method and confirm our analysis above.
 
-::: {.callout-tip title="Exercise"}
+::: {.callout-tip title="Exercise: MOSFET Diode Loop Analysis"}
 Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by @eq-mosfet-diode-openloop-gain.
 
 If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_loopgain.sch), shown in @fig-mosfet-diode-loopgain-tb.
@@ -115,7 +115,7 @@ If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet
 
 From simulation we see that the open-loop gain is $24.9\,\text{dB}$ at low frequencies, which matches quite well our prediction of $26.4\,\text{dB}$. In the Bode plot we see a low-pass with a $-3\,\text{dB}$ corner frequency of $1.4\,\text{GHz}$, which again is fairly close to our prediction of $1.1\,\text{GHz}$. 
 
-### MOSFET Diode Noise Calculation
+## MOSFET Diode Noise Calculation
 
 As a final exercise on the MOSFET diode circuit we want to calculate the output noise when we consider $\VGS$ the output reference voltage which is created when passing a bias current through the MOSFET diode. The bias current we will assume noiseless.
 
@@ -166,11 +166,11 @@ $$ {#eq-mosfet-diode-noise-rms-simplified}
 
 Inspecting @eq-mosfet-diode-noise-rms-simplified we see our familiar $kT/C$ noise enhanced by the factor $\gamma$! Calculating this value for our MOSFET diode we get $\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}$, which is a sizeable value! We run circuits in this technology at $\VDD = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$, resulting in a dynamic range in this case of $20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}$.
 
-::: {.callout-important}
+::: {.callout-important title="Large Bandwidth and Noise"}
 Large BW circuits can integrate noise over a wide bandwidth resulting in considerable rms noise.
 :::
 
-::: {.callout-tip title="Exercise"}
+::: {.callout-tip title="Exercise: MOSFET Diode Noise"}
 Please build a simulation testbench in Xschem to simulate the noise performance of the MOSFET diode, and confirm the rms noise value that we just calculated. Look at the rms value and the PSD of the noise, and play around with the integration limits. What is the effect? Can you see the flicker noise in the PSD? How much is its contribution to the rms noise?
 
 If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_noise.sch), shown in @fig-mosfet-diode-noise-tb.
@@ -178,7 +178,7 @@ If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet
 ![Testbench for MOSFET diode noise analysis.](./xschem/mosfet_diode_noise.svg){#fig-mosfet-diode-noise-tb}
 :::
 
-### Conclusion
+## Conclusion
 
 In this section we investigated the simple MOSFET-diode circuit. We learned important skills like how to derive a small-signal model, how to calculate important features like noise and open-loop gain for stability analysis. We introduced Middlebrook's method to have a mechanism to open up loops in simulation (and calculation) without disturbing operating points for change loading conditions.
 

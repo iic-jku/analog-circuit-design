@@ -1,12 +1,12 @@
 In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.
 
-### The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET) {#sec-mosfet}
+## The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET) {#sec-mosfet}
 
 In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET as a macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model. 
 
 The circuit symbol that we will use for the n-channel MOSFET is shown in @fig-nmos-symbol, and for the p-channel MOSFET it is shown in @fig-pmos-symbol. A control voltage between gate ("G") and source ("S") causes a current to flow between drain ("D") and source. The MOSFET is a 4-terminal device, so the bulk ("B") can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.
 
-::: {.callout-note}
+::: {.callout-note title="MOSFET Background"}
 Strictly speaking is the drain-source current of a MOSFET controlled by the voltage between gate and bulk and the voltage between drain and source. Since bulk is often connected to source anyway, and many circuit designers historically were already familiar with the operation of the bipolar junction transistor, it is common to consider the gate-source voltage (besides the drain-source voltage) as the controlling voltage.
 
 This focus on gate-source implies that the source is special compared to the drain. In a typical physical MOSFET, however, the drain and source are constructed exactly the same, and which terminal is drain, and which terminal is source, is only determined by the applied voltage potentials, and can change dynamically during operation (think of a MOSFET operating as a switch... which side is the drain, which side is the source?).
@@ -23,7 +23,7 @@ For hand calculations and theoretical discussions we will use the following simp
 
 In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $\CGG = \CGS + \CGD$ is the total capacitance when looking into the gate of the MOSFET. $\CGS$ is usually the dominant capacitance, and $\CGD$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $\CGS$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect). In hand calculations we will often set $\CGD = 0$.
 
-::: {.callout-note}
+::: {.callout-note title="MOSFET Bulk Terminal"}
 The bulk connection in @fig-mosfet-large-signal-model seems floating as we only consider it a control terminal, where the potential difference between source and bulk influences the behaviour of the MOSFET. However, we do not consider resistive or capacitive effects associated with this node, which is of course a gross simplification, but nevertheless one we will make in this course.
 :::
 
@@ -33,8 +33,8 @@ As a side note, the students who want to understand MOSFET behaviour from a phys
 
 Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!
 
-::: {.callout-important}
-Throughout this material, we will stick to the following notations:
+::: {.callout-important title="Mathematical Notation"}
+Throughout this material, we will largely stick to the following notation:
 
 * A **dc quantity** is shown with an upper-case letter with upper-case subscripts, like $\VGS$.
 * Double-subscripts denote **dc sources**, like $\VDD$ and $\VSS$.
@@ -43,13 +43,13 @@ Throughout this material, we will stick to the following notations:
 * A upper-case letter with a lower-case subscript is used to denote **RMS quantities**, like $I_\mathrm{ds}$.
 :::
 
-#### Large-Signal MOSFET Model
+### Large-Signal MOSFET Model
 
 We start with an investigation into the large-signal MOSFET model shown in @fig-mosfet-large-signal-model by using the simple testbench for the LV NMOS shown in @fig-simple-nmos-tb.
 
 ![Testbench for NMOS dc sweeps.](./xschem/dc_lv_nmos.svg){#fig-simple-nmos-tb}
 
-::: {.callout-tip title="Exercise"}
+::: {.callout-tip title="Exercise: MOSFET Investigation"}
 Please try to execute the following steps and answer these questions:
 
 1. Get the LV NMOS testbench (available at <https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch>) working in your IIC-OSIC-TOOLS environment.
@@ -67,7 +67,7 @@ Please try to execute the following steps and answer these questions:
    1. What happens when $V_\mathrm{BS} \neq 0$?
 :::
 
-#### Small-Signal MOSFET Model {#sec-mosfet-smallsignal-model}
+### Small-Signal MOSFET Model {#sec-mosfet-smallsignal-model}
 
 As you have seen in the previous investigations, the large-signal model of @fig-mosfet-large-signal-model describes the behaviour of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.
 
@@ -83,13 +83,13 @@ $$
 $$ {#eq-mosfet-noise}
 where $\overline{I_\mathrm{n}^2}$ is the power-spectral density of the noise in A$^2$/Hz; $k$ is the Boltzmann constant; $T$ is the absolute temperature; $\gamma$ is a parameter in simplified theory changing between $\gamma = 2/3$ in saturation and $\gamma =1$ for triode operation; $g_\mathrm{d0}$ is equal to $\gm$ in saturation and $\gds$ in triode).
 
-::: {.callout-note}
+::: {.callout-note title="MOSFET Triode and Saturation Region"}
 Sometimes we will refer to different operating modes of the MOSFET like "saturation" or "triode". Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call "triode" mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called "saturation" mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximative sense.
 :::
 
 Now we need to see how the small-signal parameters seen in @fig-mosfet-small-signal-model can be investigated and estimated using circuit simulation.
 
-::: {.callout-tip title="Exercise"}
+::: {.callout-tip title="Exercise: MOSFET Small-Signal Parameters"}
 Please try to execute the following steps and answer the following questions:
 
 1. Reuse the LV NMOS testbench (available at <https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch>).
@@ -102,6 +102,6 @@ Please try to execute the following steps and answer the following questions:
    1. What is the difference in $\gm$, $\gds$, and other parameters between the NMOS and the PMOS? Why could they be different?
 :::
 
-### Conclusion
+## Conclusion
 
 Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of @sec-mosfet and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in [@Chenming_Hu_2010].
