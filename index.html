@@ -213,7 +213,11 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-first-steps" id="toc-sec-first-steps" class="nav-link" data-scroll-target="#sec-first-steps">First Steps</a>
   <ul class="collapse">
-  <li><a href="#sec-mosfet" id="toc-sec-mosfet" class="nav-link" data-scroll-target="#sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</a></li>
+  <li><a href="#sec-mosfet" id="toc-sec-mosfet" class="nav-link" data-scroll-target="#sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</a>
+  <ul class="collapse">
+  <li><a href="#large-signal-mosfet-model" id="toc-large-signal-mosfet-model" class="nav-link" data-scroll-target="#large-signal-mosfet-model">Large-Signal MOSFET Model</a></li>
+  <li><a href="#sec-mosfet-smallsignal-model" id="toc-sec-mosfet-smallsignal-model" class="nav-link" data-scroll-target="#sec-mosfet-smallsignal-model">Small-Signal MOSFET Model</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
   <li><a href="#sec-gmid-method" id="toc-sec-gmid-method" class="nav-link" data-scroll-target="#sec-gmid-method">Transistor Sizing Using gm/ID Methodology</a>
@@ -241,10 +245,17 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#voltage-buffer-with-ota" id="toc-voltage-buffer-with-ota" class="nav-link" data-scroll-target="#voltage-buffer-with-ota">Voltage Buffer with OTA</a></li>
   <li><a href="#sec-basic-ota-large-signal" id="toc-sec-basic-ota-large-signal" class="nav-link" data-scroll-target="#sec-basic-ota-large-signal">Large-Signal Analysis of the OTA</a></li>
-  <li><a href="#sec-basic-ota-small-signal" id="toc-sec-basic-ota-small-signal" class="nav-link" data-scroll-target="#sec-basic-ota-small-signal">Small-Signal Analysis of the OTA</a></li>
+  <li><a href="#sec-basic-ota-small-signal" id="toc-sec-basic-ota-small-signal" class="nav-link" data-scroll-target="#sec-basic-ota-small-signal">Small-Signal Analysis of the OTA</a>
+  <ul class="collapse">
+  <li><a href="#ota-small-signal-transfer-function" id="toc-ota-small-signal-transfer-function" class="nav-link" data-scroll-target="#ota-small-signal-transfer-function">OTA Small-Signal Transfer Function</a></li>
+  <li><a href="#ota-noise" id="toc-ota-noise" class="nav-link" data-scroll-target="#ota-noise">OTA Noise</a></li>
+  </ul></li>
   <li><a href="#t-ota-sizing" id="toc-t-ota-sizing" class="nav-link" data-scroll-target="#t-ota-sizing">5T-OTA Sizing</a></li>
   <li><a href="#sec-basic-ota-simulation" id="toc-sec-basic-ota-simulation" class="nav-link" data-scroll-target="#sec-basic-ota-simulation">5T-OTA Simulation</a></li>
-  <li><a href="#t-ota-simulation-versus-pvt" id="toc-t-ota-simulation-versus-pvt" class="nav-link" data-scroll-target="#t-ota-simulation-versus-pvt">5T-OTA Simulation versus PVT</a></li>
+  <li><a href="#t-ota-simulation-versus-pvt" id="toc-t-ota-simulation-versus-pvt" class="nav-link" data-scroll-target="#t-ota-simulation-versus-pvt">5T-OTA Simulation versus PVT</a>
+  <ul class="collapse">
+  <li><a href="#pvt-simulation-analysis" id="toc-pvt-simulation-analysis" class="nav-link" data-scroll-target="#pvt-simulation-analysis">PVT Simulation Analysis</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#cascode-stage" id="toc-cascode-stage" class="nav-link" data-scroll-target="#cascode-stage">Cascode Stage</a></li>
   <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota">A Fully-Differential OTA</a></li>
@@ -271,26 +282,26 @@ window.Quarto = {
   
 
 
-<section id="sec-intro" class="level2">
-<h2 class="anchored" data-anchor-id="sec-intro">Introduction</h2>
+<section id="sec-intro" class="level1">
+<h1>Introduction</h1>
 <p>This is the material for an intermediate-level MOSFET circuit design course, held at JKU under course number 336.009 (“KV Analoge Schaltungstechnik”).</p>
 <p>The course makes heavy use of circuit simulation, using <strong>Xschem</strong> for schematic entry and <strong>ngspice</strong> for simulation. The 130nm CMOS technology <strong>SG13G2</strong> from IHP Microelectronics is used.</p>
 <p>Tools and PDK are integrated in the <strong>IIC-OSIC-TOOLS</strong> Docker image, which will be used during the coursework.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>All course material is made publicly available on GitHub and shared under the Apache-2.0 license.</p>
 </div>
 </div>
-<section id="ihps-sg13g2-130nm-cmos-technology" class="level3">
-<h3 class="anchored" data-anchor-id="ihps-sg13g2-130nm-cmos-technology">IHP’s SG13G2 130nm CMOS Technology</h3>
+<section id="ihps-sg13g2-130nm-cmos-technology" class="level2">
+<h2 class="anchored" data-anchor-id="ihps-sg13g2-130nm-cmos-technology">IHP’s SG13G2 130nm CMOS Technology</h2>
 <p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
 <p>For our circuit design, the most important parameters of the available devices are summarized in the following:</p>
 <ul>
@@ -305,24 +316,24 @@ Note
 <li><strong>MOM capacitor</strong>: The metal stack is well-suited for MOM capacitors due to 5 thin metal layers, but no primitive capacitor device is available at this point.</li>
 </ul>
 </section>
-<section id="schematic-entry-using-xschem" class="level3">
-<h3 class="anchored" data-anchor-id="schematic-entry-using-xschem">Schematic Entry Using Xschem</h3>
+<section id="schematic-entry-using-xschem" class="level2">
+<h2 class="anchored" data-anchor-id="schematic-entry-using-xschem">Schematic Entry Using Xschem</h2>
 <p>Xschem is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem and the basic operation of it please look at the available <a href="https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html">online documentation</a>. Usage of Xschem will be learned with the first few basic examples, essentially using a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.</p>
 </section>
-<section id="circuit-simulation-using-ngspice" class="level3">
-<h3 class="anchored" data-anchor-id="circuit-simulation-using-ngspice">Circuit Simulation Using ngspice</h3>
+<section id="circuit-simulation-using-ngspice" class="level2">
+<h2 class="anchored" data-anchor-id="circuit-simulation-using-ngspice">Circuit Simulation Using ngspice</h2>
 <p>ngspice is an open-source circuit simulator with SPICE dependency <span class="citation" data-cites="Nagel_1975">(<a href="#ref-Nagel_1975" role="doc-biblioref">Nagel 1975</a>)</span>. Besides the usual simulated types like <code>op</code> (operating point), <code>dc</code> (dc sweeps), <code>tran</code> (time-domain), or <code>ac</code> (small-signal frquency sweeps), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest <a href="https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf">online manual</a>.</p>
 </section>
-<section id="integrated-ic-design-environment-iic-osic-tools" class="level3">
-<h3 class="anchored" data-anchor-id="integrated-ic-design-environment-iic-osic-tools">Integrated IC Design Environment (IIC-OSIC-TOOLS)</h3>
+<section id="integrated-ic-design-environment-iic-osic-tools" class="level2">
+<h2 class="anchored" data-anchor-id="integrated-ic-design-environment-iic-osic-tools">Integrated IC Design Environment (IIC-OSIC-TOOLS)</h2>
 <p>In order to make use of the various required components (tools like Xschem and ngspice, PDKs like SG13G2) easier, we will use the <strong>IIC-OSIC-TOOLS</strong>. This is a pre-compiled Docker image which allows to do circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc. please look at <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS">IIC-OSIC-TOOLS GitHub page</a>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled" title="Preparation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Preparation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -330,13 +341,13 @@ Tip
 </div>
 </div>
 <p>Experienced users can install this image on their personal computer, for JKU students the IIC will host a VM on our compute cluster and provide personal login credentials.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled" title="Linux">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Linux
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -345,20 +356,20 @@ Note
 </div>
 </section>
 </section>
-<section id="sec-first-steps" class="level2">
-<h2 class="anchored" data-anchor-id="sec-first-steps">First Steps</h2>
+<section id="sec-first-steps" class="level1">
+<h1>First Steps</h1>
 <p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.</p>
-<section id="sec-mosfet" class="level3">
-<h3 class="anchored" data-anchor-id="sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<section id="sec-mosfet" class="level2">
+<h2 class="anchored" data-anchor-id="sec-mosfet">The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h2>
 <p>In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET as a macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model.</p>
 <p>The circuit symbol that we will use for the n-channel MOSFET is shown in <a href="#fig-nmos-symbol" class="quarto-xref">Figure&nbsp;1</a>, and for the p-channel MOSFET it is shown in <a href="#fig-pmos-symbol" class="quarto-xref">Figure&nbsp;2</a>. A control voltage between gate (“G”) and source (“S”) causes a current to flow between drain (“D”) and source. The MOSFET is a 4-terminal device, so the bulk (“B”) can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="MOSFET Background">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+MOSFET Background
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -411,13 +422,13 @@ Figure&nbsp;3: The MOSFET large-signal model.
 </div>
 </div>
 <p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a>. In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= 0\)</span>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="MOSFET Bulk Terminal">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+MOSFET Bulk Terminal
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -427,17 +438,17 @@ Note
 <p>Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behaviour from basic principles, we need to understand the behaviour of the elements of the large-signal model in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{DS}\)</span> and other large- and small-signal parameters.</p>
 <p>As a side note, the students who want to understand MOSFET behaviour from a physical angle should consult the MOSFET chapter from the JKU course “Design of Complex Integrated Circuits” (VL 336.048). A great introduction into MOSFET operation and fabrication is given in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>, which is available freely <a href="https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/">online</a> and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in <span class="citation" data-cites="Tsividis_McAndrew_2011">(<a href="#ref-Tsividis_McAndrew_2011" role="doc-biblioref">Tsividis and McAndrew 2011</a>)</span>.</p>
 <p>Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Mathematical Notation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Mathematical Notation
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Throughout this material, we will stick to the following notations:</p>
+<p>Throughout this material, we will largely stick to the following notation:</p>
 <ul>
 <li>A <strong>dc quantity</strong> is shown with an upper-case letter with upper-case subscripts, like <span class="math inline">\(V_\mathrm{GS}\)</span>.</li>
 <li>Double-subscripts denote <strong>dc sources</strong>, like <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>.</li>
@@ -447,8 +458,8 @@ Important
 </ul>
 </div>
 </div>
-<section id="large-signal-mosfet-model" class="level4">
-<h4 class="anchored" data-anchor-id="large-signal-mosfet-model">Large-Signal MOSFET Model</h4>
+<section id="large-signal-mosfet-model" class="level3">
+<h3 class="anchored" data-anchor-id="large-signal-mosfet-model">Large-Signal MOSFET Model</h3>
 <p>We start with an investigation into the large-signal MOSFET model shown in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> by using the simple testbench for the LV NMOS shown in <a href="#fig-simple-nmos-tb" class="quarto-xref">Figure&nbsp;4</a>.</p>
 <div id="fig-simple-nmos-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -460,13 +471,13 @@ Figure&nbsp;4: Testbench for NMOS dc sweeps.
 </figcaption>
 </figure>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Investigation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: MOSFET Investigation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -495,8 +506,8 @@ Exercise
 </div>
 </div>
 </section>
-<section id="sec-mosfet-smallsignal-model" class="level4">
-<h4 class="anchored" data-anchor-id="sec-mosfet-smallsignal-model">Small-Signal MOSFET Model</h4>
+<section id="sec-mosfet-smallsignal-model" class="level3">
+<h3 class="anchored" data-anchor-id="sec-mosfet-smallsignal-model">Small-Signal MOSFET Model</h3>
 <p>As you have seen in the previous investigations, the large-signal model of <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> describes the behaviour of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.</p>
 <p>However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.</p>
 <p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> models the drain current as a function of <span class="math inline">\(v_\mathrm{gs}\)</span>, and the resistor <span class="math inline">\(g_\mathrm{ds}\)</span> models the dependency of the drain current by <span class="math inline">\(v_\mathrm{ds}\)</span>. The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{mb} v_\mathrm{sb}\)</span>.</p>
@@ -517,13 +528,13 @@ Figure&nbsp;5: The MOSFET small-signal model.
 <p>As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by <span id="eq-mosfet-noise"><span class="math display">\[
 \overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0},
 \tag{1}\]</span></span> where <span class="math inline">\(\overline{I_\mathrm{n}^2}\)</span> is the power-spectral density of the noise in A<span class="math inline">\(^2\)</span>/Hz; <span class="math inline">\(k\)</span> is the Boltzmann constant; <span class="math inline">\(T\)</span> is the absolute temperature; <span class="math inline">\(\gamma\)</span> is a parameter in simplified theory changing between <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma =1\)</span> for triode operation; <span class="math inline">\(g_\mathrm{d0}\)</span> is equal to <span class="math inline">\(g_\mathrm{m}\)</span> in saturation and <span class="math inline">\(g_\mathrm{ds}\)</span> in triode).</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="MOSFET Triode and Saturation Region">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+MOSFET Triode and Saturation Region
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -531,13 +542,13 @@ Note
 </div>
 </div>
 <p>Now we need to see how the small-signal parameters seen in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> can be investigated and estimated using circuit simulation.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Small-Signal Parameters">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: MOSFET Small-Signal Parameters
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -560,22 +571,22 @@ Exercise
 </div>
 </section>
 </section>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of <a href="#sec-mosfet" class="quarto-xref">Section&nbsp;0.2.1</a> and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>.</p>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of <a href="#sec-mosfet" class="quarto-xref">Section&nbsp;2.1</a> and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>.</p>
 </section>
 </section>
-<section id="sec-gmid-method" class="level2">
-<h2 class="anchored" data-anchor-id="sec-gmid-method">Transistor Sizing Using gm/ID Methodology</h2>
+<section id="sec-gmid-method" class="level1">
+<h1>Transistor Sizing Using gm/ID Methodology</h1>
 <p>When designing integrated circuits it is an important question how to select various parameters of a MOSFET, like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, or the bias current <span class="math inline">\(I_\mathrm{D}\)</span>. In comparison to using discrete components in PCB design, or also compared to a bipolar junction transistor (BJT), we have these degrees of freedom, which make integrated circuit design so interesting.</p>
 <p>Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behaviour is much more complex than these simple models. Also, this highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="MOSFET Square-Law Model">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+MOSFET Square-Law Model
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -585,8 +596,8 @@ Note
 <p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behaviour over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complext MOSFET behaviour and use it for MOSFET sizing.</p>
 <p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
 <p>The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, form micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.</p>
-<section id="mosfet-characterization-testbench" class="level3">
-<h3 class="anchored" data-anchor-id="mosfet-characterization-testbench">MOSFET Characterization Testbench</h3>
+<section id="mosfet-characterization-testbench" class="level2">
+<h2 class="anchored" data-anchor-id="mosfet-characterization-testbench">MOSFET Characterization Testbench</h2>
 <p>In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in <a href="#fig-techsweep-nmos-tb" class="quarto-xref">Figure&nbsp;6</a>, and the TB for the LV PMOS is shown in <a href="#fig-techsweep-pmos-tb" class="quarto-xref">Figure&nbsp;7</a>.</p>
 <div id="fig-techsweep-nmos-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -610,17 +621,17 @@ Figure&nbsp;7: Testbench for LV PMOS <span class="math inline">\(g_\mathrm{m}/I_
 </div>
 <p>We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behaviour.</p>
 </section>
-<section id="sec-techsweep-nmos" class="level3">
-<h3 class="anchored" data-anchor-id="sec-techsweep-nmos">NMOS Characterization</h3>
-<p>First, we will start looking at the LV NMOS. In <a href="#sec-techsweep-pmos" class="quarto-xref">Section&nbsp;0.3.3</a> we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of <span class="math inline">\(1.5\,\text{V}\)</span>, so only the LV types are of interest to us.</p>
+<section id="sec-techsweep-nmos" class="level2">
+<h2 class="anchored" data-anchor-id="sec-techsweep-nmos">NMOS Characterization</h2>
+<p>First, we will start looking at the LV NMOS. In <a href="#sec-techsweep-pmos" class="quarto-xref">Section&nbsp;3.3</a> we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of <span class="math inline">\(1.5\,\text{V}\)</span>, so only the LV types are of interest to us.</p>
 <p>The first import graph is the plot of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(f_\mathrm{T}\)</span> versus the gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span>. First let us answer the question why <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good parameter to look at, and actually this is also the central parameter in the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see <a href="https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A">biasing</a>) we want to get a large amplification from a MOSFET, which corresponds to a large <span class="math inline">\(g_\mathrm{m}\)</span>. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> ratio is good.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Power Consumption">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Power Consumption
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -634,17 +645,17 @@ Note
 <p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
 \tag{3}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.”</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Why 300K?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Why 300K?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Why are we so often using <span class="math inline">\(300\,\text{K}\)</span> for a typical condition? As this corresponds to roughly <span class="math inline">\(27^{\circ}\text{C}\)</span>, this accounts for some self heating compared to otherwise usual room temperatures. Further, engineers like round numbers which are easy to remember, so <span class="math inline">\(300\,\text{K}\)</span> is used as a proxy for room temperature.</p>
+<p>Why are we so often using a temperature of <span class="math inline">\(300\,\text{K}\)</span> for a typical condition? As this corresponds to roughly <span class="math inline">\(27^{\circ}\text{C}\)</span>, this accounts for some self heating compared to otherwise cooler usual room temperatures. Further, engineers like round numbers which are easy to remember, so <span class="math inline">\(300\,\text{K}\)</span> is used as a proxy for room temperature.</p>
 </div>
 </div>
 <p>As we can also see from belows plot, the peak transit frequency of the LV NMOS is about <span class="math inline">\(75\,\text{GHz}\)</span>, which allows building radio-frequency circuits up to ca. <span class="math inline">\(f_\mathrm{T} / 10 = 7.5\,\text{GHz}\)</span>, which is a respectible number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the timeframe when 130nm CMOS became available (ca. 2000).</p>
@@ -708,22 +719,22 @@ Note
 </div>
 </div>
 <p>For analog circuits the noise performance is usually quite important. Thermal noise of a resistor (the Johnson-Nyquist noise) has a flat power-spectral density (PSD) given by <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f = 4 k T R\)</span>, where <span class="math inline">\(k\)</span> is Boltzmann’s constant, <span class="math inline">\(T\)</span> absolute temperature, and <span class="math inline">\(R\)</span> the value of the resistor (the unit of <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f\)</span> is <span class="math inline">\(\text{V}^2/\text{Hz}\)</span>). This PSD is essentially flat until very high frequencies where <a href="https://en.wikipedia.org/wiki/Johnson–Nyquist_noise">quantum effects</a> start to kick in.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Noise Notation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Noise Notation
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We usually leave the <span class="math inline">\(\Delta f\)</span> away for a shorter notation, so we write <span class="math inline">\(\overline{V_\mathrm{n}^2}\)</span> when we actually mean <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f\)</span>.</p>
-<p>Please also note that the pair of <span class="math inline">\(k T\)</span> pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation.</p>
-<p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(0\)</span> to <span class="math inline">\(\infty\)</span>) or two-sided PSD (<span class="math inline">\(f\)</span> runs from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>). The default in this lecture is the usage of a <strong>one-sided PSD</strong>.</p>
+<p>We usually leave the <span class="math inline">\(\Delta f\)</span> away for a shorter notation, so we write <span class="math inline">\(\overline{V_\mathrm{n}^2}\)</span> when we actually mean <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f\)</span>. In case of doubt look at the unit of a quantity, whether is shows <span class="math inline">\(\text{V}^2\)</span> or <span class="math inline">\(\text{V}^2/\text{Hz}\)</span> or <span class="math inline">\(\text{V}/\sqrt{\text{Hz}}\)</span> (or <span class="math inline">\(\text{I}^2\)</span> or <span class="math inline">\(\text{I}^2/\text{Hz}\)</span> or <span class="math inline">\(\text{I}/\sqrt{\text{Hz}}\)</span>).</p>
+<p>Please also note that the pair of <span class="math inline">\(k T\)</span> pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation. Boltzmann’s constant <span class="math inline">\(k = 1.38 \cdot 10^{-23}\,\text{J/K}\)</span> is just a scaling factor from thermal energy expressed as a temperature <span class="math inline">\(T\)</span> to energy <span class="math inline">\(E = k T\)</span> expressed in Joule.</p>
+<p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(0 \ge f &lt; \infty\)</span>) or two-sided power spectral density (PSD) (<span class="math inline">\(-\infty &lt; f &lt; \infty\)</span>). The default in this lecture is the usage of the <strong>one-sided PSD</strong>.</p>
 </div>
 </div>
-<p>In this lecture the only MOSFET noise we consider is the drain noise (as discussed in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;0.2.1.2</a>), showing up as a current noise between drain and source. For a for realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.</p>
+<p>In this lecture the only MOSFET noise we consider is the drain noise (as discussed in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>), showing up as a current noise between drain and source. For a for realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.</p>
 <p>The factor <span class="math inline">\(\gamma\)</span> (<a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a>) is a function of many things (in classical theory, <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma = 1\)</span> in triode), and it is characterized in the following plot as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. So when calculating MOSFET noise we can lookup <span class="math inline">\(\gamma\)</span> in the below plot, and use <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a> to calculate the effective drain current noise.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
@@ -737,13 +748,13 @@ Note
 </div>
 </div>
 <p>In a MOSFET, unfortunately, besides the thermal noise according to <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a>, there is also a substantial low-frequency excess noise, called “flicker noise” due to its characteristic <span class="math inline">\(\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f\)</span> behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency <span class="math inline">\(f_\mathrm{co}\)</span>, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of <span class="math inline">\(L\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Generally, the flicker noise is proportional to <span class="math inline">\((W L)^{-1}\)</span>, so the larger the device is, the lower the flicker noise. The parameter <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> largely stays constant when we keep <span class="math inline">\(W/L\)</span> constant, so for a given <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> flicker noise is proportinal to <span class="math inline">\(1/L^2\)</span>. However, increasing <span class="math inline">\(L\)</span> lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="MOSFET Flicker Noise">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+MOSFET Flicker Noise
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -763,16 +774,16 @@ Note
 </div>
 </div>
 </section>
-<section id="sec-techsweep-pmos" class="level3">
-<h3 class="anchored" data-anchor-id="sec-techsweep-pmos">PMOS Characterization</h3>
-<p>In the following, we have the same plots as discussed in <a href="#sec-techsweep-nmos" class="quarto-xref">Section&nbsp;0.3.2</a>, but now for the PMOS.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="sec-techsweep-pmos" class="level2">
+<h2 class="anchored" data-anchor-id="sec-techsweep-pmos">PMOS Characterization</h2>
+<p>In the following, we have the same plots as discussed in <a href="#sec-techsweep-nmos" class="quarto-xref">Section&nbsp;3.2</a>, but now for the PMOS.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="PMOS Sign Convention">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+PMOS Sign Convention
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -804,17 +815,17 @@ Note
 </div>
 </div>
 <p><span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. Unfortunately, one can see a modelling error for the PMOS in this plot. The self gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> reaches non-physical values, which indicates an issue with the <span class="math inline">\(g_\mathrm{ds}\)</span> modelling for the PMOS. We can not use these values for our circuit sizing, so we will use the respective NMOS plots also for the PMOS.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Beware of Modelling Issues">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Beware of Modelling Issues
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite often happening, as setting up the device compact models and parametrizing them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are using!</p>
+<p>This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite often happening, as setting up the device compact models and parametrizing them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are going to use!</p>
 </div>
 </div>
 <div class="quarto-embed-nb-cell">
@@ -878,8 +889,8 @@ Important
 </div>
 </section>
 </section>
-<section id="sec-mosfet-diode" class="level2">
-<h2 class="anchored" data-anchor-id="sec-mosfet-diode">First Circuit: MOSFET Diode</h2>
+<section id="sec-mosfet-diode" class="level1">
+<h1>First Circuit: MOSFET Diode</h1>
 <p>The first (simple) circuit we will investigate is a MOSFET, where the gate is shorted with a drain, a so-called MOSFET “diode”, which is shown in <a href="#fig-mosfet-diode" class="quarto-xref">Figure&nbsp;8</a>. This diode is one half of a current mirror, which we will investigate in a future section.</p>
 <div id="cell-fig-mosfet-diode" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
@@ -897,50 +908,52 @@ Figure&nbsp;8: A MOSFET connected as a diode.
 </div>
 <p>Why looking at a single-transistor circuit at all? By starting with the simplest possible circuit we can develop important skills in circuit analysis (setting up and calculating a small-signal model, calculating open-loop gain, calculate noise) and Xschem/ngspice simulation testbench creation. We safely assume that also the Mona Lisa was not Leonardo da Vinci’s first painting, so let’s start slow.</p>
 <p>This diode is usually biased by a current source, shown as <span class="math inline">\(I_\mathrm{bias}\)</span> in the figure. Depending on MOSFET sizing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>, a certain gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span> will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Feedback in the MOSFET Diode">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Feedback in the MOSFET Diode
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>It is important to realize that this configuration essentially employs a feedback loop for operation. The voltage at the drain of the MOSFET is sensed by the gate, and the gate voltage changes until the <span class="math inline">\(I_\mathrm{D}\)</span> is exactly equal to <span class="math inline">\(I_\mathrm{bias}\)</span>. In this sense this is probably the smallest feedback circuit one can build.</p>
 </div>
 </div>
-<section id="mosfet-diode-sizing" class="level3">
-<h3 class="anchored" data-anchor-id="mosfet-diode-sizing">MOSFET Diode Sizing</h3>
-<p>We will now build this circuit in Xschem. For sizing the MOSFET we will use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;0.3</a>.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<section id="mosfet-diode-sizing" class="level2">
+<h2 class="anchored" data-anchor-id="mosfet-diode-sizing">MOSFET Diode Sizing</h2>
+<p>We will now build this circuit in Xschem. For sizing the MOSFET we will use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Diode Sizing">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: MOSFET Diode Sizing
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set <span class="math inline">\(I_\mathrm{bias} = 20\,\mu\text{A}\)</span>, <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>, and we want to use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> (often a suitable compromise between transistor speed and <span class="math inline">\(g_\mathrm{m}\)</span> efficiency).</p>
 <ol type="1">
-<li>Use the figures in <a href="#sec-techsweep-nmos" class="quarto-xref">Section&nbsp;0.3.2</a> to find out the proper value for <span class="math inline">\(W\)</span>.</li>
+<li>Use the figures in <a href="#sec-techsweep-nmos" class="quarto-xref">Section&nbsp;3.2</a> to find out the proper value for <span class="math inline">\(W\)</span>.</li>
 <li>What is <span class="math inline">\(f_\mathrm{T}\)</span> for this MOSFET? What is the value for <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span>?</li>
 <li>Draw the circuit in Xschem, and simulate the operating point. Do the values match to the values found out before during circuit sizing?</li>
 </ol>
 </div>
 </div>
 <p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution: MOSFET Diode Sizing">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution
+Solution: MOSFET Diode Sizing
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
@@ -952,9 +965,10 @@ Solution
 <p>An example Jupyter notebook to extract these values accurately you can find <a href="./sizing/sizing_mosfet_diode-preview.html">here</a>. An Xschem schematic for this exercise is provide <a href="./xschem/mosfet_diode_sizing.sch">as well</a>.</p>
 </div>
 </div>
+</div>
 </section>
-<section id="mosfet-diode-large-signal-behaviour" class="level3">
-<h3 class="anchored" data-anchor-id="mosfet-diode-large-signal-behaviour">MOSFET Diode Large-Signal Behaviour</h3>
+<section id="mosfet-diode-large-signal-behaviour" class="level2">
+<h2 class="anchored" data-anchor-id="mosfet-diode-large-signal-behaviour">MOSFET Diode Large-Signal Behaviour</h2>
 <p>As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyse this loop in small-signal, we want to investgate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behaviour. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some ns. The resulting Xschem testbench is shown in <a href="#fig-mosfet-diode-settling-tb" class="quarto-xref">Figure&nbsp;9</a>.</p>
 <div id="fig-mosfet-diode-settling-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -969,8 +983,8 @@ Figure&nbsp;9: Testbench for MOSFET diode transient settling.
 <p>In <a href="#fig-mosfet-diode-settling-tb" class="quarto-xref">Figure&nbsp;9</a> another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current the <span class="math inline">\(V_\mathrm{GS}\)</span> drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to the capacitor discharge by a diode <span class="citation" data-cites="Hellen_2003">(<a href="#ref-Hellen_2003" role="doc-biblioref">Hellen 2003</a>)</span>.</p>
 <p>It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually <span class="math inline">\(V_\mathrm{DD}\)</span> or <span class="math inline">\(V_\mathrm{SS}\)</span>) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.</p>
 </section>
-<section id="mosfet-diode-small-signal-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="mosfet-diode-small-signal-analysis">MOSFET Diode Small-Signal Analysis</h3>
+<section id="mosfet-diode-small-signal-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="mosfet-diode-small-signal-analysis">MOSFET Diode Small-Signal Analysis</h2>
 <p>We now want to investigate the small-signal behaviour of the MOSFET diode. Based on the small-signal model of the MOSFET in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circit to the one shown in <a href="#fig-mosfet-diode-small-signal" class="quarto-xref">Figure&nbsp;10</a>.</p>
 <div id="cell-fig-mosfet-diode-small-signal" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
@@ -986,17 +1000,17 @@ Figure&nbsp;10: The MOSFET diode small-signal model.
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Ground Node Selection">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Ground Node Selection
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only <span class="math inline">\(N-1\)</span> independent KCL equations, <span class="math inline">\(N\)</span> being the number of nodes of a circuit), and the potential difference equations are simpler if one node is at <span class="math inline">\(0\,V\)</span>.</p>
+<p>For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only <span class="math inline">\(N-1\)</span> independent KCL equations, <span class="math inline">\(N\)</span> being the number of nodes in the circuit), and the potential difference equations are simpler if one node is at <span class="math inline">\(0\,V\)</span>.</p>
 </div>
 </div>
 <p>For calculating the small-signal impedance of the MOSFET diode we formulate KCL at the top node to get <span class="math display">\[
@@ -1006,25 +1020,25 @@ i_\mathrm{bias} - s C_\mathrm{gs}v_\mathrm{gs}- g_\mathrm{m}v_\mathrm{gs}- g_\ma
 Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm{m}+ g_\mathrm{ds}+ s C_\mathrm{gs}}.
 \tag{4}\]</span></span></p>
 <p>When neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and at dc we get <span class="math inline">\(Z_\mathrm{diode} = 1 / g_\mathrm{m}\)</span>, which is an important result and should be memorized.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="The Admittance is Your Friend">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+The Admittance is Your Friend
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In circuit analysis it is often algebraically easier to work with conductances instead of impedances, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G V\)</span>, and for a capacitance is <span class="math inline">\(I = s C V\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
+<p>In circuit analysis it is often algebraically easier to work with admittance instead of impedance, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G \cdot V\)</span>, and for a capacitance is <span class="math inline">\(I = s C \cdot V\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
 </div>
 </div>
 <p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as <span class="math display">\[
 \omega_\mathrm{c} = \frac{g_\mathrm{m}+ g_\mathrm{ds}}{C_\mathrm{gs}} \approx \omega_\mathrm{T}
 \]</span> which is pretty much the transit frequency of the MOSFET!</p>
 </section>
-<section id="mosfet-diode-stability-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="mosfet-diode-stability-analysis">MOSFET Diode Stability Analysis</h3>
+<section id="mosfet-diode-stability-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="mosfet-diode-stability-analysis">MOSFET Diode Stability Analysis</h2>
 <p>The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy <span class="math inline">\(C_\mathrm{gs}^{*}\)</span> at the right side to keep the impedances correct. A circuit diagram is shown in <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;11</a>, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!</p>
 <div id="cell-fig-mosfet-diode-openloop" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
@@ -1053,15 +1067,15 @@ H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g
 </ol>
 <p>With this single pole location in <span class="math inline">\(H_\mathrm{ol}(s)\)</span> this loop is perfectly stable at under all conditions.</p>
 <p>The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
-<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;1.23</a>.</p>
+<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;15</a>.</p>
 <p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s method and confirm our analysis above.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Diode Loop Analysis">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: MOSFET Diode Loop Analysis
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1081,8 +1095,8 @@ Figure&nbsp;12: Testbench for MOSFET diode stability analysis.
 </div>
 <p>From simulation we see that the open-loop gain is <span class="math inline">\(24.9\,\text{dB}\)</span> at low frequencies, which matches quite well our prediction of <span class="math inline">\(26.4\,\text{dB}\)</span>. In the Bode plot we see a low-pass with a <span class="math inline">\(-3\,\text{dB}\)</span> corner frequency of <span class="math inline">\(1.4\,\text{GHz}\)</span>, which again is fairly close to our prediction of <span class="math inline">\(1.1\,\text{GHz}\)</span>.</p>
 </section>
-<section id="mosfet-diode-noise-calculation" class="level3">
-<h3 class="anchored" data-anchor-id="mosfet-diode-noise-calculation">MOSFET Diode Noise Calculation</h3>
+<section id="mosfet-diode-noise-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="mosfet-diode-noise-calculation">MOSFET Diode Noise Calculation</h2>
 <p>As a final exercise on the MOSFET diode circuit we want to calculate the output noise when we consider <span class="math inline">\(V_\mathrm{GS}\)</span> the output reference voltage which is created when passing a bias current through the MOSFET diode. The bias current we will assume noiseless.</p>
 <p>We will use the small-signal circuit shown in <a href="#fig-mosfet-diode-small-signal-w-noise" class="quarto-xref">Figure&nbsp;13</a>.</p>
 <div id="cell-fig-mosfet-diode-small-signal-w-noise" class="cell" data-execution_count="8">
@@ -1102,7 +1116,7 @@ Figure&nbsp;13: The MOSFET diode small-signal model with drain noise source.
 <p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is thus given as <span class="math display">\[
 \overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
 \]</span></p>
-<p>The drain current noise of the MOSFET is given as (introduced in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;0.2.1.2</a>) <span class="math display">\[
+<p>The drain current noise of the MOSFET is given as (introduced in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>) <span class="math display">\[
 \overline{I_\mathrm{n,d}^2} = 4 k T \gamma g_\mathrm{m}.
 \]</span></p>
 <p>For low frequencies (ignoring <span class="math inline">\(g_\mathrm{ds}\)</span> and <span class="math inline">\(C_\mathrm{gs}\)</span>) we get <span class="math display">\[
@@ -1134,26 +1148,26 @@ V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \
 V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
 \tag{9}\]</span></span></p>
 <p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;9</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Large Bandwidth and Noise">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Large Bandwidth and Noise
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Large BW circuits can integrate noise over a wide bandwidth resulting in considerable rms noise.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Diode Noise">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: MOSFET Diode Noise
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1172,14 +1186,14 @@ Figure&nbsp;14: Testbench for MOSFET diode noise analysis.
 </div>
 </div>
 </section>
-<section id="conclusion-1" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion-1">Conclusion</h3>
+<section id="conclusion-1" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-1">Conclusion</h2>
 <p>In this section we investigated the simple MOSFET-diode circuit. We learned important skills like how to derive a small-signal model, how to calculate important features like noise and open-loop gain for stability analysis. We introduced Middlebrook’s method to have a mechanism to open up loops in simulation (and calculation) without disturbing operating points for change loading conditions.</p>
 <p>If you feel that you have not yet mastered these topics or are uncertain in the operation of ngspice, please go back to the beginning of the section and read through the theory and redo the exercises.</p>
 </section>
 </section>
-<section id="sec-current-mirror" class="level2">
-<h2 class="anchored" data-anchor-id="sec-current-mirror">Current Mirror</h2>
+<section id="sec-current-mirror" class="level1">
+<h1>Current Mirror</h1>
 <p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the <strong>current mirror</strong>. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;15</a> with one MOSFET diode converting the incoming bias current into a voltage, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created at once. Shown in the figure are two output currents, but any number of parallel branches can be realized.</p>
 <div id="cell-fig-current-mirror" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
@@ -1201,27 +1215,27 @@ I_\mathrm{out1} = I_\mathrm{bias} \frac{W_2}{L_2} \frac{L_1}{W_1}
 I_\mathrm{out2} = I_\mathrm{bias} \frac{W_3}{L_3} \frac{L_1}{W_1}.
 \]</span></p>
 <p>For good matching in layout care has to be taken that the MOSFET widths and lengths are constructed out of <strong>unit elements</strong> of identical size, where an appropiate amount of these single units are then arranged in series or parallel configuration to arrive at the target <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>.</p>
-<p>As we know from earlier investigations of the MOSFET performance in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;0.3</a> the drain current of a MOSFET is a function of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>. As long as the MOSFET stays in saturation (i.e., <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{ds,dsat}\)</span>) the drain current is just a mild function of <span class="math inline">\(V_\mathrm{DS}\)</span> (essentially the effect of <span class="math inline">\(g_\mathrm{ds}\)</span>, which is the output conductance of the MOSFET). A fundamental flaw of the basic current mirror shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;15</a> is the mismatch of the <span class="math inline">\(V_\mathrm{DS}\)</span> of the MOSFET. The input-side diode has <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{DS}\)</span>, whereas the output current sources have a <span class="math inline">\(V_\mathrm{DS}\)</span> depending on the connected circuitry. Improved current mirrors exist (basically fixing this flaw), still, when just a simple current mirror is required this structure is used for its simplicity.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<p>As we know from earlier investigations of the MOSFET performance in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> the drain current of a MOSFET is a function of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>. As long as the MOSFET stays in saturation (i.e., <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{ds,dsat}\)</span>) the drain current is just a mild function of <span class="math inline">\(V_\mathrm{DS}\)</span> (essentially the effect of <span class="math inline">\(g_\mathrm{ds}\)</span>, which is the output conductance of the MOSFET). A fundamental flaw of the basic current mirror shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;15</a> is the mismatch of the <span class="math inline">\(V_\mathrm{DS}\)</span> of the MOSFET. The input-side diode has <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{DS}\)</span>, whereas the output current sources have a <span class="math inline">\(V_\mathrm{DS}\)</span> depending on the connected circuitry. Improved current mirrors exist (basically fixing this flaw), still, when just a simple current mirror is required this structure is used for its simplicity.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Current Mirror">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: Current Mirror
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please construct a current mirror based on the MOSFET-diode which we sized in <a href="#sec-mosfet-diode" class="quarto-xref">Section&nbsp;0.4</a>. The input current <span class="math inline">\(I_\mathrm{bias} = 20\,\mu\text{A}\)</span>, and we want three output currents of size <span class="math inline">\(10\,\mu\text{A}\)</span>, <span class="math inline">\(20\,\mu\text{A}\)</span>, and <span class="math inline">\(40\,\mu\text{A}\)</span>.</p>
+<p>Please construct a current mirror based on the MOSFET-diode which we sized in <a href="#sec-mosfet-diode" class="quarto-xref">Section&nbsp;4</a>. The input current <span class="math inline">\(I_\mathrm{bias} = 20\,\mu\text{A}\)</span>, and we want three output currents of size <span class="math inline">\(10\,\mu\text{A}\)</span>, <span class="math inline">\(20\,\mu\text{A}\)</span>, and <span class="math inline">\(40\,\mu\text{A}\)</span>.</p>
 <p>Sweep the output voltage of all three current branches and see over which voltage range an acceptable current is created. For which output voltage range is the current departing from its ideal value, and why?</p>
-<p>You see that the slope of the output current is quite bad, as <span class="math inline">\(g_\mathrm{ds}\)</span> is too large. We can improve this by changing the length to <span class="math inline">\(L = 5\,\mu\text{m}\)</span> (for motivation, please look at the graphs in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;0.3</a>). In addition, for a current mirror we are not interested in a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> value, so we can use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 5\)</span> in this case. Please size the current mirror MOSFETs accordinly (please round the <span class="math inline">\(W\)</span> to half micron, to keep sizes a bit more practical). Compare this result to the previous one, what changed?</p>
+<p>You see that the slope of the output current is quite bad, as <span class="math inline">\(g_\mathrm{ds}\)</span> is too large. We can improve this by changing the length to <span class="math inline">\(L = 5\,\mu\text{m}\)</span> (for motivation, please look at the graphs in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>). In addition, for a current mirror we are not interested in a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> value, so we can use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 5\)</span> in this case. Please size the current mirror MOSFETs accordinly (please round the <span class="math inline">\(W\)</span> to half micron, to keep sizes a bit more practical). Compare this result to the previous one, what changed?</p>
 <p>In case you get stuck, here are Xschem schematics for the <a href="./xschem/current_mirror.sch">original</a> and the <a href="./xschem/current_mirror_improved.sch">improved</a> current mirrors.</p>
 </div>
 </div>
 </section>
-<section id="sec-diff-pair" class="level2">
-<h2 class="anchored" data-anchor-id="sec-diff-pair">Differential Pair</h2>
-<p>Like the current mirror in <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;0.5</a> the <strong>differential pair</strong> is an ubiquitous building block often used in integrated circuit design. The fundamental structure is given in <a href="#fig-differential-pair" class="quarto-xref">Figure&nbsp;16</a>.</p>
+<section id="sec-diff-pair" class="level1">
+<h1>Differential Pair</h1>
+<p>Like the current mirror in <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;5</a> the <strong>differential pair</strong> is an ubiquitous building block often used in integrated circuit design. The fundamental structure is given in <a href="#fig-differential-pair" class="quarto-xref">Figure&nbsp;16</a>.</p>
 <div id="cell-fig-differential-pair" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-differential-pair" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1237,8 +1251,8 @@ Figure&nbsp;16: A differential pair.
 </div>
 </div>
 <p>In order to understand its operation it is instructive to separate the input condition into (1) a purely differential voltage, and (2) into a common-mode voltage, and see what the impact on the output currents is.</p>
-<section id="differential-operation-of-the-diffpair" class="level3">
-<h3 class="anchored" data-anchor-id="differential-operation-of-the-diffpair">Differential Operation of the Diffpair</h3>
+<section id="differential-operation-of-the-diffpair" class="level2">
+<h2 class="anchored" data-anchor-id="differential-operation-of-the-diffpair">Differential Operation of the Diffpair</h2>
 <p>For a differential mode of operation we assume that the input common mode voltage is constant, i.e.&nbsp;<span class="math inline">\(V_\mathrm{in,p} + V_\mathrm{in,n} = V_\mathrm{CM}\)</span>. A differential input voltage <span class="math inline">\(v_\mathrm{in}\)</span> then results in <span class="math display">\[
 V_\mathrm{in,p} = V_\mathrm{CM} + \frac{v_\mathrm{in}}{2}
 \]</span> and <span class="math display">\[
@@ -1254,8 +1268,8 @@ i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = g_\mathrm{m}v_\mathrm{in}
 \tag{10}\]</span></span></p>
 <p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;10</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
 </section>
-<section id="common-mode-operation-of-the-diffpair" class="level3">
-<h3 class="anchored" data-anchor-id="common-mode-operation-of-the-diffpair">Common-Mode Operation of the Diffpair</h3>
+<section id="common-mode-operation-of-the-diffpair" class="level2">
+<h2 class="anchored" data-anchor-id="common-mode-operation-of-the-diffpair">Common-Mode Operation of the Diffpair</h2>
 <p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>. If this is the case, then the output currents are not a function of the common-mode input voltage, and (<span class="math inline">\(I_\mathrm{tail}\)</span> is set by the tail current source) <span class="math display">\[
 I_\mathrm{out,p} = I_\mathrm{out,n} = \frac{I_\mathrm{tail}}{2}.
 \]</span></p>
@@ -1287,9 +1301,9 @@ i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail
 </ol>
 </section>
 </section>
-<section id="sec-basic-ota" class="level2">
-<h2 class="anchored" data-anchor-id="sec-basic-ota">A Basic 5-Transistor OTA</h2>
-<p>Suited with the knowledge of basic transitor operation (<a href="#sec-first-steps" class="quarto-xref">Section&nbsp;0.2</a> and <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;0.3</a>) and the working knowledge of the current mirror (<a href="#sec-mosfet-diode" class="quarto-xref">Section&nbsp;0.4</a> and <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;0.5</a>) as well as the differential pair (<a href="#sec-diff-pair" class="quarto-xref">Section&nbsp;0.6</a>) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;18</a>.</p>
+<section id="sec-basic-ota" class="level1">
+<h1>A Basic 5-Transistor OTA</h1>
+<p>Suited with the knowledge of basic transitor operation (<a href="#sec-first-steps" class="quarto-xref">Section&nbsp;2</a> and <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>) and the working knowledge of the current mirror (<a href="#sec-mosfet-diode" class="quarto-xref">Section&nbsp;4</a> and <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;5</a>) as well as the differential pair (<a href="#sec-diff-pair" class="quarto-xref">Section&nbsp;6</a>) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;18</a>.</p>
 <div id="cell-fig-basic-ota" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1307,8 +1321,8 @@ Figure&nbsp;18: The 5-transistor OTA.
 <p>The operation is as follows: <span class="math inline">\(M_{1,2}\)</span> form a differential pair which is biased by the current source <span class="math inline">\(M_5\)</span>. <span class="math inline">\(M_{5,6}\)</span> form a current mirror, thus the input bias current <span class="math inline">\(I_\mathrm{bias}\)</span> sets the bias current in the OTA. The differential pair <span class="math inline">\(M_{1,2}\)</span> is loaded by the current mirror <span class="math inline">\(M_{3,4}\)</span> which mirrors the output current of <span class="math inline">\(M_1\)</span> to the right side. Here, the currents from <span class="math inline">\(M_4\)</span> and <span class="math inline">\(M_2\)</span> are summed, and together with the conductance effective at the output node a voltage builds up.</p>
 <p>We note that <span class="math inline">\(M_{1,2}\)</span> and <span class="math inline">\(M_{3,4}\)</span> need to be symmetric, thus will have the same <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> dimensioning. <span class="math inline">\(M_{5,6}\)</span> we scale accordingly to set the correct bias current in the OTA.</p>
 <p>As this is an OTA the output is a current; if the load impedance is high (i.e., purely capacitive, which is often the case in integrated circuits when driving MOSFET inputs) then the voltage gain of the OTA can be high (of course, in this simple OTA it is limited). With a high-impedance loading this OTA can provide a voltage output, and this is actually how OTAs are mostly operated.</p>
-<section id="voltage-buffer-with-ota" class="level3">
-<h3 class="anchored" data-anchor-id="voltage-buffer-with-ota">Voltage Buffer with OTA</h3>
+<section id="voltage-buffer-with-ota" class="level2">
+<h2 class="anchored" data-anchor-id="voltage-buffer-with-ota">Voltage Buffer with OTA</h2>
 <p>In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lighly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a>.</p>
 <div id="cell-fig-voltage-buffer-ota" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
@@ -1406,8 +1420,8 @@ Table&nbsp;1: Voltage buffer specification
 </figure>
 </div>
 </section>
-<section id="sec-basic-ota-large-signal" class="level3">
-<h3 class="anchored" data-anchor-id="sec-basic-ota-large-signal">Large-Signal Analysis of the OTA</h3>
+<section id="sec-basic-ota-large-signal" class="level2">
+<h2 class="anchored" data-anchor-id="sec-basic-ota-large-signal">Large-Signal Analysis of the OTA</h2>
 <p>The first step when receiving a design task is to look at the specifications, and see whether they make sense. Detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) allows to do back-of-the-envelope gauging if the specification makes sense, and (b) the derived analytical equations will serve as guide for the sizing procedure.</p>
 <ul>
 <li>In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met.</li>
@@ -1423,8 +1437,8 @@ T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} =
 T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \cdot 10^{-6}} = 0.8\,\mu\text{s}.
 \]</span> which also checks out.</p>
 </section>
-<section id="sec-basic-ota-small-signal" class="level3">
-<h3 class="anchored" data-anchor-id="sec-basic-ota-small-signal">Small-Signal Analysis of the OTA</h3>
+<section id="sec-basic-ota-small-signal" class="level2">
+<h2 class="anchored" data-anchor-id="sec-basic-ota-small-signal">Small-Signal Analysis of the OTA</h2>
 <p>In order to size the OTA components we need to derive how MOSFET parameters define the performance. The important small-signal metrics are</p>
 <ul>
 <li>dc gain <span class="math inline">\(A_0\)</span></li>
@@ -1435,8 +1449,8 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
 \]</span></p>
 <p>So in order to reach an output voltage accuracy of at least 3% we need a dc gain of <span class="math inline">\(A_0 &gt; 30.2\,\text{dB}\)</span>. To allow for process and temperature variation we need to add a bit of extra gain as margin.</p>
-<section id="ota-small-signal-transfer-function" class="level4">
-<h4 class="anchored" data-anchor-id="ota-small-signal-transfer-function">OTA Small-Signal Transfer Function</h4>
+<section id="ota-small-signal-transfer-function" class="level3">
+<h3 class="anchored" data-anchor-id="ota-small-signal-transfer-function">OTA Small-Signal Transfer Function</h3>
 <p>In order to derive the governing equations for the OTA we will make a few simplifications:</p>
 <ul>
 <li>We will set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> for all MOSFETs.</li>
@@ -1445,13 +1459,13 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 <li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span> we can add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span>.</li>
 </ul>
 <p>The resulting small-signal equivalent circuit is shown in <a href="#fig-basic-ota-small-signal" class="quarto-xref">Figure&nbsp;20</a>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled" title="Refresh MOSFET Small-Signal Model">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Refresh MOSFET Small-Signal Model
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1510,8 +1524,8 @@ s_\mathrm{pd} = -\frac{g_\mathrm{m34}}{C_\mathrm{gs34}}
 s_\mathrm{zd} = -\frac{2 g_\mathrm{m34}}{C_\mathrm{gs34}}
 \]</span></p>
 </section>
-<section id="ota-noise" class="level4">
-<h4 class="anchored" data-anchor-id="ota-noise">OTA Noise</h4>
+<section id="ota-noise" class="level3">
+<h3 class="anchored" data-anchor-id="ota-noise">OTA Noise</h3>
 <p>For the noise analysis we ignore the pole-zero doublet due to <span class="math inline">\(C_\mathrm{gs34}\)</span> (we assume minor impact due to this) and just consider the dominant pole. For the noise analysis at the output we set the input signal to zero, and thus we arrive at the simplified small-signal circuit shown in <a href="#fig-basic-ota-small-signal-noise" class="quarto-xref">Figure&nbsp;22</a>.</p>
 <div id="cell-fig-basic-ota-small-signal-noise" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
@@ -1530,13 +1544,13 @@ Figure&nbsp;22: 5-transistor OTA small-signal model for noise calculation.
 <p>We see that <span class="math display">\[
 \overline{V_\mathrm{gs34}^2} = \frac{1}{g_\mathrm{m34}^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right).
 \]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Noise Addition">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Noise Addition
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1574,32 +1588,32 @@ Y'_\mathrm{load} = g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load} + g_\math
 V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{12} + 2 \gamma_{34} \frac{g_\mathrm{m34}}{g_\mathrm{m12}} \right).
 \tag{18}\]</span></span></p>
 <p>Inspecting <a href="#eq-basic-ota-output-noise" class="quarto-xref">Equation&nbsp;18</a> we can see that the integrated output noise is the <span class="math inline">\(k T / C\)</span> noise of the output load capacitor, enhanced by the <span class="math inline">\(\gamma_{12}\)</span> of the input differential pair, plus a (smaller) contribution of the current mirror load <span class="math inline">\(M_{3,4}\)</span>. Intuitevly, this result makes sense.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Derivation of 5T-OTA Performance">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: Derivation of 5T-OTA Performance
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please take your time and carefully go through the explanations and derivations for the 5-transistor-OTA in <a href="#sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;0.7.2</a> and <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;0.7.3</a>. Try to do the calculations yourself; if you get stuck, review the previous chapters.</p>
+<p>Please take your time and carefully go through the explanations and derivations for the 5-transistor-OTA in <a href="#sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;7.2</a> and <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a>. Try to do the calculations yourself; if you get stuck, review the previous chapters.</p>
 </div>
 </div>
 </section>
 </section>
-<section id="t-ota-sizing" class="level3">
-<h3 class="anchored" data-anchor-id="t-ota-sizing">5T-OTA Sizing</h3>
-<p>Outfitted with the governing equations derived in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;0.7.3</a> we can now size the MOSFETs in the OTA, we remember that we have to size <span class="math inline">\(M_{1,2}\)</span> and <span class="math inline">\(M_{3,4}\)</span> equally.</p>
-<p>First, we need to select a proper <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for the MOSFET. Remembering <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;0.3</a> we see that for the input differential pair we should go for a large <span class="math inline">\(g_\mathrm{m}\)</span>, thus we select a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span>. As <span class="math inline">\(g_\mathrm{ds}\)</span> of <span class="math inline">\(M_2\)</span> could limit the dc gain (<a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;15</a>) we go with a rather long <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. For current sources a small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good idea, so we start with <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=5\)</span> (because we can not go too low because of <span class="math inline">\(V_\mathrm{ds,sat}\)</span>) and also an <span class="math inline">\(L = 5\,\mu\text{m}\)</span>.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<section id="t-ota-sizing" class="level2">
+<h2 class="anchored" data-anchor-id="t-ota-sizing">5T-OTA Sizing</h2>
+<p>Outfitted with the governing equations derived in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a> we can now size the MOSFETs in the OTA, we remember that we have to size <span class="math inline">\(M_{1,2}\)</span> and <span class="math inline">\(M_{3,4}\)</span> equally.</p>
+<p>First, we need to select a proper <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for the MOSFET. Remembering <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> we see that for the input differential pair we should go for a large <span class="math inline">\(g_\mathrm{m}\)</span>, thus we select a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span>. As <span class="math inline">\(g_\mathrm{ds}\)</span> of <span class="math inline">\(M_2\)</span> could limit the dc gain (<a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;15</a>) we go with a rather long <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. For current sources a small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good idea, so we start with <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=5\)</span> (because we can not go too low because of <span class="math inline">\(V_\mathrm{ds,sat}\)</span>) and also an <span class="math inline">\(L = 5\,\mu\text{m}\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: 5T-OTA Sizing">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: 5T-OTA Sizing
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1607,15 +1621,17 @@ Exercise
 </div>
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Solution: 5T-OTA Sizing
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 quarto-embed-nb-cell">
 <h1>Sizing for Basic 5T-OTA</h1>
@@ -1830,28 +1846,29 @@ headroom M5 = 0.3328988028993754 V</code></pre>
 </section>
 </div>
 </div>
+</div>
 </section>
-<section id="sec-basic-ota-simulation" class="level3">
-<h3 class="anchored" data-anchor-id="sec-basic-ota-simulation">5T-OTA Simulation</h3>
-<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can setup a simulation testbench and check the performance parameters.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<section id="sec-basic-ota-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="sec-basic-ota-simulation">5T-OTA Simulation</h2>
+<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: 5T-OTA Design and Testbench">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise: 5T-OTA Design and Testbench
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please setup a testbench in Xschem for the 5T-OTA used as a voltage buffer as schown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a>. Use typical conditions for the simulation, and check how well the specification in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a> is met, and how well the derivations in <a href="#sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;0.7.2</a> and <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;0.7.3</a> fit to the simulation results.</p>
-<p>If you get stuck, you can find the tesbench <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the large-signal settling simulation).</p>
+<p>Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as schown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a>. Use typical conditions for the simulation, and check how well the specification in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a> is met, and how well the derivations in <a href="#sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;7.2</a> and <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a> fit to the simulation results.</p>
+<p>If you get stuck, you can find the testbench and 5T-OTA schematic <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the large-signal settling simulation).</p>
 </div>
 </div>
 </section>
-<section id="t-ota-simulation-versus-pvt" class="level3">
-<h3 class="anchored">5T-OTA Simulation versus PVT</h3>
-<p>As you have seen in <a href="#sec-basic-ota-simulation" class="quarto-xref">Section&nbsp;1.0.1</a> running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:</p>
+<section id="t-ota-simulation-versus-pvt" class="level2">
+<h2 class="anchored" data-anchor-id="t-ota-simulation-versus-pvt">5T-OTA Simulation versus PVT</h2>
+<p>As you have seen in <a href="#sec-basic-ota-simulation" class="quarto-xref">Section&nbsp;8.1</a> running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:</p>
 <ol type="1">
 <li>The supply voltage of the circuit has tolerances, and thus we need to check the performance against this variation.</li>
 <li>The temperature at which the circuit is operated is likely changing. Also the performance against this has to be verified.</li>
@@ -1866,16 +1883,17 @@ Exercise
 <p>Luckily, there are open-source versions of simulation runners available, and we will use <a href="https://github.com/efabless/cace">CACE</a> in this lecture. CACE is written in Python and allows to setup a datasheet in <a href="https://yaml.org">YAML</a> which defines the simulation problem and the performance parameters to evaluate against which limits. The resulting simulations are then run in parallel and the simulation data is evaluated and summarized in various forms.</p>
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successul run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
-<div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled">
+<div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note&nbsp;1: CACE Summary for ota-5t
+Note&nbsp;1: CACE Summary for 5T-OTA
 </div>
 </div>
-<div class="callout-body-container callout-body">
+<section id="cace-summary-for-ota-5t" class="level1 callout-body-container callout-body">
+<h1>CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
 <table class="caption-top table">
 <colgroup>
@@ -2102,31 +2120,31 @@ Note&nbsp;1: CACE Summary for ota-5t
 </figure>
 </div>
 </section>
+</section>
 </div>
-</div>
-<section id="pvt-simulation-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="pvt-simulation-analysis">PVT Simulation Analysis</h4>
+<section id="pvt-simulation-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="pvt-simulation-analysis">PVT Simulation Analysis</h3>
 <p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;1</a> we see that (luckily) the specifiction is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
 </section>
 </section>
 </section>
-<section id="cascode-stage" class="level2">
-<h2 class="anchored" data-anchor-id="cascode-stage">Cascode Stage</h2>
+<section id="cascode-stage" class="level1">
+<h1>Cascode Stage</h1>
 </section>
-<section id="a-fully-differential-ota" class="level2">
-<h2 class="anchored" data-anchor-id="a-fully-differential-ota">A Fully-Differential OTA</h2>
+<section id="a-fully-differential-ota" class="level1">
+<h1>A Fully-Differential OTA</h1>
 </section>
-<section id="biasing-the-ota" class="level2">
-<h2 class="anchored" data-anchor-id="biasing-the-ota">Biasing the OTA</h2>
+<section id="biasing-the-ota" class="level1">
+<h1>Biasing the OTA</h1>
 </section>
-<section id="an-rc-opamp-filter" class="level2">
-<h2 class="anchored" data-anchor-id="an-rc-opamp-filter">An RC-OPAMP Filter</h2>
+<section id="an-rc-opamp-filter" class="level1">
+<h1>An RC-OPAMP Filter</h1>
 </section>
-<section id="summary-conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="summary-conclusion">Summary &amp; Conclusion</h2>
+<section id="summary-conclusion" class="level1">
+<h1>Summary &amp; Conclusion</h1>
 </section>
-<section id="sec-middlebrook-method" class="level2">
-<h2 class="anchored" data-anchor-id="sec-middlebrook-method">Appendix: Middlebrook’s Method</h2>
+<section id="sec-middlebrook-method" class="level1">
+<h1>Appendix: Middlebrook’s Method</h1>
 <p>When we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;24</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;25</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed, and the bias points are also correct.</p>
 <div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
@@ -2165,8 +2183,8 @@ T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}.
 T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}.
 \]</span></p>
 </section>
-<section id="appendix-ngspice-cheatsheet" class="level2">
-<h2 class="anchored" data-anchor-id="appendix-ngspice-cheatsheet">Appendix: ngspice Cheatsheet</h2>
+<section id="appendix-ngspice-cheatsheet" class="level1">
+<h1>Appendix: ngspice Cheatsheet</h1>
 <p>Here is an unsorted list of useful ngspice settings and command:</p>
 <section id="commands" class="level3">
 <h3 class="anchored" data-anchor-id="commands">Commands</h3>
@@ -2228,8 +2246,8 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}.
 </ul>
 </section>
 </section>
-<section id="appendix-xschem-cheatsheet" class="level2">
-<h2 class="anchored" data-anchor-id="appendix-xschem-cheatsheet">Appendix: Xschem Cheatsheet</h2>
+<section id="appendix-xschem-cheatsheet" class="level1">
+<h1>Appendix: Xschem Cheatsheet</h1>
 <p>When opening Xschem, using <code>Help -&gt; Keys</code> a pop-up windows comes up with many useful shortcuts. The most useful are:</p>
 <section id="moving-around-in-a-schematic" class="level4">
 <h4 class="anchored" data-anchor-id="moving-around-in-a-schematic">Moving around in a schematic:</h4>
@@ -2718,7 +2736,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
