@@ -75,9 +75,9 @@ So in order to reach an output voltage accuracy of at least 3% we need a dc gain
 In order to derive the governing equations for the OTA we will make a few simplifications:
 
 - We will set $\gmb = 0$ for all MOSFETs.
-- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$. Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain).
+- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$. Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $C_\mathrm{gs34}$ is considered at the gate node of the current mirror load.
 - We assume $\gm \gg \gds$, so we set $\gds[1] = \gds[3] = 0$.
-- The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$ we can add to the load capacitance $C_\mathrm{load}$.
+- The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$ we can add to the load capacitance $C_\mathrm{load}$. Note that $C_\mathrm{gs2}$ can be added because of the feedback connection between the inverting input and the output. However, this is not shown in the small-signal equivalent circuits below, because we are interested in the open-loop transfer function.
 
 The resulting small-signal equivalent circuit is shown in @fig-basic-ota-small-signal.
 
@@ -87,7 +87,7 @@ Please review the MOSFET small-signal equivalent model in @fig-mosfet-small-sign
 
 {{< include figures/_fig_basic_ota_small_signal.qmd >}}
 
-We can further simplify the output side by recognizing that the impedance looking from the output down we have $\gds[2]$ in series with $\gds[5] + \gm[12]$ (since we treat $M_1$ as a common-gate stage when looking from the output, and since it is loaded by a low impedance of $\gm[34]^{-1}$ we can approximate the impedance looking into $M_1$ with $\gm[12]^{-1}$). With the approximation that $\gm \gg \gds$ we can move $\gds[2] + \gds[4]$ in parallel to $C_\mathrm{load}$. Further, assuming a differential drive with a virtual ground at the tailpoint we can remove $\gds[5]$. The current source $\gm[34] \vgs[34]$ with replace with the equivalent conductance $\gm[34]$. This results in the further simplified equivalent circuit shown in @fig-basic-ota-small-signal-simplified.
+We can further simplify the output side by recognizing that the impedance looking from the output down we have $\gds[2]$ in series with $\gds[5] + \gm[12]$ (since we treat $M_1$ as a common-gate stage when looking from the output, and since it is loaded by a low impedance of $\gm[34]^{-1}$ we can approximate the impedance looking into the source of $M_1$ with $\gm[12]^{-1}$). With the approximation that $\gm \gg \gds$ the parallel connection of $\gm[12]$ and $\gds[5]$ is dominated by $\gm[12]$ and series connection by $\gds[2]$. Therefore, we can move $\gds[2] + \gds[4]$ in parallel to $C_\mathrm{load}$. Further, assuming a differential drive with a virtual ground at the tailpoint we can remove $\gds[5]$. The current source $\gm[34] \vgs[34]$ is replace with the equivalent conductance $\gm[34]$. This results in the further simplified equivalent circuit shown in @fig-basic-ota-small-signal-simplified.
 
 {{< include figures/_fig_basic_ota_small_signal_simplified.qmd >}}
 
@@ -155,6 +155,20 @@ A'(s) = \frac{\gm[12]}{\gds[2] + \gds[4] + s C_\mathrm{load}}.
 $$ {#eq-simple-ota-gain-simplified}
 
 Inspecting @eq-simple-ota-gain-simplified we can interpret the OTA transfer function as a transconductor $\gm[12]$ driving a load of $Y_\mathrm{load} = \gds[2] + \gds[4] + s C_\mathrm{load}$. We can thus redraw @fig-voltage-buffer-ota in the following way, injecting the previously calculated noise current into the output node. The result is shown in @fig-voltage-buffer-ota-noise.
+
+{{< include figures/_fig_voltage_buffer_ota_noise_zout.qmd >}}
+
+::: {.callout-note title="Output impedence the voltage buffer"}
+First we short the input terminal to ground and then we connect a current source $I_\mathrm{out}$ at the output terminal, see @fig-voltage-buffer-ota-noise-zout. Since we can neglect the gate leakage current into the inverting  input terminal of the OTA, KCL at the output node is simply:
+$$
+I_\mathrm{out} + g_\mathrm{m12}\left(-V_\mathrm{out}\right) = 0
+$$
+Thus, the output impedance is easily calculated.
+$$
+Z_\mathrm{out} = \frac{V_\mathrm{out}}{I_\mathrm{out}} = \frac{V_\mathrm{out}}{g_\mathrm{m12}V_\mathrm{out}} = \frac{1}{g_\mathrm{m12}}
+$$
+
+:::
 
 {{< include figures/_fig_voltage_buffer_ota_noise.qmd >}}
 
