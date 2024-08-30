@@ -74,8 +74,3 @@
 ## Schematic
 
 ![Schematic of ota-5t](ota-5t_schematic.svg)
-
-## Layout
-
-![Layout of ota-5t with white background](ota-5t_w.png)
-![Layout of ota-5t with black background](ota-5t_b.png)
