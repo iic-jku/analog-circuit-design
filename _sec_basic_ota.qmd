@@ -197,7 +197,11 @@ Please take your time and carefully go through the explanations and derivations 
 
 Outfitted with the governing equations derived in @sec-basic-ota-small-signal we can now size the MOSFETs in the OTA, we remember that we have to size $M_{1,2}$ and $M_{3,4}$ equally.
 
-First, we need to select a proper $\gmid$ for the MOSFET. Remembering @sec-gmid-method we see that for the input differential pair we should go for a large $\gm$, thus we select a $\gmid = 10$. As $\gds$ of $M_2$ could limit the dc gain (@eq-simple-ota-gain-dc) we go with a rather long $L = 5\,\mu\text{m}$. For current sources a small $\gmid$ is a good idea, so we start with $\gmid=5$ (because we can not go too low because of $V_\mathrm{ds,sat}$) and also an $L = 5\,\mu\text{m}$.
+First, we need to select a proper $\gmid$ for the MOSFET. Remembering @sec-gmid-method we see that for the input differential pair we should go for a large $\gm$, thus we select a $\gmid = 10$. As $\gds$ of $M_2$ could limit the dc gain (@eq-simple-ota-gain-dc) we go with a rather long $L = 5\,\mu\text{m}$. For current sources a small $\gmid$ is a good idea, so we start with $\gmid=5$ (because we can not go too low because of $V_\mathrm{ds,sat}$) and also an $L = 5\,\mu\text{m}$. The $\gmid$ is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the $\gds$ small) with this approximate relationship:
+
+$$
+\Vds[,sat] = \frac{2}{\gmid}
+$$ {#eq-gmid-saturation}
 
 ::: {.callout-tip title="Exercise: 5T-OTA Sizing"}
 Please size the 5T-OTA according to the previous $\gmid$ and $L$ suggestions. Please calculate the $W$ of $M_{1-6}$ and the total supply current. Please check wether gain error, total output noise, and turn-on settling is met with the calculated devices sizes and bias currents.
