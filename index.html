@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-09-01">
+<meta name="dcterms.date" content="2024-09-02">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-09-01">
-<meta name="citation_cover_date" content="2024-09-01">
+<meta name="citation_publication_date" content="2024-09-02">
+<meta name="citation_cover_date" content="2024-09-02">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-09-01">
+<meta name="citation_online_date" content="2024-09-02">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_abstract=In this design of a feedback system it is desirable to make experimental measurements of the loop gain as a function of frequency to ensure that the physical system operates as analytically predicted or, if not, to supply information upon which a design correction can be based. In high loop-gain systems it is desirable that the loop-gain measurement be made without opening the loop. This paper discusses practical methods of measuring and interpreting the results for loop gain of the closed-loop system by a voltage injection or a current-injection technique ; extension to the case in which the measurement can be made even though the system is unstable ; and extension to the case in which neither the voltage nor current-injection technique alone is adequate, but in which a combination of both permits the true loop gain to be derived. These techniques have been found useful not only in linear feedback systems but also in describing-function analysis of switching-mode converters and regulators.;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
 <meta name="citation_reference" content="citation_title=Verifying the diode–capacitor circuit voltage decay;,citation_author=Edward H. Hellen;,citation_publication_date=2003-08;,citation_cover_date=2003-08;,citation_year=2003;,citation_issue=8;,citation_doi=10.1119/1.1578070;,citation_volume=71;,citation_journal_title=American Journal of Physics;">
@@ -183,7 +183,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">September 1, 2024</p>
+              <p class="date">September 2, 2024</p>
             </div>
           </div>
           
@@ -200,7 +200,7 @@ window.Quarto = {
     </div>  </div>
 </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
 <div id="quarto-sidebar-toc-left" class="sidebar toc-left">
-  <nav id="TOC" role="doc-toc" class="toc-active">
+  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
@@ -270,6 +270,18 @@ window.Quarto = {
   <li><a href="#convergence-helper" id="toc-convergence-helper" class="nav-link" data-scroll-target="#convergence-helper">Convergence Helper</a></li>
   </ul></li>
   <li><a href="#appendix-xschem-cheatsheet" id="toc-appendix-xschem-cheatsheet" class="nav-link" data-scroll-target="#appendix-xschem-cheatsheet">Appendix: Xschem Cheatsheet</a></li>
+  <li><a href="#sec-designers-etiquette" id="toc-sec-designers-etiquette" class="nav-link" data-scroll-target="#sec-designers-etiquette">Appendix: Circuit Designer’s Etiquette</a></li>
+  <li><a href="#circuit-designers-etiquette" id="toc-circuit-designers-etiquette" class="nav-link" data-scroll-target="#circuit-designers-etiquette">Circuit Designer’s Etiquette</a>
+  <ul class="collapse">
+  <li><a href="#prolog" id="toc-prolog" class="nav-link" data-scroll-target="#prolog">Prolog</a></li>
+  <li><a href="#pins" id="toc-pins" class="nav-link" data-scroll-target="#pins">Pins</a></li>
+  <li><a href="#schematics" id="toc-schematics" class="nav-link" data-scroll-target="#schematics">Schematics</a></li>
+  <li><a href="#symbols" id="toc-symbols" class="nav-link" data-scroll-target="#symbols">Symbols</a></li>
+  <li><a href="#design-robustness" id="toc-design-robustness" class="nav-link" data-scroll-target="#design-robustness">Design Robustness</a></li>
+  <li><a href="#rules-for-good-mixed-signal-and-rf-circuits" id="toc-rules-for-good-mixed-signal-and-rf-circuits" class="nav-link" data-scroll-target="#rules-for-good-mixed-signal-and-rf-circuits">Rules for Good Mixed-Signal and RF Circuits</a></li>
+  <li><a href="#vhdlverilog-coding-guide" id="toc-vhdlverilog-coding-guide" class="nav-link" data-scroll-target="#vhdlverilog-coding-guide">VHDL/Verilog Coding Guide</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_txt_to_mat-preview.html"><i class="bi bi-journal-code"></i>Conversion of TXT to MAT for gm/ID result files for SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/lookup_sg13-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2</a></li><li><a href="sizing/sizing_basic_ota_improved-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic (Improved) OTA</a></li><li><a href="sizing/sizing_basic_ota-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic 5T-OTA</a></li><li><a href="sizing/sizing_current_mirror-preview.html"><i class="bi bi-journal-code"></i>Sizing for Improved Current Mirror</a></li><li><a href="sizing/sizing_mosfet_diode-preview.html"><i class="bi bi-journal-code"></i>Sizing for MOSFET Diode Example</a></li></ul></div></nav>
 </div>
@@ -1637,7 +1649,10 @@ Exercise: Derivation of 5T-OTA Performance
 <section id="t-ota-sizing" class="level2">
 <h2 class="anchored" data-anchor-id="t-ota-sizing">5T-OTA Sizing</h2>
 <p>Outfitted with the governing equations derived in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a> we can now size the MOSFETs in the OTA, we remember that we have to size <span class="math inline">\(M_{1,2}\)</span> and <span class="math inline">\(M_{3,4}\)</span> equally.</p>
-<p>First, we need to select a proper <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for the MOSFET. Remembering <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> we see that for the input differential pair we should go for a large <span class="math inline">\(g_\mathrm{m}\)</span>, thus we select a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span>. As <span class="math inline">\(g_\mathrm{ds}\)</span> of <span class="math inline">\(M_2\)</span> could limit the dc gain (<a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;15</a>) we go with a rather long <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. For current sources a small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good idea, so we start with <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=5\)</span> (because we can not go too low because of <span class="math inline">\(V_\mathrm{ds,sat}\)</span>) and also an <span class="math inline">\(L = 5\,\mu\text{m}\)</span>.</p>
+<p>First, we need to select a proper <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for the MOSFET. Remembering <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> we see that for the input differential pair we should go for a large <span class="math inline">\(g_\mathrm{m}\)</span>, thus we select a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span>. As <span class="math inline">\(g_\mathrm{ds}\)</span> of <span class="math inline">\(M_2\)</span> could limit the dc gain (<a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;15</a>) we go with a rather long <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. For current sources a small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good idea, so we start with <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=5\)</span> (because we can not go too low because of <span class="math inline">\(V_\mathrm{ds,sat}\)</span>) and also an <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the <span class="math inline">\(g_\mathrm{ds}\)</span> small) with this approximate relationship:</p>
+<p><span id="eq-gmid-saturation"><span class="math display">\[
+V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
+\tag{19}\]</span></span></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: 5T-OTA Sizing">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1881,7 +1896,7 @@ headroom M5 = 0.3328988028993754 V</code></pre>
 </section>
 <section id="sec-basic-ota-simulation" class="level2">
 <h2 class="anchored" data-anchor-id="sec-basic-ota-simulation">5T-OTA Simulation</h2>
-<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters.</p>
+<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters. Since this is the first time we draw a more complex schematic, and use a hierarchical design, we should note that drawing a schematic is an art, and there exists a set of rules and recommendations how to name pins, how to use annotations, and so on. Please read <a href="#sec-designers-etiquette" class="quarto-xref">Section&nbsp;18</a> before you start into your design work.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: 5T-OTA Design and Testbench">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2320,6 +2335,122 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}.
 <li><code>Shift-K</code> to unhighlight all nets</li>
 <li><code>Shift-o</code> to toggle light/dark color scheme</li>
 <li><code>s</code> to run a simulation</li>
+</ul>
+</section>
+</section>
+<section id="sec-designers-etiquette" class="level1">
+<h1>Appendix: Circuit Designer’s Etiquette</h1>
+</section>
+<section id="circuit-designers-etiquette" class="level1">
+<h1>Circuit Designer’s Etiquette</h1>
+<p><strong>Harald Pretl, Institute for Integrated Circuits (IIC), Johannes Kepler University, Linz</strong></p>
+<p>Release: Spring 2024</p>
+<section id="prolog" class="level2">
+<h2 class="anchored" data-anchor-id="prolog">Prolog</h2>
+<p>A consistent naming and schematic drawing style, as well as VHDL/Verilog coding scheme, is a huge help in avoiding errors and increasing productivity. Even if just one person works on a design, the error rate is lowered. If multiple persons work together in a team, a consistent working style is a big help for smooth cooperation without misunderstanding each other’s intentions. Consistency also helps to reuse existing blocks. In a well-done design, the documentation is included in the schematic/source code, so there is no searching for a piece of documentation somewhere else (which is often not found anyway).</p>
+</section>
+<section id="pins" class="level2">
+<h2 class="anchored" data-anchor-id="pins">Pins</h2>
+<ul>
+<li>Name package pins (interfacing with the outside the IC) in <strong>UPPERCASE</strong>, and all internal signals in <strong>lowercase</strong>.</li>
+<li>Supply voltages like VDD/VCC and ground like VSS/GND need to start with either <code>VDD</code>, <code>VCC</code>, <code>VSS</code>, <code>VEE</code> or <code>GND</code>, plus a suitable suffix. Examples: <code>VDD1</code>, <code>VDD_AMP</code>, <code>vdd_ldo_out</code>, <code>VSS_ANA</code> (uppercase means connected to a pin, lowercase means a VDD is created on-chip by, e.g., an LDO).</li>
+<li>Preferred are <code>VDD</code>/<code>VSS</code> for CMOS and <code>VCC</code>/<code>GND</code> for bipolar circuits. In BiCMOS circuits <code>VDD</code>/<code>VSS</code> are preferred, as usually, the digital content is the major part.</li>
+<li>Digital signals in an analog schematic should start with <code>di_</code> (for digital input) or <code>do_</code> (for digital output). Example: <code>di_ctrl1</code>. In the rare case of a bi-directional digital signal <code>dio_</code> can be used.</li>
+<li>Name digital signals consistently: <code>di_pon</code> is active-high, <code>di_pon_b</code> is active-low (<code>_b</code> standing for the negating “bar”); as an alternative, this last signal could be named <code>di_disable</code>. <code>di_reset</code> is an active-high reset, but often a reset is active-low, so it needs to be named <code>di_reset_b</code> (an alternative is <code>di_resetn</code>).</li>
+<li>In mixed-voltage designs, it might be useful to append the voltage level of a signal to avoid connecting incompatible inputs and outputs. Example: <code>do_comp_1v2</code> or <code>di_poweron_3v3</code>.</li>
+<li>Digital buses always have the MSB to the left and LSB to the right. Example: <code>do_adc[7:0]</code>.</li>
+<li>Analog signals should start with a <code>v</code> for a voltage signal or <code>i</code> for a current signal. It is often useful to include a value for bias signals or make the naming meaningful. RF signals, which are often neither voltage nor current signals, start the name with <code>rf_</code>. Examples: Signal and pin names like <code>ibias_30u</code> (30uA of bias current), <code>vbg_1v2</code> (a bandgap voltage of 1.2V), <code>vin_p</code>, <code>v_filt_out_n</code>, and <code>rf_lna_i</code> speak for themselves.</li>
+<li>Appending analog signals with <code>_i</code> and <code>_o</code> might be useful if a clear direction is obvious in the signal flow. If a signal is bi-directional, it is better to skip <code>_io</code>.</li>
+<li>Consistently use pin types <code>input</code>, <code>output</code>, or <code>inout</code> to indicate signal flow. Power supply pins are of <code>inout</code> type.</li>
+</ul>
+</section>
+<section id="schematics" class="level2">
+<h2 class="anchored" data-anchor-id="schematics">Schematics</h2>
+<ul>
+<li>In analog schematics, add a textual note about basic circuit performance. For example, in an amplifier, note things like suitable supply range, typical and w.c. current consumption, gain, GBW, input voltage range, PSRR, and other useful information.</li>
+<li>If a circuit has a quirk or is particularly clever, add a note on how it works, so others can understand the function without excessive analysis (reviewing a circuit should not be a brain teaser).</li>
+<li>Use provided borders or drawing templates for schematics, and fill the data in, like circuit designer name, date, change history, project name, etc.</li>
+<li>Use a versioning system for your data, and check in often. This avoids data loss, and going back to an earlier design stage is simple. <code>SVN</code> is often preferable to <code>GIT</code> for binary data.</li>
+<li>Draw uncluttered clear circuits. Ideally, the circuit function is apparent by inspection <strong>quickly</strong>. Everyone can obscure an inverter so that it takes 5 minutes to recognize it, but this is not a good design.</li>
+<li>Don’t alter the standard grid setting while drawing schematics (also make sure that the pins in your drawn symbols are on the standard grid)! Off-grid schematic elements will haunt you and your colleagues forever!</li>
+<li>Once a schematic is finished, take the time to name component instances properly (you can use speaking names like <code>Rstab</code> or simply use <code>R1</code>, <code>R2</code>, etc.). Use iterated instances to clean up the circuit. Use wire bundles to clean up circuits where useful. A clever technique is to use bundles and iterated instances to efficiently draw large resistor ladders, for example (however, use with care).</li>
+<li>Avoid connection-by-name, as it makes the circuit hard to read. However, there is a fine line to not cluttering circuits. Signals with many connections (<code>vdd</code>, <code>vss</code>, <code>pon</code>, <code>pon_b</code>) are often better done with connection-by-name instead of drawing a wire.</li>
+<li>Some tools allow the use of colored wires, which might be used to mark signal paths, bias lines, etc. However, this should not be overdone; use it with care.</li>
+<li>If you add auxiliary elements like current probes, ensure they get proper treatment when creating the netlist for the LVS (some elements should be shorted, and some elements simply taken out). Ideally, only use a single schematic for simulation, LVS, etc. By using tool features this can usually be done, and avoids the need to keep multiple schematics of one block in sync.</li>
+<li>Use annotations in the schematics to (1) denote current levels in branches, (2) denote bias voltage levels, (3) explain the function of logic input signals, and (4) put in logic tables if not obvious.</li>
+<li>Add comments concerning the layout, like matching devices, certain considerations of placement, sensitive nodes, etc.</li>
+<li>Add simple ASCII diagrams for timing signals if useful.</li>
+<li>Name internal signals (signals connected to pins are anyway named like the port) in a meaningful way; this makes tracking signals in simulation or layout much easier (automatic net names like <code>net0032</code> are of not much help).</li>
+<li>Properly name instances, not just <code>I1</code> or <code>I2</code>; better is <code>amp1</code>, <code>inv2</code>, etc. (a descriptor in a tool output like <code>I1/I13/I5/net017</code> is not helpful; compare that to <code>adc1/bias/bg/vref_int</code>).</li>
+<li>On check-and-save, never ignore warnings; just fix them! They will annoy you and others forever and might flag critical design flaws.</li>
+<li>Name cells interpretably, ideally making the function clear already by the name. It is often useful to prefix or postfix a cell by the project name and design iteration. Example: In the project <code>GIGAPROJECT</code>, the cells which are changed in the second design step are prefixed with <code>g2_</code>, like <code>g2_amp_bias</code>. Of course, more letters as a project abbreviation are useful if a name collision is likely to happen.</li>
+<li>Cell names in lowercase are a good choice, as otherwise, capitalization leads to inconsistency in cell names. Use <code>_</code> to break words instead of <code>CamelCase</code>, like <code>amp_bias_startup</code>.</li>
+<li>When building a design, start with the hierarchy first; plan a suitable design structure, and define all interfaces. Implement simple behavioral models for every circuit block (either with controlled sources or using Verilog-A or VHDL/Verilog digital models). In this way, you can simulate the overall design early and find issues in the hierarchy or the interconnects. Then, populate the hierarchy with the detailed circuit designs in the leaf cells. At each point in the design process, you have a design that can be simulated, with some blocks as behavioral models and some blocks already designed. Try to avoid scattered circuit elements (digital or analog) in the hierarchy; it is better to push all components into the leaf cells.</li>
+<li>Avoid huge schematics, better break them down into smaller, maintainable, and self-contained blocks, and provide a simulation test bench for these simple blocks. In this way, later re-simulation across the hierarchy is easily possible.</li>
+<li>When building up the hierarchy, choose pin names and signal names as consistently as possible. Example: use the signal name <code>vref_int</code> when connecting two leaf cells with the pin names <code>vref_int_o</code> and <code>vref_int_i</code>.</li>
+<li>Avoid the excessive use of net breakers like small resistors, as they inhibit net tracing and can lead to simulation convergence issues. If a net breaker is needed (or a current should be probed) use a 0V dc voltage source.</li>
+</ul>
+</section>
+<section id="symbols" class="level2">
+<h2 class="anchored" data-anchor-id="symbols">Symbols</h2>
+<ul>
+<li>Spend time drawing nice symbols! Ideally, the underlying circuit functionality is apparent by just looking at the symbol.</li>
+<li>Arrange the pins in a meaningful way.</li>
+<li>Group pins that belong together. An often useful arrangement is to locate the inputs on the left side, outputs on the right, digital control inputs at the bottom, and supplies at the top.</li>
+<li>Make the origin of a symbol in the top-left corner. In this way, symbols can be changed more easily, for example, by swapping out different versions of blocks.</li>
+<li>The cell name (and potentially library name) should be visible in the symbol, not only in the properties.</li>
+</ul>
+</section>
+<section id="design-robustness" class="level2">
+<h2 class="anchored" data-anchor-id="design-robustness">Design Robustness</h2>
+<ul>
+<li>It is good practice to buffer incoming digital signals with a local inverter (connected to the local block supply) before connecting it to internal nodes. This improves the slew rate of the control signal and lowers the chance of unwanted cross-talk.</li>
+<li>Consider dummy elements for good matching, and try to make useful unit sizes of components. This will make the layout creation much smoother.</li>
+<li>The golden rule of good analog performance is good matching, and good matching is achieved by identical components (size, orientation, surroundings)! If the layout does not look nice (humans like symmetry), it will not perform well.</li>
+<li>Consider supply decoupling and bias voltage decoupling inside the cells. Often, dummy elements can be used for that. Be aware, however, of unwanted supply resonances (think bond wire <code>L</code> and decoupling <code>C</code>) and slow transients of bias nodes after disturbance.</li>
+<li>Always implement a proper power-down mode. Avoid floating nodes in off-mode. The better defined the on- as well as the off-mode are, the less the chance of leakage currents. Always simulate both modes (on and off), and also simulate a transient power-up of a circuit to identify issues with slow bias start or insufficient turn-off, or nasty feedback loop instabilities during transients.</li>
+<li>When drawing the first schematic, add parasitic capacitances to each node. If all nodes are labeled, a capacitor bank is easily put into one corner of the schematic with parasitic caps tied to the ground. Use 5fF as a starting value (and replace it later with the correct value from parasitic extraction). This accounts for some wiring parasitics in layout and helps to account for these layout impairments early in the design phase and later when simulating the schematic instead of the extracted netlist with parasitics.</li>
+</ul>
+</section>
+<section id="rules-for-good-mixed-signal-and-rf-circuits" class="level2">
+<h2 class="anchored" data-anchor-id="rules-for-good-mixed-signal-and-rf-circuits">Rules for Good Mixed-Signal and RF Circuits</h2>
+<ul>
+<li>Separate analog and digital power supply, connect to package pins with multiple bond wires/bumps, and separate noisy and clean <code>vdd</code>/<code>vss</code> from each other!</li>
+<li>Prevent supply loops; keep <code>vdd</code> and <code>vss</code> lines close to each other (incl.&nbsp;bond wires and PCB traces)! This minimizes <code>L</code> and coupling factor <code>k</code>.</li>
+<li>Some prefer a massive (punched) ground plane, which is possible if you have enough metal levels. With a ground plane, the return path of a signal or supply line is just a few microns away.</li>
+<li>Use chip-internal decoupling capacitors, and decouple bias voltages to the <strong>correct</strong> potential (<code>vdd</code> or <code>vss</code>, or another node, depending on the circuit)!</li>
+<li>Use substrate contacts and guard rings to lower substrate crosstalk but use a quiet potential for connection; use triple-well if available! Connecting a guard-ring/substrate contact to a noisy supply is a prime noise injector (usually unwanted).</li>
+<li>Physically separate quiet and noisy circuits (at least by the epi thickness)!</li>
+<li>Reduce circuit noise generation as much as possible (avoid switching circuits if possible, use constant-current circuits instead, and use series/shunt regulators for supply isolation).</li>
+<li>Reduce sensitivity of circuits to interference (by using a fully differential design with high PSRR/CMRR, symmetrical layout parasitics, and good matching)!</li>
+</ul>
+</section>
+<section id="vhdlverilog-coding-guide" class="level2">
+<h2 class="anchored" data-anchor-id="vhdlverilog-coding-guide">VHDL/Verilog Coding Guide</h2>
+<p>These recommendations are specifically targeted at Verilog; however, they apply similarly to VHDL.</p>
+<ul>
+<li>Use automatic checkers (linters) to see whether your code contains errors or vulnerabilities. Commercial or open-source tools allow this, e.g., Icarus Verilog (<code>iverilog -g2005 -tnull FILE.v</code>) or Verilator (<code>verilator --lint-only -Wall FILE.v</code>).</li>
+<li>Write readable and maintainable code; use speaking variable names, and use a naming convention for inputs (beginning with <code>i_</code>) and outputs (beginning with <code>o_</code>). Active-low signals have an <code>_n</code> or <code>_b</code> in their name, like <code>i_reset_n</code>. Use comments to explain the intention.</li>
+<li>With a synchronous reset reset-related racing conditions are often avoided. If an asynchronous reset is desirable (which is often the case), ensure the reset signals are free from race conditions.</li>
+<li>Module-local registers and wires could append <code>_w</code> (for Verilog <code>wire</code>) or <code>_r</code> (for Verilog <code>reg</code>) to make their function clear. This is not required in SystemVerilog where the unified type <code>logic</code> should be used.</li>
+<li>Use an <code>assign</code> statement for logic as this often is easier to read than an <code>always @(*)</code> block. The ternary operator <code>COND ? TRUE : FALSE</code> can help with conditional assignments and is often a better choice than a (nested) <code>if ... else</code> statement.</li>
+<li>Declare all outputs explicitly with either <code>reg</code> or <code>wire</code>.</li>
+<li>Use local parameter definitions with <code>localparam</code> in a module to make the code easier to follow. Name parameters in <strong>UPPERCASE</strong>.</li>
+<li>Take care to reset all registers to a defined state (in simulation and HW).</li>
+<li>Use the rule of “one file per module.” The filename shall match the module declaration.</li>
+<li>Use <code>`default_nettype none</code> at the beginning of a file containing a module definition. After the module you can use <code>`default_nettype wire</code>. This will add a safety net against typos in signal names.</li>
+<li>In a logic assign block, use <code>assign @(*) begin ... end</code> instead of spelling out the signals in the sensitivity list. Forgetting a signal could lead to serious mismatches between simulation and HW.</li>
+<li>Make your code flexible by making bit widths and other values parameterized using a <code>localparam</code> or module parameter.</li>
+<li>Be cautious of implicit type conversions and bit-width adaptions; better make explicit conversions and match bit widths in assignments.</li>
+<li>Use only blocking assignments (<code>=</code>) in <code>always @(*)</code> blocks, and only non-blocking assignments (<code>&lt;=</code>) in clocked <code>always @(posedge ...)</code> blocks.</li>
+</ul>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
+<ul>
+<li>Good information about drawing schematics, design testbenches, etc: <a href="https://circuit-artists.com" class="uri">https://circuit-artists.com</a></li>
+<li>Sutherland/Mills, <em>Verilog and SystemVerilog Gotchas - 101 Common Coding Erorrs and How to Avoid Them</em>, Springer, 2010</li>
+<li>B. Razavi, <em>The Analog Mind</em>, column in IEEE Solid-State Circuits Magazine</li>
 </ul>
 
 </section>
@@ -2767,7 +2898,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
