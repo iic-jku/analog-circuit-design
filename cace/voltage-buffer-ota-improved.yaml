@@ -1,0 +1,282 @@
+#--------------------------------------------------------------
+# CACE circuit characterization file
+#--------------------------------------------------------------
+
+name:           ota-improved 
+description:    Simple voltage buffer for capacitive load realized with improved OTA
+PDK:            sg13g2
+
+cace_format:    5.2
+
+authorship:
+  designer:         Harald Pretl
+  company:          Johannes Kepler University
+  creation_date:    September 3, 2024
+  license:          Apache 2.0
+
+paths:
+  root:             ..
+  schematic:        xschem
+  netlist:          cace/netlist
+  documentation:    cace/_docs
+  runs:             _runs
+
+pins:
+  vdd:
+    description: Positive analog power supply
+    type: power
+    direction: inout
+    Vmin: 1.45
+    Vmax: 1.55
+  vss:
+    description: Analog ground
+    type: ground
+    direction: inout
+  ibias_5u:
+    description: Bias current input 5uA (nom)
+    type: signal
+    direction: input
+  vinp:
+    description: Voltage positive input
+    type: signal
+    direction: input
+  vinn:
+    description: Voltage negative input
+    type: signal
+    direction: input
+  vout:
+    description: Voltage output
+    type: signal
+    direction: output
+
+default_conditions:
+  vdd:
+    description: Analog power supply voltage
+    display: Vdd
+    unit: V
+    typical: 1.5
+  ibias:
+    description: Bias current
+    display: Ibias
+    unit: uA
+    typical: 5
+  corner_mos:
+    description: Process corner MOSFET
+    display: Corner MOSFET
+    typical: tt
+  corner_res:
+    description: Process corner resistors
+    display: Corner RES
+    typical: typ
+  temp:
+    description: Ambient temperature
+    display: Temperature
+    unit: °C
+    typical: 27
+  cload:
+    description: Load capacitance
+    display: Cload
+    unit: fF
+    typical: 50
+
+parameters:
+  ac_params:
+    spec:
+      gain:
+        display: Output voltage ratio
+        description: Large-signal dc gain
+        unit: V/V
+        minimum:
+          value: 0.99
+        typical:
+          value: any
+        maximum:
+          value: 1.01
+      bw:
+        display: Bandwidth
+        description: The -3dB bandwidth of the buffer
+        unit: Hz
+        minimum:
+          value: 10e6
+        typical:
+          value: any
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: ota-improved-ac.sch
+        format: ascii
+        suffix: .data
+        variables: [gain, bw]
+    plot:
+      gain_vs_temp:
+        type: xyplot
+        xaxis: temp
+        yaxis: gain
+        limits: auto
+      gain_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: gain
+        limits: auto
+      gain_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: gain
+        limits: auto
+      gain_vs_corner:
+        type: xyplot
+        xaxis: corner_mos
+        yaxis: gain
+        limits: auto
+      bw_vs_temp:
+        type: xyplot
+        xaxis: temp
+        yaxis: bw
+        limits: auto
+      bw_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: bw
+        limits: auto
+      bw_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: bw
+        limits: auto
+      bw_vs_corner:
+        type: xyplot
+        xaxis: corner_mos
+        yaxis: bw
+        limits: auto
+    conditions:
+      corner_mos:
+        enumerate: [ss, sf, tt, fs, ff]
+      corner_res:
+        enumerate: [wcs, typ, bcs]
+      vdd:
+        minimum: 1.45
+        typical: 1.5
+        maximum: 1.55
+      vin:
+        minimum: 0.7
+        typical: 0.8
+        maximum: 0.9
+      temp:
+        minimum: -40
+        typical: 27
+        maximum: 130
+
+  noise_params:
+    spec:
+      noise:
+        display: Output noise
+        description: Total output noise (rms)
+        unit: mV
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: 1
+    tool:
+      ngspice:
+        template: ota-improved-noise.sch
+        format: ascii
+        suffix: .data
+        variables: [noise]
+    plot:
+      noise_vs_temp:
+        type: xyplot
+        xaxis: temp
+        yaxis: noise
+        limits: auto
+      noise_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: noise
+        limits: auto
+      noise_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: noise
+        limits: auto
+      noise_vs_corner:
+        type: xyplot
+        xaxis: corner_mos
+        yaxis: noise
+        limits: auto
+    conditions:
+      corner_mos:
+        enumerate: [ss, sf, tt, fs, ff]
+      corner_res:
+        enumerate: [wcs, typ, bcs]
+      vdd:
+        minimum: 1.45
+        typical: 1.5
+        maximum: 1.55
+      vin:
+        minimum: 0.7
+        typical: 0.8
+        maximum: 0.9
+      temp:
+        minimum: -40
+        typical: 27
+        maximum: 130
+      
+  tran_params:
+    spec:
+      tsettle:
+        display: Settling time
+        description: Settling time of output
+        unit: us
+        minimum:
+          value: any
+        typical:
+          value: any
+        maximum:
+          value: 5
+    tool:
+      ngspice:
+        template: ota-improved-tran.sch
+        format: ascii
+        suffix: .data
+        variables: [tsettle]
+    plot:
+      settling_vs_temp:
+        type: xyplot
+        xaxis: temp
+        yaxis: tsettle
+        limits: auto
+      settling_vs_vin:
+        type: xyplot
+        xaxis: vin
+        yaxis: tsettle
+        limits: auto
+      settling_vs_vdd:
+        type: xyplot
+        xaxis: vdd
+        yaxis: tsettle
+        limits: auto
+      settling_vs_corner:
+        type: xyplot
+        xaxis: corner_mos
+        yaxis: tsettle
+        limits: auto
+    conditions:
+      corner_mos:
+        enumerate: [ss, sf, tt, fs, ff]
+      corner_res:
+        enumerate: [wcs, typ, bcs]
+      vdd:
+        minimum: 1.45
+        typical: 1.5
+        maximum: 1.55
+      vin:
+        minimum: 0.7
+        typical: 0.8
+        maximum: 0.9
+      temp:
+        minimum: -40
+        typical: 27
+        maximum: 130
