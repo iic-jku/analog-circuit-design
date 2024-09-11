@@ -1,0 +1,59 @@
+```{python}
+#| label: fig-basic-ota-small-signal-zout
+#| echo: false
+#| fig-cap: "5-transistor OTA small-signal model for output impedance calculations."
+import schemdraw as sd
+import schemdraw.elements as elm
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    
+    d.push()
+    elm.Line().left().length(1).dot(open=True).label('vin,p', 'left').idot(open=True)
+    d.pop()
+    elm.Gap().down().label(['+', 'vgs1', '-'])
+    elm.Line().right().length(3).dot().idot(open=True)
+    
+    d.push()
+    l1 = elm.Line().right().length(4).dot()
+    gds5 = elm.Resistor().down().label('gds5')
+    elm.Ground()
+    d.pop()
+
+    Ids1 = elm.SourceI().label('gm1 vgs1').reverse()
+    elm.Line().length(2).dot()
+    d.push()
+    Cgs34 = elm.Resistor().label('gm34')
+    elm.Vdd()
+    d.pop()
+
+    elm.Line().right().length(3).at(gds5.start).dot()
+    Ids2 = elm.SourceI().label('gm2 vgs2').reverse()
+    elm.Line().up().length(1).dot()
+    out = d.here
+    elm.Line().up().length(1)
+    Ids4 = elm.SourceI().label('gm34 vgs34')
+    elm.Vdd()
+    
+    elm.Line().right().at(Ids2.start)
+    gds2 = elm.Resistor().up().label('gds2')
+    elm.Line().up().length(1).dot()
+    elm.Line().up().length(1)
+    gds4 = elm.Resistor().up().label('gds4')
+    elm.Vdd()
+
+    elm.Line().right().at(out).length(8).label('vout')
+    elm.Line().down().length(2)
+    Iout = elm.SourceI().reverse().down().label('iout')
+    elm.Line().down().toy(gds5.start)
+    elm.Ground()
+
+    elm.Line().right().at(gds2.start).length(2).idot().dot(open=True)
+    elm.Gap().up().label(['-', 'vgs2', '+'])
+    elm.Line().right().length(1).dot(open=True).label('vin,n', 'right').idot(open=True)
+
+    elm.Line().left().length(3).at(Cgs34.start).dot(open=True)
+    elm.Gap().up().label(['+', 'vgs34', '-'])
+    elm.Dot(open=True)
+    elm.Vdd()
+```
