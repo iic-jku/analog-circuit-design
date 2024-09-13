@@ -4,10 +4,11 @@
 #| fig-cap: "A voltage buffer redrawn for noise analysis."
 import schemdraw as sd
 import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
 with sd.Drawing(canvas='svg') as d:
     d.config(unit=2)
     d.config(fontsize=16)
-    op = elm.Opamp().flip().label('gm12', loc='center', ofst=0)
+    op = elm.Opamp().flip().label(r'$g_\mathrm{m12}$', loc='center', ofst=0)
     elm.Line().left().length(2).at(op.in2)
     elm.Ground()
 
@@ -17,8 +18,8 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().right().length(3).dot()
     noise = d.here
 
-    elm.Line().right().length(3).label('Vout')
-    Cload = elm.Resistor().down().label('Yload')
+    elm.Line().right().length(3).label(r'$V_\mathrm{out}$')
+    Cload = elm.Resistor().down().label(r'$Y_\mathrm{load}$')
     elm.Ground()
     
     d.pop()
@@ -27,9 +28,9 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().up().toy(op.in1)
     elm.Line().right().to(op.in1)
 
-    elm.ZLabel().at(nc).left().label('1/gm12', ofst=(0,-0.5))
+    elm.ZLabel().at(nc).left().label(r'$1/g_\mathrm{m12}$', ofst=(0,-0.5))
 
-    In = elm.SourceI().at(noise).down().label('In')
+    In = elm.SourceI().at(noise).down().label(r'$\overline{I_\mathrm{n}^2}$')
     elm.Ground()
 
 ```

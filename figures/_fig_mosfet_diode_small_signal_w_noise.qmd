@@ -4,31 +4,27 @@
 #| fig-cap: "The MOSFET diode small-signal model with drain noise source."
 import schemdraw as sd
 import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
 with sd.Drawing(canvas='svg') as d:
     d.config(unit=2)
     d.config(fontsize=16)
-    #Cgs = elm.Capacitor().up().label(r'$C_\mathrm{gs}$')
-    Cgs = elm.Capacitor().up().label('Cgs')
+    Cgs = elm.Capacitor().up().label(r'$C_\mathrm{gs}$')
     d.push()
     elm.Line().right().length(3).dot()
-    #Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} \cdot v_\mathrm{gs}$').dot()
-    Ids1 = elm.SourceI().down().label('gm vgs').dot()
+    Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} \cdot v_\mathrm{gs}$').dot()
     elm.Ground()
     d.push()
     elm.Line().left().length(3)
     d.pop()
     elm.Line().right().length(3).dot()
-    #Gds = elm.Resistor().up().dot().label(r'$g_\mathrm{ds}$')
-    Gds = elm.Resistor().up().dot().label('gds')
+    Gds = elm.Resistor().up().dot().label(r'$g_\mathrm{ds}$')
     d.push()
     elm.Line().left().length(3)
     d.pop()
     elm.Line().right().length(3) 
-    #In = elm.SourceSin().down().label(r'$\overline{I_\mathrm{n,d}^2}$')
-    In = elm.SourceSin().down().label('In,d2')
+    In = elm.SourceSin().down().label(r'$\overline{I_\mathrm{n,d}^2}$')
     elm.Line().left().length(3)
     d.pop()
     d.move(dx=-1.5, dy=0)
-    #elm.Arrow().down().length(2).label(r'$v_\mathrm{gs}$')
-    elm.Arrow().down().length(2).label('vgs')
+    elm.Arrow().down().length(2).label(r'$v_\mathrm{gs}$')
 ```

@@ -4,59 +4,60 @@
 #| fig-cap: "5-transistor OTA small-signal model."
 import schemdraw as sd
 import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
 with sd.Drawing(canvas='svg') as d:
     d.config(unit=2)
     d.config(fontsize=16)
     
     d.push()
-    elm.Line().left().length(1).dot(open=True).label('vin,p', 'left').idot(open=True)
+    elm.Line().left().length(1).dot(open=True).label(r'$v_\mathrm{in,p}$', 'left').idot(open=True)
     d.pop()
-    elm.Gap().down().label(['+', 'vgs1', '-'])
+    elm.Gap().down().label(['+', r'$v_\mathrm{gs1}$', '-'])
     elm.Line().right().length(3).dot().idot(open=True)
     
     d.push()
     l1 = elm.Line().right().length(4).dot()
-    gds5 = elm.Resistor().down().label('gds5')
+    gds5 = elm.Resistor().down().label(r'$g_\mathrm{ds5}$')
     elm.Ground()
     d.pop()
 
-    Ids1 = elm.SourceI().label('gm12 vgs1').reverse()
+    Ids1 = elm.SourceI().label(r'$g_\mathrm{m12} \cdot v_\mathrm{gs1}$').reverse()
     elm.Line().length(2).dot()
     d.push()
-    Cgs34 = elm.Capacitor().label('Cgs34')
+    Cgs34 = elm.Capacitor().label(r'$C_\mathrm{gs34}$')
     elm.Vdd()
     d.pop()
     elm.Line().right().length(3)
-    Ids3 = elm.SourceI().label('gm34 vgs34')
+    Ids3 = elm.SourceI().label(r'$g_\mathrm{m34} \cdot v_\mathrm{gs34}$')
     elm.Vdd()
 
     elm.Line().right().length(3).at(gds5.start).dot()
-    Ids2 = elm.SourceI().label('gm12 vgs2').reverse()
+    Ids2 = elm.SourceI().label(r'$g_\mathrm{m12} \cdot v_\mathrm{gs2}$').reverse()
     elm.Line().up().length(1).dot()
     out = d.here
     elm.Line().up().length(1)
-    Ids4 = elm.SourceI().label('gm34 vgs34')
+    Ids4 = elm.SourceI().label(r'$g_\mathrm{m34} \cdot v_\mathrm{gs34}$')
     elm.Vdd()
     
     elm.Line().right().at(Ids2.start)
-    gds2 = elm.Resistor().up().label('gds2')
+    gds2 = elm.Resistor().up().label(r'$g_\mathrm{ds2}$')
     elm.Line().up().length(1).dot()
     elm.Line().up().length(1)
-    gds4 = elm.Resistor().up().label('gds4')
+    gds4 = elm.Resistor().up().label(r'$g_\mathrm{ds4}$')
     elm.Vdd()
 
-    elm.Line().right().at(out).length(8).label('vout')
+    elm.Line().right().at(out).length(8).label(r'$v_\mathrm{out}$')
     elm.Line().down().length(2)
-    Cload = elm.Capacitor().down().label('Cload')
+    Cload = elm.Capacitor().down().label(r'$C_\mathrm{load}$')
     elm.Line().down().toy(gds5.start)
     elm.Ground()
 
     elm.Line().right().at(gds2.start).length(2).idot().dot(open=True)
-    elm.Gap().up().label(['-', 'vgs2', '+'])
-    elm.Line().right().length(1).dot(open=True).label('vin,n', 'right').idot(open=True)
+    elm.Gap().up().label(['-', r'$v_\mathrm{gs2}$', '+'])
+    elm.Line().right().length(1).dot(open=True).label(r'$v_\mathrm{in,n}$', 'right').idot(open=True)
 
     elm.Line().left().length(3).at(Cgs34.start).dot(open=True)
-    elm.Gap().up().label(['+', 'vgs34', '-'])
+    elm.Gap().up().label(['+', r'$v_\mathrm{gs34}$', '-'])
     elm.Dot(open=True)
     elm.Vdd()
 ```
