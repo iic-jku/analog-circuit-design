@@ -322,18 +322,77 @@ Important
 <section id="ihps-sg13g2-130nm-cmos-technology" class="level2">
 <h2 class="anchored" data-anchor-id="ihps-sg13g2-130nm-cmos-technology">IHP’s SG13G2 130nm CMOS Technology</h2>
 <p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminium metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
-<p>For our circuit design, the most important parameters of the available devices are summarized in the following:</p>
-<ul>
-<li><strong>Low-voltage NMOS</strong>: Device <code>sg13_lv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.5\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
-<li><strong>Low-voltage PMOS</strong>: Device <code>sg13_lv_pmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx -0.47\,\text{V}\)</span>.</li>
-<li><strong>High-voltage NMOS</strong>: Device <code>sg13_hv_nmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.7\,\text{V}\)</span>; a triple-well option for the NMOS is available.</li>
-<li><strong>High-voltage PMOS</strong>: Device <code>sg13_hv_pmos</code>; operating voltage nominal <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx -0.65\,\text{V}\)</span>.</li>
-<li><strong>Silicided poly resistor</strong>: Device <code>rsil</code>; <span class="math inline">\(R_\square=7\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\text{TC}_1=3100\,\text{ppm/K}\)</span></li>
-<li><strong>Poly resistor</strong>: Device <code>rppd</code>; <span class="math inline">\(R_\square=260\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\text{TC}_1=170\,\text{ppm/K}\)</span></li>
-<li><strong>Poly resistor high</strong>: Device <code>rhigh</code>; <span class="math inline">\(R_\square=1360\,\Omega \pm 15\%\)</span>, <span class="math inline">\(\text{TC}_1=-2300\,\text{ppm/K}\)</span></li>
-<li><strong>MIM capacitor</strong>: Device <code>cap_cmim</code>; <span class="math inline">\(C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\)</span>, <span class="math inline">\(\text{VC}_1=-26\text{ppm/V}\)</span>, <span class="math inline">\(\text{TC}_1=3.6\text{ppm/K}\)</span>, breakdown voltage <span class="math inline">\(&gt;15\,\text{V}\)</span></li>
-<li><strong>MOM capacitor</strong>: The metal stack is well-suited for MOM capacitors due to 5 thin metal layers, but no primitive capacitor device is available at this point.</li>
-</ul>
+<p>For our circuit design, the most important parameters of the available devices are summarized in the following table:</p>
+<div id="tbl-sg13g2-devices" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sg13g2-devices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: IHP SG13G2 devices
+</figcaption>
+<div aria-describedby="tbl-sg13g2-devices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 14%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Device</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Low-voltage (LV) NMOS</td>
+<td style="text-align: left;"><code>sg13_lv_nmos</code></td>
+<td style="text-align: left;">operating voltage (nom.) <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.5\,\text{V}\)</span>; triple-well available</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Low-voltage (LV) PMOS</td>
+<td style="text-align: left;"><code>sg13_lv_pmos</code></td>
+<td style="text-align: left;">operating voltage (nom.) <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx -0.47\,\text{V}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">High-voltage (HV) NMOS</td>
+<td style="text-align: left;"><code>sg13_hv_nmos</code></td>
+<td style="text-align: left;">operating voltage (nom.) <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.7\,\text{V}\)</span>; triple-well available</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High-voltage (HV) PMOS</td>
+<td style="text-align: left;"><code>sg13_hv_pmos</code></td>
+<td style="text-align: left;">operating voltage (nom.) <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx -0.65\,\text{V}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Silicided poly resistor</td>
+<td style="text-align: left;"><code>rsil</code></td>
+<td style="text-align: left;"><span class="math inline">\(R_\square=7\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\text{TC}_1=3100\,\text{ppm/K}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Poly resistor</td>
+<td style="text-align: left;"><code>rppd</code></td>
+<td style="text-align: left;"><span class="math inline">\(R_\square=260\,\Omega \pm 10\%\)</span>, <span class="math inline">\(\text{TC}_1=170\,\text{ppm/K}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poly resistor high</td>
+<td style="text-align: left;"><code>rhigh</code></td>
+<td style="text-align: left;"><span class="math inline">\(R_\square=1360\,\Omega \pm 15\%\)</span>, <span class="math inline">\(\text{TC}_1=-2300\,\text{ppm/K}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MIM capacitor</td>
+<td style="text-align: left;"><code>cap_cmim</code></td>
+<td style="text-align: left;"><span class="math inline">\(C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\)</span>, <span class="math inline">\(\text{VC}_1=-26\text{ppm/V}\)</span>, <span class="math inline">\(\text{TC}_1=3.6\text{ppm/K}\)</span>, breakdown voltage <span class="math inline">\(&gt;15\,\text{V}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MOM capacitor</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">The metal stack is well-suited for MOM capacitors due to 5 thin metal layers, but no primitive capacitor device is available at this point.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 </section>
 <section id="schematic-entry-using-xschem" class="level2">
 <h2 class="anchored" data-anchor-id="schematic-entry-using-xschem">Schematic Entry Using Xschem</h2>
@@ -1357,11 +1416,11 @@ Figure&nbsp;19: A voltage buffer (based on OTA) driving a capacitive load.
 </div>
 </div>
 </div>
-<p>If the voltage gain of the OTA is <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application for the following spefication values (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a>). These values are rather typical of what could be expected for such a buffer design.</p>
+<p>If the voltage gain of the OTA is <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application for the following spefication values (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>). These values are rather typical of what could be expected for such a buffer design.</p>
 <div id="tbl-voltage-buffer-spec" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-voltage-buffer-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Voltage buffer specification
+Table&nbsp;2: Voltage buffer specification
 </figcaption>
 <div aria-describedby="tbl-voltage-buffer-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -1464,7 +1523,7 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 <li>gain-bandwidth product (GBW)</li>
 <li>output noise</li>
 </ul>
-<p>The specification for GBW is given in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a>, the dc gain we have to calculate from the voltage accuracy specification. For a voltage follower in the configuration shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a> the voltage gain is given by <span class="math display">\[
+<p>The specification for GBW is given in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>, the dc gain we have to calculate from the voltage accuracy specification. For a voltage follower in the configuration shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a> the voltage gain is given by <span class="math display">\[
 \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
 \]</span></p>
 <p>So in order to reach an output voltage accuracy of at least 3% we need a dc gain of <span class="math inline">\(A_0 &gt; 30.2\,\text{dB}\)</span>. To allow for process and temperature variation we need to add a bit of extra gain as margin.</p>
@@ -1914,7 +1973,7 @@ Exercise: 5T-OTA Design and Testbench
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as schown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a>. Use typical conditions for the simulation, and check how well the specification in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;1</a> is met, and how well the derivations in <a href="#sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;7.2</a> and <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a> fit to the simulation results.</p>
+<p>Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as schown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;19</a>. Use typical conditions for the simulation, and check how well the specification in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a> is met, and how well the derivations in <a href="#sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;7.2</a> and <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a> fit to the simulation results.</p>
 <p>If you get stuck, you can find the testbench and 5T-OTA schematic <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the large-signal settling simulation).</p>
 </div>
 </div>
@@ -3034,7 +3093,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
