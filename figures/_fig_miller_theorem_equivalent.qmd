@@ -1,0 +1,41 @@
+```{python}
+#| label: fig-miller-theorem-equivalent
+#| echo: false
+#| fig-cap: "An equivalent circuit using Miller's theorem."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    elm.Line().right().length(1).dot().label(r'$V_\mathrm{A}$')
+    d.push()
+    elm.Line().up().length(1)
+    d.pop()
+    d.push()
+    elm.Line().down().length(1)
+    d.pop()
+    
+    elm.Line().right().length(1)
+    d.push()
+    Z1 = elm.Resistor().length(3).down().label('$Z_1$')
+    elm.Ground()
+
+    d.pop()
+    d.move(dx=2)
+    d.push()
+
+    Z2 = elm.Resistor().length(3).down().label('$Z_2$')
+    elm.Ground()
+
+    d.pop()
+    elm.Line().right().length(1).dot()
+    d.push()
+    elm.Line().down().length(1)
+    d.pop()
+    d.push()
+    elm.Line().right().length(1).label(r'$V_\mathrm{B}$')
+    d.pop()
+    elm.Line().up().length(1)
+```

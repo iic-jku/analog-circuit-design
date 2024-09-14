@@ -75,7 +75,7 @@ So in order to reach an output voltage accuracy of at least 3% we need a dc gain
 In order to derive the governing equations for the OTA we will make a few simplifications:
 
 - We will set $\gmb = 0$ for all MOSFETs.
-- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$. Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $\Cgs[34]$ is considered at the gate node of the current mirror load.
+- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$ (for background please see @sec-miller-theorem). Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $\Cgs[34]$ is considered at the gate node of the current mirror load.
 - We assume $\gm \gg \gds$, so we set $\gds[1] = \gds[3] = 0$.
 - The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$ we can add to the load capacitance $C_\mathrm{load}$. Note that $\Cgs[2]$ can be added because of the feedback connection between the inverting input and the output. However, this is not shown in the small-signal equivalent circuits below, because we are interested in the open-loop transfer function.
 

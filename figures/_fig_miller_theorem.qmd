@@ -1,0 +1,29 @@
+```{python}
+#| label: fig-miller-theorem
+#| echo: false
+#| fig-cap: "An impedance connected between two nodes A and B."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    elm.Line().right().length(1).dot().label(r'$V_\mathrm{A}$')
+    d.push()
+    elm.Line().up().length(1)
+    d.pop()
+    d.push()
+    elm.Line().down().length(1)
+    d.pop()
+    
+    Z = elm.Resistor().length(4).label('$Z$').dot()
+
+    d.push()
+    elm.Line().up().length(1)
+    d.pop()
+    d.push()
+    elm.Line().down().length(1)
+    d.pop()
+    elm.Line().right().length(1).label(r'$V_\mathrm{B}$')
+```
