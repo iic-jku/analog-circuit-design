@@ -1,0 +1,19 @@
+```{python}
+#| label: fig-cascode-transistor
+#| echo: false
+#| fig-cap: "A MOSFET cascode circuit."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    elm.Vdd()
+    Gd = elm.Resistor().down().label(r'$G_\mathrm{D}$')
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).reverse().label('$M_1$', loc='right')
+    Gs = elm.Resistor().down().label(r'$G_\mathrm{S}$')
+    elm.Ground()
+
+    elm.Line().left().at(M1.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{B}$', loc='left')
+```

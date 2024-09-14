@@ -1,0 +1,36 @@
+```{python}
+#| label: fig-cascode-small-signal-simplified-in
+#| echo: false
+#| fig-cap: "The simplified MOSFET cascode small-signal model for calculation of the input impedance."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    d.push()
+    elm.Line().left().length(2).idot(open=True)
+    elm.Ground()
+
+    d.pop()
+    d.push()
+    elm.Gap().down().label(['+', r'$v_\mathrm{gs}$', '-'])
+    elm.Line().right().length(3).idot(open=True).dot()
+    Iin = elm.SourceI().down().label(r'$i_\mathrm{in}$').reverse()
+    elm.Ground()
+
+    d.pop()
+    d.move(dx=3)
+    d.push()
+    Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} \cdot v_\mathrm{gs}$')
+    elm.Line().right().length(3).label(r'$v_\mathrm{in}$')
+
+    Gds = elm.Resistor().up().label(r'$g_\mathrm{ds}$')
+    elm.Line().left().length(3).dot().label(r'$v_\mathrm{D}$')
+    
+    Gd = elm.Resistor().up().label(r'$G_\mathrm{D}$')
+    elm.Line().up().length(0.5)
+    elm.Line().right().length(1)
+    elm.Ground()
+```
