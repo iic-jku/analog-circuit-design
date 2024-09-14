@@ -132,7 +132,8 @@ window.Quarto = {
 <meta name="citation_year" content="2024">
 <meta name="citation_online_date" content="2024-09-14">
 <meta name="citation_language" content="en-US">
-<meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_abstract=In this design of a feedback system it is desirable to make experimental measurements of the loop gain as a function of frequency to ensure that the physical system operates as analytically predicted or, if not, to supply information upon which a design correction can be based. In high loop-gain systems it is desirable that the loop-gain measurement be made without opening the loop. This paper discusses practical methods of measuring and interpreting the results for loop gain of the closed-loop system by a voltage injection or a current-injection technique ; extension to the case in which the measurement can be made even though the system is unstable ; and extension to the case in which neither the voltage nor current-injection technique alone is adequate, but in which a combination of both permits the true loop gain to be derived. These techniques have been found useful not only in linear feedback systems but also in describing-function analysis of switching-mode converters and regulators.;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
+<meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
+<meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
 <meta name="citation_reference" content="citation_title=Verifying the diode–capacitor circuit voltage decay;,citation_author=Edward H. Hellen;,citation_publication_date=2003-08;,citation_cover_date=2003-08;,citation_year=2003;,citation_issue=8;,citation_doi=10.1119/1.1578070;,citation_volume=71;,citation_journal_title=American Journal of Physics;">
 <meta name="citation_reference" content="citation_title=SPICE2: A computer program to simulate semiconductor circuits;,citation_author=Laurence W. Nagel;,citation_publication_date=1975-05;,citation_cover_date=1975-05;,citation_year=1975;,citation_fulltext_html_url=http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html;,citation_dissertation_institution=EECS Department, University of California, Berkeley;">
 <meta name="citation_reference" content="citation_title=Systematic design of analog CMOS circuits: Using pre-computed lookup tables;,citation_author=Paul G. A. Jespers;,citation_author=Boris Murmann;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
@@ -263,6 +264,7 @@ window.Quarto = {
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter">An RC-OPAMP Filter</a></li>
   <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion">Summary &amp; Conclusion</a></li>
   <li><a href="#sec-middlebrook-method" id="toc-sec-middlebrook-method" class="nav-link" data-scroll-target="#sec-middlebrook-method">Appendix: Middlebrook’s Method</a></li>
+  <li><a href="#sec-miller-theorem" id="toc-sec-miller-theorem" class="nav-link" data-scroll-target="#sec-miller-theorem">Appendix: Miller’s Theorem</a></li>
   <li><a href="#sec-5t-ota-zout" id="toc-sec-5t-ota-zout" class="nav-link" data-scroll-target="#sec-5t-ota-zout">Appendix: 5T-OTA Small-Signal Output Impedance</a>
   <ul class="collapse">
   <li><a href="#open-loop-configuration" id="toc-open-loop-configuration" class="nav-link" data-scroll-target="#open-loop-configuration">Open-Loop Configuration</a></li>
@@ -438,7 +440,7 @@ Figure&nbsp;3: The MOSFET large-signal model.
 </div>
 </div>
 </div>
-<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a>. In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= 0\)</span>.</p>
+<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a> (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16</a>). In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= 0\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Bulk Terminal">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1471,7 +1473,7 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 <p>In order to derive the governing equations for the OTA we will make a few simplifications:</p>
 <ul>
 <li>We will set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> for all MOSFETs.</li>
-<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span>. Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;14</a>). Thus, only <span class="math inline">\(C_\mathrm{gs34}\)</span> is considered at the gate node of the current mirror load.</li>
+<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16</a>). Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;14</a>). Thus, only <span class="math inline">\(C_\mathrm{gs34}\)</span> is considered at the gate node of the current mirror load.</li>
 <li>We assume <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, so we set <span class="math inline">\(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\)</span>.</li>
 <li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span> we can add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span>. Note that <span class="math inline">\(C_\mathrm{gs2}\)</span> can be added because of the feedback connection between the inverting input and the output. However, this is not shown in the small-signal equivalent circuits below, because we are interested in the open-loop transfer function.</li>
 </ul>
@@ -1901,7 +1903,7 @@ headroom M5 = 0.3328988028993754 V</code></pre>
 </section>
 <section id="sec-basic-ota-simulation" class="level2">
 <h2 class="anchored" data-anchor-id="sec-basic-ota-simulation">5T-OTA Simulation</h2>
-<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters. Since this is the first time we draw a more complex schematic, and use a hierarchical design, we should note that drawing a schematic is an art, and there exists a set of rules and recommendations how to name pins, how to use annotations, and so on. Please read <a href="#sec-designers-etiquette" class="quarto-xref">Section&nbsp;19</a> before you start into your design work.</p>
+<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters. Since this is the first time we draw a more complex schematic, and use a hierarchical design, we should note that drawing a schematic is an art, and there exists a set of rules and recommendations how to name pins, how to use annotations, and so on. Please read <a href="#sec-designers-etiquette" class="quarto-xref">Section&nbsp;20</a> before you start into your design work.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: 5T-OTA Design and Testbench">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2234,18 +2236,57 @@ T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}.
 T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}.
 \]</span></p>
 </section>
+<section id="sec-miller-theorem" class="level1">
+<h1>Appendix: Miller’s Theorem</h1>
+<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;27</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;28</a>.</p>
+<div id="cell-fig-miller-theorem" class="cell" data-execution_count="21">
+<div class="cell-output cell-output-display">
+<div id="fig-miller-theorem" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-57" title="Figure&nbsp;27: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;27: An impedance connected between two nodes A and B.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="22">
+<div class="cell-output cell-output-display">
+<div id="fig-miller-theorem-equivalent" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-58" title="Figure&nbsp;28: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;28: An equivalent circuit using Miller’s theorem.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Using Miller’s theorem <span class="citation" data-cites="Sheikholeslami_2015">(<a href="#ref-Sheikholeslami_2015" role="doc-biblioref">Sheikholeslami 2015</a>)</span> we can calculate <span class="math display">\[
+Z_1 = \frac{Z}{1 - A} = \frac{Z}{1 - V_\mathrm{B} / V_\mathrm{A}}
+\]</span> and <span class="math display">\[
+Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
+\]</span> to arrive at an equivalent circuit, given that <span class="math inline">\(A = V_\mathrm{B} / V_\mathrm{A}\)</span> is the voltage gain between nodes A and B. A derivation of this theorem is relative straightforward considering the current through <span class="math inline">\(Z\)</span> when looking into the impedance from either node A or node B and calculating an equivalent impedance causing the same current.</p>
+<p>Note that if <span class="math inline">\(V_\mathrm{A} = V_\mathrm{B}\)</span> then there is no current flow through <span class="math inline">\(Z\)</span>, and accordingly the impedances <span class="math inline">\(Z_1 = Z_2 = \infty\)</span>.</p>
+<p>Miller’s theorem can be quite handy when an impedance is strapped between two nodes, and we want to break this connection in a calculation, e.g., considering the effect of <span class="math inline">\(C_\mathrm{GD}\)</span> in a MOSFET.</p>
+</section>
 <section id="sec-5t-ota-zout" class="level1">
 <h1>Appendix: 5T-OTA Small-Signal Output Impedance</h1>
 <p>This section gives additional details to the analysis presented in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a>. Here we provide the full calculation of the output impedance/conductance of the 5T-OTA for frequencies below the dominant pole, i.e.&nbsp;we neglect any capacitors.</p>
-<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="21">
+<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota-small-signal-zout" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-57" title="Figure&nbsp;27: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-59" title="Figure&nbsp;29: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;27: 5-transistor OTA small-signal model for output impedance calculations.
+Figure&nbsp;29: 5-transistor OTA small-signal model for output impedance calculations.
 </figcaption>
 </figure>
 </div>
@@ -2563,6 +2604,9 @@ Middlebrook, R. D. 1975. <span>“<span class="nocase">Measurement of loop gain 
 </div>
 <div id="ref-Nagel_1975" class="csl-entry" role="listitem">
 Nagel, Laurence W. 1975. <span>“SPICE2: A Computer Program to Simulate Semiconductor Circuits.”</span> PhD thesis, EECS Department, University of California, Berkeley. <a href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html">http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html</a>.
+</div>
+<div id="ref-Sheikholeslami_2015" class="csl-entry" role="listitem">
+Sheikholeslami, Ali. 2015. <span>“<span class="nocase">Miller’s Theorem [Circuit Intuitions]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 7 (3): 9–10. <a href="https://doi.org/10.1109/mssc.2015.2446457">https://doi.org/10.1109/mssc.2015.2446457</a>.
 </div>
 <div id="ref-Tsividis_McAndrew_2011" class="csl-entry" role="listitem">
 Tsividis, Yannis, and Colin McAndrew. 2011. <em>Operation and Modeling of the MOS Transistor</em>. Oxford University Press.
@@ -2990,7 +3034,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
