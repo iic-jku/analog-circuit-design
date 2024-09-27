@@ -1,5 +1,5 @@
 
-# CACE Summary for ota-improved
+# CACE Summary for ota-improved {.unnumbered .unlisted}
 
 **netlist source**: schematic
 
@@ -11,68 +11,68 @@
 | Settling time        | ngspice              | tsettle              |             any |   0.196 us |          any |   0.212 us |         5 us |   0.226 us |   Pass ✅    |
 
 
-## Plots
+## Plots {.unnumbered .unlisted}
 
-## gain_vs_temp
+## gain_vs_temp {.unnumbered .unlisted}
 
 ![gain_vs_temp](./cace/_docs/ota-improved/schematic/gain_vs_temp.png)
 
-## gain_vs_vin
+## gain_vs_vin {.unnumbered .unlisted}
 
 ![gain_vs_vin](./cace/_docs/ota-improved/schematic/gain_vs_vin.png)
 
-## gain_vs_vdd
+## gain_vs_vdd {.unnumbered .unlisted}
 
 ![gain_vs_vdd](./cace/_docs/ota-improved/schematic/gain_vs_vdd.png)
 
-## gain_vs_corner
+## gain_vs_corner {.unnumbered .unlisted}
 
 ![gain_vs_corner](./cace/_docs/ota-improved/schematic/gain_vs_corner.png)
 
-## bw_vs_temp
+## bw_vs_temp {.unnumbered .unlisted}
 
 ![bw_vs_temp](./cace/_docs/ota-improved/schematic/bw_vs_temp.png)
 
-## bw_vs_vin
+## bw_vs_vin {.unnumbered .unlisted}
 
 ![bw_vs_vin](./cace/_docs/ota-improved/schematic/bw_vs_vin.png)
 
-## bw_vs_vdd
+## bw_vs_vdd {.unnumbered .unlisted}
 
 ![bw_vs_vdd](./cace/_docs/ota-improved/schematic/bw_vs_vdd.png)
 
-## bw_vs_corner
+## bw_vs_corner {.unnumbered .unlisted}
 
 ![bw_vs_corner](./cace/_docs/ota-improved/schematic/bw_vs_corner.png)
 
-## noise_vs_temp
+## noise_vs_temp {.unnumbered .unlisted}
 
 ![noise_vs_temp](./cace/_docs/ota-improved/schematic/noise_vs_temp.png)
 
-## noise_vs_vin
+## noise_vs_vin {.unnumbered .unlisted}
 
 ![noise_vs_vin](./cace/_docs/ota-improved/schematic/noise_vs_vin.png)
 
-## noise_vs_vdd
+## noise_vs_vdd {.unnumbered .unlisted}
 
 ![noise_vs_vdd](./cace/_docs/ota-improved/schematic/noise_vs_vdd.png)
 
-## noise_vs_corner
+## noise_vs_corner {.unnumbered .unlisted}
 
 ![noise_vs_corner](./cace/_docs/ota-improved/schematic/noise_vs_corner.png)
 
-## settling_vs_temp
+## settling_vs_temp {.unnumbered .unlisted}
 
 ![settling_vs_temp](./cace/_docs/ota-improved/schematic/settling_vs_temp.png)
 
-## settling_vs_vin
+## settling_vs_vin {.unnumbered .unlisted}
 
 ![settling_vs_vin](./cace/_docs/ota-improved/schematic/settling_vs_vin.png)
 
-## settling_vs_vdd
+## settling_vs_vdd {.unnumbered .unlisted}
 
 ![settling_vs_vdd](./cace/_docs/ota-improved/schematic/settling_vs_vdd.png)
 
-## settling_vs_corner
+## settling_vs_corner {.unnumbered .unlisted}
 
 ![settling_vs_corner](./cace/_docs/ota-improved/schematic/settling_vs_corner.png)
