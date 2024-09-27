@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-09-14">
+<meta name="dcterms.date" content="2024-09-27">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-09-14">
-<meta name="citation_cover_date" content="2024-09-14">
+<meta name="citation_publication_date" content="2024-09-27">
+<meta name="citation_cover_date" content="2024-09-27">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-09-14">
+<meta name="citation_online_date" content="2024-09-27">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
@@ -177,7 +177,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">September 14, 2024</p>
+              <p class="date">September 27, 2024</p>
             </div>
           </div>
           
@@ -245,59 +245,59 @@ window.Quarto = {
   <li><a href="#ota-noise" id="toc-ota-noise" class="nav-link" data-scroll-target="#ota-noise"><span class="header-section-number">7.3.2</span> OTA Noise</a></li>
   </ul></li>
   <li><a href="#sec-basic-ota-sizing" id="toc-sec-basic-ota-sizing" class="nav-link" data-scroll-target="#sec-basic-ota-sizing"><span class="header-section-number">7.4</span> 5T-OTA Sizing</a></li>
-  <li><a href="#sec-basic-ota-simulation" id="toc-sec-basic-ota-simulation" class="nav-link" data-scroll-target="#sec-basic-ota-simulation"><span class="header-section-number">8.1</span> 5T-OTA Simulation</a></li>
-  <li><a href="#t-ota-simulation-versus-pvt" id="toc-t-ota-simulation-versus-pvt" class="nav-link" data-scroll-target="#t-ota-simulation-versus-pvt"><span class="header-section-number">8.2</span> 5T-OTA Simulation versus PVT</a>
+  <li><a href="#sec-basic-ota-simulation" id="toc-sec-basic-ota-simulation" class="nav-link" data-scroll-target="#sec-basic-ota-simulation"><span class="header-section-number">7.5</span> 5T-OTA Simulation</a></li>
+  <li><a href="#t-ota-simulation-versus-pvt" id="toc-t-ota-simulation-versus-pvt" class="nav-link" data-scroll-target="#t-ota-simulation-versus-pvt"><span class="header-section-number">7.6</span> 5T-OTA Simulation versus PVT</a>
   <ul class="collapse">
-  <li><a href="#pvt-simulation-analysis" id="toc-pvt-simulation-analysis" class="nav-link" data-scroll-target="#pvt-simulation-analysis"><span class="header-section-number">9.17.1</span> PVT Simulation Analysis</a></li>
+  <li><a href="#pvt-simulation-analysis" id="toc-pvt-simulation-analysis" class="nav-link" data-scroll-target="#pvt-simulation-analysis"><span class="header-section-number">7.6.1</span> PVT Simulation Analysis</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#sec-cascode-stage" id="toc-sec-cascode-stage" class="nav-link" data-scroll-target="#sec-cascode-stage"><span class="header-section-number">10</span> Cascode Stage</a>
+  <li><a href="#sec-cascode-stage" id="toc-sec-cascode-stage" class="nav-link" data-scroll-target="#sec-cascode-stage"><span class="header-section-number">8</span> Cascode Stage</a>
   <ul class="collapse">
-  <li><a href="#cascode-output-impedance" id="toc-cascode-output-impedance" class="nav-link" data-scroll-target="#cascode-output-impedance"><span class="header-section-number">10.1</span> Cascode Output Impedance</a></li>
-  <li><a href="#cascode-input-impedance" id="toc-cascode-input-impedance" class="nav-link" data-scroll-target="#cascode-input-impedance"><span class="header-section-number">10.2</span> Cascode Input Impedance</a></li>
+  <li><a href="#cascode-output-impedance" id="toc-cascode-output-impedance" class="nav-link" data-scroll-target="#cascode-output-impedance"><span class="header-section-number">8.1</span> Cascode Output Impedance</a></li>
+  <li><a href="#cascode-input-impedance" id="toc-cascode-input-impedance" class="nav-link" data-scroll-target="#cascode-input-impedance"><span class="header-section-number">8.2</span> Cascode Input Impedance</a></li>
   </ul></li>
-  <li><a href="#sec-improved-ota" id="toc-sec-improved-ota" class="nav-link" data-scroll-target="#sec-improved-ota"><span class="header-section-number">11</span> Improved OTA</a>
+  <li><a href="#sec-improved-ota" id="toc-sec-improved-ota" class="nav-link" data-scroll-target="#sec-improved-ota"><span class="header-section-number">9</span> Improved OTA</a>
   <ul class="collapse">
-  <li><a href="#sec-improved-ota-sizing" id="toc-sec-improved-ota-sizing" class="nav-link" data-scroll-target="#sec-improved-ota-sizing"><span class="header-section-number">11.1</span> Sizing the Improved OTA</a></li>
-  <li><a href="#designing-the-improved-ota" id="toc-designing-the-improved-ota" class="nav-link" data-scroll-target="#designing-the-improved-ota"><span class="header-section-number">12.1</span> Designing the Improved OTA</a>
+  <li><a href="#sec-improved-ota-sizing" id="toc-sec-improved-ota-sizing" class="nav-link" data-scroll-target="#sec-improved-ota-sizing"><span class="header-section-number">9.1</span> Sizing the Improved OTA</a></li>
+  <li><a href="#designing-the-improved-ota" id="toc-designing-the-improved-ota" class="nav-link" data-scroll-target="#designing-the-improved-ota"><span class="header-section-number">9.2</span> Designing the Improved OTA</a>
   <ul class="collapse">
-  <li><a href="#discussion-of-the-ota-design" id="toc-discussion-of-the-ota-design" class="nav-link" data-scroll-target="#discussion-of-the-ota-design"><span class="header-section-number">12.1.1</span> Discussion of the OTA Design</a></li>
+  <li><a href="#discussion-of-the-ota-design" id="toc-discussion-of-the-ota-design" class="nav-link" data-scroll-target="#discussion-of-the-ota-design"><span class="header-section-number">9.2.1</span> Discussion of the OTA Design</a></li>
   </ul></li>
-  <li><a href="#simulation-of-improved-ota" id="toc-simulation-of-improved-ota" class="nav-link" data-scroll-target="#simulation-of-improved-ota"><span class="header-section-number">12.2</span> Simulation of Improved OTA</a></li>
-  <li><a href="#corner-simulation-of-improved-ota" id="toc-corner-simulation-of-improved-ota" class="nav-link" data-scroll-target="#corner-simulation-of-improved-ota"><span class="header-section-number">12.3</span> Corner Simulation of Improved OTA</a></li>
+  <li><a href="#simulation-of-improved-ota" id="toc-simulation-of-improved-ota" class="nav-link" data-scroll-target="#simulation-of-improved-ota"><span class="header-section-number">9.3</span> Simulation of Improved OTA</a></li>
+  <li><a href="#corner-simulation-of-improved-ota" id="toc-corner-simulation-of-improved-ota" class="nav-link" data-scroll-target="#corner-simulation-of-improved-ota"><span class="header-section-number">9.4</span> Corner Simulation of Improved OTA</a></li>
   </ul></li>
-  <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota"><span class="header-section-number">14</span> A Fully-Differential OTA</a></li>
-  <li><a href="#biasing-the-ota" id="toc-biasing-the-ota" class="nav-link" data-scroll-target="#biasing-the-ota"><span class="header-section-number">15</span> Biasing the OTA</a></li>
-  <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">16</span> An RC-OPAMP Filter</a></li>
-  <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion"><span class="header-section-number">17</span> Summary &amp; Conclusion</a></li>
-  <li><a href="#sec-middlebrook-method" id="toc-sec-middlebrook-method" class="nav-link" data-scroll-target="#sec-middlebrook-method"><span class="header-section-number">18</span> Appendix: Middlebrook’s Method</a></li>
-  <li><a href="#sec-miller-theorem" id="toc-sec-miller-theorem" class="nav-link" data-scroll-target="#sec-miller-theorem"><span class="header-section-number">19</span> Appendix: Miller’s Theorem</a></li>
-  <li><a href="#sec-5t-ota-zout" id="toc-sec-5t-ota-zout" class="nav-link" data-scroll-target="#sec-5t-ota-zout"><span class="header-section-number">20</span> Appendix: 5T-OTA Small-Signal Output Impedance</a>
+  <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota"><span class="header-section-number">10</span> A Fully-Differential OTA</a></li>
+  <li><a href="#biasing-the-ota" id="toc-biasing-the-ota" class="nav-link" data-scroll-target="#biasing-the-ota"><span class="header-section-number">11</span> Biasing the OTA</a></li>
+  <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">12</span> An RC-OPAMP Filter</a></li>
+  <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion"><span class="header-section-number">13</span> Summary &amp; Conclusion</a></li>
+  <li><a href="#sec-middlebrook-method" id="toc-sec-middlebrook-method" class="nav-link" data-scroll-target="#sec-middlebrook-method"><span class="header-section-number">14</span> Appendix: Middlebrook’s Method</a></li>
+  <li><a href="#sec-miller-theorem" id="toc-sec-miller-theorem" class="nav-link" data-scroll-target="#sec-miller-theorem"><span class="header-section-number">15</span> Appendix: Miller’s Theorem</a></li>
+  <li><a href="#sec-5t-ota-zout" id="toc-sec-5t-ota-zout" class="nav-link" data-scroll-target="#sec-5t-ota-zout"><span class="header-section-number">16</span> Appendix: 5T-OTA Small-Signal Output Impedance</a>
   <ul class="collapse">
-  <li><a href="#open-loop-configuration" id="toc-open-loop-configuration" class="nav-link" data-scroll-target="#open-loop-configuration"><span class="header-section-number">20.1</span> Open-Loop Configuration</a></li>
-  <li><a href="#closed-loop-configuration" id="toc-closed-loop-configuration" class="nav-link" data-scroll-target="#closed-loop-configuration"><span class="header-section-number">20.2</span> Closed-Loop Configuration</a></li>
+  <li><a href="#open-loop-configuration" id="toc-open-loop-configuration" class="nav-link" data-scroll-target="#open-loop-configuration"><span class="header-section-number">16.1</span> Open-Loop Configuration</a></li>
+  <li><a href="#closed-loop-configuration" id="toc-closed-loop-configuration" class="nav-link" data-scroll-target="#closed-loop-configuration"><span class="header-section-number">16.2</span> Closed-Loop Configuration</a></li>
   </ul></li>
-  <li><a href="#appendix-ngspice-cheatsheet" id="toc-appendix-ngspice-cheatsheet" class="nav-link" data-scroll-target="#appendix-ngspice-cheatsheet"><span class="header-section-number">21</span> Appendix: ngspice Cheatsheet</a>
+  <li><a href="#appendix-ngspice-cheatsheet" id="toc-appendix-ngspice-cheatsheet" class="nav-link" data-scroll-target="#appendix-ngspice-cheatsheet"><span class="header-section-number">17</span> Appendix: ngspice Cheatsheet</a>
   <ul class="collapse">
-  <li><a href="#commands" id="toc-commands" class="nav-link" data-scroll-target="#commands"><span class="header-section-number">21.0.1</span> Commands</a></li>
-  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options"><span class="header-section-number">21.0.2</span> Options</a></li>
-  <li><a href="#convergence-helper" id="toc-convergence-helper" class="nav-link" data-scroll-target="#convergence-helper"><span class="header-section-number">21.0.3</span> Convergence Helper</a></li>
+  <li><a href="#commands" id="toc-commands" class="nav-link" data-scroll-target="#commands"><span class="header-section-number">17.0.1</span> Commands</a></li>
+  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options"><span class="header-section-number">17.0.2</span> Options</a></li>
+  <li><a href="#convergence-helper" id="toc-convergence-helper" class="nav-link" data-scroll-target="#convergence-helper"><span class="header-section-number">17.0.3</span> Convergence Helper</a></li>
   </ul></li>
-  <li><a href="#appendix-xschem-cheatsheet" id="toc-appendix-xschem-cheatsheet" class="nav-link" data-scroll-target="#appendix-xschem-cheatsheet"><span class="header-section-number">22</span> Appendix: Xschem Cheatsheet</a></li>
-  <li><a href="#sec-designers-etiquette" id="toc-sec-designers-etiquette" class="nav-link" data-scroll-target="#sec-designers-etiquette"><span class="header-section-number">23</span> Appendix: Circuit Designer’s Etiquette</a></li>
-  <li><a href="#circuit-designers-etiquette" id="toc-circuit-designers-etiquette" class="nav-link" data-scroll-target="#circuit-designers-etiquette"><span class="header-section-number">24</span> Circuit Designer’s Etiquette</a>
+  <li><a href="#appendix-xschem-cheatsheet" id="toc-appendix-xschem-cheatsheet" class="nav-link" data-scroll-target="#appendix-xschem-cheatsheet"><span class="header-section-number">18</span> Appendix: Xschem Cheatsheet</a></li>
+  <li><a href="#sec-designers-etiquette" id="toc-sec-designers-etiquette" class="nav-link" data-scroll-target="#sec-designers-etiquette"><span class="header-section-number">19</span> Appendix: Circuit Designer’s Etiquette</a></li>
+  <li><a href="#circuit-designers-etiquette" id="toc-circuit-designers-etiquette" class="nav-link" data-scroll-target="#circuit-designers-etiquette"><span class="header-section-number">20</span> Circuit Designer’s Etiquette</a>
   <ul class="collapse">
-  <li><a href="#prolog" id="toc-prolog" class="nav-link" data-scroll-target="#prolog"><span class="header-section-number">24.1</span> Prolog</a></li>
-  <li><a href="#pins" id="toc-pins" class="nav-link" data-scroll-target="#pins"><span class="header-section-number">24.2</span> Pins</a></li>
-  <li><a href="#schematics" id="toc-schematics" class="nav-link" data-scroll-target="#schematics"><span class="header-section-number">24.3</span> Schematics</a></li>
-  <li><a href="#symbols" id="toc-symbols" class="nav-link" data-scroll-target="#symbols"><span class="header-section-number">24.4</span> Symbols</a></li>
-  <li><a href="#design-robustness" id="toc-design-robustness" class="nav-link" data-scroll-target="#design-robustness"><span class="header-section-number">24.5</span> Design Robustness</a></li>
-  <li><a href="#rules-for-good-mixed-signal-and-rf-circuits" id="toc-rules-for-good-mixed-signal-and-rf-circuits" class="nav-link" data-scroll-target="#rules-for-good-mixed-signal-and-rf-circuits"><span class="header-section-number">24.6</span> Rules for Good Mixed-Signal and RF Circuits</a></li>
-  <li><a href="#vhdlverilog-coding-guide" id="toc-vhdlverilog-coding-guide" class="nav-link" data-scroll-target="#vhdlverilog-coding-guide"><span class="header-section-number">24.7</span> VHDL/Verilog Coding Guide</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">24.8</span> Further Reading</a></li>
+  <li><a href="#prolog" id="toc-prolog" class="nav-link" data-scroll-target="#prolog"><span class="header-section-number">20.1</span> Prolog</a></li>
+  <li><a href="#pins" id="toc-pins" class="nav-link" data-scroll-target="#pins"><span class="header-section-number">20.2</span> Pins</a></li>
+  <li><a href="#schematics" id="toc-schematics" class="nav-link" data-scroll-target="#schematics"><span class="header-section-number">20.3</span> Schematics</a></li>
+  <li><a href="#symbols" id="toc-symbols" class="nav-link" data-scroll-target="#symbols"><span class="header-section-number">20.4</span> Symbols</a></li>
+  <li><a href="#design-robustness" id="toc-design-robustness" class="nav-link" data-scroll-target="#design-robustness"><span class="header-section-number">20.5</span> Design Robustness</a></li>
+  <li><a href="#rules-for-good-mixed-signal-and-rf-circuits" id="toc-rules-for-good-mixed-signal-and-rf-circuits" class="nav-link" data-scroll-target="#rules-for-good-mixed-signal-and-rf-circuits"><span class="header-section-number">20.6</span> Rules for Good Mixed-Signal and RF Circuits</a></li>
+  <li><a href="#vhdlverilog-coding-guide" id="toc-vhdlverilog-coding-guide" class="nav-link" data-scroll-target="#vhdlverilog-coding-guide"><span class="header-section-number">20.7</span> VHDL/Verilog Coding Guide</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">20.8</span> Further Reading</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_txt_to_mat-preview.html"><i class="bi bi-journal-code"></i>Conversion of TXT to MAT for gm/ID result files for SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/lookup_sg13-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2</a></li><li><a href="sizing/sizing_basic_ota_improved-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic (Improved) OTA</a></li><li><a href="sizing/sizing_basic_ota-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic 5T-OTA</a></li><li><a href="sizing/sizing_current_mirror-preview.html"><i class="bi bi-journal-code"></i>Sizing for Improved Current Mirror</a></li><li><a href="sizing/sizing_mosfet_diode-preview.html"><i class="bi bi-journal-code"></i>Sizing for MOSFET Diode Example</a></li></ul></div></nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_txt_to_mat-preview.html"><i class="bi bi-journal-code"></i>Conversion of TXT to MAT for gm/ID result files for SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/lookup_sg13-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2</a></li><li><a href="sizing/sizing_basic_ota_improved-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic (Improved) OTA</a></li><li><a href="sizing/sizing_basic_ota-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic 5T-OTA</a></li><li><a href="sizing/sizing_current_mirror-preview.html"><i class="bi bi-journal-code"></i>Sizing for Improved Current Mirror</a></li><li><a href="sizing/sizing_mosfet_diode-preview.html"><i class="bi bi-journal-code"></i>Sizing for MOSFET Diode Example</a></li></ul></div></nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
@@ -506,7 +506,7 @@ Figure&nbsp;3: The MOSFET large-signal model.
 </div>
 </div>
 </div>
-<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a> (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;19</a>). In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= 0\)</span>.</p>
+<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a> (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;15</a>). In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= 0\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Bulk Terminal">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1152,7 +1152,7 @@ H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g
 </ol>
 <p>With this single pole location in <span class="math inline">\(H_\mathrm{ol}(s)\)</span> this loop is perfectly stable at under all conditions.</p>
 <p>The question is now how to simulate this open-loop gain, and how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
-<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;18</a>.</p>
+<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using a current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> which is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;14</a>.</p>
 <p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s method and confirm our analysis above.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Diode Loop Analysis">
 <div class="callout-header d-flex align-content-center">
@@ -1539,7 +1539,7 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 <p>In order to derive the governing equations for the OTA we will make a few simplifications:</p>
 <ul>
 <li>We will set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> for all MOSFETs.</li>
-<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;19</a>). Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;15</a>). Thus, only <span class="math inline">\(C_\mathrm{gs34}\)</span> is considered at the gate node of the current mirror load.</li>
+<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;15</a>). Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;15</a>). Thus, only <span class="math inline">\(C_\mathrm{gs34}\)</span> is considered at the gate node of the current mirror load.</li>
 <li>We assume <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, so we set <span class="math inline">\(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\)</span>.</li>
 <li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span> we can add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span>. Note that <span class="math inline">\(C_\mathrm{gs2}\)</span> can be added because of the feedback connection between the inverting input and the output. However, this is not shown in the small-signal equivalent circuits below, because we are interested in the open-loop transfer function.</li>
 </ul>
@@ -1752,8 +1752,8 @@ Solution: 5T-OTA Sizing
 </div>
 <div id="callout-32" class="callout-32-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<section id="sizing-for-basic-5t-ota" class="level1 quarto-embed-nb-cell" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Sizing for Basic 5T-OTA</h1>
+<section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
+<h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
 <p><strong>Copyright 2024 Harald Pretl</strong></p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
 <div id="cell-1" class="cell" data-execution_count="1">
@@ -1967,9 +1967,9 @@ headroom M5 = 0.3328988028993754 V</code></pre>
 </div>
 </div>
 </section>
-<section id="sec-basic-ota-simulation" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="sec-basic-ota-simulation"><span class="header-section-number">8.1</span> 5T-OTA Simulation</h2>
-<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters. Since this is the first time we draw a more complex schematic, and use a hierarchical design, we should note that drawing a schematic is an art, and there exists a set of rules and recommendations how to name pins, how to use annotations, and so on. Please read <a href="#sec-designers-etiquette" class="quarto-xref">Section&nbsp;23</a> before you start into your design work.</p>
+<section id="sec-basic-ota-simulation" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="sec-basic-ota-simulation"><span class="header-section-number">7.5</span> 5T-OTA Simulation</h2>
+<p>With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters. Since this is the first time we draw a more complex schematic, and use a hierarchical design, we should note that drawing a schematic is an art, and there exists a set of rules and recommendations how to name pins, how to use annotations, and so on. Please read <a href="#sec-designers-etiquette" class="quarto-xref">Section&nbsp;19</a> before you start into your design work.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: 5T-OTA Design and Testbench">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1985,9 +1985,9 @@ Exercise: 5T-OTA Design and Testbench
 </div>
 </div>
 </section>
-<section id="t-ota-simulation-versus-pvt" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="t-ota-simulation-versus-pvt"><span class="header-section-number">8.2</span> 5T-OTA Simulation versus PVT</h2>
-<p>As you have seen in <a href="#sec-basic-ota-simulation" class="quarto-xref">Section&nbsp;8.1</a> running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:</p>
+<section id="t-ota-simulation-versus-pvt" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="t-ota-simulation-versus-pvt"><span class="header-section-number">7.6</span> 5T-OTA Simulation versus PVT</h2>
+<p>As you have seen in <a href="#sec-basic-ota-simulation" class="quarto-xref">Section&nbsp;7.5</a> running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:</p>
 <ol type="1">
 <li>The supply voltage of the circuit has tolerances, and thus we need to check the performance against this variation.</li>
 <li>The temperature at which the circuit is operated is likely changing. Also the performance against this has to be verified.</li>
@@ -2013,8 +2013,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-34" class="callout-34-contents callout-collapse collapse show">
-<section id="cace-summary-for-ota-5t" class="level1 callout-body-container callout-body" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> CACE Summary for ota-5t</h1>
+<section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
+<h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
 <table class="caption-top table">
 <colgroup>
@@ -2094,11 +2094,11 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </tr>
 </tbody>
 </table>
-<section id="plots" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="plots"><span class="header-section-number">9.1</span> Plots</h2>
+<section id="plots" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="plots">Plots</h2>
 </section>
-<section id="gain_vs_temp" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="gain_vs_temp"><span class="header-section-number">9.2</span> gain_vs_temp</h2>
+<section id="gain_vs_temp" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_temp">gain_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/gain_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39" title="gain_vs_temp"><img src="./cace/_docs/ota-5t/schematic/gain_vs_temp.png" class="img-fluid figure-img" alt="gain_vs_temp"></a></p>
@@ -2106,8 +2106,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="gain_vs_vin" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="gain_vs_vin"><span class="header-section-number">9.3</span> gain_vs_vin</h2>
+<section id="gain_vs_vin" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_vin">gain_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/gain_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40" title="gain_vs_vin"><img src="./cace/_docs/ota-5t/schematic/gain_vs_vin.png" class="img-fluid figure-img" alt="gain_vs_vin"></a></p>
@@ -2115,8 +2115,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="gain_vs_vdd" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="gain_vs_vdd"><span class="header-section-number">9.4</span> gain_vs_vdd</h2>
+<section id="gain_vs_vdd" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_vdd">gain_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/gain_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41" title="gain_vs_vdd"><img src="./cace/_docs/ota-5t/schematic/gain_vs_vdd.png" class="img-fluid figure-img" alt="gain_vs_vdd"></a></p>
@@ -2124,8 +2124,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="gain_vs_corner" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="gain_vs_corner"><span class="header-section-number">9.5</span> gain_vs_corner</h2>
+<section id="gain_vs_corner" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_corner">gain_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/gain_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42" title="gain_vs_corner"><img src="./cace/_docs/ota-5t/schematic/gain_vs_corner.png" class="img-fluid figure-img" alt="gain_vs_corner"></a></p>
@@ -2133,8 +2133,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="bw_vs_temp" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="bw_vs_temp"><span class="header-section-number">9.6</span> bw_vs_temp</h2>
+<section id="bw_vs_temp" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_temp">bw_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/bw_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-43" title="bw_vs_temp"><img src="./cace/_docs/ota-5t/schematic/bw_vs_temp.png" class="img-fluid figure-img" alt="bw_vs_temp"></a></p>
@@ -2142,8 +2142,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="bw_vs_vin" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="bw_vs_vin"><span class="header-section-number">9.7</span> bw_vs_vin</h2>
+<section id="bw_vs_vin" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_vin">bw_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/bw_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-44" title="bw_vs_vin"><img src="./cace/_docs/ota-5t/schematic/bw_vs_vin.png" class="img-fluid figure-img" alt="bw_vs_vin"></a></p>
@@ -2151,8 +2151,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="bw_vs_vdd" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="bw_vs_vdd"><span class="header-section-number">9.8</span> bw_vs_vdd</h2>
+<section id="bw_vs_vdd" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_vdd">bw_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/bw_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45" title="bw_vs_vdd"><img src="./cace/_docs/ota-5t/schematic/bw_vs_vdd.png" class="img-fluid figure-img" alt="bw_vs_vdd"></a></p>
@@ -2160,8 +2160,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="bw_vs_corner" class="level2" data-number="9.9">
-<h2 data-number="9.9" class="anchored" data-anchor-id="bw_vs_corner"><span class="header-section-number">9.9</span> bw_vs_corner</h2>
+<section id="bw_vs_corner" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_corner">bw_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/bw_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-46" title="bw_vs_corner"><img src="./cace/_docs/ota-5t/schematic/bw_vs_corner.png" class="img-fluid figure-img" alt="bw_vs_corner"></a></p>
@@ -2169,8 +2169,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="noise_vs_temp" class="level2" data-number="9.10">
-<h2 data-number="9.10" class="anchored" data-anchor-id="noise_vs_temp"><span class="header-section-number">9.10</span> noise_vs_temp</h2>
+<section id="noise_vs_temp" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_temp">noise_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/noise_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-47" title="noise_vs_temp"><img src="./cace/_docs/ota-5t/schematic/noise_vs_temp.png" class="img-fluid figure-img" alt="noise_vs_temp"></a></p>
@@ -2178,8 +2178,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="noise_vs_vin" class="level2" data-number="9.11">
-<h2 data-number="9.11" class="anchored" data-anchor-id="noise_vs_vin"><span class="header-section-number">9.11</span> noise_vs_vin</h2>
+<section id="noise_vs_vin" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_vin">noise_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/noise_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-48" title="noise_vs_vin"><img src="./cace/_docs/ota-5t/schematic/noise_vs_vin.png" class="img-fluid figure-img" alt="noise_vs_vin"></a></p>
@@ -2187,8 +2187,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="noise_vs_vdd" class="level2" data-number="9.12">
-<h2 data-number="9.12" class="anchored" data-anchor-id="noise_vs_vdd"><span class="header-section-number">9.12</span> noise_vs_vdd</h2>
+<section id="noise_vs_vdd" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_vdd">noise_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/noise_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-49" title="noise_vs_vdd"><img src="./cace/_docs/ota-5t/schematic/noise_vs_vdd.png" class="img-fluid figure-img" alt="noise_vs_vdd"></a></p>
@@ -2196,8 +2196,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="noise_vs_corner" class="level2" data-number="9.13">
-<h2 data-number="9.13" class="anchored" data-anchor-id="noise_vs_corner"><span class="header-section-number">9.13</span> noise_vs_corner</h2>
+<section id="noise_vs_corner" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_corner">noise_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/noise_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-50" title="noise_vs_corner"><img src="./cace/_docs/ota-5t/schematic/noise_vs_corner.png" class="img-fluid figure-img" alt="noise_vs_corner"></a></p>
@@ -2205,8 +2205,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="settling_vs_temp" class="level2" data-number="9.14">
-<h2 data-number="9.14" class="anchored" data-anchor-id="settling_vs_temp"><span class="header-section-number">9.14</span> settling_vs_temp</h2>
+<section id="settling_vs_temp" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_temp">settling_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/settling_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-51" title="settling_vs_temp"><img src="./cace/_docs/ota-5t/schematic/settling_vs_temp.png" class="img-fluid figure-img" alt="settling_vs_temp"></a></p>
@@ -2214,8 +2214,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="settling_vs_vin" class="level2" data-number="9.15">
-<h2 data-number="9.15" class="anchored" data-anchor-id="settling_vs_vin"><span class="header-section-number">9.15</span> settling_vs_vin</h2>
+<section id="settling_vs_vin" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_vin">settling_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/settling_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-52" title="settling_vs_vin"><img src="./cace/_docs/ota-5t/schematic/settling_vs_vin.png" class="img-fluid figure-img" alt="settling_vs_vin"></a></p>
@@ -2223,8 +2223,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="settling_vs_vdd" class="level2" data-number="9.16">
-<h2 data-number="9.16" class="anchored" data-anchor-id="settling_vs_vdd"><span class="header-section-number">9.16</span> settling_vs_vdd</h2>
+<section id="settling_vs_vdd" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_vdd">settling_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/settling_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-53" title="settling_vs_vdd"><img src="./cace/_docs/ota-5t/schematic/settling_vs_vdd.png" class="img-fluid figure-img" alt="settling_vs_vdd"></a></p>
@@ -2232,8 +2232,8 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </figure>
 </div>
 </section>
-<section id="settling_vs_corner" class="level2" data-number="9.17">
-<h2 data-number="9.17" class="anchored" data-anchor-id="settling_vs_corner"><span class="header-section-number">9.17</span> settling_vs_corner</h2>
+<section id="settling_vs_corner" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_corner">settling_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-5t/schematic/settling_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-54" title="settling_vs_corner"><img src="./cace/_docs/ota-5t/schematic/settling_vs_corner.png" class="img-fluid figure-img" alt="settling_vs_corner"></a></p>
@@ -2244,14 +2244,14 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </section>
 </div>
 </div>
-<section id="pvt-simulation-analysis" class="level3" data-number="9.17.1">
-<h3 data-number="9.17.1" class="anchored" data-anchor-id="pvt-simulation-analysis"><span class="header-section-number">9.17.1</span> PVT Simulation Analysis</h3>
+<section id="pvt-simulation-analysis" class="level3" data-number="7.6.1">
+<h3 data-number="7.6.1" class="anchored" data-anchor-id="pvt-simulation-analysis"><span class="header-section-number">7.6.1</span> PVT Simulation Analysis</h3>
 <p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;1</a> we see that (luckily) the specifiction is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
 </section>
 </section>
 </section>
-<section id="sec-cascode-stage" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Cascode Stage</h1>
+<section id="sec-cascode-stage" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Cascode Stage</h1>
 <p>As we have seen in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;7</a> the performance of the OTA is generally quite acceptable (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>), but we might want to aim for better output voltage accuracy. As our analysis has shown the output voltage tolerance is limited by the open-loop dc gain <span class="math inline">\(A_0\)</span> of the OTA (see <a href="#eq-voltage-buffer-tolerance" class="quarto-xref">Equation&nbsp;12</a>), which in turn is limited by the output conductance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;18</a>, which is also confirmed by the analytical result in <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;16</a>.</p>
 <p>During the sizing procedure we have seen that the achievable <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> ratio of a single MOSFET is limited, even if we increase <span class="math inline">\(L\)</span>. We are thus searching for a better option, and here (local) feedback in form of a <strong>cascode</strong> comes to help.</p>
 <p>For analysis of a cascode, we use the following single-transistor stage shown in <a href="#fig-cascode-transistor" class="quarto-xref">Figure&nbsp;25</a>.</p>
@@ -2299,8 +2299,8 @@ Figure&nbsp;27: The simplified MOSFET cascode small-signal model.
 </div>
 </div>
 </div>
-<section id="cascode-output-impedance" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="cascode-output-impedance"><span class="header-section-number">10.1</span> Cascode Output Impedance</h2>
+<section id="cascode-output-impedance" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="cascode-output-impedance"><span class="header-section-number">8.1</span> Cascode Output Impedance</h2>
 <p>As a first step, we want to calculate the output impedance at the drain of the MOSFET (i.e., looking into the drain). For this, we replace <span class="math inline">\(G_\mathrm{D}\)</span> with a current source. The resulting small-signal equivalent circuit is shown in <a href="#fig-cascode-small-signal-simplified-out" class="quarto-xref">Figure&nbsp;28</a>.</p>
 <div id="cell-fig-cascode-small-signal-simplified-out" class="cell" data-execution_count="22">
 <div class="cell-output cell-output-display">
@@ -2342,8 +2342,8 @@ Benefit of Cascode (Output)
 </div>
 </div>
 </section>
-<section id="cascode-input-impedance" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="cascode-input-impedance"><span class="header-section-number">10.2</span> Cascode Input Impedance</h2>
+<section id="cascode-input-impedance" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="cascode-input-impedance"><span class="header-section-number">8.2</span> Cascode Input Impedance</h2>
 <p>To the calculate the input impedance of a cascode (i.e., looking into the source) we replace <span class="math inline">\(G_\mathrm{S}\)</span> with a current source. The resulting small-signal equivalent circuit is shown in <a href="#fig-cascode-small-signal-simplified-in" class="quarto-xref">Figure&nbsp;29</a>.</p>
 <div id="cell-fig-cascode-small-signal-simplified-in" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
@@ -2377,13 +2377,13 @@ Benefit of Cascode (Input)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This has the practical benefit that a capacitance connected at this noise results in a high-frequency pole, which is often not critical in terms of stability. Further, the voltage swing at a cascode input node is small due to the often small impedance, and this minimizes the Miller effect at connected inter-node capacitors (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;19</a>).</p>
+<p>This has the practical benefit that a capacitance connected at this node results in a high-frequency pole, which is often not critical in terms of stability. Further, the voltage swing at a cascode input node is small due to the often small impedance, and this minimizes the Miller effect at connected inter-node capacitors (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;15</a>).</p>
 </div>
 </div>
 </section>
 </section>
-<section id="sec-improved-ota" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Improved OTA</h1>
+<section id="sec-improved-ota" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Improved OTA</h1>
 <p>With the new learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means to add cascodes to <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;18</a>. For symmetry reasons we will add cascodes to both sides, and the resulting schematic is shown in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;30</a>.</p>
 <div id="cell-fig-improved-ota" class="cell" data-execution_count="24">
 <div class="cell-output cell-output-display">
@@ -2413,7 +2413,21 @@ Cascode Bias Voltage Generation
 <p>It is critically import for a stable performance across PVT that the bias voltages for the cascode gates are created in a manner that tracks variations with process, temperature, and supply voltage!</p>
 </div>
 </div>
-<p>The current mirrors constructed out of <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> and <span class="math inline">\(M_\mathrm{3/3C,4/4C}\)</span> are a special kind of <strong>cascoded current mirror for low-voltage operation</strong>. This type is very often used, as it forces the <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{5,6}\)</span> (and <span class="math inline">\(M_{3,4}\)</span>) to be equal, so the current mirror ratio is independent of <span class="math inline">\(g_\mathrm{ds}\)</span>. Further, by properly selecting the bias voltages of the cascode a low-voltage operation is achieved as <span class="math inline">\(V_\mathrm{DS}\)</span> can be minimized, allowing even triode operation of the current-mirror MOSFETs (as, noted above, a large <span class="math inline">\(g_\mathrm{ds}\)</span> is not a big issue).</p>
+<p>The current mirrors constructed out of <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> and <span class="math inline">\(M_\mathrm{3/3C,4/4C}\)</span> are a special kind of <strong>cascoded current mirror for low-voltage operation</strong>, also referred to as high-swing cascoded current mirror <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. This type is very often used, as it forces the <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{5,6}\)</span> (and <span class="math inline">\(M_{3,4}\)</span>) to be equal, so the current mirror ratio is independent of <span class="math inline">\(g_\mathrm{ds}\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Cascoded Current Mirror vs. High-Swing Cascoded Current Mirror">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise: Cascoded Current Mirror vs.&nbsp;High-Swing Cascoded Current Mirror
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try to verify the above statement of equal drain-source voltages by deriving both, an equation for <span class="math inline">\(V_\mathrm{DS5}\)</span> assuming a high-swing cascoded current mirror (<a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;30</a>) and <span class="math inline">\(V_\mathrm{DS5}\)</span> in case of a simple cascoded current mirror, where the reference branch <span class="math inline">\((M_\mathrm{6/6C})\)</span> is comprised of two mosfet diodes.</p>
+</div>
+</div>
+<p>Further, by properly selecting the bias voltages of the cascode a low-voltage operation is achieved as <span class="math inline">\(V_\mathrm{DS}\)</span> can be minimized, allowing even triode operation of the current-mirror MOSFETs (as, noted above, a large <span class="math inline">\(g_\mathrm{ds}\)</span> is not a big issue).</p>
 <p>A simplified small-signal gain calculation of this improved OTA uses the result of <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;16</a> and <a href="#eq-cs-cascode-output-impedance" class="quarto-xref">Equation&nbsp;23</a> to arrive at the approximate dc gain of <span id="eq-improved-ota-gain-dc"><span class="math display">\[
 A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathrm{m2C}} + g_\mathrm{ds4} \frac{g_\mathrm{ds4C}}{g_\mathrm{m4C}}}
 \tag{25}\]</span></span> leading to a significant boost in dc gain due to cascoding. We will use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
@@ -2421,12 +2435,12 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <li>save area (smaller <span class="math inline">\(L\)</span> will lead to smaller <span class="math inline">\(W\)</span> for a given <span class="math inline">\(W/L\)</span> ratio) and</li>
 <li>will push the additional poles and zeros at the inner nodes of the cascoded transistors (e.g., the connection of the drain of <span class="math inline">\(M_5\)</span> to the source of <span class="math inline">\(M_\mathrm{5C}\)</span>) to higher frequencies to result in stable behaviour and a reasonable gain transfer function (too many poles and zeros in the passband of the amplifier create many issues with stability margin).</li>
 </ol>
-<section id="sec-improved-ota-sizing" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="sec-improved-ota-sizing"><span class="header-section-number">11.1</span> Sizing the Improved OTA</h2>
+<section id="sec-improved-ota-sizing" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-improved-ota-sizing"><span class="header-section-number">9.1</span> Sizing the Improved OTA</h2>
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;7.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 1\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2435,10 +2449,10 @@ Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-38" class="callout-38-contents callout-collapse collapse show">
+<div id="callout-39" class="callout-39-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<section id="sizing-for-basic-improved-ota" class="level1 quarto-embed-nb-cell" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Sizing for Basic (Improved) OTA</h1>
+<section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
+<h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
 <p><strong>Copyright 2024 Harald Pretl</strong></p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
 <div id="cell-1" class="cell" data-execution_count="1">
@@ -2732,9 +2746,9 @@ Exercise: Improved OTA Sizing
 </div>
 </div>
 </section>
-<section id="designing-the-improved-ota" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="designing-the-improved-ota"><span class="header-section-number">12.1</span> Designing the Improved OTA</h2>
-<p>Based on the collected experience in this lecture and the result of the sizing procedure in <a href="#sec-improved-ota-sizing" class="quarto-xref">Section&nbsp;11.1</a> you should be able to design this OTA. If you want, please go ahead and try an implementation and check its performance with CACE.</p>
+<section id="designing-the-improved-ota" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="designing-the-improved-ota"><span class="header-section-number">9.2</span> Designing the Improved OTA</h2>
+<p>Based on the collected experience in this lecture and the result of the sizing procedure in <a href="#sec-improved-ota-sizing" class="quarto-xref">Section&nbsp;9.1</a> you should be able to design this OTA. If you want, please go ahead and try an implementation and check its performance with CACE.</p>
 <p>As an alternative there is a prepared OTA design shown in <a href="#fig-improved-ota-design" class="quarto-xref">Figure&nbsp;31</a> which we will discuss in detail next.</p>
 <div id="fig-improved-ota-design" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -2746,8 +2760,8 @@ Figure&nbsp;31: Improved OTA design in Xschem.
 </figcaption>
 </figure>
 </div>
-<section id="discussion-of-the-ota-design" class="level3" data-number="12.1.1">
-<h3 data-number="12.1.1" class="anchored" data-anchor-id="discussion-of-the-ota-design"><span class="header-section-number">12.1.1</span> Discussion of the OTA Design</h3>
+<section id="discussion-of-the-ota-design" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="discussion-of-the-ota-design"><span class="header-section-number">9.2.1</span> Discussion of the OTA Design</h3>
 <p>We will now do an analysis of the circuit design of the OTA including all the complications which make this design practical.</p>
 <ol type="1">
 <li>For easier navigation, the device identifier are consistent with the circuit sketch in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;30</a>.</li>
@@ -2785,8 +2799,8 @@ Parallel Connection
 </div>
 </section>
 </section>
-<section id="simulation-of-improved-ota" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="simulation-of-improved-ota"><span class="header-section-number">12.2</span> Simulation of Improved OTA</h2>
+<section id="simulation-of-improved-ota" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="simulation-of-improved-ota"><span class="header-section-number">9.3</span> Simulation of Improved OTA</h2>
 <p>Now that the circuit design of the improved OTA is done, we an use the same simulation test bench as for the basic OTA. The testbench is shown in <a href="#fig-improved-ota-design-tb-ac" class="quarto-xref">Figure&nbsp;33</a> and <a href="#fig-improved-ota-design-tb-tran" class="quarto-xref">Figure&nbsp;34</a>.</p>
 <div id="fig-improved-ota-design-tb-ac" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -2828,11 +2842,11 @@ Exercise: Improved OTA Initial Simulation
 </div>
 </div>
 </section>
-<section id="corner-simulation-of-improved-ota" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">12.3</span> Corner Simulation of Improved OTA</h2>
+<section id="corner-simulation-of-improved-ota" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">9.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;2</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-43-contents" aria-controls="callout-43" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2841,9 +2855,9 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-42" class="callout-42-contents callout-collapse collapse show">
-<section id="cace-summary-for-ota-improved" class="level1 callout-body-container callout-body" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> CACE Summary for ota-improved</h1>
+<div id="callout-43" class="callout-43-contents callout-collapse collapse show">
+<section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
+<h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
 <table class="caption-top table">
 <colgroup>
@@ -2923,11 +2937,11 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </tr>
 </tbody>
 </table>
-<section id="plots-1" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="plots-1"><span class="header-section-number">13.1</span> Plots</h2>
+<section id="plots-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="plots-1">Plots</h2>
 </section>
-<section id="gain_vs_temp-1" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="gain_vs_temp-1"><span class="header-section-number">13.2</span> gain_vs_temp</h2>
+<section id="gain_vs_temp-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_temp-1">gain_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/gain_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-65" title="gain_vs_temp"><img src="./cace/_docs/ota-improved/schematic/gain_vs_temp.png" class="img-fluid figure-img" alt="gain_vs_temp"></a></p>
@@ -2935,8 +2949,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="gain_vs_vin-1" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="gain_vs_vin-1"><span class="header-section-number">13.3</span> gain_vs_vin</h2>
+<section id="gain_vs_vin-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_vin-1">gain_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/gain_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-66" title="gain_vs_vin"><img src="./cace/_docs/ota-improved/schematic/gain_vs_vin.png" class="img-fluid figure-img" alt="gain_vs_vin"></a></p>
@@ -2944,8 +2958,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="gain_vs_vdd-1" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="gain_vs_vdd-1"><span class="header-section-number">13.4</span> gain_vs_vdd</h2>
+<section id="gain_vs_vdd-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_vdd-1">gain_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/gain_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-67" title="gain_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/gain_vs_vdd.png" class="img-fluid figure-img" alt="gain_vs_vdd"></a></p>
@@ -2953,8 +2967,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="gain_vs_corner-1" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="gain_vs_corner-1"><span class="header-section-number">13.5</span> gain_vs_corner</h2>
+<section id="gain_vs_corner-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_corner-1">gain_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/gain_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-68" title="gain_vs_corner"><img src="./cace/_docs/ota-improved/schematic/gain_vs_corner.png" class="img-fluid figure-img" alt="gain_vs_corner"></a></p>
@@ -2962,8 +2976,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="bw_vs_temp-1" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="bw_vs_temp-1"><span class="header-section-number">13.6</span> bw_vs_temp</h2>
+<section id="bw_vs_temp-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_temp-1">bw_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/bw_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-69" title="bw_vs_temp"><img src="./cace/_docs/ota-improved/schematic/bw_vs_temp.png" class="img-fluid figure-img" alt="bw_vs_temp"></a></p>
@@ -2971,8 +2985,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="bw_vs_vin-1" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="bw_vs_vin-1"><span class="header-section-number">13.7</span> bw_vs_vin</h2>
+<section id="bw_vs_vin-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_vin-1">bw_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/bw_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-70" title="bw_vs_vin"><img src="./cace/_docs/ota-improved/schematic/bw_vs_vin.png" class="img-fluid figure-img" alt="bw_vs_vin"></a></p>
@@ -2980,8 +2994,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="bw_vs_vdd-1" class="level2" data-number="13.8">
-<h2 data-number="13.8" class="anchored" data-anchor-id="bw_vs_vdd-1"><span class="header-section-number">13.8</span> bw_vs_vdd</h2>
+<section id="bw_vs_vdd-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_vdd-1">bw_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/bw_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-71" title="bw_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/bw_vs_vdd.png" class="img-fluid figure-img" alt="bw_vs_vdd"></a></p>
@@ -2989,8 +3003,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="bw_vs_corner-1" class="level2" data-number="13.9">
-<h2 data-number="13.9" class="anchored" data-anchor-id="bw_vs_corner-1"><span class="header-section-number">13.9</span> bw_vs_corner</h2>
+<section id="bw_vs_corner-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_corner-1">bw_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/bw_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-72" title="bw_vs_corner"><img src="./cace/_docs/ota-improved/schematic/bw_vs_corner.png" class="img-fluid figure-img" alt="bw_vs_corner"></a></p>
@@ -2998,8 +3012,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="noise_vs_temp-1" class="level2" data-number="13.10">
-<h2 data-number="13.10" class="anchored" data-anchor-id="noise_vs_temp-1"><span class="header-section-number">13.10</span> noise_vs_temp</h2>
+<section id="noise_vs_temp-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_temp-1">noise_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/noise_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-73" title="noise_vs_temp"><img src="./cace/_docs/ota-improved/schematic/noise_vs_temp.png" class="img-fluid figure-img" alt="noise_vs_temp"></a></p>
@@ -3007,8 +3021,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="noise_vs_vin-1" class="level2" data-number="13.11">
-<h2 data-number="13.11" class="anchored" data-anchor-id="noise_vs_vin-1"><span class="header-section-number">13.11</span> noise_vs_vin</h2>
+<section id="noise_vs_vin-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_vin-1">noise_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/noise_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-74" title="noise_vs_vin"><img src="./cace/_docs/ota-improved/schematic/noise_vs_vin.png" class="img-fluid figure-img" alt="noise_vs_vin"></a></p>
@@ -3016,8 +3030,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="noise_vs_vdd-1" class="level2" data-number="13.12">
-<h2 data-number="13.12" class="anchored" data-anchor-id="noise_vs_vdd-1"><span class="header-section-number">13.12</span> noise_vs_vdd</h2>
+<section id="noise_vs_vdd-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_vdd-1">noise_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/noise_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-75" title="noise_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/noise_vs_vdd.png" class="img-fluid figure-img" alt="noise_vs_vdd"></a></p>
@@ -3025,8 +3039,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="noise_vs_corner-1" class="level2" data-number="13.13">
-<h2 data-number="13.13" class="anchored" data-anchor-id="noise_vs_corner-1"><span class="header-section-number">13.13</span> noise_vs_corner</h2>
+<section id="noise_vs_corner-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_corner-1">noise_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/noise_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-76" title="noise_vs_corner"><img src="./cace/_docs/ota-improved/schematic/noise_vs_corner.png" class="img-fluid figure-img" alt="noise_vs_corner"></a></p>
@@ -3034,8 +3048,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="settling_vs_temp-1" class="level2" data-number="13.14">
-<h2 data-number="13.14" class="anchored" data-anchor-id="settling_vs_temp-1"><span class="header-section-number">13.14</span> settling_vs_temp</h2>
+<section id="settling_vs_temp-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_temp-1">settling_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/settling_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-77" title="settling_vs_temp"><img src="./cace/_docs/ota-improved/schematic/settling_vs_temp.png" class="img-fluid figure-img" alt="settling_vs_temp"></a></p>
@@ -3043,8 +3057,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="settling_vs_vin-1" class="level2" data-number="13.15">
-<h2 data-number="13.15" class="anchored" data-anchor-id="settling_vs_vin-1"><span class="header-section-number">13.15</span> settling_vs_vin</h2>
+<section id="settling_vs_vin-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_vin-1">settling_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/settling_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-78" title="settling_vs_vin"><img src="./cace/_docs/ota-improved/schematic/settling_vs_vin.png" class="img-fluid figure-img" alt="settling_vs_vin"></a></p>
@@ -3052,8 +3066,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="settling_vs_vdd-1" class="level2" data-number="13.16">
-<h2 data-number="13.16" class="anchored" data-anchor-id="settling_vs_vdd-1"><span class="header-section-number">13.16</span> settling_vs_vdd</h2>
+<section id="settling_vs_vdd-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_vdd-1">settling_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/settling_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-79" title="settling_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/settling_vs_vdd.png" class="img-fluid figure-img" alt="settling_vs_vdd"></a></p>
@@ -3061,8 +3075,8 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </figure>
 </div>
 </section>
-<section id="settling_vs_corner-1" class="level2" data-number="13.17">
-<h2 data-number="13.17" class="anchored" data-anchor-id="settling_vs_corner-1"><span class="header-section-number">13.17</span> settling_vs_corner</h2>
+<section id="settling_vs_corner-1" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_corner-1">settling_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./cace/_docs/ota-improved/schematic/settling_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-80" title="settling_vs_corner"><img src="./cace/_docs/ota-improved/schematic/settling_vs_corner.png" class="img-fluid figure-img" alt="settling_vs_corner"></a></p>
@@ -3133,20 +3147,20 @@ Table&nbsp;3: Voltage buffer specification
 </div>
 </section>
 </section>
-<section id="a-fully-differential-ota" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> A Fully-Differential OTA</h1>
+<section id="a-fully-differential-ota" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> A Fully-Differential OTA</h1>
 <p>To be added in a future release.</p>
 </section>
-<section id="biasing-the-ota" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> Biasing the OTA</h1>
+<section id="biasing-the-ota" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Biasing the OTA</h1>
 <p>To be added in a future release.</p>
 </section>
-<section id="an-rc-opamp-filter" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> An RC-OPAMP Filter</h1>
+<section id="an-rc-opamp-filter" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> An RC-OPAMP Filter</h1>
 <p>To be added in a future release.</p>
 </section>
-<section id="summary-conclusion" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> Summary &amp; Conclusion</h1>
+<section id="summary-conclusion" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Summary &amp; Conclusion</h1>
 <p>By now, you should be familiar with the use of a schematic entry tool (Xschem) and circuit simulator (ngspice). You have learned the basic performance trade-offs, and the large- and small-signal behviour of the MOSFET. You can use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method to size MOSFET for class-A operation. You can design simple amplifiers based on OTA structures. In summary, you are on a good way to become a good analog or mixed-signal circuit designer!</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Feedback">
 <div class="callout-header d-flex align-content-center">
@@ -3162,8 +3176,8 @@ Feedback
 </div>
 </div>
 </section>
-<section id="sec-middlebrook-method" class="level1" data-number="18">
-<h1 data-number="18"><span class="header-section-number">18</span> Appendix: Middlebrook’s Method</h1>
+<section id="sec-middlebrook-method" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Appendix: Middlebrook’s Method</h1>
 <p>When we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;35</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;36</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed, and the bias points are also correct.</p>
 <div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="25">
 <div class="cell-output cell-output-display">
@@ -3202,8 +3216,8 @@ T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}.
 T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}.
 \]</span></p>
 </section>
-<section id="sec-miller-theorem" class="level1" data-number="19">
-<h1 data-number="19"><span class="header-section-number">19</span> Appendix: Miller’s Theorem</h1>
+<section id="sec-miller-theorem" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Appendix: Miller’s Theorem</h1>
 <p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;37</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;38</a>.</p>
 <div id="cell-fig-miller-theorem" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-display">
@@ -3241,8 +3255,8 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 <p>Note that if <span class="math inline">\(V_\mathrm{A} = V_\mathrm{B}\)</span> then there is no current flow through <span class="math inline">\(Z\)</span>, and accordingly the impedances <span class="math inline">\(Z_1 = Z_2 = \infty\)</span>.</p>
 <p>Miller’s theorem can be quite handy when an impedance is strapped between two nodes, and we want to break this connection in a calculation, e.g., considering the effect of <span class="math inline">\(C_\mathrm{GD}\)</span> in a MOSFET.</p>
 </section>
-<section id="sec-5t-ota-zout" class="level1" data-number="20">
-<h1 data-number="20"><span class="header-section-number">20</span> Appendix: 5T-OTA Small-Signal Output Impedance</h1>
+<section id="sec-5t-ota-zout" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Appendix: 5T-OTA Small-Signal Output Impedance</h1>
 <p>This section gives additional details to the analysis presented in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a>. Here we provide the full calculation of the output impedance/conductance of the 5T-OTA for frequencies below the dominant pole, i.e.&nbsp;we neglect any capacitors.</p>
 <div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="29">
 <div class="cell-output cell-output-display">
@@ -3258,8 +3272,8 @@ Figure&nbsp;39: 5-transistor OTA small-signal model for output impedance calcula
 </div>
 </div>
 </div>
-<section id="open-loop-configuration" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="open-loop-configuration"><span class="header-section-number">20.1</span> Open-Loop Configuration</h2>
+<section id="open-loop-configuration" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="open-loop-configuration"><span class="header-section-number">16.1</span> Open-Loop Configuration</h2>
 <p>For the open-loop case, the gates of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are tied to ground and thus, both <span class="math inline">\(v_\mathrm{gs}\)</span> are equal. <span class="math display">\[
 v_\mathrm{in,p}=v_\mathrm{in,p}=0~\text{V}
 \]</span> <span id="eq-app-vbufzout-vin-ol"><span class="math display">\[
@@ -3294,8 +3308,8 @@ i_\mathrm{out} -\left[g_\mathrm{ds4} + \frac{g_\mathrm{ds2}\cdot\left(2g_\mathrm
 \frac{i_\mathrm{out}}{v_\mathrm{out}}\approx g_\mathrm{ds4} + g_\mathrm{ds2}
 \tag{33}\]</span></span></p>
 </section>
-<section id="closed-loop-configuration" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="closed-loop-configuration"><span class="header-section-number">20.2</span> Closed-Loop Configuration</h2>
+<section id="closed-loop-configuration" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="closed-loop-configuration"><span class="header-section-number">16.2</span> Closed-Loop Configuration</h2>
 <p>In contrast to the open-loop case, we keep the gate of <span class="math inline">\(M_1\)</span> connected to ground and tie the input of <span class="math inline">\(M_2\)</span> to the output node <span class="math inline">\(v_\mathrm{out}\)</span>. <span id="eq-app-vbufzout-vin-cl"><span class="math display">\[
 v_\mathrm{in,n} = v_\mathrm{out}
 \tag{34}\]</span></span></p>
@@ -3328,11 +3342,11 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 \]</span></p>
 </section>
 </section>
-<section id="appendix-ngspice-cheatsheet" class="level1" data-number="21">
-<h1 data-number="21"><span class="header-section-number">21</span> Appendix: ngspice Cheatsheet</h1>
+<section id="appendix-ngspice-cheatsheet" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Appendix: ngspice Cheatsheet</h1>
 <p>Here is an unsorted list of useful ngspice settings and command:</p>
-<section id="commands" class="level3" data-number="21.0.1">
-<h3 data-number="21.0.1" class="anchored" data-anchor-id="commands"><span class="header-section-number">21.0.1</span> Commands</h3>
+<section id="commands" class="level3" data-number="17.0.1">
+<h3 data-number="17.0.1" class="anchored" data-anchor-id="commands"><span class="header-section-number">17.0.1</span> Commands</h3>
 <ul>
 <li><code>ac dec|lin points fstart fstop</code> performs a small-signal ac analysis with either linear or decade sweep</li>
 <li><code>dc sourcename vstart vstop vincr [src2 start2 stop2 incr2]</code> runs a dc-sweep, optionally across two variables</li>
@@ -3361,8 +3375,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>write</code> writes simulation data (the saved nodes) into a RAW file; default is binary, can be changed to ASCII with <code>set filetype=ascii</code>; with <code>set appendwrite</code> data is added to an existing file</li>
 </ul>
 </section>
-<section id="options" class="level3" data-number="21.0.2">
-<h3 data-number="21.0.2" class="anchored" data-anchor-id="options"><span class="header-section-number">21.0.2</span> Options</h3>
+<section id="options" class="level3" data-number="17.0.2">
+<h3 data-number="17.0.2" class="anchored" data-anchor-id="options"><span class="header-section-number">17.0.2</span> Options</h3>
 <p>Use <code>option option=val option=val</code> to set various options; important ones are:</p>
 <ul>
 <li><code>abstol</code> sets the absolute current error tolerance (default is 1pA)</li>
@@ -3381,8 +3395,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>warn</code> enables the priting of the SOA warning messages</li>
 </ul>
 </section>
-<section id="convergence-helper" class="level3" data-number="21.0.3">
-<h3 data-number="21.0.3" class="anchored" data-anchor-id="convergence-helper"><span class="header-section-number">21.0.3</span> Convergence Helper</h3>
+<section id="convergence-helper" class="level3" data-number="17.0.3">
+<h3 data-number="17.0.3" class="anchored" data-anchor-id="convergence-helper"><span class="header-section-number">17.0.3</span> Convergence Helper</h3>
 <ul>
 <li><code>option gmin</code> can be used to increase the conductance applied at every node</li>
 <li><code>option method=gear</code> can lead to improved convergence</li>
@@ -3391,11 +3405,11 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 </ul>
 </section>
 </section>
-<section id="appendix-xschem-cheatsheet" class="level1" data-number="22">
-<h1 data-number="22"><span class="header-section-number">22</span> Appendix: Xschem Cheatsheet</h1>
+<section id="appendix-xschem-cheatsheet" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Appendix: Xschem Cheatsheet</h1>
 <p>When opening Xschem, using <code>Help -&gt; Keys</code> a pop-up windows comes up with many useful shortcuts. The most useful are:</p>
-<section id="moving-around-in-a-schematic" class="level4" data-number="22.0.0.1">
-<h4 data-number="22.0.0.1" class="anchored" data-anchor-id="moving-around-in-a-schematic"><span class="header-section-number">22.0.0.1</span> Moving around in a schematic:</h4>
+<section id="moving-around-in-a-schematic" class="level4" data-number="18.0.0.1">
+<h4 data-number="18.0.0.1" class="anchored" data-anchor-id="moving-around-in-a-schematic"><span class="header-section-number">18.0.0.1</span> Moving around in a schematic:</h4>
 <ul>
 <li><code>Cursor keys</code> to move around</li>
 <li><code>Ctrl-e</code> to go back to parent schematic</li>
@@ -3405,8 +3419,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>Ctrl-z</code> to zoom out</li>
 </ul>
 </section>
-<section id="editing-schematics" class="level4" data-number="22.0.0.2">
-<h4 data-number="22.0.0.2" class="anchored" data-anchor-id="editing-schematics"><span class="header-section-number">22.0.0.2</span> Editing schematics:</h4>
+<section id="editing-schematics" class="level4" data-number="18.0.0.2">
+<h4 data-number="18.0.0.2" class="anchored" data-anchor-id="editing-schematics"><span class="header-section-number">18.0.0.2</span> Editing schematics:</h4>
 <ul>
 <li><code>Del</code> to delete elements</li>
 <li><code>Ins</code> to insert elements from library</li>
@@ -3426,8 +3440,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>&amp;</code> to join, break, and collapse wires</li>
 </ul>
 </section>
-<section id="viewingsimulating-schematics" class="level4" data-number="22.0.0.3">
-<h4 data-number="22.0.0.3" class="anchored" data-anchor-id="viewingsimulating-schematics"><span class="header-section-number">22.0.0.3</span> Viewing/Simulating Schematics</h4>
+<section id="viewingsimulating-schematics" class="level4" data-number="18.0.0.3">
+<h4 data-number="18.0.0.3" class="anchored" data-anchor-id="viewingsimulating-schematics"><span class="header-section-number">18.0.0.3</span> Viewing/Simulating Schematics</h4>
 <ul>
 <li><code>5</code> to only view probes</li>
 <li><code>k</code> to highlight selected net</li>
@@ -3437,19 +3451,19 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 </ul>
 </section>
 </section>
-<section id="sec-designers-etiquette" class="level1" data-number="23">
-<h1 data-number="23"><span class="header-section-number">23</span> Appendix: Circuit Designer’s Etiquette</h1>
+<section id="sec-designers-etiquette" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Appendix: Circuit Designer’s Etiquette</h1>
 </section>
-<section id="circuit-designers-etiquette" class="level1" data-number="24">
-<h1 data-number="24"><span class="header-section-number">24</span> Circuit Designer’s Etiquette</h1>
+<section id="circuit-designers-etiquette" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> Circuit Designer’s Etiquette</h1>
 <p><strong>Harald Pretl, Institute for Integrated Circuits (IIC), Johannes Kepler University, Linz</strong></p>
 <p>Release: Spring 2024</p>
-<section id="prolog" class="level2" data-number="24.1">
-<h2 data-number="24.1" class="anchored" data-anchor-id="prolog"><span class="header-section-number">24.1</span> Prolog</h2>
+<section id="prolog" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="prolog"><span class="header-section-number">20.1</span> Prolog</h2>
 <p>A consistent naming and schematic drawing style, as well as VHDL/Verilog coding scheme, is a huge help in avoiding errors and increasing productivity. Even if just one person works on a design, the error rate is lowered. If multiple persons work together in a team, a consistent working style is a big help for smooth cooperation without misunderstanding each other’s intentions. Consistency also helps to reuse existing blocks. In a well-done design, the documentation is included in the schematic/source code, so there is no searching for a piece of documentation somewhere else (which is often not found anyway).</p>
 </section>
-<section id="pins" class="level2" data-number="24.2">
-<h2 data-number="24.2" class="anchored" data-anchor-id="pins"><span class="header-section-number">24.2</span> Pins</h2>
+<section id="pins" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="pins"><span class="header-section-number">20.2</span> Pins</h2>
 <ul>
 <li>Name package pins (interfacing with the outside the IC) in <strong>UPPERCASE</strong>, and all internal signals in <strong>lowercase</strong>.</li>
 <li>Supply voltages like VDD/VCC and ground like VSS/GND need to start with either <code>VDD</code>, <code>VCC</code>, <code>VSS</code>, <code>VEE</code> or <code>GND</code>, plus a suitable suffix. Examples: <code>VDD1</code>, <code>VDD_AMP</code>, <code>vdd_ldo_out</code>, <code>VSS_ANA</code> (uppercase means connected to a pin, lowercase means a VDD is created on-chip by, e.g., an LDO).</li>
@@ -3463,8 +3477,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li>Consistently use pin types <code>input</code>, <code>output</code>, or <code>inout</code> to indicate signal flow. Power supply pins are of <code>inout</code> type.</li>
 </ul>
 </section>
-<section id="schematics" class="level2" data-number="24.3">
-<h2 data-number="24.3" class="anchored" data-anchor-id="schematics"><span class="header-section-number">24.3</span> Schematics</h2>
+<section id="schematics" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="schematics"><span class="header-section-number">20.3</span> Schematics</h2>
 <ul>
 <li>In analog schematics, add a textual note about basic circuit performance. For example, in an amplifier, note things like suitable supply range, typical and w.c. current consumption, gain, GBW, input voltage range, PSRR, and other useful information.</li>
 <li>If a circuit has a quirk or is particularly clever, add a note on how it works, so others can understand the function without excessive analysis (reviewing a circuit should not be a brain teaser).</li>
@@ -3490,8 +3504,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li>Avoid the excessive use of net breakers like small resistors, as they inhibit net tracing and can lead to simulation convergence issues. If a net breaker is needed (or a current should be probed) use a 0V dc voltage source.</li>
 </ul>
 </section>
-<section id="symbols" class="level2" data-number="24.4">
-<h2 data-number="24.4" class="anchored" data-anchor-id="symbols"><span class="header-section-number">24.4</span> Symbols</h2>
+<section id="symbols" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="symbols"><span class="header-section-number">20.4</span> Symbols</h2>
 <ul>
 <li>Spend time drawing nice symbols! Ideally, the underlying circuit functionality is apparent by just looking at the symbol.</li>
 <li>Arrange the pins in a meaningful way.</li>
@@ -3500,8 +3514,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li>The cell name (and potentially library name) should be visible in the symbol, not only in the properties.</li>
 </ul>
 </section>
-<section id="design-robustness" class="level2" data-number="24.5">
-<h2 data-number="24.5" class="anchored" data-anchor-id="design-robustness"><span class="header-section-number">24.5</span> Design Robustness</h2>
+<section id="design-robustness" class="level2" data-number="20.5">
+<h2 data-number="20.5" class="anchored" data-anchor-id="design-robustness"><span class="header-section-number">20.5</span> Design Robustness</h2>
 <ul>
 <li>It is good practice to buffer incoming digital signals with a local inverter (connected to the local block supply) before connecting it to internal nodes. This improves the slew rate of the control signal and lowers the chance of unwanted cross-talk.</li>
 <li>Consider dummy elements for good matching, and try to make useful unit sizes of components. This will make the layout creation much smoother.</li>
@@ -3511,8 +3525,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li>When drawing the first schematic, add parasitic capacitances to each node. If all nodes are labeled, a capacitor bank is easily put into one corner of the schematic with parasitic caps tied to the ground. Use 5fF as a starting value (and replace it later with the correct value from parasitic extraction). This accounts for some wiring parasitics in layout and helps to account for these layout impairments early in the design phase and later when simulating the schematic instead of the extracted netlist with parasitics.</li>
 </ul>
 </section>
-<section id="rules-for-good-mixed-signal-and-rf-circuits" class="level2" data-number="24.6">
-<h2 data-number="24.6" class="anchored" data-anchor-id="rules-for-good-mixed-signal-and-rf-circuits"><span class="header-section-number">24.6</span> Rules for Good Mixed-Signal and RF Circuits</h2>
+<section id="rules-for-good-mixed-signal-and-rf-circuits" class="level2" data-number="20.6">
+<h2 data-number="20.6" class="anchored" data-anchor-id="rules-for-good-mixed-signal-and-rf-circuits"><span class="header-section-number">20.6</span> Rules for Good Mixed-Signal and RF Circuits</h2>
 <ul>
 <li>Separate analog and digital power supply, connect to package pins with multiple bond wires/bumps, and separate noisy and clean <code>vdd</code>/<code>vss</code> from each other!</li>
 <li>Prevent supply loops; keep <code>vdd</code> and <code>vss</code> lines close to each other (incl.&nbsp;bond wires and PCB traces)! This minimizes <code>L</code> and coupling factor <code>k</code>.</li>
@@ -3524,8 +3538,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li>Reduce sensitivity of circuits to interference (by using a fully differential design with high PSRR/CMRR, symmetrical layout parasitics, and good matching)!</li>
 </ul>
 </section>
-<section id="vhdlverilog-coding-guide" class="level2" data-number="24.7">
-<h2 data-number="24.7" class="anchored" data-anchor-id="vhdlverilog-coding-guide"><span class="header-section-number">24.7</span> VHDL/Verilog Coding Guide</h2>
+<section id="vhdlverilog-coding-guide" class="level2" data-number="20.7">
+<h2 data-number="20.7" class="anchored" data-anchor-id="vhdlverilog-coding-guide"><span class="header-section-number">20.7</span> VHDL/Verilog Coding Guide</h2>
 <p>These recommendations are specifically targeted at Verilog; however, they apply similarly to VHDL.</p>
 <ul>
 <li>Use automatic checkers (linters) to see whether your code contains errors or vulnerabilities. Commercial or open-source tools allow this, e.g., Icarus Verilog (<code>iverilog -g2005 -tnull FILE.v</code>) or Verilator (<code>verilator --lint-only -Wall FILE.v</code>).</li>
@@ -3544,8 +3558,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li>Use only blocking assignments (<code>=</code>) in <code>always @(*)</code> blocks, and only non-blocking assignments (<code>&lt;=</code>) in clocked <code>always @(posedge ...)</code> blocks.</li>
 </ul>
 </section>
-<section id="further-reading" class="level2" data-number="24.8">
-<h2 data-number="24.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">24.8</span> Further Reading</h2>
+<section id="further-reading" class="level2" data-number="20.8">
+<h2 data-number="20.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">20.8</span> Further Reading</h2>
 <ul>
 <li>Good information about drawing schematics, design testbenches, etc: <a href="https://circuit-artists.com" class="uri">https://circuit-artists.com</a></li>
 <li>Sutherland/Mills, <em>Verilog and SystemVerilog Gotchas - 101 Common Coding Erorrs and How to Avoid Them</em>, Springer, 2010</li>
@@ -4000,7 +4014,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
