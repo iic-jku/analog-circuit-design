@@ -2,7 +2,8 @@ In this first chapter we will learn to use Xschem for schematic entry, and how t
 
 ## The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET) {#sec-mosfet}
 
-In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET as a macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model. 
+
+Since we have an emphasis on integrated circuit design the size of the MOSFET can be adapted by changing its width $W$ and its length $L$. As we will see later, $L$ has a profound impact on the MOSFET performance allowing to trade-off speed versus output conductance versus device-to-device matching. The width $W$ is more of a scaling parameter to adapt the current **density** (strictly speaking charge density) forming in the MOSFET channel to a desired current. More about this later.
 
 The circuit symbol that we will use for the n-channel MOSFET is shown in @fig-nmos-symbol, and for the p-channel MOSFET it is shown in @fig-pmos-symbol. A control voltage between gate ("G") and source ("S") causes a current to flow between drain ("D") and source. The MOSFET is a 4-terminal device, so the bulk ("B") can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.
 
@@ -34,13 +35,8 @@ As a side note, the students who want to understand MOSFET behaviour from a phys
 Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!
 
 ::: {.callout-important title="Mathematical Notation"}
-Throughout this material, we will largely stick to the following notation:
 
-* A **dc quantity** is shown with an upper-case letter with upper-case subscripts, like $\VGS$.
 * Double-subscripts denote **dc sources**, like $\VDD$ and $\VSS$.
-* An **ac (small-signal) quantity** is a lower-case letter with a lower-case subscript, like $\gm$.
-* A **total quantity** (dc plus ac) is shown as a lowercase letter with upper-case subscript, like $i_\mathrm{DS}$.
-* A upper-case letter with a lower-case subscript is used to denote **RMS quantities**, like $I_\mathrm{ds}$.
 :::
 
 ### Large-Signal MOSFET Model
