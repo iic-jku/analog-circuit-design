@@ -26,12 +26,12 @@ For hand calculations and theoretical discussions we will use the following simp
 In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $\CGG = \CGS + \CGD$ is the total capacitance when looking into the gate of the MOSFET. $\CGS$ is usually the dominant capacitance, and $\CGD$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $\CGS$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect) (see @sec-miller-theorem). In hand calculations we will often set $\CGD = 0$.
 
 ::: {.callout-note title="MOSFET Bulk Terminal"}
-The bulk connection in @fig-mosfet-large-signal-model seems floating as we only consider it a control terminal, where the potential difference between source and bulk influences the behaviour of the MOSFET. However, we do not consider resistive or capacitive effects associated with this node, which is of course a gross simplification, but nevertheless one we will make in this course.
+The bulk connection in @fig-mosfet-large-signal-model seems floating as we only consider it a control terminal, where the potential difference between source and bulk influences the behavior of the MOSFET. However, we do not consider resistive or capacitive effects associated with this node, which is of course a gross simplification, but nevertheless one we will make in this course.
 :::
 
-Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behaviour from basic principles, we need to understand the behaviour of the elements of the large-signal model in @fig-mosfet-large-signal-model by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $\VGS$ and $\VDS$ and looking at $\IDS$ and other large- and small-signal parameters.
+Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behavior from basic principles, we need to understand the behavior of the elements of the large-signal model in @fig-mosfet-large-signal-model by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $\VGS$ and $\VDS$ and looking at $\IDS$ and other large- and small-signal parameters.
 
-As a side note, the students who want to understand MOSFET behaviour from a physical angle should consult the MOSFET chapter from the JKU course "Design of Complex Integrated Circuits" (VL 336.048). A great introduction into MOSFET operation and fabrication is given in [@Chenming_Hu_2010], which is available freely [online](https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/) and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in [@Tsividis_McAndrew_2011].
+As a side note, the students who want to understand MOSFET behavior from a physical angle should consult the MOSFET chapter from the JKU course "Design of Complex Integrated Circuits" (VL 336.048). A great introduction into MOSFET operation and fabrication is given in [@Chenming_Hu_2010], which is available freely [online](https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/) and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in [@Tsividis_McAndrew_2011].
 
 Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!
 
@@ -56,7 +56,7 @@ Please try to execute the following steps and answer these questions:
 
 1. Get the LV NMOS testbench (available at <https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch>) working in your IIC-OSIC-TOOLS environment.
 2. Make yourself familiar with Xschem (change the schematic in various ways, run a simulation, graph the result).
-3. Make youself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look at MOSFET model parameters).
+3. Make yourself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look at MOSFET model parameters).
 4. Explore the LV NMOS `sg13_lv_nmos`:
    1. How is $\IDS$ affected by $\VGS$ and $\VDS$?
    2. Change $W$ and $L$ of the MOSFET. What is the impact on the above parameters? Can you explain the variations?
@@ -71,7 +71,7 @@ Please try to execute the following steps and answer these questions:
 
 ### Small-Signal MOSFET Model {#sec-mosfet-smallsignal-model}
 
-As you have seen in the previous investigations, the large-signal model of @fig-mosfet-large-signal-model describes the behaviour of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.
+As you have seen in the previous investigations, the large-signal model of @fig-mosfet-large-signal-model describes the behavior of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.
 
 However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.
 
@@ -86,7 +86,7 @@ $$ {#eq-mosfet-noise}
 where $\overline{I_\mathrm{n}^2}$ is the power-spectral density of the noise in A$^2$/Hz; $k$ is the Boltzmann constant; $T$ is the absolute temperature; $\gamma$ is a parameter in simplified theory changing between $\gamma = 2/3$ in saturation and $\gamma =1$ for triode operation; $g_\mathrm{d0}$ is equal to $\gm$ in saturation and $\gds$ in triode).
 
 ::: {.callout-note title="MOSFET Triode and Saturation Region"}
-Sometimes we will refer to different operating modes of the MOSFET like "saturation" or "triode". Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call "triode" mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called "saturation" mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximative sense.
+Sometimes we will refer to different operating modes of the MOSFET like "saturation" or "triode". Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call "triode" mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called "saturation" mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximate sense.
 :::
 
 Now we need to see how the small-signal parameters seen in @fig-mosfet-small-signal-model can be investigated and estimated using circuit simulation.
@@ -106,4 +106,4 @@ Please try to execute the following steps and answer the following questions:
 
 ## Conclusion
 
-Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviours. If you feel you are not sufficiently fluent in these things, please go back to the beginning of @sec-mosfet and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in [@Chenming_Hu_2010].
+Congratulations for making it thus far! By now you should have a solid grasp of the tool handling of Xschem and ngspice, and you should be familiar with the large- and small-signal operation of both NMOS and PMOS, and the parameters describing these behaviors. If you feel you are not sufficiently fluent in these things, please go back to the beginning of @sec-mosfet and revisit the relevant sections, or dive into further reading about the MOSFET operation, like in [@Chenming_Hu_2010].

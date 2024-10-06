@@ -8,10 +8,10 @@ The transistor name appendix "C" indicates a cascode device sitting atop its bas
 It is critically import for a stable performance across PVT that the bias voltages for the cascode gates are created in a manner that tracks variations with process, temperature, and supply voltage!
 :::
 
-The current mirrors constructed out of $M_\mathrm{5/5C,6/6C}$ and $M_\mathrm{3/3C,4/4C}$ are a special kind of **cascoded current mirror for low-voltage operation**, also referred to as high-swing cascoded current mirror [@Jespers_Murmann_2017]. This type is very often used, as it forces the $\VGS$ and $\VDS$ of $M_{5,6}$ (and $M_{3,4}$) to be equal, so the current mirror ratio is independent of $\gds$. 
+The current mirrors constructed out of $M_\mathrm{5/5C,6/6C}$ and $M_\mathrm{3/3C,4/4C}$ are a special kind of **cascode current mirror for low-voltage operation**, also referred to as high-swing cascode current mirror [@Jespers_Murmann_2017]. This type is very often used, as it forces the $\VGS$ and $\VDS$ of $M_{5,6}$ (and $M_{3,4}$) to be equal, so the current mirror ratio is independent of $\gds$. 
 
-::: {.callout-tip title="Exercise: Cascoded Current Mirror vs. High-Swing Cascoded Current Mirror"}
-Try to verify the above statement of equal drain-source voltages by deriving both, an equation for $\VDS[5]$ assuming a high-swing cascoded current mirror (@fig-improved-ota) and $\VDS[5]$ in case of a simple cascoded current mirror, where the reference branch $(M_\mathrm{6/6C})$ is comprised of two mosfet diodes.
+::: {.callout-tip title="Exercise: Cascode Current Mirror vs. High-Swing Cascode Current Mirror"}
+Try to verify the above statement of equal drain-source voltages by deriving both, an equation for $\VDS[5]$ assuming a high-swing cascode current mirror (@fig-improved-ota) and $\VDS[5]$ in case of a simple cascode current mirror, where the reference branch $(M_\mathrm{6/6C})$ is comprised of two mosfet diodes.
 :::
 
 Further, by properly selecting the bias voltages of the cascode a low-voltage operation is achieved as $\VDS$ can be minimized, allowing even triode operation of the current-mirror MOSFETs (as, noted above, a large $\gds$ is not a big issue).
@@ -23,7 +23,7 @@ $$ {#eq-improved-ota-gain-dc}
 leading to a significant boost in dc gain due to cascoding. We will use this increased gain to reduce the $L$ of all MOSFET to
 
 1. save area (smaller $L$ will lead to smaller $W$ for a given $W/L$ ratio) and
-2. will push the additional poles and zeros at the inner nodes of the cascoded transistors (e.g., the connection of the drain of $M_5$ to the source of $M_\mathrm{5C}$) to higher frequencies to result in stable behaviour and a reasonable gain transfer function (too many poles and zeros in the passband of the amplifier create many issues with stability margin).
+2. will push the additional poles and zeros at the inner nodes of the cascode transistors (e.g., the connection of the drain of $M_5$ to the source of $M_\mathrm{5C}$) to higher frequencies to result in stable behavior and a reasonable gain transfer function (too many poles and zeros in the pass band of the amplifier create many issues with stability margin).
 
 ## Sizing the Improved OTA {#sec-improved-ota-sizing}
 
@@ -59,7 +59,7 @@ We will now do an analysis of the circuit design of the OTA including all the co
 4. As you can (hopefully) see the circuit is carefully drawn to ease readability. Important nets are named, text comments state certain properties like nominal voltage levels, bias currents, etc. Current sensing elements are added to directly see the dc currents in the circuit simulation.
 5. The bias voltage generation for the cascodes is included as well. The voltage drop for the bottom transistors is developed across a resistor (this is a simple but effective way, but other implementations are possible as well). We are using a dummy branch for bias generation (constructed with $M_\mathrm{7/7C,8/8C}$ and $R_3$).
 6. The floating bias voltage $V_\mathrm{bias2}$ is created by implementing a current source from $\VDD$ ($M_\mathrm{9/9C}$), then a MOSFET diode $M_{11}$ with resistor $R_4$, and an additional current source towards $\VSS$ ($M_\mathrm{10/10C}$). Instead of using the bottom current source the current in the tail current source $M_\mathrm{5/5C}$ could have been increased, but matching is better with the chosen approach.
-7. Power-down transistors $M_{\mathrm{pd,}x}$ are added to allow a proper shutdown of the circuit with a digital enable input. It is generally a good idea to clamp floating nodes in off-mode so that no issues during power-down (like increased leakage currents) or delayed startup or shutdown are occuring. It is further a good design principle to buffer all incoming digital signals with inverters connected to the local supply. This lowers the risk of unwanted noise coupling or excessive slewrates on the incoming digital signals.
+7. Power-down transistors $M_{\mathrm{pd,}x}$ are added to allow a proper shutdown of the circuit with a digital enable input. It is generally a good idea to clamp floating nodes in off-mode so that no issues during power-down (like increased leakage currents) or delayed startup or shutdown are occurring. It is further a good design principle to buffer all incoming digital signals with inverters connected to the local supply. This lowers the risk of unwanted noise coupling or excessive slew rates on the incoming digital signals.
 8. Sensitive bias nodes are buffered with decoupling capacitors. We are using MOSFET as nonlinear capacitors, which is not an issue in this application, but we value the increased capacitive density. Please note how the MOSFET are connected (to $\VDD$? or to $\VSS$?).
 
 The resistor used in this circuit are subcircuits to allow series connection of unit resistor elements. The schematic of one element is shown in @fig-improved-ota-design-res. It is using an effective method to create a series string of connected resistors using wire bundles. Try to understand the circuit, consult the Xschem manual, and look at the resulting SPICE netlist to confirm your finding.
@@ -96,7 +96,7 @@ Just like for the basic OTA we use the CACE system to check the performance of t
 {{< include ./cace/_docs/ota-improved_schematic.md >}}
 :::
 
-The improved performance allows to improve the specificatios in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. We have intetionally increased the power consumption a little bit, but we negotiated with the chip lead designer a changed bias current level, so overall the situation is even slightly improved. The new situation with the improved design is summarized in @tbl-voltage-buffer-spec-improved (unchanged entries are not shown).
+The improved performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. We have intentionally increased the power consumption a little bit, but we negotiated with the chip lead designer a changed bias current level, so overall the situation is even slightly improved. The new situation with the improved design is summarized in @tbl-voltage-buffer-spec-improved (unchanged entries are not shown).
 
 | Specification                              | Basic 5T-OTA | Improved OTA | Unit    |
 |:-------------------------------------------|:------------:|:------------:|:-------:|

@@ -1,4 +1,4 @@
-Suited with the knowledge of basic transitor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
+Suited with the knowledge of basic transistor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
 
 {{< include figures/_fig_basic_ota.qmd >}}
 
@@ -10,11 +10,11 @@ As this is an OTA the output is a current; if the load impedance is high (i.e., 
 
 ## Voltage Buffer with OTA
 
-In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lighly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in @fig-voltage-buffer-ota.
+In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lightly loads a voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in @fig-voltage-buffer-ota.
 
 {{< include figures/_fig_voltage_buffer_ota.qmd >}}
 
-If the voltage gain of the OTA is @fig-voltage-buffer-ota is high, then $V_\mathrm{out} \approx V_\mathrm{in}$. We now want to design an OTA for this application for the following spefication values (see @tbl-voltage-buffer-spec). These values are rather typical of what could be expected for such a buffer design.
+If the voltage gain of the OTA is @fig-voltage-buffer-ota is high, then $V_\mathrm{out} \approx V_\mathrm{in}$. We now want to design an OTA for this application for the following specification values (see @tbl-voltage-buffer-spec). These values are rather typical of what could be expected for such a buffer design.
 
 | Specification                                           | Value                              | Unit    |
 |:--------------------------------------------------------|:----------------------------------:|:-------:|
@@ -75,7 +75,7 @@ So in order to reach an output voltage accuracy of at least 3% we need a dc gain
 In order to derive the governing equations for the OTA we will make a few simplifications:
 
 - We will set $\gmb = 0$ for all MOSFETs.
-- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$ (for background please see @sec-miller-theorem). Hoewever, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $\Cgs[34]$ is considered at the gate node of the current mirror load.
+- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$ (for background please see @sec-miller-theorem). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $\Cgs[34]$ is considered at the gate node of the current mirror load.
 - We assume $\gm \gg \gds$, so we set $\gds[1] = \gds[3] = 0$.
 - The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$ we can add to the load capacitance $C_\mathrm{load}$. Note that $\Cgs[2]$ can be added because of the feedback connection between the inverting input and the output. However, this is not shown in the small-signal equivalent circuits below, because we are interested in the open-loop transfer function.
 
@@ -113,7 +113,7 @@ which is plausible, and confirms the requirement of a high impedance at the outp
 $$
 A (s \rightarrow \infty) = \frac{\gm[12]}{2 s C_\mathrm{load}}
 $$ {#eq-simple-ota-highf}
-which is essentially the behaviour of an integrator, and we can use @eq-simple-ota-highf to calculate the frequency where the gain drops to $1$:
+which is essentially the behavior of an integrator, and we can use @eq-simple-ota-highf to calculate the frequency where the gain drops to $1$:
 $$
 f_\mathrm{ug} = \frac{\gm[12]}{4 \pi C_\mathrm{load}}
 $$
@@ -149,7 +149,7 @@ $$
 \overline{I_\mathrm{n}^2} = \overline{I_\mathrm{n2}^2} + \overline{I_\mathrm{n4}^2} + \gm[34]^2 \frac{1}{\gm[34]^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right) = 2 \left( \overline{I_\mathrm{n12}^2} + \overline{I_\mathrm{n34}^2} \right).
 $$
 
-As a next step, let us rewrite the OTA transfer function $A(s)$ (see @eq-simple-ota-gain) by getting rid of the pole-zero doublet as a simplyfing assumption to get
+As a next step, let us rewrite the OTA transfer function $A(s)$ (see @eq-simple-ota-gain) by getting rid of the pole-zero doublet as a simplifying assumption to get
 $$
 A'(s) = \frac{\gm[12]}{\gds[2] + \gds[4] + s C_\mathrm{load}}.
 $$ {#eq-simple-ota-gain-simplified}
@@ -158,7 +158,7 @@ Inspecting @eq-simple-ota-gain-simplified we can interpret the OTA transfer func
 
 {{< include figures/_fig_voltage_buffer_ota_noise_zout.qmd >}}
 
-::: {.callout-note title="Output Impedence of the Voltage Buffer"}
+::: {.callout-note title="Output Impedance of the Voltage Buffer"}
 First we short the input terminal to ground and then we connect a current source $I_\mathrm{out}$ at the output terminal, see @fig-voltage-buffer-ota-noise-zout. Since we can neglect the gate leakage current into the inverting  input terminal of the OTA, KCL at the output node is simply:
 $$
 I_\mathrm{out} + \gm[12]\left(-V_\mathrm{out}\right) = 0
@@ -187,7 +187,7 @@ $$
 V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{12} + 2 \gamma_{34} \frac{\gm[34]}{\gm[12]} \right).
 $$ {#eq-basic-ota-output-noise}
 
-Inspecting @eq-basic-ota-output-noise we can see that the integrated output noise is the $k T / C$ noise of the output load capacitor, enhanced by the $\gamma_{12}$ of the input differential pair, plus a (smaller) contribution of the current mirror load $M_{3,4}$. Intuitevly, this result makes sense.
+Inspecting @eq-basic-ota-output-noise we can see that the integrated output noise is the $k T / C$ noise of the output load capacitor, enhanced by the $\gamma_{12}$ of the input differential pair, plus a (smaller) contribution of the current mirror load $M_{3,4}$. Intuitively, this result makes sense.
 
 ::: {.callout-tip title="Exercise: Derivation of 5T-OTA Performance"}
 Please take your time and carefully go through the explanations and derivations for the 5-transistor-OTA in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal. Try to do the calculations yourself; if you get stuck, review the previous chapters.
@@ -218,7 +218,7 @@ The sizing procedure and its calculation are best performed in a Jupyter noteboo
 With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters. Since this is the first time we draw a more complex schematic, and use a hierarchical design, we should note that drawing a schematic is an art, and there exists a set of rules and recommendations how to name pins, how to use annotations, and so on. Please read @sec-designers-etiquette before you start into your design work.
 
 ::: {.callout-tip title="Exercise: 5T-OTA Design and Testbench"}
-Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as schown in @fig-voltage-buffer-ota. Use typical conditions for the simulation, and check how well the specification in @tbl-voltage-buffer-spec is met, and how well the derivations in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal fit to the simulation results.
+Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as shown in @fig-voltage-buffer-ota. Use typical conditions for the simulation, and check how well the specification in @tbl-voltage-buffer-spec is met, and how well the derivations in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal fit to the simulation results.
 
 If you get stuck, you can find the testbench and 5T-OTA schematic [here](./xschem/ota-5t_tb-ac.svg) (for the small-signal analysis) and [here](./xschem/ota-5t_tb-ac.svg) (for the large-signal settling simulation).
 :::
@@ -242,7 +242,7 @@ Luckily, there are open-source versions of simulation runners available, and we 
 
 There is a CACE setup available for our 5T-OTA. The [datasheet](./cace/voltage-buffer-ota.yaml) describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, [this one](./cace/templates/ota-5t-ac.sch) is used for ac simulations, [this one](./cace/templates/ota-5t-noise.sch) is used for noise simulation, and [this one](./cace/templates/ota-5t-tran.sch) is used for transient simulation.
 
-After a successul run, a documentation is automatically generated. The result of a full run of this [OTA design](./xschem/ota-5t.svg) is presented here:
+After a successful run, a documentation is automatically generated. The result of a full run of this [OTA design](./xschem/ota-5t.svg) is presented here:
 
 ::: {#nte-basic-ota-cace-result .callout-note title="CACE Summary for 5T-OTA" collapse="false"}
 
@@ -251,4 +251,4 @@ After a successul run, a documentation is automatically generated. The result of
 
 ### PVT Simulation Analysis
 
-Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) the specifiction is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitics ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.
+Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitic ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.

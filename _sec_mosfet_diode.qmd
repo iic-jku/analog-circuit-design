@@ -34,9 +34,9 @@ Before continuing, please finish the previous exercise. Once you are done, compa
 An example Jupyter notebook to extract these values accurately you can find [here](./sizing/sizing_mosfet_diode.ipynb). An Xschem schematic for this exercise is provide [as well](./xschem/mosfet_diode_sizing.sch).
 :::
 
-## MOSFET Diode Large-Signal Behaviour
+## MOSFET Diode Large-Signal Behavior
 
-As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyse this loop in small-signal, we want to investgate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behaviour. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some ns. The resulting Xschem testbench is shown in @fig-mosfet-diode-settling-tb.
+As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyze this loop in small-signal, we want to investigate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behavior. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some ns. The resulting Xschem testbench is shown in @fig-mosfet-diode-settling-tb.
 
 ![Testbench for MOSFET diode transient settling.](./xschem/mosfet_diode_settling.svg){#fig-mosfet-diode-settling-tb}
 
@@ -46,7 +46,7 @@ It is thus generally a good idea to add power-down switches to the circuits to d
 
 ## MOSFET Diode Small-Signal Analysis
 
-We now want to investigate the small-signal behaviour of the MOSFET diode. Based on the small-signal model of the MOSFET in @fig-mosfet-small-signal-model we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circit to the one shown in @fig-mosfet-diode-small-signal.
+We now want to investigate the small-signal behavior of the MOSFET diode. Based on the small-signal model of the MOSFET in @fig-mosfet-small-signal-model we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circuit to the one shown in @fig-mosfet-diode-small-signal.
 
 {{< include figures/_fig_mosfet_diode_small_signal.qmd >}}
 
@@ -70,7 +70,7 @@ When neglecting $\gds$ and at dc we get $Z_\mathrm{diode} = 1 / \gm$, which is a
 In circuit analysis it is often algebraically easier to work with admittance instead of impedance, so please remember that Ohm's law for a conductance is $I = G \cdot V$, and for a capacitance is $I = s C \cdot V$. When writing equations, it is also practical to keep $s C$ together, so we will strive to sort terms accordingly.
 :::
 
-Looking at @eq-mosfet-diode-impedance we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capactive as the gate-source capacitance starts to dominate. The corner frequeny of this low-pass can be calculated as
+Looking at @eq-mosfet-diode-impedance we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capacitive as the gate-source capacitance starts to dominate. The corner frequency of this low-pass can be calculated as
 $$
 \omega_\mathrm{c} = \frac{\gm + \gds}{\Cgs} \approx \omega_\mathrm{T}
 $$

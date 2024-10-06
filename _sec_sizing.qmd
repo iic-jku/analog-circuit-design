@@ -1,12 +1,12 @@
 When designing integrated circuits it is an important question how to select various parameters of a MOSFET, like $W$, $L$, or the bias current $I_\mathrm{D}$. In comparison to using discrete components in PCB design, or also compared to a bipolar junction transistor (BJT), we have these degrees of freedom, which make integrated circuit design so interesting.
 
-Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behaviour is much more complex than these simple models. Also, this highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.
+Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behavior is much more complex than these simple models. Also, this highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.
 
 ::: {.callout-note title="MOSFET Square-Law Model"}
-One of the many simplifactions of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existance of a threshold voltage is assumed, but in fact this voltage is just existing given a certain definition, and depending on definition, its value changed. In addition, in nm CMOS, the threshold voltage is a function on many thing, like $W$ and $L$.
+One of the many simplifications of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existence of a threshold voltage is assumed, but in fact this voltage is just existing given a certain definition, and depending on definition, its value changed. In addition, in nm CMOS, the threshold voltage is a function on many thing, like $W$ and $L$.
 :::
 
-An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e. for large $\VGS$ where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behaviour over a wide range of parameters like $W$, $L$, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complext MOSFET behaviour and use it for MOSFET sizing.
+An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e. for large $\VGS$ where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like $W$, $L$, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.
 
 Being a well-established approach we select the $\gmid$ methodology introduced by P. Jespers and B. Murmann in [@Jespers_Murmann_2017]. A brief introduction is available [here](https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf) as well.
 
@@ -20,7 +20,7 @@ In order to get the required tabulated data we use a testbench in Xschem which s
 
 ![Testbench for LV PMOS $\gmid$ characterization.](./xschem/techsweep_sg13g2_lv_pmos.svg){#fig-techsweep-pmos-tb}
 
-We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behaviour.
+We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behavior.
 
 ## NMOS Characterization {#sec-techsweep-nmos}
 
@@ -29,7 +29,7 @@ First, we will start looking at the LV NMOS. In @sec-techsweep-pmos we have the 
 The first import graph is the plot of $\gmid$ and $f_\mathrm{T}$ versus the gate-source voltage $\VGS$. First let us answer the question why $\gmid$ is a good parameter to look at, and actually this is also the central parameter in the $\gmid$ methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see [biasing](https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A)) we want to get a large amplification from a MOSFET, which corresponds to a large $\gm$. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high $\gmid$ ratio is good.
 
 ::: {.callout-note title="Power Consumption"}
-Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severly limited by the cooling capabilities of the electrical system.
+Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severely limited by the cooling capabilities of the electrical system.
 :::
 
 However, as can be seen in the below plot, there exists a strong and unfortunate trade-off with device speed, characterized here by the transit frequency $f_\mathrm{T}$. It would be ideal if there exists a design point where we get high transconductance per bias current concurrently to having the fastest operation, but unfortunately, this is clearly not the case. The $\gmid$ peaks for $\VGS < 0.3\,\text{V}$, and the highest speed we get at $\VGS \approx 1.2\,\text{V}$. The dashed vertical line plots the nominal threshold voltage, as you can see in this continuum of parameter space, it marks not a particularly special point.
@@ -50,7 +50,7 @@ with $\Vth$ the threshold voltage and $V_\mathrm{od}$ the so-called "overdrive v
 Why are we so often using a temperature of $300\,\text{K}$ for a typical condition? As this corresponds to roughly $27^{\circ}\text{C}$, this accounts for some self heating compared to otherwise cooler usual room temperatures. Further, engineers like round numbers which are easy to remember, so $300\,\text{K}$ is used as a proxy for room temperature.
 :::
 
-As we can also see from belows plot, the peak transit frequency of the LV NMOS is about $75\,\text{GHz}$, which allows building radio-frequency circuits up to ca. $f_\mathrm{T} / 10 = 7.5\,\text{GHz}$, which is a respectible number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the timeframe when 130nm CMOS became available (ca. 2000). 
+As we can also see from belows plot, the peak transit frequency of the LV NMOS is about $75\,\text{GHz}$, which allows building radio-frequency circuits up to ca. $f_\mathrm{T} / 10 = 7.5\,\text{GHz}$, which is a respectable number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the time frame when 130nm CMOS became available (ca. 2000). 
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gmid-ft-vs-vgs >}}
 
@@ -62,7 +62,7 @@ The next plot shows the ratio of $\gm / \gds$ versus $\gmid$. The ratio $\gm / \
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gmgds-vs-gmid-vs-l >}}
 
-The following figure plots the drain current density $I_\mathrm{D}/W$ as a function of $\gmid$ and $L$. With this plot we can find out how to set the $W$ of a MOSFET once we know the biasing current $I_\mathrm{D}$, the $L$ (selected according to self gain, $f_\mathrm{T}$, and other considerations) and the $\gmid$ design point we selected. The drain current density $I_\mathrm{D}/W$ is a very useful nomalized metric to use, because the physical action in the MOSFET establishes a charge density in the channel below the gate, and the changing of the $W$ of the device merely transforms this charge density into an absolute parameter (together with $L$).
+The following figure plots the drain current density $I_\mathrm{D}/W$ as a function of $\gmid$ and $L$. With this plot we can find out how to set the $W$ of a MOSFET once we know the biasing current $I_\mathrm{D}$, the $L$ (selected according to self gain, $f_\mathrm{T}$, and other considerations) and the $\gmid$ design point we selected. The drain current density $I_\mathrm{D}/W$ is a very useful normalized metric to use, because the physical action in the MOSFET establishes a charge density in the channel below the gate, and the changing of the $W$ of the device merely transforms this charge density into an absolute parameter (together with $L$).
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-jd-vs-gmid-vs-l >}}
 
@@ -86,10 +86,10 @@ The factor $\gamma$ (@eq-mosfet-noise) is a function of many things (in classica
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gamma-vs-gmid-vs-l >}}
 
-In a MOSFET, unfortunately, besides the thermal noise according to @eq-mosfet-noise, there is also a substantial low-frequency excess noise, called "flicker noise" due to its characteristic $\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f$ behaviour (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency $f_\mathrm{co}$, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of $L$ and $\gmid$. Generally, the flicker noise is proportional to $(W L)^{-1}$, so the larger the device is, the lower the flicker noise. The parameter $\gmid$ largely stays constant when we keep $W/L$ constant, so for a given $\gmid$ flicker noise is proportinal to $1/L^2$. However, increasing $L$ lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.
+In a MOSFET, unfortunately, besides the thermal noise according to @eq-mosfet-noise, there is also a substantial low-frequency excess noise, called "flicker noise" due to its characteristic $\overline{I_\mathrm{d,nf}^2} = K_\mathrm{f}/f$ behavior (this means that this noise PSD decreases versus frequency). In order to characterize this flicker noise the following plot shows the cross-over frequency $f_\mathrm{co}$, where the flicker noise is as large as the thermal noise. As can be seen in the below plot, this frequency is a strong function of $L$ and $\gmid$. Generally, the flicker noise is proportional to $(W L)^{-1}$, so the larger the device is, the lower the flicker noise. The parameter $\gmid$ largely stays constant when we keep $W/L$ constant, so for a given $\gmid$ flicker noise is proportional to $1/L^2$. However, increasing $L$ lowers device speed dramatically, so here we have a trade-off between flicker-noise performance and MOSFET speed, and this can have dramatic consequences for high-speed circuits.
 
 ::: {.callout-note title="MOSFET Flicker Noise"}
-The physical origin of flicker noise is the crystal interface between silicon (Si) and the silicondioxide (SiO~2~). Since these are different materials, there are dangling bonds, which can capture charge charriers travelling in the channel. After a random time, these carriers are released, and flicker noise is the result. The amount of flicker noise is a function of the manufacturing process, and will generally be different between device types and wafer foundries.
+The physical origin of flicker noise is the crystal interface between silicon (Si) and the silicon dioxide (SiO~2~). Since these are different materials, there are dangling bonds, which can capture charge carriers traveling in the channel. After a random time, these carriers are released, and flicker noise is the result. The amount of flicker noise is a function of the manufacturing process, and will generally be different between device types and wafer foundries.
 :::
 
 As you can see in the following plot, $f_\mathrm{co}$ can reach well into the 10's of MHz for short MOSFETs, significantly degrading the noise performance of a circuit.
@@ -115,7 +115,7 @@ $f_\mathrm{T}$ against $\gmid$ for several different $L$. One can see significan
 $\gm / \gds$ versus $\gmid$. Unfortunately, one can see a modelling error for the PMOS in this plot. The self gain $\gm / \gds$ reaches non-physical values, which indicates an issue with the $\gds$ modelling for the PMOS. We can not use these values for our circuit sizing, so we will use the respective NMOS plots also for the PMOS.
 
 ::: {.callout-important title="Beware of Modelling Issues"}
-This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite often happening, as setting up the device compact models and parametrizing them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are going to use!
+This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite often happening, as setting up the device compact models and parametrize them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are going to use!
 :::
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-gmgds-vs-gmid-vs-l >}}
