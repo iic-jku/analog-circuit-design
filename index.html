@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-09-27">
+<meta name="dcterms.date" content="2024-10-06">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-09-27">
-<meta name="citation_cover_date" content="2024-09-27">
+<meta name="citation_publication_date" content="2024-10-06">
+<meta name="citation_cover_date" content="2024-10-06">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-09-27">
+<meta name="citation_online_date" content="2024-10-06">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
@@ -177,7 +177,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">September 27, 2024</p>
+              <p class="date">October 6, 2024</p>
             </div>
           </div>
           
@@ -446,7 +446,8 @@ Linux
 <p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.</p>
 <section id="sec-mosfet" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-mosfet"><span class="header-section-number">2.1</span> The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h2>
-<p>In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics. Instead, we will treat the MOSFET as a macroscopic by assuming we have a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model.</p>
+<p>In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics or a simplified solid-state physics based approach resulting in the well-known square-law model. Instead, we will treat the MOSFET behaviorally by assuming a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model.</p>
+<p>Since we have an emphasis on integrated circuit design the size of the MOSFET can be adapted by changing its width <span class="math inline">\(W\)</span> and its length <span class="math inline">\(L\)</span>. As we will see later, <span class="math inline">\(L\)</span> has a profound impact on the MOSFET performance allowing to trade-off speed versus output conductance versus device-to-device matching. The width <span class="math inline">\(W\)</span> is more of a scaling parameter to adapt the current <strong>density</strong> (strictly speaking charge density) forming in the MOSFET channel to a desired current. More about this later.</p>
 <p>The circuit symbol that we will use for the n-channel MOSFET is shown in <a href="#fig-nmos-symbol" class="quarto-xref">Figure&nbsp;1</a>, and for the p-channel MOSFET it is shown in <a href="#fig-pmos-symbol" class="quarto-xref">Figure&nbsp;2</a>. A control voltage between gate (“G”) and source (“S”) causes a current to flow between drain (“D”) and source. The MOSFET is a 4-terminal device, so the bulk (“B”) can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Background">
 <div class="callout-header d-flex align-content-center">
@@ -533,13 +534,13 @@ Mathematical Notation
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Throughout this material, we will largely stick to the following notation:</p>
+<p>Throughout this material, we will largely stick to the following notation standardized by IEEE:</p>
 <ul>
-<li>A <strong>dc quantity</strong> is shown with an upper-case letter with upper-case subscripts, like <span class="math inline">\(V_\mathrm{GS}\)</span>.</li>
+<li>A <strong>dc quantity</strong> is shown with an upper-case variable name with upper-case subscripts, like <span class="math inline">\(V_\mathrm{GS}\)</span>.</li>
 <li>Double-subscripts denote <strong>dc sources</strong>, like <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>.</li>
-<li>An <strong>ac (small-signal) quantity</strong> is a lower-case letter with a lower-case subscript, like <span class="math inline">\(g_\mathrm{m}\)</span>.</li>
-<li>A <strong>total quantity</strong> (dc plus ac) is shown as a lowercase letter with upper-case subscript, like <span class="math inline">\(i_\mathrm{DS}\)</span>.</li>
-<li>A upper-case letter with a lower-case subscript is used to denote <strong>RMS quantities</strong>, like <span class="math inline">\(I_\mathrm{ds}\)</span>.</li>
+<li>An <strong>ac (small-signal) quantity</strong> (incremental quantity) has a lower-case variable name with a lower-case subscript, like <span class="math inline">\(g_\mathrm{m}\)</span>.</li>
+<li>A <strong>total quantity</strong> (dc plus ac) is shown as a lowercase variable name with upper-case subscript, like <span class="math inline">\(i_\mathrm{DS}\)</span>.</li>
+<li>An upper-case variable name with a lower-case subscript is used to denote <strong>RMS quantities</strong>, like <span class="math inline">\(I_\mathrm{ds}\)</span>.</li>
 </ul>
 </div>
 </div>
@@ -4014,7 +4015,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
