@@ -19,14 +19,14 @@ Unfortunately, this focus on a "special" source has made its way into some MOSFE
 {{< include figures/_fig_nmos_symbol.qmd >}}
 {{< include figures/_fig_pmos_symbol.qmd >}}
 
-For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in @fig-mosfet-large-signal-model. A current source $\IDS$ models the current flow between drain and source, and it is controlled by the three control voltages $\VGS$, $\VDS$, and $V_\mathrm{SB}$. Note that in this way (since $\IDS = f(\VDS)$) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply $V_\mathrm{SB} = 0$.
+For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in @fig-mosfet-large-signal-model. A current source $\IDS$ models the current flow between drain and source, and it is controlled by the three control voltages $\VGS$, $\VDS$, and $V_\mathrm{SB}$. Note that in this way (since $\IDS = f(\VDS)$) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply $V_\mathrm{SB} = 0$ and $\CSB$ is shorted.
 
 {{< include figures/_fig_mosfet_large_signal_model.qmd >}}
 
-In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $\CGG = \CGS + \CGD$ is the total capacitance when looking into the gate of the MOSFET. $\CGS$ is usually the dominant capacitance, and $\CGD$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $\CGS$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect) (see @sec-miller-theorem). In hand calculations we will often set $\CGD = 0$.
+In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $\CGG = \CGS + \CGD + \CGB$ is the total capacitance when looking into the gate of the MOSFET. $\CGS$ is usually the dominant capacitance, and $\CGD$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $\CGS$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect) (see @sec-miller-theorem). In hand calculations we will often set $\CGD = \CGB = \CDB = \CSB = 0$.
 
 ::: {.callout-note title="MOSFET Bulk Terminal"}
-The bulk connection in @fig-mosfet-large-signal-model seems floating as we only consider it a control terminal, where the potential difference between source and bulk influences the behavior of the MOSFET. However, we do not consider resistive or capacitive effects associated with this node, which is of course a gross simplification, but nevertheless one we will make in this course.
+In many situations we will connect the bulk and source terminals of a MOSFET together, which results in a simplified large-signal model. As an exercise, look at @fig-mosfet-large-signal-model and draw this simplified model (hint: look at @fig-mosfet-small-signal-model and @fig-mosfet-small-signal-model-simplified for inspiration).
 :::
 
 Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behavior from basic principles, we need to understand the behavior of the elements of the large-signal model in @fig-mosfet-large-signal-model by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of $\VGS$ and $\VDS$ and looking at $\IDS$ and other large- and small-signal parameters.
@@ -60,7 +60,8 @@ Please try to execute the following steps and answer these questions:
 4. Explore the LV NMOS `sg13_lv_nmos`:
    1. How is $\IDS$ affected by $\VGS$ and $\VDS$?
    2. Change $W$ and $L$ of the MOSFET. What is the impact on the above parameters? Can you explain the variations?
-   3. When looking at the model parameters in ngspice, you see that there is a $\CGD$ and a $\CDG$. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?
+   3. Look at the capacitance values for $\CGS$, $\CGB$, $\CGD$, and $\CDB$. How are they affected by $W$ and $L$ and by changing the bias conditions (play with $\VGS$ and $\VDS$)?
+   4. When looking at the model parameters in ngspice, you see that there is a $\CGD$ and a $\CDG$. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?
 5. Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
    1. For a given $W$ and $L$, which device provides more drain current? How are the capacitances related?
    2. If you would have to size an inverter, what would be the ideal ratio of $W_p/W_n$? Will you exactly design this ratio, or are the reasons to deviate?
@@ -78,6 +79,10 @@ However, for many practical situations, we bias a MOSFET with a set of dc voltag
 We will use the small-signal MOSFET model shown in @fig-mosfet-small-signal-model for this course. The current-source $\ids = \gm \vgs$ models the drain current as a function of $\vgs$, and the resistor $\gds$ models the dependency of the drain current by $\vds$. The drain current dependency on the source-bulk voltage (the so-called "body effect") is introduced by the current source $\ids = g_\mathrm{mb} v_\mathrm{sb}$.
 
 {{< include figures/_fig_mosfet_small_signal_model.qmd >}}
+
+As has been mentioned before, in many situations (and whenever we want to use a simplified model) we connect source and bulk of the MOSFET together. This results in the much simplified small-signal model shown in @ig-mosfet-small-signal-model-simplified.
+
+{{< include figures/_fig_mosfet_small_signal_model_simplified.qmd >}}
 
 As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by
 $$

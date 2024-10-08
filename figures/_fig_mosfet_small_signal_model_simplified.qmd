@@ -1,0 +1,45 @@
+```{python}
+#| label: fig-mosfet-small-signal-model-simplified
+#| echo: false
+#| fig-cap: "The MOSFET small-signal model when source and bulk are shorted."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    d.push()
+    #elm.Line().left().length(2).dot().idot()
+    #d.push()
+
+    #Cgb = elm.Capacitor().down().label(r'$C_\mathrm{gb}$').length(3)
+    #elm.Line().right().length(14).dot()
+
+    #d.pop()
+    elm.Line().left().length(2).dot(open=True).label('G', 'left').idot()
+    d.pop()
+    d.push()
+    Cgs = elm.Capacitor().down().label(r'$C_\mathrm{gs} + C_\mathrm{gb}$')
+    elm.Line().right().length(3).dot()
+    l1 = elm.Line().down().length(1).dot(open=True).label('S', 'left')
+    d.pop()
+    Cgd = elm.Capacitor().right().length(3).label(r'$C_\mathrm{gd}$').dot()
+    d.push()
+    Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} \cdot v_\mathrm{gs}$')
+    elm.Line().right().length(2).dot()
+
+    d.push()
+    Rds = elm.Resistor().up().dot().label(r'$g_\mathrm{ds}$')
+    d.pop()
+    elm.Line().right().length(2)
+    In = elm.SourceSin().up().label(r'$\overline{I_\mathrm{n}^2}$').dot()
+    d.pop()
+
+    elm.Line().right().length(6).dot()
+    d.push()
+    Cdb = elm.Capacitor().down().label(r'$C_\mathrm{db}$')
+    elm.Line().left().length(2).dot()
+    d.pop()
+
+    elm.Line().right().dot(open=True).length(1).label('D', 'right')
+```
