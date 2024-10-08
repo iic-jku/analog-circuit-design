@@ -94,6 +94,16 @@ where $\overline{I_\mathrm{n}^2}$ is the power-spectral density of the noise in 
 Sometimes we will refer to different operating modes of the MOSFET like "saturation" or "triode". Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call "triode" mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called "saturation" mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximate sense.
 :::
 
+A metric which is useful to assess the speed of a MOSFET is the so-called **transit frequency** $f_\mathrm{T}$. It is defined as the frequency where the current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output. It can easily be derived using the simplified MOSFET small-signal model of @fig-mosfet-small-signal-model-simplified by driving it with a voltage source and shorting the output to (neglecting the feed-forward current introduced by $\Cgd$)
+$$
+\omega_\mathrm{T} = 2 \pi f_\mathrm{T} \approx \frac{\gm}{\Cgg} = \frac{\gm}{\Cgs + \Cgd + \Cgb}.
+$$ {#eq-mosfet-transit-frequency}
+This frequency is an extrapolated frequency where the MOSFET operation is dominated by several second-order effects (hence @eq-mosfet-transit-frequency is not valid any longer). A rule-of-thumb is to use a MOSFET up to approximately $f_\mathrm{T} / 10$. In any case, $f_\mathrm{T}$ is a proxy of the speed of a MOSFET; in other words, how much input capacitance $\Cgg$ is incurred when creating a certain $\gm$.
+
+::: {.callout-tip title="Exercise: MOSFET Transit Frequency"}
+As a home exercise, try to derive @eq-mosfet-transit-frequency starting from @fig-mosfet-small-signal-model-simplified.
+::: 
+
 Now we need to see how the small-signal parameters seen in @fig-mosfet-small-signal-model can be investigated and estimated using circuit simulation.
 
 ::: {.callout-tip title="Exercise: MOSFET Small-Signal Parameters"}
@@ -103,7 +113,7 @@ Please try to execute the following steps and answer the following questions:
 2. Explore the LV NMOS `sg13_lv_nmos`:
    1. How are $\gm$ and $\gds$ changing when you change the dc node voltages?
    2. What is the ratio of $\gm$ to $g_\mathrm{mb}$? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?
-   3. Take a look at the device capacitances $\Cgs$ and $\Cgd$. Why are they important? What is the relation to $f_\mathrm{T}$? *Note: $f_\mathrm{T}$ is the transit frequency where the current gain of the MOSFET drops to 1, and can be approximated by $2 \pi f_\mathrm{T} = \gm / \Cgg$.*
+   3. Take a look at the device capacitances $\Cgs$, $\Cgd$, and $\Cgb$. Why are they important? What is the $f_\mathrm{T}$ of the MOSFET?
    4. Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
 3. Go back to your testbench for the LVS PMOS `sg13_lv_pmos`:
    1. What is the difference in $\gm$, $\gds$, and other parameters between the NMOS and the PMOS? Why could they be different?
