@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-10-08">
+<meta name="dcterms.date" content="2024-10-10">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-10-08">
-<meta name="citation_cover_date" content="2024-10-08">
+<meta name="citation_publication_date" content="2024-10-10">
+<meta name="citation_cover_date" content="2024-10-10">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-10-08">
+<meta name="citation_online_date" content="2024-10-10">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
@@ -177,7 +177,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">October 8, 2024</p>
+              <p class="date">October 10, 2024</p>
             </div>
           </div>
           
@@ -587,7 +587,7 @@ Exercise: MOSFET Investigation
 </ol></li>
 <li>Build a test bench to explore the body effect, start with LV NMOS.
 <ol type="1">
-<li>What happens when <span class="math inline">\(V_\mathrm{BS} \neq 0\)</span>?</li>
+<li>What happens when <span class="math inline">\(V_\mathrm{sb}\neq 0\)</span>?</li>
 </ol></li>
 </ol>
 </div>
@@ -643,6 +643,22 @@ MOSFET Triode and Saturation Region
 <p>Sometimes we will refer to different operating modes of the MOSFET like “saturation” or “triode”. Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call “triode” mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called “saturation” mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like “triode” and “saturation” only in an approximate sense.</p>
 </div>
 </div>
+<p>A metric which is useful to assess the speed of a MOSFET is the so-called <strong>transit frequency</strong> <span class="math inline">\(f_\mathrm{T}\)</span>. It is defined as the frequency where the current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output. It can easily be derived using the simplified MOSFET small-signal model of <a href="#fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;6</a> by driving it with a voltage source and shorting the output to (neglecting the feed-forward current introduced by <span class="math inline">\(C_\mathrm{gd}\)</span>) <span id="eq-mosfet-transit-frequency"><span class="math display">\[
+\omega_\mathrm{T} = 2 \pi f_\mathrm{T} \approx \frac{g_\mathrm{m}}{C_\mathrm{gg}} = \frac{g_\mathrm{m}}{C_\mathrm{gs}+ C_\mathrm{gd}+ C_\mathrm{gb}}.
+\tag{2}\]</span></span> This frequency is an extrapolated frequency where the MOSFET operation is dominated by several second-order effects (hence <a href="#eq-mosfet-transit-frequency" class="quarto-xref">Equation&nbsp;2</a> is not valid any longer). A rule-of-thumb is to use a MOSFET up to approximately <span class="math inline">\(f_\mathrm{T} / 10\)</span>. In any case, <span class="math inline">\(f_\mathrm{T}\)</span> is a proxy of the speed of a MOSFET; in other words, how much input capacitance <span class="math inline">\(C_\mathrm{gg}\)</span> is incurred when creating a certain <span class="math inline">\(g_\mathrm{m}\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Transit Frequency">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise: MOSFET Transit Frequency
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As a home exercise, try to derive <a href="#eq-mosfet-transit-frequency" class="quarto-xref">Equation&nbsp;2</a> starting from <a href="#fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;6</a>.</p>
+</div>
+</div>
 <p>Now we need to see how the small-signal parameters seen in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> can be investigated and estimated using circuit simulation.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Small-Signal Parameters">
 <div class="callout-header d-flex align-content-center">
@@ -661,7 +677,7 @@ Exercise: MOSFET Small-Signal Parameters
 <ol type="1">
 <li>How are <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span> changing when you change the dc node voltages?</li>
 <li>What is the ratio of <span class="math inline">\(g_\mathrm{m}\)</span> to <span class="math inline">\(g_\mathrm{mb}\)</span>? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?</li>
-<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{gs}\)</span> and <span class="math inline">\(C_\mathrm{gd}\)</span>. Why are they important? What is the relation to <span class="math inline">\(f_\mathrm{T}\)</span>? <em>Note: <span class="math inline">\(f_\mathrm{T}\)</span> is the transit frequency where the current gain of the MOSFET drops to 1, and can be approximated by <span class="math inline">\(2 \pi f_\mathrm{T} = g_\mathrm{m}/ C_\mathrm{gg}\)</span>.</em></li>
+<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{gs}\)</span>, <span class="math inline">\(C_\mathrm{gd}\)</span>, and <span class="math inline">\(C_\mathrm{gb}\)</span>. Why are they important? What is the <span class="math inline">\(f_\mathrm{T}\)</span> of the MOSFET?</li>
 <li>Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
 </ol></li>
 <li>Go back to your testbench for the LVS PMOS <code>sg13_lv_pmos</code>:
@@ -743,10 +759,10 @@ Power Consumption
 <p>However, as can be seen in the below plot, there exists a strong and unfortunate trade-off with device speed, characterized here by the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span>. It would be ideal if there exists a design point where we get high transconductance per bias current concurrently to having the fastest operation, but unfortunately, this is clearly not the case. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> peaks for <span class="math inline">\(V_\mathrm{GS}&lt; 0.3\,\text{V}\)</span>, and the highest speed we get at <span class="math inline">\(V_\mathrm{GS}\approx 1.2\,\text{V}\)</span>. The dashed vertical line plots the nominal threshold voltage, as you can see in this continuum of parameter space, it marks not a particularly special point.</p>
 <p>Note that <span id="eq-mosfet-gmid-weakinversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{1}{n V_\mathrm{T}}
-\tag{2}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
+\tag{3}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
 <p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
-\tag{3}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.”</p>
+\tag{4}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.”</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Why 300K?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1046,7 +1062,7 @@ Exercise: MOSFET Diode Sizing
 </div>
 <p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: MOSFET Diode Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1055,7 +1071,7 @@ Solution: MOSFET Diode Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
@@ -1120,7 +1136,7 @@ i_\mathrm{bias} - s C_\mathrm{gs}v_\mathrm{gs}- g_\mathrm{m}v_\mathrm{gs}- g_\ma
 \]</span></p>
 <p>It follows that <span id="eq-mosfet-diode-impedance"><span class="math display">\[
 Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm{m}+ g_\mathrm{ds}+ s C_\mathrm{gs}}.
-\tag{4}\]</span></span></p>
+\tag{5}\]</span></span></p>
 <p>When neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and at dc we get <span class="math inline">\(Z_\mathrm{diode} = 1 / g_\mathrm{m}\)</span>, which is an important result and should be memorized.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="The Admittance is Your Friend">
 <div class="callout-header d-flex align-content-center">
@@ -1135,7 +1151,7 @@ The Admittance is Your Friend
 <p>In circuit analysis it is often algebraically easier to work with admittance instead of impedance, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G \cdot V\)</span>, and for a capacitance is <span class="math inline">\(I = s C \cdot V\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
 </div>
 </div>
-<p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capacitive as the gate-source capacitance starts to dominate. The corner frequency of this low-pass can be calculated as <span class="math display">\[
+<p>Looking at <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capacitive as the gate-source capacitance starts to dominate. The corner frequency of this low-pass can be calculated as <span class="math display">\[
 \omega_\mathrm{c} = \frac{g_\mathrm{m}+ g_\mathrm{ds}}{C_\mathrm{gs}} \approx \omega_\mathrm{T}
 \]</span> which is pretty much the transit frequency of the MOSFET!</p>
 </section>
@@ -1161,8 +1177,8 @@ v_\mathrm{out} = - g_\mathrm{m}v_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm
 \]</span></p>
 <p>The open-loop gain <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is thus <span id="eq-mosfet-diode-openloop-gain"><span class="math display">\[
 H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
-\tag{5}\]</span></span></p>
-<p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;5</a> we realize that</p>
+\tag{6}\]</span></span></p>
+<p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;6</a> we realize that</p>
 <ol type="1">
 <li>the dc gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the self-gain of the MOSFET, so <span class="math inline">\(20 \log(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}\)</span>, and</li>
 <li>there is a pole at <span class="math inline">\(\omega_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\)</span>, which is at <span class="math inline">\(9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\)</span>.</li>
@@ -1181,7 +1197,7 @@ Exercise: MOSFET Diode Loop Analysis
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;5</a>.</p>
+<p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;6</a>.</p>
 <p>If you are getting stuck you can look at this Xschem <a href="./xschem/mosfet_diode_loopgain.sch">testbench</a>, shown in <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;13</a>.</p>
 <div id="fig-mosfet-diode-loopgain-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1215,7 +1231,7 @@ Figure&nbsp;14: The MOSFET diode small-signal model with drain noise source.
 </div>
 </div>
 </div>
-<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;4</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is thus given as <span class="math display">\[
+<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is thus given as <span class="math display">\[
 \overline{V_\mathrm{n}^2} = Z_\mathrm{diode}^2 \overline{I_\mathrm{n,d}^2}.
 \]</span></p>
 <p>The drain current noise of the MOSFET is given as (introduced in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>) <span class="math display">\[
@@ -1226,8 +1242,8 @@ Figure&nbsp;14: The MOSFET diode small-signal model with drain noise source.
 \]</span> which is the thermal noise of a resistor of value <span class="math inline">\(1 / g_\mathrm{m}\)</span> enhanced by the factor <span class="math inline">\(\gamma\)</span>.</p>
 <p>We now calculate the full equation, and after a bit of algebra arrive at <span id="eq-mosfet-diode-noise-psd"><span class="math display">\[
 \overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds})^2 + (2 \pi f C_\mathrm{gs})^2}.
-\tag{6}\]</span></span></p>
-<p>If we are interested in the PSD of the noise then <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;6</a> gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation, using the following identity:</p>
+\tag{7}\]</span></span></p>
+<p>If we are interested in the PSD of the noise then <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;7</a> gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation, using the following identity:</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Useful Integral for Noise Calculations">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1240,16 +1256,16 @@ Useful Integral for Noise Calculations
 <div class="callout-body-container callout-body">
 <p><span id="eq-integral-identity"><span class="math display">\[
 \int_0^\infty {\frac{a}{b^2 + c^2 f^2} df} = \frac{\pi}{2} \frac{a}{b \cdot c}
-\tag{7}\]</span></span></p>
-</div>
-</div>
-<p>Using the integral help in <a href="#eq-integral-identity" class="quarto-xref">Equation&nbsp;7</a>, we can easily transform <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;6</a> to <span id="eq-mosfet-diode-noise-rms"><span class="math display">\[
-V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds}) C_\mathrm{gs}}.
 \tag{8}\]</span></span></p>
-<p>The form of <a href="#eq-mosfet-diode-noise-rms" class="quarto-xref">Equation&nbsp;8</a> is the exact solution, but we gain additional insight if we assume that <span class="math inline">\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span> and then <span id="eq-mosfet-diode-noise-rms-simplified"><span class="math display">\[
-V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
+</div>
+</div>
+<p>Using the integral help in <a href="#eq-integral-identity" class="quarto-xref">Equation&nbsp;8</a>, we can easily transform <a href="#eq-mosfet-diode-noise-psd" class="quarto-xref">Equation&nbsp;7</a> to <span id="eq-mosfet-diode-noise-rms"><span class="math display">\[
+V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma g_\mathrm{m}}{(g_\mathrm{m}+ g_\mathrm{ds}) C_\mathrm{gs}}.
 \tag{9}\]</span></span></p>
-<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;9</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
+<p>The form of <a href="#eq-mosfet-diode-noise-rms" class="quarto-xref">Equation&nbsp;9</a> is the exact solution, but we gain additional insight if we assume that <span class="math inline">\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span> and then <span id="eq-mosfet-diode-noise-rms-simplified"><span class="math display">\[
+V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
+\tag{10}\]</span></span></p>
+<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;10</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Large Bandwidth and Noise">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1367,8 +1383,8 @@ i_\mathrm{out,n} = g_\mathrm{m2} \left( -\frac{v_\mathrm{in}}{2} \right).
 \]</span></p>
 <p>Usually we assume symmetry in the differential pair, so <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m}\)</span>. The differential output current <span class="math inline">\(i_\mathrm{out}\)</span> is then given by <span id="eq-differential-pair-dm"><span class="math display">\[
 i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = g_\mathrm{m}v_\mathrm{in}
-\tag{10}\]</span></span></p>
-<p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;10</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
+\tag{11}\]</span></span></p>
+<p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;11</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
 </section>
 <section id="common-mode-operation-of-the-diffpair" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="common-mode-operation-of-the-diffpair"><span class="header-section-number">6.2</span> Common-Mode Operation of the Diffpair</h2>
@@ -1395,8 +1411,8 @@ v_\mathrm{in} = v_\mathrm{gs}+ \frac{i_\mathrm{ds}}{g_\mathrm{tail}}.
 \]</span></p>
 <p>With <span class="math inline">\(i_\mathrm{out} = i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
 i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} v_\mathrm{in}
-\tag{11}\]</span></span></p>
-<p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;11</a> we can distinguish the following extreme cases:</p>
+\tag{12}\]</span></span></p>
+<p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;12</a> we can distinguish the following extreme cases:</p>
 <ol type="1">
 <li>If <span class="math inline">\(g_\mathrm{tail} = 0\)</span> (ideal tail current source) then <span class="math inline">\(i_\mathrm{out} = 0\)</span>, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.</li>
 <li>If <span class="math inline">\(g_\mathrm{tail} = \infty\)</span> then <span class="math inline">\(i_\mathrm{out} = g_\mathrm{m}v_\mathrm{in}\)</span>, which means the output current is a function of the MOSFET <span class="math inline">\(g_\mathrm{m}\)</span>. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behavior, this configuration is called a “pseudo-differential pair.”</li>
@@ -1549,14 +1565,14 @@ T_\mathrm{slew} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \c
 </ul>
 <p>The specification for GBW is given in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>, the dc gain we have to calculate from the voltage accuracy specification. For a voltage follower in the configuration shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;20</a> the voltage gain is given by <span id="eq-voltage-buffer-tolerance"><span class="math display">\[
 \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
-\tag{12}\]</span></span></p>
+\tag{13}\]</span></span></p>
 <p>So in order to reach an output voltage accuracy of at least 3% we need a dc gain of <span class="math inline">\(A_0 &gt; 30.2\,\text{dB}\)</span>. To allow for process and temperature variation we need to add a bit of extra gain as margin.</p>
 <section id="ota-small-signal-transfer-function" class="level3" data-number="7.3.1">
 <h3 data-number="7.3.1" class="anchored" data-anchor-id="ota-small-signal-transfer-function"><span class="header-section-number">7.3.1</span> OTA Small-Signal Transfer Function</h3>
 <p>In order to derive the governing equations for the OTA we will make a few simplifications:</p>
 <ul>
 <li>We will set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> for all MOSFETs.</li>
-<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;15</a>). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;15</a>). Thus, only <span class="math inline">\(C_\mathrm{gs34}\)</span> is considered at the gate node of the current mirror load.</li>
+<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;15</a>). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;16</a>). Thus, only <span class="math inline">\(C_\mathrm{gs34}\)</span> is considered at the gate node of the current mirror load.</li>
 <li>We assume <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, so we set <span class="math inline">\(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\)</span>.</li>
 <li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span> we can add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span>. Note that <span class="math inline">\(C_\mathrm{gs2}\)</span> can be added because of the feedback connection between the inverting input and the output. However, this is not shown in the small-signal equivalent circuits below, because we are interested in the open-loop transfer function.</li>
 </ul>
@@ -1605,20 +1621,20 @@ Figure&nbsp;22: 5-transistor OTA small-signal model with further simplifications
 </div>
 <p>In the simplified circuit model in <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;22</a> we can see that we have two poles in the circuit, one at the gate note of <span class="math inline">\(M_{3,4}\)</span>, and one at the output. Realizing that <span class="math inline">\(v_\mathrm{in,p} = v_\mathrm{in}/2\)</span> and <span class="math inline">\(v_\mathrm{in,n} = - v_\mathrm{in}/2\)</span> we can formulate KCL at the output node to <span id="eq-simple-ota-eq1"><span class="math display">\[
 -g_\mathrm{m34} V_\mathrm{gs34} - \left( -g_\mathrm{m12} \frac{V_\mathrm{in}}{2} \right) - V_\mathrm{out} (g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}) = 0.
-\tag{13}\]</span></span> We further realize that <span id="eq-simple-ota-eq2"><span class="math display">\[
+\tag{14}\]</span></span> We further realize that <span id="eq-simple-ota-eq2"><span class="math display">\[
 V_\mathrm{gs34} = -g_\mathrm{m12} \frac{V_\mathrm{in}}{2} \frac{1}{g_\mathrm{m34} + s C_\mathrm{gs34}}.
-  \tag{14}\]</span></span></p>
-<p>By combining <a href="#eq-simple-ota-eq1" class="quarto-xref">Equation&nbsp;13</a> and <a href="#eq-simple-ota-eq2" class="quarto-xref">Equation&nbsp;14</a> and after a bit of algebraic manipulation we arrive at <span id="eq-simple-ota-gain"><span class="math display">\[
+  \tag{15}\]</span></span></p>
+<p>By combining <a href="#eq-simple-ota-eq1" class="quarto-xref">Equation&nbsp;14</a> and <a href="#eq-simple-ota-eq2" class="quarto-xref">Equation&nbsp;15</a> and after a bit of algebraic manipulation we arrive at <span id="eq-simple-ota-gain"><span class="math display">\[
 A(s) = \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m12}}{2} \frac{2 g_\mathrm{m34} + s C_\mathrm{gs34}}{(g_\mathrm{m34} + s C_\mathrm{gs34}) (g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load})}.
-\tag{15}\]</span></span></p>
-<p>When we now inspect <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;15</a> we can see that for low frequencies the gain is <span id="eq-simple-ota-gain-dc"><span class="math display">\[
+\tag{16}\]</span></span></p>
+<p>When we now inspect <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;16</a> we can see that for low frequencies the gain is <span id="eq-simple-ota-gain-dc"><span class="math display">\[
 A(s \rightarrow 0) = A_0 = \frac{g_\mathrm{m12}}{g_\mathrm{ds2} + g_\mathrm{ds4}}
-\tag{16}\]</span></span> which is plausible, and confirms the requirement of a high impedance at the output node. For very large frequencies we get <span id="eq-simple-ota-highf"><span class="math display">\[
+\tag{17}\]</span></span> which is plausible, and confirms the requirement of a high impedance at the output node. For very large frequencies we get <span id="eq-simple-ota-highf"><span class="math display">\[
 A (s \rightarrow \infty) = \frac{g_\mathrm{m12}}{2 s C_\mathrm{load}}
-\tag{17}\]</span></span> which is essentially the behavior of an integrator, and we can use <a href="#eq-simple-ota-highf" class="quarto-xref">Equation&nbsp;17</a> to calculate the frequency where the gain drops to <span class="math inline">\(1\)</span>: <span class="math display">\[
+\tag{18}\]</span></span> which is essentially the behavior of an integrator, and we can use <a href="#eq-simple-ota-highf" class="quarto-xref">Equation&nbsp;18</a> to calculate the frequency where the gain drops to <span class="math inline">\(1\)</span>: <span class="math display">\[
 f_\mathrm{ug} = \frac{g_\mathrm{m12}}{4 \pi C_\mathrm{load}}
 \]</span></p>
-<p>when looking at <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;15</a> we see that we have a dominant pole at <span class="math inline">\(s_\mathrm{p}\)</span> and a pole-zero doublet with <span class="math inline">\(s_\mathrm{pd}\)</span>/<span class="math inline">\(s_\mathrm{zd}\)</span>: <span class="math display">\[
+<p>when looking at <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;16</a> we see that we have a dominant pole at <span class="math inline">\(s_\mathrm{p}\)</span> and a pole-zero doublet with <span class="math inline">\(s_\mathrm{pd}\)</span>/<span class="math inline">\(s_\mathrm{zd}\)</span>: <span class="math display">\[
 s_\mathrm{p} = -\frac{g_\mathrm{ds2} + g_\mathrm{ds4}}{C_\mathrm{load}}
 \]</span> <span class="math display">\[
 s_\mathrm{pd} = -\frac{g_\mathrm{m34}}{C_\mathrm{gs34}}
@@ -1662,10 +1678,10 @@ Noise Addition
 <p>We can then sum the output noise current <span class="math inline">\(\overline{I_\mathrm{n}}\)</span> as <span class="math display">\[
 \overline{I_\mathrm{n}^2} = \overline{I_\mathrm{n2}^2} + \overline{I_\mathrm{n4}^2} + g_\mathrm{m34}^2 \frac{1}{g_\mathrm{m34}^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right) = 2 \left( \overline{I_\mathrm{n12}^2} + \overline{I_\mathrm{n34}^2} \right).
 \]</span></p>
-<p>As a next step, let us rewrite the OTA transfer function <span class="math inline">\(A(s)\)</span> (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;15</a>) by getting rid of the pole-zero doublet as a simplifying assumption to get <span id="eq-simple-ota-gain-simplified"><span class="math display">\[
+<p>As a next step, let us rewrite the OTA transfer function <span class="math inline">\(A(s)\)</span> (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;16</a>) by getting rid of the pole-zero doublet as a simplifying assumption to get <span id="eq-simple-ota-gain-simplified"><span class="math display">\[
 A'(s) = \frac{g_\mathrm{m12}}{g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}}.
-\tag{18}\]</span></span></p>
-<p>Inspecting <a href="#eq-simple-ota-gain-simplified" class="quarto-xref">Equation&nbsp;18</a> we can interpret the OTA transfer function as a transconductor <span class="math inline">\(g_\mathrm{m12}\)</span> driving a load of <span class="math inline">\(Y_\mathrm{load} = g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}\)</span>. We can thus redraw <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;20</a> in the following way, injecting the previously calculated noise current into the output node. The result is shown in <a href="#fig-voltage-buffer-ota-noise" class="quarto-xref">Figure&nbsp;25</a>.</p>
+\tag{19}\]</span></span></p>
+<p>Inspecting <a href="#eq-simple-ota-gain-simplified" class="quarto-xref">Equation&nbsp;19</a> we can interpret the OTA transfer function as a transconductor <span class="math inline">\(g_\mathrm{m12}\)</span> driving a load of <span class="math inline">\(Y_\mathrm{load} = g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}\)</span>. We can thus redraw <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;20</a> in the following way, injecting the previously calculated noise current into the output node. The result is shown in <a href="#fig-voltage-buffer-ota-noise" class="quarto-xref">Figure&nbsp;25</a>.</p>
 <div id="cell-fig-voltage-buffer-ota-noise-zout" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div id="fig-voltage-buffer-ota-noise-zout" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1713,14 +1729,14 @@ Figure&nbsp;25: A voltage buffer redrawn for noise analysis.
 </div>
 <p>We see that the feedback around the transconductor <span class="math inline">\(g_\mathrm{m12}\)</span> creates an impedance of <span class="math inline">\(1/g_\mathrm{m12}\)</span>. We can now calculate the effective load conductance of <span id="eq-basic-ota-output-noise-yload"><span class="math display">\[
 Y'_\mathrm{load} = g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load} + g_\mathrm{m12} \approx g_\mathrm{m12} + s C_\mathrm{load}.
-\tag{19}\]</span></span></p>
+\tag{20}\]</span></span></p>
 <p>The output noise voltage is then (using <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a>) <span class="math display">\[
 \overline{V_\mathrm{n,out}^2}(f) = \frac{\overline{I_\mathrm{n}^2}}{|Y'_\mathrm{load}|^2} = \frac{\overline{I_\mathrm{n}^2}}{g_\mathrm{m12}^2 + (2 \pi f C_\mathrm{load})2^2} = \frac{8 k T (\gamma_{12} g_\mathrm{m12} + \gamma_{34} g_\mathrm{m34})}{g_\mathrm{m12}^2 + (2 \pi f C_\mathrm{load})^2}.
 \]</span></p>
-<p>We can use the identity <a href="#eq-integral-identity" class="quarto-xref">Equation&nbsp;7</a> to calculate the rms output noise to <span id="eq-basic-ota-output-noise"><span class="math display">\[
+<p>We can use the identity <a href="#eq-integral-identity" class="quarto-xref">Equation&nbsp;8</a> to calculate the rms output noise to <span id="eq-basic-ota-output-noise"><span class="math display">\[
 V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{12} + 2 \gamma_{34} \frac{g_\mathrm{m34}}{g_\mathrm{m12}} \right).
-\tag{20}\]</span></span></p>
-<p>Inspecting <a href="#eq-basic-ota-output-noise" class="quarto-xref">Equation&nbsp;20</a> we can see that the integrated output noise is the <span class="math inline">\(k T / C\)</span> noise of the output load capacitor, enhanced by the <span class="math inline">\(\gamma_{12}\)</span> of the input differential pair, plus a (smaller) contribution of the current mirror load <span class="math inline">\(M_{3,4}\)</span>. Intuitively, this result makes sense.</p>
+\tag{21}\]</span></span></p>
+<p>Inspecting <a href="#eq-basic-ota-output-noise" class="quarto-xref">Equation&nbsp;21</a> we can see that the integrated output noise is the <span class="math inline">\(k T / C\)</span> noise of the output load capacitor, enhanced by the <span class="math inline">\(\gamma_{12}\)</span> of the input differential pair, plus a (smaller) contribution of the current mirror load <span class="math inline">\(M_{3,4}\)</span>. Intuitively, this result makes sense.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Derivation of 5T-OTA Performance">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1739,10 +1755,10 @@ Exercise: Derivation of 5T-OTA Performance
 <section id="sec-basic-ota-sizing" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="sec-basic-ota-sizing"><span class="header-section-number">7.4</span> 5T-OTA Sizing</h2>
 <p>Outfitted with the governing equations derived in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a> we can now size the MOSFETs in the OTA, we remember that we have to size <span class="math inline">\(M_{1,2}\)</span> and <span class="math inline">\(M_{3,4}\)</span> equally.</p>
-<p>First, we need to select a proper <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for the MOSFET. Remembering <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> we see that for the input differential pair we should go for a large <span class="math inline">\(g_\mathrm{m}\)</span>, thus we select a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span>. As <span class="math inline">\(g_\mathrm{ds}\)</span> of <span class="math inline">\(M_2\)</span> could limit the dc gain (<a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;16</a>) we go with a rather long <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. For current sources a small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good idea, so we start with <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=5\)</span> (because we can not go too low because of <span class="math inline">\(V_\mathrm{ds,sat}\)</span>) and also an <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the <span class="math inline">\(g_\mathrm{ds}\)</span> small) with this approximate relationship:</p>
+<p>First, we need to select a proper <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for the MOSFET. Remembering <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> we see that for the input differential pair we should go for a large <span class="math inline">\(g_\mathrm{m}\)</span>, thus we select a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span>. As <span class="math inline">\(g_\mathrm{ds}\)</span> of <span class="math inline">\(M_2\)</span> could limit the dc gain (<a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;17</a>) we go with a rather long <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. For current sources a small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good idea, so we start with <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=5\)</span> (because we can not go too low because of <span class="math inline">\(V_\mathrm{ds,sat}\)</span>) and also an <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the <span class="math inline">\(g_\mathrm{ds}\)</span> small) with this approximate relationship:</p>
 <p><span id="eq-gmid-saturation"><span class="math display">\[
 V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
-\tag{21}\]</span></span></p>
+\tag{22}\]</span></span></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: 5T-OTA Sizing">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1758,7 +1774,7 @@ Exercise: 5T-OTA Sizing
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1767,7 +1783,7 @@ Solution: 5T-OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div id="callout-33" class="callout-33-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -2020,7 +2036,7 @@ Exercise: 5T-OTA Design and Testbench
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2029,7 +2045,7 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-34" class="callout-34-contents callout-collapse collapse show">
+<div id="callout-35" class="callout-35-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -2269,7 +2285,7 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </section>
 <section id="sec-cascode-stage" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Cascode Stage</h1>
-<p>As we have seen in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;7</a> the performance of the OTA is generally quite acceptable (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>), but we might want to aim for better output voltage accuracy. As our analysis has shown the output voltage tolerance is limited by the open-loop dc gain <span class="math inline">\(A_0\)</span> of the OTA (see <a href="#eq-voltage-buffer-tolerance" class="quarto-xref">Equation&nbsp;12</a>), which in turn is limited by the output conductance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;19</a>, which is also confirmed by the analytical result in <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;16</a>.</p>
+<p>As we have seen in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;7</a> the performance of the OTA is generally quite acceptable (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>), but we might want to aim for better output voltage accuracy. As our analysis has shown the output voltage tolerance is limited by the open-loop dc gain <span class="math inline">\(A_0\)</span> of the OTA (see <a href="#eq-voltage-buffer-tolerance" class="quarto-xref">Equation&nbsp;13</a>), which in turn is limited by the output conductance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;19</a>, which is also confirmed by the analytical result in <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;17</a>.</p>
 <p>During the sizing procedure we have seen that the achievable <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> ratio of a single MOSFET is limited, even if we increase <span class="math inline">\(L\)</span>. We are thus searching for a better option, and here (local) feedback in form of a <strong>cascode</strong> comes to help.</p>
 <p>For analysis of a cascode, we use the following single-transistor stage shown in <a href="#fig-cascode-transistor" class="quarto-xref">Figure&nbsp;26</a>.</p>
 <div id="cell-fig-cascode-transistor" class="cell" data-execution_count="20">
@@ -2341,10 +2357,10 @@ i_\mathrm{out} - g_\mathrm{m}v_\mathrm{gs}- g_\mathrm{ds}v_\mathrm{ds}= 0.
 \]</span></p>
 <p>Using the previously found identities, and after a bit of algebraic manipulations we arrive at <span id="eq-cascode-output"><span class="math display">\[
 g_\mathrm{out} = \frac{i_\mathrm{out}}{v_\mathrm{out}} = \frac{g_\mathrm{ds}}{1 + \frac{g_\mathrm{m}+ g_\mathrm{ds}}{G_\mathrm{S}}} = \frac{g_\mathrm{ds}\cdot G_\mathrm{S}}{G_\mathrm{S} + g_\mathrm{m}+ g_\mathrm{ds}}
-\tag{22}\]</span></span></p>
+\tag{23}\]</span></span></p>
 <p>We find that if <span class="math inline">\(G_\mathrm{S} = 0\)</span> (an open) then <span class="math inline">\(g_\mathrm{out} = 0\)</span>, and if <span class="math inline">\(G_\mathrm{S} = \infty\)</span> (a short) then <span class="math inline">\(g_\mathrm{out} = g_\mathrm{ds}\)</span>. We can calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus <span class="math inline">\(G_\mathrm{S} = g_\mathrm{ds}'\)</span>) and get <span id="eq-cs-cascode-output-impedance"><span class="math display">\[
 g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\mathrm{m}+ g_\mathrm{ds}} \approx g_\mathrm{ds}' \frac{g_\mathrm{ds}}{g_\mathrm{m}}.
-\tag{23}\]</span></span></p>
+\tag{24}\]</span></span></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Benefit of Cascode (Output)">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2381,7 +2397,7 @@ i_\mathrm{in} + g_\mathrm{ds}v_\mathrm{ds}+ g_\mathrm{m}v_\mathrm{gs}= 0.
 \]</span></p>
 <p>After some manipulation we find that <span id="eq-cascode-input"><span class="math display">\[
 g_\mathrm{in} = \frac{i_\mathrm{in}}{v_\mathrm{in}} = \frac{(g_\mathrm{m}+ g_\mathrm{ds}) \cdot G_\mathrm{D}}{g_\mathrm{ds}+ G_\mathrm{D}}.
-\tag{24}\]</span></span></p>
+\tag{25}\]</span></span></p>
 <p>Setting <span class="math inline">\(G_\mathrm{D} = 0\)</span> (an open) results in <span class="math inline">\(g_\mathrm{in} = 0\)</span> as well, so the input impedance of the cascode is very large when the drain impedance is large.</p>
 <p>However, setting <span class="math inline">\(G_\mathrm{D} = \infty\)</span> (a short or low-ohmic impedance) results in the well-known result of <span class="math inline">\(g_\mathrm{in} = g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span>, which means that the input impedance looking into a cascode is approximately <span class="math inline">\(1/g_\mathrm{m}\)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Benefit of Cascode (Input)">
@@ -2445,9 +2461,9 @@ Exercise: Cascode Current Mirror vs.&nbsp;High-Swing Cascode Current Mirror
 </div>
 </div>
 <p>Further, by properly selecting the bias voltages of the cascode a low-voltage operation is achieved as <span class="math inline">\(V_\mathrm{DS}\)</span> can be minimized, allowing even triode operation of the current-mirror MOSFETs (as, noted above, a large <span class="math inline">\(g_\mathrm{ds}\)</span> is not a big issue).</p>
-<p>A simplified small-signal gain calculation of this improved OTA uses the result of <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;16</a> and <a href="#eq-cs-cascode-output-impedance" class="quarto-xref">Equation&nbsp;23</a> to arrive at the approximate dc gain of <span id="eq-improved-ota-gain-dc"><span class="math display">\[
+<p>A simplified small-signal gain calculation of this improved OTA uses the result of <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;17</a> and <a href="#eq-cs-cascode-output-impedance" class="quarto-xref">Equation&nbsp;24</a> to arrive at the approximate dc gain of <span id="eq-improved-ota-gain-dc"><span class="math display">\[
 A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathrm{m2C}} + g_\mathrm{ds4} \frac{g_\mathrm{ds4C}}{g_\mathrm{m4C}}}
-\tag{25}\]</span></span> leading to a significant boost in dc gain due to cascoding. We will use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
+\tag{26}\]</span></span> leading to a significant boost in dc gain due to cascoding. We will use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
 <ol type="1">
 <li>save area (smaller <span class="math inline">\(L\)</span> will lead to smaller <span class="math inline">\(W\)</span> for a given <span class="math inline">\(W/L\)</span> ratio) and</li>
 <li>will push the additional poles and zeros at the inner nodes of the cascode transistors (e.g., the connection of the drain of <span class="math inline">\(M_5\)</span> to the source of <span class="math inline">\(M_\mathrm{5C}\)</span>) to higher frequencies to result in stable behavior and a reasonable gain transfer function (too many poles and zeros in the pass band of the amplifier create many issues with stability margin).</li>
@@ -2457,7 +2473,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;7.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 1\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2466,7 +2482,7 @@ Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-39" class="callout-39-contents callout-collapse collapse show">
+<div id="callout-40" class="callout-40-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -2863,7 +2879,7 @@ Exercise: Improved OTA Initial Simulation
 <h2 data-number="9.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">9.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;2</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-43-contents" aria-controls="callout-43" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2872,7 +2888,7 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-43" class="callout-43-contents callout-collapse collapse show">
+<div id="callout-44" class="callout-44-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -3295,66 +3311,66 @@ Figure&nbsp;40: 5-transistor OTA small-signal model for output impedance calcula
 v_\mathrm{in,p}=v_\mathrm{in,p}=0~\text{V}
 \]</span> <span id="eq-app-vbufzout-vin-ol"><span class="math display">\[
 v_\mathrm{gs1} = v_\mathrm{gs2}
-\tag{26}\]</span></span></p>
+\tag{27}\]</span></span></p>
 <p>KCL at the output node: <span id="eq-app-vbufzout-kcl-vout-ol"><span class="math display">\[
 i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - i_{g_\mathrm{ds2}} - g_\mathrm{m2}v_\mathrm{gs2} = 0
-\tag{27}\]</span></span></p>
+\tag{28}\]</span></span></p>
 <p>KCL at the tail node: <span class="math display">\[
 g_\mathrm{m1}v_\mathrm{gs1} + g_\mathrm{m2}v_\mathrm{gs2} + i_{g_\mathrm{ds2}} + g_\mathrm{ds5}v_\mathrm{gs2} = 0
 \]</span></p>
-<p>Using <a href="#eq-app-vbufzout-vin-ol" class="quarto-xref">Equation&nbsp;26</a> we can eliminate <span class="math inline">\(v_\mathrm{gs1}\)</span> and solve for <span class="math inline">\(i_{g_\mathrm{ds2}}\)</span>. <span id="eq-app-vbufzout-igds2"><span class="math display">\[
+<p>Using <a href="#eq-app-vbufzout-vin-ol" class="quarto-xref">Equation&nbsp;27</a> we can eliminate <span class="math inline">\(v_\mathrm{gs1}\)</span> and solve for <span class="math inline">\(i_{g_\mathrm{ds2}}\)</span>. <span id="eq-app-vbufzout-igds2"><span class="math display">\[
 i_{g_\mathrm{ds2}} = -\left(g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds5}\right)v_\mathrm{gs2}
-\tag{28}\]</span></span></p>
+\tag{29}\]</span></span></p>
 <p>Furthermore, we need an expression for <span class="math inline">\(v_\mathrm{gs34}\)</span>. Ohm’s law at the conductance <span class="math inline">\(g_\mathrm{m34}\)</span> will suffice. <span id="eq-app-vbufzout-vgs34-ol"><span class="math display">\[
 v_\mathrm{gs34} = -\frac{g_\mathrm{m1}}{g_\mathrm{m34}}v_\mathrm{gs1}
-\tag{29}\]</span></span></p>
-<p>KVL from the output node down to ground (over <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;28</a> gives us an expression for <span class="math inline">\(v_\mathrm{gs2}\)</span> <span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
-v_\mathrm{gs2} = -\frac{g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out}
 \tag{30}\]</span></span></p>
-<p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;27</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;28</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>. <span class="math display">\[
+<p>KVL from the output node down to ground (over <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;29</a> gives us an expression for <span class="math inline">\(v_\mathrm{gs2}\)</span> <span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
+v_\mathrm{gs2} = -\frac{g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out}
+\tag{31}\]</span></span></p>
+<p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;28</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;29</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>. <span class="math display">\[
 i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} + \left(g_\mathrm{m1}+g_\mathrm{ds5}\right)v_\mathrm{gs2} = 0
 \]</span></p>
-<p>Second, <span class="math inline">\(v_\mathrm{gs34}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;29</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m34}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>. <span class="math display">\[
+<p>Second, <span class="math inline">\(v_\mathrm{gs34}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;30</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m34}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>. <span class="math display">\[
 i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} + \left(2g_\mathrm{m1}+g_\mathrm{ds5}\right)v_\mathrm{gs2} = 0
 \]</span></p>
-<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;30</a> gives as an expression for the last remaining unknown <span class="math inline">\(v_\mathrm{gs2}\)</span>. Thus, the factor in front of <span class="math inline">\(v_\mathrm{out}\)</span> defines the conductance at the output node. <span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
+<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;31</a> gives as an expression for the last remaining unknown <span class="math inline">\(v_\mathrm{gs2}\)</span>. Thus, the factor in front of <span class="math inline">\(v_\mathrm{out}\)</span> defines the conductance at the output node. <span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
 i_\mathrm{out} -\left[g_\mathrm{ds4} + \left(2g_\mathrm{m1}+g_\mathrm{ds5}\right)\frac{g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}\right]v_\mathrm{out} = 0
-\tag{31}\]</span></span> Before, we interpret this result, we use are assumption of matched input transistors (<span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span>) and slightly rearrange the equation to give us more insight. <span id="eq-app-vbufzout-zout-ol-2"><span class="math display">\[
+\tag{32}\]</span></span> Before, we interpret this result, we use are assumption of matched input transistors (<span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span>) and slightly rearrange the equation to give us more insight. <span id="eq-app-vbufzout-zout-ol-2"><span class="math display">\[
 i_\mathrm{out} -\left[g_\mathrm{ds4} + \frac{g_\mathrm{ds2}\cdot\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)}{g_\mathrm{ds2}+\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)}\right]v_\mathrm{out} = 0
-\tag{32}\]</span></span> Now, we can identify the common equation of the total resistance of two parallel resistors. However, we are dealing with conductances here, so the same equation describes the total conductance of two conductances in series, while parallel conductances are simply summed. In parallel to <span class="math inline">\(g_\mathrm{ds4}\)</span>, there is effectively the series connection of <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)\)</span> at work. If we apply the general assumption of <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, only the parallel connection of <span class="math inline">\(g_\mathrm{ds4}\)</span> and <span class="math inline">\(g_\mathrm{ds2}\)</span> remains. Therefore, moving <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span> in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a> was valid. <span id="eq-app-vbufzout-zout-ol-3"><span class="math display">\[
+\tag{33}\]</span></span> Now, we can identify the common equation of the total resistance of two parallel resistors. However, we are dealing with conductances here, so the same equation describes the total conductance of two conductances in series, while parallel conductances are simply summed. In parallel to <span class="math inline">\(g_\mathrm{ds4}\)</span>, there is effectively the series connection of <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)\)</span> at work. If we apply the general assumption of <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, only the parallel connection of <span class="math inline">\(g_\mathrm{ds4}\)</span> and <span class="math inline">\(g_\mathrm{ds2}\)</span> remains. Therefore, moving <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span> in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a> was valid. <span id="eq-app-vbufzout-zout-ol-3"><span class="math display">\[
 \frac{i_\mathrm{out}}{v_\mathrm{out}}\approx g_\mathrm{ds4} + g_\mathrm{ds2}
-\tag{33}\]</span></span></p>
+\tag{34}\]</span></span></p>
 </section>
 <section id="closed-loop-configuration" class="level2" data-number="16.2">
 <h2 data-number="16.2" class="anchored" data-anchor-id="closed-loop-configuration"><span class="header-section-number">16.2</span> Closed-Loop Configuration</h2>
 <p>In contrast to the open-loop case, we keep the gate of <span class="math inline">\(M_1\)</span> connected to ground and tie the input of <span class="math inline">\(M_2\)</span> to the output node <span class="math inline">\(v_\mathrm{out}\)</span>. <span id="eq-app-vbufzout-vin-cl"><span class="math display">\[
 v_\mathrm{in,n} = v_\mathrm{out}
-\tag{34}\]</span></span></p>
+\tag{35}\]</span></span></p>
 <p>KCL at the output node: <span id="eq-app-vbufzout-kcl-vout-cl"><span class="math display">\[
 i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - g_\mathrm{ds2}v_\mathrm{gs2} - g_\mathrm{m2}v_\mathrm{gs2} = 0
-\tag{35}\]</span></span></p>
+\tag{36}\]</span></span></p>
 <p>We use KVL from the output node down to ground to find an expression for <span class="math inline">\(v_\mathrm{gs2}\)</span>. <span id="eq-app-vbufzout-kvl-vout-cl"><span class="math display">\[
 v_\mathrm{gs2} =  v_\mathrm{out} + v_\mathrm{gs1}
-\tag{36}\]</span></span></p>
+\tag{37}\]</span></span></p>
 <p>KCL at the tail node: <span id="eq-app-vbufzout-kcl-vtail-cl"><span class="math display">\[
 g_\mathrm{m1}v_\mathrm{gs1} + g_\mathrm{m2}v_\mathrm{gs2} + g_\mathrm{ds2}v_\mathrm{gs2} + g_\mathrm{ds5}v_\mathrm{gs2} = 0
-\tag{37}\]</span></span></p>
-<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;36</a> to substitute <span class="math inline">\(v_\mathrm{gs2}\)</span> in {#eq-app-vbufzout-kcl-vtail-cl} we find an equation for <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
-v_\mathrm{gs1} = -\frac{g_\mathrm{m2}+g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out}
 \tag{38}\]</span></span></p>
-<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;36</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;29</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;38</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;35</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;36</a> to eliminate <span class="math inline">\(v_\mathrm{gs2}\)</span>. <span class="math display">\[
+<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;37</a> to substitute <span class="math inline">\(v_\mathrm{gs2}\)</span> in {#eq-app-vbufzout-kcl-vtail-cl} we find an equation for <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
+v_\mathrm{gs1} = -\frac{g_\mathrm{m2}+g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out}
+\tag{39}\]</span></span></p>
+<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;37</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;30</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;39</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;36</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;37</a> to eliminate <span class="math inline">\(v_\mathrm{gs2}\)</span>. <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - \left(g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{gs1} = 0
 \]</span></p>
-<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;29</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(v_\mathrm{gs34}\)</span>. <span class="math display">\[
+<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;30</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(v_\mathrm{gs34}\)</span>. <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} - \left(g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1}\right)v_\mathrm{gs1} = 0
 \]</span></p>
-<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;38</a> to eliminate the remaining unknown <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span class="math display">\[
+<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;39</a> to eliminate the remaining unknown <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} + \left(g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1}\right)\frac{g_\mathrm{m2}+g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out} = 0
 \]</span></p>
-<p>A more simpler result can be obtained, if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;38</a> first (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>) and then plug it into our main equation. Additionally, we use <span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span> to further simplify the equation. <span class="math display">\[
+<p>A more simpler result can be obtained, if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;39</a> first (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>) and then plug it into our main equation. Additionally, we use <span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span> to further simplify the equation. <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{ds4} + \frac{3}{2} g_\mathrm{ds2} + g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 \]</span></p>
-<p>If we apply <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span> again, we arrive at the same result which was used for the noise calculation in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a>, compare the expression for <span class="math inline">\(Y'_\mathrm{load}\)</span> given by <a href="#eq-basic-ota-output-noise-yload" class="quarto-xref">Equation&nbsp;19</a> . <span class="math display">\[
+<p>If we apply <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span> again, we arrive at the same result which was used for the noise calculation in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;7.3</a>, compare the expression for <span class="math inline">\(Y'_\mathrm{load}\)</span> given by <a href="#eq-basic-ota-output-noise-yload" class="quarto-xref">Equation&nbsp;20</a> . <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 \]</span></p>
 </section>
@@ -4031,7 +4047,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
