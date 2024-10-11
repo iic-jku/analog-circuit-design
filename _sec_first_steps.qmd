@@ -25,6 +25,8 @@ For hand calculations and theoretical discussions we will use the following simp
 
 In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $\CGG = \CGS + \CGD + \CGB$ is the total capacitance when looking into the gate of the MOSFET. $\CGS$ is usually the dominant capacitance, and $\CGD$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $\CGS$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect) (see @sec-miller-theorem). In hand calculations we will often set $\CGD = \CGB = \CDB = \CSB = 0$.
 
+To model a physical MOSFET there will be also a requirement for resistors in the model to account for terminal access resistances ($R_\mathrm{G}$, $R_\mathrm{D}$, and $R_\mathrm{S}$) as well as resistors to model second-order effects like non-quasistatic operation. For lower frequencies and bulk MOSFETs we will not consider these resistors, and just deal with the capacitive behavior.
+
 ::: {.callout-note title="MOSFET Bulk Terminal"}
 In many situations we will connect the bulk and source terminals of a MOSFET together, which results in a simplified large-signal model. As an exercise, look at @fig-mosfet-large-signal-model and draw this simplified model (hint: look at @fig-mosfet-small-signal-model and @fig-mosfet-small-signal-model-simplified for inspiration).
 :::
@@ -76,7 +78,24 @@ As you have seen in the previous investigations, the large-signal model of @fig-
 
 However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.
 
-We will use the small-signal MOSFET model shown in @fig-mosfet-small-signal-model for this course. The current-source $\ids = \gm \vgs$ models the drain current as a function of $\vgs$, and the resistor $\gds$ models the dependency of the drain current by $\vds$. The drain current dependency on the source-bulk voltage (the so-called "body effect") is introduced by the current source $\ids = g_\mathrm{mb} v_\mathrm{sb}$.
+We will use the small-signal MOSFET model shown in @fig-mosfet-small-signal-model for this course. The current-source $\ids = \gm \vgs$ models the drain current $\IDS$ as a function of $\VGS$ with
+
+$$
+\gm = \frac{\partial \IDS(\VGS, \VDS, \VSB)}{\partial \VGS},
+$$
+
+and the resistor $\gds$ models the dependency of the drain current by $\VDS$:
+
+$$
+\gds = \frac{\partial \IDS(\VGS, \VDS, \VSB)}{\partial \VDS}
+$$
+
+The drain current dependency on the source-bulk voltage (the so-called "body effect") is introduced by the current source $\ids = g_\mathrm{mb} v_\mathrm{sb}$:
+
+$$
+\gmb = \frac{\partial \IDS(\VGS, \VDS, \VSB)}{\partial \VSB}
+$$
+
 
 {{< include figures/_fig_mosfet_small_signal_model.qmd >}}
 
@@ -84,14 +103,20 @@ As has been mentioned before, in many situations (and whenever we want to use a 
 
 {{< include figures/_fig_mosfet_small_signal_model_simplified.qmd >}}
 
-As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by
+As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the **drain-source current noise** of the MOSFET, given by
+
 $$
 \overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0},
 $$ {#eq-mosfet-noise}
-where $\overline{I_\mathrm{n}^2}$ is the power-spectral density of the noise in A$^2$/Hz; $k$ is the Boltzmann constant; $T$ is the absolute temperature; $\gamma$ is a parameter in simplified theory changing between $\gamma = 2/3$ in saturation and $\gamma =1$ for triode operation; $g_\mathrm{d0}$ is equal to $\gm$ in saturation and $\gds$ in triode).
+
+where $\overline{I_\mathrm{n}^2}$ is the one-sided power-spectral density of the noise in A$^2$/Hz; $k$ is the Boltzmann constant; $T$ is the absolute temperature; $\gamma$ is a (fitting) parameter in simplified theory changing between $\gamma = 2/3$ in saturation and $\gamma =1$ for triode operation; $g_\mathrm{d0}$ is equal to $\gm$ in saturation and $\gds$ in triode).
 
 ::: {.callout-note title="MOSFET Triode and Saturation Region"}
-Sometimes we will refer to different operating modes of the MOSFET like "saturation" or "triode". Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call "triode" mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called "saturation" mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximate sense.
+Sometimes we will refer to different operating modes of the MOSFET like "saturation" or "triode." Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a voltage-controlled resistor (since the impact of both $\VGS$ and $\VDS$ on $\IDS$ is large), and this mode of operation we call "**triode**" mode. 
+
+When the drain-source voltage $\VDS$ is increased, at some point the drain-source current saturates and is only a weak function of the drain-source voltage, while still being well controlled by $\VGS$. This mode is called "**saturation**" mode.
+
+As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximate sense.
 :::
 
 A metric which is useful to assess the speed of a MOSFET is the so-called **transit frequency** $f_\mathrm{T}$. It is defined as the frequency where the current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output. It can easily be derived using the simplified MOSFET small-signal model of @fig-mosfet-small-signal-model-simplified by driving it with a voltage source and shorting the output to (neglecting the feed-forward current introduced by $\Cgd$)
