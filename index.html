@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-10-10">
+<meta name="dcterms.date" content="2024-10-11">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-10-10">
-<meta name="citation_cover_date" content="2024-10-10">
+<meta name="citation_publication_date" content="2024-10-11">
+<meta name="citation_cover_date" content="2024-10-11">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-10-10">
+<meta name="citation_online_date" content="2024-10-11">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
@@ -139,6 +139,9 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Systematic design of analog CMOS circuits: Using pre-computed lookup tables;,citation_author=Paul G. A. Jespers;,citation_author=Boris Murmann;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
 <meta name="citation_reference" content="citation_title=Modern semiconductor devices for integrated circuits;,citation_author=Chenming Hu;,citation_publication_date=2010;,citation_cover_date=2010;,citation_year=2010;">
 <meta name="citation_reference" content="citation_title=Operation and modeling of the MOS transistor;,citation_author=Yannis Tsividis;,citation_author=Colin McAndrew;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;">
+<meta name="citation_reference" content="citation_title=Analysis and Design of Elementary MOS Amplifier Stages;,citation_author=Boris Murmann;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;">
+<meta name="citation_reference" content="citation_title=Analysis and Design of Analog Integrated Circuits;,citation_author=Paul R. Gray;,citation_author=Paul J. Hurst;,citation_author=Stephen H. Lewis;,citation_author=Robert G. Meyer;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;">
+<meta name="citation_reference" content="citation_title=Design of Analog CMOS Integrated Circuits;,citation_author=Behzad Razavi;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
 </head>
 
 <body>
@@ -177,7 +180,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">October 10, 2024</p>
+              <p class="date">October 11, 2024</p>
             </div>
           </div>
           
@@ -508,6 +511,7 @@ Figure&nbsp;3: The MOSFET large-signal model.
 </div>
 </div>
 <p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}+ C_\mathrm{GB}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a> (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;15</a>). In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= C_\mathrm{GB}= C_\mathrm{DB}= C_\mathrm{SB}= 0\)</span>.</p>
+<p>To model a physical MOSFET there will be also a requirement for resistors in the model to account for terminal access resistances (<span class="math inline">\(R_\mathrm{G}\)</span>, <span class="math inline">\(R_\mathrm{D}\)</span>, and <span class="math inline">\(R_\mathrm{S}\)</span>) as well as resistors to model second-order effects like non-quasistatic operation. For lower frequencies and bulk MOSFETs we will not consider these resistors, and just deal with the capacitive behavior.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Bulk Terminal">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -597,7 +601,18 @@ Exercise: MOSFET Investigation
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="sec-mosfet-smallsignal-model"><span class="header-section-number">2.1.2</span> Small-Signal MOSFET Model</h3>
 <p>As you have seen in the previous investigations, the large-signal model of <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> describes the behavior of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.</p>
 <p>However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.</p>
-<p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> models the drain current as a function of <span class="math inline">\(v_\mathrm{gs}\)</span>, and the resistor <span class="math inline">\(g_\mathrm{ds}\)</span> models the dependency of the drain current by <span class="math inline">\(v_\mathrm{ds}\)</span>. The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{mb} v_\mathrm{sb}\)</span>.</p>
+<p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> models the drain current <span class="math inline">\(I_\mathrm{DS}\)</span> as a function of <span class="math inline">\(V_\mathrm{GS}\)</span> with</p>
+<p><span class="math display">\[
+g_\mathrm{m}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{sb})}{\partial V_\mathrm{GS}},
+\]</span></p>
+<p>and the resistor <span class="math inline">\(g_\mathrm{ds}\)</span> models the dependency of the drain current by <span class="math inline">\(V_\mathrm{DS}\)</span>:</p>
+<p><span class="math display">\[
+g_\mathrm{ds}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{sb})}{\partial V_\mathrm{DS}}
+\]</span></p>
+<p>The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{mb} v_\mathrm{sb}\)</span>:</p>
+<p><span class="math display">\[
+g_\mathrm{mb}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{sb})}{\partial V_\mathrm{sb}}
+\]</span></p>
 <div id="cell-fig-mosfet-small-signal-model" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-small-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -627,9 +642,11 @@ Figure&nbsp;6: The MOSFET small-signal model when source and bulk are shorted.
 </div>
 </div>
 </div>
-<p>As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the drain-source current noise of the MOSFET, given by <span id="eq-mosfet-noise"><span class="math display">\[
+<p>As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the <strong>drain-source current noise</strong> of the MOSFET, given by</p>
+<p><span id="eq-mosfet-noise"><span class="math display">\[
 \overline{I_\mathrm{n}^2} = 4 k T \gamma g_\mathrm{d0},
-\tag{1}\]</span></span> where <span class="math inline">\(\overline{I_\mathrm{n}^2}\)</span> is the power-spectral density of the noise in A<span class="math inline">\(^2\)</span>/Hz; <span class="math inline">\(k\)</span> is the Boltzmann constant; <span class="math inline">\(T\)</span> is the absolute temperature; <span class="math inline">\(\gamma\)</span> is a parameter in simplified theory changing between <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma =1\)</span> for triode operation; <span class="math inline">\(g_\mathrm{d0}\)</span> is equal to <span class="math inline">\(g_\mathrm{m}\)</span> in saturation and <span class="math inline">\(g_\mathrm{ds}\)</span> in triode).</p>
+\tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(\overline{I_\mathrm{n}^2}\)</span> is the one-sided power-spectral density of the noise in A<span class="math inline">\(^2\)</span>/Hz; <span class="math inline">\(k\)</span> is the Boltzmann constant; <span class="math inline">\(T\)</span> is the absolute temperature; <span class="math inline">\(\gamma\)</span> is a (fitting) parameter in simplified theory changing between <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma =1\)</span> for triode operation; <span class="math inline">\(g_\mathrm{d0}\)</span> is equal to <span class="math inline">\(g_\mathrm{m}\)</span> in saturation and <span class="math inline">\(g_\mathrm{ds}\)</span> in triode).</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Triode and Saturation Region">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -640,7 +657,9 @@ MOSFET Triode and Saturation Region
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Sometimes we will refer to different operating modes of the MOSFET like “saturation” or “triode”. Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a resistor, and this mode of operation we call “triode” mode. When the drain-source voltage is increased, at some point the drain-source current saturates and is no longer a strong function of the drain-source voltage. This mode is called “saturation” mode. As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like “triode” and “saturation” only in an approximate sense.</p>
+<p>Sometimes we will refer to different operating modes of the MOSFET like “saturation” or “triode.” Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a voltage-controlled resistor (since the impact of both <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> on <span class="math inline">\(I_\mathrm{DS}\)</span> is large), and this mode of operation we call “<strong>triode</strong>” mode.</p>
+<p>When the drain-source voltage <span class="math inline">\(V_\mathrm{DS}\)</span> is increased, at some point the drain-source current saturates and is only a weak function of the drain-source voltage, while still being well controlled by <span class="math inline">\(V_\mathrm{GS}\)</span>. This mode is called “<strong>saturation</strong>” mode.</p>
+<p>As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like “triode” and “saturation” only in an approximate sense.</p>
 </div>
 </div>
 <p>A metric which is useful to assess the speed of a MOSFET is the so-called <strong>transit frequency</strong> <span class="math inline">\(f_\mathrm{T}\)</span>. It is defined as the frequency where the current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output. It can easily be derived using the simplified MOSFET small-signal model of <a href="#fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;6</a> by driving it with a voltage source and shorting the output to (neglecting the feed-forward current introduced by <span class="math inline">\(C_\mathrm{gd}\)</span>) <span id="eq-mosfet-transit-frequency"><span class="math display">\[
@@ -1436,6 +1455,20 @@ Figure&nbsp;19: The 5-transistor OTA.
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Refresh MOSFET Basic Circuits">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Refresh MOSFET Basic Circuits
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While we repeat the basics of elementary MOSFET amplifier stages (like common-source stage, common-gate stage, and current mirror) in this course material, the following compendium <span class="citation" data-cites="murmann_mos_stages_2013">(<a href="#ref-murmann_mos_stages_2013" role="doc-biblioref">Murmann 2013</a>)</span> is recommended for review. It is freely available at <a href="https://github.com/bmurmann/Book-on-MOS-stages" class="uri">https://github.com/bmurmann/Book-on-MOS-stages</a>.</p>
+<p>In addition, we can highly recommend these references <span class="citation" data-cites="Gray_Mayer_5th_ed">Razavi (<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">2017</a>)</span> for further study.</p>
+</div>
+</div>
 <p>The operation is as follows: <span class="math inline">\(M_{1,2}\)</span> form a differential pair which is biased by the current source <span class="math inline">\(M_5\)</span>. <span class="math inline">\(M_{5,6}\)</span> form a current mirror, thus the input bias current <span class="math inline">\(I_\mathrm{bias}\)</span> sets the bias current in the OTA. The differential pair <span class="math inline">\(M_{1,2}\)</span> is loaded by the current mirror <span class="math inline">\(M_{3,4}\)</span> which mirrors the output current of <span class="math inline">\(M_1\)</span> to the right side. Here, the currents from <span class="math inline">\(M_4\)</span> and <span class="math inline">\(M_2\)</span> are summed, and together with the conductance effective at the output node a voltage builds up.</p>
 <p>We note that <span class="math inline">\(M_{1,2}\)</span> and <span class="math inline">\(M_{3,4}\)</span> need to be symmetric, thus will have the same <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> dimensioning. <span class="math inline">\(M_{5,6}\)</span> we scale accordingly to set the correct bias current in the OTA.</p>
 <p>As this is an OTA the output is a current; if the load impedance is high (i.e., purely capacitive, which is often the case in integrated circuits when driving MOSFET inputs) then the voltage gain of the OTA can be high (of course, in this simple OTA it is limited). With a high-impedance loading this OTA can provide a voltage output, and this is actually how OTAs are mostly operated.</p>
@@ -1774,7 +1807,7 @@ Exercise: 5T-OTA Sizing
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1783,7 +1816,7 @@ Solution: 5T-OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-33" class="callout-33-contents callout-collapse collapse">
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -2036,7 +2069,7 @@ Exercise: 5T-OTA Design and Testbench
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2045,7 +2078,7 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-35" class="callout-35-contents callout-collapse collapse show">
+<div id="callout-36" class="callout-36-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -2473,7 +2506,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;7.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 1\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2482,7 +2515,7 @@ Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-40" class="callout-40-contents callout-collapse collapse show">
+<div id="callout-41" class="callout-41-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -2879,7 +2912,7 @@ Exercise: Improved OTA Initial Simulation
 <h2 data-number="9.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">9.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;2</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-45-contents" aria-controls="callout-45" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2888,7 +2921,7 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-44" class="callout-44-contents callout-collapse collapse show">
+<div id="callout-45" class="callout-45-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -3603,6 +3636,9 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Gray_Mayer_5th_ed" class="csl-entry" role="listitem">
+Gray, Paul R., Paul J. Hurst, Stephen H. Lewis, and Robert G. Meyer. 2009. <em><span class="nocase">Analysis and Design of Analog Integrated Circuits</span></em>. Wiley.
+</div>
 <div id="ref-Hellen_2003" class="csl-entry" role="listitem">
 Hellen, Edward H. 2003. <span>“<span class="nocase">Verifying the diode–capacitor circuit voltage decay</span>.”</span> <em>American Journal of Physics</em> 71 (8): 797–800. <a href="https://doi.org/10.1119/1.1578070">https://doi.org/10.1119/1.1578070</a>.
 </div>
@@ -3615,8 +3651,14 @@ Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CM
 <div id="ref-Middlebrook_1975" class="csl-entry" role="listitem">
 Middlebrook, R. D. 1975. <span>“<span class="nocase">Measurement of loop gain in feedback systems</span>.”</span> <em>International Journal of Electronics</em> 38 (4): 485–512. <a href="https://doi.org/10.1080/00207217508920421">https://doi.org/10.1080/00207217508920421</a>.
 </div>
+<div id="ref-murmann_mos_stages_2013" class="csl-entry" role="listitem">
+Murmann, Boris. 2013. <em><span class="nocase">Analysis and Design of Elementary MOS Amplifier Stages</span></em>. NTS Press.
+</div>
 <div id="ref-Nagel_1975" class="csl-entry" role="listitem">
 Nagel, Laurence W. 1975. <span>“SPICE2: A Computer Program to Simulate Semiconductor Circuits.”</span> PhD thesis, EECS Department, University of California, Berkeley. <a href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html">http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html</a>.
+</div>
+<div id="ref-Razavi_Analog_CMOS" class="csl-entry" role="listitem">
+Razavi, Behzad. 2017. <em><span class="nocase">Design of Analog CMOS Integrated Circuits</span></em>. McGraw-Hill.
 </div>
 <div id="ref-Sheikholeslami_2015" class="csl-entry" role="listitem">
 Sheikholeslami, Ali. 2015. <span>“<span class="nocase">Miller’s Theorem [Circuit Intuitions]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 7 (3): 9–10. <a href="https://doi.org/10.1109/mssc.2015.2446457">https://doi.org/10.1109/mssc.2015.2446457</a>.
@@ -4047,7 +4089,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
