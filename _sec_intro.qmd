@@ -49,3 +49,39 @@ Experienced users can install this image on their personal computer, for JKU stu
 ::: {.callout-warning title="Linux"}
 In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal. If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many resources available.
 :::
+
+## Setting up the Design Directory
+
+- Open your VM by entering the URL in your browser.
+- Open a terminal (third icon in taskbar). You should get the following prompt: `/foss/designs >`
+- Clone the git repository into the current directory: `git clone https://github.com/iic-jku/analog-circuit-design.git`
+- This Github repository includes a file called `.designinit`, which sets the PDK and certain paths. However this must be located in `/foss/designs/`
+- Therefore, we first need to copy it there: `cp analog-circuit-design/.designinit .`
+- Then we adjust the variable `XSCHEM_USER_LIBRARY_PATH` by opening the file in an editor e.g. `nano .designinit`
+    - Edit the last line from `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem` to `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem`
+- To apply the changes, we need to close the current terminal window: `exit`
+- Open again a terminal
+- Test if the correct PDK gets selected: `echo $PDK`
+- Change into the Github repository: `cd analog-circuit-design`
+- Start xschem using `xschem &` or directly open a specific schematic using `xschem xschem/dc_lv_nmos.sch &`
+
+### Creating Backups
+
+You can easily create backups of your work by creating a zip archive of the complete directory.
+
+- Change to the parent directory: `cd /foss/designs/`
+- Create a zip archive from the complete design folder: `zip backup.zip analog-circuit-design -r`
+
+### Updating the Repository
+
+- Create a backup! 
+- Go to directory: e.g. `cd /foss/desings/analog-circuit-design`
+- Fetch newest changes from the origin: `git fetch origin`
+- Merge changes from the origin into local branch 'master': `git merge origin/main`
+
+::: {.callout-warning title="Merge Conflicts"}
+It is possible that `git merge` does not complete successfully. Either you are able to resovle the merge conflict manually, or it may be easier to make a fresh clone of the repository and adding your local changes manually from the backup.
+
+**Think twice before execting any git commands without a backup, this could lead to permanent loss of data!**
+:::
+
