@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-10-13">
+<meta name="dcterms.date" content="2024-10-23">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-10-13">
-<meta name="citation_cover_date" content="2024-10-13">
+<meta name="citation_publication_date" content="2024-10-23">
+<meta name="citation_cover_date" content="2024-10-23">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-10-13">
+<meta name="citation_online_date" content="2024-10-23">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
@@ -180,7 +180,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">October 13, 2024</p>
+              <p class="date">October 23, 2024</p>
             </div>
           </div>
           
@@ -207,6 +207,11 @@ window.Quarto = {
   <li><a href="#schematic-entry-using-xschem" id="toc-schematic-entry-using-xschem" class="nav-link" data-scroll-target="#schematic-entry-using-xschem"><span class="header-section-number">1.2</span> Schematic Entry Using Xschem</a></li>
   <li><a href="#circuit-simulation-using-ngspice" id="toc-circuit-simulation-using-ngspice" class="nav-link" data-scroll-target="#circuit-simulation-using-ngspice"><span class="header-section-number">1.3</span> Circuit Simulation Using ngspice</a></li>
   <li><a href="#integrated-ic-design-environment-iic-osic-tools" id="toc-integrated-ic-design-environment-iic-osic-tools" class="nav-link" data-scroll-target="#integrated-ic-design-environment-iic-osic-tools"><span class="header-section-number">1.4</span> Integrated IC Design Environment (IIC-OSIC-TOOLS)</a></li>
+  <li><a href="#setting-up-the-design-directory" id="toc-setting-up-the-design-directory" class="nav-link" data-scroll-target="#setting-up-the-design-directory"><span class="header-section-number">1.5</span> Setting up the Design Directory</a>
+  <ul class="collapse">
+  <li><a href="#creating-backups" id="toc-creating-backups" class="nav-link" data-scroll-target="#creating-backups"><span class="header-section-number">1.5.1</span> Creating Backups</a></li>
+  <li><a href="#updating-the-repository" id="toc-updating-the-repository" class="nav-link" data-scroll-target="#updating-the-repository"><span class="header-section-number">1.5.2</span> Updating the Repository</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#sec-first-steps" id="toc-sec-first-steps" class="nav-link" data-scroll-target="#sec-first-steps"><span class="header-section-number">2</span> First Steps</a>
   <ul class="collapse">
@@ -441,6 +446,56 @@ Linux
 <p>In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal. If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many resources available.</p>
 </div>
 </div>
+</section>
+<section id="setting-up-the-design-directory" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="setting-up-the-design-directory"><span class="header-section-number">1.5</span> Setting up the Design Directory</h2>
+<ul>
+<li>Open your VM by entering the URL in your browser.</li>
+<li>Open a terminal (third icon in taskbar). You should get the following prompt: <code>/foss/designs &gt;</code></li>
+<li>Clone the git repository into the current directory: <code>git clone https://github.com/iic-jku/analog-circuit-design.git</code></li>
+<li>This Github repository includes a file called <code>.designinit</code>, which sets the PDK and certain paths. However this must be located in <code>/foss/designs/</code></li>
+<li>Therefore, we first need to copy it there: <code>cp analog-circuit-design/.designinit .</code></li>
+<li>Then we adjust the variable <code>XSCHEM_USER_LIBRARY_PATH</code> by opening the file in an editor e.g.&nbsp;<code>nano .designinit</code>
+<ul>
+<li>Edit the last line from <code>export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem</code> to <code>export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem</code></li>
+</ul></li>
+<li>To apply the changes, we need to close the current terminal window: <code>exit</code></li>
+<li>Open again a terminal</li>
+<li>Test if the correct PDK gets selected: <code>echo $PDK</code></li>
+<li>Change into the Github repository: <code>cd analog-circuit-design</code></li>
+<li>Start xschem using <code>xschem</code> or directly open a specific schematic using <code>xschem xschem/dc_lv_nmos.sch</code></li>
+</ul>
+<section id="creating-backups" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="creating-backups"><span class="header-section-number">1.5.1</span> Creating Backups</h3>
+<p>You can easily create backups of your work by creating a zip archive of the complete directory.</p>
+<ul>
+<li>Change to the parent directory: <code>cd /foss/designs/</code></li>
+<li>Create a zip archive from the complete design folder: <code>zip backup.zip analog-circuit-design -r</code></li>
+</ul>
+</section>
+<section id="updating-the-repository" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="updating-the-repository"><span class="header-section-number">1.5.2</span> Updating the Repository</h3>
+<ul>
+<li>Create a backup!</li>
+<li>Go to directory: e.g.&nbsp;<code>cd /foss/designs/analog-circuit-design</code></li>
+<li>Fetch newest changes from the origin: <code>git fetch origin</code></li>
+<li>Merge changes from the origin into local branch ‘master’: <code>git merge origin/main</code></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled" title="Git Merge Conflicts">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Git Merge Conflicts
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is possible that <code>git merge</code> does not complete successfully. Either you are able to resolve the merge conflict manually, or it may be easier to make a fresh clone of the repository and adding your local changes manually from the backup.</p>
+<p><strong>Think twice before executing any git commands without a backup, this could lead to permanent loss of data!</strong></p>
+</div>
+</div>
+</section>
 </section>
 </section>
 <section id="sec-first-steps" class="level1" data-number="2">
@@ -1080,7 +1135,7 @@ Exercise: MOSFET Diode Sizing
 </div>
 <p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: MOSFET Diode Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1089,7 +1144,7 @@ Solution: MOSFET Diode Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
@@ -1806,7 +1861,7 @@ Exercise: 5T-OTA Sizing
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1815,7 +1870,7 @@ Solution: 5T-OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-34" class="callout-34-contents callout-collapse collapse">
+<div id="callout-35" class="callout-35-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -2068,7 +2123,7 @@ Exercise: 5T-OTA Design and Testbench
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2077,7 +2132,7 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-36" class="callout-36-contents callout-collapse collapse show">
+<div id="callout-37" class="callout-37-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -2505,7 +2560,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;7.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 1\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2514,7 +2569,7 @@ Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-41" class="callout-41-contents callout-collapse collapse show">
+<div id="callout-42" class="callout-42-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -2911,7 +2966,7 @@ Exercise: Improved OTA Initial Simulation
 <h2 data-number="9.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">9.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;2</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-45-contents" aria-controls="callout-45" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-46-contents" aria-controls="callout-46" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2920,7 +2975,7 @@ Note&nbsp;2: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-45" class="callout-45-contents callout-collapse collapse show">
+<div id="callout-46" class="callout-46-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -4085,7 +4140,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
