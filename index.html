@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-10-23">
+<meta name="dcterms.date" content="2024-10-26">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-10-23">
-<meta name="citation_cover_date" content="2024-10-23">
+<meta name="citation_publication_date" content="2024-10-26">
+<meta name="citation_cover_date" content="2024-10-26">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-10-23">
+<meta name="citation_online_date" content="2024-10-26">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
@@ -180,7 +180,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">October 23, 2024</p>
+              <p class="date">October 26, 2024</p>
             </div>
           </div>
           
@@ -716,7 +716,7 @@ MOSFET Triode and Saturation Region
 <p>As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like “triode” and “saturation” only in an approximate sense.</p>
 </div>
 </div>
-<p>A metric which is useful to assess the speed of a MOSFET is the so-called <strong>transit frequency</strong> <span class="math inline">\(f_\mathrm{T}\)</span>. It is defined as the frequency where the current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output. It can easily be derived using the simplified MOSFET small-signal model of <a href="#fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;6</a> by driving it with a voltage source and shorting the output to (neglecting the feed-forward current introduced by <span class="math inline">\(C_\mathrm{gd}\)</span>) <span id="eq-mosfet-transit-frequency"><span class="math display">\[
+<p>A metric which is useful to assess the speed of a MOSFET is the so-called <strong>transit frequency</strong> <span class="math inline">\(f_\mathrm{T}\)</span>. It is defined as the frequency where the small-signal current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output drops to unity (reaches one). It can easily be derived using the simplified MOSFET small-signal model of <a href="#fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;6</a> by driving it with a voltage source and shorting the output to (neglecting the feed-forward current introduced by <span class="math inline">\(C_\mathrm{gd}\)</span>) <span id="eq-mosfet-transit-frequency"><span class="math display">\[
 \omega_\mathrm{T} = 2 \pi f_\mathrm{T} \approx \frac{g_\mathrm{m}}{C_\mathrm{gg}} = \frac{g_\mathrm{m}}{C_\mathrm{gs}+ C_\mathrm{gd}+ C_\mathrm{gb}}.
 \tag{2}\]</span></span> This frequency is an extrapolated frequency where the MOSFET operation is dominated by several second-order effects (hence <a href="#eq-mosfet-transit-frequency" class="quarto-xref">Equation&nbsp;2</a> is not valid any longer). A rule-of-thumb is to use a MOSFET up to approximately <span class="math inline">\(f_\mathrm{T} / 10\)</span>. In any case, <span class="math inline">\(f_\mathrm{T}\)</span> is a proxy of the speed of a MOSFET; in other words, how much input capacitance <span class="math inline">\(C_\mathrm{gg}\)</span> is incurred when creating a certain <span class="math inline">\(g_\mathrm{m}\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Transit Frequency">
@@ -1543,7 +1543,7 @@ Figure&nbsp;20: A voltage buffer (based on OTA) driving a capacitive load.
 </div>
 </div>
 </div>
-<p>If the voltage gain of the OTA is <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;20</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application for the following specification values (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>). These values are rather typical of what could be expected for such a buffer design.</p>
+<p>If the voltage gain of the OTA in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;20</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application for the following specification values (see <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>). These values are rather typical of what could be expected for such a buffer design.</p>
 <div id="tbl-voltage-buffer-spec" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-voltage-buffer-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3533,7 +3533,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <ul>
 <li><code>Cursor keys</code> to move around</li>
 <li><code>Ctrl-e</code> to go back to parent schematic</li>
-<li><code>e</code> to descend into selected symbol</li>
+<li><code>e</code> to descend into schematic of selected symbol</li>
+<li><code>i</code> to descend into symbol of selected symbol</li>
 <li><code>f</code> full zoom on schematic</li>
 <li><code>Shift-z</code> to zoom in</li>
 <li><code>Ctrl-z</code> to zoom out</li>
@@ -3549,7 +3550,9 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>c</code> to copy elements</li>
 <li><code>Alt-Shift-l</code> to add wire label</li>
 <li><code>Alt-l</code> to add label pin</li>
-<li><code>m</code> move selected objects</li>
+<li><code>m</code> to move selected objects</li>
+<li><code>Shift-R</code> to rotate selected objects</li>
+<li><code>Shift-F</code> to mirror / flip selected objects</li>
 <li><code>q</code> to edit properties</li>
 <li><code>Ctrl-s</code> to save schematic</li>
 <li><code>t</code> to place a text</li>
@@ -3558,6 +3561,7 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>w</code> to draw a wire</li>
 <li><code>Shift-W</code> draw wire and snap to close pin or net point</li>
 <li><code>&amp;</code> to join, break, and collapse wires</li>
+<li><code>A</code> to make symbol from schematic</li>
 </ul>
 </section>
 <section id="viewingsimulating-schematics" class="level4" data-number="18.0.0.3">
@@ -3568,6 +3572,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>Shift-K</code> to unhighlight all nets</li>
 <li><code>Shift-o</code> to toggle light/dark color scheme</li>
 <li><code>s</code> to run a simulation</li>
+<li><code>a &amp; b</code> to add cursors to an in-circuit simulation graph</li>
+<li><code>f</code> full zoom on y- or x-axis in in-circuit simulation graph</li>
 </ul>
 </section>
 </section>
@@ -4140,7 +4146,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
