@@ -285,14 +285,14 @@ window.Quarto = {
   <li><a href="#open-loop-configuration" id="toc-open-loop-configuration" class="nav-link" data-scroll-target="#open-loop-configuration"><span class="header-section-number">16.1</span> Open-Loop Configuration</a></li>
   <li><a href="#closed-loop-configuration" id="toc-closed-loop-configuration" class="nav-link" data-scroll-target="#closed-loop-configuration"><span class="header-section-number">16.2</span> Closed-Loop Configuration</a></li>
   </ul></li>
-  <li><a href="#appendix-linux-cheatsheet" id="toc-appendix-linux-cheatsheet" class="nav-link" data-scroll-target="#appendix-linux-cheatsheet"><span class="header-section-number">17</span> Appendix: Linux Cheatsheet</a></li>
-  <li><a href="#appendix-ngspice-cheatsheet" id="toc-appendix-ngspice-cheatsheet" class="nav-link" data-scroll-target="#appendix-ngspice-cheatsheet"><span class="header-section-number">18</span> Appendix: ngspice Cheatsheet</a>
+  <li><a href="#sec-linux-cheatsheet" id="toc-sec-linux-cheatsheet" class="nav-link" data-scroll-target="#sec-linux-cheatsheet"><span class="header-section-number">17</span> Appendix: Linux Cheatsheet</a></li>
+  <li><a href="#sec-xschem-cheatsheet" id="toc-sec-xschem-cheatsheet" class="nav-link" data-scroll-target="#sec-xschem-cheatsheet"><span class="header-section-number">18</span> Appendix: Xschem Cheatsheet</a></li>
+  <li><a href="#sec-ngspice-cheatsheet" id="toc-sec-ngspice-cheatsheet" class="nav-link" data-scroll-target="#sec-ngspice-cheatsheet"><span class="header-section-number">19</span> Appendix: ngspice Cheatsheet</a>
   <ul class="collapse">
-  <li><a href="#commands" id="toc-commands" class="nav-link" data-scroll-target="#commands"><span class="header-section-number">18.1</span> Commands</a></li>
-  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options"><span class="header-section-number">18.2</span> Options</a></li>
-  <li><a href="#convergence-helper" id="toc-convergence-helper" class="nav-link" data-scroll-target="#convergence-helper"><span class="header-section-number">18.3</span> Convergence Helper</a></li>
+  <li><a href="#commands" id="toc-commands" class="nav-link" data-scroll-target="#commands"><span class="header-section-number">19.1</span> Commands</a></li>
+  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options"><span class="header-section-number">19.2</span> Options</a></li>
+  <li><a href="#convergence-helper" id="toc-convergence-helper" class="nav-link" data-scroll-target="#convergence-helper"><span class="header-section-number">19.3</span> Convergence Helper</a></li>
   </ul></li>
-  <li><a href="#appendix-xschem-cheatsheet" id="toc-appendix-xschem-cheatsheet" class="nav-link" data-scroll-target="#appendix-xschem-cheatsheet"><span class="header-section-number">19</span> Appendix: Xschem Cheatsheet</a></li>
   <li><a href="#sec-designers-etiquette" id="toc-sec-designers-etiquette" class="nav-link" data-scroll-target="#sec-designers-etiquette"><span class="header-section-number">20</span> Appendix: Circuit Designer’s Etiquette</a>
   <ul class="collapse">
   <li><a href="#prolog" id="toc-prolog" class="nav-link" data-scroll-target="#prolog"><span class="header-section-number">20.1</span> Prolog</a></li>
@@ -412,10 +412,12 @@ Table&nbsp;1: IHP SG13G2 devices
 <section id="schematic-entry-using-xschem" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="schematic-entry-using-xschem"><span class="header-section-number">1.2</span> Schematic Entry Using Xschem</h2>
 <p>Xschem is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem and the basic operation of it please look at the available <a href="https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html">online documentation</a>. Usage of Xschem will be learned with the first few basic examples, essentially using a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.</p>
+<p>A summary of important Xschem keyboard shortcuts is provided in <a href="#sec-xschem-cheatsheet" class="quarto-xref">Section&nbsp;18</a>.</p>
 </section>
 <section id="circuit-simulation-using-ngspice" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="circuit-simulation-using-ngspice"><span class="header-section-number">1.3</span> Circuit Simulation Using ngspice</h2>
 <p>ngspice is an open-source circuit simulator with SPICE dependency <span class="citation" data-cites="Nagel_1975">(<a href="#ref-Nagel_1975" role="doc-biblioref">Nagel 1975</a>)</span>. Besides the usual simulated types like <code>op</code> (operating point), <code>dc</code> (dc sweeps), <code>tran</code> (time-domain), or <code>ac</code> (small-signal frequency sweeps), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest <a href="https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf">online manual</a>.</p>
+<p>Important ngspice simulation commands and options (e.g., to control convergence settings) are listed in <a href="#sec-ngspice-cheatsheet" class="quarto-xref">Section&nbsp;19</a>.</p>
 </section>
 <section id="integrated-ic-design-environment-iic-osic-tools" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="integrated-ic-design-environment-iic-osic-tools"><span class="header-section-number">1.4</span> Integrated IC Design Environment (IIC-OSIC-TOOLS)</h2>
@@ -445,6 +447,7 @@ Linux
 </div>
 <div class="callout-body-container callout-body">
 <p>In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal. If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many resources available.</p>
+<p>A summary of important Linux shell commands is provided in <a href="#sec-linux-cheatsheet" class="quarto-xref">Section&nbsp;17</a>.</p>
 </div>
 </div>
 </section>
@@ -3463,7 +3466,7 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 \]</span></p>
 </section>
 </section>
-<section id="appendix-linux-cheatsheet" class="level1" data-number="17">
+<section id="sec-linux-cheatsheet" class="level1" data-number="17">
 <h1 data-number="17"><span class="header-section-number">17</span> Appendix: Linux Cheatsheet</h1>
 <p>The most useful commands for the Linux command line are:</p>
 <ul>
@@ -3486,11 +3489,64 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 </ul>
 <p>More advanced commands can be found under <a href="https://www.geeksforgeeks.org/linux-commands-cheat-sheet" class="uri">https://www.geeksforgeeks.org/linux-commands-cheat-sheet</a></p>
 </section>
-<section id="appendix-ngspice-cheatsheet" class="level1" data-number="18">
-<h1 data-number="18"><span class="header-section-number">18</span> Appendix: ngspice Cheatsheet</h1>
+<section id="sec-xschem-cheatsheet" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Appendix: Xschem Cheatsheet</h1>
+<p>When opening Xschem, using <code>Help -&gt; Keys</code> a pop-up windows comes up with many useful shortcuts. The most useful are:</p>
+<section id="moving-around-in-a-schematic" class="level4" data-number="18.0.0.1">
+<h4 data-number="18.0.0.1" class="anchored" data-anchor-id="moving-around-in-a-schematic"><span class="header-section-number">18.0.0.1</span> Moving around in a schematic:</h4>
+<ul>
+<li><code>Cursor keys</code> to move around</li>
+<li><code>Ctrl-e</code> to go back to parent schematic</li>
+<li><code>e</code> to descend into schematic of selected symbol</li>
+<li><code>i</code> to descend into symbol of selected symbol</li>
+<li><code>f</code> full zoom on schematic</li>
+<li><code>Shift-z</code> to zoom in</li>
+<li><code>Ctrl-z</code> to zoom out</li>
+</ul>
+</section>
+<section id="editing-schematics" class="level4" data-number="18.0.0.2">
+<h4 data-number="18.0.0.2" class="anchored" data-anchor-id="editing-schematics"><span class="header-section-number">18.0.0.2</span> Editing schematics:</h4>
+<ul>
+<li><code>Del</code> to delete elements</li>
+<li><code>Ins</code> to insert elements from library</li>
+<li><code>Escape</code> to abort an operation</li>
+<li><code>Ctrl-#</code> to rename components with duplicate names</li>
+<li><code>c</code> to copy elements</li>
+<li><code>Alt-Shift-l</code> to add wire label</li>
+<li><code>Alt-l</code> to add label pin</li>
+<li><code>m</code> to move selected objects</li>
+<li><code>Shift-R</code> to rotate selected objects</li>
+<li><code>Shift-F</code> to mirror / flip selected objects</li>
+<li><code>q</code> to edit properties</li>
+<li><code>Ctrl-s</code> to save schematic</li>
+<li><code>t</code> to place a text</li>
+<li><code>Shift-T</code> to toggle the <code>ignore</code> flag on an instance</li>
+<li><code>u</code> to undo an operation</li>
+<li><code>w</code> to draw a wire</li>
+<li><code>Shift-W</code> draw wire and snap to close pin or net point</li>
+<li><code>&amp;</code> to join, break, and collapse wires</li>
+<li><code>A</code> to make symbol from schematic</li>
+<li><code>Alt-s</code> to reload the circuit if changes in a subcircuit were made</li>
+</ul>
+</section>
+<section id="viewingsimulating-schematics" class="level4" data-number="18.0.0.3">
+<h4 data-number="18.0.0.3" class="anchored" data-anchor-id="viewingsimulating-schematics"><span class="header-section-number">18.0.0.3</span> Viewing/Simulating Schematics</h4>
+<ul>
+<li><code>5</code> to only view probes</li>
+<li><code>k</code> to highlight selected net</li>
+<li><code>Shift-K</code> to unhighlight all nets</li>
+<li><code>Shift-o</code> to toggle light/dark color scheme</li>
+<li><code>s</code> to run a simulation</li>
+<li><code>a &amp; b</code> to add cursors to an in-circuit simulation graph</li>
+<li><code>f</code> full zoom on y- or x-axis in in-circuit simulation graph</li>
+</ul>
+</section>
+</section>
+<section id="sec-ngspice-cheatsheet" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Appendix: ngspice Cheatsheet</h1>
 <p>Here is an unsorted list of useful ngspice settings and command:</p>
-<section id="commands" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="commands"><span class="header-section-number">18.1</span> Commands</h2>
+<section id="commands" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="commands"><span class="header-section-number">19.1</span> Commands</h2>
 <ul>
 <li><code>ac dec|lin points fstart fstop</code> performs a small-signal ac analysis with either linear or decade sweep</li>
 <li><code>dc sourcename vstart vstop vincr [src2 start2 stop2 incr2]</code> runs a dc-sweep, optionally across two variables</li>
@@ -3519,8 +3575,8 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>write</code> writes simulation data (the saved nodes) into a RAW file; default is binary, can be changed to ASCII with <code>set filetype=ascii</code>; with <code>set appendwrite</code> data is added to an existing file</li>
 </ul>
 </section>
-<section id="options" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="options"><span class="header-section-number">18.2</span> Options</h2>
+<section id="options" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="options"><span class="header-section-number">19.2</span> Options</h2>
 <p>Use <code>option option=val option=val</code> to set various options; important ones are:</p>
 <ul>
 <li><code>abstol</code> sets the absolute current error tolerance (default is 1pA)</li>
@@ -3539,66 +3595,13 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li><code>warn</code> enables the printing of the SOA warning messages</li>
 </ul>
 </section>
-<section id="convergence-helper" class="level2" data-number="18.3">
-<h2 data-number="18.3" class="anchored" data-anchor-id="convergence-helper"><span class="header-section-number">18.3</span> Convergence Helper</h2>
+<section id="convergence-helper" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="convergence-helper"><span class="header-section-number">19.3</span> Convergence Helper</h2>
 <ul>
 <li><code>option gmin</code> can be used to increase the conductance applied at every node</li>
 <li><code>option method=gear</code> can lead to improved convergence</li>
 <li><code>.nodeset</code> can be used to specify initial node voltage guesses</li>
 <li><code>.ic</code> can be used to set initial conditions</li>
-</ul>
-</section>
-</section>
-<section id="appendix-xschem-cheatsheet" class="level1" data-number="19">
-<h1 data-number="19"><span class="header-section-number">19</span> Appendix: Xschem Cheatsheet</h1>
-<p>When opening Xschem, using <code>Help -&gt; Keys</code> a pop-up windows comes up with many useful shortcuts. The most useful are:</p>
-<section id="moving-around-in-a-schematic" class="level4" data-number="19.0.0.1">
-<h4 data-number="19.0.0.1" class="anchored" data-anchor-id="moving-around-in-a-schematic"><span class="header-section-number">19.0.0.1</span> Moving around in a schematic:</h4>
-<ul>
-<li><code>Cursor keys</code> to move around</li>
-<li><code>Ctrl-e</code> to go back to parent schematic</li>
-<li><code>e</code> to descend into schematic of selected symbol</li>
-<li><code>i</code> to descend into symbol of selected symbol</li>
-<li><code>f</code> full zoom on schematic</li>
-<li><code>Shift-z</code> to zoom in</li>
-<li><code>Ctrl-z</code> to zoom out</li>
-</ul>
-</section>
-<section id="editing-schematics" class="level4" data-number="19.0.0.2">
-<h4 data-number="19.0.0.2" class="anchored" data-anchor-id="editing-schematics"><span class="header-section-number">19.0.0.2</span> Editing schematics:</h4>
-<ul>
-<li><code>Del</code> to delete elements</li>
-<li><code>Ins</code> to insert elements from library</li>
-<li><code>Escape</code> to abort an operation</li>
-<li><code>Ctrl-#</code> to rename components with duplicate names</li>
-<li><code>c</code> to copy elements</li>
-<li><code>Alt-Shift-l</code> to add wire label</li>
-<li><code>Alt-l</code> to add label pin</li>
-<li><code>m</code> to move selected objects</li>
-<li><code>Shift-R</code> to rotate selected objects</li>
-<li><code>Shift-F</code> to mirror / flip selected objects</li>
-<li><code>q</code> to edit properties</li>
-<li><code>Ctrl-s</code> to save schematic</li>
-<li><code>t</code> to place a text</li>
-<li><code>Shift-T</code> to toggle the <code>ignore</code> flag on an instance</li>
-<li><code>u</code> to undo an operation</li>
-<li><code>w</code> to draw a wire</li>
-<li><code>Shift-W</code> draw wire and snap to close pin or net point</li>
-<li><code>&amp;</code> to join, break, and collapse wires</li>
-<li><code>A</code> to make symbol from schematic</li>
-<li><code>Alt-s</code> to reload the circuit if changes in a subcircuit were made</li>
-</ul>
-</section>
-<section id="viewingsimulating-schematics" class="level4" data-number="19.0.0.3">
-<h4 data-number="19.0.0.3" class="anchored" data-anchor-id="viewingsimulating-schematics"><span class="header-section-number">19.0.0.3</span> Viewing/Simulating Schematics</h4>
-<ul>
-<li><code>5</code> to only view probes</li>
-<li><code>k</code> to highlight selected net</li>
-<li><code>Shift-K</code> to unhighlight all nets</li>
-<li><code>Shift-o</code> to toggle light/dark color scheme</li>
-<li><code>s</code> to run a simulation</li>
-<li><code>a &amp; b</code> to add cursors to an in-circuit simulation graph</li>
-<li><code>f</code> full zoom on y- or x-axis in in-circuit simulation graph</li>
 </ul>
 </section>
 </section>
@@ -4169,7 +4172,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
