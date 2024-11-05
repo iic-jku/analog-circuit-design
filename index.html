@@ -649,7 +649,7 @@ Exercise: MOSFET Investigation
 </ol></li>
 <li>Build a test bench to explore the body effect, start with LV NMOS.
 <ol type="1">
-<li>What happens when <span class="math inline">\(V_\mathrm{sb}\neq 0\)</span>?</li>
+<li>What happens when <span class="math inline">\(V_\mathrm{SB}\neq 0\)</span>?</li>
 </ol></li>
 </ol>
 </div>
@@ -661,15 +661,15 @@ Exercise: MOSFET Investigation
 <p>However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.</p>
 <p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> models the drain current <span class="math inline">\(I_\mathrm{DS}\)</span> as a function of <span class="math inline">\(V_\mathrm{GS}\)</span> with</p>
 <p><span class="math display">\[
-g_\mathrm{m}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{sb})}{\partial V_\mathrm{GS}},
+g_\mathrm{m}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{GS}},
 \]</span></p>
 <p>and the resistor <span class="math inline">\(g_\mathrm{ds}\)</span> models the dependency of the drain current by <span class="math inline">\(V_\mathrm{DS}\)</span>:</p>
 <p><span class="math display">\[
-g_\mathrm{ds}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{sb})}{\partial V_\mathrm{DS}}
+g_\mathrm{ds}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{DS}}
 \]</span></p>
 <p>The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{mb} v_\mathrm{sb}\)</span>:</p>
 <p><span class="math display">\[
-g_\mathrm{mb}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{sb})}{\partial V_\mathrm{sb}}
+g_\mathrm{mb}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{SB}}
 \]</span></p>
 <div id="cell-fig-mosfet-small-signal-model" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
@@ -4172,7 +4172,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
