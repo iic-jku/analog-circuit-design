@@ -132,6 +132,7 @@ window.Quarto = {
 <meta name="citation_year" content="2024">
 <meta name="citation_online_date" content="2024-11-05">
 <meta name="citation_language" content="en-US">
+<meta name="citation_reference" content="citation_title=A treatise on electricity and magnetism;,citation_author=James Clerk Maxwell;,citation_publication_date=1873;,citation_cover_date=1873;,citation_year=1873;,citation_volume=1;">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=Measurement of loop gain in feedback systems;,citation_author=R. D. Middlebrook;,citation_publication_date=1975;,citation_cover_date=1975;,citation_year=1975;,citation_issue=4;,citation_doi=10.1080/00207217508920421;,citation_issn=0020-7217;,citation_volume=38;,citation_journal_title=International Journal of Electronics;">
 <meta name="citation_reference" content="citation_title=Verifying the diode–capacitor circuit voltage decay;,citation_author=Edward H. Hellen;,citation_publication_date=2003-08;,citation_cover_date=2003-08;,citation_year=2003;,citation_issue=8;,citation_doi=10.1119/1.1578070;,citation_volume=71;,citation_journal_title=American Journal of Physics;">
@@ -639,7 +640,7 @@ Exercise: MOSFET Investigation
 <li>How is <span class="math inline">\(I_\mathrm{DS}\)</span> affected by <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>?</li>
 <li>Change <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of the MOSFET. What is the impact on the above parameters? Can you explain the variations?</li>
 <li>Look at the capacitance values for <span class="math inline">\(C_\mathrm{GS}\)</span>, <span class="math inline">\(C_\mathrm{GB}\)</span>, <span class="math inline">\(C_\mathrm{GD}\)</span>, and <span class="math inline">\(C_\mathrm{DB}\)</span>. How are they affected by <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> and by changing the bias conditions (play with <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>)?</li>
-<li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\mathrm{DG}\)</span>. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why?</li>
+<li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\mathrm{DG}\)</span>. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why? (Hint: Study <a href="#nte-maxwell-cap-matrix" class="quarto-xref">Note&nbsp;1</a>)</li>
 </ol></li>
 <li>Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
 <ol type="1">
@@ -762,6 +763,35 @@ Exercise: MOSFET Small-Signal Parameters
 <li>What is the difference in <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(g_\mathrm{ds}\)</span>, and other parameters between the NMOS and the PMOS? Why could they be different?</li>
 </ol></li>
 </ol>
+</div>
+</div>
+<div id="nte-maxwell-cap-matrix" class="callout callout-style-default callout-note callout-titled" title="Maxwell Capacitance Matrix">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;1: Maxwell Capacitance Matrix
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A Maxwell capacitance matrix <span class="citation" data-cites="Maxwell_1873">(<a href="#ref-Maxwell_1873" role="doc-biblioref">Maxwell 1873</a>)</span> provides the relation between voltages on a set of conductors and the charges on these conductors. For a given conductor set with <span class="math inline">\(N\)</span> conductors (and thus <span class="math inline">\(N\)</span> terminals) the relation is <span class="math display">\[
+\mathbf{Q} = \mathbf{C} \cdot \mathbf{V}
+\]</span> where <span class="math inline">\(\mathbf{Q}\)</span> is a vector of the charges on the <span class="math inline">\(N\)</span> conductors, <span class="math inline">\(\mathbf{C}\)</span> is a <span class="math inline">\(N \times N\)</span> capacitance matrix, and <span class="math inline">\(\mathbf{V}\)</span> is the potential vector. In the case of two conductors and physical capacitances between them, <span class="math inline">\(\mathbf{C}\)</span> is given by <span class="math display">\[
+\mathbf{C} =
+\begin{pmatrix}
+C_{11} + C_{12} &amp; -C_{12} \\
+-C_{21} &amp; C_{21} + C_{22} \\
+\end{pmatrix}
+\]</span> where <span class="math inline">\(C_{xx} = \partial Q_x / \partial V_x\)</span> is the auto capacitance from a conductor <span class="math inline">\(x\)</span> towards infinity (ground), and <span class="math inline">\(C_{xy} = \partial Q_x / \partial V_y\)</span> is the mutual capacitance from node/conductor <span class="math inline">\(x\)</span> to node/conductor <span class="math inline">\(y\)</span>. For a physical capacitor <span class="math inline">\(C_{xy} = C_{yx}\)</span>.</p>
+<p>Using the above equation to calculate <span class="math inline">\(Q_1\)</span> (the charge on conductor <span class="math inline">\(1\)</span>) results in <span class="math display">\[
+Q_1 = ( C_{11} + C_{12} ) V_1 - C_{12} V_2 = C_{11} (V_1 - 0) + C_{12} (V_1 - V_2)
+\]</span> which is the expected result.</p>
+<p>Such a Maxwell capacitance formulation is also used in the MOSFET model to describe the charge at a terminal as a function of potential at another terminal. So, <span class="math display">\[
+C_\mathrm{GD}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{D}}
+\]</span> or <span class="math display">\[
+C_\mathrm{GG}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{G}}
+\]</span> with <span class="math inline">\(Q_\mathrm{G}\)</span> the charge at terminal G in response to either <span class="math inline">\(V_\mathrm{D}\)</span> or <span class="math inline">\(V_\mathrm{G}\)</span>. Note that in a MOSFET, generally <span class="math inline">\(C_{xy} \ne C_{yx}\)</span>!</p>
 </div>
 </div>
 </section>
@@ -1139,7 +1169,7 @@ Exercise: MOSFET Diode Sizing
 </div>
 <p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: MOSFET Diode Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1148,7 +1178,7 @@ Solution: MOSFET Diode Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
@@ -1865,7 +1895,7 @@ Exercise: 5T-OTA Sizing
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1874,7 +1904,7 @@ Solution: 5T-OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-35" class="callout-35-contents callout-collapse collapse">
+<div id="callout-36" class="callout-36-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -2127,16 +2157,16 @@ Exercise: 5T-OTA Design and Testbench
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note&nbsp;1: CACE Summary for 5T-OTA
+Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-37" class="callout-37-contents callout-collapse collapse show">
+<div id="callout-38" class="callout-38-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -2370,7 +2400,7 @@ Note&nbsp;1: CACE Summary for 5T-OTA
 </div>
 <section id="pvt-simulation-analysis" class="level3" data-number="7.6.1">
 <h3 data-number="7.6.1" class="anchored" data-anchor-id="pvt-simulation-analysis"><span class="header-section-number">7.6.1</span> PVT Simulation Analysis</h3>
-<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;1</a> we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitic (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
+<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a> we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitic (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
 </section>
 </section>
 </section>
@@ -2564,7 +2594,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;7.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 1\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-43-contents" aria-controls="callout-43" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2573,7 +2603,7 @@ Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-42" class="callout-42-contents callout-collapse collapse show">
+<div id="callout-43" class="callout-43-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -2968,18 +2998,18 @@ Exercise: Improved OTA Initial Simulation
 </section>
 <section id="corner-simulation-of-improved-ota" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">9.4</span> Corner Simulation of Improved OTA</h2>
-<p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;2</a>.</p>
+<p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-46-contents" aria-controls="callout-46" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-47-contents" aria-controls="callout-47" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note&nbsp;2: CACE Summary for Improved OTA
+Note&nbsp;3: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-46" class="callout-46-contents callout-collapse collapse show">
+<div id="callout-47" class="callout-47-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -3731,6 +3761,9 @@ Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em
 <div id="ref-Jespers_Murmann_2017" class="csl-entry" role="listitem">
 Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CMOS Circuits: Using Pre-Computed Lookup Tables</em>. Cambridge University Press.
 </div>
+<div id="ref-Maxwell_1873" class="csl-entry" role="listitem">
+Maxwell, James Clerk. 1873. <em>A Treatise on Electricity and Magnetism</em>. Vol. 1. Clarendon Press.
+</div>
 <div id="ref-Middlebrook_1975" class="csl-entry" role="listitem">
 Middlebrook, R. D. 1975. <span>“<span class="nocase">Measurement of loop gain in feedback systems</span>.”</span> <em>International Journal of Electronics</em> 38 (4): 485–512. <a href="https://doi.org/10.1080/00207217508920421">https://doi.org/10.1080/00207217508920421</a>.
 </div>
@@ -4172,7 +4205,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
