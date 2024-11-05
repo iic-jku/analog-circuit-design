@@ -1,7 +1,7 @@
 ```{python}
 #| label: fig-mosfet-large-signal-model
 #| echo: false
-#| fig-cap: "The MOSFET large-signal model."
+#| fig-cap: "The MOSFET large-signal model. In general, all capacitors are nonlinear, i.e., they depend on their terminal voltages."
 import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
@@ -12,27 +12,27 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().left().length(1.5).dot().idot()
 
     d.push()
-    Cgb = elm.Capacitor().down().label(r'$C_\mathrm{GB}$').length(4)
+    Cgb = elm.CapacitorVar().down().label(r'$C_\mathrm{GB}$').length(4)
     elm.Line().right().length(9.5).dot()
 
     d.pop()
     elm.Line().left().length(1).dot(open=True).label('G', 'left')
     d.pop()
     d.push()
-    Cgs = elm.Capacitor().down().label(r'$C_\mathrm{GS}$').length(3)
+    Cgs = elm.CapacitorVar().down().label(r'$C_\mathrm{GS}$').length(3)
     elm.Line().right().length(6).dot()
     l1 = elm.Line().down().length(2).dot(open=True).label('S', 'left')
     d.pop()
-    Cgd = elm.Capacitor().right().length(6).label(r'$C_\mathrm{GD}$').dot()
+    Cgd = elm.CapacitorVar().right().length(6).label(r'$C_\mathrm{GD}$').dot()
     d.push()
     Ids = elm.SourceI().down().label(r'$I_\mathrm{DS} = f(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})$').length(3)
     
     d.pop()
     elm.Line().right().length(2).dot()
     d.push()
-    Cdb = elm.Capacitor().down().label(r'$C_\mathrm{DB}$').length(3).dot()
+    Cdb = elm.CapacitorVar().down().label(r'$C_\mathrm{DB}$').length(3).dot()
     d.push()
-    Csb = elm.Capacitor().left().label(r'$C_\mathrm{SB}$')
+    Csb = elm.CapacitorVar().left().label(r'$C_\mathrm{SB}$')
     d.pop()
     elm.Line().down().toy(l1.end).dot(open=True).label('B', 'left')
 
