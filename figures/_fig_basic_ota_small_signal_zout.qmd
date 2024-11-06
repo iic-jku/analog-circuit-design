@@ -21,7 +21,7 @@ with sd.Drawing(canvas='svg') as d:
     elm.Ground()
     d.pop()
 
-    Ids1 = elm.SourceI().label(r'$g_\mathrm{m1} \cdot v_\mathrm{gs1}$').reverse()
+    Ids1 = elm.SourceI().label(r'$g_\mathrm{m1} v_\mathrm{gs1}$').reverse()
     elm.Line().length(2).dot()
     d.push()
     Cgs34 = elm.Resistor().label(r'$g_\mathrm{m34}$')
@@ -29,11 +29,11 @@ with sd.Drawing(canvas='svg') as d:
     d.pop()
 
     elm.Line().right().length(3).at(gds5.start).dot()
-    Ids2 = elm.SourceI().label(r'$g_\mathrm{m2} \cdot v_\mathrm{gs2}$').reverse()
+    Ids2 = elm.SourceI().label(r'$g_\mathrm{m2} v_\mathrm{gs2}$').reverse()
     elm.Line().up().length(1).dot()
     out = d.here
     elm.Line().up().length(1)
-    Ids4 = elm.SourceI().label(r'$g_\mathrm{m34} \cdot v_\mathrm{gs34}$')
+    Ids4 = elm.SourceI().label(r'$g_\mathrm{m34} v_\mathrm{gs34}$')
     elm.Vdd()
     
     elm.Line().right().at(Ids2.start)
