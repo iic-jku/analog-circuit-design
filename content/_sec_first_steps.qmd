@@ -119,6 +119,15 @@ When the drain-source voltage $\VDS$ is increased, at some point the drain-sourc
 As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like "triode" and "saturation" only in an approximate sense.
 :::
 
+We can also consider an even more reduced small-signal MOSFET model compared to @fig-mosfet-small-signal-model-simplified, which is shown in @fig-mosfet-small-signal-model-basic. In this, we just consider the transconductance $\gm$, the input capacitor $\Cgg$, as well as the output conductance $\gds$. Note that we can redraw the pi-model of @fig-mosfet-small-signal-model-basic into the $\tau$-model of @fig-mosfet-small-signal-model-basic-t. Depending on the circuit configuration, either the first or the second form results in simpler calculations of the circuit equations.
+
+{{< include /figures/_fig_mosfet_small_signal_model_basic.qmd >}}
+{{< include /figures/_fig_mosfet_small_signal_model_basic_t.qmd >}}
+
+::: {.callout-tip title="Exercise: MOSFET Model Transformation"}
+Can you show, with which circuit manipulations you can transform the pi-model of @fig-mosfet-small-signal-model-basic into the T-model of @fig-mosfet-small-signal-model-basic-t? 
+:::
+
 A metric which is useful to assess the speed of a MOSFET is the so-called **transit frequency** $f_\mathrm{T}$. It is defined as the frequency where the small-signal current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output drops to unity (reaches one). It can easily be derived using the simplified MOSFET small-signal model of @fig-mosfet-small-signal-model-simplified by driving it with a voltage source and shorting the output to (neglecting the feed-forward current introduced by $\Cgd$)
 $$
 \omega_\mathrm{T} = 2 \pi f_\mathrm{T} \approx \frac{\gm}{\Cgg} = \frac{\gm}{\Cgs + \Cgd + \Cgb}.
@@ -126,7 +135,7 @@ $$ {#eq-mosfet-transit-frequency}
 This frequency is an extrapolated frequency where the MOSFET operation is dominated by several second-order effects (hence @eq-mosfet-transit-frequency is not valid any longer). A rule-of-thumb is to use a MOSFET up to approximately $f_\mathrm{T} / 10$. In any case, $f_\mathrm{T}$ is a proxy of the speed of a MOSFET; in other words, how much input capacitance $\Cgg$ is incurred when creating a certain $\gm$.
 
 ::: {.callout-tip title="Exercise: MOSFET Transit Frequency"}
-As a home exercise, try to derive @eq-mosfet-transit-frequency starting from @fig-mosfet-small-signal-model-simplified.
+As a home exercise, try to derive @eq-mosfet-transit-frequency starting from @fig-mosfet-small-signal-model-simplified. By showing this transformation you can proof that indeed both circuits are electrically equivalent.
 ::: 
 
 Now we need to see how the small-signal parameters seen in @fig-mosfet-small-signal-model can be investigated and estimated using circuit simulation.
