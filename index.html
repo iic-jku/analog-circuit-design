@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-11-06">
+<meta name="dcterms.date" content="2024-11-08">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-11-06">
-<meta name="citation_cover_date" content="2024-11-06">
+<meta name="citation_publication_date" content="2024-11-08">
+<meta name="citation_cover_date" content="2024-11-08">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-11-06">
+<meta name="citation_online_date" content="2024-11-08">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=A treatise on electricity and magnetism;,citation_author=James Clerk Maxwell;,citation_publication_date=1873;,citation_cover_date=1873;,citation_year=1873;,citation_volume=1;">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
@@ -181,7 +181,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">November 6, 2024</p>
+              <p class="date">November 8, 2024</p>
             </div>
           </div>
           
@@ -554,7 +554,7 @@ Figure&nbsp;2: Circuit symbol of p-channel MOSFET.
 </div>
 </div>
 </div>
-<p>For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a>. A current source <span class="math inline">\(I_\mathrm{DS}\)</span> models the current flow between drain and source, and it is controlled by the three control voltages <span class="math inline">\(V_\mathrm{GS}\)</span>, <span class="math inline">\(V_\mathrm{DS}\)</span>, and <span class="math inline">\(V_\mathrm{SB}\)</span>. Note that in this way (since <span class="math inline">\(I_\mathrm{DS}= f(V_\mathrm{DS})\)</span>) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply <span class="math inline">\(V_\mathrm{SB} = 0\)</span> and <span class="math inline">\(C_\mathrm{SB}\)</span> is shorted.</p>
+<p>For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a>. A current source <span class="math inline">\(I_\mathrm{D}\)</span> models the current flow between drain and source, and it is controlled by the three control voltages <span class="math inline">\(V_\mathrm{GS}\)</span>, <span class="math inline">\(V_\mathrm{DS}\)</span>, and <span class="math inline">\(V_\mathrm{SB}\)</span>. Note that in this way (since <span class="math inline">\(I_\mathrm{D}= f(V_\mathrm{DS})\)</span>) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply <span class="math inline">\(V_\mathrm{SB} = 0\)</span> and <span class="math inline">\(C_\mathrm{SB}\)</span> is shorted.</p>
 <div id="cell-fig-mosfet-large-signal-model" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-large-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -584,7 +584,7 @@ MOSFET Bulk Terminal
 <p>In many situations we will connect the bulk and source terminals of a MOSFET together, which results in a simplified large-signal model. As an exercise, look at <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> and draw this simplified model (hint: look at <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> and <a href="#fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;6</a> for inspiration).</p>
 </div>
 </div>
-<p>Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behavior from basic principles, we need to understand the behavior of the elements of the large-signal model in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{DS}\)</span> and other large- and small-signal parameters.</p>
+<p>Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behavior from basic principles, we need to understand the behavior of the elements of the large-signal model in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{D}\)</span> and other large- and small-signal parameters.</p>
 <p>As a side note, the students who want to understand MOSFET behavior from a physical angle should consult the MOSFET chapter from the JKU course “Design of Complex Integrated Circuits” (VL 336.048). A great introduction into MOSFET operation and fabrication is given in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>, which is available freely <a href="https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/">online</a> and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in <span class="citation" data-cites="Tsividis_McAndrew_2011">(<a href="#ref-Tsividis_McAndrew_2011" role="doc-biblioref">Tsividis and McAndrew 2011</a>)</span>.</p>
 <p>Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Mathematical Notation">
@@ -637,7 +637,7 @@ Exercise: MOSFET Investigation
 <li>Make yourself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look at MOSFET model parameters).</li>
 <li>Explore the LV NMOS <code>sg13_lv_nmos</code>:
 <ol type="1">
-<li>How is <span class="math inline">\(I_\mathrm{DS}\)</span> affected by <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>?</li>
+<li>How is <span class="math inline">\(I_\mathrm{D}\)</span> affected by <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>?</li>
 <li>Change <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of the MOSFET. What is the impact on the above parameters? Can you explain the variations?</li>
 <li>Look at the capacitance values for <span class="math inline">\(C_\mathrm{GS}\)</span>, <span class="math inline">\(C_\mathrm{GB}\)</span>, <span class="math inline">\(C_\mathrm{GD}\)</span>, and <span class="math inline">\(C_\mathrm{DB}\)</span>. How are they affected by <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> and by changing the bias conditions (play with <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>)?</li>
 <li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\mathrm{DG}\)</span>. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why? (Hint: Study <a href="#nte-maxwell-cap-matrix" class="quarto-xref">Note&nbsp;1</a>)</li>
@@ -660,17 +660,17 @@ Exercise: MOSFET Investigation
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="sec-mosfet-smallsignal-model"><span class="header-section-number">2.1.2</span> Small-Signal MOSFET Model</h3>
 <p>As you have seen in the previous investigations, the large-signal model of <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;3</a> describes the behavior of the MOSFET across a wide range of voltages applied at the MOSFET terminals. Unfortunately, for hand analysis dealing with a nonlinear model is close to impossible, at the very least it is quite tedious.</p>
 <p>However, for many practical situations, we bias a MOSFET with a set of dc voltages applied to its terminal, and only apply small signal excursions during operation. If we do this, we can linearize the large-signal model in this dc operating point, and resort to a small-signal model which can be very useful for hand calculations. Many experienced designers analyze their circuits by doing these kind of hand calculations and describing the circuit analytically, which is a great way to understand fundamental performance limits and relationships between parameters.</p>
-<p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> models the drain current <span class="math inline">\(I_\mathrm{DS}\)</span> as a function of <span class="math inline">\(V_\mathrm{GS}\)</span> with</p>
+<p>We will use the small-signal MOSFET model shown in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;5</a> for this course. The current-source <span class="math inline">\(i_\mathrm{d}= g_\mathrm{m}v_\mathrm{gs}\)</span> models the drain current <span class="math inline">\(I_\mathrm{D}\)</span> as a function of <span class="math inline">\(V_\mathrm{GS}\)</span> with</p>
 <p><span class="math display">\[
-g_\mathrm{m}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{GS}},
+g_\mathrm{m}= \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{GS}},
 \]</span></p>
 <p>and the resistor <span class="math inline">\(g_\mathrm{ds}\)</span> models the dependency of the drain current by <span class="math inline">\(V_\mathrm{DS}\)</span>:</p>
 <p><span class="math display">\[
-g_\mathrm{ds}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{DS}}
+g_\mathrm{ds}= \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{DS}}
 \]</span></p>
-<p>The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{ds}= g_\mathrm{mb} v_\mathrm{sb}\)</span>:</p>
+<p>The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{d}= g_\mathrm{mb} v_\mathrm{sb}\)</span>:</p>
 <p><span class="math display">\[
-g_\mathrm{mb}= \frac{\partial I_\mathrm{DS}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{SB}}
+g_\mathrm{mb}= \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{SB}}
 \]</span></p>
 <div id="cell-fig-mosfet-small-signal-model" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
@@ -716,7 +716,7 @@ MOSFET Triode and Saturation Region
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Sometimes we will refer to different operating modes of the MOSFET like “saturation” or “triode.” Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a voltage-controlled resistor (since the impact of both <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> on <span class="math inline">\(I_\mathrm{DS}\)</span> is large), and this mode of operation we call “<strong>triode</strong>” mode.</p>
+<p>Sometimes we will refer to different operating modes of the MOSFET like “saturation” or “triode.” Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a voltage-controlled resistor (since the impact of both <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> on <span class="math inline">\(I_\mathrm{D}\)</span> is large), and this mode of operation we call “<strong>triode</strong>” mode.</p>
 <p>When the drain-source voltage <span class="math inline">\(V_\mathrm{DS}\)</span> is increased, at some point the drain-source current saturates and is only a weak function of the drain-source voltage, while still being well controlled by <span class="math inline">\(V_\mathrm{GS}\)</span>. This mode is called “<strong>saturation</strong>” mode.</p>
 <p>As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like “triode” and “saturation” only in an approximate sense.</p>
 </div>
@@ -1556,9 +1556,9 @@ Figure&nbsp;20: Small-signal model of the differential pair half-circuit in comm
 </div>
 </div>
 <p>Formulating KVL for the input-side loop we get <span class="math display">\[
-v_\mathrm{in} = v_\mathrm{gs}+ \frac{i_\mathrm{ds}}{g_\mathrm{tail}}.
+v_\mathrm{in} = v_\mathrm{gs}+ \frac{i_\mathrm{d}}{g_\mathrm{tail}}.
 \]</span></p>
-<p>With <span class="math inline">\(i_\mathrm{out} = i_\mathrm{ds}= g_\mathrm{m}v_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
+<p>With <span class="math inline">\(i_\mathrm{out} = i_\mathrm{d}= g_\mathrm{m}v_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
 i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} v_\mathrm{in}
 \tag{12}\]</span></span></p>
 <p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;12</a> we can distinguish the following extreme cases:</p>
@@ -4247,7 +4247,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
