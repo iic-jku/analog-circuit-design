@@ -206,38 +206,39 @@
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
 <p><em>Important note: Numpy version 1.x.x is required; an error is thrown for Numpy 2.x.x</em></p>
 </div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [24]:</pre></div><div id="cell-2" class="cell" data-execution_count="24">
+<div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="cell-2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pygmid <span class="im">import</span> Lookup <span class="im">as</span> lk</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lv_nmos <span class="op">=</span> lk(<span class="st">'sg13_lv_nmos.mat'</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>lv_pmos <span class="op">=</span> lk(<span class="st">'sg13_lv_pmos.mat'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [25]:</pre></div><div id="cell-3" class="cell" data-execution_count="25">
+<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="cell-3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lookup a specific value</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># List of parameters: VGS, VDS, VSB, L, W, NFING, ID, VT, GM, GMB, GDS, CGG, CGB, CGD, CGS, CDD, CSS</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>gm <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM'</span>, L<span class="op">=</span><span class="fl">0.13</span>, VGS<span class="op">=</span><span class="fl">0.9</span>, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gm)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"gm ="</span>, <span class="bu">round</span>(<span class="bu">float</span>(gm<span class="op">/</span><span class="fl">1e-3</span>),<span class="dv">3</span>), <span class="st">'mS'</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">id</span> <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID'</span>, L<span class="op">=</span><span class="fl">0.13</span>, VGS<span class="op">=</span><span class="fl">0.9</span>, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Id ="</span>, <span class="bu">round</span>(<span class="bu">float</span>(<span class="bu">id</span><span class="op">/</span><span class="fl">1e-3</span>),<span class="dv">3</span>), <span class="st">"mA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.003581
-0.0008946</code></pre>
+<pre><code>gm = 3.581 mS
+Id = 0.895 mA</code></pre>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [26]:</pre></div><div id="cell-4" class="cell" data-execution_count="26">
+<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="cell-4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Query below uses minimum L, VDS=max(vgs)/2=0.9 and VSB=0 as defaults since they not specified</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gm <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM'</span>, VGS<span class="op">=</span><span class="fl">0.9</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"gm ="</span>, <span class="bu">round</span>(<span class="bu">float</span>(gm<span class="op">/</span><span class="fl">1e-3</span>),<span class="dv">4</span>), <span class="st">'mS'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.003581</code></pre>
+<pre><code>gm = 3.581 mS</code></pre>
 </div>
 </div></div>
-<div class="cell-container"><div class="cell-decorator"><pre>In [27]:</pre></div><div id="cell-5" class="cell" data-execution_count="27">
+<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="cell-5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to above, but now we are looking up a ratio against another ratio</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gm_cgg <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_CGG'</span>, GM_ID<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gm_cgg<span class="op">/</span><span class="dv">2</span><span class="op">/</span>np.pi <span class="op">/</span> <span class="fl">1e9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ft <span class="op">=</span> gm_cgg<span class="op">/</span><span class="dv">2</span><span class="op">/</span>np.pi</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ft ="</span>, <span class="bu">round</span>(<span class="bu">float</span>(ft<span class="op">/</span><span class="fl">1e9</span>), <span class="dv">1</span>), <span class="st">"GHz"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>9.931352853533765</code></pre>
+<pre><code>ft = 9.9 GHz</code></pre>
 </div>
 </div></div>
      </main>
