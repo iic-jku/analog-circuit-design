@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-11-12">
+<meta name="dcterms.date" content="2024-11-13">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-11-12">
-<meta name="citation_cover_date" content="2024-11-12">
+<meta name="citation_publication_date" content="2024-11-13">
+<meta name="citation_cover_date" content="2024-11-13">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-11-12">
+<meta name="citation_online_date" content="2024-11-13">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=A treatise on electricity and magnetism;,citation_author=James Clerk Maxwell;,citation_publication_date=1873;,citation_cover_date=1873;,citation_year=1873;,citation_volume=1;">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
@@ -181,7 +181,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">November 12, 2024</p>
+              <p class="date">November 13, 2024</p>
             </div>
           </div>
           
@@ -225,9 +225,9 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-gmid-method" id="toc-sec-gmid-method" class="nav-link" data-scroll-target="#sec-gmid-method"><span class="header-section-number">3</span> Transistor Sizing Using gm/ID Methodology</a>
   <ul class="collapse">
-  <li><a href="#mosfet-characterization-testbench" id="toc-mosfet-characterization-testbench" class="nav-link" data-scroll-target="#mosfet-characterization-testbench"><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</a></li>
-  <li><a href="#sec-techsweep-nmos" id="toc-sec-techsweep-nmos" class="nav-link" data-scroll-target="#sec-techsweep-nmos"><span class="header-section-number">3.2</span> NMOS Characterization</a></li>
-  <li><a href="#sec-techsweep-pmos" id="toc-sec-techsweep-pmos" class="nav-link" data-scroll-target="#sec-techsweep-pmos"><span class="header-section-number">3.3</span> PMOS Characterization</a></li>
+  <li><a href="#sec-techsweep-testbench" id="toc-sec-techsweep-testbench" class="nav-link" data-scroll-target="#sec-techsweep-testbench"><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</a></li>
+  <li><a href="#sec-techsweep-nmos" id="toc-sec-techsweep-nmos" class="nav-link" data-scroll-target="#sec-techsweep-nmos"><span class="header-section-number">3.2</span> NMOS Characterization in Saturation</a></li>
+  <li><a href="#sec-techsweep-pmos" id="toc-sec-techsweep-pmos" class="nav-link" data-scroll-target="#sec-techsweep-pmos"><span class="header-section-number">3.3</span> PMOS Characterization in Saturation</a></li>
   </ul></li>
   <li><a href="#sec-mosfet-diode" id="toc-sec-mosfet-diode" class="nav-link" data-scroll-target="#sec-mosfet-diode"><span class="header-section-number">4</span> First Circuit: MOSFET Diode</a>
   <ul class="collapse">
@@ -863,8 +863,8 @@ MOSFET Square-Law Model
 <p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.</p>
 <p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
 <p>The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.</p>
-<section id="mosfet-characterization-testbench" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="mosfet-characterization-testbench"><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</h2>
+<section id="sec-techsweep-testbench" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-techsweep-testbench"><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</h2>
 <p>In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in <a href="#fig-techsweep-nmos-tb" class="quarto-xref">Figure&nbsp;9</a>, and the TB for the LV PMOS is shown in <a href="#fig-techsweep-pmos-tb" class="quarto-xref">Figure&nbsp;10</a>.</p>
 <div id="fig-techsweep-nmos-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -889,9 +889,10 @@ Figure&nbsp;10: Testbench for LV PMOS <span class="math inline">\(g_\mathrm{m}/I
 <p>We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behavior.</p>
 </section>
 <section id="sec-techsweep-nmos" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="sec-techsweep-nmos"><span class="header-section-number">3.2</span> NMOS Characterization</h2>
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-techsweep-nmos"><span class="header-section-number">3.2</span> NMOS Characterization in Saturation</h2>
 <p>First, we will start looking at the LV NMOS. In <a href="#sec-techsweep-pmos" class="quarto-xref">Section&nbsp;3.3</a> we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of <span class="math inline">\(1.5\,\text{V}\)</span>, so only the LV types are of interest to us.</p>
-<p>The first import graph is the plot of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(f_\mathrm{T}\)</span> versus the gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span>. First let us answer the question why <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good parameter to look at, and actually this is also the central parameter in the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see <a href="https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A">biasing</a>) we want to get a large amplification from a MOSFET, which corresponds to a large <span class="math inline">\(g_\mathrm{m}\)</span>. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> ratio is good.</p>
+<p>In the plots that follow we will set <span class="math inline">\(V_\mathrm{ds}= V_\mathrm{DD}/2\)</span> to keep the MOSFET in saturation (as this is the region of operation where most MOSFET are operated when working in class-A). We will later also look at the MOSFET performance in triode operation, as this is the operation mode where the MOSFET is used as a switch. While the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method is primarily intended to be used for circuits where the MOSFETs are held in saturation and are biased by a certain bias current (usually referred to <a href="https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A">class-A</a>), the generated tables using the testbenches of <a href="#sec-techsweep-testbench" class="quarto-xref">Section&nbsp;3.1</a> contain the data for all MOSFET bias points.</p>
+<p>The first import graph is the plot of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(f_\mathrm{T}\)</span> versus the gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span>. First let us answer the question why <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good parameter to look at, and actually this is also the central parameter in the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology. In many circuits we want to get a large amplification from a MOSFET, which corresponds to a large <span class="math inline">\(g_\mathrm{m}\)</span>. We want to achieve this by spending the minimum biasing current possible (ideally zero), as we almost always design for lowest power consumption. Thus, a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> ratio is good.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Power Consumption">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1042,7 +1043,7 @@ MOSFET Flicker Noise
 </div>
 </section>
 <section id="sec-techsweep-pmos" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="sec-techsweep-pmos"><span class="header-section-number">3.3</span> PMOS Characterization</h2>
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-techsweep-pmos"><span class="header-section-number">3.3</span> PMOS Characterization in Saturation</h2>
 <p>In the following, we have the same plots as discussed in <a href="#sec-techsweep-nmos" class="quarto-xref">Section&nbsp;3.2</a>, but now for the PMOS.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="PMOS Sign Convention">
 <div class="callout-header d-flex align-content-center">
@@ -4247,7 +4248,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
