@@ -12,7 +12,7 @@ Being a well-established approach we select the $\gmid$ methodology introduced b
 
 The $\gmid$ methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.
 
-## MOSFET Characterization Testbench
+## MOSFET Characterization Testbench {#sec-techsweep-testbench}
 
 In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in @fig-techsweep-nmos-tb, and the TB for the LV PMOS is shown in @fig-techsweep-pmos-tb.
 
@@ -22,11 +22,13 @@ In order to get the required tabulated data we use a testbench in Xschem which s
 
 We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behavior.
 
-## NMOS Characterization {#sec-techsweep-nmos}
+## NMOS Characterization in Saturation {#sec-techsweep-nmos}
 
 First, we will start looking at the LV NMOS. In @sec-techsweep-pmos we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of $1.5\,\text{V}$, so only the LV types are of interest to us.
 
-The first import graph is the plot of $\gmid$ and $f_\mathrm{T}$ versus the gate-source voltage $\VGS$. First let us answer the question why $\gmid$ is a good parameter to look at, and actually this is also the central parameter in the $\gmid$ methodology. In many circuits that are biased in class-A (i.e., with a constant quiescent current that is larger than the largest signal excursion, see [biasing](https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A)) we want to get a large amplification from a MOSFET, which corresponds to a large $\gm$. We want this by spending the minimum biasing current possible (ideally zero), as we always design for minimum power consumption. Thus, a high $\gmid$ ratio is good.
+In the plots that follow we will set $\Vds = \VDD/2$ to keep the MOSFET in saturation (as this is the region of operation where most MOSFET are operated when working in class-A). We will later also look at the MOSFET performance in triode operation, as this is the operation mode where the MOSFET is used as a switch. While the $\gmid$ method is primarily intended to be used for circuits where the MOSFETs are held in saturation and are biased by a certain bias current (usually referred to [class-A](https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A)), the generated tables using the testbenches of @sec-techsweep-testbench contain the data for all MOSFET bias points.
+
+The first import graph is the plot of $\gmid$ and $f_\mathrm{T}$ versus the gate-source voltage $\VGS$. First let us answer the question why $\gmid$ is a good parameter to look at, and actually this is also the central parameter in the $\gmid$ methodology. In many circuits we want to get a large amplification from a MOSFET, which corresponds to a large $\gm$. We want to achieve this by spending the minimum biasing current possible (ideally zero), as we almost always design for lowest power consumption. Thus, a high $\gmid$ ratio is good.
 
 ::: {.callout-note title="Power Consumption"}
 Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severely limited by the cooling capabilities of the electrical system.
@@ -96,7 +98,7 @@ As you can see in the following plot, $f_\mathrm{co}$ can reach well into the 10
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-fco-vs-gmid-vs-l >}}
 
-## PMOS Characterization {#sec-techsweep-pmos}
+## PMOS Characterization in Saturation {#sec-techsweep-pmos}
 
 In the following, we have the same plots as discussed in @sec-techsweep-nmos, but now for the PMOS.
 
