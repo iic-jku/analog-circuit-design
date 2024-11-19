@@ -885,6 +885,19 @@ MOSFET Square-Law Model
 <section id="sec-techsweep-testbench" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-techsweep-testbench"><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</h2>
 <p>In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in <a href="#fig-techsweep-nmos-tb" class="quarto-xref">Figure&nbsp;9</a>, and the TB for the LV PMOS is shown in <a href="#fig-techsweep-pmos-tb" class="quarto-xref">Figure&nbsp;10</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Note on Characterization Testbench">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note on Characterization Testbench
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The testbenches are relatively straightforward, with one exception: The drain current noise is sensed via the drain voltage source <code>vd</code> and converted to a noise voltage (node <code>n</code>) using a current-controlled voltage source (CCVS). This is necessary as the <code>.noise</code> simulation statement works with voltages.</p>
+</div>
+</div>
 <div id="fig-techsweep-nmos-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-techsweep-nmos-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1231,7 +1244,7 @@ Exercise: MOSFET Diode Sizing
 </div>
 <p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: MOSFET Diode Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1240,7 +1253,7 @@ Solution: MOSFET Diode Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
@@ -1957,7 +1970,7 @@ Exercise: 5T-OTA Sizing
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1966,7 +1979,7 @@ Solution: 5T-OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-38" class="callout-38-contents callout-collapse collapse">
+<div id="callout-39" class="callout-39-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -2220,7 +2233,7 @@ Exercise: 5T-OTA Design and Testbench
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2229,7 +2242,7 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-40" class="callout-40-contents callout-collapse collapse show">
+<div id="callout-41" class="callout-41-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -2657,7 +2670,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;7.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 1\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-45-contents" aria-controls="callout-45" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-46-contents" aria-controls="callout-46" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2666,7 +2679,7 @@ Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-45" class="callout-45-contents callout-collapse collapse show">
+<div id="callout-46" class="callout-46-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -3063,7 +3076,7 @@ Exercise: Improved OTA Initial Simulation
 <h2 data-number="9.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">9.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-49-contents" aria-controls="callout-49" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3072,7 +3085,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-49" class="callout-49-contents callout-collapse collapse show">
+<div id="callout-50" class="callout-50-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -4268,7 +4281,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
