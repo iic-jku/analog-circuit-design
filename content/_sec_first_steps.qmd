@@ -55,6 +55,16 @@ We start with an investigation into the large-signal MOSFET model shown in @fig-
 
 ![Testbench for NMOS dc sweeps.](./xschem/dc_lv_nmos.svg){#fig-simple-nmos-tb}
 
+::: {.callout-note title="MOSFET Simulation Model"}
+For modelling the MOSFET behavior in a circuit simulator like ngspice different models are available. Some of these models have been widely adopted, like the [BSIM](https://en.wikipedia.org/wiki/BSIM) (Berkeley Short-channel IGFET Model) or PSP (Philips Penn State) model. The PSP model version 103.6 is used in the IHP SG13G2 PDK for the LV and HV MOSFET. This model has several advantages:
+
+* Physics-based surface-potential model
+* Symmetric formulation with respect to drain and source
+* Support for mobility reduction, velocity saturation, DIBL, gate current, lateral doping gradient effects, STI stress, NQS, etc.
+
+The PSP 103.6 model documentation can be found [here](https://www.cea.fr/cea-tech/leti/pspsupport/Documents/psp103p6_summary.pdf). In chapter 8 the dc operating point output of the model (these parameters can be queried in ngspice) is explained, which is helpful to interpret the simulation output.
+:::
+
 ::: {.callout-tip title="Exercise: MOSFET Investigation"}
 Please try to execute the following steps and answer these questions:
 
