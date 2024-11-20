@@ -1,0 +1,19 @@
+```{python}
+#| label: fig-cs-amplifier
+#| echo: false
+#| fig-cap: "A MOSFET common-source amplifier with resistive load."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    elm.Vdd().label(r'$V_\mathrm{DD}$')
+    R1 = elm.Resistor().down().label(r'$R_1$').dot()
+    d.push()
+    elm.Line().right().dot(open=True).length(1.5).label(r'$v_\mathrm{out}$', 'right')
+    d.pop()
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).reverse().label('$M_1$', loc='right')
+    elm.Ground()
+    elm.Line().left().at(M1.gate).dot(open=True).length(1).label(r'$v_\mathrm{in}$', 'left')
+```

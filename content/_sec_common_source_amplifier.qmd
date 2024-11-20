@@ -1,0 +1,23 @@
+# Common-Source Amplifier {#sec-cs-amplifier}
+
+We now want to design something more useful, and we will use a basic circuit structure, a single-ended common-source amplifier. The structure of this circuit, using a resistor as a load, is shown in @fig-cs-amplifier.
+
+{{< include figures/_fig_cs_amplifier.qmd >}}
+
+The function of this circuit is as follows: Assuming the MOSFET $M_1$ is kept in saturation, then a small-signal voltage $v_\mathrm{in}$ applied at the gate is converted into a drain current $i_\mathrm{d}$ using the MOSFET's transconductance $\gm$. Then, this current is converted into a voltage again in the resistor $R_1$. Ultimately, we have a voltage gain $A_\mathrm{v}$ of
+
+$$
+A_\mathrm{v} = \frac{v_\mathrm{out}}{v_\mathrm{in}} \approx - \frac{\gm v_\mathrm{in} R_1}{v_\mathrm{in}} = - \gm R_1
+$$
+
+## Sense Amplifier for 50$\Omega$ Load
+
+Let us now size and design an exemplary implementation (of course using the $\gmid$ method). In order to have useful real-life specifications, we want to build an amplifier which can be used to sense an on-chip voltage and drive external measurement equipment. Often, this equipment has a load impedance of 50$\Omega$, and we want to have an impedance-matched output. The voltage gain shall be set to 1 (we want to sense the voltage, but be able to drive the measurement equipment).
+
+The resulting circuit is shown in @fig-meas-amplifier. As the load is usually ground-referred, and as we want to avoid an ac-block at the output, we use a PMOS amplifier stage (compare @fig-meas-amplifier with @fig-cs-amplifier).
+
+{{< include figures/_fig_meas_amplifier.qmd >}}
+
+The power matching condition at the output mandates that $R_1 = R_\mathrm{load}$, so $R'_1 = R_\mathrm{load} \parallel R_1 = 25\,\Omega$. The voltage gain requirement of $|A_\mathrm{v}| = 1$ results in $\gm = 1 / R'_1 = 40\,\text{mS}$.
+
+We now need to find $W$ and $L$ of $M_1$ and set the required bias current $\ID$. We also need to find out the proper $\VGS$ to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a $\gmid=5$ and set $L = 0.13\,\mu\text{m}$.
