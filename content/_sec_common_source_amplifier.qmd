@@ -1,8 +1,8 @@
 # Common-Source Amplifier {#sec-cs-amplifier}
 
-We now want to design something more useful, and we will use a basic circuit structure, a single-ended common-source amplifier. The structure of this circuit, using a resistor as a load, is shown in @fig-cs-amplifier.
+We now want to design something more useful, and we will use a basic circuit structure, namely a single-ended common-source amplifier. The structure of this circuit, using a resistor as a load, is shown in @fig-cs-amplifier.
 
-{{< include figures/_fig_cs_amplifier.qmd >}}
+{{< include /figures/_fig_cs_amplifier.qmd >}}
 
 The function of this circuit is as follows: Assuming the MOSFET $M_1$ is kept in saturation, then a small-signal voltage $v_\mathrm{in}$ applied at the gate is converted into a drain current $i_\mathrm{d}$ using the MOSFET's transconductance $\gm$. Then, this current is converted into a voltage again in the resistor $R_1$. Ultimately, we have a voltage gain $A_\mathrm{v}$ of
 
@@ -12,12 +12,35 @@ $$
 
 ## Sense Amplifier for 50$\Omega$ Load
 
-Let us now size and design an exemplary implementation (of course using the $\gmid$ method). In order to have useful real-life specifications, we want to build an amplifier which can be used to sense an on-chip voltage and drive external measurement equipment. Often, this equipment has a load impedance of 50$\Omega$, and we want to have an impedance-matched output. The voltage gain shall be set to 1 (we want to sense the voltage, but be able to drive the measurement equipment).
+Let us now size and design an exemplary implementation (of course using the $\gmid$ method). In order to have useful real-life specifications, we want to build an amplifier which can be used to sense an on-chip voltage and drive external measurement equipment. Often, this equipment has a load impedance of 50$\Omega$, and we want to have an impedance-matched output. The voltage gain shall be set to 1 (essentially, we want to sense a voltage and drive the measurement equipment).
 
-The resulting circuit is shown in @fig-meas-amplifier. As the load is usually ground-referred, and as we want to avoid an ac-block at the output, we use a PMOS amplifier stage (compare @fig-meas-amplifier with @fig-cs-amplifier).
+The resulting circuit is shown in @fig-meas-amplifier. As the load is usually ground-referred, and as we want to avoid an ac-block at the output, we use a PMOS amplifier stage (compare with @fig-cs-amplifier).
 
-{{< include figures/_fig_meas_amplifier.qmd >}}
+{{< include /figures/_fig_meas_amplifier.qmd >}}
 
-The power matching condition at the output mandates that $R_1 = R_\mathrm{load}$, so $R'_1 = R_\mathrm{load} \parallel R_1 = 25\,\Omega$. The voltage gain requirement of $|A_\mathrm{v}| = 1$ results in $\gm = 1 / R'_1 = 40\,\text{mS}$.
+::: {.callout-tip title="Exercise: PMOS-Based Measurement Amplifier"}
+Please think about why exactly we want this measurement amplifier be based on a PMOS instead of an NMOS.
+:::
 
-We now need to find $W$ and $L$ of $M_1$ and set the required bias current $\ID$. We also need to find out the proper $\VGS$ to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a $\gmid=5$ and set $L = 0.13\,\mu\text{m}$.
+The [power matching](https://en.wikipedia.org/wiki/Impedance_matching) condition at the output mandates that $R_1 = R_\mathrm{load}$, so $R'_1 = R_\mathrm{load} \parallel R_1 = 25\,\Omega$. The voltage gain requirement of $|A_\mathrm{v}| = 1$ results in $\gm = 1 / R'_1 = 40\,\text{mS}$.
+
+We now need to find $W$ and $L$ of $M_1$ and set the required bias current $\ID$. We also need to find out the proper $\VGS$ to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a $\gmid=8$ and set $L = 0.13\,\mu\text{m}$. The notebook is available [here](sizing/sizing_measurement_amplifier.ipynb).
+
+The resulting circuit is shown in the following figure (the red input capacitor shows the $\Cgg$ of the MOSFET):
+
+{{< embed /sizing/sizing_measurement_amplifier.ipynb#fig-meas-amp-sized >}}
+
+::: {.callout-tip title="Exercise: Measurement Amplifier Simulation"}
+Please go through the [sizing notebook](sizing/sizing_measurement_amplifier.ipynb) of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?
+
+Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter `ng` accordingly (the shown $W$ is the total width of the MOSFET, and $W / \text{ng} \le 10\mu\text{m}$ is the width per MOSFET gate finger).
+
+* What is the dc gain of this amplifier when loaded with 50$\Omega$?
+* The dc gain is likely not 0dB. Why is this so?
+* Increase the width $W$ of the PMOS until the gain is correct. What is the $W$ that you had to set, and how much is $\ID$ now?
+* What is the bandwidth (i.e., the -3dB corner frequency) of the output, when the voltage source has a source resistance of 1k$\Omega$?
+
+If you get stuck, [here](xschem/measurement_amplifier.sch) is the solution to this exercise.
+:::
+
+By now we have designed a measurement amplifier based on a common-source stage. One problem with this stage is the relatively large input capacitance of approx. 0.3pF, which loads the input. Another issue even more severe is that the fact that the bias point in the circuit is set by the dc voltage level at the input. In general, we want a setup where the bias points of the circuit are largely independent of the dc input voltages. This is why in integrated circuit design we often design differential circuits where the input and output signals are given by the differential voltages, and are largely independent from the common-mode voltages. This is usually an advantage.
