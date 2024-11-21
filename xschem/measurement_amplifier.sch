@@ -59,12 +59,8 @@ N 480 -610 600 -610 {lab=vin}
 N 640 -610 720 -610 {lab=vdd}
 N 720 -680 720 -610 {lab=vdd}
 N 640 -680 720 -680 {lab=vdd}
-N 480 -580 480 -560 {lab=vin}
-N 480 -480 480 -460 {lab=#net2}
-N 480 -580 540 -580 {lab=vin}
-N 480 -610 480 -580 {lab=vin}
-N 480 -480 540 -480 {lab=#net2}
-N 480 -500 480 -480 {lab=#net2}
+N 480 -610 480 -560 {lab=vin}
+N 480 -500 480 -460 {lab=#net2}
 C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib cornerMOSlv.lib mos_tt
