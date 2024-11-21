@@ -143,3 +143,22 @@ Noise factor $\gamma$ versus $\gmid$ and $L$:
 Flicker noise corner frequency $f_\mathrm{co}$ versus $\gmid$ and $L$. If you compare this figure carefully with the NMOS figure you can see that for some operating points the flicker noise for the PMOS is lower than for the NMOS. This is often true for CMOS technologies, so it can be an advantage to use a PMOS transistor in places where flicker noise is critical, like an OTA input stage. Using PMOS has the further advantage that the bulk node can be tied to source (which for NMOS is only possible in a triple-well technology, which is often not available), which gets rid of the [body effect](https://en.wikipedia.org/wiki/Threshold_voltage). 
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-fco-vs-gmid-vs-l >}}
+
+## NMOS and PMOS Characterization in Triode
+
+Besides using the MOSFET as a transconductor in saturation we often use the MOSFET as a switch in triode mode (to either switch voltages or currents). In this triode/switch mode of operation we are mainly interested in two parameters:
+
+* The resistance of the switch/MOSFET when it is turned on ($R_\mathrm{on} = 1 / \gds$).
+* The shunt capacitance of the switch when it is turned off ($C_\mathrm{off}$ is defined by the coupling capacitances between drain and source).
+
+In the operation of the NMOS as a switch the gate is usually pulled to $\VDD$ and the bulk is permanently connected to $\VSS$ to achieve the lowest $R_\mathrm{on}$ (to turn the switch off the gate is pulled towards $\VSS$). Likewise, to turn on a PMOS, the gate is usually pulled to $\VSS$ and the bulk is connected to $\VDD$. In this situation the drain/source potential is somewhere between $\VDD$ and $\VSS$, so the MOSFET will experience a $\VSB \neq 0$, leading to a quite noticeable bulk effect. Once the drain/source potential is sufficiently high for NMOS (low PMOS) the switch resistance will drastically degrade.
+
+In order to get a feeling for the behavior of the MOSFET as a switch the following characterization plots show $R_\mathrm{on}$ and $C_\mathrm{off}$ for the NMOS and the PMOS, respectively. Both plots are for $L = L_\mathrm{min} = 0.13\mu m$, as for switches usually minimum length devices are used. Only for special applications (e.g., the leakage current in off-mode is a concern) MOSFETs with increased $L$ are used.
+
+{{< embed ./sizing/techsweep_sg13_plots_triode.ipynb#fig-triode-ron-vs-vsource-1 >}}
+
+As can be seen in the previous plot, an NMOS can be used to switch at potentials close to $\VSS$, while a PMOS can be used to switch at potentials close to $\VDD$. To construct a switch which can work for all voltage levels between $\VDD$ and $\VSS$ an NMOS is put in parallel to a PMOS, resulting in the well-known **transmission gate**.
+
+{{< embed ./sizing/techsweep_sg13_plots_triode.ipynb#fig-triode-coff-vs-vsource >}}
+
+As the switch on-resistance gets lower when increasing $W$, the off-capacitance gets larger. Thus, a good performance indicator for comparing switches in a given technology is the $R_\mathrm{on} C_\mathrm{off}$ product. 
