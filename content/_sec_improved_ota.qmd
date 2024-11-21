@@ -2,7 +2,7 @@
 
 With the new learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means to add cascodes to $M_2$ and $M_4$ in @fig-basic-ota. For symmetry reasons we will add cascodes to both sides, and the resulting schematic is shown in @fig-improved-ota.
 
-{{< include figures/_fig_improved_ota.qmd >}}
+{{< include /figures/_fig_improved_ota.qmd >}}
 
 The transistor name appendix "C" indicates a cascode device sitting atop its base transistor. The bias voltage $V_\mathrm{bias1}$ is referenced to $\VSS$, the bias voltage $V_\mathrm{bias3}$ is referenced to $\VDD$, and the floating bias voltage $V_\mathrm{bias2}$ creates a voltage bias for $M_\mathrm{1C}$ and $M_\mathrm{2C}$ relative to the tail point, so that the $\VDS$ of $M_{1,2}$ stays constant with a changing common-mode input voltage.
 
@@ -34,7 +34,7 @@ Like the sizing of the 5T-OTA in @sec-basic-ota-sizing we will again use the $\g
 We set $\gmid = 13$ across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at @sec-gmid-method to confirm this choice.
 
 ::: {.callout-note title="Improved OTA Sizing" collapse="false"}
-{{< embed ./sizing/sizing_basic_ota_improved.ipynb echo=true >}}
+{{< embed /sizing/sizing_basic_ota_improved.ipynb echo=true >}}
 :::
 
 Looking at this sizing result we see that we achieve an improved $A0 > 43\,\text{dB}$ while meeting also the other performance requirements of @tbl-voltage-buffer-spec with margin. In addition, we check the voltage headroom of the critical MOSFET to see if we can squeeze it into the available supply voltage range, and see that this is possible with our above choice selection of parameters.
@@ -95,7 +95,7 @@ Just like for the basic OTA we use the CACE system to check the performance of t
 
 ::: {#nte-improved-ota-cace-result .callout-note title="CACE Summary for Improved OTA" collapse="false"}
 
-{{< include ./cace/_docs/ota-improved_schematic.md >}}
+{{< include /cace/_docs/ota-improved_schematic.md >}}
 :::
 
 The improved performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. We have intentionally increased the power consumption a little bit, but we negotiated with the chip lead designer a changed bias current level, so overall the situation is even slightly improved. The new situation with the improved design is summarized in @tbl-voltage-buffer-spec-improved (unchanged entries are not shown).
