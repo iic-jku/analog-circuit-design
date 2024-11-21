@@ -36,7 +36,9 @@ Once you agree with the circuit sizing please build an Xschem simulation testben
 * Increase the width $W$ of the PMOS until the gain is correct. What is the $W$ that you had to set, and how much is $\ID$ now?
 * What is the bandwidth (i.e., the -3dB corner frequency) of the output, when the voltage source has a source resistance of 1k$\Omega$?
 
-If you get stuck, [here](./xschem/measurement_amplifier.sch) is the solution to this exercise.
+If you get stuck, [here](./xschem/measurement_amplifier.sch) is the solution to this exercise, and it is also shown in @fig-meas-amp-tb.
+
+![Simulation schematic of the common-source measurement amplifier.](./xschem/measurement_amplifier.svg){#fig-meas-amp-tb}
 :::
 
 By now we have designed a measurement amplifier based on a common-source stage. One problem with this stage is the relatively large input capacitance of approx. 0.3pF, which loads the input. Another issue even more severe is that the fact that the bias point in the circuit is set by the dc voltage level at the input. In general, we want a setup where the bias points of the circuit are largely independent of the dc input voltages. This is why in integrated circuit design we often design differential circuits where the input and output signals are given by the differential voltages, and are largely independent from the common-mode voltages. This is usually an advantage.
