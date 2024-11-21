@@ -6,21 +6,21 @@ During the sizing procedure we have seen that the achievable $\gm / \gds$ ratio 
 
 For analysis of a cascode, we use the following single-transistor stage shown in @fig-cascode-transistor.
 
-{{< include figures/_fig_cascode_transistor.qmd >}}
+{{< include /figures/_fig_cascode_transistor.qmd >}}
 
 In order to derive the operation of the cascode analytically, we draw the small-signal equivalent circuit in @fig-cascode-small-signal. We assume that $V_\mathrm{B}$ is a low-ohmic bias voltage, thus we replace it by ac ground. We further set $\gmb = 0$.
 
-{{< include figures/_fig_cascode_small_signal.qmd >}}
+{{< include /figures/_fig_cascode_small_signal.qmd >}}
 
 Since the gate is assumed at a fixed potential, we can put $\Cgs$ in parallel to $G_\mathrm{S}$ as $G_\mathrm{S}^{*} = G_\mathrm{S} + s \Cgs$, and we can put $\Cgd$ in parallel to $G_\mathrm{D}$ as $G_\mathrm{D}^{*} = G_\mathrm{D} + s \Cgd$. As a result we will disregard these capacitors for now, and just consider $G_\mathrm{S}$ and $G_\mathrm{D}$. 
 
-{{< include figures/_fig_cascode_small_signal_simplified.qmd >}}
+{{< include /figures/_fig_cascode_small_signal_simplified.qmd >}}
 
 ## Cascode Output Impedance
 
 As a first step, we want to calculate the output impedance at the drain of the MOSFET (i.e., looking into the drain). For this, we replace $G_\mathrm{D}$ with a current source. The resulting small-signal equivalent circuit is shown in @fig-cascode-small-signal-simplified-out.
 
-{{< include figures/_fig_cascode_small_signal_simplified_out.qmd >}}
+{{< include /figures/_fig_cascode_small_signal_simplified_out.qmd >}}
 
 We realize that $i_\mathrm{out}$ flows through $G_\mathrm{S}$ and drops $\vgs$ (note the sign):
 $$
@@ -50,7 +50,7 @@ The output impedance of the lower MOSFET ($\gds'$) is **reduced** by the self-ga
 
 To calculate the input impedance of a cascode (i.e., looking into the source) we replace $G_\mathrm{S}$ with a current source. The resulting small-signal equivalent circuit is shown in @fig-cascode-small-signal-simplified-in. 
 
-{{< include figures/_fig_cascode_small_signal_simplified_in.qmd >}}
+{{< include /figures/_fig_cascode_small_signal_simplified_in.qmd >}}
 
 We note that $\vgs = -v_\mathrm{in}$ and that $i_\mathrm{in}$ flows through $G_\mathrm{D}$, resulting in $v_\mathrm{D} = i_\mathrm{in} / G_\mathrm{D}$. Note that $\vds =  v_\mathrm{D} - v_\mathrm{in}$. Formulating KCL at the input node results in
 $$
