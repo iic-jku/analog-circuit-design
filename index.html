@@ -143,6 +143,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Analysis and Design of Elementary MOS Amplifier Stages;,citation_author=Boris Murmann;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;">
 <meta name="citation_reference" content="citation_title=Analysis and Design of Analog Integrated Circuits;,citation_author=Paul R. Gray;,citation_author=Paul J. Hurst;,citation_author=Stephen H. Lewis;,citation_author=Robert G. Meyer;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;">
 <meta name="citation_reference" content="citation_title=Design of Analog CMOS Integrated Circuits;,citation_author=Behzad Razavi;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
+<meta name="citation_reference" content="citation_title=Analog Integrated Circuit Design;,citation_author=Tony C. Carusone;,citation_author=David Johns;,citation_author=Kenneth Martin;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;">
 </head>
 
 <body>
@@ -900,7 +901,7 @@ MOSFET Square-Law Model
 </div>
 <p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.</p>
 <p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
-<p>The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.</p>
+<p>The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology has the huge advantage that it catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.</p>
 <section id="sec-techsweep-testbench" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-techsweep-testbench"><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</h2>
 <p>In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in <a href="#fig-techsweep-nmos-tb" class="quarto-xref">Figure&nbsp;9</a>, and the TB for the LV PMOS is shown in <a href="#fig-techsweep-pmos-tb" class="quarto-xref">Figure&nbsp;10</a>.</p>
@@ -963,7 +964,7 @@ Power Consumption
 \tag{3}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
 <p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
-\tag{4}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.”</p>
+\tag{4}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.” The latter is sometimes also dubbed the effective gate-source voltage <span class="math inline">\(V_\mathrm{eff}\)</span> <span class="citation" data-cites="Johns_Martin_2nd_ed">(<a href="#ref-Johns_Martin_2nd_ed" role="doc-biblioref">Carusone, Johns, and Martin 2011</a>)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Why 300K?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -989,7 +990,7 @@ Why 300K?
 </div>
 </div>
 </div>
-<p>The following figure plots <span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. As you can see, device speeds maximizes for a low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and a short <span class="math inline">\(L\)</span>. As you can see the drain-source voltage is kept at <span class="math inline">\(V_\mathrm{DS}= 0.75\,\text{V} = V_\mathrm{DD}/ 2\)</span>, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at <span class="math inline">\(V_\mathrm{SB} = 0\,\text{V}\)</span>, which means bulk and source terminals are connected.</p>
+<p>The following figure plots <span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. As you can see, device speeds maximizes for a low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and a short <span class="math inline">\(L\)</span>. Note, that the drain-source voltage is kept at <span class="math inline">\(V_\mathrm{DS}= 0.75\,\text{V} = V_\mathrm{DD}/ 2\)</span>, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at <span class="math inline">\(V_\mathrm{SB} = 0\,\text{V}\)</span>, which means bulk and source terminals are connected.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-nmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
@@ -1053,7 +1054,7 @@ Noise Notation
 <p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(0 \ge f &lt; \infty\)</span>) or two-sided power spectral density (PSD) (<span class="math inline">\(-\infty &lt; f &lt; \infty\)</span>). The default in this lecture is the usage of the <strong>one-sided PSD</strong>.</p>
 </div>
 </div>
-<p>In this lecture the only MOSFET noise we consider is the drain noise (as discussed in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>), showing up as a current noise between drain and source. For a for realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.</p>
+<p>In this lecture the only MOSFET noise we consider is the drain noise (as discussed in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>), showing up as a current noise between drain and source. For a realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.</p>
 <p>The factor <span class="math inline">\(\gamma\)</span> (<a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a>) is a function of many things (in classical theory, <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma = 1\)</span> in triode), and it is characterized in the following plot as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. So when calculating MOSFET noise we can lookup <span class="math inline">\(\gamma\)</span> in the below plot, and use <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a> to calculate the effective drain current noise.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-12" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
@@ -1215,7 +1216,7 @@ Beware of Modelling Issues
 <li>The shunt capacitance of the switch when it is turned off (<span class="math inline">\(C_\mathrm{off}\)</span> is defined by the coupling capacitances between drain and source).</li>
 </ul>
 <p>In the operation of the NMOS as a switch the gate is usually pulled to <span class="math inline">\(V_\mathrm{DD}\)</span> and the bulk is permanently connected to <span class="math inline">\(V_\mathrm{SS}\)</span> to achieve the lowest <span class="math inline">\(R_\mathrm{on}\)</span> (to turn the switch off the gate is pulled towards <span class="math inline">\(V_\mathrm{SS}\)</span>). Likewise, to turn on a PMOS, the gate is usually pulled to <span class="math inline">\(V_\mathrm{SS}\)</span> and the bulk is connected to <span class="math inline">\(V_\mathrm{DD}\)</span>. In this situation the drain/source potential is somewhere between <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>, so the MOSFET will experience a <span class="math inline">\(V_\mathrm{SB}\neq 0\)</span>, leading to a quite noticeable bulk effect. Once the drain/source potential is sufficiently high for NMOS (low PMOS) the switch resistance will drastically degrade.</p>
-<p>In order to get a feeling for the behavior of the MOSFET as a switch the following characterization plots show <span class="math inline">\(R_\mathrm{on}\)</span> and <span class="math inline">\(C_\mathrm{off}\)</span> for the NMOS and the PMOS, respectively. Both plots are for <span class="math inline">\(L = L_\mathrm{min} = 0.13\mu m\)</span>, as for switches usually minimum length devices are used. Only for special applications (e.g., the leakage current in off-mode is a concern) MOSFETs with increased <span class="math inline">\(L\)</span> are used.</p>
+<p>In order to get a feeling for the behavior of the MOSFET as a switch the following characterization plots show <span class="math inline">\(R_\mathrm{on}\)</span> and <span class="math inline">\(C_\mathrm{off}\)</span> for the NMOS and the PMOS, respectively. Both plots are for <span class="math inline">\(L = L_\mathrm{min} = 0.13\mu m\)</span>, as for switches usually minimum length devices are used. Only for special applications (e.g., the drain-source leakage current in off-mode is a concern) MOSFETs with increased <span class="math inline">\(L\)</span> are used.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-3" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-11-19T16:09:53.483405Z&quot;,&quot;start_time&quot;:&quot;2024-11-19T16:09:53.204584Z&quot;}" data-tags="[&quot;fig-triode-ron-vs-vsource-1&quot;]" data-execution_count="3">
 <div class="cell-output cell-output-display">
@@ -1227,7 +1228,7 @@ Beware of Modelling Issues
 </div>
 </div>
 </div>
-<p>As can be seen in the previous plot, an NMOS can be used to switch at potentials close to <span class="math inline">\(V_\mathrm{SS}\)</span>, while a PMOS can be used to switch at potentials close to <span class="math inline">\(V_\mathrm{DD}\)</span>. To construct a switch which can work for all voltage levels between <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span> an NMOS is put in parallel to a PMOS, resulting in the well-known <strong>transmission gate</strong>.</p>
+<p>As can be seen in the previous plot, an NMOS can be used to switch at potentials close to <span class="math inline">\(V_\mathrm{SS}\)</span>, while a PMOS is the better choice when switching at potentials close to <span class="math inline">\(V_\mathrm{DD}\)</span>. To construct a switch which can work for all voltage levels between <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span> an NMOS is put in parallel to a PMOS, resulting in the well-known <strong>transmission gate</strong>.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-6" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-11-19T16:09:53.680720Z&quot;,&quot;start_time&quot;:&quot;2024-11-19T16:09:53.597301Z&quot;}" data-tags="[&quot;fig-triode-coff-vs-vsource&quot;]" data-execution_count="6">
 <div class="cell-output cell-output-display">
@@ -1541,7 +1542,7 @@ Figure&nbsp;17: Testbench for MOSFET diode noise analysis.
 </section>
 <section id="conclusion-1" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="conclusion-1"><span class="header-section-number">4.6</span> Conclusion</h2>
-<p>In this section we investigated the simple MOSFET-diode circuit. We learned important skills like how to derive a small-signal model, how to calculate important features like noise and open-loop gain for stability analysis. We introduced Middlebrook’s method to have a mechanism to open up loops in simulation (and calculation) without disturbing operating points for change loading conditions.</p>
+<p>In this section we investigated the simple MOSFET-diode circuit. We learned important skills like how to derive a small-signal model, how to calculate important features like noise and open-loop gain for stability analysis. We introduced Middlebrook’s method to have a mechanism to open up loops in simulation (and calculation) without disturbing operating points for changed loading conditions.</p>
 <p>If you feel that you have not yet mastered these topics or are uncertain in the operation of ngspice, please go back to the beginning of the section and read through the theory and redo the exercises.</p>
 </section>
 </section>
@@ -1569,7 +1570,7 @@ A_\mathrm{v} = \frac{v_\mathrm{out}}{v_\mathrm{in}} \approx - \frac{g_\mathrm{m}
 <section id="sense-amplifier-for-50-ohm-load" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sense-amplifier-for-50-ohm-load"><span class="header-section-number">5.1</span> Sense Amplifier for 50 Ohm Load</h2>
 <p>Let us now size and design an exemplary implementation (of course using the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method). In order to have useful real-life specifications, we want to build an amplifier which can be used to sense an on-chip voltage and drive external measurement equipment. Often, this equipment has a load impedance of 50<span class="math inline">\(\Omega\)</span>, and we want to have an impedance-matched output. The voltage gain shall be set to 1 (essentially, we want to sense a voltage and drive the measurement equipment).</p>
-<p>The resulting circuit is shown in <a href="#fig-meas-amplifier" class="quarto-xref">Figure&nbsp;19</a>. As the load is usually ground-referred, and as we want to avoid an ac-block at the output, we use a PMOS amplifier stage (compare with <a href="#fig-cs-amplifier" class="quarto-xref">Figure&nbsp;18</a>).</p>
+<p>The resulting circuit is shown in <a href="#fig-meas-amplifier" class="quarto-xref">Figure&nbsp;19</a>. As the load is usually ground-referred, and as we want to avoid a dc-block at the output, we use a PMOS amplifier stage (compare with <a href="#fig-cs-amplifier" class="quarto-xref">Figure&nbsp;18</a>).</p>
 <div id="cell-fig-meas-amplifier" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div id="fig-meas-amplifier" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3966,6 +3967,9 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Johns_Martin_2nd_ed" class="csl-entry" role="listitem">
+Carusone, Tony C., David Johns, and Kenneth Martin. 2011. <em><span>Analog Integrated Circuit Design</span></em>. Wiley.
+</div>
 <div id="ref-Gray_Mayer_5th_ed" class="csl-entry" role="listitem">
 Gray, Paul R., Paul J. Hurst, Stephen H. Lewis, and Robert G. Meyer. 2009. <em><span class="nocase">Analysis and Design of Analog Integrated Circuits</span></em>. Wiley.
 </div>
@@ -4422,7 +4426,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
