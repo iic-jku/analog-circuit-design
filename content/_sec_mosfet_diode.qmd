@@ -50,7 +50,7 @@ It is thus generally a good idea to add power-down switches to the circuits to d
 
 We now want to investigate the small-signal behavior of the MOSFET diode. Based on the small-signal model of the MOSFET in @fig-mosfet-small-signal-model we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circuit to the one shown in @fig-mosfet-diode-small-signal.
 
-{{< include /figures/_fig_mosfet_diode_small_signal.qmd >}}
+{{< include ./figures/_fig_mosfet_diode_small_signal.qmd >}}
 
 ::: {.callout-note title="Ground Node Selection"}
 For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only $N-1$ independent KCL equations, $N$ being the number of nodes in the circuit), and the potential difference equations are simpler if one node is at $0\,V$.
@@ -82,7 +82,7 @@ which is pretty much the transit frequency of the MOSFET!
 
 The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy $\Cgs^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
 
-{{< include /figures/_fig_mosfet_diode_openloop.qmd >}}
+{{< include ./figures/_fig_mosfet_diode_openloop.qmd >}}
 
 By inspecting @fig-mosfet-diode-openloop we see that 
 $$
@@ -123,7 +123,7 @@ As a final exercise on the MOSFET diode circuit we want to calculate the output 
 
 We will use the small-signal circuit shown in @fig-mosfet-diode-small-signal-w-noise.
 
-{{< include /figures/_fig_mosfet_diode_small_signal_w_noise.qmd >}}
+{{< include ./figures/_fig_mosfet_diode_small_signal_w_noise.qmd >}}
 
 As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $\vgs$ is thus given as
 $$
