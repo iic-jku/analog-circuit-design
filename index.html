@@ -8,7 +8,7 @@
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
-<meta name="dcterms.date" content="2024-11-21">
+<meta name="dcterms.date" content="2024-11-22">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -127,10 +127,10 @@ window.Quarto = {
 <meta name="citation_title" content="Analog Circuit Design">
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
-<meta name="citation_publication_date" content="2024-11-21">
-<meta name="citation_cover_date" content="2024-11-21">
+<meta name="citation_publication_date" content="2024-11-22">
+<meta name="citation_cover_date" content="2024-11-22">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-11-21">
+<meta name="citation_online_date" content="2024-11-22">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=A treatise on electricity and magnetism;,citation_author=James Clerk Maxwell;,citation_publication_date=1873;,citation_cover_date=1873;,citation_year=1873;,citation_volume=1;">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
@@ -181,7 +181,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">November 21, 2024</p>
+              <p class="date">November 22, 2024</p>
             </div>
           </div>
           
@@ -241,7 +241,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-cs-amplifier" id="toc-sec-cs-amplifier" class="nav-link" data-scroll-target="#sec-cs-amplifier"><span class="header-section-number">5</span> Common-Source Amplifier</a>
   <ul class="collapse">
-  <li><a href="#sense-amplifier-for-50ohm-load" id="toc-sense-amplifier-for-50ohm-load" class="nav-link" data-scroll-target="#sense-amplifier-for-50ohm-load"><span class="header-section-number">5.1</span> Sense Amplifier for 50Ohm Load</a></li>
+  <li><a href="#sense-amplifier-for-50-ohm-load" id="toc-sense-amplifier-for-50-ohm-load" class="nav-link" data-scroll-target="#sense-amplifier-for-50-ohm-load"><span class="header-section-number">5.1</span> Sense Amplifier for 50 Ohm Load</a></li>
   </ul></li>
   <li><a href="#sec-current-mirror" id="toc-sec-current-mirror" class="nav-link" data-scroll-target="#sec-current-mirror"><span class="header-section-number">6</span> Current Mirror</a></li>
   <li><a href="#sec-diff-pair" id="toc-sec-diff-pair" class="nav-link" data-scroll-target="#sec-diff-pair"><span class="header-section-number">7</span> Differential Pair</a>
@@ -324,7 +324,7 @@ window.Quarto = {
 
 <section id="sec-intro" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>This is the material for an intermediate-level MOSFET circuit design course, held at JKU under course number 336.009 (“KV Analoge Schaltungstechnik”).</p>
+<p>This is the material for an intermediate-level MOSFET analog circuit design course, held at JKU under course number 336.009 (“KV Analoge Schaltungstechnik”).</p>
 <p>The course makes heavy use of circuit simulation, using <strong>Xschem</strong> for schematic entry and <strong>ngspice</strong> for simulation. The 130nm CMOS technology <strong>SG13G2</strong> from IHP Microelectronics is used.</p>
 <p>Tools and PDK are integrated in the <strong>IIC-OSIC-TOOLS</strong> Docker image, which will be used during the coursework.</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -344,7 +344,7 @@ Important
 </div>
 <section id="ihps-sg13g2-130nm-cmos-technology" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="ihps-sg13g2-130nm-cmos-technology"><span class="header-section-number">1.1</span> IHP’s SG13G2 130nm CMOS Technology</h2>
-<p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminum metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
+<p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from <a href="https://www.ihp-microelectronics.com">IHP Microelectronics</a>. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminum metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
 <p>For our circuit design, the most important parameters of the available devices are summarized in the following table:</p>
 <div id="tbl-sg13g2-devices" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -360,16 +360,16 @@ Table&nbsp;1: IHP SG13G2 devices
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Device</th>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Specification</th>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Device Name</th>
+<th style="text-align: left;">Specifications</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Low-voltage (LV) NMOS</td>
 <td style="text-align: left;"><code>sg13_lv_nmos</code></td>
-<td style="text-align: left;">operating voltage (nom.) <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.5\,\text{V}\)</span>; triple-well available</td>
+<td style="text-align: left;">operating voltage (nom.) <span class="math inline">\(V_\mathrm{DD}=1.5\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.13\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.5\,\text{V}\)</span>; isolated NMOS available</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Low-voltage (LV) PMOS</td>
@@ -379,7 +379,7 @@ Table&nbsp;1: IHP SG13G2 devices
 <tr class="odd">
 <td style="text-align: left;">High-voltage (HV) NMOS</td>
 <td style="text-align: left;"><code>sg13_hv_nmos</code></td>
-<td style="text-align: left;">operating voltage (nom.) <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.7\,\text{V}\)</span>; triple-well available</td>
+<td style="text-align: left;">operating voltage (nom.) <span class="math inline">\(V_\mathrm{DD}=3.3\,\text{V}\)</span>, <span class="math inline">\(L_\mathrm{min}=0.45\,\mu\text{m}\)</span>, <span class="math inline">\(V_\mathrm{th}\approx 0.7\,\text{V}\)</span>; isolated NMOS available</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">High-voltage (HV) PMOS</td>
@@ -419,17 +419,17 @@ Table&nbsp;1: IHP SG13G2 devices
 </section>
 <section id="schematic-entry-using-xschem" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="schematic-entry-using-xschem"><span class="header-section-number">1.2</span> Schematic Entry Using Xschem</h2>
-<p>Xschem is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem and the basic operation of it please look at the available <a href="https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html">online documentation</a>. Usage of Xschem will be learned with the first few basic examples, essentially using a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.</p>
+<p><a href="https://xschem.sourceforge.io">Xschem</a> is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem and the basic operation of it please look at the available <a href="https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html">online documentation</a>. Usage of Xschem will be learned with the first few basic examples, essentially using a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.</p>
 <p>A summary of important Xschem keyboard shortcuts is provided in <a href="#sec-xschem-cheatsheet" class="quarto-xref">Section&nbsp;19</a>.</p>
 </section>
 <section id="circuit-simulation-using-ngspice" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="circuit-simulation-using-ngspice"><span class="header-section-number">1.3</span> Circuit Simulation Using ngspice</h2>
-<p>ngspice is an open-source circuit simulator with SPICE dependency <span class="citation" data-cites="Nagel_1975">(<a href="#ref-Nagel_1975" role="doc-biblioref">Nagel 1975</a>)</span>. Besides the usual simulated types like <code>op</code> (operating point), <code>dc</code> (dc sweeps), <code>tran</code> (time-domain), or <code>ac</code> (small-signal frequency sweeps), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest <a href="https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf">online manual</a>.</p>
-<p>Important ngspice simulation commands and options (e.g., to control convergence settings) are listed in <a href="#sec-ngspice-cheatsheet" class="quarto-xref">Section&nbsp;20</a>.</p>
+<p><a href="https://ngspice.sourceforge.io">ngspice</a> is an open-source circuit simulator with SPICE dependency <span class="citation" data-cites="Nagel_1975">(<a href="#ref-Nagel_1975" role="doc-biblioref">Nagel 1975</a>)</span>. Besides the usual simulated types like <code>op</code> (operating point), <code>dc</code> (dc sweeps), <code>tran</code> (time domain), <code>ac</code> (small-signal frequency sweeps), and <code>noise</code> (small-signal noise analysis), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest <a href="https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf">online manual</a>.</p>
+<p>Important ngspice simulation commands and options (e.g., how to control convergence settings) are listed in <a href="#sec-ngspice-cheatsheet" class="quarto-xref">Section&nbsp;20</a>.</p>
 </section>
 <section id="integrated-ic-design-environment-iic-osic-tools" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="integrated-ic-design-environment-iic-osic-tools"><span class="header-section-number">1.4</span> Integrated IC Design Environment (IIC-OSIC-TOOLS)</h2>
-<p>In order to make use of the various required components (tools like Xschem and ngspice, PDKs like SG13G2) easier, we will use the <strong>IIC-OSIC-TOOLS</strong>. This is a pre-compiled Docker image which allows to do circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc. please look at <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS">IIC-OSIC-TOOLS GitHub page</a>.</p>
+<p>In order to make use of the various required components (tools like Xschem and ngspice, PDKs like SG13G2) easier, we will use the <strong>IIC-OSIC-TOOLS</strong>. This is a pre-compiled Docker image which allows to do circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc., please look at <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS">IIC-OSIC-TOOLS GitHub page</a>.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Preparation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -454,7 +454,7 @@ Linux
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal. If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many resources available.</p>
+<p>In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal (shell). If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many resources available.</p>
 <p>A summary of important Linux shell commands is provided in <a href="#sec-linux-cheatsheet" class="quarto-xref">Section&nbsp;18</a>.</p>
 </div>
 </div>
@@ -463,32 +463,32 @@ Linux
 <h2 data-number="1.5" class="anchored" data-anchor-id="setting-up-the-design-directory"><span class="header-section-number">1.5</span> Setting up the Design Directory</h2>
 <ul>
 <li>Open your VM by entering the URL in your browser.</li>
-<li>Open a terminal (third icon in taskbar). You should get the following prompt: <code>/foss/designs &gt;</code></li>
+<li>Open a terminal (third icon in the taskbar at the bottom). You should get the following prompt: <code>/foss/designs &gt;</code></li>
 <li>Clone the git repository into the current directory: <code>git clone https://github.com/iic-jku/analog-circuit-design.git</code></li>
-<li>This Github repository includes a file called <code>.designinit</code>, which sets the PDK and certain paths. However this must be located in <code>/foss/designs/</code></li>
+<li>This GitHub repository includes a file called <code>.designinit</code>, which sets the PDK and certain paths. However, this must be located in <code>/foss/designs/</code></li>
 <li>Therefore, we first need to copy it there: <code>cp analog-circuit-design/.designinit .</code></li>
 <li>Then we adjust the variable <code>XSCHEM_USER_LIBRARY_PATH</code> by opening the file in an editor e.g.&nbsp;<code>nano .designinit</code>
 <ul>
-<li>Edit the last line from <code>export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem</code> to <code>export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem</code></li>
+<li>Change the last line from <code>export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem</code> to <code>export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem</code></li>
 </ul></li>
 <li>To apply the changes, we need to close the current terminal window: <code>exit</code></li>
 <li>Open again a terminal</li>
-<li>Test if the correct PDK gets selected: <code>echo $PDK</code></li>
-<li>Change into the Github repository: <code>cd analog-circuit-design</code></li>
+<li>Test if the correct PDK gets selected: <code>echo $PDK</code> (you should get <code>sg13g2</code> as the answer)</li>
+<li>Change into the GitHub repository: <code>cd analog-circuit-design</code></li>
 <li>Start xschem using <code>xschem</code> or directly open a specific schematic using <code>xschem xschem/dc_lv_nmos.sch</code></li>
 </ul>
 <section id="creating-backups" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="creating-backups"><span class="header-section-number">1.5.1</span> Creating Backups</h3>
-<p>You can easily create backups of your work by creating a zip archive of the complete directory.</p>
+<p>You can easily create backups of your work by creating a zip archive of the complete directory:</p>
 <ul>
-<li>Change to the parent directory: <code>cd /foss/designs/</code></li>
+<li>Change to the parent directory: <code>cd /foss/designs</code></li>
 <li>Create a zip archive from the complete design folder: <code>zip backup.zip analog-circuit-design -r</code></li>
 </ul>
 </section>
 <section id="updating-the-repository" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="updating-the-repository"><span class="header-section-number">1.5.2</span> Updating the Repository</h3>
 <ul>
-<li>Create a backup!</li>
+<li><strong>Create a backup!</strong></li>
 <li>Go to directory: e.g.&nbsp;<code>cd /foss/designs/analog-circuit-design</code></li>
 <li>Fetch newest changes from the origin: <code>git fetch origin</code></li>
 <li>Merge changes from the origin into local branch ‘master’: <code>git merge origin/main</code></li>
@@ -504,7 +504,19 @@ Git Merge Conflicts
 </div>
 <div class="callout-body-container callout-body">
 <p>It is possible that <code>git merge</code> does not complete successfully. Either you are able to resolve the merge conflict manually, or it may be easier to make a fresh clone of the repository and adding your local changes manually from the backup.</p>
-<p><strong>Think twice before executing any git commands without a backup, this could lead to permanent loss of data!</strong></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please think twice before executing any git command without a backup, as this could lead to permanent loss of data!</p>
 </div>
 </div>
 </section>
@@ -512,12 +524,12 @@ Git Merge Conflicts
 </section>
 <section id="sec-first-steps" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> First Steps</h1>
-<p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe HBTs, we will use it as a pure CMOS technology.</p>
+<p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe heterojunction bipolar transistors (HBTs), we will use it as a pure CMOS technology, which is available from IHP under the name SG13S.</p>
 <section id="sec-mosfet" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-mosfet"><span class="header-section-number">2.1</span> The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h2>
-<p>In this course, we will not dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics or a simplified solid-state physics based approach resulting in the well-known square-law model. Instead, we will treat the MOSFET behaviorally by assuming a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model.</p>
-<p>Since we have an emphasis on integrated circuit design the size of the MOSFET can be adapted by changing its width <span class="math inline">\(W\)</span> and its length <span class="math inline">\(L\)</span>. As we will see later, <span class="math inline">\(L\)</span> has a profound impact on the MOSFET performance allowing to trade-off speed versus output conductance versus device-to-device matching. The width <span class="math inline">\(W\)</span> is more of a scaling parameter to adapt the current <strong>density</strong> (strictly speaking charge density) forming in the MOSFET channel to a desired current. More about this later.</p>
-<p>The circuit symbol that we will use for the n-channel MOSFET is shown in <a href="#fig-nmos-symbol" class="quarto-xref">Figure&nbsp;1</a>, and for the p-channel MOSFET it is shown in <a href="#fig-pmos-symbol" class="quarto-xref">Figure&nbsp;2</a>. A control voltage between gate (“G”) and source (“S”) causes a current to flow between drain (“D”) and source. The MOSFET is a 4-terminal device, so the bulk (“B”) can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.</p>
+<p>In this course, we will <strong>not</strong> dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics or a simplified solid-state physics based approach resulting in the well-known square-law model. Instead, we will treat the MOSFET behaviorally by assuming a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model.</p>
+<p>Since we have an emphasis on integrated circuit design in this course the size of the MOSFET can be adapted by changing its width <span class="math inline">\(W\)</span> and its length <span class="math inline">\(L\)</span>. As we will see later, <span class="math inline">\(L\)</span> has a profound impact on the MOSFET performance allowing to trade-off speed versus output conductance versus device-to-device matching. The width <span class="math inline">\(W\)</span> is more of a scaling parameter to adapt the current <strong>density</strong> (strictly speaking charge density) forming in the MOSFET channel to a desired current. More about this later.</p>
+<p>The circuit symbol that we will use for the n-channel MOSFET is shown in <a href="#fig-nmos-symbol" class="quarto-xref">Figure&nbsp;1</a>, and for the p-channel MOSFET it is shown in <a href="#fig-pmos-symbol" class="quarto-xref">Figure&nbsp;2</a>. A control voltage between gate (“G”) and source (“S”) controls the current flow between drain (“D”) and source. The MOSFET is a 4-terminal device, so the bulk (“B”) can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Background">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -528,8 +540,8 @@ MOSFET Background
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Strictly speaking is the drain-source current of a MOSFET controlled by the voltage between gate and bulk and the voltage between drain and source. Since bulk is often connected to source anyway, and many circuit designers historically were already familiar with the operation of the bipolar junction transistor, it is common to consider the gate-source voltage (besides the drain-source voltage) as the controlling voltage.</p>
-<p>This focus on gate-source implies that the source is special compared to the drain. In a typical physical MOSFET, however, the drain and source are constructed exactly the same, and which terminal is drain, and which terminal is source, is only determined by the applied voltage potentials, and can change dynamically during operation (think of a MOSFET operating as a switch… which side is the drain, which side is the source?).</p>
+<p>Strictly speaking is the drain-source current of a MOSFET controlled by the voltage between gate and bulk (<span class="math inline">\(V_\mathrm{GB}\)</span>) and the voltage between drain and source (<span class="math inline">\(V_\mathrm{DS}\)</span>). Since bulk is often connected to source anyway, and many circuit designers historically were already familiar with the operation of the bipolar junction transistor (BJT), it is common to consider the gate-source voltage (besides the drain-source voltage) as the controlling voltage.</p>
+<p>This focus on gate-source suggests that the source is special compared to the drain. In a typical physical MOSFET, however, the drain and source are constructed exactly the same (i.e., the MOSFET is a symmetric device), and which terminal is drain, and which terminal is source, is only determined by the applied voltage potentials, and can change dynamically during operation (think of a MOSFET operating as a switch… which side is the drain, which side is the source?).</p>
 <p>Unfortunately, this focus on a “special” source has made its way into some MOSFET compact models. The model that is used in SG13G2 luckily uses the PSP model, which is formulated symmetrically with regards to drain and source, and is thus very well suited for analog and RF circuit design. For a detailed understanding of the PSP model please refer to the <a href="https://www.nxp.com/wcm_documents/models/mos-models/model-psp/psp102p4_summary.pdf">model documentation</a>.</p>
 </div>
 </div>
@@ -1285,7 +1297,7 @@ Exercise: MOSFET Diode Sizing
 </div>
 <p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: MOSFET Diode Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1294,7 +1306,7 @@ Solution: MOSFET Diode Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
@@ -1554,8 +1566,8 @@ Figure&nbsp;18: A MOSFET common-source amplifier with resistive load.
 <p><span class="math display">\[
 A_\mathrm{v} = \frac{v_\mathrm{out}}{v_\mathrm{in}} \approx - \frac{g_\mathrm{m}v_\mathrm{in} R_1}{v_\mathrm{in}} = - g_\mathrm{m}R_1
 \]</span></p>
-<section id="sense-amplifier-for-50ohm-load" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="sense-amplifier-for-50ohm-load"><span class="header-section-number">5.1</span> Sense Amplifier for 50Ohm Load</h2>
+<section id="sense-amplifier-for-50-ohm-load" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sense-amplifier-for-50-ohm-load"><span class="header-section-number">5.1</span> Sense Amplifier for 50 Ohm Load</h2>
 <p>Let us now size and design an exemplary implementation (of course using the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method). In order to have useful real-life specifications, we want to build an amplifier which can be used to sense an on-chip voltage and drive external measurement equipment. Often, this equipment has a load impedance of 50<span class="math inline">\(\Omega\)</span>, and we want to have an impedance-matched output. The voltage gain shall be set to 1 (essentially, we want to sense a voltage and drive the measurement equipment).</p>
 <p>The resulting circuit is shown in <a href="#fig-meas-amplifier" class="quarto-xref">Figure&nbsp;19</a>. As the load is usually ground-referred, and as we want to avoid an ac-block at the output, we use a PMOS amplifier stage (compare with <a href="#fig-cs-amplifier" class="quarto-xref">Figure&nbsp;18</a>).</p>
 <div id="cell-fig-meas-amplifier" class="cell" data-execution_count="13">
@@ -2099,7 +2111,7 @@ Exercise: 5T-OTA Sizing
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2108,7 +2120,7 @@ Solution: 5T-OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-41" class="callout-41-contents callout-collapse collapse">
+<div id="callout-42" class="callout-42-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -2362,7 +2374,7 @@ Exercise: 5T-OTA Design and Testbench
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-43-contents" aria-controls="callout-43" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2371,7 +2383,7 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-43" class="callout-43-contents callout-collapse collapse show">
+<div id="callout-44" class="callout-44-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -2799,7 +2811,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 1\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-49-contents" aria-controls="callout-49" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2808,7 +2820,7 @@ Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-48" class="callout-48-contents callout-collapse collapse show">
+<div id="callout-49" class="callout-49-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -3205,7 +3217,7 @@ Exercise: Improved OTA Initial Simulation
 <h2 data-number="10.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">10.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-52-contents" aria-controls="callout-52" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-53-contents" aria-controls="callout-53" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3214,7 +3226,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-52" class="callout-52-contents callout-collapse collapse show">
+<div id="callout-53" class="callout-53-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -4410,7 +4422,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
