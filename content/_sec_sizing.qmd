@@ -12,7 +12,7 @@ An additional shortcoming of the square-law model is that it is only valid in st
 
 Being a well-established approach we select the $\gmid$ methodology introduced by P. Jespers and B. Murmann in [@Jespers_Murmann_2017]. A brief introduction is available [here](https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf) as well.
 
-The $\gmid$ methodology has the huge advantage that is catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.
+The $\gmid$ methodology has the huge advantage that it catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.
 
 ## MOSFET Characterization Testbench {#sec-techsweep-testbench}
 
@@ -52,7 +52,7 @@ For the classical square-law model of the MOSFET in strong inversion, $\gmid$ is
 $$
 \frac{\gm}{I_\mathrm{D}} = \frac{2}{\VGS - \Vth} = \frac{2}{V_\mathrm{od}} 
 $$ {#eq-mosfet-gmid-stronginversion}
-with $\Vth$ the threshold voltage and $V_\mathrm{od}$ the so-called "overdrive voltage."
+with $\Vth$ the threshold voltage and $V_\mathrm{od}$ the so-called "overdrive voltage." The latter is sometimes also dubbed the effective gate-source voltage $V_\mathrm{eff}$ [@Johns_Martin_2nd_ed].
 
 ::: {.callout-note title="Why 300K?"}
 Why are we so often using a temperature of $300\,\text{K}$ for a typical condition? As this corresponds to roughly $27^{\circ}\text{C}$, this accounts for some self heating compared to otherwise cooler usual room temperatures. Further, engineers like round numbers which are easy to remember, so $300\,\text{K}$ is used as a proxy for room temperature.
@@ -62,7 +62,7 @@ As we can also see from belows plot, the peak transit frequency of the LV NMOS i
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gmid-ft-vs-vgs >}}
 
-The following figure plots $f_\mathrm{T}$ against $\gmid$ for several different $L$. As you can see, device speeds maximizes for a low $\gmid$ and a short $L$. As you can see the drain-source voltage is kept at $\VDS = 0.75\,\text{V} = \VDD / 2$, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at $V_\mathrm{SB} = 0\,\text{V}$, which means bulk and source terminals are connected.
+The following figure plots $f_\mathrm{T}$ against $\gmid$ for several different $L$. As you can see, device speeds maximizes for a low $\gmid$ and a short $L$. Note, that the drain-source voltage is kept at $\VDS = 0.75\,\text{V} = \VDD / 2$, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at $V_\mathrm{SB} = 0\,\text{V}$, which means bulk and source terminals are connected.
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-ft-vs-gmid-vs-l >}}
 
@@ -88,7 +88,7 @@ Please also note that the pair of $k T$ pretty much always shows up together, so
 Further, when working with PSD there is the usage of a one-sided ($0 \ge f < \infty$) or two-sided power spectral density (PSD) ($-\infty < f < \infty$). The default in this lecture is the usage of the **one-sided PSD**.
 :::
 
-In this lecture the only MOSFET noise we consider is the drain noise (as discussed in @sec-mosfet-smallsignal-model), showing up as a current noise between drain and source. For a for realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.
+In this lecture the only MOSFET noise we consider is the drain noise (as discussed in @sec-mosfet-smallsignal-model), showing up as a current noise between drain and source. For a realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.
 
 The factor $\gamma$ (@eq-mosfet-noise) is a function of many things (in classical theory, $\gamma = 2/3$ in saturation and $\gamma = 1$ in triode), and it is characterized in the following plot as a function of $\gmid$ and $L$. So when calculating MOSFET noise we can lookup $\gamma$ in the below plot, and use @eq-mosfet-noise to calculate the effective drain current noise.
 
@@ -153,11 +153,11 @@ Besides using the MOSFET as a transconductor in saturation we often use the MOSF
 
 In the operation of the NMOS as a switch the gate is usually pulled to $\VDD$ and the bulk is permanently connected to $\VSS$ to achieve the lowest $R_\mathrm{on}$ (to turn the switch off the gate is pulled towards $\VSS$). Likewise, to turn on a PMOS, the gate is usually pulled to $\VSS$ and the bulk is connected to $\VDD$. In this situation the drain/source potential is somewhere between $\VDD$ and $\VSS$, so the MOSFET will experience a $\VSB \neq 0$, leading to a quite noticeable bulk effect. Once the drain/source potential is sufficiently high for NMOS (low PMOS) the switch resistance will drastically degrade.
 
-In order to get a feeling for the behavior of the MOSFET as a switch the following characterization plots show $R_\mathrm{on}$ and $C_\mathrm{off}$ for the NMOS and the PMOS, respectively. Both plots are for $L = L_\mathrm{min} = 0.13\mu m$, as for switches usually minimum length devices are used. Only for special applications (e.g., the leakage current in off-mode is a concern) MOSFETs with increased $L$ are used.
+In order to get a feeling for the behavior of the MOSFET as a switch the following characterization plots show $R_\mathrm{on}$ and $C_\mathrm{off}$ for the NMOS and the PMOS, respectively. Both plots are for $L = L_\mathrm{min} = 0.13\mu m$, as for switches usually minimum length devices are used. Only for special applications (e.g., the drain-source leakage current in off-mode is a concern) MOSFETs with increased $L$ are used.
 
 {{< embed ./sizing/techsweep_sg13_plots_triode.ipynb#fig-triode-ron-vs-vsource-1 >}}
 
-As can be seen in the previous plot, an NMOS can be used to switch at potentials close to $\VSS$, while a PMOS can be used to switch at potentials close to $\VDD$. To construct a switch which can work for all voltage levels between $\VDD$ and $\VSS$ an NMOS is put in parallel to a PMOS, resulting in the well-known **transmission gate**.
+As can be seen in the previous plot, an NMOS can be used to switch at potentials close to $\VSS$, while a PMOS is the better choice when switching at potentials close to $\VDD$. To construct a switch which can work for all voltage levels between $\VDD$ and $\VSS$ an NMOS is put in parallel to a PMOS, resulting in the well-known **transmission gate**.
 
 {{< embed ./sizing/techsweep_sg13_plots_triode.ipynb#fig-triode-coff-vs-vsource >}}
 
