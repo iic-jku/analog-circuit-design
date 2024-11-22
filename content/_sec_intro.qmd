@@ -1,6 +1,6 @@
 # Introduction {#sec-intro}
 
-This is the material for an intermediate-level MOSFET circuit design course, held at JKU under course number 336.009 ("KV Analoge Schaltungstechnik").
+This is the material for an intermediate-level MOSFET analog circuit design course, held at JKU under course number 336.009 ("KV Analoge Schaltungstechnik").
 
 The course makes heavy use of circuit simulation, using **Xschem** for schematic entry and **ngspice** for simulation. The 130nm CMOS technology **SG13G2** from IHP Microelectronics is used.
 
@@ -16,15 +16,15 @@ The production of this document would be impossible without these (and many more
 
 ## IHP's SG13G2 130nm CMOS Technology
 
-SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from IHP Microelectronics. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminum metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at [SG13G2 process specification](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf). While we will not do layouts in this course, the layout rules can be found at [SG13G2 layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf).
+SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from [IHP Microelectronics](https://www.ihp-microelectronics.com). It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminum metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at [SG13G2 process specification](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf). While we will not do layouts in this course, the layout rules can be found at [SG13G2 layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf).
 
 For our circuit design, the most important parameters of the available devices are summarized in the following table:
 
-| Device                       | Name           | Specification                                                    |
+| Component                    | Device Name    | Specifications                                                   |
 |:-----------------------------|:---------------|:-----------------------------------------------------------------|
-| Low-voltage (LV) NMOS        | `sg13_lv_nmos` | operating voltage (nom.) $\VDD=1.5\,\text{V}$, $L_\mathrm{min}=0.13\,\mu\text{m}$, $\Vth \approx 0.5\,\text{V}$; triple-well available |
+| Low-voltage (LV) NMOS        | `sg13_lv_nmos` | operating voltage (nom.) $\VDD=1.5\,\text{V}$, $L_\mathrm{min}=0.13\,\mu\text{m}$, $\Vth \approx 0.5\,\text{V}$; isolated NMOS available |
 | Low-voltage (LV) PMOS        | `sg13_lv_pmos` | operating voltage (nom.) $\VDD=1.5\,\text{V}$, $L_\mathrm{min}=0.13\,\mu\text{m}$, $\Vth \approx -0.47\,\text{V}$ |
-| High-voltage (HV) NMOS       | `sg13_hv_nmos` | operating voltage (nom.) $\VDD=3.3\,\text{V}$, $L_\mathrm{min}=0.45\,\mu\text{m}$, $\Vth \approx 0.7\,\text{V}$; triple-well available |
+| High-voltage (HV) NMOS       | `sg13_hv_nmos` | operating voltage (nom.) $\VDD=3.3\,\text{V}$, $L_\mathrm{min}=0.45\,\mu\text{m}$, $\Vth \approx 0.7\,\text{V}$; isolated NMOS available |
 | High-voltage (HV) PMOS       | `sg13_hv_pmos` | operating voltage (nom.) $\VDD=3.3\,\text{V}$, $L_\mathrm{min}=0.45\,\mu\text{m}$, $\Vth \approx -0.65\,\text{V}$ |
 | Silicided poly resistor      | `rsil`         | $R_\square=7\,\Omega \pm 10\%$, $\text{TC}_1=3100\,\text{ppm/K}$ |
 | Poly resistor                | `rppd`         | $R_\square=260\,\Omega \pm 10\%$, $\text{TC}_1=170\,\text{ppm/K}$ |
@@ -36,19 +36,19 @@ For our circuit design, the most important parameters of the available devices a
 
 ## Schematic Entry Using Xschem
 
-Xschem is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem and the basic operation of it please look at the available [online documentation](https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html). Usage of Xschem will be learned with the first few basic examples, essentially using a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.
+[Xschem](https://xschem.sourceforge.io) is an open-source schematic entry tool with emphasis on integrated circuits. For up-to-date information of the many features of Xschem and the basic operation of it please look at the available [online documentation](https://xschem.sourceforge.io/stefan/xschem_man/xschem_man.html). Usage of Xschem will be learned with the first few basic examples, essentially using a single MOSFET. The usage model of Xschem is that the schematic is hierarchically drawn, and the simulation and evaluation statements are contained in the schematics. Further, Xschem offers embedded graphing, which we will mostly use.
 
 A summary of important Xschem keyboard shortcuts is provided in @sec-xschem-cheatsheet.
 
 ## Circuit Simulation Using ngspice
 
-ngspice is an open-source circuit simulator with SPICE dependency [@Nagel_1975]. Besides the usual simulated types like `op` (operating point), `dc` (dc sweeps), `tran` (time-domain), or `ac` (small-signal frequency sweeps), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest [online manual](https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf).
+[ngspice](https://ngspice.sourceforge.io) is an open-source circuit simulator with SPICE dependency [@Nagel_1975]. Besides the usual simulated types like `op` (operating point), `dc` (dc sweeps), `tran` (time domain), `ac` (small-signal frequency sweeps), and `noise` (small-signal noise analysis), ngspice offers a script-like control interface, where many different simulation controls and result evaluations can be done. For detailed information please refer to the latest [online manual](https://ngspice.sourceforge.io/docs/ngspice-43-manual.pdf).
 
-Important ngspice simulation commands and options (e.g., to control convergence settings) are listed in @sec-ngspice-cheatsheet.
+Important ngspice simulation commands and options (e.g., how to control convergence settings) are listed in @sec-ngspice-cheatsheet.
 
 ## Integrated IC Design Environment (IIC-OSIC-TOOLS)
 
-In order to make use of the various required components (tools like Xschem and ngspice, PDKs like SG13G2) easier, we will use the **IIC-OSIC-TOOLS**. This is a pre-compiled Docker image which allows to do circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc. please look at [IIC-OSIC-TOOLS GitHub page](https://github.com/iic-jku/IIC-OSIC-TOOLS).
+In order to make use of the various required components (tools like Xschem and ngspice, PDKs like SG13G2) easier, we will use the **IIC-OSIC-TOOLS**. This is a pre-compiled Docker image which allows to do circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc., please look at [IIC-OSIC-TOOLS GitHub page](https://github.com/iic-jku/IIC-OSIC-TOOLS).
 
 ::: {.callout-warning title="Preparation"}
 Please make sure to receive information about your personal VM access ahead of the course start.
@@ -57,7 +57,7 @@ Please make sure to receive information about your personal VM access ahead of t
 Experienced users can install this image on their personal computer, for JKU students the IIC will host a VM on our compute cluster and provide personal login credentials.
 
 ::: {.callout-warning title="Linux"}
-In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal. If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many resources available.
+In this course, we assume that students have a basic knowledge of Linux and how to operate it using the terminal (shell). If you are not yet familiar with Linux (which is basically a must when doing integrated circuit design as many tools are only available on Linux), then please check out a Linux introductory course or tutorial online, there are many resources available.
 
 A summary of important Linux shell commands is provided in @sec-linux-cheatsheet.
 :::
@@ -65,34 +65,36 @@ A summary of important Linux shell commands is provided in @sec-linux-cheatsheet
 ## Setting up the Design Directory
 
 - Open your VM by entering the URL in your browser.
-- Open a terminal (third icon in taskbar). You should get the following prompt: `/foss/designs >`
+- Open a terminal (third icon in the taskbar at the bottom). You should get the following prompt: `/foss/designs >`
 - Clone the git repository into the current directory: `git clone https://github.com/iic-jku/analog-circuit-design.git`
-- This Github repository includes a file called `.designinit`, which sets the PDK and certain paths. However this must be located in `/foss/designs/`
+- This GitHub repository includes a file called `.designinit`, which sets the PDK and certain paths. However, this must be located in `/foss/designs/`
 - Therefore, we first need to copy it there: `cp analog-circuit-design/.designinit .`
 - Then we adjust the variable `XSCHEM_USER_LIBRARY_PATH` by opening the file in an editor e.g. `nano .designinit`
-    - Edit the last line from `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem` to `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem`
+    - Change the last line from `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem` to `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem`
 - To apply the changes, we need to close the current terminal window: `exit`
 - Open again a terminal
-- Test if the correct PDK gets selected: `echo $PDK`
-- Change into the Github repository: `cd analog-circuit-design`
+- Test if the correct PDK gets selected: `echo $PDK` (you should get `sg13g2` as the answer)
+- Change into the GitHub repository: `cd analog-circuit-design`
 - Start xschem using `xschem` or directly open a specific schematic using `xschem xschem/dc_lv_nmos.sch`
 
 ### Creating Backups
 
-You can easily create backups of your work by creating a zip archive of the complete directory.
+You can easily create backups of your work by creating a zip archive of the complete directory:
 
-- Change to the parent directory: `cd /foss/designs/`
+- Change to the parent directory: `cd /foss/designs`
 - Create a zip archive from the complete design folder: `zip backup.zip analog-circuit-design -r`
 
 ### Updating the Repository
 
-- Create a backup! 
+- **Create a backup!** 
 - Go to directory: e.g. `cd /foss/designs/analog-circuit-design`
 - Fetch newest changes from the origin: `git fetch origin`
 - Merge changes from the origin into local branch 'master': `git merge origin/main`
 
 ::: {.callout-warning title="Git Merge Conflicts"}
 It is possible that `git merge` does not complete successfully. Either you are able to resolve the merge conflict manually, or it may be easier to make a fresh clone of the repository and adding your local changes manually from the backup.
+:::
 
-**Think twice before executing any git commands without a backup, this could lead to permanent loss of data!**
+::: {.callout-important}
+Please think twice before executing any git command without a backup, as this could lead to permanent loss of data!
 :::
