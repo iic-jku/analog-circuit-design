@@ -1,5 +1,4 @@
-v {xschem version=3.4.6RC file_version=1.2
-}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -75,7 +74,9 @@ op
 write measurement_amplifier.raw
 set appendwrite
 ac dec 101 1k 1G
-let vout_db=20*log(mag(vout))
+let vout_db=20*log10(mag(vout))
+meas ac vout_db_max max vout_db
+print vout_db_max
 write measurement_amplifier.raw
 .endc
 "}
@@ -97,8 +98,8 @@ m=1}
 C {ammeter.sym} 640 -510 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
 C {sg13g2_pr/sg13_lv_pmos.sym} 620 -610 0 0 {name=M1
 l=0.13u
-w=280u
-ng=56
+w=260u
+ng=52
 m=1
 model=sg13_lv_pmos
 spiceprefix=X
