@@ -46,6 +46,8 @@ In @fig-mosfet-diode-settling-tb another interesting effect can be observed: Whi
 
 It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually $\VDD$ or $\VSS$) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.
 
+Exemplary implementations of power-down switches are shown in the Xschem implementation of the improved OTA in @fig-improved-ota-design. What $W/L$ ratio should these transistors have? Well, in general, switches often have minimum length to be fast. However, if there are no further specifications like power-down time, then these transistors often are used as dummy transistors for other circuit parts and are sized to fit the layout best.
+
 ## MOSFET Diode Small-Signal Analysis
 
 We now want to investigate the small-signal behavior of the MOSFET diode. Based on the small-signal model of the MOSFET in @fig-mosfet-small-signal-model we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circuit to the one shown in @fig-mosfet-diode-small-signal.
