@@ -6,106 +6,114 @@ V {}
 S {}
 E {}
 T {Parameterizable Transmission Gate with Dummies} 590 -1690 0 0 1 1 {}
-T {-) In most cases, equal W/L ratios for both p- and n-MOSFETs are used. But sizing according to their µCox-ratio is also fine.
+T {-) In most cases, equal W/L ratios for both p- and n-MOSFETs are used.
 
 -) For transmission gates, the sizing of PMOS could be the same as NMOS because large PMOS increases its 
 parasitic capacitance at the drain and the source. Thus, the speed is decreased in turn when (W/L)p=3(W/L)n.
 
--) Minimum-sized thick-oxide MOSFETs decrease leakage currents and charge injection simultaneously [Fath].
+-) If W is increased, the on-resistance decreases and vice versa.
+ 
+-) If L is increased, the drain-source leakage current decreases but the TG gets slower and vice versa.
 
--) Dummy MOSFETs for compensating charge injection.} 480 -1520 0 0 0.5 0.5 {}
+-) Furthermore, larger switches have more charge in the inversion layer, which leads to increased charge injection when the switches are turned off. 
+Larger switches also increase the drain-source overlap capacitance, which leads to increased clock feedthrough.
+Accordingly, larger switches are not always the solution. Alternatively, one can use bootstrapped switches [Wulff].
+
+-) To compensate charge injection and clock feedthrough dummy MOSFETs with half W can be used [Baker].
+
+-) If available, minimum-sized thick-oxide MOSFETs decrease leakage currents and charge injection simultaneously [Fath].} 300 -1560 0 0 0.5 0.5 {}
 T {di_tg_ctrl = 1, di_tg_ctrl_n = 0: v_a connected to v_b
-di_tg_ctrl = 0, di_tg_ctrl_n = 1: v_a = X, v_b = HIGH-Z} 880 -460 0 0 0.5 0.5 {}
-N 1120 -700 1120 -660 {
+di_tg_ctrl = 0, di_tg_ctrl_n = 1: v_a = X, v_b = HIGH-Z} 880 -320 0 0 0.5 0.5 {}
+N 1160 -520 1160 -480 {
 lab=di_tg_ctrl}
-N 1120 -1100 1120 -1060 {
+N 1160 -920 1160 -880 {
 lab=di_tg_ctrl_n}
-N 1150 -1020 1160 -1020 {
+N 1190 -840 1200 -840 {
 lab=v_b}
-N 1160 -1020 1160 -960 {
+N 1200 -840 1200 -780 {
 lab=v_b}
-N 1300 -960 1420 -960 {
+N 1340 -780 1460 -780 {
 lab=v_b}
-N 1220 -1020 1230 -1020 {
+N 1260 -840 1270 -840 {
 lab=v_b}
-N 1220 -1020 1220 -960 {
+N 1260 -840 1260 -780 {
 lab=v_b}
-N 1160 -960 1220 -960 {
+N 1200 -780 1260 -780 {
 lab=v_b}
-N 1290 -1020 1300 -1020 {
+N 1330 -840 1340 -840 {
 lab=v_b}
-N 1300 -1020 1300 -960 {
+N 1340 -840 1340 -780 {
 lab=v_b}
-N 1220 -960 1300 -960 {
+N 1260 -780 1340 -780 {
 lab=v_b}
-N 1260 -1100 1260 -1060 {
+N 1300 -920 1300 -880 {
 lab=di_tg_ctrl}
-N 1080 -1020 1090 -1020 {
+N 1120 -840 1130 -840 {
 lab=v_a}
-N 1080 -1020 1080 -960 {
+N 1120 -840 1120 -780 {
 lab=v_a}
-N 960 -960 1080 -960 {
+N 1000 -780 1120 -780 {
 lab=v_a}
-N 1080 -740 1090 -740 {
+N 1120 -560 1130 -560 {
 lab=v_a}
-N 1080 -800 1080 -740 {
+N 1120 -620 1120 -560 {
 lab=v_a}
-N 960 -800 1080 -800 {
+N 1000 -620 1120 -620 {
 lab=v_a}
-N 1220 -740 1230 -740 {
+N 1260 -560 1270 -560 {
 lab=v_b}
-N 1220 -800 1220 -740 {
+N 1260 -620 1260 -560 {
 lab=v_b}
-N 1160 -800 1220 -800 {
+N 1200 -620 1260 -620 {
 lab=v_b}
-N 1160 -800 1160 -740 {
+N 1200 -620 1200 -560 {
 lab=v_b}
-N 1150 -740 1160 -740 {
+N 1190 -560 1200 -560 {
 lab=v_b}
-N 1300 -800 1420 -800 {
+N 1340 -620 1460 -620 {
 lab=v_b}
-N 1260 -700 1260 -660 {
+N 1300 -520 1300 -480 {
 lab=di_tg_ctrl_n}
-N 1120 -1020 1120 -920 {
+N 1160 -840 1160 -740 {
 lab=VDD}
-N 1260 -920 1360 -920 {
+N 1300 -740 1400 -740 {
 lab=VDD}
-N 1360 -1100 1360 -920 {
+N 1400 -920 1400 -740 {
 lab=VDD}
-N 1260 -1020 1260 -920 {
+N 1300 -840 1300 -740 {
 lab=VDD}
-N 1120 -920 1260 -920 {
+N 1160 -740 1300 -740 {
 lab=VDD}
-N 1120 -840 1120 -740 {
+N 1160 -660 1160 -560 {
 lab=VSS}
-N 1260 -840 1360 -840 {
+N 1300 -660 1400 -660 {
 lab=VSS}
-N 1360 -840 1360 -660 {
+N 1400 -660 1400 -480 {
 lab=VSS}
-N 1260 -840 1260 -740 {
+N 1300 -660 1300 -560 {
 lab=VSS}
-N 1120 -840 1260 -840 {
+N 1160 -660 1300 -660 {
 lab=VSS}
-N 960 -880 960 -800 {
+N 1000 -700 1000 -620 {
 lab=v_a}
-N 920 -880 960 -880 {
+N 960 -700 1000 -700 {
 lab=v_a}
-N 960 -960 960 -880 {
+N 1000 -780 1000 -700 {
 lab=v_a}
-N 1420 -880 1420 -800 {
+N 1460 -700 1460 -620 {
 lab=v_b}
-N 1420 -880 1460 -880 {
+N 1460 -700 1500 -700 {
 lab=v_b}
-N 1420 -960 1420 -880 {
+N 1460 -780 1460 -700 {
 lab=v_b}
-N 1290 -740 1300 -740 {lab=v_b}
-N 1300 -800 1300 -740 {lab=v_b}
-N 1220 -800 1300 -800 {
+N 1330 -560 1340 -560 {lab=v_b}
+N 1340 -620 1340 -560 {lab=v_b}
+N 1260 -620 1340 -620 {
 lab=v_b}
 C {devices/title-3.sym} 0 0 0 0 {name=l1 author="Simon Dorrer" rev=1.0 lock=true}
-C {devices/iopin.sym} 920 -880 0 1 {name=p2 lab=v_a}
-C {devices/iopin.sym} 1460 -880 0 0 {name=p4 lab=v_b}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1120 -720 1 1 {name=M1
+C {devices/iopin.sym} 960 -700 0 1 {name=p2 lab=v_a}
+C {devices/iopin.sym} 1500 -700 0 0 {name=p4 lab=v_b}
+C {sg13g2_pr/sg13_lv_nmos.sym} 1160 -540 1 1 {name=M1
 l=L_N
 w=W_N
 ng=1
@@ -113,7 +121,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 1120 -1040 1 0 {name=M2
+C {sg13g2_pr/sg13_lv_pmos.sym} 1160 -860 1 0 {name=M2
 l=L_P
 w=W_P
 ng=1
@@ -121,7 +129,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 1260 -1040 1 0 {name=Mdummy2
+C {sg13g2_pr/sg13_lv_pmos.sym} 1300 -860 1 0 {name=Mdummy2
 l=L_P_D
 w=W_P_D
 ng=1
@@ -129,7 +137,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1260 -720 1 1 {name=Mdummy1
+C {sg13g2_pr/sg13_lv_nmos.sym} 1300 -540 1 1 {name=Mdummy1
 l=L_N_D
 w=W_N_D
 ng=1
@@ -137,9 +145,9 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {devices/lab_pin.sym} 1260 -1100 1 0 {name=p12 sig_type=std_logic lab=di_tg_ctrl}
-C {devices/lab_pin.sym} 1260 -660 3 0 {name=p13 sig_type=std_logic lab=di_tg_ctrl_n}
-C {devices/iopin.sym} 1360 -1100 3 0 {name=p3 lab=VDD}
-C {devices/iopin.sym} 1360 -660 1 0 {name=p7 lab=VSS}
-C {devices/ipin.sym} 1120 -660 3 0 {name=p8 lab=di_tg_ctrl}
-C {devices/ipin.sym} 1120 -1100 1 0 {name=p9 lab=di_tg_ctrl_n}
+C {devices/lab_pin.sym} 1300 -920 1 0 {name=p12 sig_type=std_logic lab=di_tg_ctrl}
+C {devices/lab_pin.sym} 1300 -480 3 0 {name=p13 sig_type=std_logic lab=di_tg_ctrl_n}
+C {devices/iopin.sym} 1400 -920 3 0 {name=p3 lab=VDD}
+C {devices/iopin.sym} 1400 -480 1 0 {name=p7 lab=VSS}
+C {devices/ipin.sym} 1160 -480 3 0 {name=p8 lab=di_tg_ctrl}
+C {devices/ipin.sym} 1160 -920 1 0 {name=p9 lab=di_tg_ctrl_n}
