@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -87,10 +87,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-86e67f1fcd594f562d62505f92e4b4dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -146,6 +146,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Analysis and Design of Analog Integrated Circuits;,citation_author=Paul R. Gray;,citation_author=Paul J. Hurst;,citation_author=Stephen H. Lewis;,citation_author=Robert G. Meyer;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;">
 <meta name="citation_reference" content="citation_title=Design of Analog CMOS Integrated Circuits;,citation_author=Behzad Razavi;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;">
 <meta name="citation_reference" content="citation_title=Analog Integrated Circuit Design;,citation_author=Tony C. Carusone;,citation_author=David Johns;,citation_author=Kenneth Martin;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;">
+<meta name="citation_reference" content="citation_title=Fifty nifty variations of two-transistor circuits: A tribute to the versatility of MOSFETs;,citation_author=Harald Pretl;,citation_author=Matthias Eberlein;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_issue=3;,citation_volume=13;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 </head>
 
 <body>
@@ -984,6 +985,7 @@ Why 300K?
 </div>
 </div>
 <p>As we can also see from belows plot, the peak transit frequency of the LV NMOS is about <span class="math inline">\(75\,\text{GHz}\)</span>, which allows building radio-frequency circuits up to ca. <span class="math inline">\(f_\mathrm{T} / 10 = 7.5\,\text{GHz}\)</span>, which is a respectable number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the time frame when 130nm CMOS became available (ca. 2000).</p>
+<p>Note that <span class="math inline">\(f_\mathrm{T}\)</span> saturates and even decreases again at around <span class="math inline">\(V_\mathrm{GS}= 1.2\,\text{V}\)</span> due to second-order effects of the transistor like <a href="https://en.wikipedia.org/wiki/Saturation_velocity">velocity saturation</a> and <a href="https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering">DIBL</a>. Velocity saturation describes the saturation of the velocity of the electrons at a certain <span class="math inline">\(V_\mathrm{GS}\)</span>. As a consequence, also <span class="math inline">\(g_\mathrm{m}\)</span> saturates. Since <span class="math inline">\(f_\mathrm{T} \propto g_\mathrm{m}/ C_\mathrm{gs}\)</span>, <span class="math inline">\(f_\mathrm{T}\)</span> can not further increase. DIBL explains the effect when a too high <span class="math inline">\(V_\mathrm{GS}\)</span> is applied and therefore the channel is confined to a narrow region at the surface, leading to more carrier scattering and thus lower mobility.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-5" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}" data-tags="[&quot;fig-nmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
 <div class="cell-output cell-output-display">
@@ -995,7 +997,8 @@ Why 300K?
 </div>
 </div>
 </div>
-<p>The following figure plots <span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. As you can see, device speeds maximizes for a low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and a short <span class="math inline">\(L\)</span>. Note, that the drain-source voltage is kept at <span class="math inline">\(V_\mathrm{DS}= 0.75\,\text{V} = V_\mathrm{DD}/ 2\)</span>, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at <span class="math inline">\(V_\mathrm{SB} = 0\,\text{V}\)</span>, which means bulk and source terminals are connected.</p>
+<p>The following figure plots <span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. As you can see, device speed maximizes for a low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and a short <span class="math inline">\(L\)</span>. Note, that the drain-source voltage is kept at <span class="math inline">\(V_\mathrm{DS}= 0.75\,\text{V} = V_\mathrm{DD}/ 2\)</span>, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at <span class="math inline">\(V_\mathrm{SB}= V_\mathrm{S} - V_\mathrm{B} = 0\,\text{V}\)</span>, which means bulk and source terminals are connected. If <span class="math inline">\(V_\mathrm{SB}\neq 0\,\text{V}\)</span>, then the so-called <a href="https://en.wikipedia.org/wiki/Threshold_voltage#Body_effect">body effect</a>, bulk effect or back-gate effect occurs.</p>
+<p>If <span class="math inline">\(V_\mathrm{SB}&gt; 0\,\text{V}\)</span>, then <span class="math inline">\(V_\mathrm{th}\)</span> increases. If <span class="math inline">\(V_\mathrm{SB}&lt; 0\,\text{V}\)</span>, then <span class="math inline">\(V_\mathrm{th}\)</span> decreases. At first glance, this effect may sound unwanted (and often also is), however, improved circuit designs by changing the bulk potential can be realized. For example, circuit 16 in <span class="citation" data-cites="Pretl_Fifty_Nifty_Circuits">(<a href="#ref-Pretl_Fifty_Nifty_Circuits" role="doc-biblioref">Pretl and Eberlein 2021</a>)</span> shows an implementation of a current mirror by exploiting the body effect. However, keep in mind that a deep-n-well (DNW), also called triple-well, is needed for NMOS transistors when the bulk is not tied to GND. This DNW may not be supported by the used PDK or can add additional costs to the wafer processing.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-nmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
@@ -1128,7 +1131,7 @@ PMOS Sign Convention
 </div>
 </div>
 </div>
-<p><span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. One can see significantly lower top speed for the PMOS compared to the NMOS, which means for high-speed circuits the NMOS should be used.</p>
+<p><span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. One can see a significantly lower top speed for the PMOS compared to the NMOS, which means for high-speed circuits the NMOS should be used. The reason for this is the approximately two to three times higher mobility of electrons compared to the mobility of holes.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-8" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}" data-tags="[&quot;fig-pmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
@@ -1248,6 +1251,7 @@ Beware of Modelling Issues
 </div>
 </div>
 <p>As the switch on-resistance gets lower when increasing <span class="math inline">\(W\)</span>, the off-capacitance gets larger. Thus, a good performance indicator for comparing switches in a given technology is the <span class="math inline">\(R_\mathrm{on} C_\mathrm{off}\)</span> product.</p>
+<p>When designing switches, often the unwanted effects of charge injection and clock feed-through have to be considered and, as always, a trade-off has to be chosen. More details can be found in literature, e.g, <span class="citation" data-cites="Johns_Martin_2nd_ed">(<a href="#ref-Johns_Martin_2nd_ed" role="doc-biblioref">Carusone, Johns, and Martin 2011</a>)</span> or <span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span>.</p>
 </section>
 </section>
 <section id="sec-mosfet-diode" class="level1" data-number="4">
@@ -1343,6 +1347,7 @@ Figure&nbsp;12: Testbench for MOSFET diode transient settling.
 </div>
 <p>In <a href="#fig-mosfet-diode-settling-tb" class="quarto-xref">Figure&nbsp;12</a> another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current the <span class="math inline">\(V_\mathrm{GS}\)</span> drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to the capacitor discharge by a diode <span class="citation" data-cites="Hellen_2003">(<a href="#ref-Hellen_2003" role="doc-biblioref">Hellen 2003</a>)</span>.</p>
 <p>It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually <span class="math inline">\(V_\mathrm{DD}\)</span> or <span class="math inline">\(V_\mathrm{SS}\)</span>) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.</p>
+<p>Exemplary implementations of power-down switches are shown in the Xschem implementation of the improved OTA in <a href="#fig-improved-ota-design" class="quarto-xref">Figure&nbsp;37</a>. Which <span class="math inline">\(W/L\)</span> ratio should these transistors have? Well, in general, switches often have minimum length to be fast and to have low <span class="math inline">\(R_\mathrm{on}\)</span>. However, if there are no critical specifications (e.g., like power-down time), then these transistors are often used as dummy transistors for other circuit parts and are sized to fit the layout best.</p>
 </section>
 <section id="mosfet-diode-small-signal-analysis" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="mosfet-diode-small-signal-analysis"><span class="header-section-number">4.3</span> MOSFET Diode Small-Signal Analysis</h2>
@@ -4001,6 +4006,9 @@ Murmann, Boris. 2013. <em><span class="nocase">Analysis and Design of Elementary
 <div id="ref-Nagel_1975" class="csl-entry" role="listitem">
 Nagel, Laurence W. 1975. <span>“SPICE2: A Computer Program to Simulate Semiconductor Circuits.”</span> PhD thesis, EECS Department, University of California, Berkeley. <a href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html">http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html</a>.
 </div>
+<div id="ref-Pretl_Fifty_Nifty_Circuits" class="csl-entry" role="listitem">
+Pretl, Harald, and Matthias Eberlein. 2021. <span>“Fifty Nifty Variations of Two-Transistor Circuits: A Tribute to the Versatility of MOSFETs.”</span> <em>IEEE Solid-State Circuits Magazine</em> 13 (3): 38–46.
+</div>
 <div id="ref-Razavi_Analog_CMOS" class="csl-entry" role="listitem">
 Razavi, Behzad. 2017. <em><span class="nocase">Design of Analog CMOS Integrated Circuits</span></em>. McGraw-Hill.
 </div>
@@ -4094,8 +4102,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -4206,7 +4212,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -4433,7 +4438,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
