@@ -60,9 +60,14 @@ Why are we so often using a temperature of $300\,\text{K}$ for a typical conditi
 
 As we can also see from belows plot, the peak transit frequency of the LV NMOS is about $75\,\text{GHz}$, which allows building radio-frequency circuits up to ca. $f_\mathrm{T} / 10 = 7.5\,\text{GHz}$, which is a respectable number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the time frame when 130nm CMOS became available (ca. 2000). 
 
+Note that $f_\mathrm{T}$ saturates and even decreases again at around $\VGS = 1.2\,\text{V}$ due to second-order effects of the transistor like [velocity saturation](https://en.wikipedia.org/wiki/Saturation_velocity) and [DIBL](https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering). Velocity saturation describes the saturation of the velocity of the electrons at a certain $\VGS$. As a consequence, also $\gm$ saturates. Since $f_\mathrm{T} \propto \gm / \Cgs$, $f_\mathrm{T}$ can not further increase. DIBL explains the effect when a too high $\VGS$ is applied and therefore the channel is confined to a narrow region at the surface, leading to
+more carrier scattering and thus lower mobility.
+
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-gmid-ft-vs-vgs >}}
 
-The following figure plots $f_\mathrm{T}$ against $\gmid$ for several different $L$. As you can see, device speeds maximizes for a low $\gmid$ and a short $L$. Note, that the drain-source voltage is kept at $\VDS = 0.75\,\text{V} = \VDD / 2$, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at $V_\mathrm{SB} = 0\,\text{V}$, which means bulk and source terminals are connected.
+The following figure plots $f_\mathrm{T}$ against $\gmid$ for several different $L$. As you can see, device speed maximizes for a low $\gmid$ and a short $L$. Note, that the drain-source voltage is kept at $\VDS = 0.75\,\text{V} = \VDD / 2$, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at $\VSB = V_\mathrm{S} - V_\mathrm{B} = 0\,\text{V}$, which means bulk and source terminals are connected. If $\VSB \neq 0\,\text{V}$, then the so-called [body effect](https://en.wikipedia.org/wiki/Threshold_voltage#Body_effect), bulk effect or back-gate effect occurs. 
+
+If $\VSB > 0\,\text{V}$, then $\Vth$ increases. If $\VSB < 0\,\text{V}$, then $\Vth$ decreases. At first glance, this effect may sound unwanted (and often also is), however, improved circuit designs by changing the bulk potential can be realized. For example, circuit 16 in [@Pretl_Fifty_Nifty_Circuits] shows an implementation of a current mirror by exploiting the body effect. However, keep in mind that a deep-n-well (DNW), also called triple-well, is needed for NMOS transistors when the bulk is not tied to GND. This DNW may not be supported by the used PDK or can add additional costs to the wafer processing.
 
 {{< embed ./sizing/techsweep_sg13_plots_nmos.ipynb#fig-nmos-ft-vs-gmid-vs-l >}}
 
@@ -118,7 +123,7 @@ $\gmid$ and $f_\mathrm{T}$ versus the gate-source voltage $\VGS$:
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-gmid-ft-vs-vgs >}}
 
-$f_\mathrm{T}$ against $\gmid$ for several different $L$. One can see significantly lower top speed for the PMOS compared to the NMOS, which means for high-speed circuits the NMOS should be used.
+$f_\mathrm{T}$ against $\gmid$ for several different $L$. One can see a significantly lower top speed for the PMOS compared to the NMOS, which means for high-speed circuits the NMOS should be used. The reason for this is the approximately two to three times higher mobility of electrons compared to the mobility of holes.
 
 {{< embed ./sizing/techsweep_sg13_plots_pmos.ipynb#fig-pmos-ft-vs-gmid-vs-l >}}
 
@@ -166,3 +171,5 @@ As can be seen in the previous plot, an NMOS can be used to switch at potentials
 {{< embed ./sizing/techsweep_sg13_plots_triode.ipynb#fig-triode-coff-vs-vsource >}}
 
 As the switch on-resistance gets lower when increasing $W$, the off-capacitance gets larger. Thus, a good performance indicator for comparing switches in a given technology is the $R_\mathrm{on} C_\mathrm{off}$ product. 
+
+When designing switches, often the unwanted effects of charge injection and clock feed-through have to be considered and, as always, a trade-off has to be chosen. More details can be found in literature, e.g, [@Johns_Martin_2nd_ed] or [@Razavi_Analog_CMOS].
