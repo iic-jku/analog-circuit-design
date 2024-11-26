@@ -1,14 +1,14 @@
 ```{python}
 #| label: fig-mosfet-diode-small-signal
 #| echo: false
-#| fig-cap: "The MOSFET diode small-signal model."
+#| fig-cap: "The MOSFET diode small-signal model (drain and gate are shorted, as well as source and bulk)."
 import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
 with sd.Drawing(canvas='svg') as d:
     d.config(unit=2)
     d.config(fontsize=16)
-    Cgs = elm.Capacitor().up().label(r'$C_\mathrm{gs}$')
+    Cgs = elm.Capacitor().up().label(r'$C_\mathrm{gs} + C_\mathrm{gb} + C_\mathrm{db} \approx C_\mathrm{gs}$')
     d.push()
     elm.Line().right().length(3).dot()
     Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} v_\mathrm{gs}$').dot()
@@ -28,6 +28,6 @@ with sd.Drawing(canvas='svg') as d:
     d.pop()
     elm.Line().left().length(3)
     d.pop()
-    d.move(dx=-1.5, dy=0)
+    d.move(dx=-5, dy=0)
     elm.Arrow().down().length(2).label(r'$v_\mathrm{gs}$')
 ```

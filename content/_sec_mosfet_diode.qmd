@@ -168,10 +168,10 @@ $$
 V_\mathrm{n,rms}^2 = \frac{k T \gamma}{\Cgs}.
 $$ {#eq-mosfet-diode-noise-rms-simplified}
 
-Inspecting @eq-mosfet-diode-noise-rms-simplified we see our familiar $kT/C$ noise enhanced by the factor $\gamma$! Calculating this value for our MOSFET diode we get $\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}$, which is a sizeable value! We run circuits in this technology at $\VDD = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$, resulting in a dynamic range in this case of $20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}$.
+Inspecting @eq-mosfet-diode-noise-rms-simplified we see our familiar $kT/C$ noise multiplied by the factor $\gamma$! Calculating this value for our MOSFET diode we get $\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}$, which is a sizeable value! We run circuits in this technology at $\VDD = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$ (single-ended), resulting in a dynamic range in this case of $20 \log (0.39 / 1.58 \cdot 10^{-3}) \approx 48\,\text{dB}$ assuming a sinusoidal signal.
 
 ::: {.callout-important title="Large Bandwidth and Noise"}
-Large BW circuits can integrate noise over a wide bandwidth resulting in considerable rms noise.
+Large bandwidth circuits integrate noise over a wide bandwidth resulting in considerable rms noise.
 :::
 
 ::: {.callout-tip title="Exercise: MOSFET Diode Noise"}
