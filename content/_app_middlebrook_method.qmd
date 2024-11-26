@@ -1,6 +1,6 @@
 # Appendix: Middlebrook's Method {#sec-middlebrook-method}
 
-When we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in @fig-middlebrook-voltage and @fig-middlebrook-current. The derivation of this approach is presented in [@Middlebrook_1975], and has the big advantage that loading is not changed, and the bias points are also correct.
+If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e. the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in @fig-middlebrook-voltage and @fig-middlebrook-current. The derivation of this approach is presented in [@Middlebrook_1975], and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.
 
 {{< include ./figures/_fig_middlebrook_voltage.qmd >}}
 {{< include ./figures/_fig_middlebrook_current.qmd >}}
@@ -14,7 +14,11 @@ $$
 T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}.
 $$
 
-Then, we can calculate the closed-loop transfer function $T(s) = H_\mathrm{ol(s)}$ as
+Then, we can calculate the open-loop transfer function $T(s) = H_\mathrm{ol(s)}$ as
 $$
-T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2}.
+T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \frac{V_\mathrm{r} I_\mathrm{r} - V_\mathrm{f} I_\mathrm{f}}{2 V_\mathrm{f} I_\mathrm{f} - V_\mathrm{r} I_\mathrm{f} - V_\mathrm{f} I_\mathrm{r}}.
 $$
+
+The four ac quantities $V_\mathrm{f}$, $V_\mathrm{r}$, $I_\mathrm{f}$, and $I_\mathrm{r}$ we can readily find by circuit simulation or calculation.
+
+Please note that Middlebrook's method works well for $T \gg 1$, so it will show inaccuracies at the crossover frequency of the open-loop gain at $T(s) \approx 0$. An improved method (slightly more complicated) can be found in [@Tian_2001].
