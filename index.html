@@ -249,7 +249,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-cs-amplifier" id="toc-sec-cs-amplifier" class="nav-link" data-scroll-target="#sec-cs-amplifier"><span class="header-section-number">5</span> Common-Source Amplifier</a>
   <ul class="collapse">
-  <li><a href="#sense-amplifier-for-50-ohm-load" id="toc-sense-amplifier-for-50-ohm-load" class="nav-link" data-scroll-target="#sense-amplifier-for-50-ohm-load"><span class="header-section-number">5.1</span> Sense Amplifier for 50 Ohm Load</a></li>
+  <li><a href="#sense-amplifier-driving-50-ohm-matched-load" id="toc-sense-amplifier-driving-50-ohm-matched-load" class="nav-link" data-scroll-target="#sense-amplifier-driving-50-ohm-matched-load"><span class="header-section-number">5.1</span> Sense Amplifier Driving 50 Ohm Matched Load</a></li>
   </ul></li>
   <li><a href="#sec-current-mirror" id="toc-sec-current-mirror" class="nav-link" data-scroll-target="#sec-current-mirror"><span class="header-section-number">6</span> Current Mirror</a></li>
   <li><a href="#sec-diff-pair" id="toc-sec-diff-pair" class="nav-link" data-scroll-target="#sec-diff-pair"><span class="header-section-number">7</span> Differential Pair</a>
@@ -1592,7 +1592,7 @@ Figure&nbsp;17: Testbench for MOSFET diode noise analysis.
 </section>
 <section id="sec-cs-amplifier" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Common-Source Amplifier</h1>
-<p>We now want to design something more useful, and we will use a basic circuit structure, namely a single-ended common-source amplifier. The structure of this circuit, using a resistor as a load, is shown in <a href="#fig-cs-amplifier" class="quarto-xref">Figure&nbsp;18</a>.</p>
+<p>We now want to step up our game, and use more components to design something useful. We will use a basic circuit structure, namely a single-ended common-source amplifier. The structure of this circuit, using a resistor as a load, is shown in <a href="#fig-cs-amplifier" class="quarto-xref">Figure&nbsp;18</a>.</p>
 <div id="cell-fig-cs-amplifier" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div id="fig-cs-amplifier" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1607,14 +1607,14 @@ Figure&nbsp;18: A MOSFET common-source amplifier with resistive load.
 </div>
 </div>
 </div>
-<p>The function of this circuit is as follows: Assuming the MOSFET <span class="math inline">\(M_1\)</span> is kept in saturation, then a small-signal voltage <span class="math inline">\(v_\mathrm{in}\)</span> applied at the gate is converted into a drain current <span class="math inline">\(i_\mathrm{d}\)</span> using the MOSFET’s transconductance <span class="math inline">\(g_\mathrm{m}\)</span>. Then, this current is converted into a voltage again in the resistor <span class="math inline">\(R_1\)</span>. Ultimately, we have a voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of</p>
+<p>The function of this circuit is as follows: Assuming the MOSFET <span class="math inline">\(M_1\)</span> is kept in saturation, then a small-signal voltage <span class="math inline">\(v_\mathrm{in}\)</span> applied at the gate is converted into a drain current <span class="math inline">\(i_\mathrm{d}\)</span> by the MOSFET’s transconductance <span class="math inline">\(g_\mathrm{m}\)</span>. Then, this current is converted into a voltage again in the resistor <span class="math inline">\(R_1\)</span>. Ultimately, we have a voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of</p>
 <p><span class="math display">\[
-A_\mathrm{v} = \frac{v_\mathrm{out}}{v_\mathrm{in}} \approx - \frac{g_\mathrm{m}v_\mathrm{in} R_1}{v_\mathrm{in}} = - g_\mathrm{m}R_1
+A_\mathrm{v} = \frac{v_\mathrm{out}}{v_\mathrm{in}} \approx - \frac{g_\mathrm{m}v_\mathrm{in} R_1}{v_\mathrm{in}} = - g_\mathrm{m}R_1.
 \]</span></p>
-<section id="sense-amplifier-for-50-ohm-load" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="sense-amplifier-for-50-ohm-load"><span class="header-section-number">5.1</span> Sense Amplifier for 50 Ohm Load</h2>
-<p>Let us now size and design an exemplary implementation (of course using the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method). In order to have useful real-life specifications, we want to build an amplifier which can be used to sense an on-chip voltage and drive external measurement equipment. Often, this equipment has a load impedance of 50<span class="math inline">\(\Omega\)</span>, and we want to have an impedance-matched output. The voltage gain shall be set to 1 (essentially, we want to sense a voltage and drive the measurement equipment).</p>
-<p>The resulting circuit is shown in <a href="#fig-meas-amplifier" class="quarto-xref">Figure&nbsp;19</a>. As the load is usually ground-referred, and as we want to avoid a dc-block at the output, we use a PMOS amplifier stage (compare with <a href="#fig-cs-amplifier" class="quarto-xref">Figure&nbsp;18</a>).</p>
+<section id="sense-amplifier-driving-50-ohm-matched-load" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sense-amplifier-driving-50-ohm-matched-load"><span class="header-section-number">5.1</span> Sense Amplifier Driving 50 Ohm Matched Load</h2>
+<p>Let us now size and design an exemplary implementation of this amplifier (of course using the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method). In order to have useful real-life specifications, we want to build an amplifier which can be used to sense an on-chip voltage and drive off-chip measurement equipment. Often, this equipment has an input impedance of 50<span class="math inline">\(\Omega\)</span>, and we want to have an impedance-matched output. The voltage gain shall be set to 1 (essentially, we want to sense a voltage and drive the measurement equipment).</p>
+<p>The resulting circuit is shown in <a href="#fig-meas-amplifier" class="quarto-xref">Figure&nbsp;19</a>. As the load is usually ground-referred, and we want to avoid a dc-block at the output, we use a PMOS amplifier stage (compare with <a href="#fig-cs-amplifier" class="quarto-xref">Figure&nbsp;18</a>).</p>
 <div id="cell-fig-meas-amplifier" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div id="fig-meas-amplifier" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1642,8 +1642,8 @@ Exercise: PMOS-Based Measurement Amplifier
 <p>Please think about why exactly we want this measurement amplifier be based on a PMOS instead of an NMOS.</p>
 </div>
 </div>
-<p>The <a href="https://en.wikipedia.org/wiki/Impedance_matching">power matching</a> condition at the output mandates that <span class="math inline">\(R_1 = R_\mathrm{load}\)</span>, so <span class="math inline">\(R'_1 = R_\mathrm{load} \parallel R_1 = 25\,\Omega\)</span>. The voltage gain requirement of <span class="math inline">\(|A_\mathrm{v}| = 1\)</span> results in <span class="math inline">\(g_\mathrm{m}= 1 / R'_1 = 40\,\text{mS}\)</span>.</p>
-<p>We now need to find <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of <span class="math inline">\(M_1\)</span> and set the required bias current <span class="math inline">\(I_\mathrm{D}\)</span>. We also need to find out the proper <span class="math inline">\(V_\mathrm{GS}\)</span> to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=8\)</span> and set <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>. The notebook is available <a href="./sizing/sizing_measurement_amplifier-preview.html">here</a>. The resulting circuit including all component values is shown at the end of the notebook (the red input capacitor shows the <span class="math inline">\(C_\mathrm{gg}\)</span> of the MOSFET).</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Impedance_matching">power matching</a> requirement at the output mandates that <span class="math inline">\(R_1 = R_\mathrm{load}\)</span>, so <span class="math inline">\(R'_1 = R_\mathrm{load} \parallel R_1 = 25\,\Omega\)</span>. The voltage gain requirement of <span class="math inline">\(|A_\mathrm{v}| = 1\)</span> results in <span class="math inline">\(g_\mathrm{m}= 1 / R'_1 = 40\,\text{mS}\)</span>.</p>
+<p>We now need to find <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of <span class="math inline">\(M_1\)</span> and calculate the required bias current <span class="math inline">\(I_\mathrm{D}\)</span>. We also need to find the proper <span class="math inline">\(V_\mathrm{GS}\)</span> to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=8\)</span> and set <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>. The notebook is available <a href="./sizing/sizing_measurement_amplifier-preview.html">here</a>. The resulting circuit including all component values is shown at the end of the notebook (the red input capacitor shows the <span class="math inline">\(C_\mathrm{gg}\)</span> of the MOSFET).</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Measurement Amplifier Simulation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1655,12 +1655,12 @@ Exercise: Measurement Amplifier Simulation
 </div>
 <div class="callout-body-container callout-body">
 <p>Please go through the <a href="./sizing/sizing_measurement_amplifier-preview.html">sizing notebook</a> of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?</p>
-<p>Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter <code>ng</code> accordingly (the shown <span class="math inline">\(W\)</span> is the total width of the MOSFET, and <span class="math inline">\(W / \text{ng} \le 10\mu\text{m}\)</span> is the width per MOSFET gate finger).</p>
+<p>Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter <code>ng</code> accordingly (the shown <span class="math inline">\(W\)</span> is the total width of the MOSFET, and <span class="math inline">\(W / \text{ng} \le 10\mu\text{m}\)</span> is the width per MOSFET gate finger).</p>
 <ul>
 <li>What is the dc gain of this amplifier when loaded with 50<span class="math inline">\(\Omega\)</span>?</li>
-<li>The dc gain is likely not 0dB. Why is this so?</li>
+<li>The dc gain is likely not exactly 0dB. Why is this so?</li>
 <li>Increase the width <span class="math inline">\(W\)</span> of the PMOS until the gain is correct. What is the <span class="math inline">\(W\)</span> that you had to set, and how much is <span class="math inline">\(I_\mathrm{D}\)</span> now?</li>
-<li>What is the bandwidth (i.e., the -3dB corner frequency) of the output, when the voltage source has a source resistance of 1k<span class="math inline">\(\Omega\)</span>?</li>
+<li>What is the bandwidth (i.e., the -3dB corner frequency) of the output voltage, when the voltage source has a source resistance of 1k<span class="math inline">\(\Omega\)</span>?</li>
 </ul>
 <p>If you get stuck, <a href="./xschem/measurement_amplifier.sch">here</a> is the solution to this exercise, and it is also shown in <a href="#fig-meas-amp-tb" class="quarto-xref">Figure&nbsp;20</a>.</p>
 <div id="fig-meas-amp-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1675,7 +1675,7 @@ Figure&nbsp;20: Simulation schematic of the common-source measurement amplifier.
 </div>
 </div>
 </div>
-<p>By now we have designed a measurement amplifier based on a common-source stage. One problem with this stage is the relatively large input capacitance of approx. 0.3pF, which loads the input. Another issue even more severe is that the fact that the bias point in the circuit is set by the dc voltage level at the input. In general, we want a setup where the bias points of the circuit are largely independent of the dc input voltages. This is why in integrated circuit design we often design differential circuits where the input and output signals are given by the differential voltages, and are largely independent from the common-mode voltages. This is usually an advantage.</p>
+<p>By now we have designed a measurement amplifier based on a common-source stage. One problem with this stage is the relatively large input capacitance <span class="math inline">\(C_\mathrm{GG}\)</span> of approx. 0.3pF, which loads the input source. Another issue even more severe is that the fact that the bias point in this circuit is set by the dc voltage level at the input. In general, we want a setup where the bias points of the circuit are largely independent of the dc input voltages. This is why in integrated circuit design we often design <strong>differential circuits</strong> where the input and output signals are given by the differential voltages, and are largely independent from the common-mode voltages. This is usually an advantage.</p>
 </section>
 </section>
 <section id="sec-current-mirror" class="level1" data-number="6">
