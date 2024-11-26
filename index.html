@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2024-11-25">
+<meta name="dcterms.date" content="2024-11-26">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -129,10 +129,10 @@ window.Quarto = {
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
 <meta name="citation_author" content="Simon Dorrer">
-<meta name="citation_publication_date" content="2024-11-25">
-<meta name="citation_cover_date" content="2024-11-25">
+<meta name="citation_publication_date" content="2024-11-26">
+<meta name="citation_cover_date" content="2024-11-26">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-11-25">
+<meta name="citation_online_date" content="2024-11-26">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=A treatise on electricity and magnetism;,citation_author=James Clerk Maxwell;,citation_publication_date=1873;,citation_cover_date=1873;,citation_year=1873;,citation_volume=1;">
 <meta name="citation_reference" content="citation_title=Miller’s Theorem [Circuit Intuitions];,citation_author=Ali Sheikholeslami;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=http://ieeexplore.ieee.org/document/7258480/;,citation_issue=3;,citation_doi=10.1109/mssc.2015.2446457;,citation_issn=1943-0582;,citation_volume=7;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
@@ -188,7 +188,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">November 25, 2024</p>
+              <p class="date">November 26, 2024</p>
             </div>
           </div>
           
@@ -1357,10 +1357,10 @@ Figure&nbsp;12: Testbench for MOSFET diode transient settling.
 <div id="fig-mosfet-diode-small-signal" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mosfet-diode-small-signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-mosfet-diode-small-signal-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Figure&nbsp;13: The MOSFET diode small-signal model."><img src="index_files/figure-html/fig-mosfet-diode-small-signal-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-mosfet-diode-small-signal-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Figure&nbsp;13: The MOSFET diode small-signal model (drain and gate are shorted, as well as source and bulk)."><img src="index_files/figure-html/fig-mosfet-diode-small-signal-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-small-signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13: The MOSFET diode small-signal model.
+Figure&nbsp;13: The MOSFET diode small-signal model (drain and gate are shorted, as well as source and bulk).
 </figcaption>
 </figure>
 </div>
@@ -1513,7 +1513,7 @@ V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \
 <p>The form of <a href="#eq-mosfet-diode-noise-rms" class="quarto-xref">Equation&nbsp;9</a> is the exact solution, but we gain additional insight if we assume that <span class="math inline">\(g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span> and then <span id="eq-mosfet-diode-noise-rms-simplified"><span class="math display">\[
 V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
 \tag{10}\]</span></span></p>
-<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;10</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise enhanced by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span>, resulting in a dynamic range in this case of <span class="math inline">\(20 \log (1.58 \cdot 10^{-3} / 0.39) \approx -48\,\text{dB}\)</span>.</p>
+<p>Inspecting <a href="#eq-mosfet-diode-noise-rms-simplified" class="quarto-xref">Equation&nbsp;10</a> we see our familiar <span class="math inline">\(kT/C\)</span> noise multiplied by the factor <span class="math inline">\(\gamma\)</span>! Calculating this value for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span> (single-ended), resulting in a dynamic range in this case of <span class="math inline">\(20 \log (0.39 / 1.58 \cdot 10^{-3}) \approx 48\,\text{dB}\)</span> assuming a sinusoidal signal.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Large Bandwidth and Noise">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1524,7 +1524,7 @@ Large Bandwidth and Noise
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Large BW circuits can integrate noise over a wide bandwidth resulting in considerable rms noise.</p>
+<p>Large bandwidth circuits integrate noise over a wide bandwidth resulting in considerable rms noise.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Diode Noise">
