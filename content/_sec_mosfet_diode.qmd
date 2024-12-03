@@ -100,6 +100,39 @@ which is pretty much the transit frequency of the MOSFET!
 
 ## MOSFET Diode Stability Analysis
 
+::: {.callout-note title="Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap"}
+@fig-feedback-system shows a negative feedback system with input $X(s)$ and output $Y(s)$, where $H_\mathrm{ol}(s)$ is the transfer function of the feed-forward path (also called **open-loop gain**) and $G(s)$ is the transfer function of the feedback network. The **loop-gain** is the product of both transfer functions $T(s) = H_\mathrm{ol}(s) G(s)$ and is used for the stability analysis. The closed-loop gain is defined as $H_\mathrm{cl}(s) = Y(s) / X(s)$ can be derived with $Y(s) = H_\mathrm{ol}(s) [X(s) - Y(s) G(s)]$ to be
+$$
+H_\mathrm{cl}(s) = \frac{Y(s)}{X(s)} = \frac{H_\mathrm{ol}(s)}{1 + H_\mathrm{ol}(s) G(s)} = \frac{H_\mathrm{ol}(s)}{1 + T(s)}
+$${#eq-closed-loop-gain}
+
+If the open-loop gain is sufficiently large $H_\mathrm{ol}(s) \gg 1$, then the closed-loop gain simplifies to $H_\mathrm{cl}(s) \approx 1 / G(s)$. This result is convenient, since it is independent of $H_\mathrm{ol}(s)$. Therefore, the overall gain is only set with the feedback gain $G(s)$ in operational amplifier circuits.
+
+In the case of the MOSFET diode, $G(s) = 1$ and therefore $T(s) = H_\mathrm{ol}(s)$ and $H_\mathrm{cl}(s) \approx 1$. Therefore, this chapter uses open-loop gain and loop-gain as synonyms.
+
+{{< include ./figures/_fig_feedback_system.qmd >}}
+:::
+
+::: {.callout-note title="Gain-Bandwidth Product in Feedback Systems"}
+The gain-bandwidth product (GBP or GBWP) or transit frequency $f_\mathrm{T}$ of a first-order open-loop system is the product of the open-loop dc gain $H_\mathrm{ol,dc} = H_\mathrm{ol}(f = 0\,\text{Hz})$ and the open-loop $-3\,\text{dB}$ cut-off frequency $f_\mathrm{c,ol}$ of $H_\mathrm{ol}(s)$.
+$$
+\text{GBWP} = f_\mathrm{T,ol} = H_\mathrm{ol,dc} f_\mathrm{c,ol}
+$$
+
+If a frequency-independent negative feedback $G$ (e.g., a resistive divider) is applied to this open-loop system, the transit frequency changes to
+$$
+f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
+$$
+Hence, the closed-loop transit frequency is slightly lower than the open-loop transit frequency $f_\mathrm{T,cl} \leq f_\mathrm{T}$.
+
+The closed-loop $-3\,\text{dB}$ cut-off frequency $f_\mathrm{c,cl}$ can then be calculated from the open-loop transit frequency and the feedback gain.
+$$
+f_\mathrm{c,cl} = H_\mathrm{ol,DC} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
+$$
+
+This theory might be interesting when Middlebrook's and Tian's method are compared later for the MOSFET diode.
+:::
+
 The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy $\Cgs^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
 
 {{< include ./figures/_fig_mosfet_diode_openloop.qmd >}}
@@ -111,7 +144,7 @@ $$
 
 The open-loop gain $H_\mathrm{ol}(s)$ is thus
 $$
-H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{\gm}{\gds + s \Cgs}.
+H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{\gm}{\gds + s \Cgs} = - \frac{\gm}{\gds} \frac{1}{1 + s \frac{\Cgs}{\gds}}.
 $$ {#eq-mosfet-diode-openloop-gain}
 
 Inspecting @eq-mosfet-diode-openloop-gain we realize that:
@@ -121,9 +154,11 @@ Inspecting @eq-mosfet-diode-openloop-gain we realize that:
 
 With this single pole location in $H_\mathrm{ol}(s)$ this loop is perfectly stable at under all conditions (remember that a single pole results in a maximum phase shift of --90$^\circ$).
 
-The question is now how to simulate this open-loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. 
+The question is now how to simulate this open-loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. This is called **Rosenstark's method** [@Rosenstark_1984]. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. 
 
 There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using an ac current source. Based on both measurements the open-loop gain can be calculated. This is called **Middlebrook's method** [@Middlebrook_1975] and is based on double injection, and we will use it for our loop simulations. This method is detailed in @sec-middlebrook-method.
+
+There are several other methods like Tian's method [@Tian_2001], for example. A comprehensive overview can be found in [@Neag_2015] which describes ten different simulation-based loop gain analysis methods.
 
 We now want to simulate the open-loop transfer function $H_\mathrm{ol}(s)$ by using Middlebrook's method and confirm our analysis above.
 
@@ -136,6 +171,12 @@ If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet
 :::
 
 From simulation we see that the open-loop gain is $24.9\,\text{dB}$ at low frequencies, which matches quite well our prediction of $26.4\,\text{dB}$. In the Bode plot we see a low-pass with a $-3\,\text{dB}$ corner frequency of $1.4\,\text{GHz}$, which again is fairly close to our prediction of $1.1\,\text{GHz}$. 
+
+::: {.callout-important title="What About Large-Signal Stability?"}
+Keep in mind that the above simulation only verifies the small-signal stability in one certain operating point. If we later look at the stability of an OTA it might be a good idea to verify the small-signal stability in different operating points.
+
+Furthermore, one can apply a step response to the closed-loop system input and estimate the phase margin from the overshoot and the output (see *"Automatic Control"* lecture). One could also use a step-wise step response to simulate different operating points for a certain time (see *"Introduction in Integrated Circuit Design"* lecture).
+:::
 
 ## MOSFET Diode Noise Calculation
 
@@ -195,13 +236,17 @@ You fill find that the output noise is
 $$
 V_\mathrm{n,rms}^2 = \frac{k T}{C} 
 $$
-which is independent of $R$! This is a surprising result, and is the well-known $kT/C$ noise.
+which is independent of $R$! This is a surprising result, and is the well-known $kT/C$ noise. 
+Intuitively, we could argue that the noise increases with larger $R$, but at the same time, the bandwidth decreases and therefore $R$ does not add additional noise.
 
 Side note: The shortest derivation of this formula involves the [equipartition theorem](https://en.wikipedia.org/wiki/Equipartition_theorem): Any system in thermal equilibrium has an energy of $kT/2$ per degree of freedom. This $RC$ system has one degree of freedom in the capacitor, and the stored energy in the capacitor is $CV_\mathrm{rms}^2/2$. Equating both energies we find that $V_\mathrm{rms}^2 = kT/C$.
 :::
 
-
 Calculating the rms noise voltage for our MOSFET diode we get $\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}$, which is a sizeable value! We run circuits in this technology at $\VDD = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$ (single-ended), resulting in a dynamic range in this case of $20 \log_{10} (0.39 / 1.58 \cdot 10^{-3}) \approx 48\,\text{dB}$ assuming a sinusoidal signal.
+
+::: {.callout-important title="Be Careful with Parasitic Capacitances in IC Design"}
+In general, in integrated circuit design, we often have only small parasitic capacitances on many nodes that could sum up to unwanted high noise according to @eq-mosfet-diode-noise-rms-simplified. If one wants to lower the noise an increased capacitance could limit the bandwidth (and thus the $kT/C$ noise).
+:::
 
 ::: {.callout-important title="Large Bandwidth and Noise"}
 Remember: Large bandwidth circuits integrate noise over a wide bandwidth resulting in (potentially) considerable rms noise. The way to lower the total noise is to lower the PSD of the noise contributions, which usually requires increased power consumption. So in a nutshell:
