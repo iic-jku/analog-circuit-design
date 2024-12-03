@@ -17,7 +17,7 @@ N 180 -160 220 -160 {
 lab=rn}
 N 180 -300 220 -300 {
 lab=rp}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2024 Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
 C {iopin.sym} 180 -300 0 1 {name=p2 lab=rp}
 C {iopin.sym} 180 -160 0 1 {name=p1 lab=rn}
 C {sg13g2_pr/rhigh.sym} 320 -230 0 0 {name=R5[0..3]
