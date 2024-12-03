@@ -149,7 +149,7 @@ C {devices/vsource.sym} 440 -250 0 0 {name=Vgs value=-0.3}
 C {devices/vsource.sym} 700 -290 0 0 {name=Vds value=-0.75}
 C {devices/gnd.sym} 700 -200 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 640 -200 0 0 {name=l4 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2024 Harald Pretl, IIC@JKU"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 80 -250 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"

@@ -698,7 +698,7 @@ N 1790 -1000 1790 -940 {
 lab=#net18}
 N 1670 -1030 1790 -1030 {
 lab=vss}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2024 Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 1590 -410 2 1 {name=M5
 l=1u
 w=4u

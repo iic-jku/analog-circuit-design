@@ -35,7 +35,7 @@ C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib cornerMOSlv.lib mos_tt
 "}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 Harald Pretl (adapted from Boris Murmann)"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license (adapted from B. Murmann)"}
 C {devices/launcher.sym} 480 -420 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"

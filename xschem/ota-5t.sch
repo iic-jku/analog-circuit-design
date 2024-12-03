@@ -186,7 +186,7 @@ N 320 -860 320 -790 {
 lab=vdd}
 N 260 -860 320 -860 {
 lab=vdd}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2024 Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 700 -280 2 1 {name=M5
 l=5u
 w=0.5u
