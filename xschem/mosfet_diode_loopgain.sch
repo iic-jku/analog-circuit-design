@@ -168,7 +168,7 @@ C {devices/gnd.sym} 1240 -160 0 0 {name=l1 lab=GND}
 C {devices/vsource.sym} 880 -250 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 880 -160 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 1310 -160 0 0 {name=l4 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2024 Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, S. Dorrer, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 1220 -250 2 1 {name=M1
 l=0.13u
 w=1u
