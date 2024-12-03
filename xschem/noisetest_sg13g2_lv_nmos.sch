@@ -116,7 +116,7 @@ print onoise_n.xm1.nsg13_lv_nmos_rwell
 
 .endc
 "}
-C {devices/title.sym} 160 -40 0 0 {name=l5 author="Michael Koefinger (adapted from Boris Murmann)"}
+C {devices/title.sym} 160 -40 0 0 {name=l5 author="(c) 2024 M. Koefinger, Apache-2.0 license (adapted from B. Murmann)"}
 C {devices/launcher.sym} 520 -1020 0 0 {name=h3
 descr="save, netlist & simulate"
 tclcommand="xschem save; xschem netlist; xschem simulate"

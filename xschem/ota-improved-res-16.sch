@@ -19,7 +19,7 @@ N 280 -180 280 -140 {
 lab=rn}
 N 180 -140 280 -140 {
 lab=rn}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2024 Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
 C {iopin.sym} 180 -520 0 1 {name=p2 lab=rp}
 C {iopin.sym} 180 -140 0 1 {name=p1 lab=rn}
 C {ota-improved-res-4.sym} 280 -420 0 0 {name=x1}

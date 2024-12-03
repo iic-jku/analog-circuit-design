@@ -142,7 +142,7 @@ plot i(viout3) vs v(out3)
 "}
 C {devices/vsource.sym} 380 -370 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 380 -280 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2024 Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 630 -370 2 0 {name=M1
 l=5u
 w=4u

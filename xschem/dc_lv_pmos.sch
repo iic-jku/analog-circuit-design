@@ -88,7 +88,7 @@ quit
 "}
 C {devices/vsource.sym} 240 -350 0 0 {name=Vgs value=0.52}
 C {devices/vsource.sym} 420 -290 0 0 {name=Vds value=3.3}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2023-2024 IHP PDK Authors, Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2023-2024 IHP PDK Authors, H. Pretl, Apache-2.0 license"}
 C {devices/ammeter.sym} 310 -210 0 0 {name=Vd}
 C {devices/launcher.sym} 710 -300 0 0 {name=h1
 descr="load waves" 

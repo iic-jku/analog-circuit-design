@@ -80,7 +80,7 @@ C {devices/vsource.sym} 180 -250 0 0 {name=Vgs value=0.77}
 C {devices/vsource.sym} 440 -290 0 0 {name=Vds value=3.3}
 C {devices/gnd.sym} 440 -200 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 380 -200 0 0 {name=l4 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2023-2024 IHP PDK Authors, Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2023-2024 IHP PDK Authors, H. Pretl, Apache-2.0 license"}
 C {devices/ammeter.sym} 370 -400 1 0 {name=Vd}
 C {devices/launcher.sym} 640 -300 0 0 {name=h1
 descr="load waves" 
