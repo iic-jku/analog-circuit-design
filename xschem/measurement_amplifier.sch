@@ -82,7 +82,7 @@ write measurement_amplifier.raw
 "}
 C {devices/vsource.sym} 340 -370 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 340 -280 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="Copyright 2024 Harald Pretl"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 380 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
