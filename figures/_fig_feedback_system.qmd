@@ -30,7 +30,7 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().right()
     sm = dsp.SumSigma()
     dsp.Arrow().right()
-    dsp.Box().label('$H_\mathrm{ol}(s)$')
+    dsp.Box().label(r'$H_\mathrm{ol}(s)$')
     elm.Line().right()
     elm.Dot()
     d.push()  # Save this drawing position/direction for later
@@ -42,7 +42,5 @@ with sd.Drawing(canvas='svg') as d:
     dsp.Box().label('$G(s)$')
     elm.Line().tox(sm.S)
     elm.Line().up().length(d.unit/2)
-    dsp.Arrow().toy(sm.S).label('-', loc='top')
-    
-    d.draw()
+    dsp.Arrow().toy(sm.S).label('$-$', loc='bottom')
 ```
