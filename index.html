@@ -1430,7 +1430,7 @@ Open-Loop Gain, Closed-Loop Gain, and Loop-Gain—A Short Recap
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="#fig-feedback-system" class="quarto-xref">Figure&nbsp;14</a> shows a negative feedback system with input <span class="math inline">\(X(s)\)</span> and output <span class="math inline">\(Y(s)\)</span>, where <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is the transfer function of the feed-forward path (also called <strong>open-loop gain</strong>) and <span class="math inline">\(G(s)\)</span> is the transfer function of the feedback network. The <strong>loop-gain</strong> is the product of both transfer functions <span class="math inline">\(T(s) = H_\mathrm{ol}(s) G(s)\)</span> and is used for the stability analysis. The closed-loop gain is defined as <span class="math inline">\(H_\mathrm{cl}(s) = Y(s) / X(s)\)</span> can be derived with <span class="math inline">\(Y(s) = H_\mathrm{ol}(s) [X(s) - Y(s) G(s)]\)</span> to be <span id="eq-closed-loop-gain"><span class="math display">\[
+<p><a href="#fig-feedback-system" class="quarto-xref">Figure&nbsp;14</a> shows a negative feedback system with input <span class="math inline">\(X(s)\)</span> and output <span class="math inline">\(Y(s)\)</span>, where <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is the transfer function of the feed-forward path (also called <strong>open-loop gain</strong>) and <span class="math inline">\(G(s)\)</span> is the transfer function of the feedback network. The <strong>loop-gain</strong> is the product of both transfer functions <span class="math inline">\(T(s) = H_\mathrm{ol}(s) G(s)\)</span> and is used for the stability analysis. The <strong>closed-loop</strong> gain is defined as <span class="math inline">\(H_\mathrm{cl}(s) = Y(s) / X(s)\)</span> can be derived with <span class="math inline">\(Y(s) = H_\mathrm{ol}(s) [X(s) - Y(s) G(s)]\)</span> to be <span id="eq-closed-loop-gain"><span class="math display">\[
 H_\mathrm{cl}(s) = \frac{Y(s)}{X(s)} = \frac{H_\mathrm{ol}(s)}{1 + H_\mathrm{ol}(s) G(s)} = \frac{H_\mathrm{ol}(s)}{1 + T(s)}
 \tag{6}\]</span></span></p>
 <p>If the open-loop gain is sufficiently large <span class="math inline">\(H_\mathrm{ol}(s) \gg 1\)</span>, then the closed-loop gain simplifies to <span class="math inline">\(H_\mathrm{cl}(s) \approx 1 / G(s)\)</span>. This result is convenient, since it is independent of <span class="math inline">\(H_\mathrm{ol}(s)\)</span>. Therefore, the overall gain is only set with the feedback gain <span class="math inline">\(G(s)\)</span> in operational amplifier circuits.</p>
@@ -1466,11 +1466,11 @@ Gain-Bandwidth Product in Feedback Systems
 \]</span></p>
 <p>If a frequency-independent negative feedback <span class="math inline">\(G\)</span> (e.g., a resistive divider) is applied to this open-loop system, the transit frequency changes to <span class="math display">\[
 f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
-\]</span> Hence, the closed-loop transit frequency is slightly lower than the open-loop transit frequency <span class="math inline">\(f_\mathrm{T,cl} \leq f_\mathrm{T}\)</span>.</p>
+\]</span> Hence, the closed-loop transit frequency is slightly lower than the open-loop transit frequency <span class="math inline">\(f_\mathrm{T,cl} &lt; f_\mathrm{T,ol}\)</span>.</p>
 <p>The closed-loop <span class="math inline">\(-3\,\text{dB}\)</span> cut-off frequency <span class="math inline">\(f_\mathrm{c,cl}\)</span> can then be calculated from the open-loop transit frequency and the feedback gain. <span class="math display">\[
 f_\mathrm{c,cl} = H_\mathrm{ol,DC} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
 \]</span></p>
-<p>This theory might be interesting when Middlebrook’s and Tian’s method are compared later for the MOSFET diode.</p>
+<p>This theory might be interesting when Middlebrook’s and Tian’s methods for loop gain analysis are later compared in the MOSFET diode testbench (see <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;16</a>).</p>
 </div>
 </div>
 <p>The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy <span class="math inline">\(C_\mathrm{gs}^{*}\)</span> at the right side to keep the impedances correct. A circuit diagram is shown in <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;15</a>, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!</p>
@@ -1540,7 +1540,7 @@ What About Large-Signal Stability?
 </div>
 <div class="callout-body-container callout-body">
 <p>Keep in mind that the above simulation only verifies the small-signal stability in one certain operating point. If we later look at the stability of an OTA it might be a good idea to verify the small-signal stability in different operating points.</p>
-<p>Furthermore, one can apply a step response to the closed-loop system input and estimate the phase margin from the overshoot and the output (see <em>“Automatic Control”</em> lecture). One could also use a step-wise step response to simulate different operating points for a certain time (see <em>“Introduction in Integrated Circuit Design”</em> lecture).</p>
+<p>Furthermore, one can apply a step response to the closed-loop system input and estimate the phase margin from the overshoot at the output (see <em>“Automatic Control”</em> lecture). One could also use a step-wise step response to simulate different operating points for a certain time (see <em>“Introduction in Integrated Circuit Design”</em> lecture).</p>
 </div>
 </div>
 </section>
@@ -1614,7 +1614,9 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 <p>Side note: The shortest derivation of this formula involves the <a href="https://en.wikipedia.org/wiki/Equipartition_theorem">equipartition theorem</a>: Any system in thermal equilibrium has an energy of <span class="math inline">\(kT/2\)</span> per degree of freedom. This <span class="math inline">\(RC\)</span> system has one degree of freedom in the capacitor, and the stored energy in the capacitor is <span class="math inline">\(CV_\mathrm{rms}^2/2\)</span>. Equating both energies we find that <span class="math inline">\(V_\mathrm{rms}^2 = kT/C\)</span>.</p>
 </div>
 </div>
-<p>Calculating the rms noise voltage for our MOSFET diode we get <span class="math inline">\(\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV}\)</span>, which is a sizeable value! We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span> (single-ended), resulting in a dynamic range in this case of <span class="math inline">\(20 \log_{10} (0.39 / 1.58 \cdot 10^{-3}) \approx 48\,\text{dB}\)</span> assuming a sinusoidal signal.</p>
+<p>Calculating the rms noise voltage for our MOSFET diode we get <span class="math display">\[
+\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV},
+\]</span> which is a sizeable value! Think about it, can this rms noise voltage be measured with an oscilloscope? If not, why? We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span> (single-ended), resulting in a dynamic range in this case of <span class="math inline">\(20 \log_{10} (0.39 / 1.58 \cdot 10^{-3}) \approx 48\,\text{dB}\)</span> assuming a sinusoidal signal. In order to get a feeling which dynamic range is “good”, we can calculate the required dynamic range of a 16-bit audio ADC to be <span class="math inline">\(6.02 \cdot 16 + 1.76\,\text{dB} = 98.08\,\text{dB} \approx 100\,\text{dB}\)</span>. This calculation should make clear that, for example, the correct sizing of the sample&amp;hold capacitor is crucial for low rms noise voltage.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Be Careful with Parasitic Capacitances in IC Design">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1690,10 +1692,18 @@ Figure&nbsp;19: A MOSFET common-source amplifier with resistive load.
 </div>
 </div>
 </div>
-<p>The function of this circuit is as follows: Assuming the MOSFET <span class="math inline">\(M_1\)</span> is kept in saturation, then a small-signal voltage <span class="math inline">\(v_\mathrm{in}\)</span> applied at the gate is converted into a drain current <span class="math inline">\(i_\mathrm{d}\)</span> by the MOSFET’s transconductance <span class="math inline">\(g_\mathrm{m}\)</span>. Then, this current is converted into a voltage again in the resistor <span class="math inline">\(R_1\)</span>. Ultimately, we have a voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of</p>
+<p>The function of this circuit is as follows: Assuming the MOSFET <span class="math inline">\(M_1\)</span> is kept in saturation, then a small-signal voltage <span class="math inline">\(v_\mathrm{in}\)</span> applied at the gate is converted into a drain current <span class="math inline">\(i_\mathrm{d}\)</span> by the MOSFET’s transconductance <span class="math inline">\(g_\mathrm{m}\)</span>. Then, this current is converted into a voltage again in the resistor <span class="math inline">\(R_1\)</span>. Ultimately, we have a dc voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of</p>
 <p><span class="math display">\[
 A_\mathrm{v} = \frac{v_\mathrm{out}}{v_\mathrm{in}} \approx - \frac{g_\mathrm{m}v_\mathrm{in} R_1}{v_\mathrm{in}} = - g_\mathrm{m}R_1.
 \]</span></p>
+<p>As explained above, it is a good approach to see electronic circuit components as</p>
+<ul>
+<li>voltage-to-current (MOSFET as common-source or common-gate; resistor),</li>
+<li>current-to-voltage (resistor),</li>
+<li>current-to-current (MOSFET as common-gate), and</li>
+<li>voltage-to-voltage (MOSFET as common-drain)</li>
+</ul>
+<p>conversions for better understanding.</p>
 <section id="sense-amplifier-driving-50-ohm-matched-load" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sense-amplifier-driving-50-ohm-matched-load"><span class="header-section-number">5.1</span> Sense Amplifier Driving 50 Ohm Matched Load</h2>
 <p>Let us now size and design an exemplary implementation of this amplifier (of course using the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method). In order to have useful real-life specifications, we want to build an amplifier which can be used to sense an on-chip voltage and drive off-chip measurement equipment. Often, this equipment has an input impedance of 50<span class="math inline">\(\Omega\)</span>, and we want to have an impedance-matched output. The voltage gain shall be set to 1 (essentially, we want to sense a voltage and drive the measurement equipment).</p>
