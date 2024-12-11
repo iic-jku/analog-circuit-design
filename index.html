@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2024-12-07">
+<meta name="dcterms.date" content="2024-12-11">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -129,10 +129,10 @@ window.Quarto = {
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
 <meta name="citation_author" content="Simon Dorrer">
-<meta name="citation_publication_date" content="2024-12-07">
-<meta name="citation_cover_date" content="2024-12-07">
+<meta name="citation_publication_date" content="2024-12-11">
+<meta name="citation_cover_date" content="2024-12-11">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-12-07">
+<meta name="citation_online_date" content="2024-12-11">
 <meta name="citation_language" content="en-US">
 <meta name="citation_reference" content="citation_title=Comparative analysis of simulation-based methods for deriving the phase- and gain-margins of feedback circuits with op-amps;,citation_author=Marius Neag;,citation_author=Raul Oneţ;,citation_author=István Kovács;,citation_author=Paul Mărtari;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_issue=3;,citation_doi=10.1109/TCSI.2014.2370151;,citation_volume=62;,citation_journal_title=IEEE Transactions on Circuits and Systems I: Regular Papers;">
 <meta name="citation_reference" content="citation_title=Loop gain measurement in feedback amplifiers;,citation_author=S. Rosenstark;,citation_publication_date=1984;,citation_cover_date=1984;,citation_year=1984;,citation_issue=3;,citation_doi=10.1080/00207218408938921;,citation_volume=57;,citation_journal_title=International Journal of Electronics;,citation_publisher=Taylor &amp;amp;amp; Francis;">
@@ -191,7 +191,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">December 7, 2024</p>
+              <p class="date">December 11, 2024</p>
             </div>
           </div>
           
@@ -1737,6 +1737,23 @@ Exercise: PMOS-Based Measurement Amplifier
 </div>
 <p>The <a href="https://en.wikipedia.org/wiki/Impedance_matching">power matching</a> requirement at the output mandates that <span class="math inline">\(R_1 = R_\mathrm{load}\)</span>, so <span class="math inline">\(R'_1 = R_\mathrm{load} \parallel R_1 = 25\,\Omega\)</span>. The voltage gain requirement of <span class="math inline">\(|A_\mathrm{v}| = 1\)</span> results in <span class="math inline">\(g_\mathrm{m}= 1 / R'_1 = 40\,\text{mS}\)</span>.</p>
 <p>We now need to find <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of <span class="math inline">\(M_1\)</span> and calculate the required bias current <span class="math inline">\(I_\mathrm{D}\)</span>. We also need to find the proper <span class="math inline">\(V_\mathrm{GS}\)</span> to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=8\)</span> and set <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>. The notebook is available <a href="./sizing/sizing_measurement_amplifier-preview.html">here</a>. The resulting circuit including all component values is shown at the end of the notebook (the red input capacitor shows the <span class="math inline">\(C_\mathrm{gg}\)</span> of the MOSFET).</p>
+<div id="imp-mosfet-params-ng-m" class="callout callout-style-default callout-important callout-titled" title="MOSFET Parameters NG and M">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important&nbsp;1: MOSFET Parameters NG and M
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When sizing the MOSFET for this example we found that we need a fairly large <span class="math inline">\(W\)</span>, resulting in a MOSFET aspect ratio of <span class="math inline">\(W/L \gg 1000\)</span>. When constructing an integrated circuit out of individual MOSFET we strive for an overall IC dimension that is roughly quadratic. For MOSFET with large aspect ratios we need to get them into a comfortable shape.</p>
+<p>In order to achieve this, we construct the MOSFET out of smaller pieces, and the size of this pieces (called “gate fingers”) are controlled by the parameter <code>ng</code>. These MOSFET gate fingers all have the same <span class="math inline">\(L\)</span>, but their width is <span class="math inline">\(W_\mathrm{finger} = W / \text{ng}\)</span>. All this individual smaller MOSFET are connected in parallel.</p>
+<p>In order to increase the MOSFET model accuracy, often the maximum value of <span class="math inline">\(W_\mathrm{finger}\)</span> is limited. In the case of SG13G2 <span class="math inline">\(W_\mathrm{finger} \le 10\,\mu\text{m}\)</span>.</p>
+<p>In order to construct even larger MOSFET, we can connect multiple MOSFET in parallel. We can do this in the circuit editor by placing and connected these MOSFET; but since this is often used there is a more convenient way: By using the parameter <code>m</code> (“multiplier” or “multiplicity”) we instantiate <span class="math inline">\(m\)</span> MOSFET connected in parallel.</p>
+<p>When to use <code>ng</code> and when to use <code>m</code>? The use of <code>ng</code> results in a more compact IC layout, and is thus generally preferable. Only in certain instances (e.g., when using a really large <span class="math inline">\(W\)</span>) <code>m</code> should be used. Further, the thoughtful use of <code>ng</code> <strong>allows to construct all the NMOS and PMOS of a circuit out of the same gate finger elements</strong>. This will result in a very compact layout!</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Measurement Amplifier Simulation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1748,7 +1765,7 @@ Exercise: Measurement Amplifier Simulation
 </div>
 <div class="callout-body-container callout-body">
 <p>Please go through the <a href="./sizing/sizing_measurement_amplifier-preview.html">sizing notebook</a> of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?</p>
-<p>Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter <code>ng</code> accordingly (the shown <span class="math inline">\(W\)</span> is the total width of the MOSFET, and <span class="math inline">\(W / \text{ng} \le 10\mu\text{m}\)</span> is the width per MOSFET gate finger).</p>
+<p>Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter <code>ng</code> accordingly (see <a href="#imp-mosfet-params-ng-m" class="quarto-xref">Important&nbsp;1</a>).</p>
 <ul>
 <li>What is the dc gain of this amplifier when loaded with 50<span class="math inline">\(\Omega\)</span>?</li>
 <li>The dc gain is likely not exactly 0dB. Why is this so?</li>
@@ -2249,7 +2266,7 @@ Exercise: 5T-OTA Sizing
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-49-contents" aria-controls="callout-49" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2258,7 +2275,7 @@ Solution: 5T-OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-48" class="callout-48-contents callout-collapse collapse">
+<div id="callout-49" class="callout-49-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -2512,7 +2529,7 @@ Exercise: 5T-OTA Design and Testbench
 <p>There is a CACE setup available for our 5T-OTA. The <a href="./cace/voltage-buffer-ota.yaml">datasheet</a> describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, <a href="./cace/templates/ota-5t-ac.sch">this one</a> is used for ac simulations, <a href="./cace/templates/ota-5t-noise.sch">this one</a> is used for noise simulation, and <a href="./cace/templates/ota-5t-tran.sch">this one</a> is used for transient simulation.</p>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-51-contents" aria-controls="callout-51" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2521,7 +2538,7 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-50" class="callout-50-contents callout-collapse collapse show">
+<div id="callout-51" class="callout-51-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -2949,7 +2966,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 1\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5/5C,6/6C}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-56-contents" aria-controls="callout-56" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2958,7 +2975,7 @@ Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-55" class="callout-55-contents callout-collapse collapse show">
+<div id="callout-56" class="callout-56-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -3365,7 +3382,7 @@ Exercise: Improved OTA Initial Simulation
 <h2 data-number="10.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">10.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-59-contents" aria-controls="callout-59" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-60-contents" aria-controls="callout-60" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3374,7 +3391,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-59" class="callout-59-contents callout-collapse collapse show">
+<div id="callout-60" class="callout-60-contents callout-collapse collapse show">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>

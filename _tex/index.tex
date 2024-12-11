@@ -227,6 +227,8 @@
 \makeatother
 \newcounter{quartocalloutnteno}
 \newcommand{\quartocalloutnte}[1]{\refstepcounter{quartocalloutnteno}\label{#1}}
+\newcounter{quartocalloutimpno}
+\newcommand{\quartocalloutimp}[1]{\refstepcounter{quartocalloutimpno}\label{#1}}
 
 \ifLuaTeX
 \usepackage[bidi=basic]{babel}
@@ -258,7 +260,7 @@
 
 \title{Analog Circuit Design}
 \author{Harald Pretl \and Michael Koefinger \and Simon Dorrer}
-\date{2024-12-07}
+\date{2024-12-11}
 
 \begin{document}
 \maketitle
@@ -283,7 +285,7 @@ technology \textbf{SG13G2} from IHP Microelectronics is used.
 Tools and PDK are integrated in the \textbf{IIC-OSIC-TOOLS} Docker
 image, which will be used during the coursework.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 All course material (source code of this document, Jupyter notebooks for
 calculations, Xschem circuits, etc.) is made publicly available on
@@ -429,7 +431,7 @@ information like installed tools, how to setup a VM, etc., please look
 at \href{https://github.com/iic-jku/IIC-OSIC-TOOLS}{IIC-OSIC-TOOLS
 GitHub page}.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Preparation}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-warning-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Preparation}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6]
 
 Please make sure to receive information about your personal VM access
 ahead of the course start.
@@ -440,7 +442,7 @@ Experienced users can install this image on their personal computer, for
 JKU students the IIC will host a VM on our compute cluster and provide
 personal login credentials.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Linux}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-warning-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Linux}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6]
 
 In this course, we assume that students have a basic knowledge of Linux
 and how to operate it using the terminal (shell). If you are not yet
@@ -529,7 +531,7 @@ the complete directory:
   \texttt{git\ merge\ origin/main}
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Git Merge Conflicts}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-warning-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Git Merge Conflicts}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6]
 
 It is possible that \texttt{git\ merge} does not complete successfully.
 Either you are able to resolve the merge conflict manually, or it may be
@@ -538,7 +540,7 @@ changes manually from the backup.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 Please think twice before executing any git command without a backup, as
 this could lead to permanent loss of data!
@@ -585,7 +587,7 @@ control the drain-source current flow. Often, the bulk is connected to
 source, and then the bulk terminal is not shown to declutter the
 schematics.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Background}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Background}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 Strictly speaking is the drain-source current of a MOSFET controlled by
 the voltage between gate and bulk (\(V_\mathrm{GB}\)) and the voltage
@@ -699,7 +701,7 @@ resistors to model second-order effects like non-quasistatic operation.
 For lower frequencies and bulk MOSFETs we will not consider these
 resistors, and just deal with the capacitive behavior.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Bulk Terminal}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Bulk Terminal}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 In many situations we will connect the bulk and source terminals of a
 MOSFET together, which results in a simplified large-signal model. As an
@@ -733,7 +735,7 @@ Now, in order to get started, basic Xschem testbenches are prepared, and
 first simple dc sweeps of various voltages and currents will be done.
 But before that, please look at the import note below!
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Mathematical Notation}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Mathematical Notation}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 Throughout this material, we will largely stick to the following
 notation standardized by IEEE:
@@ -779,7 +781,7 @@ testbench for the LV NMOS shown in Figure~\ref{fig-simple-nmos-tb}.
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Simulation Model}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Simulation Model}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 For modelling the MOSFET behavior in a circuit simulator like ngspice
 different models are available. Some of these models have been widely
@@ -807,7 +809,7 @@ interpret the simulation output.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Investigation}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Investigation}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please try to execute the following steps and answer these questions:
 
@@ -985,7 +987,7 @@ in simplified theory changing between \(\gamma = 2/3\) in saturation and
 \(\gamma =1\) for triode operation; \(g_\mathrm{d0}\) is equal to
 \(g_\mathrm{m}\) in saturation and \(g_\mathrm{ds}\) in triode).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Triode and Saturation Region}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Triode and Saturation Region}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 Sometimes we will refer to different operating modes of the MOSFET like
 ``saturation'' or ``triode.'' Generally speaking, when the drain-source
@@ -1055,7 +1057,7 @@ small-signal basic T-model.}
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Model Transformation}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Model Transformation}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Can you show, with which circuit manipulations you can transform the
 pi-model of Figure~\ref{fig-mosfet-small-signal-model-basic} into the
@@ -1083,7 +1085,7 @@ rule-of-thumb is to use a MOSFET up to approximately
 speed of a MOSFET; in other words, how much input capacitance
 \(C_\mathrm{gg}\) is incurred when creating a certain \(g_\mathrm{m}\).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Transit Frequency}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Transit Frequency}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 As a home exercise, try to derive
 Equation~\ref{eq-mosfet-transit-frequency} starting from
@@ -1097,7 +1099,7 @@ Now we need to see how the small-signal parameters seen in
 Figure~\ref{fig-mosfet-small-signal-model} can be investigated and
 estimated using circuit simulation.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Small-Signal Parameters}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Small-Signal Parameters}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please try to execute the following steps and answer the following
 questions:
@@ -1147,7 +1149,7 @@ questions:
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note \ref*{nte-maxwell-cap-matrix}: Maxwell Capacitance Matrix}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note \ref*{nte-maxwell-cap-matrix}: Maxwell Capacitance Matrix}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 \quartocalloutnte{nte-maxwell-cap-matrix} 
 
@@ -1216,7 +1218,7 @@ simplified derivations introduce concepts like the threshold voltage or
 the overdrive voltage, which are interesting from a theoretical
 viewpoint, but bear little practical use.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Square-Law Model}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Square-Law Model}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 One of the many simplifications of the square-law model is that the
 mobility of the charge carriers is assumed constant (it is not).
@@ -1264,7 +1266,7 @@ testbench for the LV NMOS is shown in
 Figure~\ref{fig-techsweep-nmos-tb}, and the TB for the LV PMOS is shown
 in Figure~\ref{fig-techsweep-pmos-tb}.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note on Characterization Testbench}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note on Characterization Testbench}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 The testbenches are relatively straightforward, with one exception: The
 drain current noise is sensed via the drain voltage source \texttt{vd}
@@ -1340,7 +1342,7 @@ biasing current possible (ideally zero), as we almost always design for
 lowest power consumption. Thus, a high \(g_\mathrm{m}/I_\mathrm{D}\)
 ratio is good.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Power Consumption}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Power Consumption}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 Designing for minimum power consumption is pretty much always mandated.
 For battery-operated equipment it is a paramount requirement, but also
@@ -1379,7 +1381,7 @@ For the classical square-law model of the MOSFET in strong inversion,
 sometimes also dubbed the effective gate-source voltage
 \(V_\mathrm{eff}\) (Carusone, Johns, and Martin 2011).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Why 300K?}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Why 300K?}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 Why are we so often using a temperature of \(300\,\text{K}\) for a
 typical condition? As this corresponds to roughly
@@ -1508,7 +1510,7 @@ frequencies where
 \href{https://en.wikipedia.org/wiki/Johnson–Nyquist_noise}{quantum
 effects} start to kick in.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Noise Notation}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Noise Notation}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 We usually leave the \(\Delta f\) away for a shorter notation, so we
 write \(\overline{V_\mathrm{n}^2}\) when we actually mean
@@ -1570,7 +1572,7 @@ stays constant when we keep \(W/L\) constant, so for a given
 so here we have a trade-off between flicker-noise performance and MOSFET
 speed, and this can have dramatic consequences for high-speed circuits.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Flicker Noise}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{MOSFET Flicker Noise}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 The physical origin of flicker noise is the crystal interface between
 silicon (Si) and the silicon dioxide (SiO\textsubscript{2}). Since these
@@ -1603,7 +1605,7 @@ Saturation}\label{sec-techsweep-pmos}
 In the following, we have the same plots as discussed in
 Section~\ref{sec-techsweep-nmos}, but now for the PMOS.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{PMOS Sign Convention}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{PMOS Sign Convention}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 In all PMOS plots we plot positive values for voltages and currents, to
 have compatible plots to the NMOS. Of course, in a PMOS, voltages and
@@ -1639,7 +1641,7 @@ values, which indicates an issue with the \(g_\mathrm{ds}\) modelling
 for the PMOS. We can not use these values for our circuit sizing, so we
 will use the respective NMOS plots also for the PMOS.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Beware of Modelling Issues}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Beware of Modelling Issues}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 This example shows how important it is to benchmark the device models
 when starting to use a new technology. Modelling artifacts like the one
@@ -1814,7 +1816,7 @@ and \(L\), a certain gate-source voltage \(V_\mathrm{GS}\) will develop.
 This voltage can be used as a biasing voltage for other circuit parts,
 for example.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Feedback in the MOSFET Diode}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Feedback in the MOSFET Diode}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 It is important to realize that this configuration employs a feedback
 loop for operation. The voltage at the drain of the MOSFET is sensed by
@@ -1830,7 +1832,7 @@ We will now build this circuit in Xschem. For sizing the MOSFET we will
 use the \(g_\mathrm{m}/I_\mathrm{D}\) methodology introduced in
 Section~\ref{sec-gmid-method}.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Diode Sizing}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Diode Sizing}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please build a MOSFET diode circuit in Xschem where you use an LV NMOS,
 set \(I_\mathrm{bias} = 20\,\mu\text{A}\), \(L = 0.13\,\mu\text{m}\),
@@ -1856,7 +1858,7 @@ compromise between transistor speed and \(g_\mathrm{m}\) efficiency).
 Before continuing, please finish the previous exercise. Once you are
 done, compare with the below provided solution.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solution: MOSFET Diode Sizing}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solution: MOSFET Diode Sizing}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1927,7 +1929,7 @@ in turn reduces the drain current, which will make the discharge even
 slower. We have an effect similar to a capacitor discharge by a diode
 (Hellen 2003).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Power-Down Switches}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Power-Down Switches}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 It is thus generally a good idea to add power-down switches to the
 circuits to disable the circuit quickly by pulling floating nodes to a
@@ -1978,7 +1980,7 @@ bulk).}
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Ground Node Selection}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Ground Node Selection}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 For small-signal analysis we would not need to declare one node as the
 ground potential. However, when doing so, and selecting the ground node
@@ -2004,7 +2006,7 @@ When neglecting \(g_\mathrm{ds}\), at dc we get
 \(Z_\mathrm{diode} = 1 / g_\mathrm{m}\), which is an important result
 and should be memorized.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{The Admittance is Your Friend}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{The Admittance is Your Friend}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 In circuit analysis it is often algebraically easier to work with
 admittance instead of impedance, so please remember that Ohm's law for a
@@ -2024,7 +2026,7 @@ The corner frequency of this low-pass can be calculated as \[
 \subsection{MOSFET Diode Stability
 Analysis}\label{mosfet-diode-stability-analysis}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 Figure~\ref{fig-feedback-system} shows a negative feedback system with
 input \(X(s)\) and output \(Y(s)\), where \(H_\mathrm{ol}(s)\) is the
@@ -2065,7 +2067,7 @@ feedback system.}
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Gain-Bandwidth Product in Feedback Systems}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Gain-Bandwidth Product in Feedback Systems}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 The gain-bandwidth product (GBP or GBWP) or transit frequency
 \(f_\mathrm{T}\) of a first-order open-loop system is the product of the
@@ -2181,7 +2183,7 @@ We now want to simulate the open-loop transfer function
 \(H_\mathrm{ol}(s)\) by using Middlebrook's method and confirm our
 analysis above.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Diode Loop Analysis}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Diode Loop Analysis}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please build a simulation testbench in Xschem to simulate the open-loop
 transfer function of the MOSFET diode. Confirm the dc gain and pole
@@ -2212,7 +2214,7 @@ low frequencies, which matches quite well our prediction of
 \(-3\,\text{dB}\) corner frequency of \(1.4\,\text{GHz}\), which again
 is fairly close to our prediction of \(1.1\,\text{GHz}\).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{What About Large-Signal Stability?}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{What About Large-Signal Stability?}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 Keep in mind that the above simulation only verifies the small-signal
 stability in one certain operating point. If we later look at the
@@ -2288,7 +2290,7 @@ Equation~\ref{eq-mosfet-diode-noise-psd} gives us the result. If we are
 interested in the rms value (the total noise) we need to integrate this
 equation, using the following identity:
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Useful Integral for Noise Calculations}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Useful Integral for Noise Calculations}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 \begin{equation}\phantomsection\label{eq-integral-identity}{
 \int_0^\infty {\frac{a}{b^2 + c^2 f^2} df} = \frac{\pi}{2} \frac{a}{b \cdot c}
@@ -2312,7 +2314,7 @@ V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
 Inspecting Equation~\ref{eq-mosfet-diode-noise-rms-simplified} we see
 our familiar \(kT/C\) noise multiplied by the factor \(\gamma\)!
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Total Output Noise of RC-Lowpass}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Total Output Noise of RC-Lowpass}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 If you have never calculated this before then you should work through
 the following: Calculate the total output noise of an \(RC\)-lowpass
@@ -2353,7 +2355,7 @@ range is ``good'', we can calculate the required dynamic range of a
 This calculation should make clear that, for example, the correct sizing
 of the sample\&hold capacitor is crucial for low rms noise voltage.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Be Careful with Parasitic Capacitances in IC Design}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Be Careful with Parasitic Capacitances in IC Design}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 In general, in integrated circuit design, we often have only small
 parasitic capacitances on many nodes that could sum up to unwanted high
@@ -2363,7 +2365,7 @@ bandwidth (and thus the \(kT/C\) noise).
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Large Bandwidth and Noise}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Large Bandwidth and Noise}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 Remember: Large bandwidth circuits integrate noise over a wide bandwidth
 resulting in (potentially) considerable rms noise. The way to lower the
@@ -2374,7 +2376,7 @@ Large bandwidth plus small noise equals large power consumption.
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Diode Noise}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: MOSFET Diode Noise}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please build a simulation testbench in Xschem to simulate the noise
 performance of the MOSFET diode, and confirm the rms noise value that we
@@ -2511,7 +2513,7 @@ Notebook}}
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: PMOS-Based Measurement Amplifier}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: PMOS-Based Measurement Amplifier}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please think about why exactly we want this measurement amplifier be
 based on a PMOS instead of an NMOS.
@@ -2536,7 +2538,43 @@ circuit including all component values is shown at the end of the
 notebook (the red input capacitor shows the \(C_\mathrm{gg}\) of the
 MOSFET).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Measurement Amplifier Simulation}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important \ref*{imp-mosfet-params-ng-m}: MOSFET Parameters NG and M}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
+
+\quartocalloutimp{imp-mosfet-params-ng-m} 
+
+When sizing the MOSFET for this example we found that we need a fairly
+large \(W\), resulting in a MOSFET aspect ratio of \(W/L \gg 1000\).
+When constructing an integrated circuit out of individual MOSFET we
+strive for an overall IC dimension that is roughly quadratic. For MOSFET
+with large aspect ratios we need to get them into a comfortable shape.
+
+In order to achieve this, we construct the MOSFET out of smaller pieces,
+and the size of this pieces (called ``gate fingers'') are controlled by
+the parameter \texttt{ng}. These MOSFET gate fingers all have the same
+\(L\), but their width is \(W_\mathrm{finger} = W / \text{ng}\). All
+this individual smaller MOSFET are connected in parallel.
+
+In order to increase the MOSFET model accuracy, often the maximum value
+of \(W_\mathrm{finger}\) is limited. In the case of SG13G2
+\(W_\mathrm{finger} \le 10\,\mu\text{m}\).
+
+In order to construct even larger MOSFET, we can connect multiple MOSFET
+in parallel. We can do this in the circuit editor by placing and
+connected these MOSFET; but since this is often used there is a more
+convenient way: By using the parameter \texttt{m} (``multiplier'' or
+``multiplicity'') we instantiate \(m\) MOSFET connected in parallel.
+
+When to use \texttt{ng} and when to use \texttt{m}? The use of
+\texttt{ng} results in a more compact IC layout, and is thus generally
+preferable. Only in certain instances (e.g., when using a really large
+\(W\)) \texttt{m} should be used. Further, the thoughtful use of
+\texttt{ng} \textbf{allows to construct all the NMOS and PMOS of a
+circuit out of the same gate finger elements}. This will result in a
+very compact layout!
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Measurement Amplifier Simulation}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please go through the
 \href{./sizing/sizing_measurement_amplifier.ipynb}{sizing notebook} of
@@ -2548,9 +2586,7 @@ testbench where you simulate the small-signal voltage gain
 \(A_\mathrm{v}\) of this measurement amplifier if it is driven with an
 ideal voltage source. Keep in mind that the maximum MOSFET finger width
 is 10µm in this technology, so you need to set the parameter \texttt{ng}
-accordingly (the shown \(W\) is the total width of the MOSFET, and
-\(W / \text{ng} \le 10\mu\text{m}\) is the width per MOSFET gate
-finger).
+accordingly (see Important~\ref{imp-mosfet-params-ng-m}).
 
 \begin{itemize}
 \tightlist
@@ -2659,7 +2695,7 @@ current mirrors exist (basically fixing this flaw), still, when just a
 simple current mirror is required this structure is used for its
 simplicity.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Current Mirror}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Current Mirror}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please construct a current mirror based on the MOSFET-diode which we
 sized in Section~\ref{sec-mosfet-diode}. The input current
@@ -2859,7 +2895,7 @@ Notebook}}
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Refresh MOSFET Basic Circuits}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-warning-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Refresh MOSFET Basic Circuits}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6]
 
 While we repeat the basics of elementary MOSFET amplifier stages (like
 common-source stage, common-gate stage, and current mirror) in this
@@ -3092,7 +3128,7 @@ few simplifications:
 The resulting small-signal equivalent circuit is shown in
 Figure~\ref{fig-basic-ota-small-signal}.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Refresh MOSFET Small-Signal Model}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-warning-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Refresh MOSFET Small-Signal Model}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6]
 
 Please review the MOSFET small-signal equivalent model in
 Figure~\ref{fig-mosfet-small-signal-model} at this point. For the PMOS
@@ -3237,7 +3273,7 @@ We see that \[
 \overline{V_\mathrm{gs34}^2} = \frac{1}{g_\mathrm{m34}^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right).
 \]
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Noise Addition}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Noise Addition}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 Remember that \textbf{uncorrelated} noise quantities need to be
 power-summed (i.e., \(I^2 = I_1^2 + I_2^2\))!
@@ -3285,7 +3321,7 @@ calculation of a voltage buffer.}
 \href{https://iic-jku.github.io/analog-circuit-design/index.qmd.html}{Article
 Notebook}}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Output Impedance of the Voltage Buffer}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Output Impedance of the Voltage Buffer}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 First we short the input terminal to ground and then we connect a
 current source \(I_\mathrm{out}\) at the output terminal, see
@@ -3344,7 +3380,7 @@ capacitor, enhanced by the \(\gamma_{12}\) of the input differential
 pair, plus a (smaller) contribution of the current mirror load
 \(M_{3,4}\). Intuitively, this result makes sense.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Derivation of 5T-OTA Performance}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Derivation of 5T-OTA Performance}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please take your time and carefully go through the explanations and
 derivations for the 5-transistor-OTA in
@@ -3378,7 +3414,7 @@ drain-source voltage to keep a MOSFET in saturation (i.e., keep the
 V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 }\end{equation}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: 5T-OTA Sizing}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: 5T-OTA Sizing}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please size the 5T-OTA according to the previous
 \(g_\mathrm{m}/I_\mathrm{D}\) and \(L\) suggestions. Please calculate
@@ -3392,7 +3428,7 @@ The sizing procedure and its calculation are best performed in a Jupyter
 notebook, as we can easily look up the exact data from the pre-computed
 tables:
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solution: 5T-OTA Sizing}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solution: 5T-OTA Sizing}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 \section*{Sizing for Basic 5T-OTA}\label{sizing-for-basic-5t-ota}
 
@@ -3673,7 +3709,7 @@ recommendations how to name pins, how to use annotations, and so on.
 Please read Section~\ref{sec-designers-etiquette} before you start into
 your design work.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: 5T-OTA Design and Testbench}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: 5T-OTA Design and Testbench}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please design the circuit of the 5T-OTA. Put the OTA circuit in a
 separate schematic, create a symbol for it, and use this symbol in a
@@ -3765,7 +3801,7 @@ After a successful run, a documentation is automatically generated. The
 result of a full run of this \href{./xschem/ota-5t.svg}{OTA design} is
 presented here:
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note \ref*{nte-basic-ota-cace-result}: CACE Summary for 5T-OTA}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note \ref*{nte-basic-ota-cace-result}: CACE Summary for 5T-OTA}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 \quartocalloutnte{nte-basic-ota-cace-result} 
 
@@ -4180,7 +4216,7 @@ transistor stage (thus \(G_\mathrm{S} = g_\mathrm{ds}'\)) and get
 g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\mathrm{m}+ g_\mathrm{ds}} \approx g_\mathrm{ds}' \frac{g_\mathrm{ds}}{g_\mathrm{m}}.
 }\end{equation}
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Benefit of Cascode (Output)}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Benefit of Cascode (Output)}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 The output impedance of the lower MOSFET (\(g_\mathrm{ds}'\)) is
 \textbf{reduced} by the self-gain of the cascode transistor! This is a
@@ -4241,7 +4277,7 @@ impedance) results in the well-known result of
 which means that the input impedance looking into a cascode is
 approximately \(1/g_\mathrm{m}\).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Benefit of Cascode (Input)}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Benefit of Cascode (Input)}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 This has the practical benefit that a capacitance connected at this node
 results in a high-frequency pole, which is often not critical in terms
@@ -4290,7 +4326,7 @@ is referenced to \(V_\mathrm{DD}\), and the floating bias voltage
 \(V_\mathrm{DS}\) of \(M_{1,2}\) stays constant with a changing
 common-mode input voltage.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Cascode Bias Voltage Generation}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Cascode Bias Voltage Generation}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 It is critically import for a stable performance across PVT that the
 bias voltages for the cascode gates are created in a manner that tracks
@@ -4306,7 +4342,7 @@ often used, as it forces the \(V_\mathrm{GS}\) and \(V_\mathrm{DS}\) of
 \(M_{5,6}\) (and \(M_{3,4}\)) to be equal, so the current mirror ratio
 is independent of \(g_\mathrm{ds}\).
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Cascode Current Mirror vs.~High-Swing Cascode Current Mirror}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Cascode Current Mirror vs.~High-Swing Cascode Current Mirror}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Try to verify the above statement of equal drain-source voltages by
 deriving both, an equation for \(V_\mathrm{DS5}\) assuming a high-swing
@@ -4364,7 +4400,7 @@ the MOSFETs (this is now way more critical than in the basic 5T-OTA as
 we stack now double as many MOSFET at the same supply voltage). Please
 look at Section~\ref{sec-gmid-method} to confirm this choice.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Improved OTA Sizing}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Improved OTA Sizing}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 \section*{Sizing for Basic (Improved)
 OTA}\label{sizing-for-basic-improved-ota}
@@ -4707,7 +4743,7 @@ addition, we check the voltage headroom of the critical MOSFET to see if
 we can squeeze it into the available supply voltage range, and see that
 this is possible with our above choice selection of parameters.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Improved OTA Sizing}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Improved OTA Sizing}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please take a detailed look at the above sizing notebook and play with
 the numbers and calculations. Do you find a better trade-off for the
@@ -4828,7 +4864,7 @@ implementation used in the improved OTA design.}
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Parallel Connection}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Parallel Connection}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 Note that a parallel connection of devices is effectively possible using
 the multiplier notation of Xschem.
@@ -4883,7 +4919,7 @@ of the improved OTA design (loop gain analysis).}
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-tip-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Improved OTA Initial Simulation}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-tip-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Exercise: Improved OTA Initial Simulation}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-tip-color!10!white, opacitybacktitle=0.6]
 
 Please use the above testbenches to simulate the improved OTA:
 
@@ -4917,7 +4953,7 @@ performance of the improved OTA design holistically across variations
 like PVT and input signal variations. The results of the CACE run are
 shown below in Note~\ref{nte-improved-ota-cace-result}.
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note \ref*{nte-improved-ota-cace-result}: CACE Summary for Improved OTA}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-note-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note \ref*{nte-improved-ota-cace-result}: CACE Summary for Improved OTA}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6]
 
 \quartocalloutnte{nte-improved-ota-cace-result} 
 
@@ -5240,7 +5276,7 @@ MOSFET for class-A operation. You can design simple amplifiers based on
 OTA structures. In summary, you are on a good way to become a good
 analog or mixed-signal circuit designer!
 
-\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-important-color-frame, breakable, toptitle=1mm, left=2mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colback=white, leftrule=.75mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, opacityback=0, arc=.35mm, coltitle=black, bottomrule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Feedback}]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, titlerule=0mm, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, coltitle=black, bottomtitle=1mm, opacityback=0, colframe=quarto-callout-important-color-frame, left=2mm, toptitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Feedback}, arc=.35mm, colback=white, breakable, colbacktitle=quarto-callout-important-color!10!white, opacitybacktitle=0.6]
 
 We hope you have enjoyed these lecture notes! If you have feedback,
 suggestions, additions, or corrections, please send us an e-mail, create
