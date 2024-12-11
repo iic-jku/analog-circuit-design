@@ -1,5 +1,4 @@
-v {xschem version=3.4.5 file_version=1.2
-}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -130,14 +129,13 @@ value="
 save all
 
 op
-
+write current_mirror.raw
 dc Vout1 0 1.5 10m
 plot i(viout1) vs v(out1)
 dc Vout2 0 1.5 10m
 plot i(viout2) vs v(out2)
 dc Vout3 0 1.5 10m
 plot i(viout3) vs v(out3)
-write current_mirror.raw
 
 .endc
 "}
