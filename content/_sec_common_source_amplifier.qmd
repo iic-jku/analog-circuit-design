@@ -51,10 +51,22 @@ The [power matching](https://en.wikipedia.org/wiki/Impedance_matching) requireme
 
 We now need to find $W$ and $L$ of $M_1$ and calculate the required bias current $\ID$. We also need to find the proper $\VGS$ to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a $\gmid=8$ and set $L = 0.13\,\mu\text{m}$. The notebook is available [here](./sizing/sizing_measurement_amplifier.ipynb). The resulting circuit including all component values is shown at the end of the notebook (the red input capacitor shows the $\Cgg$ of the MOSFET).
 
+::: {.callout-important title="MOSFET Parameters NG and M" #imp-mosfet-params-ng-m}
+When sizing the MOSFET for this example we found that we need a fairly large $W$, resulting in a MOSFET aspect ratio of $W/L \gg 1000$. When constructing an integrated circuit out of individual MOSFET we strive for an overall IC dimension that is roughly quadratic. For MOSFET with large aspect ratios we need to get them into a comfortable shape.
+
+In order to achieve this, we construct the MOSFET out of smaller pieces, and the size of this pieces (called "gate fingers") are controlled by the parameter `ng`. These MOSFET gate fingers all have the same $L$, but their width is $W_\mathrm{finger} = W / \text{ng}$. All this individual smaller MOSFET are connected in parallel.
+
+In order to increase the MOSFET model accuracy, often the maximum value of $W_\mathrm{finger}$ is limited. In the case of SG13G2 $W_\mathrm{finger} \le 10\,\mu\text{m}$.
+
+In order to construct even larger MOSFET, we can connect multiple MOSFET in parallel. We can do this in the circuit editor by placing and connected these MOSFET; but since this is often used there is a more convenient way: By using the parameter `m` ("multiplier" or "multiplicity") we instantiate $m$ MOSFET connected in parallel.
+
+When to use `ng` and when to use `m`? The use of `ng` results in a more compact IC layout, and is thus generally preferable. Only in certain instances (e.g., when using a really large $W$) `m` should be used. Further, the thoughtful use of `ng` **allows to construct all the NMOS and PMOS of a circuit out of the same gate finger elements**. This will result in a very compact layout!
+:::
+
 ::: {.callout-tip title="Exercise: Measurement Amplifier Simulation"}
 Please go through the [sizing notebook](./sizing/sizing_measurement_amplifier.ipynb) of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?
 
-Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain $A_\mathrm{v}$ of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter `ng` accordingly (the shown $W$ is the total width of the MOSFET, and $W / \text{ng} \le 10\mu\text{m}$ is the width per MOSFET gate finger).
+Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain $A_\mathrm{v}$ of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter `ng` accordingly (see @imp-mosfet-params-ng-m).
 
 * What is the dc gain of this amplifier when loaded with 50$\Omega$?
 * The dc gain is likely not exactly 0dB. Why is this so?
