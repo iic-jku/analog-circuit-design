@@ -14,7 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 :::
 
-# Appendix: Miller's Theorem {#sec-miller-theorem}
+# Appendix: Useful Circuit Theorems
+
+## Miller's Theorem {#sec-miller-theorem}
 
 Using Miller's theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in @fig-miller-theorem, and the equivalent circuit is shown in @fig-miller-theorem-equivalent.
 
@@ -34,3 +36,15 @@ to arrive at an equivalent circuit, given that $A = V_\mathrm{B} / V_\mathrm{A}$
 Note that if $V_\mathrm{A} = V_\mathrm{B}$ then there is no current flow through $Z$, and accordingly the impedances $Z_1 = Z_2 = \infty$.
 
 Miller's theorem can be quite handy when an impedance is strapped between two nodes, and we want to break this connection in a calculation, e.g., considering the effect of $\CGD$ in a MOSFET.
+
+## Bode's Noise Theorem {#sec-bode-noise-theorem}
+
+The total integrated noise of any (no matter how complicated) $RLC$ network (interpreted as a one-port) is given by
+
+$$
+\overline{V_\mathrm{n}^2} = kT \left( \frac{1}{C_\infty} - \frac{1}{C_0} \right),
+$$
+
+where $C_\infty$ is the capacitance looking into the network with all resistors and inductors open-circuited, and $C_0$ is the capacitance looking into the circuit when all inductors and resistors are shorted [@Pavan_2019].
+
+Reference [@Pavan_2019] is an excellent read deriving Bode's noise theorem from different angles.
