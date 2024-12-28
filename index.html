@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2024-12-17">
+<meta name="dcterms.date" content="2024-12-28">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -129,13 +129,15 @@ window.Quarto = {
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
 <meta name="citation_author" content="Simon Dorrer">
-<meta name="citation_publication_date" content="2024-12-17">
-<meta name="citation_cover_date" content="2024-12-17">
+<meta name="citation_publication_date" content="2024-12-28">
+<meta name="citation_cover_date" content="2024-12-28">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-12-17">
+<meta name="citation_online_date" content="2024-12-28">
 <meta name="citation_fulltext_html_url" content="https://iic-jku.github.io/analog-circuit-design">
 <meta name="citation_doi" content="10.5281/zenodo.14387481">
 <meta name="citation_language" content="en-US">
+<meta name="citation_reference" content="citation_title=An alternative approach to bode’s noise theorem;,citation_author=Shanthi Pavan;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_issue=5;,citation_doi=10.1109/TCSII.2019.2907860;,citation_volume=66;,citation_journal_title=IEEE Transactions on Circuits and Systems II: Express Briefs;">
+<meta name="citation_reference" content="citation_title=R-C Ladder Design: A Tutorial [CAS Education];,citation_author=Chandan Kumar Singh;,citation_author=Gabor C Temes;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_issue=4;,citation_doi=10.1109/mcas.2024.3462661;,citation_volume=24;,citation_journal_title=IEEE Circuits and Systems Magazine;">
 <meta name="citation_reference" content="citation_title=Thermionic valve amplifying circuit;,citation_author=A. D. Blumlein;,citation_publication_date=1937;,citation_cover_date=1937;,citation_year=1937;,citation_publisher=U.S.&nbsp;Patent 2,185,367;">
 <meta name="citation_reference" content="citation_title=Some Circuit Design Techniques for Linear Integrated Circuits;,citation_author=R Widlar;,citation_publication_date=1965;,citation_cover_date=1965;,citation_year=1965;,citation_issue=4;,citation_doi=10.1109/tct.1965.1082512;,citation_volume=12;,citation_journal_title=IEEE Transactions on Circuit Theory;">
 <meta name="citation_reference" content="citation_title=Comparative analysis of simulation-based methods for deriving the phase- and gain-margins of feedback circuits with op-amps;,citation_author=Marius Neag;,citation_author=Raul Oneţ;,citation_author=István Kovács;,citation_author=Paul Mărtari;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_issue=3;,citation_doi=10.1109/TCSI.2014.2370151;,citation_volume=62;,citation_journal_title=IEEE Transactions on Circuits and Systems I: Regular Papers;">
@@ -195,7 +197,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">December 17, 2024</p>
+              <p class="date">December 28, 2024</p>
             </div>
           </div>
           
@@ -299,7 +301,11 @@ window.Quarto = {
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">13</span> An RC-OPAMP Filter</a></li>
   <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion"><span class="header-section-number">14</span> Summary &amp; Conclusion</a></li>
   <li><a href="#sec-middlebrook-method" id="toc-sec-middlebrook-method" class="nav-link" data-scroll-target="#sec-middlebrook-method"><span class="header-section-number">15</span> Appendix: Middlebrook’s Method</a></li>
-  <li><a href="#sec-miller-theorem" id="toc-sec-miller-theorem" class="nav-link" data-scroll-target="#sec-miller-theorem"><span class="header-section-number">16</span> Appendix: Miller’s Theorem</a></li>
+  <li><a href="#appendix-useful-circuit-theorems" id="toc-appendix-useful-circuit-theorems" class="nav-link" data-scroll-target="#appendix-useful-circuit-theorems"><span class="header-section-number">16</span> Appendix: Useful Circuit Theorems</a>
+  <ul class="collapse">
+  <li><a href="#sec-miller-theorem" id="toc-sec-miller-theorem" class="nav-link" data-scroll-target="#sec-miller-theorem"><span class="header-section-number">16.1</span> Miller’s Theorem</a></li>
+  <li><a href="#sec-bode-noise-theorem" id="toc-sec-bode-noise-theorem" class="nav-link" data-scroll-target="#sec-bode-noise-theorem"><span class="header-section-number">16.2</span> Bode’s Noise Theorem</a></li>
+  </ul></li>
   <li><a href="#sec-5t-ota-zout" id="toc-sec-5t-ota-zout" class="nav-link" data-scroll-target="#sec-5t-ota-zout"><span class="header-section-number">17</span> Appendix: 5T-OTA Small-Signal Output Impedance</a>
   <ul class="collapse">
   <li><a href="#open-loop-configuration" id="toc-open-loop-configuration" class="nav-link" data-scroll-target="#open-loop-configuration"><span class="header-section-number">17.1</span> Open-Loop Configuration</a></li>
@@ -602,7 +608,7 @@ Figure&nbsp;3: The MOSFET large-signal model. In general, all capacitors are non
 </div>
 </div>
 </div>
-<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}+ C_\mathrm{GB}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a> (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16</a>). In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= C_\mathrm{GB}= C_\mathrm{DB}= C_\mathrm{SB}= 0\)</span>.</p>
+<p>In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: <span class="math inline">\(C_\mathrm{GG}= C_\mathrm{GS}+ C_\mathrm{GD}+ C_\mathrm{GB}\)</span> is the total capacitance when looking into the gate of the MOSFET. <span class="math inline">\(C_\mathrm{GS}\)</span> is usually the dominant capacitance, and <span class="math inline">\(C_\mathrm{GD}\)</span> models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to <span class="math inline">\(C_\mathrm{GS}\)</span>, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the <a href="https://en.wikipedia.org/wiki/Miller_effect">Miller effect</a> (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16.1</a>). In hand calculations we will often set <span class="math inline">\(C_\mathrm{GD}= C_\mathrm{GB}= C_\mathrm{DB}= C_\mathrm{SB}= 0\)</span>.</p>
 <p>To model a physical MOSFET there will be also a requirement for resistors in the model to account for terminal access resistances (<span class="math inline">\(R_\mathrm{G}\)</span>, <span class="math inline">\(R_\mathrm{D}\)</span>, and <span class="math inline">\(R_\mathrm{S}\)</span>) as well as resistors to model second-order effects like non-quasistatic operation. For lower frequencies and bulk MOSFETs we will not consider these resistors, and just deal with the capacitive behavior.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Bulk Terminal">
 <div class="callout-header d-flex align-content-center">
@@ -1616,6 +1622,7 @@ Exercise: Total Output Noise of RC-Lowpass
 V_\mathrm{n,rms}^2 = \frac{k T}{C}
 \]</span> which is independent of <span class="math inline">\(R\)</span>! This is a surprising result, and is the well-known <span class="math inline">\(kT/C\)</span> noise. Intuitively, we could argue that the noise increases with larger <span class="math inline">\(R\)</span>, but at the same time, the bandwidth decreases and therefore <span class="math inline">\(R\)</span> does not add additional noise.</p>
 <p>Side note: The shortest derivation of this formula involves the <a href="https://en.wikipedia.org/wiki/Equipartition_theorem">equipartition theorem</a>: Any system in thermal equilibrium has an energy of <span class="math inline">\(kT/2\)</span> per degree of freedom. This <span class="math inline">\(RC\)</span> system has one degree of freedom in the capacitor, and the stored energy in the capacitor is <span class="math inline">\(CV_\mathrm{rms}^2/2\)</span>. Equating both energies we find that <span class="math inline">\(V_\mathrm{rms}^2 = kT/C\)</span>.</p>
+<p>To calculate the total output noise of a generalized passive network Bode’s noise theorem is quite practical (see <a href="#sec-bode-noise-theorem" class="quarto-xref">Section&nbsp;16.2</a>).</p>
 </div>
 </div>
 <p>Calculating the rms noise voltage for our MOSFET diode we get <span class="math display">\[
@@ -2125,7 +2132,7 @@ Small-Signal vs.&nbsp;Large-Signal Operation
 <p>In order to derive the governing small-signal equations for the OTA we will make a few simplifications:</p>
 <ul>
 <li>We will set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> for all MOSFETs.</li>
-<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16</a>). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;17</a>). Thus, only <span class="math inline">\(C_\mathrm{gs34}\)</span> is considered at the gate node of the current mirror load.</li>
+<li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16.1</a>). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;17</a>). Thus, only <span class="math inline">\(C_\mathrm{gs34}\)</span> is considered at the gate node of the current mirror load.</li>
 <li>We assume <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, so we set <span class="math inline">\(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\)</span>.</li>
 <li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span> we can add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span>. Note that <span class="math inline">\(C_\mathrm{gs2}\)</span> can be added because of the feedback connection between the inverting input and the output. However, this is not shown in the small-signal equivalent circuits below, because we are interested in the open-loop transfer function.</li>
 </ul>
@@ -2978,7 +2985,7 @@ Benefit of Cascode (Input)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This has the practical benefit that a capacitance connected at this node results in a high-frequency pole, which is often not critical in terms of stability. Further, the voltage swing at a cascode input node is small due to the often small impedance, and this minimizes the Miller effect at connected inter-node capacitors (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16</a>).</p>
+<p>This has the practical benefit that a capacitance connected at this node results in a high-frequency pole, which is often not critical in terms of stability. Further, the voltage swing at a cascode input node is small due to the often small impedance, and this minimizes the Miller effect at connected inter-node capacitors (see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16.1</a>).</p>
 </div>
 </div>
 </section>
@@ -3829,8 +3836,10 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \
 <p>The four ac quantities <span class="math inline">\(V_\mathrm{f}\)</span>, <span class="math inline">\(V_\mathrm{r}\)</span>, <span class="math inline">\(I_\mathrm{f}\)</span>, and <span class="math inline">\(I_\mathrm{r}\)</span> we can readily find by circuit simulation or calculation.</p>
 <p>Please note that Middlebrook’s method works well for <span class="math inline">\(T \gg 1\)</span>, so it will show inaccuracies at the crossover frequency of the open-loop gain at <span class="math inline">\(T(s) \approx 0\)</span>. An improved method (slightly more complicated) can be found in <span class="citation" data-cites="Tian_2001">(<a href="#ref-Tian_2001" role="doc-biblioref">Tian et al. 2001</a>)</span>.</p>
 </section>
-<section id="sec-miller-theorem" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Appendix: Miller’s Theorem</h1>
+<section id="appendix-useful-circuit-theorems" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Appendix: Useful Circuit Theorems</h1>
+<section id="sec-miller-theorem" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">16.1</span> Miller’s Theorem</h2>
 <p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;46</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;47</a>.</p>
 <div id="cell-fig-miller-theorem" class="cell" data-execution_count="34">
 <div class="cell-output cell-output-display">
@@ -3867,6 +3876,16 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 \]</span> to arrive at an equivalent circuit, given that <span class="math inline">\(A = V_\mathrm{B} / V_\mathrm{A}\)</span> is the voltage gain between nodes A and B. A derivation of this theorem is relative straightforward considering the current through <span class="math inline">\(Z\)</span> when looking into the impedance from either node A or node B and calculating an equivalent impedance causing the same current.</p>
 <p>Note that if <span class="math inline">\(V_\mathrm{A} = V_\mathrm{B}\)</span> then there is no current flow through <span class="math inline">\(Z\)</span>, and accordingly the impedances <span class="math inline">\(Z_1 = Z_2 = \infty\)</span>.</p>
 <p>Miller’s theorem can be quite handy when an impedance is strapped between two nodes, and we want to break this connection in a calculation, e.g., considering the effect of <span class="math inline">\(C_\mathrm{GD}\)</span> in a MOSFET.</p>
+</section>
+<section id="sec-bode-noise-theorem" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="sec-bode-noise-theorem"><span class="header-section-number">16.2</span> Bode’s Noise Theorem</h2>
+<p>The total integrated noise of any (no matter how complicated) <span class="math inline">\(RLC\)</span> network (interpreted as a one-port) is given by</p>
+<p><span class="math display">\[
+\overline{V_\mathrm{n}^2} = kT \left( \frac{1}{C_\infty} - \frac{1}{C_0} \right),
+\]</span></p>
+<p>where <span class="math inline">\(C_\infty\)</span> is the capacitance looking into the network with all resistors and inductors open-circuited, and <span class="math inline">\(C_0\)</span> is the capacitance looking into the circuit when all inductors and resistors are shorted <span class="citation" data-cites="Pavan_2019">(<a href="#ref-Pavan_2019" role="doc-biblioref">Pavan 2019</a>)</span>.</p>
+<p>Reference <span class="citation" data-cites="Pavan_2019">(<a href="#ref-Pavan_2019" role="doc-biblioref">Pavan 2019</a>)</span> is an excellent read deriving Bode’s noise theorem from different angles.</p>
+</section>
 </section>
 <section id="sec-5t-ota-zout" class="level1" data-number="17">
 <h1 data-number="17"><span class="header-section-number">17</span> Appendix: 5T-OTA Small-Signal Output Impedance</h1>
@@ -4241,6 +4260,9 @@ Nagel, Laurence W. 1975. <span>“SPICE2: A Computer Program to Simulate Semicon
 <div id="ref-Neag_2015" class="csl-entry" role="listitem">
 Neag, Marius, Raul Oneţ, István Kovács, and Paul Mărtari. 2015. <span>“Comparative Analysis of Simulation-Based Methods for Deriving the Phase- and Gain-Margins of Feedback Circuits with Op-Amps.”</span> <em>IEEE Transactions on Circuits and Systems I: Regular Papers</em> 62 (3): 625–34. <a href="https://doi.org/10.1109/TCSI.2014.2370151">https://doi.org/10.1109/TCSI.2014.2370151</a>.
 </div>
+<div id="ref-Pavan_2019" class="csl-entry" role="listitem">
+Pavan, Shanthi. 2019. <span>“An Alternative Approach to Bode’s Noise Theorem.”</span> <em>IEEE Transactions on Circuits and Systems II: Express Briefs</em> 66 (5): 738–42. <a href="https://doi.org/10.1109/TCSII.2019.2907860">https://doi.org/10.1109/TCSII.2019.2907860</a>.
+</div>
 <div id="ref-Pretl_Fifty_Nifty_Circuits" class="csl-entry" role="listitem">
 Pretl, Harald, and Matthias Eberlein. 2021. <span>“Fifty Nifty Variations of Two-Transistor Circuits: A Tribute to the Versatility of MOSFETs.”</span> <em>IEEE Solid-State Circuits Magazine</em> 13 (3): 38–46.
 </div>
@@ -4265,14 +4287,14 @@ Widlar, R. 1965. <span>“<span class="nocase">Some Circuit Design Techniques fo
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2024,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2024-12-17},
+  date = {2024-12-28},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2024" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2024. <span>“Analog
-Circuit Design.”</span> December 17, 2024. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> December 28, 2024. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
