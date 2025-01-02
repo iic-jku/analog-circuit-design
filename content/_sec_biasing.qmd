@@ -1,0 +1,101 @@
+::: {.content-hidden}
+Copyright (C) 2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Biasing
+
+So far, we have pushed one unresolved issue in front of us. We have studied ways to multiply and scale bias currents using current mirrors (see @sec-current-mirror) and we have also found ways to buffer (and scale) bias voltages (see @sec-voltage-buffer-with-ota, scaling can be readily achieved by using a resistive divider in the feedback path). We can generate bias voltages by running a current through a resistor. However, what has not been discussed so far is **how to generate one stable bias current in the first place**.
+
+If we would have a stable reference voltage, then we can use the arrangement shown in @fig-bias-current-gen to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)
+
+$$
+I_\mathrm{bias} = \frac{V_\mathrm{ref}}{R_1}.
+$$
+
+Using $A_1$ and $M_1$ the voltage $V_\mathrm{ref}$ is regulated across $R_1$ and available at the drain of $M_1$.
+
+{{< include /figures/_fig_bias_current_gen.qmd >}}
+
+The resistor $R_1$ will show variation with the process tolerance, but we can either (a) use an external resistor for a precise current generation, or (b) use some sort of trimming to correct this resistor value. Depending on the further use of the bias currents a variation of the resistor might no be a bad thing. Assuming we use the resulting bias current to generate somewhere a bias voltage $V_\mathrm{bias}$ by running the current through resistor $R_2$, then this voltage is given by
+
+$$
+V_\mathrm{bias} = R_2 I_\mathrm{bias} = \frac{R_2}{R_1} V_\mathrm{ref}.
+$$
+
+We can see in the above equation that the absolute values of $R_1$ and $R_2$ do not play a role, only the *ratio* is important. Luckily, components in integrated circuits match very well, so we can multiply and scale one reference voltage $V_\mathrm{ref}$ across our IC.
+
+Since all components on chip will experience manufacturing tolerances of at least $\pm 10\%$ we strive for something more accurate. We can resort to an off-chip property like an externally provided reference current or voltage, or use the power supply as a voltage reference (often, power supply rails are specified to $\pm 5 \ldots 10\%$).
+
+The only option left is to use a material property of the silicon itself for stable reference voltage generation.
+
+## Bandgap Reference
+
+It has been realized that a bipolar junction transistor (BJT) has the wonderful property, that the base-emitter voltage $\VBE$ has the following approximate relationship vs. temperature [@Widlar_1971]
+
+$$
+\VBE \approx V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + \VBE[0] \left( \frac{T}{T_0} \right)
+$$ {#eq-vbe-vs-temp}
+
+where $V_\mathrm{g0} = 1.205\,\text{V}$ is the bandgap voltage of silicon at $0\,\text{K}$ and $\VBE[0]$ is the base-emitter voltage of a BJT as reference temperature $T_0$. Further, the difference in $\VBE$ of two BJT operated at different emitter current densities $J_1$ and $J_2$ is given as
+
+$$
+\Delta \VBE = \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
+$$ {#eq-delta-vbe-vs-temp}
+
+with $k$ the Boltzmann constant, and $q$ the elementary charge.
+
+Adding @eq-vbe-vs-temp and @eq-delta-vbe-vs-temp results in a reference voltage of value
+
+$$
+V_\mathrm{ref} =  V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + \VBE[0] \left( \frac{T}{T_0} \right) +  \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
+$$ {#eq-bandgap-voltage-with-temp}
+
+which can be made temperature-insensitive when the terms, which are a function of $T$, cancel each other, and only
+
+$$
+V_\mathrm{ref} =  V_\mathrm{g0}
+$$ {#eq-bandgap-voltage}
+
+remains. We thus have created an on-chip reference (called the "**bandgap reference**") which is absolutely constant with zero temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of $\pm 1 \ldots 3\%$ without trimming are perfectly possible.
+
+The originial implementation in [@Widlar_1971] uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of this available layers are available for free without extra processing cost, they are very slow, show unusually small $\beta < 10$, and the collector is tied to $\VSS$ as it is the substrate. Still, for bandgap references, they are very useful.
+
+A simple implemementation of a bandgap referece circuit is shown in @fig-bandgap-simple [@Gray_Meyer_5th_ed]. If we scale $R_1$ and $R_2$ correctly then we can achieve @eq-bandgap-voltage. Note that the output voltage is ca. $1.2\,\text{V}$, so operating this circuit on low supply voltages will be problematic.
+
+{{< include /figures/_fig_bandgap_reference_simple.qmd >}}
+
+$M_1$ to $M_4$ are scaled in a way that in both branches the same bias current is flowing. Further, $M_1$ and $M_2$ ensure that there is the same potential at their sources. Since the PNP are scaled by the factor $n$ (thus the current density is different) so that the following voltage develops across $R_1$:
+
+$$
+\Delta \VBE = \frac{k T}{q} \ln n
+$$
+
+Hence, the bias current in all the branches is given by
+
+$$
+I_\mathrm{bias} = \frac{\Delta \VBE}{R_1} = \frac{1}{R_1} \frac{k T}{q} \ln n. 
+$$
+
+With $M_5$ we mirror this bias current into the output branch, and the output voltage $V_\mathrm{ref}$ is then given by
+
+$$
+V_\mathrm{ref} = \VBE + \frac{R_2}{R_1} \frac{k T}{q} \ln n.  
+$$
+
+By proper selection of $R_1$, $R_2$ and $n$ we can satisfy @eq-bandgap-voltage-with-temp to result in @eq-bandgap-voltage.
+
+::: {.callout-note title="Improved Bandgap Reference"}
+For an improved implementation of @fig-bandgap-simple, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, @eq-vbe-vs-temp and @eq-delta-vbe-vs-temp build on the relationship $I_\mathrm{C} = f(\VBE)$, while we control $I_\mathrm{E}$ in this circuit. If $\beta$ is large then $I_\mathrm{C} \approx I_\mathrm{E}$, but this is not the case for the used PNPs.
+:::

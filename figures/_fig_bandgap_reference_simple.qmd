@@ -1,0 +1,71 @@
+```{python}
+#| label: fig-bandgap-simple
+#| echo: false
+#| fig-cap: "A simple bandgap reference."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+  d.config(unit=2)
+  d.config(fontsize=16)
+
+  #elm.Vdd()
+  M4 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label(r'$M_4$')
+  elm.Line().down().length(1)
+  M1 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label(r'$M_1$')
+  
+
+  elm.Line().right().length(1.5).at(M4.gate).dot()
+  d.push()
+  elm.Line().right().length(0.5)
+  M3 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).reverse().label(r'$M_3$', ofst=-1.5)
+  elm.Line().down().length(1)
+  M2 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).reverse().label(r'$M_2$', ofst=-1.5)
+  R1 = elm.Resistor().down().label('$R_1$')
+  N2 = elm.BjtPnp().anchor('emitter').right().label('$n$')
+  elm.Ground().at(N2.collector)
+  elm.Line().left().length(0.5).at(N2.base)
+  elm.Line().down().toy(N2.collector)
+  elm.Ground()
+  elm.Vdd().at(M3.source)
+
+  elm.Line().down().at(M1.source).toy(N2.emitter)
+  N1 = elm.BjtPnp().anchor('emitter').right().reverse().label('$1$', ofst=-1)
+  elm.Ground().at(N1.collector)
+  elm.Line().right().length(0.5).at(N1.base)
+  elm.Line().down().toy(N1.collector)
+  elm.Ground()
+  elm.Vdd().at(M4.source)
+
+  d.pop()
+  elm.Line().down().length(1)
+  elm.Line().right().tox(M3.drain).dot()
+  d.push()
+
+  elm.Line().at(M1.gate).length(0.5).dot()
+  d.push()
+  elm.Line().tox(M2.gate)
+  d.pop()
+  elm.Line().up().length(1)
+  elm.Line().left().tox(M1.drain).dot()
+
+  d.pop()
+  elm.Line().right().length(1.5)
+  elm.Line().up().toy(M3.gate)
+  elm.Line().right().length(1)
+
+  M5 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).reverse().label(r'$M_5$', ofst=-1.5)
+  elm.Line().down().dot()
+  d.push()
+  elm.Line().right().length(1).dot(open=True).label(r'$V_\mathrm{ref} \approx 1.2\,\text{V}$', 'right')
+  elm.Vdd().at(M5.source)
+
+  d.pop()
+  elm.Line().down().toy(M2.source)
+  R2 = elm.Resistor().down().label('$R_2$')
+  N2 = elm.BjtPnp().anchor('emitter').right().label('$n$')
+  elm.Ground().at(N2.collector)
+  elm.Line().left().length(0.5).at(N2.base)
+  elm.Line().down().toy(N2.collector)
+  elm.Ground()
+```
