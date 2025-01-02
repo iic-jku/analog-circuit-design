@@ -48,7 +48,7 @@ N 1200 -440 1200 -400 {lab=#net1}
 N 1060 -1040 1200 -1040 {lab=v_dd}
 N 1200 -560 1200 -500 {lab=vref}
 N 1200 -1040 1260 -1040 {lab=v_dd}
-N 1200 -560 1300 -560 {lab=vref}
+N 1200 -560 1380 -560 {lab=vref}
 N 560 -440 560 -400 {lab=#net2}
 N 1200 -610 1200 -560 {lab=vref}
 N 1000 -620 1000 -600 {lab=#net3}
@@ -117,11 +117,12 @@ N 760 -680 760 -650 {lab=vg2}
 N 640 -650 760 -650 {lab=vg2}
 N 850 -1040 850 -810 {lab=v_dd}
 N 760 -760 760 -740 {lab=#net9}
-C {devices/code_shown.sym} 0 -140 0 0 {name=MODEL only_toplevel=true
+C {devices/code_shown.sym} 0 -160 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
 .lib cornerMOSlv.lib mos_tt
 .lib cornerHBT.lib hbt_typ
+.lib cornerRES.lib res_typ
 "}
 C {devices/code_shown.sym} 0 -550 0 0 {name=NGSPICE only_toplevel=true 
 value="
@@ -167,9 +168,6 @@ w=1.0e-6
 l=2.0e-6
 m=1
 }
-C {res.sym} 1000 -470 0 0 {name=R1
-value=5.4k
-m=1}
 C {sg13g2_pr/sg13_lv_nmos.sym} 580 -570 2 0 {name=M1A
 l=1u
 w=15u
@@ -185,19 +183,13 @@ w=1.0e-6
 l=2.0e-6
 m=1
 }
-C {res.sym} 1200 -470 0 0 {name=R2
-value=39k
-m=1}
-C {lab_wire.sym} 1300 -560 0 0 {name=p1 sig_type=std_logic lab=vref}
+C {lab_wire.sym} 1380 -560 0 0 {name=p1 sig_type=std_logic lab=vref}
 C {ammeter.sym} 560 -470 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
 C {ammeter.sym} 1200 -640 0 0 {name=Vmeas1 savecurrent=true spice_ignore=0}
 C {lab_pin.sym} 1000 -520 0 0 {name=p3 sig_type=std_logic lab=v2}
 C {lab_pin.sym} 1000 -420 0 0 {name=p4 sig_type=std_logic lab=v3}
 C {lab_pin.sym} 560 -520 0 0 {name=p5 sig_type=std_logic lab=v1}
 C {lab_wire.sym} 680 -970 0 0 {name=p6 sig_type=std_logic lab=vg4}
-C {res.sym} 560 -750 0 0 {name=R3
-value=20k
-m=1}
 C {sg13g2_pr/sg13_lv_pmos.sym} 580 -890 0 1 {name=M4B
 l=1u
 w=50u
@@ -208,9 +200,6 @@ spiceprefix=X
 }
 C {lab_wire.sym} 700 -570 0 0 {name=p7 sig_type=std_logic lab=vg1}
 C {lab_wire.sym} 700 -650 0 0 {name=p8 sig_type=std_logic lab=vg2}
-C {res.sym} 1000 -790 0 0 {name=R4
-value=20k
-m=1}
 C {lab_wire.sym} 680 -890 0 0 {name=p9 sig_type=std_logic lab=vg3}
 C {sg13g2_pr/sg13_lv_nmos.sym} 580 -650 2 0 {name=M1B
 l=1u
@@ -285,3 +274,7 @@ model=sg13_lv_pmos
 spiceprefix=X
 }
 C {ammeter.sym} 760 -710 0 0 {name=Vmeas2 savecurrent=true spice_ignore=0}
+C {bandgap_simple_res-5k.sym} 1000 -440 0 1 {name=xr1}
+C {bandgap_simple_res-10k.sym} 560 -720 0 1 {name=xr4}
+C {bandgap_simple_res-10k.sym} 1000 -760 0 0 {name=xr3}
+C {bandgap_simple_res-37k5.sym} 1200 -440 0 0 {name=xr2}
