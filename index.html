@@ -3876,7 +3876,8 @@ Improved Bandgap Reference
 <p>For an improved implementation of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;45</a>, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;31</a> and <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;32</a> build on the relationship <span class="math inline">\(I_\mathrm{C} = f(V_\mathrm{BE})\)</span>, while we control <span class="math inline">\(I_\mathrm{E}\)</span> in this circuit. If <span class="math inline">\(\beta\)</span> is large then <span class="math inline">\(I_\mathrm{C} \approx I_\mathrm{E}\)</span>, but this is not the case for the used PNPs.</p>
 </div>
 </div>
-<p>The circuit of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;45</a> has been implemented in Xschem and is shown in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;46</a>. The current sources have been improved by using cascodes. No base current compensation is implemented, as it is assumed that the <span class="math inline">\(\beta\)</span> of the PNP is similar although they are operated at different emitter current densities. Note the addition of a startup branch with <span class="math inline">\(M_\mathrm{startup}\)</span> which is inactive during normal operation but will inject a startup current if no proper bias point has yet been found. There is no circuitry added for enabling/disabling the circuit, which would also be needed for a practical implementation.</p>
+<p>The circuit of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;45</a> has been implemented in Xschem and is shown in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;46</a>. The current sources have been improved by using cascodes. No base current compensation is implemented, as it is assumed that the <span class="math inline">\(\beta\)</span> of the PNP are similar although they are operated at different emitter current densities. Note the addition of a startup branch with <span class="math inline">\(M_\mathrm{startup}\)</span> which is inactive during normal operation but will inject a startup current if no proper bias point has yet been found. There is no circuitry added for enabling/disabling the circuit, which would also be needed for a practical implementation.</p>
+<p>The resistors <span class="math inline">\(R_{1-4}\)</span> have been implemented out of unit elements of ca. <span class="math inline">\(5\,\text{k}\Omega\)</span> for optimum matching. Building a bandgap for the first time on silicon likely will show a slightly deviating temperature coefficient, which is why we keep a few dummy resistors around in <span class="math inline">\(R_2\)</span> to compensate the TC in a redesign.</p>
 <div id="fig-bandgap-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3887,13 +3888,13 @@ Figure&nbsp;46: Simple bandgap reference circuit in Xschem.
 </figcaption>
 </figure>
 </div>
-<p>The Xschem schematic is available <a href="./xschem/bandgap_simple.sch">here</a> and the simulated reference voltage vs.&nbsp;temperature is shown in <a href="#fig-bandgap-sim-result" class="quarto-xref">Figure&nbsp;47</a>.</p>
+<p>The Xschem schematic is available <a href="./xschem/bandgap_simple.sch">here</a> and the simulated reference voltage vs.&nbsp;temperature is shown in <a href="#fig-bandgap-sim-result" class="quarto-xref">Figure&nbsp;47</a>. For a typical process we achieve a TC of <span class="math inline">\(\pm 0.2\%\)</span>.</p>
 <div id="cell-fig-bandgap-sim-result" class="cell" data-execution_count="34">
 <div class="cell-output cell-output-display">
 <div id="fig-bandgap-sim-result" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-bandgap-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-95" title="Figure&nbsp;47: Reference voltage from simulated bandgap circuit."><img src="index_files/figure-html/fig-bandgap-sim-result-output-1.png" width="606" height="429" class="figure-img"></a>
+<a href="index_files/figure-html/fig-bandgap-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-95" title="Figure&nbsp;47: Reference voltage from simulated bandgap circuit."><img src="index_files/figure-html/fig-bandgap-sim-result-output-1.png" width="614" height="429" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;47: Reference voltage from simulated bandgap circuit.
@@ -3902,7 +3903,7 @@ Figure&nbsp;47: Reference voltage from simulated bandgap circuit.
 </div>
 </div>
 </div>
-<p>The circuit in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;46</a> works fine at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist <span class="citation" data-cites="Banba_1999">Eberlein, Panagopoulos, and Pretl (<a href="#ref-Eberlein_2018" role="doc-biblioref">2018</a>)</span> but are outside the scope of this introductory course.</p>
+<p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;46</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist <span class="citation" data-cites="Banba_1999">Eberlein, Panagopoulos, and Pretl (<a href="#ref-Eberlein_2018" role="doc-biblioref">2018</a>)</span>.</p>
 </section>
 </section>
 <section id="a-fully-differential-ota" class="level1" data-number="12">
