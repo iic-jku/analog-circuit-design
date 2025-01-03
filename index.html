@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-01-02">
+<meta name="dcterms.date" content="2025-01-03">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -129,10 +129,10 @@ window.Quarto = {
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
 <meta name="citation_author" content="Simon Dorrer">
-<meta name="citation_publication_date" content="2025-01-02">
-<meta name="citation_cover_date" content="2025-01-02">
+<meta name="citation_publication_date" content="2025-01-03">
+<meta name="citation_cover_date" content="2025-01-03">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-02">
+<meta name="citation_online_date" content="2025-01-03">
 <meta name="citation_fulltext_html_url" content="https://iic-jku.github.io/analog-circuit-design">
 <meta name="citation_doi" content="10.5281/zenodo.14387481">
 <meta name="citation_language" content="en-US">
@@ -201,7 +201,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 2, 2025</p>
+              <p class="date">January 3, 2025</p>
             </div>
           </div>
           
@@ -303,6 +303,7 @@ window.Quarto = {
   <li><a href="#biasing" id="toc-biasing" class="nav-link" data-scroll-target="#biasing"><span class="header-section-number">11</span> Biasing</a>
   <ul class="collapse">
   <li><a href="#bandgap-reference" id="toc-bandgap-reference" class="nav-link" data-scroll-target="#bandgap-reference"><span class="header-section-number">11.1</span> Bandgap Reference</a></li>
+  <li><a href="#banba-bandgap-reference" id="toc-banba-bandgap-reference" class="nav-link" data-scroll-target="#banba-bandgap-reference"><span class="header-section-number">11.2</span> Banba Bandgap Reference</a></li>
   </ul></li>
   <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota"><span class="header-section-number">12</span> A Fully-Differential OTA</a></li>
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">13</span> An RC-OPAMP Filter</a></li>
@@ -3905,6 +3906,39 @@ Figure&nbsp;47: Reference voltage from simulated bandgap circuit.
 </div>
 <p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;46</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist <span class="citation" data-cites="Banba_1999">Eberlein, Panagopoulos, and Pretl (<a href="#ref-Eberlein_2018" role="doc-biblioref">2018</a>)</span>.</p>
 </section>
+<section id="banba-bandgap-reference" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="banba-bandgap-reference"><span class="header-section-number">11.2</span> Banba Bandgap Reference</h2>
+<p>The Banba reference <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> is quite a bit trickier to design than the classical bandgap shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;45</a>. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;8</a>. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.</p>
+<p>A first design has been implemented and is shown in <a href="#fig-bandgap-banba-schematic" class="quarto-xref">Figure&nbsp;48</a>. The supply voltage (which could be lower than <span class="math inline">\(1.5\,\text{V}\)</span>) is limited by our OTA design; however, it works well at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>. The simulated reference voltage (which is scaled to roughly <span class="math inline">\(V_\mathrm{bandgap} / 2\)</span>) is shown in <a href="#fig-bandgap-banba-sim-result" class="quarto-xref">Figure&nbsp;49</a>.</p>
+<div id="fig-bandgap-banba-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bandgap-banba-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="./xschem/bandgap_banba.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-96" title="Figure&nbsp;48: Banba bandgap reference circuit in Xschem."><img src="./xschem/bandgap_banba.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-banba-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;48: Banba bandgap reference circuit in Xschem.
+</figcaption>
+</figure>
+</div>
+<p>Note the self-biasing of the OTA with the current generated in the reference branches. The feedback loop needs capacitors for stabilization, and we use area-efficient MOSFET for this task. For a detailed explanation of this circuit please refer to <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span>, but in brief, the operation is as follows:</p>
+<p>The CTAT and PTAT currents required for compensating each others TC’s are built using a <span class="math inline">\(\Delta V_\mathrm{BE}\)</span> cell (given the PTAT current) with parallel resistors (providing the CTAT current). Voltages are sensed using an error amplifier and current sources are controlled to achieve matching currents in both branches. This current can then also be mirrored to flow through another resistor which can be scaled to produce the output voltage.</p>
+<p>In comparison to the classical bandgap reference shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;45</a> (where the developed currents in all branches are PTAT) the currents developed in the Banba reference are constant vs.&nbsp;temperature.</p>
+<p>The minimum supply voltage for the Banba reference is the <span class="math inline">\(V_\mathrm{BE}\)</span> of the PNP plus the saturation voltage of one MOSFET current source, so ca. <span class="math inline">\(V_\mathrm{DDmin} \ge 0.8\,\text{V} + 0.2\,\text{V} \approx 1\,\text{V}\)</span>. Of course we also need to design an OTA which can work at this low supply.</p>
+<div id="cell-fig-bandgap-banba-sim-result" class="cell" data-execution_count="35">
+<div class="cell-output cell-output-display">
+<div id="fig-bandgap-banba-sim-result" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bandgap-banba-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-97" title="Figure&nbsp;49: Reference voltage from simulated Banba bandgap circuit."><img src="index_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" width="614" height="429" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-banba-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;49: Reference voltage from simulated Banba bandgap circuit.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="a-fully-differential-ota" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> A Fully-Differential OTA</h1>
@@ -3933,30 +3967,30 @@ Feedback
 </section>
 <section id="sec-middlebrook-method" class="level1" data-number="15">
 <h1 data-number="15"><span class="header-section-number">15</span> Appendix: Middlebrook’s Method</h1>
-<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;48</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;49</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
-<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="35">
+<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;50</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;51</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
+<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="36">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-96" title="Figure&nbsp;48: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-98" title="Figure&nbsp;50: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;48: Middlebrook voltage loop gain simulation.
+Figure&nbsp;50: Middlebrook voltage loop gain simulation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="36">
+<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="37">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-97" title="Figure&nbsp;49: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-99" title="Figure&nbsp;51: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;49: Middlebrook current loop gain simulation.
+Figure&nbsp;51: Middlebrook current loop gain simulation.
 </figcaption>
 </figure>
 </div>
@@ -3977,30 +4011,30 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \
 <h1 data-number="16"><span class="header-section-number">16</span> Appendix: Useful Circuit Theorems</h1>
 <section id="sec-miller-theorem" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">16.1</span> Miller’s Theorem</h2>
-<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;50</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;51</a>.</p>
-<div id="cell-fig-miller-theorem" class="cell" data-execution_count="37">
+<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;52</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;53</a>.</p>
+<div id="cell-fig-miller-theorem" class="cell" data-execution_count="38">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-98" title="Figure&nbsp;50: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-100" title="Figure&nbsp;52: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;50: An impedance connected between two nodes A and B.
+Figure&nbsp;52: An impedance connected between two nodes A and B.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="38">
+<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="39">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem-equivalent" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-99" title="Figure&nbsp;51: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-101" title="Figure&nbsp;53: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;51: An equivalent circuit using Miller’s theorem.
+Figure&nbsp;53: An equivalent circuit using Miller’s theorem.
 </figcaption>
 </figure>
 </div>
@@ -4027,15 +4061,15 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 <section id="sec-5t-ota-zout" class="level1" data-number="17">
 <h1 data-number="17"><span class="header-section-number">17</span> Appendix: 5T-OTA Small-Signal Output Impedance</h1>
 <p>This section gives additional details to the analysis presented in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>. Here we provide the full calculation of the output impedance/conductance of the 5T-OTA for frequencies below the dominant pole, i.e.&nbsp;we neglect any capacitors.</p>
-<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="39">
+<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="40">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota-small-signal-zout" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-100" title="Figure&nbsp;52: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-102" title="Figure&nbsp;54: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;52: 5-transistor OTA small-signal model for output impedance calculations.
+Figure&nbsp;54: 5-transistor OTA small-signal model for output impedance calculations.
 </figcaption>
 </figure>
 </div>
@@ -4436,14 +4470,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-01-02},
+  date = {2025-01-03},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> January 2, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> January 3, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
