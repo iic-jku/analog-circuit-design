@@ -127,3 +127,37 @@ plt.grid(True)
 ```
 
 Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use $100\,\text{mV}$ nominally as headroom. The circuit in @fig-bandgap-schematic works only marginally at $\VDD = 1.5\,\text{V}$, but would not work at $1.2\,\text{V}$ or lower. Improved circuit architectures for $<1\,\text{V}$ operation exist [@Banba_1999,@Eberlein_2018].
+
+## Banba Bandgap Reference
+
+The Banba reference [@Banba_1999] is quite a bit trickier to design than the classical bandgap shown in @fig-bandgap-simple. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in @sec-basic-ota. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.
+
+A first design has been implemented and is shown in @fig-bandgap-banba-schematic. The supply voltage (which could be lower than $1.5\,\text{V}$) is limited by our OTA design; however, it works well at $\VDD = 1.5\,\text{V}$. The simulated reference voltage (which is scaled to roughly $V_\mathrm{bandgap} / 2$) is shown in @fig-bandgap-banba-sim-result.
+
+![Banba bandgap reference circuit in Xschem.](./xschem/bandgap_banba.svg){#fig-bandgap-banba-schematic}
+
+Note the self-biasing of the OTA with the current generated in the reference branches. The feedback loop needs capacitors for stabilization, and we use area-efficient MOSFET for this task. For a detailed explanation of this circuit please refer to [@Banba_1999], but in brief, the operation is as follows:
+
+The CTAT and PTAT currents required for compensating each others TC's are built using a $\Delta \VBE$ cell (given the PTAT current) with parallel resistors (providing the CTAT current). Voltages are sensed using an error amplifier and current sources are controlled to achieve matching currents in both branches. This current can then also be mirrored to flow through another resistor which can be scaled to produce the output voltage.
+
+In comparison to the classical bandgap reference shown in @fig-bandgap-simple (where the developed currents in all branches are PTAT) the currents developed in the Banba reference are constant vs. temperature.
+
+The minimum supply voltage for the Banba reference is the $\VBE$ of the PNP plus the saturation voltage of one MOSFET current source, so ca. $\VDD[min] \ge 0.8\,\text{V} + 0.2\,\text{V} \approx 1\,\text{V}$. Of course we also need to design an OTA which can work at this low supply.
+
+```{python}
+#| label: fig-bandgap-banba-sim-result
+#| echo: false
+#| fig-cap: "Reference voltage from simulated Banba bandgap circuit."
+import numpy as np
+import matplotlib.pyplot as plt
+
+filename = "xschem/bandgap_banba.txt"
+data = np.loadtxt(filename)
+x = data[:, 0]
+y = data[:, 1]
+plt.plot(x, y, linestyle='-', color='b')
+plt.xlabel("Temperature (C)")
+plt.ylabel("Vref (V)")
+#plt.title("Reference Voltage of Bandgap")
+plt.grid(True)
+```
