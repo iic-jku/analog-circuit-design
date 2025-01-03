@@ -303,3 +303,27 @@ After a successful run, a documentation is automatically generated. The result o
 ### PVT Simulation Analysis
 
 Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitic ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.
+
+## OTA Variants
+
+Following, we are going to discuss two popular variants of the simple 5T-OTA. The first version provides an almost rail-to-rail single-ended output, and can thus be used for a variety of applications requiring this range. The arrangement is shown in @fig-ota-se-rail-to-rail. It is a single-stage amplifier, as the only high-impedance point is at the output where significant voltage-gain is produced. The current mirrors can be used to scale up the current generated in the input differential pair to some extent in the output stage (or can be used to lower the current compared to the bias current in the diffpair); i.e., the bias currents of the input stage and the output stage can be set independently.
+
+Being a single-stage amplifier stability is usually not an issue, as only the output node is high-ohmic; all other nodes feature a MOSFET diode so the node impedance is $\approx \gm^{-1}$ and thus the according poles are located at high frequencies.
+
+{{< include ./figures/_fig_ota_se_r2r.qmd >}}
+
+Another popular version is shown in @fig-ota-se-twostage. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation (in @fig-ota-se-twostage a very simplistic Miller-compensation using $C_\mathrm{M}$ is shown; often, we would want to implement a more advanced scheme). An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from $\VDD$ of one $\VGS$ ($\VGS[3]$ on the left side, $\VGS[5]$ on the right side).
+
+{{< include ./figures/_fig_ota_se_twostage.qmd >}}
+
+Note that the circuit of @fig-ota-se-twostage can be easily modified into a low-dropout voltage regulator (LDO). This simple yet often effective circuit is shown in @fig-simple-ldo. The pass transistor $M_\mathrm{pass}$ has to be sized according to the load current and the dropout voltage.
+
+{{< include ./figures/_fig_simple_ldo.qmd >}}
+
+The reference voltage $V_\mathrm{ref}$ is scaled by $R_1$ and $R_2$, so that the output voltage $V_\mathrm{out}$ is given by
+
+$$
+V_\mathrm{out} \approx V_\mathrm{ref} \left( 1 + \frac{R_1}{R_2} \right)
+$$
+
+if the gain of the OTA is sufficiently high. The quiescent current through $R_{1,2}$ established a minimum load current for the LDO, which is often a good thing for stability. More information on LDOs can be found in [@Razavi_2019].
