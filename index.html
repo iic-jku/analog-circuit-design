@@ -136,6 +136,7 @@ window.Quarto = {
 <meta name="citation_fulltext_html_url" content="https://iic-jku.github.io/analog-circuit-design">
 <meta name="citation_doi" content="10.5281/zenodo.14387481">
 <meta name="citation_language" content="en-US">
+<meta name="citation_reference" content="citation_title=The Design of a Low-Voltage Bandgap Reference [The Analog Mind];,citation_author=Behzad Razavi;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_issue=3;,citation_doi=10.1109/mssc.2021.3088963;,citation_issn=1943-0582;,citation_volume=13;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=The Low Dropout Regulator [A Circuit for All Seasons];,citation_author=Behzad Razavi;,citation_publication_date=2019-01;,citation_cover_date=2019-01;,citation_year=2019;,citation_fulltext_html_url=https://ieeexplore.ieee.org/document/8741287/;,citation_issue=2;,citation_doi=10.1109/mssc.2019.2910952;,citation_issn=1943-0582;,citation_volume=11;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=A 40nW, Sub-IV Truly “Digital” Reverse Bandgap Reference Using Bulk-Diodes in 16nm FinFET;,citation_author=Matthias Eberlein;,citation_author=Georgios Panagopoulos;,citation_author=Harald Pretl;,citation_publication_date=2018-11;,citation_cover_date=2018-11;,citation_year=2018;,citation_doi=10.1109/asscc.2018.8579306;,citation_volume=00;,citation_journal_title=2018 IEEE Asian Solid-State Circuits Conference (A-SSCC);">
 <meta name="citation_reference" content="citation_title=A CMOS bandgap reference circuit with sub-1-V operation;,citation_author=H. Banba;,citation_author=H. Shiga;,citation_author=A. Umezawa;,citation_author=T. Miyaba;,citation_author=T. Tanzawa;,citation_author=S. Atsumi;,citation_author=K. Sakui;,citation_publication_date=1999;,citation_cover_date=1999;,citation_year=1999;,citation_issue=5;,citation_doi=10.1109/4.760378;,citation_volume=34;,citation_journal_title=IEEE Journal of Solid-State Circuits;">
@@ -305,7 +306,7 @@ window.Quarto = {
   <li><a href="#biasing" id="toc-biasing" class="nav-link" data-scroll-target="#biasing"><span class="header-section-number">11</span> Biasing</a>
   <ul class="collapse">
   <li><a href="#bandgap-reference" id="toc-bandgap-reference" class="nav-link" data-scroll-target="#bandgap-reference"><span class="header-section-number">11.1</span> Bandgap Reference</a></li>
-  <li><a href="#banba-bandgap-reference" id="toc-banba-bandgap-reference" class="nav-link" data-scroll-target="#banba-bandgap-reference"><span class="header-section-number">11.2</span> Banba Bandgap Reference</a></li>
+  <li><a href="#sec-banba-bandgap" id="toc-sec-banba-bandgap" class="nav-link" data-scroll-target="#sec-banba-bandgap"><span class="header-section-number">11.2</span> Banba Bandgap Reference</a></li>
   </ul></li>
   <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota"><span class="header-section-number">12</span> A Fully-Differential OTA</a></li>
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">13</span> An RC-OPAMP Filter</a></li>
@@ -2932,7 +2933,7 @@ Figure&nbsp;35: A basic low-dropout voltage regulator (LDO) with Miller compensa
 <p><span class="math display">\[
 V_\mathrm{out} \approx V_\mathrm{ref} \left( 1 + \frac{R_1}{R_2} \right)
 \]</span></p>
-<p>if the gain of the OTA is sufficiently high. The quiescent current through <span class="math inline">\(R_{1,2}\)</span> established a minimum load current for the LDO, which is often a good thing for stability. More information on LDOs can be found in <span class="citation" data-cites="Razavi_2019">(<a href="#ref-Razavi_2019" role="doc-biblioref">Razavi 2019</a>)</span>.</p>
+<p>if the gain of the OTA is sufficiently high. The quiescent current through <span class="math inline">\(R_{1,2}\)</span> established a minimum load current for the LDO, which is often a good thing for stability. More information on LDOs can be found in <span class="citation" data-cites="Razavi_2019_ldo">(<a href="#ref-Razavi_2019_ldo" role="doc-biblioref">Razavi 2019</a>)</span>.</p>
 </section>
 </section>
 <section id="sec-cascode-stage" class="level1" data-number="9">
@@ -3962,8 +3963,8 @@ Figure&nbsp;50: Reference voltage from simulated bandgap circuit.
 </div>
 <p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;49</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist <span class="citation" data-cites="Banba_1999">Eberlein, Panagopoulos, and Pretl (<a href="#ref-Eberlein_2018" role="doc-biblioref">2018</a>)</span>.</p>
 </section>
-<section id="banba-bandgap-reference" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="banba-bandgap-reference"><span class="header-section-number">11.2</span> Banba Bandgap Reference</h2>
+<section id="sec-banba-bandgap" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-banba-bandgap"><span class="header-section-number">11.2</span> Banba Bandgap Reference</h2>
 <p>The Banba reference <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> is quite a bit trickier to design than the classical bandgap shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;48</a>. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;8</a>. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.</p>
 <p>A first design has been implemented and is shown in <a href="#fig-bandgap-banba-schematic" class="quarto-xref">Figure&nbsp;51</a>. The supply voltage (which could be lower than <span class="math inline">\(1.5\,\text{V}\)</span>) is limited by our OTA design; however, it works well at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>. The simulated reference voltage (which is scaled to roughly <span class="math inline">\(V_\mathrm{bandgap} / 2\)</span>) is shown in <a href="#fig-bandgap-banba-sim-result" class="quarto-xref">Figure&nbsp;52</a>.</p>
 <div id="fig-bandgap-banba-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3992,6 +3993,21 @@ Figure&nbsp;52: Reference voltage from simulated Banba bandgap circuit.
 </figcaption>
 </figure>
 </div>
+</div>
+</div>
+<p>A well described design of a Banba bandgap reference (including a two-stage OTA and a regulated cascode for the output current mirror), covering much more details than discussed here, can be found in [Razavi_2021_bandgap].</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Improved Low-Voltage Bandagap">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise: Improved Low-Voltage Bandagap
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As an <em>optional</em> exercise for advanced users: Design a bandgap circuit following [Razavi_2021_bandgap]. Implement the shown two-stage OTA and the regulated cascode.</p>
+<p>As a starting point, the design of <a href="#sec-banba-bandgap" class="quarto-xref">Section&nbsp;11.2</a> can be used. As this design will contain more blocks, please build up a hierarchical design, with the OTAs designed in separate subcircuits.</p>
 </div>
 </div>
 </section>
@@ -4505,7 +4521,7 @@ Pretl, Harald, and Matthias Eberlein. 2021. <span>“Fifty Nifty Variations of T
 <div id="ref-Razavi_Analog_CMOS" class="csl-entry" role="listitem">
 Razavi, Behzad. 2017. <em><span class="nocase">Design of Analog CMOS Integrated Circuits</span></em>. McGraw-Hill.
 </div>
-<div id="ref-Razavi_2019" class="csl-entry" role="listitem">
+<div id="ref-Razavi_2019_ldo" class="csl-entry" role="listitem">
 ———. 2019. <span>“<span class="nocase">The Low Dropout Regulator [A Circuit for All Seasons]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 11 (2): 8–13. <a href="https://doi.org/10.1109/mssc.2019.2910952">https://doi.org/10.1109/mssc.2019.2910952</a>.
 </div>
 <div id="ref-Rosenstark_1984" class="csl-entry" role="listitem">
