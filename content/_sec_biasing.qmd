@@ -128,7 +128,7 @@ plt.grid(True)
 
 Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use $100\,\text{mV}$ nominally as headroom. The circuit in @fig-bandgap-schematic works only marginally at $\VDD = 1.5\,\text{V}$, but would not work at $1.2\,\text{V}$ or lower. Improved circuit architectures for $<1\,\text{V}$ operation exist [@Banba_1999,@Eberlein_2018].
 
-## Banba Bandgap Reference
+## Banba Bandgap Reference {#sec-banba-bandgap}
 
 The Banba reference [@Banba_1999] is quite a bit trickier to design than the classical bandgap shown in @fig-bandgap-simple. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in @sec-basic-ota. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.
 
@@ -161,3 +161,11 @@ plt.ylabel("Vref (V)")
 #plt.title("Reference Voltage of Bandgap")
 plt.grid(True)
 ```
+
+A well described design of a Banba bandgap reference (including a two-stage OTA and a regulated cascode for the output current mirror), covering much more details than discussed here, can be found in [Razavi_2021_bandgap].
+
+::: {.callout-tip title="Exercise: Improved Low-Voltage Bandagap"}
+As an *optional* exercise for advanced users: Design a bandgap circuit following [Razavi_2021_bandgap]. Implement the shown two-stage OTA and the regulated cascode.
+
+As a starting point, the design of @sec-banba-bandgap can be used. As this design will contain more blocks, please build up a hierarchical design, with the OTAs designed in separate subcircuits.
+:::
