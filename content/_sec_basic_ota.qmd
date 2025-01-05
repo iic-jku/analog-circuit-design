@@ -304,7 +304,7 @@ After a successful run, a documentation is automatically generated. The result o
 
 Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitic ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.
 
-## OTA Variants
+## OTA Variants {#sec-ota-variants-single-ended}
 
 Following, we are going to discuss two popular variants of the simple 5T-OTA. The first version provides an almost rail-to-rail single-ended output, and can thus be used for a variety of applications requiring this range. The arrangement is shown in @fig-ota-se-rail-to-rail. It is a single-stage amplifier, as the only high-impedance point is at the output where significant voltage-gain is produced. The current mirrors can be used to scale up the current generated in the input differential pair to some extent in the output stage (or can be used to lower the current compared to the bias current in the diffpair); i.e., the bias currents of the input stage and the output stage can be set independently.
 
