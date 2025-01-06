@@ -18,7 +18,7 @@ limitations under the License.
 
 So far, we have discussed the implementation of OTAs with a differential input and a single-ended output. Often, in integrated circuits, we want to implement fully differential signal chains, as this allows an almost-rail-to-rail swing around a common-mode voltage. Further, noise pickup due to limited power-supply rejection ratio (PSRR) or coupling into the differential signal routing can be suppressed by designing amplifiers with high common-mode rejection ratio (CMRR).
 
-The OTA presented in @ec-ota-variants-single-ended can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in @fig-diff-ota-resload.
+The OTA presented in @sec-ota-variants-single-ended can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in @fig-diff-ota-resload.
 
 {{< include ./figures/_fig_ota_diff_twostage.qmd >}}
 
@@ -32,7 +32,97 @@ In addition, we realize that $\VGS[4] = \VGS[3] = \VGS[5] = \VGS[6]$ for common-
 
 For differential operation, the differential pair of $M_{1,2}$ is loaded by $R_\mathrm{load}$ and provides fairly high gain. The second gain stage is formed by current-source-loaded common-source stages $M_{4,6}$ and provides additional gain (of course, this is a function of the load impedance).
 
-As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in @fig-ota-res-load we have a low-frequency pole at the drains of $M_{1,3}$ and $M_{2,5}$ and a furter low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into *Miller compensation*.
+As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in @fig-diff-ota-resload we have a low-frequency pole at the drains of $M_{1,3}$ and $M_{2,5}$ and a further low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into *Miller compensation*.
 
 ## Miller Compensation
 
+A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies, that we have enough [phase margin](https://en.wikipedia.org/wiki/Phase_margin) in the closed-loop system. We may strive for $60^\circ$ as this will only cause a minor peaking in the frequency response [@Gray_Meyer_5th_ed].
+
+The question now is where to implement this dominant pole. In order to create a low-frequency pole we need a high-impedance point and a large capacitance. Placing just a large capacitor is unwelcome, as this causes large area consumption on chip.
+
+Luckily, we know from the analysis in @sec-miller-theorem that we can use voltage gain to increase the apparent value of a capacitor by feedback. Inspecting our circuit in @fig-diff-ota-resload we see that we have voltage gain from node $A$ to node $B$ and node $A'$ and $B'$, respectively. This means we have an opportunity to strap a capacitor between those nodes, and create a dominant pole at node $A$ (and $A'$).
+
+We can now add these so-called "Miller capacitors" to our circuit. The result is shown in @fig-diff-ota-resload-miller. (We have also added resistors in series with the capacitors; we ignore these resistors for the time being).
+
+{{< include ./figures/_fig_ota_diff_twostage_miller.qmd >}}
+
+It is instructive to look at the small-signal equivalent circuit of the common-source stage $M_4$ loaded by current-source $M_7$. The resulting model is shown in @fig-miller-comp-model (we are ignoring the bulk effect of $M_4$, and lump components of $M_{4,7}$ into the input and the output impedances formed by $C_\mathrm{L}$, $C_\mathrm{in}$, $g_\mathrm{in}$ and $g_\mathrm{out}$).
+
+{{< include ./figures/_fig_miller_comp_model.qmd >}}
+
+In order to analyse the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through $C_\mathrm{m}$ (we set $R_\mathrm{m}=0$ for now):
+
+$$
+I_\mathrm{in} + I_\mathrm{m} - V_\mathrm{gs} (s C_\mathrm{in} + g_\mathrm{in}) = 0
+$$ {#eq-miller-comp-kcl1}
+
+$$
+-I_\mathrm{m} - \gm V_\mathrm{gs} - V_\mathrm{out} (s C_\mathrm{L} + g_\mathrm{out}) = 0 
+$$ {#eq-miller-comp-kcl2}
+
+$$
+I_\mathrm{m} = s C_\mathrm{m} (V_\mathrm{out} - V_\mathrm{gs}) 
+$$ {#eq-miller-comp-kcl3}
+
+Using @eq-miller-comp-kcl3 in @eq-miller-comp-kcl1 and @eq-miller-comp-kcl2 and then calculating the transfer function we arrive at
+
+$$
+\frac{V_\mathrm{out}}{I_\mathrm{in}} = \frac{s C_\mathrm{m} - \gm}{(s C_\mathrm{m} + s C_\mathrm{L} + g_\mathrm{out})(s C_\mathrm{m} + s C_\mathrm{in} + g_\mathrm{in}) - (s C_\mathrm{m} - \gm) s C_\mathrm{m}}.
+$$ {#eq-miller-comp-kcl4}
+
+In order to check @eq-miller-comp-kcl4 we can set $s C_\mathrm{m} = 0$ and see whether we can interpret the result:
+
+$$
+\frac{V_\mathrm{out}}{I_\mathrm{in}} = -\frac{\gm}{(s C_\mathrm{L} + g_\mathrm{out})(s C_\mathrm{in} + g_\mathrm{in})} = -\frac{\gm}{g_\mathrm{out} g_\mathrm{in}}
+\frac{1}{\left( 1 + \frac{s C_\mathrm{L}}{g_\mathrm{out}} \right)}
+\frac{1}{\left( 1 + \frac{s C_\mathrm{in}}{g_\mathrm{in}} \right)}
+$$ {#eq-miller-comp-kcl5}
+
+We find that @eq-miller-comp-kcl5 looks reasonable, as we have the correct dc gain of $-\gm/(g_\mathrm{out} g_\mathrm{in})$ and two poles, one at the input and one at the output.
+
+We now return to the more interesting case of $s C_\mathrm{m} \neq 0$. We use the reasonable assumption that $\gm \gg g_\mathrm{in,out}$ to simplify the algebra and result in an interpretable result. After quite a few pages of algebraic manipulations (please try for yourself!) we arrive at
+
+$$
+\frac{V_\mathrm{out}}{I_\mathrm{in}} = -\frac{\gm}{g_\mathrm{out} g_\mathrm{in}}
+\frac{\left( 1 - \frac{s C_\mathrm{m}}{\gm} \right)}
+{
+\left( 1 + s \frac{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mathrm{in} C_\mathrm{L}}{C_\mathrm{m}}}{\gm} \right)
+\left( 1 + s \frac{C_\mathrm{m} \frac{\gm}{g_\mathrm{out}}}{g_\mathrm{in}} \right)
+}.
+$$ {#eq-miller-comp-pz}
+
+Looking at @eq-miller-comp-pz we can identify important changes compared to @eq-miller-comp-kcl5. We have the intended low-frequency pole $s_\mathrm{p1}$ at the input where the capacitor $C_\mathrm{m}$  is increased by the dc gain of the common-source stage $\gm / g_\mathrm{out}$:
+
+$$
+s_\mathrm{p1} = -\frac{g_\mathrm{in}}{C_\mathrm{m} \frac{\gm}{g_\mathrm{out}}}
+$$
+
+We further have a high frequency pole $s_\mathrm{p2}$ where the pole at the output has been shifted to higher frequencies! This is a very welcome effect called *pole splitting*, and it helps to stabilize the feedback system, as the nondominant (output) pole is shifted out in frequency while the dominant (input) pole is pulled in.
+
+$$
+s_\mathrm{p2} = -\frac{\gm}{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mathrm{in} C_\mathrm{L}}{C_\mathrm{m}}}
+$$
+
+Together, the movement of poles $s_\mathrm{p1}$ and $s_\mathrm{p2}$ is a great deal in terms of stability. However, not all is rosy, as we have to also look at the numerator of @eq-miller-comp-pz. Here we see that a zero $s_\mathrm{z}$ has been formed, unfortunately a quite bad one. Calculating its location as
+
+$$
+s_\mathrm{z} = +\frac{\gm}{C_\mathrm{m}}
+$$ {#eq-miller-zero}
+
+we see that it is located in the *right half-plane* of the s-domain. Such a zero leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are loosing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!
+
+A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift.
+
+Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see @fig-diff-ota-resload-miller and @fig-miller-comp-model). Doing this we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!
+
+Repeating the calculation of the transfer function $V_\mathrm{out} / I_\mathrm{in}$ including $R_\mathrm{m}$ we see that the zero location is changed and can be calculated as (the pole locations are also slightly changed due to the addition of $R_\mathrm{m}$, but we will not discuss the resulting equations here)
+
+$$
+s_\mathrm{z} = \frac{\gm}{C_\mathrm{m} (1 - \gm R_\mathrm{m})}
+$$ {#eq-miller-zero-comp}
+
+If we do not use the resistor (i.e., $R_\mathrm{m}=0$) then @eq-miller-zero-comp collapses to @eq-miller-zero. If $\gm R_\mathrm{m} < 1$ then the zero stays in the right half-plane; if $\gm R_\mathrm{m} > 1$ then the zero moves into the left half-plane (this is what we want). If $\gm R_\mathrm{m} = 1$ then we have compensated the zero at it moves to $-\infty$; however, in practice exact compensation is not easy to establish across conditions, so we want to move the zero into the left half-plane. Adding a bit of margin want to size
+
+$$
+R_\mathrm{m} > \frac{2}{\gm}.
+$$
