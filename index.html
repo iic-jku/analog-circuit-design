@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-01-05">
+<meta name="dcterms.date" content="2025-01-06">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -129,10 +129,10 @@ window.Quarto = {
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
 <meta name="citation_author" content="Simon Dorrer">
-<meta name="citation_publication_date" content="2025-01-05">
-<meta name="citation_cover_date" content="2025-01-05">
+<meta name="citation_publication_date" content="2025-01-06">
+<meta name="citation_cover_date" content="2025-01-06">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-05">
+<meta name="citation_online_date" content="2025-01-06">
 <meta name="citation_fulltext_html_url" content="https://iic-jku.github.io/analog-circuit-design">
 <meta name="citation_doi" content="10.5281/zenodo.14387481">
 <meta name="citation_language" content="en-US">
@@ -203,7 +203,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 5, 2025</p>
+              <p class="date">January 6, 2025</p>
             </div>
           </div>
           
@@ -286,7 +286,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#pvt-simulation-analysis" id="toc-pvt-simulation-analysis" class="nav-link" data-scroll-target="#pvt-simulation-analysis"><span class="header-section-number">8.6.1</span> PVT Simulation Analysis</a></li>
   </ul></li>
-  <li><a href="#ota-variants" id="toc-ota-variants" class="nav-link" data-scroll-target="#ota-variants"><span class="header-section-number">8.7</span> OTA Variants</a></li>
+  <li><a href="#sec-ota-variants-single-ended" id="toc-sec-ota-variants-single-ended" class="nav-link" data-scroll-target="#sec-ota-variants-single-ended"><span class="header-section-number">8.7</span> OTA Variants</a></li>
   </ul></li>
   <li><a href="#sec-cascode-stage" id="toc-sec-cascode-stage" class="nav-link" data-scroll-target="#sec-cascode-stage"><span class="header-section-number">9</span> Cascode Stage</a>
   <ul class="collapse">
@@ -308,7 +308,10 @@ window.Quarto = {
   <li><a href="#bandgap-reference" id="toc-bandgap-reference" class="nav-link" data-scroll-target="#bandgap-reference"><span class="header-section-number">11.1</span> Bandgap Reference</a></li>
   <li><a href="#sec-banba-bandgap" id="toc-sec-banba-bandgap" class="nav-link" data-scroll-target="#sec-banba-bandgap"><span class="header-section-number">11.2</span> Banba Bandgap Reference</a></li>
   </ul></li>
-  <li><a href="#a-fully-differential-ota" id="toc-a-fully-differential-ota" class="nav-link" data-scroll-target="#a-fully-differential-ota"><span class="header-section-number">12</span> A Fully-Differential OTA</a></li>
+  <li><a href="#sec-differential-ota" id="toc-sec-differential-ota" class="nav-link" data-scroll-target="#sec-differential-ota"><span class="header-section-number">12</span> Differential OTAs</a>
+  <ul class="collapse">
+  <li><a href="#miller-compensation" id="toc-miller-compensation" class="nav-link" data-scroll-target="#miller-compensation"><span class="header-section-number">12.1</span> Miller Compensation</a></li>
+  </ul></li>
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">13</span> An RC-OPAMP Filter</a></li>
   <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion"><span class="header-section-number">14</span> Summary &amp; Conclusion</a></li>
   <li><a href="#sec-middlebrook-method" id="toc-sec-middlebrook-method" class="nav-link" data-scroll-target="#sec-middlebrook-method"><span class="header-section-number">15</span> Appendix: Middlebrook’s Method</a></li>
@@ -2881,8 +2884,8 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 <p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a> we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitic (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
 </section>
 </section>
-<section id="ota-variants" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="ota-variants"><span class="header-section-number">8.7</span> OTA Variants</h2>
+<section id="sec-ota-variants-single-ended" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="sec-ota-variants-single-ended"><span class="header-section-number">8.7</span> OTA Variants</h2>
 <p>Following, we are going to discuss two popular variants of the simple 5T-OTA. The first version provides an almost rail-to-rail single-ended output, and can thus be used for a variety of applications requiring this range. The arrangement is shown in <a href="#fig-ota-se-rail-to-rail" class="quarto-xref">Figure&nbsp;33</a>. It is a single-stage amplifier, as the only high-impedance point is at the output where significant voltage-gain is produced. The current mirrors can be used to scale up the current generated in the input differential pair to some extent in the output stage (or can be used to lower the current compared to the bias current in the diffpair); i.e., the bias currents of the input stage and the output stage can be set independently.</p>
 <p>Being a single-stage amplifier stability is usually not an issue, as only the output node is high-ohmic; all other nodes feature a MOSFET diode so the node impedance is <span class="math inline">\(\approx g_\mathrm{m}^{-1}\)</span> and thus the according poles are located at high frequencies.</p>
 <div id="cell-fig-ota-se-rail-to-rail" class="cell" data-execution_count="26">
@@ -4012,9 +4015,119 @@ Exercise: Improved Low-Voltage Bandagap
 </div>
 </section>
 </section>
-<section id="a-fully-differential-ota" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> A Fully-Differential OTA</h1>
-<p>To be added in a future release.</p>
+<section id="sec-differential-ota" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Differential OTAs</h1>
+<p>So far, we have discussed the implementation of OTAs with a differential input and a single-ended output. Often, in integrated circuits, we want to implement fully differential signal chains, as this allows an almost-rail-to-rail swing around a common-mode voltage. Further, noise pickup due to limited power-supply rejection ratio (PSRR) or coupling into the differential signal routing can be suppressed by designing amplifiers with high common-mode rejection ratio (CMRR).</p>
+<p>The OTA presented in <a href="#sec-ota-variants-single-ended" class="quarto-xref">Section&nbsp;8.7</a> can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;53</a>.</p>
+<div id="cell-fig-diff-ota-resload" class="cell" data-execution_count="39">
+<div class="cell-output cell-output-display">
+<div id="fig-diff-ota-resload" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diff-ota-resload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-diff-ota-resload-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-101" title="Figure&nbsp;53: Differential two-stage OTA with resistive load."><img src="index_files/figure-html/fig-diff-ota-resload-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-resload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;53: Differential two-stage OTA with resistive load.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This OTA shows a load on top of the differential pair that we have not yet studied. It is instructive to analyze this structure in terms of differential and common-mode operation.</p>
+<p>For common-mode operation (i.e., injecting the same current into the drain of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>) we have the same voltage at the drains of <span class="math inline">\(M_{3,5}\)</span>, thus <span class="math inline">\(V_\mathrm{DS3}=V_\mathrm{DS5}\)</span>. We have thus no current flowing through <span class="math inline">\(R_{1,2}\)</span> and as a result <span class="math inline">\(V_\mathrm{DS3}=V_\mathrm{DS5} = V_\mathrm{X} = V_\mathrm{GS3} = V_\mathrm{GS5} = V_\mathrm{GS3,5}\)</span>. We realize that <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_5\)</span> are diode-connected for common-mode operation. We thus have well-defined dc operating points, and also low common-mode gain, since the common-mode load is <span class="math inline">\(g_\mathrm{m3}^{-1} \parallel g_\mathrm{m5}^{-1}\)</span>.</p>
+<p>For pure differential operation, the mid-point <span class="math inline">\(X\)</span> of <span class="math inline">\(R_{1,2}\)</span> acts as a virtual ground. The bias voltage <span class="math inline">\(V_\mathrm{GS3,5}\)</span> is thus not changed (it is set only by the common-mode operation) and thus <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_5\)</span> operate as current sources. The differential load impedance is high and is given by <span class="math inline">\(R_\mathrm{load} = (R_1 + R_2) \parallel (g_\mathrm{ds3}^{-1} + g_\mathrm{ds5}^{-1})\)</span>.</p>
+<p>In addition, we realize that <span class="math inline">\(V_\mathrm{GS4} = V_\mathrm{GS3} = V_\mathrm{GS5} = V_\mathrm{GS6}\)</span> for common-mode operation, hence the quiescent current of <span class="math inline">\(M_{4,6}\)</span> is set in a current-mirror-like fashion by the diode-connected <span class="math inline">\(M_{3,5}\)</span>.</p>
+<p>For differential operation, the differential pair of <span class="math inline">\(M_{1,2}\)</span> is loaded by <span class="math inline">\(R_\mathrm{load}\)</span> and provides fairly high gain. The second gain stage is formed by current-source-loaded common-source stages <span class="math inline">\(M_{4,6}\)</span> and provides additional gain (of course, this is a function of the load impedance).</p>
+<p>As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;53</a> we have a low-frequency pole at the drains of <span class="math inline">\(M_{1,3}\)</span> and <span class="math inline">\(M_{2,5}\)</span> and a further low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into <em>Miller compensation</em>.</p>
+<section id="miller-compensation" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="miller-compensation"><span class="header-section-number">12.1</span> Miller Compensation</h2>
+<p>A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies, that we have enough <a href="https://en.wikipedia.org/wiki/Phase_margin">phase margin</a> in the closed-loop system. We may strive for <span class="math inline">\(60^\circ\)</span> as this will only cause a minor peaking in the frequency response <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span>.</p>
+<p>The question now is where to implement this dominant pole. In order to create a low-frequency pole we need a high-impedance point and a large capacitance. Placing just a large capacitor is unwelcome, as this causes large area consumption on chip.</p>
+<p>Luckily, we know from the analysis in <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16.1</a> that we can use voltage gain to increase the apparent value of a capacitor by feedback. Inspecting our circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;53</a> we see that we have voltage gain from node <span class="math inline">\(A\)</span> to node <span class="math inline">\(B\)</span> and node <span class="math inline">\(A'\)</span> and <span class="math inline">\(B'\)</span>, respectively. This means we have an opportunity to strap a capacitor between those nodes, and create a dominant pole at node <span class="math inline">\(A\)</span> (and <span class="math inline">\(A'\)</span>).</p>
+<p>We can now add these so-called “Miller capacitors” to our circuit. The result is shown in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;54</a>. (We have also added resistors in series with the capacitors; we ignore these resistors for the time being).</p>
+<div id="cell-fig-diff-ota-resload-miller" class="cell" data-execution_count="40">
+<div class="cell-output cell-output-display">
+<div id="fig-diff-ota-resload-miller" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diff-ota-resload-miller-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-102" title="Figure&nbsp;54: Differential two-stage OTA with resistive load and Miller compensation."><img src="index_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-resload-miller-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;54: Differential two-stage OTA with resistive load and Miller compensation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>It is instructive to look at the small-signal equivalent circuit of the common-source stage <span class="math inline">\(M_4\)</span> loaded by current-source <span class="math inline">\(M_7\)</span>. The resulting model is shown in <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;55</a> (we are ignoring the bulk effect of <span class="math inline">\(M_4\)</span>, and lump components of <span class="math inline">\(M_{4,7}\)</span> into the input and the output impedances formed by <span class="math inline">\(C_\mathrm{L}\)</span>, <span class="math inline">\(C_\mathrm{in}\)</span>, <span class="math inline">\(g_\mathrm{in}\)</span> and <span class="math inline">\(g_\mathrm{out}\)</span>).</p>
+<div id="cell-fig-miller-comp-model" class="cell" data-execution_count="41">
+<div class="cell-output cell-output-display">
+<div id="fig-miller-comp-model" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-miller-comp-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-miller-comp-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-103" title="Figure&nbsp;55: Small-signal model of common-source stage with Miller compensation."><img src="index_files/figure-html/fig-miller-comp-model-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-comp-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;55: Small-signal model of common-source stage with Miller compensation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to analyse the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through <span class="math inline">\(C_\mathrm{m}\)</span> (we set <span class="math inline">\(R_\mathrm{m}=0\)</span> for now):</p>
+<p><span id="eq-miller-comp-kcl1"><span class="math display">\[
+I_\mathrm{in} + I_\mathrm{m} - V_\mathrm{gs} (s C_\mathrm{in} + g_\mathrm{in}) = 0
+\tag{36}\]</span></span></p>
+<p><span id="eq-miller-comp-kcl2"><span class="math display">\[
+-I_\mathrm{m} - g_\mathrm{m}V_\mathrm{gs} - V_\mathrm{out} (s C_\mathrm{L} + g_\mathrm{out}) = 0
+\tag{37}\]</span></span></p>
+<p><span id="eq-miller-comp-kcl3"><span class="math display">\[
+I_\mathrm{m} = s C_\mathrm{m} (V_\mathrm{out} - V_\mathrm{gs})
+\tag{38}\]</span></span></p>
+<p>Using <a href="#eq-miller-comp-kcl3" class="quarto-xref">Equation&nbsp;38</a> in <a href="#eq-miller-comp-kcl1" class="quarto-xref">Equation&nbsp;36</a> and <a href="#eq-miller-comp-kcl2" class="quarto-xref">Equation&nbsp;37</a> and then calculating the transfer function we arrive at</p>
+<p><span id="eq-miller-comp-kcl4"><span class="math display">\[
+\frac{V_\mathrm{out}}{I_\mathrm{in}} = \frac{s C_\mathrm{m} - g_\mathrm{m}}{(s C_\mathrm{m} + s C_\mathrm{L} + g_\mathrm{out})(s C_\mathrm{m} + s C_\mathrm{in} + g_\mathrm{in}) - (s C_\mathrm{m} - g_\mathrm{m}) s C_\mathrm{m}}.
+\tag{39}\]</span></span></p>
+<p>In order to check <a href="#eq-miller-comp-kcl4" class="quarto-xref">Equation&nbsp;39</a> we can set <span class="math inline">\(s C_\mathrm{m} = 0\)</span> and see whether we can interpret the result:</p>
+<p><span id="eq-miller-comp-kcl5"><span class="math display">\[
+\frac{V_\mathrm{out}}{I_\mathrm{in}} = -\frac{g_\mathrm{m}}{(s C_\mathrm{L} + g_\mathrm{out})(s C_\mathrm{in} + g_\mathrm{in})} = -\frac{g_\mathrm{m}}{g_\mathrm{out} g_\mathrm{in}}
+\frac{1}{\left( 1 + \frac{s C_\mathrm{L}}{g_\mathrm{out}} \right)}
+\frac{1}{\left( 1 + \frac{s C_\mathrm{in}}{g_\mathrm{in}} \right)}
+\tag{40}\]</span></span></p>
+<p>We find that <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;40</a> looks reasonable, as we have the correct dc gain of <span class="math inline">\(-g_\mathrm{m}/(g_\mathrm{out} g_\mathrm{in})\)</span> and two poles, one at the input and one at the output.</p>
+<p>We now return to the more interesting case of <span class="math inline">\(s C_\mathrm{m} \neq 0\)</span>. We use the reasonable assumption that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{in,out}\)</span> to simplify the algebra and result in an interpretable result. After quite a few pages of algebraic manipulations (please try for yourself!) we arrive at</p>
+<p><span id="eq-miller-comp-pz"><span class="math display">\[
+\frac{V_\mathrm{out}}{I_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{out} g_\mathrm{in}}
+\frac{\left( 1 - \frac{s C_\mathrm{m}}{g_\mathrm{m}} \right)}
+{
+\left( 1 + s \frac{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mathrm{in} C_\mathrm{L}}{C_\mathrm{m}}}{g_\mathrm{m}} \right)
+\left( 1 + s \frac{C_\mathrm{m} \frac{g_\mathrm{m}}{g_\mathrm{out}}}{g_\mathrm{in}} \right)
+}.
+\tag{41}\]</span></span></p>
+<p>Looking at <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;41</a> we can identify important changes compared to <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;40</a>. We have the intended low-frequency pole <span class="math inline">\(s_\mathrm{p1}\)</span> at the input where the capacitor <span class="math inline">\(C_\mathrm{m}\)</span> is increased by the dc gain of the common-source stage <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{out}\)</span>:</p>
+<p><span class="math display">\[
+s_\mathrm{p1} = -\frac{g_\mathrm{in}}{C_\mathrm{m} \frac{g_\mathrm{m}}{g_\mathrm{out}}}
+\]</span></p>
+<p>We further have a high frequency pole <span class="math inline">\(s_\mathrm{p2}\)</span> where the pole at the output has been shifted to higher frequencies! This is a very welcome effect called <em>pole splitting</em>, and it helps to stabilize the feedback system, as the nondominant (output) pole is shifted out in frequency while the dominant (input) pole is pulled in.</p>
+<p><span class="math display">\[
+s_\mathrm{p2} = -\frac{g_\mathrm{m}}{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mathrm{in} C_\mathrm{L}}{C_\mathrm{m}}}
+\]</span></p>
+<p>Together, the movement of poles <span class="math inline">\(s_\mathrm{p1}\)</span> and <span class="math inline">\(s_\mathrm{p2}\)</span> is a great deal in terms of stability. However, not all is rosy, as we have to also look at the numerator of <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;41</a>. Here we see that a zero <span class="math inline">\(s_\mathrm{z}\)</span> has been formed, unfortunately a quite bad one. Calculating its location as</p>
+<p><span id="eq-miller-zero"><span class="math display">\[
+s_\mathrm{z} = +\frac{g_\mathrm{m}}{C_\mathrm{m}}
+\tag{42}\]</span></span></p>
+<p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are loosing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
+<p>A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift.</p>
+<p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;54</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;55</a>). Doing this we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
+<p>Repeating the calculation of the transfer function <span class="math inline">\(V_\mathrm{out} / I_\mathrm{in}\)</span> including <span class="math inline">\(R_\mathrm{m}\)</span> we see that the zero location is changed and can be calculated as (the pole locations are also slightly changed due to the addition of <span class="math inline">\(R_\mathrm{m}\)</span>, but we will not discuss the resulting equations here)</p>
+<p><span id="eq-miller-zero-comp"><span class="math display">\[
+s_\mathrm{z} = \frac{g_\mathrm{m}}{C_\mathrm{m} (1 - g_\mathrm{m}R_\mathrm{m})}
+\tag{43}\]</span></span></p>
+<p>If we do not use the resistor (i.e., <span class="math inline">\(R_\mathrm{m}=0\)</span>) then <a href="#eq-miller-zero-comp" class="quarto-xref">Equation&nbsp;43</a> collapses to <a href="#eq-miller-zero" class="quarto-xref">Equation&nbsp;42</a>. If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &lt; 1\)</span> then the zero stays in the right half-plane; if <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &gt; 1\)</span> then the zero moves into the left half-plane (this is what we want). If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} = 1\)</span> then we have compensated the zero at it moves to <span class="math inline">\(-\infty\)</span>; however, in practice exact compensation is not easy to establish across conditions, so we want to move the zero into the left half-plane. Adding a bit of margin want to size</p>
+<p><span class="math display">\[
+R_\mathrm{m} &gt; \frac{2}{g_\mathrm{m}}.
+\]</span></p>
+</section>
 </section>
 <section id="an-rc-opamp-filter" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> An RC-OPAMP Filter</h1>
@@ -4039,30 +4152,30 @@ Feedback
 </section>
 <section id="sec-middlebrook-method" class="level1" data-number="15">
 <h1 data-number="15"><span class="header-section-number">15</span> Appendix: Middlebrook’s Method</h1>
-<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;53</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;54</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
-<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="39">
+<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;56</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;57</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
+<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="42">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-101" title="Figure&nbsp;53: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-104" title="Figure&nbsp;56: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;53: Middlebrook voltage loop gain simulation.
+Figure&nbsp;56: Middlebrook voltage loop gain simulation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="40">
+<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="43">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-102" title="Figure&nbsp;54: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="Figure&nbsp;57: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;54: Middlebrook current loop gain simulation.
+Figure&nbsp;57: Middlebrook current loop gain simulation.
 </figcaption>
 </figure>
 </div>
@@ -4083,30 +4196,30 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \
 <h1 data-number="16"><span class="header-section-number">16</span> Appendix: Useful Circuit Theorems</h1>
 <section id="sec-miller-theorem" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">16.1</span> Miller’s Theorem</h2>
-<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;55</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;56</a>.</p>
-<div id="cell-fig-miller-theorem" class="cell" data-execution_count="41">
+<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;58</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;59</a>.</p>
+<div id="cell-fig-miller-theorem" class="cell" data-execution_count="44">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-103" title="Figure&nbsp;55: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-106" title="Figure&nbsp;58: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;55: An impedance connected between two nodes A and B.
+Figure&nbsp;58: An impedance connected between two nodes A and B.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="42">
+<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="45">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem-equivalent" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-104" title="Figure&nbsp;56: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-107" title="Figure&nbsp;59: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;56: An equivalent circuit using Miller’s theorem.
+Figure&nbsp;59: An equivalent circuit using Miller’s theorem.
 </figcaption>
 </figure>
 </div>
@@ -4133,15 +4246,15 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 <section id="sec-5t-ota-zout" class="level1" data-number="17">
 <h1 data-number="17"><span class="header-section-number">17</span> Appendix: 5T-OTA Small-Signal Output Impedance</h1>
 <p>This section gives additional details to the analysis presented in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>. Here we provide the full calculation of the output impedance/conductance of the 5T-OTA for frequencies below the dominant pole, i.e.&nbsp;we neglect any capacitors.</p>
-<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="43">
+<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="46">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota-small-signal-zout" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="Figure&nbsp;57: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-108" title="Figure&nbsp;60: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;57: 5-transistor OTA small-signal model for output impedance calculations.
+Figure&nbsp;60: 5-transistor OTA small-signal model for output impedance calculations.
 </figcaption>
 </figure>
 </div>
@@ -4153,63 +4266,63 @@ Figure&nbsp;57: 5-transistor OTA small-signal model for output impedance calcula
 v_\mathrm{in,p}=v_\mathrm{in,p}=0~\text{V}
 \]</span> <span id="eq-app-vbufzout-vin-ol"><span class="math display">\[
 v_\mathrm{gs1} = v_\mathrm{gs2}
-\tag{36}\]</span></span></p>
+\tag{44}\]</span></span></p>
 <p>KCL at the output node: <span id="eq-app-vbufzout-kcl-vout-ol"><span class="math display">\[
 i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - i_{g_\mathrm{ds2}} - g_\mathrm{m2}v_\mathrm{gs2} = 0
-\tag{37}\]</span></span></p>
+\tag{45}\]</span></span></p>
 <p>KCL at the tail node: <span class="math display">\[
 g_\mathrm{m1}v_\mathrm{gs1} + g_\mathrm{m2}v_\mathrm{gs2} + i_{g_\mathrm{ds2}} + g_\mathrm{ds5}v_\mathrm{gs2} = 0
 \]</span></p>
-<p>Using <a href="#eq-app-vbufzout-vin-ol" class="quarto-xref">Equation&nbsp;36</a> we can eliminate <span class="math inline">\(v_\mathrm{gs1}\)</span> and solve for <span class="math inline">\(i_{g_\mathrm{ds2}}\)</span>. <span id="eq-app-vbufzout-igds2"><span class="math display">\[
+<p>Using <a href="#eq-app-vbufzout-vin-ol" class="quarto-xref">Equation&nbsp;44</a> we can eliminate <span class="math inline">\(v_\mathrm{gs1}\)</span> and solve for <span class="math inline">\(i_{g_\mathrm{ds2}}\)</span>. <span id="eq-app-vbufzout-igds2"><span class="math display">\[
 i_{g_\mathrm{ds2}} = -\left(g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds5}\right)v_\mathrm{gs2}
-\tag{38}\]</span></span></p>
+\tag{46}\]</span></span></p>
 <p>Furthermore, we need an expression for <span class="math inline">\(v_\mathrm{gs34}\)</span>. Ohm’s law at the conductance <span class="math inline">\(g_\mathrm{m34}\)</span> will suffice. <span id="eq-app-vbufzout-vgs34-ol"><span class="math display">\[
 v_\mathrm{gs34} = -\frac{g_\mathrm{m1}}{g_\mathrm{m34}}v_\mathrm{gs1}
-\tag{39}\]</span></span></p>
-<p>KVL from the output node down to ground (over <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;38</a> gives us an expression for <span class="math inline">\(v_\mathrm{gs2}\)</span> <span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
+\tag{47}\]</span></span></p>
+<p>KVL from the output node down to ground (over <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;46</a> gives us an expression for <span class="math inline">\(v_\mathrm{gs2}\)</span> <span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
 v_\mathrm{gs2} = -\frac{g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out}
-\tag{40}\]</span></span></p>
-<p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;37</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;38</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>. <span class="math display">\[
+\tag{48}\]</span></span></p>
+<p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;45</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;46</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>. <span class="math display">\[
 i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} + \left(g_\mathrm{m1}+g_\mathrm{ds5}\right)v_\mathrm{gs2} = 0
 \]</span></p>
-<p>Second, <span class="math inline">\(v_\mathrm{gs34}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;39</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m34}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>. <span class="math display">\[
+<p>Second, <span class="math inline">\(v_\mathrm{gs34}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;47</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m34}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>. <span class="math display">\[
 i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} + \left(2g_\mathrm{m1}+g_\mathrm{ds5}\right)v_\mathrm{gs2} = 0
 \]</span></p>
-<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;40</a> gives as an expression for the last remaining unknown <span class="math inline">\(v_\mathrm{gs2}\)</span>. Thus, the factor in front of <span class="math inline">\(v_\mathrm{out}\)</span> defines the conductance at the output node. <span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
+<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;48</a> gives as an expression for the last remaining unknown <span class="math inline">\(v_\mathrm{gs2}\)</span>. Thus, the factor in front of <span class="math inline">\(v_\mathrm{out}\)</span> defines the conductance at the output node. <span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
 i_\mathrm{out} -\left[g_\mathrm{ds4} + \left(2g_\mathrm{m1}+g_\mathrm{ds5}\right)\frac{g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}\right]v_\mathrm{out} = 0
-\tag{41}\]</span></span> Before, we interpret this result, we use are assumption of matched input transistors (<span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span>) and slightly rearrange the equation to give us more insight. <span id="eq-app-vbufzout-zout-ol-2"><span class="math display">\[
+\tag{49}\]</span></span> Before, we interpret this result, we use are assumption of matched input transistors (<span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span>) and slightly rearrange the equation to give us more insight. <span id="eq-app-vbufzout-zout-ol-2"><span class="math display">\[
 i_\mathrm{out} -\left[g_\mathrm{ds4} + \frac{g_\mathrm{ds2}\cdot\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)}{g_\mathrm{ds2}+\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)}\right]v_\mathrm{out} = 0
-\tag{42}\]</span></span> Now, we can identify the common equation of the total resistance of two parallel resistors. However, we are dealing with conductances here, so the same equation describes the total conductance of two conductances in series, while parallel conductances are simply summed. In parallel to <span class="math inline">\(g_\mathrm{ds4}\)</span>, there is effectively the series connection of <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)\)</span> at work. If we apply the general assumption of <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, only the parallel connection of <span class="math inline">\(g_\mathrm{ds4}\)</span> and <span class="math inline">\(g_\mathrm{ds2}\)</span> remains. Therefore, moving <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span> in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a> was valid. <span id="eq-app-vbufzout-zout-ol-3"><span class="math display">\[
+\tag{50}\]</span></span> Now, we can identify the common equation of the total resistance of two parallel resistors. However, we are dealing with conductances here, so the same equation describes the total conductance of two conductances in series, while parallel conductances are simply summed. In parallel to <span class="math inline">\(g_\mathrm{ds4}\)</span>, there is effectively the series connection of <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)\)</span> at work. If we apply the general assumption of <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, only the parallel connection of <span class="math inline">\(g_\mathrm{ds4}\)</span> and <span class="math inline">\(g_\mathrm{ds2}\)</span> remains. Therefore, moving <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span> in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a> was valid. <span id="eq-app-vbufzout-zout-ol-3"><span class="math display">\[
 \frac{i_\mathrm{out}}{v_\mathrm{out}}\approx g_\mathrm{ds4} + g_\mathrm{ds2}
-\tag{43}\]</span></span></p>
+\tag{51}\]</span></span></p>
 </section>
 <section id="closed-loop-configuration" class="level2" data-number="17.2">
 <h2 data-number="17.2" class="anchored" data-anchor-id="closed-loop-configuration"><span class="header-section-number">17.2</span> Closed-Loop Configuration</h2>
 <p>In contrast to the open-loop case, we keep the gate of <span class="math inline">\(M_1\)</span> connected to ground and tie the input of <span class="math inline">\(M_2\)</span> to the output node <span class="math inline">\(v_\mathrm{out}\)</span>. <span id="eq-app-vbufzout-vin-cl"><span class="math display">\[
 v_\mathrm{in,n} = v_\mathrm{out}
-\tag{44}\]</span></span></p>
+\tag{52}\]</span></span></p>
 <p>KCL at the output node: <span id="eq-app-vbufzout-kcl-vout-cl"><span class="math display">\[
 i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - g_\mathrm{ds2}v_\mathrm{gs2} - g_\mathrm{m2}v_\mathrm{gs2} = 0
-\tag{45}\]</span></span></p>
+\tag{53}\]</span></span></p>
 <p>We use KVL from the output node down to ground to find an expression for <span class="math inline">\(v_\mathrm{gs2}\)</span>. <span id="eq-app-vbufzout-kvl-vout-cl"><span class="math display">\[
 v_\mathrm{gs2} =  v_\mathrm{out} + v_\mathrm{gs1}
-\tag{46}\]</span></span></p>
+\tag{54}\]</span></span></p>
 <p>KCL at the tail node: <span id="eq-app-vbufzout-kcl-vtail-cl"><span class="math display">\[
 g_\mathrm{m1}v_\mathrm{gs1} + g_\mathrm{m2}v_\mathrm{gs2} + g_\mathrm{ds2}v_\mathrm{gs2} + g_\mathrm{ds5}v_\mathrm{gs2} = 0
-\tag{47}\]</span></span></p>
-<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;46</a> to substitute <span class="math inline">\(v_\mathrm{gs2}\)</span> in {#eq-app-vbufzout-kcl-vtail-cl} we find an equation for <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
+\tag{55}\]</span></span></p>
+<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;54</a> to substitute <span class="math inline">\(v_\mathrm{gs2}\)</span> in {#eq-app-vbufzout-kcl-vtail-cl} we find an equation for <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
 v_\mathrm{gs1} = -\frac{g_\mathrm{m2}+g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out}
-\tag{48}\]</span></span></p>
-<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;46</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;39</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;48</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;45</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;46</a> to eliminate <span class="math inline">\(v_\mathrm{gs2}\)</span>. <span class="math display">\[
+\tag{56}\]</span></span></p>
+<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;54</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;47</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;56</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;53</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;54</a> to eliminate <span class="math inline">\(v_\mathrm{gs2}\)</span>. <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - \left(g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{gs1} = 0
 \]</span></p>
-<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;39</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(v_\mathrm{gs34}\)</span>. <span class="math display">\[
+<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;47</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(v_\mathrm{gs34}\)</span>. <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} - \left(g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1}\right)v_\mathrm{gs1} = 0
 \]</span></p>
-<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;48</a> to eliminate the remaining unknown <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span class="math display">\[
+<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;56</a> to eliminate the remaining unknown <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} + \left(g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1}\right)\frac{g_\mathrm{m2}+g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out} = 0
 \]</span></p>
-<p>A more simpler result can be obtained, if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;48</a> first (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>) and then plug it into our main equation. Additionally, we use <span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span> to further simplify the equation. <span class="math display">\[
+<p>A more simpler result can be obtained, if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;56</a> first (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>) and then plug it into our main equation. Additionally, we use <span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span> to further simplify the equation. <span class="math display">\[
 i_\mathrm{out} -\left(g_\mathrm{ds4} + \frac{3}{2} g_\mathrm{ds2} + g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 \]</span></p>
 <p>If we apply <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span> again, we arrive at the same result which was used for the noise calculation in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>, compare the expression for <span class="math inline">\(Y'_\mathrm{load}\)</span> given by <a href="#eq-basic-ota-output-noise-yload" class="quarto-xref">Equation&nbsp;24</a> . <span class="math display">\[
@@ -4545,14 +4658,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-01-05},
+  date = {2025-01-06},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> January 5, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> January 6, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
