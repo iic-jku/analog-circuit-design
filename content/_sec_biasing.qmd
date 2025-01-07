@@ -94,13 +94,19 @@ $$
 V_\mathrm{ref} = \VBE + \frac{R_2}{R_1} \frac{k T}{q} \ln m.  
 $$
 
-By proper selection of $R_1$, $R_2$ and $n$ we can satisfy @eq-bandgap-voltage-with-temp to result in @eq-bandgap-voltage.
+By proper selection of $R_1$, $R_2$ and $m$ we can satisfy @eq-bandgap-voltage-with-temp to result in @eq-bandgap-voltage.
 
 ::: {.callout-note title="Improved Bandgap Reference"}
 For an improved implementation of @fig-bandgap-simple, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, @eq-vbe-vs-temp and @eq-delta-vbe-vs-temp build on the relationship $I_\mathrm{C} = f(\VBE)$, while we control $I_\mathrm{E}$ in this circuit. If $\beta$ is large then $I_\mathrm{C} \approx I_\mathrm{E}$, but this is not the case for the used PNPs.
 :::
 
-The circuit of @fig-bandgap-simple has been implemented in Xschem and is shown in @fig-bandgap-schematic. The current sources have been improved by using cascodes. No base current compensation is implemented, as it is assumed that the $\beta$ of the PNP are similar although they are operated at different emitter current densities. Note the addition of a startup branch with $M_\mathrm{startup}$ which is inactive during normal operation but will inject a startup current if no proper bias point has yet been found. There is no circuitry added for enabling/disabling the circuit, which would also be needed for a practical implementation. As usual, the MOSFET sizing has been done in this [notebook](sizing/sizing_bandgap_simple.ipynb).
+The circuit of @fig-bandgap-simple has been implemented in Xschem and is shown in @fig-bandgap-schematic. The current sources have been improved by using cascodes. We are using the low-voltage current mirror type already introduced in @sec-improved-ota. The bias voltages for the cascodes are generated via the voltage drops of $R_3$ and $R_4$, respectively. 
+
+No base current compensation for the BJTs is implemented, as it is assumed that the $\beta$ of the PNP are similar although they are operated at different emitter current densities.
+
+Note the addition of a startup branch with $M_\mathrm{startup}$ which is inactive during normal operation but will inject a startup current if no proper bias point has yet been found.
+
+There is no circuitry added for enabling/disabling the circuit, which would also be needed for a practical implementation. As usual, the MOSFET sizing has been done in this [notebook](sizing/sizing_bandgap_simple.ipynb).
 
 The resistors $R_{1-4}$ have been implemented out of unit elements of ca. $5\,\text{k}\Omega$ for optimum matching. Building a bandgap for the first time on silicon likely will show a slightly deviating temperature coefficient, which is why we keep a few dummy resistors around in $R_2$ to compensate the TC in a redesign.
 
