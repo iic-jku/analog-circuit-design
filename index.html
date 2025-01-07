@@ -312,6 +312,7 @@ window.Quarto = {
   <li><a href="#sec-differential-ota" id="toc-sec-differential-ota" class="nav-link" data-scroll-target="#sec-differential-ota"><span class="header-section-number">12</span> Differential OTAs</a>
   <ul class="collapse">
   <li><a href="#miller-compensation" id="toc-miller-compensation" class="nav-link" data-scroll-target="#miller-compensation"><span class="header-section-number">12.1</span> Miller Compensation</a></li>
+  <li><a href="#common-mode-regulation" id="toc-common-mode-regulation" class="nav-link" data-scroll-target="#common-mode-regulation"><span class="header-section-number">12.2</span> Common-Mode Regulation</a></li>
   </ul></li>
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">13</span> An RC-OPAMP Filter</a></li>
   <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion"><span class="header-section-number">14</span> Summary &amp; Conclusion</a></li>
@@ -4013,13 +4014,13 @@ Figure&nbsp;53: Reference voltage from simulated Banba bandgap circuit.
 </div>
 </div>
 <p>A well described design of a Banba bandgap reference (including a two-stage OTA and a regulated cascode for the output current mirror), covering much more details than discussed here, can be found in [Razavi_2021_bandgap].</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Improved Low-Voltage Bandagap">
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Improved Low-Voltage Bandgap">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Improved Low-Voltage Bandagap
+Exercise: Improved Low-Voltage Bandgap
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4089,7 +4090,7 @@ Figure&nbsp;56: Small-signal model of common-source stage with Miller compensati
 </div>
 </div>
 </div>
-<p>In order to analyse the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through <span class="math inline">\(C_\mathrm{m}\)</span> (we set <span class="math inline">\(R_\mathrm{m}=0\)</span> for now):</p>
+<p>In order to analyze the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through <span class="math inline">\(C_\mathrm{m}\)</span> (we set <span class="math inline">\(R_\mathrm{m}=0\)</span> for now):</p>
 <p><span id="eq-miller-comp-kcl1"><span class="math display">\[
 I_\mathrm{in} + I_\mathrm{m} - V_\mathrm{gs} (s C_\mathrm{in} + g_\mathrm{in}) = 0
 \tag{36}\]</span></span></p>
@@ -4143,6 +4144,59 @@ s_\mathrm{z} = \frac{g_\mathrm{m}}{C_\mathrm{m} (1 - g_\mathrm{m}R_\mathrm{m})}
 R_\mathrm{m} &gt; \frac{2}{g_\mathrm{m}}.
 \]</span></p>
 </section>
+<section id="common-mode-regulation" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="common-mode-regulation"><span class="header-section-number">12.2</span> Common-Mode Regulation</h2>
+<p>In fully-differential (i.e., differential inputs and outputs) OTAs we have a new issue concerning common-mode voltage control: Depending on the feedback network around the OTA we might or might not have a defined dc operating point (common-mode wise). Think of the following scenario: If implement an integrator with an OTA then the feedback network from output to input consists of a capacitor. This means that the output of the OTA is loaded very high ohmic, and any small current mismatch between <span class="math inline">\(M_4\)</span>/<span class="math inline">\(M_7\)</span> or <span class="math inline">\(M_6\)</span>/<span class="math inline">\(M_8\)</span> (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;55</a>) will cause a strong deviation of the dc operating point at the output!</p>
+<p>We can not accept that the dc operating points in a circuit are ill defined. We thus need a way to establish the dc operating point. Using the diode-resistive load for the differential pair in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;55</a> the dc operating point there is well-defined by the diode-connected <span class="math inline">\(M_{3,5}\)</span>. However, the output stage is different, and we need to add circuitry to also control the dc operating point there.</p>
+<p>One well-known way is to sense the common-mode voltage using two resistors (similar to <span class="math inline">\(R_{1,2}\)</span> in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;55</a>), and compare this measured common-mode voltage to a reference voltage using an error amplifier. Then the output of the error amplifier controls the common-mode voltage, e.g., by driving the gates of <span class="math inline">\(M_{7,8}\)</span> in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;55</a>.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Differential and Common-Mode Loops">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Differential and Common-Mode Loops
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When using an error amplifier to regulate a common-mode point keep in mind that you need to check the differential and common-mode stability of these various loops! This can lead to tricky situations, especially under large-signal excitation where the common-mode sensing might not work as expected!</p>
+<p>In order to get a differential circuit stable one often has to make the common-mode loop faster than the differential loops. So simple, high-speed error amplifiers are an advantage.</p>
+<p>In summary, stability investigations are critically important for differential circuits, and never forget to check for common-mode stability as well!</p>
+</div>
+</div>
+<p>Instead of a common-mode regulation loop (and all its complications regarding stability) often a common-mode setting is sufficient (after all, a somewhat imprecise setting of the dc points is good enough). A common-mode setting has the advantage that no error amplifier is required. We will also use this approach of a common-mode loop setting in the adapted differential OTA shown in <a href="#fig-diff-ota-resload-miller-cm" class="quarto-xref">Figure&nbsp;57</a>.</p>
+<div id="cell-fig-diff-ota-resload-miller-cm" class="cell" data-execution_count="42">
+<div class="cell-output cell-output-display">
+<div id="fig-diff-ota-resload-miller-cm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diff-ota-resload-miller-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-diff-ota-resload-miller-cm-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="Figure&nbsp;57: Differential two-stage OTA with resistive load, Miller compensation and output common-mode control."><img src="index_files/figure-html/fig-diff-ota-resload-miller-cm-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-resload-miller-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;57: Differential two-stage OTA with resistive load, Miller compensation and output common-mode control.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Resistors <span class="math inline">\(R_{3,4}\)</span> sense the output voltages and create a replica of the common-mode point (assuming <span class="math inline">\(R_3 = R_4\)</span>). This common-mode point is connected to the gates of <span class="math inline">\(M_{7,8}\)</span> to essentially connect <span class="math inline">\(M_{7,8}\)</span> like a diode (only for common-mode operation); in differential mode, <span class="math inline">\(M_7\)</span> and <span class="math inline">\(M_8\)</span> act as current source, like the load of the differential pair <span class="math inline">\(M_{3,5}\)</span>. However, since we want to set the common-mode voltage at the output independently from <span class="math inline">\(V_\mathrm{GS7,8}\)</span> we also pull a current through <span class="math inline">\(R_{3,4}\)</span> to cause <span class="math inline">\(V_\mathrm{DS7,8} \neq V_\mathrm{GS7,8}\)</span>; essentially, this is a diode connection including a voltage shift! The output common-mode voltage is then given by</p>
+<p><span class="math display">\[
+V_\mathrm{out,cm} = V_\mathrm{GS7,8} + \frac{R_{3,4} I_\mathrm{D11}}{2}.
+\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Modify Bias Points with Currents">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Modify Bias Points with Currents
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep the technique shown in <a href="#fig-diff-ota-resload-miller-cm" class="quarto-xref">Figure&nbsp;57</a> (using <span class="math inline">\(R_{3,4}\)</span> and <span class="math inline">\(M_{11}\)</span>) in mind: You can always modify a bias point by injecting a dc current into a node, or by pulling a dc current out of a node (or do both to increase or lower the quiescent current through a resistor or transistor)! Since we likely have already current mirrors in the circuit it is usually a minor effort adding MOSFETs to create these bias currents.</p>
+</div>
+</div>
+</section>
 </section>
 <section id="an-rc-opamp-filter" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> An RC-OPAMP Filter</h1>
@@ -4167,30 +4221,30 @@ Feedback
 </section>
 <section id="sec-middlebrook-method" class="level1" data-number="15">
 <h1 data-number="15"><span class="header-section-number">15</span> Appendix: Middlebrook’s Method</h1>
-<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;57</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;58</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
-<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="42">
+<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;58</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;59</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
+<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="43">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="Figure&nbsp;57: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-106" title="Figure&nbsp;58: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;57: Middlebrook voltage loop gain simulation.
+Figure&nbsp;58: Middlebrook voltage loop gain simulation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="43">
+<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="44">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-106" title="Figure&nbsp;58: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-107" title="Figure&nbsp;59: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;58: Middlebrook current loop gain simulation.
+Figure&nbsp;59: Middlebrook current loop gain simulation.
 </figcaption>
 </figure>
 </div>
@@ -4211,30 +4265,30 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \
 <h1 data-number="16"><span class="header-section-number">16</span> Appendix: Useful Circuit Theorems</h1>
 <section id="sec-miller-theorem" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">16.1</span> Miller’s Theorem</h2>
-<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;59</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;60</a>.</p>
-<div id="cell-fig-miller-theorem" class="cell" data-execution_count="44">
+<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;60</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;61</a>.</p>
+<div id="cell-fig-miller-theorem" class="cell" data-execution_count="45">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-107" title="Figure&nbsp;59: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-108" title="Figure&nbsp;60: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;59: An impedance connected between two nodes A and B.
+Figure&nbsp;60: An impedance connected between two nodes A and B.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="45">
+<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="46">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem-equivalent" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-108" title="Figure&nbsp;60: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-109" title="Figure&nbsp;61: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;60: An equivalent circuit using Miller’s theorem.
+Figure&nbsp;61: An equivalent circuit using Miller’s theorem.
 </figcaption>
 </figure>
 </div>
@@ -4261,15 +4315,15 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 <section id="sec-5t-ota-zout" class="level1" data-number="17">
 <h1 data-number="17"><span class="header-section-number">17</span> Appendix: 5T-OTA Small-Signal Output Impedance</h1>
 <p>This section gives additional details to the analysis presented in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>. Here we provide the full calculation of the output impedance/conductance of the 5T-OTA for frequencies below the dominant pole, i.e.&nbsp;we neglect any capacitors.</p>
-<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="46">
+<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="47">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota-small-signal-zout" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-109" title="Figure&nbsp;61: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-110" title="Figure&nbsp;62: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;61: 5-transistor OTA small-signal model for output impedance calculations.
+Figure&nbsp;62: 5-transistor OTA small-signal model for output impedance calculations.
 </figcaption>
 </figure>
 </div>
