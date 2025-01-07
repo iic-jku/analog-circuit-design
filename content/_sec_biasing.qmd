@@ -138,7 +138,7 @@ Please note how tight the dc operating point is in this design to keep all MOSFE
 
 The Banba reference [@Banba_1999] is quite a bit trickier to design than the classical bandgap shown in @fig-bandgap-simple. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in @sec-basic-ota. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.
 
-A first design has been implemented and is shown in @fig-bandgap-banba-schematic. The supply voltage (which could be lower than $1.5\,\text{V}$) is limited by our OTA design; however, it works well at $\VDD = 1.5\,\text{V}$. The simulated reference voltage (which is scaled to roughly $V_\mathrm{bandgap} / 2$) is shown in @fig-bandgap-banba-sim-result.
+A first design has been implemented and is shown in @fig-bandgap-banba-schematic, and the testbench is shown in @fig-bandgap-banba-tb. The supply voltage (which could be lower than $1.5\,\text{V}$) is limited by our OTA design; however, it works well at $\VDD = 1.5\,\text{V}$. The simulated reference voltage (which is scaled to roughly $V_\mathrm{bandgap} / 2$) is shown in @fig-bandgap-banba-sim-result.
 
 ![Banba bandgap reference circuit in Xschem.](./xschem/bandgap_banba.svg){#fig-bandgap-banba-schematic}
 
@@ -149,6 +149,8 @@ The CTAT and PTAT currents required for compensating each others TC's are built 
 In comparison to the classical bandgap reference shown in @fig-bandgap-simple (where the developed currents in all branches are PTAT) the currents developed in the Banba reference are constant vs. temperature.
 
 The minimum supply voltage for the Banba reference is the $\VBE$ of the PNP plus the saturation voltage of one MOSFET current source, so ca. $\VDD[min] \ge 0.8\,\text{V} + 0.2\,\text{V} \approx 1\,\text{V}$. Of course we also need to design an OTA which can work at this low supply.
+
+![Banba bandgap testbench Xschem.](./xschem/bandgap_banba_tb.svg){#fig-bandgap-banba-tb}
 
 ```{python}
 #| label: fig-bandgap-banba-sim-result
