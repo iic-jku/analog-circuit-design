@@ -4,11 +4,12 @@ K {}
 V {}
 S {}
 E {}
-T {m=8} 950 -330 0 0 0.4 0.4 {}
-T {m=8} 1150 -330 0 0 0.4 0.4 {}
+T {m=32} 890 -410 0 0 0.4 0.4 {}
 T {10uA} 540 -280 0 0 0.4 0.4 {}
-T {10uA} 970 -280 0 0 0.4 0.4 {}
+T {10uA} 960 -280 0 0 0.4 0.4 {}
 T {10uA} 1170 -280 0 0 0.4 0.4 {}
+T {m=2} 600 -420 0 0 0.4 0.4 {}
+T {m=32} 1100 -410 0 0 0.4 0.4 {}
 N 380 -300 380 -280 {
 lab=GND}
 N 380 -340 380 -300 {
@@ -154,14 +155,14 @@ descr="annotate OP"
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
 C {lab_pin.sym} 380 -1040 0 0 {name=p2 sig_type=std_logic lab=v_dd}
-C {sg13g2_pr/pnpMPA.sym} 580 -370 0 1 {name=Q1
+C {sg13g2_pr/pnpMPA.sym} 580 -370 0 1 {name=Q1[1..2]
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
 l=2.0e-6
 m=1
 }
-C {sg13g2_pr/pnpMPA.sym} 980 -370 0 0 {name=Q2[1..8]
+C {sg13g2_pr/pnpMPA.sym} 980 -370 0 0 {name=Q2[1..32]
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
@@ -176,7 +177,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/pnpMPA.sym} 1180 -370 0 0 {name=Q3[1..8]
+C {sg13g2_pr/pnpMPA.sym} 1180 -370 0 0 {name=Q3[1..32]
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
@@ -274,7 +275,7 @@ model=sg13_lv_pmos
 spiceprefix=X
 }
 C {ammeter.sym} 760 -710 0 0 {name=Vmeas2 savecurrent=true spice_ignore=0}
-C {bandgap_simple_res-5k.sym} 1000 -440 0 1 {name=xr1}
+C {bandgap_simple_res-6k.sym} 1000 -440 0 1 {name=xr1}
 C {bandgap_simple_res-10k.sym} 560 -720 0 1 {name=xr4}
 C {bandgap_simple_res-10k.sym} 1000 -760 0 0 {name=xr3}
 C {bandgap_simple_res-37k5.sym} 1200 -440 0 0 {name=xr2}

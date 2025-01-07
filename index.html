@@ -3973,7 +3973,7 @@ Figure&nbsp;50: Reference voltage from simulated bandgap circuit.
 <section id="sec-banba-bandgap" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="sec-banba-bandgap"><span class="header-section-number">11.2</span> Banba Bandgap Reference</h2>
 <p>The Banba reference <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> is quite a bit trickier to design than the classical bandgap shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;48</a>. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;8</a>. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.</p>
-<p>A first design has been implemented and is shown in <a href="#fig-bandgap-banba-schematic" class="quarto-xref">Figure&nbsp;51</a>. The supply voltage (which could be lower than <span class="math inline">\(1.5\,\text{V}\)</span>) is limited by our OTA design; however, it works well at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>. The simulated reference voltage (which is scaled to roughly <span class="math inline">\(V_\mathrm{bandgap} / 2\)</span>) is shown in <a href="#fig-bandgap-banba-sim-result" class="quarto-xref">Figure&nbsp;52</a>.</p>
+<p>A first design has been implemented and is shown in <a href="#fig-bandgap-banba-schematic" class="quarto-xref">Figure&nbsp;51</a>, and the testbench is shown in <a href="#fig-bandgap-banba-tb" class="quarto-xref">Figure&nbsp;52</a>. The supply voltage (which could be lower than <span class="math inline">\(1.5\,\text{V}\)</span>) is limited by our OTA design; however, it works well at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>. The simulated reference voltage (which is scaled to roughly <span class="math inline">\(V_\mathrm{bandgap} / 2\)</span>) is shown in <a href="#fig-bandgap-banba-sim-result" class="quarto-xref">Figure&nbsp;53</a>.</p>
 <div id="fig-bandgap-banba-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-banba-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3988,15 +3988,25 @@ Figure&nbsp;51: Banba bandgap reference circuit in Xschem.
 <p>The CTAT and PTAT currents required for compensating each others TC’s are built using a <span class="math inline">\(\Delta V_\mathrm{BE}\)</span> cell (given the PTAT current) with parallel resistors (providing the CTAT current). Voltages are sensed using an error amplifier and current sources are controlled to achieve matching currents in both branches. This current can then also be mirrored to flow through another resistor which can be scaled to produce the output voltage.</p>
 <p>In comparison to the classical bandgap reference shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;48</a> (where the developed currents in all branches are PTAT) the currents developed in the Banba reference are constant vs.&nbsp;temperature.</p>
 <p>The minimum supply voltage for the Banba reference is the <span class="math inline">\(V_\mathrm{BE}\)</span> of the PNP plus the saturation voltage of one MOSFET current source, so ca. <span class="math inline">\(V_\mathrm{DDmin} \ge 0.8\,\text{V} + 0.2\,\text{V} \approx 1\,\text{V}\)</span>. Of course we also need to design an OTA which can work at this low supply.</p>
+<div id="fig-bandgap-banba-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bandgap-banba-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="./xschem/bandgap_banba_tb.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-100" title="Figure&nbsp;52: Banba bandgap testbench Xschem."><img src="./xschem/bandgap_banba_tb.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-banba-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;52: Banba bandgap testbench Xschem.
+</figcaption>
+</figure>
+</div>
 <div id="cell-fig-bandgap-banba-sim-result" class="cell" data-execution_count="38">
 <div class="cell-output cell-output-display">
 <div id="fig-bandgap-banba-sim-result" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-banba-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-100" title="Figure&nbsp;52: Reference voltage from simulated Banba bandgap circuit."><img src="index_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" width="614" height="429" class="figure-img"></a>
+<a href="index_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-101" title="Figure&nbsp;53: Reference voltage from simulated Banba bandgap circuit."><img src="index_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" width="614" height="429" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-banba-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;52: Reference voltage from simulated Banba bandgap circuit.
+Figure&nbsp;53: Reference voltage from simulated Banba bandgap circuit.
 </figcaption>
 </figure>
 </div>
@@ -4022,16 +4032,16 @@ Exercise: Improved Low-Voltage Bandagap
 <section id="sec-differential-ota" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Differential OTAs</h1>
 <p>So far, we have discussed the implementation of OTAs with a differential input and a single-ended output. Often, in integrated circuits, we want to implement fully differential signal chains, as this allows an almost-rail-to-rail swing around a common-mode voltage. Further, noise pickup due to limited power-supply rejection ratio (PSRR) or coupling into the differential signal routing can be suppressed by designing amplifiers with high common-mode rejection ratio (CMRR).</p>
-<p>The OTA presented in <a href="#sec-ota-variants-single-ended" class="quarto-xref">Section&nbsp;8.7</a> can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;53</a>.</p>
+<p>The OTA presented in <a href="#sec-ota-variants-single-ended" class="quarto-xref">Section&nbsp;8.7</a> can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;54</a>.</p>
 <div id="cell-fig-diff-ota-resload" class="cell" data-execution_count="39">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-resload" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-resload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-diff-ota-resload-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-101" title="Figure&nbsp;53: Differential two-stage OTA with resistive load."><img src="index_files/figure-html/fig-diff-ota-resload-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-diff-ota-resload-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-102" title="Figure&nbsp;54: Differential two-stage OTA with resistive load."><img src="index_files/figure-html/fig-diff-ota-resload-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-resload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;53: Differential two-stage OTA with resistive load.
+Figure&nbsp;54: Differential two-stage OTA with resistive load.
 </figcaption>
 </figure>
 </div>
@@ -4042,38 +4052,38 @@ Figure&nbsp;53: Differential two-stage OTA with resistive load.
 <p>For pure differential operation, the mid-point <span class="math inline">\(X\)</span> of <span class="math inline">\(R_{1,2}\)</span> acts as a virtual ground. The bias voltage <span class="math inline">\(V_\mathrm{GS3,5}\)</span> is thus not changed (it is set only by the common-mode operation) and thus <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_5\)</span> operate as current sources. The differential load impedance is high and is given by <span class="math inline">\(R_\mathrm{load} = (R_1 + R_2) \parallel (g_\mathrm{ds3}^{-1} + g_\mathrm{ds5}^{-1})\)</span>.</p>
 <p>In addition, we realize that <span class="math inline">\(V_\mathrm{GS4} = V_\mathrm{GS3} = V_\mathrm{GS5} = V_\mathrm{GS6}\)</span> for common-mode operation, hence the quiescent current of <span class="math inline">\(M_{4,6}\)</span> is set in a current-mirror-like fashion by the diode-connected <span class="math inline">\(M_{3,5}\)</span>.</p>
 <p>For differential operation, the differential pair of <span class="math inline">\(M_{1,2}\)</span> is loaded by <span class="math inline">\(R_\mathrm{load}\)</span> and provides fairly high gain. The second gain stage is formed by current-source-loaded common-source stages <span class="math inline">\(M_{4,6}\)</span> and provides additional gain (of course, this is a function of the load impedance).</p>
-<p>As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;53</a> we have a low-frequency pole at the drains of <span class="math inline">\(M_{1,3}\)</span> and <span class="math inline">\(M_{2,5}\)</span> and a further low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into <em>Miller compensation</em>.</p>
+<p>As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;54</a> we have a low-frequency pole at the drains of <span class="math inline">\(M_{1,3}\)</span> and <span class="math inline">\(M_{2,5}\)</span> and a further low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into <em>Miller compensation</em>.</p>
 <p>Of course, loop gain analysis of differential OTAs can and should be carried out. An exemplary testbench where the loop gain is simulated with Rosenstark’s, Middlebrook’s, and Tian’s method can be found <a href="xschem/ota-differential_tb-loopgain.sch">here</a>. Note that there is no underlying circuit right now and it should only show how it could be done.</p>
 <section id="miller-compensation" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="miller-compensation"><span class="header-section-number">12.1</span> Miller Compensation</h2>
 <p>A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies, that we have enough <a href="https://en.wikipedia.org/wiki/Phase_margin">phase margin</a> in the closed-loop system. We may strive for <span class="math inline">\(60^\circ\)</span> as this will only cause a minor peaking in the frequency response <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span>.</p>
 <p>The question now is where to implement this dominant pole. In order to create a low-frequency pole we need a high-impedance point and a large capacitance. Placing just a large capacitor is unwelcome, as this causes large area consumption on chip.</p>
-<p>Luckily, we know from the analysis in <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16.1</a> that we can use voltage gain to increase the apparent value of a capacitor by feedback. Inspecting our circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;53</a> we see that we have voltage gain from node <span class="math inline">\(A\)</span> to node <span class="math inline">\(B\)</span> and node <span class="math inline">\(A'\)</span> and <span class="math inline">\(B'\)</span>, respectively. This means we have an opportunity to strap a capacitor between those nodes, and create a dominant pole at node <span class="math inline">\(A\)</span> (and <span class="math inline">\(A'\)</span>).</p>
-<p>We can now add these so-called “Miller capacitors” to our circuit. The result is shown in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;54</a>. (We have also added resistors in series with the capacitors; we ignore these resistors for the time being).</p>
+<p>Luckily, we know from the analysis in <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;16.1</a> that we can use voltage gain to increase the apparent value of a capacitor by feedback. Inspecting our circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;54</a> we see that we have voltage gain from node <span class="math inline">\(A\)</span> to node <span class="math inline">\(B\)</span> and node <span class="math inline">\(A'\)</span> and <span class="math inline">\(B'\)</span>, respectively. This means we have an opportunity to strap a capacitor between those nodes, and create a dominant pole at node <span class="math inline">\(A\)</span> (and <span class="math inline">\(A'\)</span>).</p>
+<p>We can now add these so-called “Miller capacitors” to our circuit. The result is shown in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;55</a>. (We have also added resistors in series with the capacitors; we ignore these resistors for the time being).</p>
 <div id="cell-fig-diff-ota-resload-miller" class="cell" data-execution_count="40">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-resload-miller" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-resload-miller-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-102" title="Figure&nbsp;54: Differential two-stage OTA with resistive load and Miller compensation."><img src="index_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-103" title="Figure&nbsp;55: Differential two-stage OTA with resistive load and Miller compensation."><img src="index_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-resload-miller-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;54: Differential two-stage OTA with resistive load and Miller compensation.
+Figure&nbsp;55: Differential two-stage OTA with resistive load and Miller compensation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>It is instructive to look at the small-signal equivalent circuit of the common-source stage <span class="math inline">\(M_4\)</span> loaded by current-source <span class="math inline">\(M_7\)</span>. The resulting model is shown in <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;55</a> (we are ignoring the bulk effect of <span class="math inline">\(M_4\)</span>, and lump components of <span class="math inline">\(M_{4,7}\)</span> into the input and the output impedances formed by <span class="math inline">\(C_\mathrm{L}\)</span>, <span class="math inline">\(C_\mathrm{in}\)</span>, <span class="math inline">\(g_\mathrm{in}\)</span> and <span class="math inline">\(g_\mathrm{out}\)</span>).</p>
+<p>It is instructive to look at the small-signal equivalent circuit of the common-source stage <span class="math inline">\(M_4\)</span> loaded by current-source <span class="math inline">\(M_7\)</span>. The resulting model is shown in <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;56</a> (we are ignoring the bulk effect of <span class="math inline">\(M_4\)</span>, and lump components of <span class="math inline">\(M_{4,7}\)</span> into the input and the output impedances formed by <span class="math inline">\(C_\mathrm{L}\)</span>, <span class="math inline">\(C_\mathrm{in}\)</span>, <span class="math inline">\(g_\mathrm{in}\)</span> and <span class="math inline">\(g_\mathrm{out}\)</span>).</p>
 <div id="cell-fig-miller-comp-model" class="cell" data-execution_count="41">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-comp-model" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-comp-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-comp-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-103" title="Figure&nbsp;55: Small-signal model of common-source stage with Miller compensation."><img src="index_files/figure-html/fig-miller-comp-model-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-comp-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-104" title="Figure&nbsp;56: Small-signal model of common-source stage with Miller compensation."><img src="index_files/figure-html/fig-miller-comp-model-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-comp-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;55: Small-signal model of common-source stage with Miller compensation.
+Figure&nbsp;56: Small-signal model of common-source stage with Miller compensation.
 </figcaption>
 </figure>
 </div>
@@ -4123,7 +4133,7 @@ s_\mathrm{z} = +\frac{g_\mathrm{m}}{C_\mathrm{m}}
 \tag{42}\]</span></span></p>
 <p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are loosing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
 <p>A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift.</p>
-<p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;54</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;55</a>). Doing this we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
+<p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;55</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;56</a>). Doing this we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
 <p>Repeating the calculation of the transfer function <span class="math inline">\(V_\mathrm{out} / I_\mathrm{in}\)</span> including <span class="math inline">\(R_\mathrm{m}\)</span> we see that the zero location is changed and can be calculated as (the pole locations are also slightly changed due to the addition of <span class="math inline">\(R_\mathrm{m}\)</span>, but we will not discuss the resulting equations here)</p>
 <p><span id="eq-miller-zero-comp"><span class="math display">\[
 s_\mathrm{z} = \frac{g_\mathrm{m}}{C_\mathrm{m} (1 - g_\mathrm{m}R_\mathrm{m})}
@@ -4157,16 +4167,16 @@ Feedback
 </section>
 <section id="sec-middlebrook-method" class="level1" data-number="15">
 <h1 data-number="15"><span class="header-section-number">15</span> Appendix: Middlebrook’s Method</h1>
-<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;56</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;57</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
+<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;57</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;58</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
 <div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="42">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-104" title="Figure&nbsp;56: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="Figure&nbsp;57: Middlebrook voltage loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;56: Middlebrook voltage loop gain simulation.
+Figure&nbsp;57: Middlebrook voltage loop gain simulation.
 </figcaption>
 </figure>
 </div>
@@ -4177,10 +4187,10 @@ Figure&nbsp;56: Middlebrook voltage loop gain simulation.
 <div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="Figure&nbsp;57: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-106" title="Figure&nbsp;58: Middlebrook current loop gain simulation."><img src="index_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;57: Middlebrook current loop gain simulation.
+Figure&nbsp;58: Middlebrook current loop gain simulation.
 </figcaption>
 </figure>
 </div>
@@ -4201,16 +4211,16 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \
 <h1 data-number="16"><span class="header-section-number">16</span> Appendix: Useful Circuit Theorems</h1>
 <section id="sec-miller-theorem" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">16.1</span> Miller’s Theorem</h2>
-<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;58</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;59</a>.</p>
+<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;59</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;60</a>.</p>
 <div id="cell-fig-miller-theorem" class="cell" data-execution_count="44">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-106" title="Figure&nbsp;58: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-107" title="Figure&nbsp;59: An impedance connected between two nodes A and B."><img src="index_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;58: An impedance connected between two nodes A and B.
+Figure&nbsp;59: An impedance connected between two nodes A and B.
 </figcaption>
 </figure>
 </div>
@@ -4221,10 +4231,10 @@ Figure&nbsp;58: An impedance connected between two nodes A and B.
 <div id="fig-miller-theorem-equivalent" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-107" title="Figure&nbsp;59: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-108" title="Figure&nbsp;60: An equivalent circuit using Miller’s theorem."><img src="index_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;59: An equivalent circuit using Miller’s theorem.
+Figure&nbsp;60: An equivalent circuit using Miller’s theorem.
 </figcaption>
 </figure>
 </div>
@@ -4256,10 +4266,10 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 <div id="fig-basic-ota-small-signal-zout" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-108" title="Figure&nbsp;60: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
+<a href="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-109" title="Figure&nbsp;61: 5-transistor OTA small-signal model for output impedance calculations."><img src="index_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;60: 5-transistor OTA small-signal model for output impedance calculations.
+Figure&nbsp;61: 5-transistor OTA small-signal model for output impedance calculations.
 </figcaption>
 </figure>
 </div>
