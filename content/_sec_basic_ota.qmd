@@ -312,7 +312,7 @@ Being a single-stage amplifier stability is usually not an issue, as only the ou
 
 {{< include ./figures/_fig_ota_se_r2r.qmd >}}
 
-Another popular version is shown in @fig-ota-se-twostage. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation (in @fig-ota-se-twostage a very simplistic Miller-compensation using $C_\mathrm{M}$ is shown; often, we would want to implement a more advanced scheme). An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from $\VDD$ of one $\VGS$ ($\VGS[3]$ on the left side, $\VGS[5]$ on the right side).
+Another popular version is shown in @fig-ota-se-twostage. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. @fig-ota-se-twostage shows a very simplistic Miller-compensation using $C_\mathrm{M}$. Often, we would want to implement a more advanced scheme. Some examples can be found in [@Baker_compensating_OPAMP]. An interesting technique is the indirect compensation with cascoded input differential pairs (see @fig-improved-ota) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from $\VDD$ of one $\VGS$ ($\VGS[3]$ on the left side, $\VGS[5]$ on the right side).
 
 {{< include ./figures/_fig_ota_se_twostage.qmd >}}
 
@@ -326,4 +326,4 @@ $$
 V_\mathrm{out} \approx V_\mathrm{ref} \left( 1 + \frac{R_1}{R_2} \right)
 $$
 
-if the gain of the OTA is sufficiently high. The quiescent current through $R_{1,2}$ established a minimum load current for the LDO, which is often a good thing for stability. More information on LDOs can be found in [@Razavi_2019_ldo].
+if the gain of the OTA is sufficiently high. The quiescent current through $R_{1,2}$ establishes a minimum load current for the LDO, which is often good for stability. More information on LDOs can be found in [@Razavi_2019_ldo].
