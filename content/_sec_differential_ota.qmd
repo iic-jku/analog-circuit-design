@@ -52,7 +52,7 @@ It is instructive to look at the small-signal equivalent circuit of the common-s
 
 {{< include ./figures/_fig_miller_comp_model.qmd >}}
 
-In order to analyse the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through $C_\mathrm{m}$ (we set $R_\mathrm{m}=0$ for now):
+In order to analyze the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through $C_\mathrm{m}$ (we set $R_\mathrm{m}=0$ for now):
 
 $$
 I_\mathrm{in} + I_\mathrm{m} - V_\mathrm{gs} (s C_\mathrm{in} + g_\mathrm{in}) = 0
@@ -128,3 +128,23 @@ If we do not use the resistor (i.e., $R_\mathrm{m}=0$) then @eq-miller-zero-comp
 $$
 R_\mathrm{m} > \frac{2}{\gm}.
 $$
+
+## Common-Mode Regulation
+
+In fully-differential (i.e., differential inputs and outputs) OTAs we have a new issue concerning common-mode voltage control: Depending on the feedback network around the OTA we might or might not have a defined dc operating point (common-mode wise). Think of the following scenario: If implement an integrator with an OTA then the feedback network from output to input consists of a capacitor. This means that the output of the OTA is loaded very high ohmic, and any small current mismatch between $M_4$/$M_7$ or $M_6$/$M_8$ (see @fig-diff-ota-resload-miller) will cause a strong deviation of the dc operating point at the output!
+
+We can not accept that the dc operating points in a circuit are ill defined. We thus need a way to establish the dc operating point. Using the diode-resistive load for the differential pair in @fig-diff-ota-resload-miller the dc operating point there is well-defined by the diode-connected $M_{3,5}$. However, the output stage is different, and we need to add circuitry to also control the dc operating point there.
+
+One well-known way is to sense the common-mode voltage using two resistors (similar to $R_{1,2}$ in @fig-diff-ota-resload-miller), and compare this measured common-mode voltage to a reference voltage using an error amplifier. Then the output of the error amplifier controls the common-mode voltage, e.g., by driving the gates of $M_{7,8}$ in @fig-diff-ota-resload-miller.
+
+::: {.callout-important title="Differential and Common-Mode Loops"}
+When using an error amplifier to regulate a common-mode point keep in mind that you need to check the differential and common-mode stability of these various loops! This can lead to tricky situations, especially under large-signal excitation where the common-mode sensing might not work as expected!
+
+In order to get a differential circuit stable one often has to make the common-mode loop faster than the differential loops. So simple, high-speed error amplifiers are an advantage. 
+
+In summary, stability investigations are critically important for differential circuits, and never forget to check for common-mode stability as well!
+:::
+
+Instead of a common-mode regulation loop (and all its complications regarding stability) often a common-mode setting is sufficient (after all, a somewhat imprecise setting of the dc points is good enough). A common-mode setting has the advantage that no error amplifier is required. We will also use this approach of a common-mode loop setting in the adapted differential OTA shown in @fig-diff-ota-resload-miller-cm.
+
+{{< include ./figures/_fig_ota_diff_twostage_miller_cm.qmd >}}

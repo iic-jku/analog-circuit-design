@@ -1,0 +1,127 @@
+::: {.content-hidden}
+Copyright (C) 2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-diff-ota-resload-miller-cm
+#| echo: false
+#| fig-cap: "Differential two-stage OTA with resistive load, Miller compensation and output common-mode control."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$M_1$', ofst=-1.5).reverse()
+    elm.Line().down().length(0.5)
+    elm.Line().right().length(2).dot()
+    d.push()
+
+    elm.Line().down().length(1.5)
+    M10 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_{10}$', ofst=-1.5).reverse()
+    elm.Ground()
+    elm.Line().left().length(0.5).at(M10.gate)
+    elm.Line().up().length(1).dot()
+    pos3 = d.here
+    elm.Line().left().length(7.5)
+    d.push()
+    elm.Line().down().length(1)
+    elm.Line().left().length(0.5)
+    M9 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).label('$M_9$')
+    elm.Ground()
+    elm.Line().up().length(6).at(M9.drain)
+    Ibias = elm.SourceI().up().label(r'$I_\mathrm{bias}$').reverse()
+    elm.Vdd()
+    d.pop()
+    elm.Line().left().tox(M9.drain).idot().dot()
+
+    d.pop()
+    elm.Line().right().length(2)
+    elm.Line().up().length(0.5)
+    M2 = elm.AnalogNFet(offset_gate=False).anchor('source').theta(0).label('$M_2$')
+    
+    elm.Line().left().at(M1.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left')
+    elm.Line().right().at(M2.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right')
+    
+    elm.Line().up().at(M1.drain).length(2).dot()
+    pos1 = d.here
+    elm.Line().up().length(0.5)
+    M3 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_3$')
+    elm.Vdd().at(M3.source)
+
+    elm.Line().up().at(M2.drain).length(2).dot()
+    pos2 = d.here
+    elm.Line().up().length(0.5)
+    M5 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_5$',ofst=-1.5).reverse()
+    elm.Vdd().at(M5.source)
+
+    d.here = pos1
+    elm.Line().left().length(3.5).label('$A$')
+    M4 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).label('$M_4$')
+    elm.Line().at(M4.source).up().toy(M3.source)
+    elm.Vdd()
+
+    d.here = pos2
+    elm.Line().right().length(3.5).label("$A'$")
+    M6 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).label('$M_6$', ofst=-1.5).reverse()
+    elm.Line().at(M6.source).up().toy(M5.source)
+    elm.Vdd()
+
+    elm.Line().at(M4.drain).down().length(0.5)
+    #elm.Dot().label('$B$','right')
+    elm.Dot()
+    d.push()
+    d.push()
+    elm.Line().left().length(1).dot(open=True).label(r'$V_\mathrm{out,p}$', 'left')
+    d.pop()
+    elm.Capacitor().right().label(r'$C_\mathrm{m1}$')
+    elm.Resistor().right().label(r'$R_\mathrm{m1}$').tox(M3.drain).dot()
+    d.pop()
+    elm.Line().down().toy(M10.drain)
+    M7 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_7$', ofst=-1.5).reverse()
+    elm.Ground().at(M7.source)
+    elm.Line().at(M7.gate).left().length(0.5)
+    elm.Line().up().length(1).dot()
+
+    elm.Line().at(M6.drain).down().length(0.5)
+    #elm.Dot().label("$B'$", 'left')
+    elm.Dot()
+    d.push()
+    d.push()
+    elm.Line().right().length(1).dot(open=True).label(r'$V_\mathrm{out,n}$', 'right')
+    d.pop()
+    elm.Capacitor().left().label(r'$C_\mathrm{m2}$')
+    elm.Resistor().left().label(r'$R_\mathrm{m2}$').tox(M5.drain).dot()
+    d.pop()
+    elm.Line().down().toy(M7.drain)
+    M8 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_8$', ofst=-1.5).reverse()
+    elm.Ground().at(M8.source)
+    elm.Line().at(M8.gate).left().length(0.5)
+    elm.Line().up().length(1)
+    elm.Line().left().length(6.5)
+
+    d.here = pos1
+    R1 = elm.Resistor().right().label('$R_1$').dot()
+    d.push()
+    R2 = elm.Resistor().right().label('$R_2$')
+    d.pop()
+    elm.Line().up().toy(M3.gate)
+    elm.Dot().label('$X$')
+    d.push()
+    elm.Line().left().to(M3.gate)
+    d.pop()
+    elm.Line().right().to(M5.gate)
+```
