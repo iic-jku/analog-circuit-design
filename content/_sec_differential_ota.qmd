@@ -148,3 +148,13 @@ In summary, stability investigations are critically important for differential c
 Instead of a common-mode regulation loop (and all its complications regarding stability) often a common-mode setting is sufficient (after all, a somewhat imprecise setting of the dc points is good enough). A common-mode setting has the advantage that no error amplifier is required. We will also use this approach of a common-mode loop setting in the adapted differential OTA shown in @fig-diff-ota-resload-miller-cm.
 
 {{< include ./figures/_fig_ota_diff_twostage_miller_cm.qmd >}}
+
+Resistors $R_{3,4}$ sense the output voltages and create a replica of the common-mode point (assuming $R_3 = R_4$). This common-mode point is connected to the gates of $M_{7,8}$ to essentially connect $M_{7,8}$ like a diode (only for common-mode operation); in differential mode, $M_7$ and $M_8$ act as current source, like the load of the differential pair $M_{3,5}$. However, since we want to set the common-mode voltage at the output independently from $\VGS[7,8]$ we also pull a current through $R_{3,4}$ to cause $\VDS[7,8] \neq \VGS[7,8]$; essentially, this is a diode connection including a voltage shift! The output common-mode voltage is then given by
+
+$$
+V_\mathrm{out,cm} = \VGS[7,8] + \frac{R_{3,4} \ID[11]}{2}.
+$$
+
+::: {.callout-warning title="Modify Bias Points with Currents"}
+Keep the technique shown in @fig-diff-ota-resload-miller-cm (using $R_{3,4}$ and $M_{11}$) in mind: You can always modify a bias point by injecting a dc current into a node, or by pulling a dc current out of a node (or do both to increase or lower the quiescent current through a resistor or transistor)! Since we likely have already current mirrors in the circuit it is usually a minor effort adding MOSFETs to create these bias currents.
+:::

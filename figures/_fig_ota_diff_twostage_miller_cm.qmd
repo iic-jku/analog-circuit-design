@@ -27,14 +27,14 @@ with sd.Drawing(canvas='svg') as d:
     
     M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$M_1$', ofst=-1.5).reverse()
     elm.Line().down().length(0.5)
-    elm.Line().right().length(2).dot()
+    elm.Line().right().length(0.5).dot()
     d.push()
 
-    elm.Line().down().length(1.5)
+    elm.Line().down().length(4.5)
     M10 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_{10}$', ofst=-1.5).reverse()
     elm.Ground()
     elm.Line().left().length(0.5).at(M10.gate)
-    elm.Line().up().length(1).dot()
+    elm.Line().up().length(1)
     pos3 = d.here
     elm.Line().left().length(7.5)
     d.push()
@@ -42,14 +42,14 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().left().length(0.5)
     M9 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).label('$M_9$')
     elm.Ground()
-    elm.Line().up().length(6).at(M9.drain)
+    elm.Line().up().length(8.5).at(M9.drain)
     Ibias = elm.SourceI().up().label(r'$I_\mathrm{bias}$').reverse()
     elm.Vdd()
     d.pop()
     elm.Line().left().tox(M9.drain).idot().dot()
 
     d.pop()
-    elm.Line().right().length(2)
+    elm.Line().right().length(3.5)
     elm.Line().up().length(0.5)
     M2 = elm.AnalogNFet(offset_gate=False).anchor('source').theta(0).label('$M_2$')
     
@@ -90,14 +90,11 @@ with sd.Drawing(canvas='svg') as d:
     elm.Capacitor().right().label(r'$C_\mathrm{m1}$')
     elm.Resistor().right().label(r'$R_\mathrm{m1}$').tox(M3.drain).dot()
     d.pop()
-    elm.Line().down().toy(M10.drain)
-    M7 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_7$', ofst=-1.5).reverse()
+    elm.Line().down().length(4.5)
+    M7 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_7$')
     elm.Ground().at(M7.source)
-    elm.Line().at(M7.gate).left().length(0.5)
-    elm.Line().up().length(1).dot()
 
     elm.Line().at(M6.drain).down().length(0.5)
-    #elm.Dot().label("$B'$", 'left')
     elm.Dot()
     d.push()
     d.push()
@@ -109,9 +106,10 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().down().toy(M7.drain)
     M8 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_8$', ofst=-1.5).reverse()
     elm.Ground().at(M8.source)
-    elm.Line().at(M8.gate).left().length(0.5)
-    elm.Line().up().length(1)
-    elm.Line().left().length(6.5)
+    elm.Line().at(M8.gate).left().tox(M2.source)
+    elm.Line().left().length(0.5).dot()
+    pos4 = d.here
+    elm.Line().at(M8.gate).left().tox(M7.gate)
 
     d.here = pos1
     R1 = elm.Resistor().right().label('$R_1$').dot()
@@ -124,4 +122,19 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().left().to(M3.gate)
     d.pop()
     elm.Line().right().to(M5.gate)
+
+    elm.Line().up().length(0.5).at(M7.drain)
+    elm.Resistor().right().tox(pos4).idot().dot().label('$R_3$')
+    d.push()
+    elm.Line().down().toy(M7.gate)
+    pos5 = d.here
+    d.pop()
+    elm.Resistor().right().tox(M8.drain).dot().label('$R_4$')
+
+    elm.Line().down().at(pos5).toy(M10.drain)
+    M11 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_{11}$', ofst=-1.5).reverse()
+    elm.Ground()
+    elm.Line().left().length(0.5).at(M11.gate)
+    elm.Line().up().length(1)
+    elm.Line().left().length(3).dot()
 ```
