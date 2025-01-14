@@ -1,5 +1,4 @@
-v {xschem version=3.4.5 file_version=1.2
-}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -89,10 +88,6 @@ C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0
 C {devices/launcher.sym} 500 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
-}
-C {devices/launcher.sym} 740 -160 0 0 {name=h3
-descr="annotate OP" 
-tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
 C {lab_pin.sym} 520 -380 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {ota-5t.sym} 1050 -630 0 0 {name=xota}
