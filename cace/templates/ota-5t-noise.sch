@@ -1,5 +1,4 @@
-v {xschem version=3.4.5 file_version=1.2
-}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -96,4 +95,4 @@ C {spice_probe.sym} 1080 -600 0 0 {name=p5 attrs=""}
 C {spice_probe.sym} 1440 -570 0 0 {name=p6 attrs=""}
 C {spice_probe.sym} 1350 -410 0 0 {name=p7 attrs=""}
 C {lab_wire.sym} 1350 -470 0 0 {name=p8 sig_type=std_logic lab=v_ena}
-C {/foss/designs/xschem/ota-5t.sym} 1310 -570 0 0 {name=x1}
+C {ota-5t.sym} 1310 -570 0 0 {name=x1}
