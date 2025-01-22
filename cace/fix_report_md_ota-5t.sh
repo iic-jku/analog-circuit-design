@@ -5,7 +5,7 @@ TMP_FILE="${FILE}.tmp"
 
 # Check if the file exists
 if [[ ! -f "$FILE" ]]; then
-  echo "Error: File $FILE not found."
+  echo "[ERROR] File $FILE not found."
   exit 1
 fi
 
