@@ -11,7 +11,7 @@ fi
 
 cp "$FILE" "$TMP_FILE"
 # Fix paths for Quarto rendering
-#sed 's#/ota#/cace/_docs/ota#g' "$TMP_FILE" > "$FILE"
+sed 's#/ota#/cace/_docs/ota#g' "$TMP_FILE" > "$FILE"
 cp "$FILE" "$TMP_FILE"
 
 # Suppress numbering and listing of headings
