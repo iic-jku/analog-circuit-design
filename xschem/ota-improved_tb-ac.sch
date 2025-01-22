@@ -1,5 +1,4 @@
-v {xschem version=3.4.5 file_version=1.2
-}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -87,7 +86,7 @@ print dcgain
 print fbw
 print gainerror
 
-noise v(v_out) Vin dec 101 1k 100MEG
+noise v(v_out) Vin dec 101 1k 100MEG 1000
 print onoise_total
 
 .endc
