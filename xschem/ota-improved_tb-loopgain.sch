@@ -116,7 +116,7 @@ N 1860 -700 2100 -700 {lab=v_ss}
 N 1860 -800 1860 -780 {lab=vmeas2}
 N 1860 -800 1900 -800 {lab=vmeas2}
 N 1860 -840 1860 -800 {lab=vmeas2}
-C {devices/code_shown.sym} 20 -150 0 0 {name=MODEL only_toplevel=true
+C {devices/code_shown.sym} 0 -180 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib cornerMOSlv.lib mos_tt
 "}
@@ -233,7 +233,11 @@ C {isource.sym} 1860 -750 2 1 {name=Itest2 value="dc 0 ac 1"}
 C {devices/vsource.sym} 1930 -840 3 0 {name=Vtest3 value="dc 0 ac 0"}
 C {lab_wire.sym} 1900 -800 2 0 {name=p25 sig_type=std_logic lab=vmeas2}
 C {ammeter.sym} 2030 -840 1 0 {name=Vimeas2 savecurrent=true spice_ignore=0}
-C {/foss/designs/analog-circuit-design/xschem/ota-improved.sym} 1340 -400 0 0 {name=x1}
-C {/foss/designs/analog-circuit-design/xschem/ota-improved.sym} 2100 -400 0 0 {name=x2}
-C {/foss/designs/analog-circuit-design/xschem/ota-improved.sym} 1340 -960 0 0 {name=x3}
-C {/foss/designs/analog-circuit-design/xschem/ota-improved.sym} 2100 -960 0 0 {name=x4}
+C {ota-improved.sym} 1340 -400 0 0 {name=x1}
+C {ota-improved.sym} 2100 -400 0 0 {name=x2}
+C {ota-improved.sym} 1340 -960 0 0 {name=x3}
+C {ota-improved.sym} 2100 -960 0 0 {name=x4}
+C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL2 only_toplevel=true
+format="tcleval( @value )"
+value=".lib cornerRES.lib res_typ
+"}
