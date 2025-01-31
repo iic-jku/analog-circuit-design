@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-01-14">
+<meta name="dcterms.date" content="2025-01-31">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -90,7 +90,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e1e378e796bdd1aa61cf7dc9c87af473.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2ecafa609d29e6b5df2c2179b389d5c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -129,10 +129,10 @@ window.Quarto = {
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
 <meta name="citation_author" content="Simon Dorrer">
-<meta name="citation_publication_date" content="2025-01-14">
-<meta name="citation_cover_date" content="2025-01-14">
+<meta name="citation_publication_date" content="2025-01-31">
+<meta name="citation_cover_date" content="2025-01-31">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-14">
+<meta name="citation_online_date" content="2025-01-31">
 <meta name="citation_fulltext_html_url" content="https://iic-jku.github.io/analog-circuit-design">
 <meta name="citation_doi" content="10.5281/zenodo.14387481">
 <meta name="citation_language" content="en-US">
@@ -205,7 +205,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 14, 2025</p>
+              <p class="date">January 31, 2025</p>
             </div>
           </div>
           
@@ -2522,10 +2522,10 @@ settling time = 0.056 µs</code></pre>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>sth_m34 <span class="op">=</span> lv_pmos.lookup(<span class="st">'STH_GM'</span>, VGS<span class="op">=</span>vgs_m34, L<span class="op">=</span>l_34, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>) <span class="op">*</span> gm_m34</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>gamma_m34 <span class="op">=</span> sth_m34<span class="op">/</span>(<span class="dv">4</span><span class="op">*</span><span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span><span class="op">*</span>gm_m34)</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>output_noise_rms <span class="op">=</span> <span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span> <span class="op">/</span> (c_load <span class="op">+</span> c_load_parasitic) <span class="op">*</span> (<span class="dv">2</span><span class="op">*</span>gamma_m12 <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>gamma_m34 <span class="op">*</span> gm_m34<span class="op">/</span>gm_m12)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output noise (rms) ='</span>, <span class="bu">round</span>(output_noise_rms<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">4</span>), <span class="st">'µV'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>output_noise_rms <span class="op">=</span> np.sqrt(<span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span> <span class="op">/</span> (c_load <span class="op">+</span> c_load_parasitic) <span class="op">*</span> (<span class="dv">2</span><span class="op">*</span>gamma_m12 <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>gamma_m34 <span class="op">*</span> gm_m34<span class="op">/</span>gm_m12))</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output noise ='</span>, <span class="bu">round</span>(output_noise_rms<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µVrms'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>output noise (rms) = 0.1254 µV</code></pre>
+<pre><code>output noise = 354.2 µVrms</code></pre>
 </div>
 </div>
 <div id="cell-11" class="cell" data-execution_count="11">
@@ -2567,7 +2567,7 @@ M6 W = 2.5 um</code></pre>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'5T-OTA performance summary:'</span>)</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---------------------------'</span>)</span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'supply current ='</span>, <span class="bu">round</span>(i_total<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µA'</span>)</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output noise ='</span>, <span class="bu">round</span>(output_noise_rms<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">4</span>), <span class="st">'µVrms'</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output noise ='</span>, <span class="bu">round</span>(output_noise_rms<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µVrms'</span>)</span>
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'voltage gain error ='</span>, <span class="bu">round</span>((gain_error<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span>, <span class="dv">1</span>), <span class="st">'%'</span>)</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-3dB bandwidth incl. parasitics ='</span>, <span class="bu">round</span>(f_bw<span class="op">/</span><span class="fl">1e6</span>, <span class="dv">2</span>), <span class="st">'MHz'</span>)</span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'turn-on time (slewing+settling) ='</span>, <span class="bu">round</span>((t_slew<span class="op">+</span>t_settle)<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'µs'</span>)</span>
@@ -2588,7 +2588,7 @@ M6   W= 2.5 , L= 5
 5T-OTA performance summary:
 ---------------------------
 supply current = 4.0 µA
-output noise = 0.1254 µVrms
+output noise = 354.2 µVrms
 voltage gain error = -1.8 %
 -3dB bandwidth incl. parasitics = 14.3 MHz
 turn-on time (slewing+settling) = 0.09 µs
@@ -4734,14 +4734,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-01-14},
+  date = {2025-01-31},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> January 14, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> January 31, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
