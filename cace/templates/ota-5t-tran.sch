@@ -66,7 +66,7 @@ value="
 .include CACE\{DUT_path\}
 .temp CACE\{temp\}
 .option SEED=CACE[CACE\{seed=12345\} + CACE\{iterations=0\}]
-.ic v(v_vout)=0
+.ic v(v_out)=0
 
 .control
 set num_threads=1

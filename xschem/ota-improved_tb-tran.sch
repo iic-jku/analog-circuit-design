@@ -64,7 +64,7 @@ lab=v_ena}
 C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.ic v(v_vout)=0
+.ic v(v_out)=0
 .control
 
 tran 0.005u 15u uic
