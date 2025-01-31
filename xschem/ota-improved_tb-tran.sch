@@ -1,5 +1,4 @@
-v {xschem version=3.4.5 file_version=1.2
-}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -64,9 +63,11 @@ lab=v_ena}
 C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.ic v(v_vout)=0
-.control
 
+.ic v(v_out)=0
+.option method=gear
+
+.control
 tran 0.005u 15u uic
 plot v_ena v_out
 
@@ -81,7 +82,7 @@ print tsettle
 "}
 C {devices/vsource.sym} 520 -330 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 520 -280 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 500 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
@@ -106,11 +107,9 @@ C {spice_probe.sym} 820 -660 0 0 {name=p5 attrs=""}
 C {spice_probe.sym} 1180 -630 0 0 {name=p6 attrs=""}
 C {spice_probe.sym} 1090 -470 0 0 {name=p7 attrs=""}
 C {lab_wire.sym} 1090 -530 0 0 {name=p8 sig_type=std_logic lab=v_ena}
-C {devices/code_shown.sym} 0 -110 0 0 {name=MODEL1 only_toplevel=true
+C {devices/code_shown.sym} 0 -170 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
-value=".lib cornerMOSlv.lib mos_tt
-"}
-C {devices/code_shown.sym} 0 -190 0 0 {name=MODEL2 only_toplevel=true
-format="tcleval( @value )"
-value=".lib cornerRES.lib res_typ
+value="
+.lib cornerMOSlv.lib mos_tt
+.lib cornerRES.lib res_typ
 "}
