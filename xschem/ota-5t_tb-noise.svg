@@ -162,7 +162,7 @@ text {font-family: Sans-Serif;}
 <text fill="#0044ee"  xml:space="preserve" font-size="6.39135" transform="translate(411.283, 357.134)" >GND</text>
 <text fill="#0044ee"  xml:space="preserve" font-size="10.5457" transform="translate(379.065, 291.385)" >v_ss</text>
 <text fill="#0044ee"  xml:space="preserve" font-size="8.62832" transform="translate(812.325, 130.334)" >v_out</text>
-<text fill="#0044ee"  xml:space="preserve" font-size="8.62832" transform="translate(487.466, 111.897)" >v_in</text>
+<text fill="#0044ee"  xml:space="preserve" font-size="8.62832" transform="translate(481.466, 111.897)" >v_cm</text>
 <text fill="#0044ee"  xml:space="preserve" font-size="8.62832" transform="translate(682.269, 191.789)" >v_ena</text>
 <text fill="#222222"  xml:space="preserve" font-size="9.58702" transform="translate(41.0151, 449.146)" >MODEL</text>
 <text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 464.51)" >.lib cornerMOSlv.lib mos_tt</text>
@@ -170,28 +170,28 @@ text {font-family: Sans-Serif;}
 <text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 76.0466)" >.temp 27</text>
 <text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 87.043)" >.control</text>
 <text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 98.0393)" >option sparse</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 109.036)" >save all</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 120.032)" >op</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 131.028)" >write ota-5t_tb-ac.raw</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 142.025)" >set appendwrite</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 164.017)" >ac dec 101 1k 100MEG</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 175.013)" >write ota-5t_tb-ac.raw</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 186.01)" >plot 20*log10(v_out)</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 208.002)" >meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 218.999)" >let f3db = dcgain/sqrt(2)</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 229.995)" >meas ac fbw WHEN vmag(v_out)=f3db FALL=1</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 240.991)" >let gainerror=(dcgain-1)/1</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 251.988)" >print dcgain</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 262.984)" >print fbw</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 273.98)" >print gainerror</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 295.973)" >noise v(v_out) Vin dec 101 1k 100MEG</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 306.969)" >print onoise_total</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 328.962)" >.endc</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 109.036)" >set filetype=ascii</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 120.032)" >save all</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 142.025)" >*op</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 153.021)" >*write ota-5t_tb-noise.raw</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 164.017)" >*set appendwrite</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 186.01)" >ac dec 101 1k 1G</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 197.006)" >*write ota-5t_tb-noise.raw</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 208.002)" >plot 20*log10(v_out)</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 229.995)" >noise v(v_out) Vin lin 1000 1MEG 1000MEG 1</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 240.991)" >print inoise_total</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 251.988)" >print onoise_total</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 273.98)" >setplot noise1</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 284.977)" >plot inoise_spectrum linplot</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 295.973)" >plot onoise_spectrum linplot</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 317.966)" >setplot noise2</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 328.962)" >write ota-5t_tb-noise.raw</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 350.955)" >.endc</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(369.801, 311.811)" >Vdd</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(369.801, 327.175)" >1.5</text>
-<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(280.691, 516.576)" >         ota-5t_tb-ac.sch</text>
-<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(280.691, 498.139)" >(c) 2024 H. Pretl, Apache-2.0 license</text>
-<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(625.115, 498.139)" >2024-12-07  18:54:20</text>
+<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(280.691, 516.576)" >         ota-5t_tb-noise.sch</text>
+<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(280.691, 498.139)" >(c) 2024-2025 H. Pretl, Apache-2.0 license</text>
+<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(625.115, 498.139)" >2025-01-31  16:11:10</text>
 <text fill="#222222"  xml:space="preserve" font-size="31.9567" transform="translate(139.344, 515.549)" >SCHEM</text>
 <text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(351.364, 426.111)" >simulate</text>
 <text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(498.857, 426.111)" >annotate OP</text>
@@ -211,12 +211,14 @@ text {font-family: Sans-Serif;}
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(846.079, 170.464)" >C1</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(846.079, 178.145)" >50f</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(846.079, 185.827)" >m=1</text>
-<text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(480.42, 182.755)" >Vin</text>
-<text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(480.42, 198.118)" >dc 0.8 ac 1</text>
+<text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(480.42, 182.755)" >Vcm</text>
+<text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(480.42, 198.118)" >dc 0.8</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(720.096, 40.6393)" >I0</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(720.096, 47.9702)" >20u</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(720.096, 250.355)" >Venable</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(720.096, 265.719)" >1.5</text>
+<text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(560.312, 145.881)" >Vin</text>
+<text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(560.312, 161.245)" >dc 0 ac 1</text>
 <path class="l4" d="M37.9423 452.732L80.961 452.732"/>
 <path class="l4" d="M37.9423 452.732L37.9423 465.023"/>
 <path class="l4" d="M37.9423 53.2725L80.961 53.2725"/>
@@ -269,6 +271,10 @@ text {font-family: Sans-Serif;}
 <path class="l4" d="M710.878 240.711L710.878 243.784"/>
 <path class="l4" d="M707.805 237.638L707.805 274.512"/>
 <circle class="l4" cx="707.805" cy="256.075" r="9.21829" style="fill:none;" />
+<path class="l4" d="M549.558 137.774L552.63 137.774"/>
+<path class="l4" d="M551.094 136.237L551.094 139.31"/>
+<path class="l4" d="M548.021 133.164L548.021 170.038"/>
+<circle class="l4" cx="548.021" cy="151.601" r="9.21829" style="fill:none;" />
 <path class="l5" d="M355.973 297.557L359.046 297.557L359.046 300.63L355.973 300.63L355.973 297.557z"/>
 <path class="l5" d="M355.973 334.43L359.046 334.43L359.046 337.503L355.973 337.503L355.973 334.43z"/>
 <path class="l5" d="M355.973 346.722L359.046 346.722L359.046 349.794L355.973 349.794L355.973 346.722z"/>
@@ -299,6 +305,8 @@ text {font-family: Sans-Serif;}
 <path class="l5" d="M762.827 132.876L763.403 132.876L763.403 133.452L762.827 133.452L762.827 132.876z"/>
 <path class="l5" d="M707.517 231.205L708.093 231.205L708.093 231.781L707.517 231.781L707.517 231.205z"/>
 <path class="l5" d="M707.037 193.851L708.573 193.851L708.573 195.388L707.037 195.388L707.037 193.851z"/>
+<path class="l5" d="M546.485 131.628L549.558 131.628L549.558 134.701L546.485 134.701L546.485 131.628z"/>
+<path class="l5" d="M546.485 168.501L549.558 168.501L549.558 171.574L546.485 171.574L546.485 168.501z"/>
 <path class="l6" d="M274.545 501.896L763.115 501.896"/>
 <path class="l6" d="M37.9423 501.896L77.8883 501.896"/>
 <path class="l15" d="M544.18 109.35L548.021 104.741"/>
@@ -341,17 +349,12 @@ text {font-family: Sans-Serif;}
 <path class="l1" d="M683.223 10.2538L707.805 10.2538"/>
 <path class="l1" d="M683.223 182.329L683.223 286.803"/>
 <path class="l1" d="M836.861 194.62L836.861 286.803"/>
-<path class="l1" d="M836.861 133.164L836.861 157.747"/>
-<path class="l1" d="M787.697 133.164L836.861 133.164"/>
-<path class="l1" d="M787.697 133.164L787.697 206.911"/>
-<path class="l1" d="M744.678 133.164L787.697 133.164"/>
-<path class="l1" d="M591.04 206.911L787.697 206.911"/>
-<path class="l1" d="M591.04 151.601L591.04 206.911"/>
+<path class="l1" d="M744.678 133.164L836.861 133.164"/>
 <path class="l1" d="M591.04 151.601L634.059 151.601"/>
 <path class="l1" d="M468.129 206.911L468.129 286.803"/>
 <path class="l1" d="M406.674 286.803L468.129 286.803"/>
 <path class="l1" d="M468.129 114.728L468.129 170.038"/>
-<path class="l1" d="M468.129 114.728L634.059 114.728"/>
+<path class="l1" d="M548.021 114.728L634.059 114.728"/>
 <path class="l1" d="M707.805 10.2538L707.805 22.5449"/>
 <path class="l1" d="M707.805 59.4181L707.805 84.0002"/>
 <path class="l1" d="M683.223 53.2725L683.223 84.0002"/>
@@ -362,19 +365,25 @@ text {font-family: Sans-Serif;}
 <path class="l1" d="M683.223 286.803L707.805 286.803"/>
 <path class="l1" d="M468.129 286.803L683.223 286.803"/>
 <path class="l1" d="M707.805 182.329L707.805 237.638"/>
+<path class="l1" d="M548.021 114.728L548.021 133.164"/>
+<path class="l1" d="M468.129 114.728L548.021 114.728"/>
+<path class="l1" d="M591.04 151.601L591.04 188.474"/>
+<path class="l1" d="M548.021 188.474L591.04 188.474"/>
+<path class="l1" d="M548.021 170.038L548.021 188.474"/>
+<path class="l1" d="M836.861 133.164L836.861 157.747"/>
+<circle class="l1" cx="548.021" cy="114.728" r="2.27385"/>
 <circle class="l1" cx="683.223" cy="53.2725" r="2.27385"/>
 <circle class="l1" cx="468.129" cy="286.803" r="2.27385"/>
 <circle class="l1" cx="468.129" cy="286.803" r="2.27385"/>
 <circle class="l1" cx="683.223" cy="286.803" r="2.27385"/>
 <circle class="l1" cx="468.129" cy="286.803" r="2.27385"/>
 <circle class="l1" cx="683.223" cy="53.2725" r="2.27385"/>
+<circle class="l1" cx="548.021" cy="114.728" r="2.27385"/>
 <circle class="l1" cx="683.223" cy="53.2725" r="2.27385"/>
-<circle class="l1" cx="787.697" cy="133.164" r="2.27385"/>
+<circle class="l1" cx="548.021" cy="114.728" r="2.27385"/>
 <circle class="l1" cx="683.223" cy="286.803" r="2.27385"/>
 <circle class="l1" cx="683.223" cy="286.803" r="2.27385"/>
 <circle class="l1" cx="707.805" cy="286.803" r="2.27385"/>
 <circle class="l1" cx="707.805" cy="286.803" r="2.27385"/>
 <circle class="l1" cx="707.805" cy="286.803" r="2.27385"/>
-<circle class="l1" cx="787.697" cy="133.164" r="2.27385"/>
-<circle class="l1" cx="787.697" cy="133.164" r="2.27385"/>
 </svg>
