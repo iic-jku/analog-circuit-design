@@ -616,7 +616,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1250 -890 2 0 {name=M11_3
+C {sg13g2_pr/sg13_lv_nmos.sym} 1250 -890 2 0 {name=M10_3
 l=0.5u
 w=1u
 ng=1
@@ -657,7 +657,7 @@ model=sg13_lv_nmos
 spiceprefix=X
 }
 C {lab_wire.sym} 1890 -220 0 0 {name=p16 sig_type=std_logic lab=ena_n}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1250 -830 2 0 {name=M11_4
+C {sg13g2_pr/sg13_lv_nmos.sym} 1250 -830 2 0 {name=M10_4
 l=0.5u
 w=1u
 ng=1
@@ -681,7 +681,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1250 -950 2 0 {name=M11_2
+C {sg13g2_pr/sg13_lv_nmos.sym} 1250 -950 2 0 {name=M10_2
 l=0.5u
 w=1u
 ng=1
@@ -689,7 +689,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1250 -1010 2 0 {name=M11_1
+C {sg13g2_pr/sg13_lv_nmos.sym} 1250 -1010 2 0 {name=M10_1
 l=0.5u
 w=1u
 ng=1
