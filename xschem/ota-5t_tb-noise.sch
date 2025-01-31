@@ -56,6 +56,7 @@ lab=v_cm}
 N 900 -600 900 -540 {lab=#net1}
 N 830 -540 900 -540 {lab=#net1}
 N 830 -570 830 -540 {lab=#net1}
+N 1300 -630 1300 -590 {lab=v_out}
 C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib cornerMOSlv.lib mos_tt
@@ -65,27 +66,33 @@ value="
 .temp 27
 .control
 option sparse
+set filetype=ascii
 save all
-op
-write ota-5t_tb-ac.raw
-set appendwrite
+
+*op
+*write ota-5t_tb-noise.raw
+*set appendwrite
 
 ac dec 101 1k 1G
-write ota-5t_tb-ac.raw
+*write ota-5t_tb-noise.raw
 plot 20*log10(v_out)
 
-noise v(v_out) Vin dec 101 1k 1G
+noise v(v_out) Vin lin 1000 1MEG 1000MEG 1
 print inoise_total
 print onoise_total
+
 setplot noise1
-plot inoise_spectrum
-plot onoise_spectrum
+plot inoise_spectrum linplot
+plot onoise_spectrum linplot
+
+setplot noise2
+write ota-5t_tb-noise.raw
 
 .endc
 "}
 C {devices/vsource.sym} 520 -330 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 520 -280 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 500 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
