@@ -118,7 +118,9 @@ N 1860 -800 1900 -800 {lab=vmeas2}
 N 1860 -840 1860 -800 {lab=vmeas2}
 C {devices/code_shown.sym} 0 -180 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
-value=".lib cornerMOSlv.lib mos_tt
+value="
+.lib cornerMOSlv.lib mos_tt
+.lib cornerRES.lib res_typ
 "}
 C {devices/code_shown.sym} 20 -1170 0 0 {name=NGSPICE
 only_toplevel=true
@@ -237,7 +239,3 @@ C {ota-improved.sym} 1340 -400 0 0 {name=x1}
 C {ota-improved.sym} 2100 -400 0 0 {name=x2}
 C {ota-improved.sym} 1340 -960 0 0 {name=x3}
 C {ota-improved.sym} 2100 -960 0 0 {name=x4}
-C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL2 only_toplevel=true
-format="tcleval( @value )"
-value=".lib cornerRES.lib res_typ
-"}

@@ -60,9 +60,11 @@ N 700 -380 1050 -380 {
 lab=v_ss}
 N 1090 -550 1090 -460 {
 lab=v_ena}
-C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL1 only_toplevel=true
+C {devices/code_shown.sym} 0 -150 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
-value=".lib cornerMOSlv.lib mos_tt
+value="
+.lib cornerMOSlv.lib mos_tt
+.lib cornerRES.lib res_typ
 "}
 C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true 
 value="
@@ -118,7 +120,3 @@ C {spice_probe.sym} 820 -660 0 0 {name=p5 attrs=""}
 C {spice_probe.sym} 1180 -630 0 0 {name=p6 attrs=""}
 C {spice_probe.sym} 1090 -470 0 0 {name=p7 attrs=""}
 C {lab_wire.sym} 1090 -530 0 0 {name=p8 sig_type=std_logic lab=v_ena}
-C {devices/code_shown.sym} 0 -180 0 0 {name=MODEL2 only_toplevel=true
-format="tcleval( @value )"
-value=".lib cornerRES.lib res_typ
-"}
