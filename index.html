@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-01-31">
+<meta name="dcterms.date" content="2025-02-02">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -129,13 +129,14 @@ window.Quarto = {
 <meta name="citation_author" content="Harald Pretl">
 <meta name="citation_author" content="Michael Koefinger">
 <meta name="citation_author" content="Simon Dorrer">
-<meta name="citation_publication_date" content="2025-01-31">
-<meta name="citation_cover_date" content="2025-01-31">
+<meta name="citation_publication_date" content="2025-02-02">
+<meta name="citation_cover_date" content="2025-02-02">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-31">
+<meta name="citation_online_date" content="2025-02-02">
 <meta name="citation_fulltext_html_url" content="https://iic-jku.github.io/analog-circuit-design">
 <meta name="citation_doi" content="10.5281/zenodo.14387481">
 <meta name="citation_language" content="en-US">
+<meta name="citation_reference" content="citation_title=Miller’s secret [shop talk: What you didn’t learn in school];,citation_author=Chris Mangelsdorf;,citation_publication_date=2025;,citation_cover_date=2025;,citation_year=2025;,citation_issue=1;,citation_doi=10.1109/MSSC.2024.3503792;,citation_volume=17;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
 <meta name="citation_reference" content="citation_title=Relationship between frequency response and settling time of operational amplifiers;,citation_author=B. Y. T. Kamath;,citation_author=R. G. Meyer;,citation_author=P. R. Gray;,citation_publication_date=1974;,citation_cover_date=1974;,citation_year=1974;,citation_issue=6;,citation_doi=10.1109/JSSC.1974.1050527;,citation_volume=9;,citation_journal_title=IEEE Journal of Solid-State Circuits;">
 <meta name="citation_reference" content="citation_title=Bad circuit design 3 - compensating an op-amp;,citation_author=R. J. Baker;,citation_fulltext_html_url=https://cmosedu.com/cmos1/bad_design/bad_design3/bad_design_3.htm;">
 <meta name="citation_reference" content="citation_title=The Design of a Low-Voltage Bandgap Reference [The Analog Mind];,citation_author=Behzad Razavi;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_issue=3;,citation_doi=10.1109/mssc.2021.3088963;,citation_issn=1943-0582;,citation_volume=13;,citation_journal_title=IEEE Solid-State Circuits Magazine;">
@@ -205,7 +206,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">January 31, 2025</p>
+              <p class="date">February 2, 2025</p>
             </div>
           </div>
           
@@ -4272,6 +4273,19 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 \]</span> to arrive at an equivalent circuit, given that <span class="math inline">\(A = V_\mathrm{B} / V_\mathrm{A}\)</span> is the voltage gain between nodes A and B. A derivation of this theorem is relative straightforward considering the current through <span class="math inline">\(Z\)</span> when looking into the impedance from either node A or node B and calculating an equivalent impedance causing the same current.</p>
 <p>Note that if <span class="math inline">\(V_\mathrm{A} = V_\mathrm{B}\)</span> then there is no current flow through <span class="math inline">\(Z\)</span>, and accordingly the impedances <span class="math inline">\(Z_1 = Z_2 = \infty\)</span>.</p>
 <p>Miller’s theorem can be quite handy when an impedance is strapped between two nodes, and we want to break this connection in a calculation, e.g., considering the effect of <span class="math inline">\(C_\mathrm{GD}\)</span> in a MOSFET.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Miller's Secret">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Miller’s Secret
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that Miller’s compensation is so much more than just making a big capacitor out of a small one. There are layers upon layers of subtlety, and huge hidden benefits which can be read in <span class="citation" data-cites="Mangelsdorf_2025_miller">(<a href="#ref-Mangelsdorf_2025_miller" role="doc-biblioref">Mangelsdorf 2025</a>)</span>.</p>
+</div>
+</div>
 </section>
 <section id="sec-bode-noise-theorem" class="level2" data-number="16.2">
 <h2 data-number="16.2" class="anchored" data-anchor-id="sec-bode-noise-theorem"><span class="header-section-number">16.2</span> Bode’s Noise Theorem</h2>
@@ -4656,6 +4670,9 @@ Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CM
 <div id="ref-Kamath_1974" class="csl-entry" role="listitem">
 Kamath, B. Y. T., R. G. Meyer, and P. R. Gray. 1974. <span>“Relationship Between Frequency Response and Settling Time of Operational Amplifiers.”</span> <em>IEEE Journal of Solid-State Circuits</em> 9 (6): 347–52. <a href="https://doi.org/10.1109/JSSC.1974.1050527">https://doi.org/10.1109/JSSC.1974.1050527</a>.
 </div>
+<div id="ref-Mangelsdorf_2025_miller" class="csl-entry" role="listitem">
+Mangelsdorf, Chris. 2025. <span>“Miller’s Secret [Shop Talk: What You Didn’t Learn in School].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (1): 21–27. <a href="https://doi.org/10.1109/MSSC.2024.3503792">https://doi.org/10.1109/MSSC.2024.3503792</a>.
+</div>
 <div id="ref-Maxwell_1873" class="csl-entry" role="listitem">
 Maxwell, James Clerk. 1873. <em>A Treatise on Electricity and Magnetism</em>. Vol. 1. Clarendon Press.
 </div>
@@ -4704,14 +4721,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-01-31},
+  date = {2025-02-02},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> January 31, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> February 2, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
