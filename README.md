@@ -13,4 +13,4 @@ Tools and PDK are integrated in the **IIC-OSIC-TOOLS** Docker image, which will 
 
 All course material is made publicly available and shared under the Apache-2.0 license.
 
-**We happily accept PR to fix typos or add content! If you want do discuss something that is not clear, please open an issue!**
+**We happily accept PR to fix typos or add content! If you want to discuss something that is not clear, please open an issue!**
