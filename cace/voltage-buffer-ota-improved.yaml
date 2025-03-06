@@ -167,7 +167,71 @@ parameters:
         minimum: -40
         typical: 27
         maximum: 130
-
+  
+  ac_mc_params:
+    spec:
+      gain_mc:
+        display: Output voltage ratio - Monte Carlo
+        description: Large-signal dc gain
+        unit: V/V
+        minimum:
+          value: 0.99
+        typical:
+          value: any
+        maximum:
+          value: 1.01
+      bw_mc:
+        display: Bandwidth - Monte Carlo
+        description: The -3dB bandwidth of the buffer
+        unit: Hz
+        minimum:
+          value: 10e6
+        typical:
+          value: any
+        maximum:
+          value: any
+    tool:
+      ngspice:
+        template: ota-improved-ac.sch
+        collate: iterations
+        format: ascii
+        suffix: .data
+        variables: [gain_mc, bw_mc]
+        script: ota-improved-ac.py
+        script_variables: [gain_mc_arr, bw_mc_arr]
+    plot:
+      gain_mc:
+        type: histogram
+        xaxis: gain_mc_arr
+      bw_mc:
+        type: histogram
+        xaxis: bw_mc_arr
+    conditions:
+      iterations: # for Monte Carlo
+        description: Iterations to run
+        display: Iterations
+        minimum: 1
+        maximum: 100
+        step: linear
+        stepsize: 1
+      sigma:
+        # This is actually mc_ok.
+        # If mc_ok = 1: MC with 3 sigma.
+        # If mc_ok = 0: MC is turned off.
+        # https://github.com/IHP-GmbH/IHP-Open-PDK/issues/149
+        #minimum: 0
+        typical: 1
+      corner_mos:
+        typical: tt_stat # Monte Carlo corner for TT
+      corner_res:
+        typical: typ
+      vdd:
+        typical: 1.5
+      vin:
+        typical: 0.8
+      temp:
+        typical: 27
+        
   noise_params:
     spec:
       noise:
