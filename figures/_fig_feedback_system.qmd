@@ -1,5 +1,5 @@
 ::: {.content-hidden}
-Copyright (C) 2024 Harald Pretl and co-authors (harald.pretl@jku.at)
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -27,7 +27,8 @@ with sd.Drawing(canvas='svg') as d:
     d.config(fontsize=16)
     
     elm.Dot(open=True).label('$X(s)$')
-    elm.Line().right()
+    elm.Line().right().length(d.unit*0.5)
+    elm.Arrow().right().length(d.unit*0.5).label('$+$', loc='bottom', ofst=0)
     sm = dsp.SumSigma()
     dsp.Arrow().right()
     dsp.Box().label(r'$H_\mathrm{ol}(s)$')
@@ -41,6 +42,6 @@ with sd.Drawing(canvas='svg') as d:
     dsp.Arrow().left()
     dsp.Box().label('$G(s)$')
     elm.Line().tox(sm.S)
-    elm.Line().up().length(d.unit/2)
+    elm.Line().up().length(d.unit*0.75)
     dsp.Arrow().toy(sm.S).label('$-$', loc='bottom')
 ```
