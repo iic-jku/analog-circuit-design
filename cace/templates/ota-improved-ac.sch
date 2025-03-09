@@ -1,5 +1,4 @@
-v {xschem version=3.4.5 file_version=1.2
-}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -63,10 +62,9 @@ N 1350 -490 1350 -400 {
 lab=v_ena}
 C {devices/code_shown.sym} 0 -740 0 0 {name=NGSPICE only_toplevel=true 
 value="
-.lib cornerMOSlv.lib mos_CACE\{corner_mos\}
-.lib cornerRES.lib res_CACE\{corner_res\}
 .include CACE\{DUT_path\}
 .temp CACE\{temp\}
+.param mc_ok = CACE\{sigma=1\}
 .option SEED=CACE[CACE\{seed=12345\} + CACE\{iterations=0\}]
 
 .control
@@ -102,3 +100,10 @@ C {spice_probe.sym} 1440 -570 0 0 {name=p6 attrs=""}
 C {spice_probe.sym} 1350 -410 0 0 {name=p7 attrs=""}
 C {lab_wire.sym} 1350 -470 0 0 {name=p8 sig_type=std_logic lab=v_ena}
 C {ota-improved.sym} 1310 -570 0 0 {name=xota}
+C {devices/code_shown.sym} 0 -250 0 0 {name=MODEL only_toplevel=true
+format="tcleval( @value )"
+value="
+.lib cornerMOSlv.lib mos_CACE\{corner_mos\}
+.lib cornerMOShv.lib mos_CACE\{corner_mos\}
+.lib cornerRES.lib res_CACE\{corner_res\}
+"}
