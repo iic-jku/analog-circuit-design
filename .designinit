@@ -3,7 +3,7 @@
 
 # The PDK name has been changed starting with 2025.01
 YEAR="${IIC_OSIC_TOOLS_VERSION%%.*}"
-if [[ "$YEAR" -ge 2025 ]]; then
+if [[ -z "$YEAR" || "$YEAR" -ge 2025 ]]; then
     export PDK=ihp-sg13g2
 else
     export PDK=sg13g2
