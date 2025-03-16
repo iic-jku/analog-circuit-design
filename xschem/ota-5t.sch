@@ -196,7 +196,7 @@ N 1000 -640 1140 -640 {lab=vout}
 N 1000 -680 1000 -640 {
 lab=vout}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, Apache-2.0 license"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 880 -280 2 1 {name=M5
+C {sg13g2_pr/sg13_lv_nmos.sym} 880 -280 0 0 {name=M5
 l=5u
 w=0.5u
 ng=1
@@ -212,7 +212,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 800 -590 2 1 {name=M1
+C {sg13g2_pr/sg13_lv_nmos.sym} 800 -590 0 0 {name=M1
 l=5u
 w=2u
 ng=1
@@ -220,7 +220,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1020 -590 2 0 {name=M2
+C {sg13g2_pr/sg13_lv_nmos.sym} 1020 -590 0 1 {name=M2
 l=5u
 w=2u
 ng=1
@@ -236,7 +236,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 660 -280 2 0 {name=M6
+C {sg13g2_pr/sg13_lv_nmos.sym} 660 -280 0 1 {name=M6
 l=5u
 w=2.5u
 ng=5
@@ -244,7 +244,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 740 -210 2 1 {name=M9
+C {sg13g2_pr/sg13_lv_nmos.sym} 740 -210 0 0 {name=M9
 l=0.13u
 w=0.5u
 ng=1
@@ -266,7 +266,7 @@ C {iopin.sym} 160 -160 0 1 {name=p3 lab=vss}
 C {ipin.sym} 160 -590 0 0 {name=p4 lab=vinp}
 C {ipin.sym} 160 -500 0 0 {name=p5 lab=vinn}
 C {opin.sym} 1140 -640 0 0 {name=p6 lab=vout}
-C {sg13g2_pr/sg13_lv_nmos.sym} 400 -210 2 1 {name=M7
+C {sg13g2_pr/sg13_lv_nmos.sym} 400 -210 0 0 {name=M7
 l=0.13u
 w=0.5u
 ng=1
@@ -283,7 +283,7 @@ model=sg13_lv_pmos
 spiceprefix=X
 }
 C {ipin.sym} 160 -260 0 0 {name=p7 lab=d_ena}
-C {sg13g2_pr/sg13_lv_nmos.sym} 720 -390 2 1 {name=M10
+C {sg13g2_pr/sg13_lv_nmos.sym} 720 -390 0 0 {name=M10
 l=0.13u
 w=0.5u
 ng=1
@@ -295,7 +295,7 @@ C {lab_wire.sym} 690 -210 0 0 {name=p8 sig_type=std_logic lab=ena_n}
 C {lab_wire.sym} 800 -280 0 0 {name=p9 sig_type=std_logic lab=gate_n}
 C {lab_wire.sym} 940 -710 0 0 {name=p10 sig_type=std_logic lab=gate_p}
 C {lab_wire.sym} 900 -440 0 0 {name=p11 sig_type=std_logic lab=tail}
-C {sg13g2_pr/sg13_lv_nmos.sym} 240 -210 2 1 {name=M12
+C {sg13g2_pr/sg13_lv_nmos.sym} 240 -210 0 0 {name=M12
 l=0.13u
 w=0.5u
 ng=1
