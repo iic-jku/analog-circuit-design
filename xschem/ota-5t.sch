@@ -312,3 +312,8 @@ model=sg13_lv_pmos
 spiceprefix=X
 }
 C {lab_wire.sym} 590 -390 0 0 {name=p12 sig_type=std_logic lab=ena}
+C {sg13g2_pr/annotate_fet_params.sym} 1280 -310 0 0 {name=annot1 ref=M5}
+C {sg13g2_pr/annotate_fet_params.sym} 1280 -520 0 0 {name=annot2 ref=M1}
+C {sg13g2_pr/annotate_fet_params.sym} 1440 -520 0 0 {name=annot3 ref=M2}
+C {sg13g2_pr/annotate_fet_params.sym} 1280 -720 0 0 {name=annot4 ref=M3}
+C {sg13g2_pr/annotate_fet_params.sym} 1440 -720 0 0 {name=annot5 ref=M4}
