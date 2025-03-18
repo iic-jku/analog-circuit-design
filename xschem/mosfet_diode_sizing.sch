@@ -1,5 +1,4 @@
-v {xschem version=3.4.5 file_version=1.2
-}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -43,6 +42,8 @@ save @n.xm1.nsg13_lv_nmos[gds]
 save @n.xm1.nsg13_lv_nmos[vth]
 save @n.xm1.nsg13_lv_nmos[cgg]
 save @n.xm1.nsg13_lv_nmos[cgd]
+save @n.xm1.nsg13_lv_nmos[cgdol]
+save @n.xm1.nsg13_lv_nmos[cgsol]
 save @n.xm1.nsg13_lv_nmos[vdss]
 save @n.xm1.nsg13_lv_nmos[fug]
 save @n.xm1.nsg13_lv_nmos[rg]
@@ -56,7 +57,7 @@ C {devices/vsource.sym} 520 -370 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 520 -280 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 820 -280 0 0 {name=l4 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 730 -370 2 1 {name=M1
+C {sg13g2_pr/sg13_lv_nmos.sym} 730 -370 0 0 {name=M1
 l=0.13u
 w=1u
 ng=1
@@ -93,3 +94,4 @@ descr="rg="}
 C {isource.sym} 750 -470 0 0 {name=Ibias value=20u}
 C {lab_pin.sym} 680 -420 0 0 {name=p1 sig_type=std_logic lab=v_gs}
 C {lab_pin.sym} 520 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {sg13g2_pr/annotate_fet_params.sym} 900 -430 0 0 {name=annot1 ref=M1}
