@@ -286,7 +286,7 @@ N 1240 -720 1260 -720 {lab=vintn}
 N 1240 -740 1240 -720 {
 lab=vintn}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 H. Pretl, Apache-2.0 license"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1380 -280 2 1 {name=M10
+C {sg13g2_pr/sg13_lv_nmos.sym} 1380 -280 0 0 {name=M10
 l=5u
 w=50u
 ng=10
@@ -294,7 +294,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1220 -550 2 1 {name=M1
+C {sg13g2_pr/sg13_lv_nmos.sym} 1220 -550 0 0 {name=M1
 l=0.5u
 w=10u
 ng=2
@@ -302,7 +302,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1620 -550 2 0 {name=M2
+C {sg13g2_pr/sg13_lv_nmos.sym} 1620 -550 0 1 {name=M2
 l=0.5u
 w=10u
 ng=2
@@ -318,7 +318,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 660 -280 2 0 {name=M9
+C {sg13g2_pr/sg13_lv_nmos.sym} 660 -280 0 1 {name=M9
 l=5u
 w=5u
 ng=1
@@ -326,7 +326,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 740 -210 2 1 {name=M16
+C {sg13g2_pr/sg13_lv_nmos.sym} 740 -210 0 0 {name=M16
 l=0.13u
 w=5u
 ng=1
@@ -348,7 +348,7 @@ C {iopin.sym} 160 -160 0 1 {name=p3 lab=vss}
 C {ipin.sym} 160 -550 0 0 {name=p4 lab=vinp}
 C {ipin.sym} 160 -460 0 0 {name=p5 lab=vinn}
 C {opin.sym} 1920 -440 0 0 {name=p6 lab=voutp}
-C {sg13g2_pr/sg13_lv_nmos.sym} 400 -210 2 1 {name=M14
+C {sg13g2_pr/sg13_lv_nmos.sym} 400 -210 0 0 {name=M14
 l=0.13u
 w=5u
 ng=1
@@ -365,7 +365,7 @@ model=sg13_lv_pmos
 spiceprefix=X
 }
 C {ipin.sym} 160 -260 0 0 {name=p7 lab=d_ena}
-C {sg13g2_pr/sg13_lv_nmos.sym} 720 -390 2 1 {name=M17
+C {sg13g2_pr/sg13_lv_nmos.sym} 720 -390 0 0 {name=M17
 l=0.13u
 w=5u
 ng=1
@@ -377,7 +377,7 @@ C {lab_wire.sym} 620 -340 0 0 {name=p8 sig_type=std_logic lab=ena_n}
 C {lab_wire.sym} 900 -280 0 0 {name=p9 sig_type=std_logic lab=gate_n}
 C {lab_wire.sym} 1480 -770 0 0 {name=p10 sig_type=std_logic lab=gate_p}
 C {lab_wire.sym} 1320 -480 0 0 {name=p11 sig_type=std_logic lab=tail}
-C {sg13g2_pr/sg13_lv_nmos.sym} 240 -210 2 1 {name=M12
+C {sg13g2_pr/sg13_lv_nmos.sym} 240 -210 0 0 {name=M12
 l=0.13u
 w=5u
 ng=1
@@ -395,7 +395,7 @@ spiceprefix=X
 }
 C {lab_wire.sym} 620 -390 0 0 {name=p12 sig_type=std_logic lab=ena}
 C {opin.sym} 1920 -460 0 0 {name=p13 lab=voutn}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1080 -340 2 0 {name=M7
+C {sg13g2_pr/sg13_lv_nmos.sym} 1080 -340 0 1 {name=M7
 l=5u
 w=20u
 ng=4
@@ -419,7 +419,7 @@ spiceprefix=X
 b=0
 m=1
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1540 -280 2 1 {name=M11_1
+C {sg13g2_pr/sg13_lv_nmos.sym} 1540 -280 0 0 {name=M11_1
 l=5u
 w=1u
 ng=1
@@ -461,7 +461,7 @@ spiceprefix=X
 b=0
 m=1
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1760 -340 2 1 {name=M8
+C {sg13g2_pr/sg13_lv_nmos.sym} 1760 -340 0 0 {name=M8
 l=5u
 w=20u
 ng=4
