@@ -1,9 +1,12 @@
+# SPDX-FileCopyrightText: 2025 Harald Pretl and co-authors
+# Johannes Kepler University, Institute for Integrated Circuits
 # shellcheck shell=bash
+
 # Switch to IHP SG13G2 PDK
 
 # The PDK name has been changed starting with 2025.01
 YEAR="${IIC_OSIC_TOOLS_VERSION%%.*}"
-if [[ "$YEAR" -ge 2025 ]]; then
+if [[ -z "$YEAR" || "$YEAR" -ge 2025 ]]; then
     export PDK=ihp-sg13g2
 else
     export PDK=sg13g2
@@ -14,3 +17,11 @@ export STD_CELL_LIBRARY=sg13g2_stdcell
 export SPICE_USERINIT_DIR=$PDK_ROOT/$PDK/libs.tech/ngspice 
 # Set path for Xschem
 export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem
+
+# The NMOS symbols for the IHP PDK changed with version 2025.03
+YEARMONTH=${IIC_OSIC_TOOLS_VERSION//./} 
+if [[ $YEARMONTH -lt 202503 ]]; then
+    echo
+    echo "[WARNING] The default NMOS symbols changed with version 2025.03!"
+    echo "[WARNING] Please update your image to 2025.03 or later to use the new symbols."
+fi
