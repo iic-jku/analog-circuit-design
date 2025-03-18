@@ -226,7 +226,7 @@ model=sg13_lv_pmos
 spiceprefix=X
 }
 C {lab_pin.sym} 490 -740 0 0 {name=p6 sig_type=std_logic lab=vg}
-C {sg13g2_pr/sg13_lv_nmos.sym} 470 -320 2 1 {name=M5
+C {sg13g2_pr/sg13_lv_nmos.sym} 470 -320 0 0 {name=M5
 l=0.13u
 w=1u
 ng=1
@@ -234,7 +234,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 290 -270 2 1 {name=M10
+C {sg13g2_pr/sg13_lv_nmos.sym} 290 -270 0 0 {name=M10
 l=0.13u
 w=1.0u
 ng=1
