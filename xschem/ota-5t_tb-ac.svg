@@ -168,30 +168,31 @@ text {font-family: Sans-Serif;}
 <text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 464.51)" >.lib cornerMOSlv.lib mos_tt</text>
 <text fill="#222222"  xml:space="preserve" font-size="9.58702" transform="translate(41.0151, 49.6865)" >NGSPICE</text>
 <text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 76.0466)" >.temp 27</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 87.043)" >.control</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 98.0393)" >option sparse</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 109.036)" >save all</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 120.032)" >op</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 131.028)" >write ota-5t_tb-ac.raw</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 142.025)" >set appendwrite</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 164.017)" >ac dec 101 1k 100MEG</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 175.013)" >write ota-5t_tb-ac.raw</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 186.01)" >plot 20*log10(v_out)</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 208.002)" >meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 218.999)" >let f3db = dcgain/sqrt(2)</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 229.995)" >meas ac fbw WHEN vmag(v_out)=f3db FALL=1</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 240.991)" >let gainerror=(dcgain-1)/1</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 251.988)" >print dcgain</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 262.984)" >print fbw</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 273.98)" >print gainerror</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 295.973)" >noise v(v_out) Vin dec 101 1k 100MEG</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 306.969)" >print onoise_total</text>
-<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 328.962)" >.endc</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 87.043)" >.include ../ota-5t_tb-ac.save</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 98.0393)" >.control</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 109.036)" >option sparse</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 120.032)" >save all</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 131.028)" >op</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 142.025)" >write ota-5t_tb-ac.raw</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 153.021)" >set appendwrite</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 175.013)" >ac dec 101 1k 100MEG</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 186.01)" >write ota-5t_tb-ac.raw</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 197.006)" >plot 20*log10(v_out)</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 218.999)" >meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 229.995)" >let f3db = dcgain/sqrt(2)</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 240.991)" >meas ac fbw WHEN vmag(v_out)=f3db FALL=1</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 251.988)" >let gainerror=(dcgain-1)/1</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 262.984)" >print dcgain</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 273.98)" >print fbw</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 284.977)" >print gainerror</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 306.969)" >noise v(v_out) Vin dec 101 1k 100MEG</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 317.966)" >print onoise_total</text>
+<text fill="#222222"  xml:space="preserve" font-size="9.58702" style="font-family:Monospace;" transform="translate(47.1606, 339.958)" >.endc</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(369.801, 311.811)" >Vdd</text>
 <text fill="#222222"  xml:space="preserve" font-size="6.39135" transform="translate(369.801, 327.175)" >1.5</text>
 <text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(280.691, 516.576)" >         ota-5t_tb-ac.sch</text>
-<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(280.691, 498.139)" >(c) 2024 H. Pretl, Apache-2.0 license</text>
-<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(625.115, 498.139)" >2024-12-07  18:54:20</text>
+<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(280.691, 498.139)" >(c) 2024-2025 H. Pretl, Apache-2.0 license</text>
+<text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(625.115, 498.139)" >2025-03-16  18:16:45</text>
 <text fill="#222222"  xml:space="preserve" font-size="31.9567" transform="translate(139.344, 515.549)" >SCHEM</text>
 <text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(351.364, 426.111)" >simulate</text>
 <text fill="#222222"  xml:space="preserve" font-size="12.7827" transform="translate(498.857, 426.111)" >annotate OP</text>

@@ -159,7 +159,7 @@ C {devices/code_shown.sym} 5 -112.5 0 0 {name=MODEL1 only_toplevel=true
 format="tcleval( @value )"
 value=".lib cornerMOSlv.lib mos_tt
 "}
-C {sg13g2_pr/sg13_lv_nmos.sym} 490 -300 2 1 {name=M1
+C {sg13g2_pr/sg13_lv_nmos.sym} 490 -300 0 0 {name=M1
 l=\{lx\}
 w=\{wx\}
 ng=1

@@ -88,7 +88,7 @@ C {devices/vsource.sym} 780 -240 0 0 {name=vd value=0.75}
 C {devices/gnd.sym} 780 -110 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 720 -110 0 0 {name=l4 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license (adapted from B. Murmann)"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 630 -240 2 1 {name=M1
+C {sg13g2_pr/sg13_lv_nmos.sym} 630 -240 0 0 {name=M1
 l=\{lx\}
 w=\{wx\}
 ng=1
