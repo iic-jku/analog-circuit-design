@@ -1,8 +1,32 @@
 project:
    type: website
 
+var:
+  url-repo: https://github.com/iic-jku/analog-circuit-design   # to call this value : {{< meta var.url-repo >}}
+
 website:
   title: "Analog Circuit Design"
+  navbar:
+    background: "#447099"
+    search: true
+    left:
+      - icon: house
+        href: index.qmd
+        text: "About"
+      - href: content.qmd
+        text: "Course Material"
+      - icon: bi-filetype-pdf
+        text: PDF
+        href: content.pdf
+    right:
+      - icon: github
+        href: "{{< meta var.url-repo >}}"
+        target: "_blank"
+
+  page-footer:
+    right: |
+      Website built with [Quarto](https://quarto.org/){.external target="_blank"} <br>
+      [Code source]({{< meta var.url-repo >}}){.external target="_blank"}
 
 execute:
   freeze: auto
