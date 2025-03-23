@@ -1,25 +1,40 @@
 project:
-  type: manuscript
+   type: website
 
-manuscript:
-  article: index.qmd
+var:
+  url-repo: https://github.com/iic-jku/analog-circuit-design   # to call this value : {{< meta var.url-repo >}}
+
+website:
+  title: "Analog Circuit Design"
+  navbar:
+    background: "#447099"
+    search: true
+    left:
+      - icon: house
+        href: index.qmd
+        text: "About"
+      - href: analog_circuit_design.qmd
+        text: "Course Material"
+      - icon: bi-filetype-pdf
+        text: PDF
+        href: analog_circuit_design.pdf
+    right:
+      - icon: github
+        href: "{{< meta var.url-repo >}}"
+        target: "_blank"
+
+  page-footer:
+    right: |
+      Website built with [Quarto](https://quarto.org/){.external target="_blank"} <br>
+      [Code source]({{< meta var.url-repo >}}){.external target="_blank"}
 
 execute:
   freeze: auto
 
 format:
   html:
-    toc: true
+    theme:
+      light: cosmo
+      dark: solar  
     fig-align: center
     lang: en-US
-    number-sections: true
-    toc-expand: 2
-  pdf:
-    toc: true
-    fig-align: center
-    lang: en-US
-    number-sections: true
-    papersize: A4
-    pdf-engine: xelatex 
-
-bibliography: references.bib
