@@ -60,11 +60,11 @@ N 880 -260 1230 -260 {
 lab=v_ss}
 N 1270 -430 1270 -340 {
 lab=v_ena}
-C {devices/code_shown.sym} 0 -650 0 0 {name=NGSPICE only_toplevel=true 
+C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true 
 value="
-.lib cornerMOSlv.lib mos_CACE\{corner\}
 .include CACE\{DUT_path\}
 .temp CACE\{temp\}
+.param mc_ok = CACE\{sigma=1\}
 .option SEED=CACE[CACE\{seed=12345\} + CACE\{iterations=0\}]
 
 .ic v(v_out)=0
@@ -102,3 +102,9 @@ C {spice_probe.sym} 1360 -510 0 0 {name=p6 attrs=""}
 C {spice_probe.sym} 1270 -350 0 0 {name=p7 attrs=""}
 C {lab_wire.sym} 1270 -410 0 0 {name=p8 sig_type=std_logic lab=v_ena}
 C {ota-5t.sym} 1230 -510 0 0 {name=xota}
+C {devices/code_shown.sym} 0 -250 0 0 {name=MODEL only_toplevel=true
+format="tcleval( @value )"
+value="
+.lib cornerMOSlv.lib mos_CACE\{corner\}
+.lib cornerMOShv.lib mos_CACE\{corner\}
+"}
