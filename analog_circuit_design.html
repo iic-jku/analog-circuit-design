@@ -274,7 +274,7 @@ window.Quarto = {
   <li><a href="#sec-basic-ota-simulation" id="toc-sec-basic-ota-simulation" class="nav-link" data-scroll-target="#sec-basic-ota-simulation"><span class="header-section-number">8.5</span> 5T-OTA Simulation</a></li>
   <li><a href="#sec-mosfet-mismatch" id="toc-sec-mosfet-mismatch" class="nav-link" data-scroll-target="#sec-mosfet-mismatch"><span class="header-section-number">8.6</span> MOSFET Mismatch</a></li>
   <li><a href="#sec-resistor-mismatch" id="toc-sec-resistor-mismatch" class="nav-link" data-scroll-target="#sec-resistor-mismatch"><span class="header-section-number">8.7</span> Resistor Mismatch</a></li>
-  <li><a href="#sec-basic-ota-simulation-pvt" id="toc-sec-basic-ota-simulation-pvt" class="nav-link" data-scroll-target="#sec-basic-ota-simulation-pvt"><span class="header-section-number">8.8</span> 5T-OTA Simulation versus PVT</a>
+  <li><a href="#sec-basic-ota-simulation-pvt" id="toc-sec-basic-ota-simulation-pvt" class="nav-link" data-scroll-target="#sec-basic-ota-simulation-pvt"><span class="header-section-number">8.8</span> 5T-OTA Simulation versus PVT and MC</a>
   <ul class="collapse">
   <li><a href="#pvt-simulation-analysis" id="toc-pvt-simulation-analysis" class="nav-link" data-scroll-target="#pvt-simulation-analysis"><span class="header-section-number">8.8.1</span> PVT Simulation Analysis</a></li>
   <li><a href="#monte-carlo-simulation-analysis" id="toc-monte-carlo-simulation-analysis" class="nav-link" data-scroll-target="#monte-carlo-simulation-analysis"><span class="header-section-number">8.8.2</span> Monte Carlo Simulation Analysis</a></li>
@@ -2682,14 +2682,14 @@ Exercise: 5T-OTA Design and Testbench
 <p>For a typical MOSFET, we usually consider two main mismatch effects <span class="citation" data-cites="Pelgrom_1989">(<a href="#ref-Pelgrom_1989" role="doc-biblioref">Pelgrom, Duinmaijer, and Welbers 1989</a>)</span>:</p>
 <ul>
 <li>A variation of the threshold voltage (mainly due to variations in doping levels).</li>
-<li>A variation of the critical dimensions of the MOSFET (<span class="math inline">\(W/L\)</span>).</li>
+<li>A variation of the critical dimensions of the MOSFET (<span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> as well as vertical dimensions).</li>
 </ul>
 <p>Both effects influence the drain current of the MOSFET, and they are indirectly proportional to the size of the MOSFET. So, if we want to reduce the mismatch, we have to increase the size of the MOSFET by increasing its gate area <span class="math inline">\(W \cdot L\)</span>.</p>
 <p>If we formulate the drain current mismatch <span class="math inline">\(\Delta I_\mathrm{D}/ I_\mathrm{D}\)</span> of two nominally identical MOSFET we get</p>
 <p><span id="eq-mosfet-mismatch"><span class="math display">\[
 \frac{\Delta I_\mathrm{D}}{I_\mathrm{D}} = \frac{A_\mathrm{mosfet}}{\sqrt{W L}}
 \tag{27}\]</span></span></p>
-<p>with <span class="math inline">\(A_\mathrm{mosfet}\)</span> being a mismatch parameter for given CMOS technology.</p>
+<p>with <span class="math inline">\(A_\mathrm{mosfet}\)</span> being a mismatch parameter for a given CMOS technology.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Mismatch">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2714,7 +2714,7 @@ MOSFET Mismatch
 \frac{\Delta (W/L)}{(W/L)} = \frac{A_\mathrm{k}}{\sqrt{W L}}.
 \tag{29}\]</span></span></p>
 <p>The resulting input offset voltage <span class="math inline">\(V_\mathrm{offs}\)</span> of a differential pair is then given by <span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span> <span id="eq-diffpair-offset"><span class="math display">\[
-V_\mathrm{offs}^2 = \left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \frac{\Delta (W/L)}{{(W/L)}} \right)^2 + \Delta V_\mathrm{th}^2.
+V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \frac{\Delta (W/L)}{{(W/L)}} \right)^2 + \Delta V_\mathrm{th}^2}.
 \tag{30}\]</span></span></p>
 <p>The mismatch in the drain current of two current-mirror transistors is given by <span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span></p>
 <p><span id="eq-currentmirror-offset"><span class="math display">\[
@@ -2723,8 +2723,8 @@ V_\mathrm{offs}^2 = \left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \frac{\Delta (
 <p>To minimize the input offset voltage in a differential pair we should strive to minimize <span class="math inline">\(V_\mathrm{GS}\)</span> (see <a href="#eq-diffpair-offset" class="quarto-xref">Equation&nbsp;30</a>) and to minimize the mismatch in current mirrors we should target a large <span class="math inline">\(V_\mathrm{GS}\)</span> (see <a href="#eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;31</a>). In both cases the MOSFET area <span class="math inline">\(W \cdot L\)</span> needs to be large enough (see <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;29</a>).</p>
 </div>
 </div>
-<p>How can we now cope with mismatch in design and simulation? We can account the transitor mismatch according to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;27</a> in circuit analysis and quantify its effect. We can then take this into account for circuit sizing.</p>
-<p>We can also simulate the effects of MOSFET mismatch on circuit performance by doing a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"><strong>Monte Carlo</strong></a> simulation. Here, a random realization of the variations of all circuit components (where mismatch is modelled) is taken and the circuit is simulated. Then, another random realization is simulated, and so on. In summary, we run the same simulation for different realization <span class="math inline">\(N\)</span> times and evaluate the resulting variations of the circuit parameters. If <span class="math inline">\(N\)</span> is large enough then the distributions should approach a <a href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian distribution</a>, and we can then estimate the variances of the circuit parameters. Using statistical analysis we can then assess the <strong>yield</strong> of a circuit, i.e., how many circuit realizations will meet the specification.</p>
+<p>How can we now cope with mismatch in design and simulation? We can account the transitor mismatch according to <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;29</a> in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.</p>
+<p>We can also simulate the effects of MOSFET mismatch on circuit performance by doing a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"><strong>Monte Carlo</strong></a> simulation. Here, a random realization of the variations of all circuit components (where mismatch is modelled) is taken and the circuit is simulated. Then, another random realization is simulated, and so on. In summary, we run the same simulation for different realizations <span class="math inline">\(N\)</span> times and evaluate the resulting variations of the circuit parameters. If <span class="math inline">\(N\)</span> is large enough then the distributions should approach a <a href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian distribution</a>, and we can then estimate the variances of the circuit parameters. Using statistical analysis we can then assess the <a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield"><strong>yield</strong></a> of a circuit, i.e., how many circuit realizations will meet the specification.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Number of Monte Carlo Simulation Runs">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2735,27 +2735,27 @@ Number of Monte Carlo Simulation Runs
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The number of Monte Carlo simulation runs <span class="math inline">\(N\)</span> has to be large enough to approach Gaussian distributions to estimate the variances. However, this comes at the price of a large simulation time, so a balance has to be found. Often, <span class="math inline">\(N = 250\)</span> is a good compromise between simulation time and well-behaved parameter distributions.</p>
+<p>The number of Monte Carlo simulation runs <span class="math inline">\(N\)</span> has to be large enough to approach Gaussian distributions to allow estimation of the variances. However, this comes at the cost of a large simulation time, so a balance has to be found. Often, <span class="math inline">\(N = 250\)</span> is a good compromise between simulation time and well-behaved parameter distributions.</p>
 </div>
 </div>
 <p>As you can see in the previous discussion, running Monte Carlo simulations is a tedious process due to the large number of involved simulations and the required data processing of the heaps of simulation data. Luckily, CACE supports this type of simulation, and we will use it in <a href="#sec-basic-ota-simulation-pvt" class="quarto-xref">Section&nbsp;8.8</a>.</p>
 </section>
 <section id="sec-resistor-mismatch" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="sec-resistor-mismatch"><span class="header-section-number">8.7</span> Resistor Mismatch</h2>
-<p>Similar to the MOSFET mismatch discussed in <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6</a> also resistors will show mismatch. Similar to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;27</a> the resistor mismatch <span class="math inline">\(\Delta R / R\)</span> can be characterized by</p>
+<p>Similar to the MOSFET mismatch discussed in <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6</a>, resistors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;27</a> the resistor mismatch <span class="math inline">\(\Delta R / R\)</span> can be characterized by</p>
 <p><span id="eq-resistor-mismatch"><span class="math display">\[
 \frac{\Delta R}{R} = \frac{A_\mathrm{res}}{\sqrt{W L}}
 \tag{32}\]</span></span></p>
-<p>with <span class="math inline">\(A_\mathrm{res}\)</span> being a mismatch parameter for given CMOS technology.</p>
-<p>With <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;32</a> we now have two criteria how to select the width <span class="math inline">\(W\)</span> of a specific resistor (the length <span class="math inline">\(L\)</span> is then derived from the required resistance value with <span class="math inline">\(R = R_\square \cdot L / W\)</span>):</p>
+<p>with <span class="math inline">\(A_\mathrm{res}\)</span> being a mismatch parameter for a given CMOS technology.</p>
+<p>With <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;32</a> we now have two criteria for how to select the width <span class="math inline">\(W\)</span> of a specific resistor (the length <span class="math inline">\(L\)</span> is then derived from the required resistance value with <span class="math inline">\(R = R_\square \cdot L / W\)</span>):</p>
 <ol type="1">
-<li>Current handling capability (the larger the <span class="math inline">\(W\)</span>, the more dc current a resistor can carry)</li>
-<li>Resistor mismatch (the larger the <span class="math inline">\(W\)</span>, the larger the <span class="math inline">\(W L\)</span> for a given <span class="math inline">\(L/W\)</span>)</li>
+<li>The current handling capability (the larger the <span class="math inline">\(W\)</span>, the more dc current a resistor can carry), and</li>
+<li>the resistor mismatch (the larger the <span class="math inline">\(W\)</span>, the larger the <span class="math inline">\(W L\)</span> for a given <span class="math inline">\(L/W\)</span>).</li>
 </ol>
-<p>If a resistor’s dimensions are not limited by the two criteria above then we usually choose the minimum width that is allowed for a given resistor in a specific technology (for SG13G2 it is <span class="math inline">\(L_\mathrm{min} = 0.5\,\mu\text{m}\)</span>).</p>
+<p>If a resistor’s dimensions are not limited by the two criteria above then we usually choose the minimum width that is allowed for a given resistor in a specific technology (for SG13G2 it is <span class="math inline">\(L_\mathrm{min} = 0.5\,\mu\text{m}\)</span>) to save area and to minimize the parasitic capacitance of the resistor to substrate.</p>
 </section>
 <section id="sec-basic-ota-simulation-pvt" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="sec-basic-ota-simulation-pvt"><span class="header-section-number">8.8</span> 5T-OTA Simulation versus PVT</h2>
+<h2 data-number="8.8" class="anchored" data-anchor-id="sec-basic-ota-simulation-pvt"><span class="header-section-number">8.8</span> 5T-OTA Simulation versus PVT and MC</h2>
 <p>As you have seen in <a href="#sec-basic-ota-simulation" class="quarto-xref">Section&nbsp;8.5</a> running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:</p>
 <ol type="1">
 <li>The supply voltage of the circuit has tolerances, and thus we need to check the performance against this variation.</li>
@@ -3061,7 +3061,8 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </section>
 <section id="monte-carlo-simulation-analysis" class="level3" data-number="8.8.2">
 <h3 data-number="8.8.2" class="anchored" data-anchor-id="monte-carlo-simulation-analysis"><span class="header-section-number">8.8.2</span> Monte Carlo Simulation Analysis</h3>
-<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a> we see that the output voltage specification is not met due to MOSFET mismatch. We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions proof to be too small. We should now go back and increase the transistor sizing (increase <span class="math inline">\(L\)</span> significantly while keeping the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> values). Likely we will find that some performance parameter now deteriorated due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.</p>
+<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a> we see that the output voltage specification is not met due to MOSFET mismatch! We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions proof to be too small. We should now go back and change the transistor sizing (increasing <span class="math inline">\(L\)</span> significantly while keeping the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.</p>
+<p>It is not unusual that the power consumption now increases, as we have to increase the size of the MOSFETs for matching, and these larger MOSFETs increase the parasitic capacitances which in turn lead to larger power consumption to keep the required bandwidth by increasing the <span class="math inline">\(g_\mathrm{m}\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Re-Sizing of 5T-OTA for Mismatch">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -3072,7 +3073,7 @@ Exercise: Re-Sizing of 5T-OTA for Mismatch
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Go back to <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> and repeat the sizing procedure of the 5T-OTA by increasing the <span class="math inline">\(L\)</span> of the MOSFETs significantly. Focus first on the differential pair as it will likely have the biggest impact. Then, tune the size of the output current mirror is necessary.</p>
+<p>Go back to <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> and repeat the sizing procedure of the 5T-OTA by increasing the <span class="math inline">\(L\)</span> of the MOSFETs significantly. Focus first on the differential pair as it will likely have the biggest impact (see <a href="#eq-diffpair-offset" class="quarto-xref">Equation&nbsp;30</a>). Then, tune the size of the output current mirror if necessary (see <a href="#eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;31</a>).</p>
 <p>Once you are happy with the sizing result repeat the PVT simulations in CACE to confirm the performance of the voltage buffer including mismatch.</p>
 </div>
 </div>
