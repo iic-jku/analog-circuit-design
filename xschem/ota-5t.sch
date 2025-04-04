@@ -260,12 +260,12 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {ipin.sym} 160 -440 0 0 {name=p1 lab=ibias_20u}
-C {iopin.sym} 160 -860 0 1 {name=p2 lab=vdd}
-C {iopin.sym} 160 -160 0 1 {name=p3 lab=vss}
-C {ipin.sym} 160 -590 0 0 {name=p4 lab=vinp}
-C {ipin.sym} 160 -500 0 0 {name=p5 lab=vinn}
-C {opin.sym} 1140 -640 0 0 {name=p6 lab=vout}
+C {devices/ipin.sym} 160 -440 0 0 {name=p1 lab=ibias_20u}
+C {devices/iopin.sym} 160 -860 0 1 {name=p2 lab=vdd}
+C {devices/iopin.sym} 160 -160 0 1 {name=p3 lab=vss}
+C {devices/ipin.sym} 160 -590 0 0 {name=p4 lab=vinp}
+C {devices/ipin.sym} 160 -500 0 0 {name=p5 lab=vinn}
+C {devices/opin.sym} 1140 -640 0 0 {name=p6 lab=vout}
 C {sg13g2_pr/sg13_lv_nmos.sym} 400 -210 0 0 {name=M7
 l=0.13u
 w=0.5u
@@ -282,7 +282,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {ipin.sym} 160 -260 0 0 {name=p7 lab=d_ena}
+C {devices/ipin.sym} 160 -260 0 0 {name=p7 lab=d_ena}
 C {sg13g2_pr/sg13_lv_nmos.sym} 720 -390 0 0 {name=M10
 l=0.13u
 w=0.5u
@@ -291,10 +291,10 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {lab_wire.sym} 690 -210 0 0 {name=p8 sig_type=std_logic lab=ena_n}
-C {lab_wire.sym} 800 -280 0 0 {name=p9 sig_type=std_logic lab=gate_n}
-C {lab_wire.sym} 940 -710 0 0 {name=p10 sig_type=std_logic lab=gate_p}
-C {lab_wire.sym} 900 -440 0 0 {name=p11 sig_type=std_logic lab=tail}
+C {devices/lab_wire.sym} 690 -210 0 0 {name=p8 sig_type=std_logic lab=ena_n}
+C {devices/lab_wire.sym} 800 -280 0 0 {name=p9 sig_type=std_logic lab=gate_n}
+C {devices/lab_wire.sym} 940 -710 0 0 {name=p10 sig_type=std_logic lab=gate_p}
+C {devices/lab_wire.sym} 900 -440 0 0 {name=p11 sig_type=std_logic lab=tail}
 C {sg13g2_pr/sg13_lv_nmos.sym} 240 -210 0 0 {name=M12
 l=0.13u
 w=0.5u
@@ -311,7 +311,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {lab_wire.sym} 590 -390 0 0 {name=p12 sig_type=std_logic lab=ena}
+C {devices/lab_wire.sym} 590 -390 0 0 {name=p12 sig_type=std_logic lab=ena}
 C {sg13g2_pr/annotate_fet_params.sym} 1280 -310 0 0 {name=annot1 ref=M5}
 C {sg13g2_pr/annotate_fet_params.sym} 1280 -520 0 0 {name=annot2 ref=M1}
 C {sg13g2_pr/annotate_fet_params.sym} 1440 -520 0 0 {name=annot3 ref=M2}
