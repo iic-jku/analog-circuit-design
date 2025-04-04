@@ -154,7 +154,7 @@ C {devices/launcher.sym} 740 -150 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
-C {lab_pin.sym} 380 -1040 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/lab_pin.sym} 380 -1040 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {sg13g2_pr/pnpMPA.sym} 580 -370 0 1 {name=Q1[1..2]
 model=pnpMPA
 spiceprefix=X
@@ -184,13 +184,13 @@ w=1.0e-6
 l=2.0e-6
 m=1
 }
-C {lab_wire.sym} 1380 -560 0 0 {name=p1 sig_type=std_logic lab=vref}
-C {ammeter.sym} 560 -470 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1200 -640 0 0 {name=Vmeas1 savecurrent=true spice_ignore=0}
-C {lab_pin.sym} 1000 -520 0 0 {name=p3 sig_type=std_logic lab=v2}
-C {lab_pin.sym} 1000 -420 0 0 {name=p4 sig_type=std_logic lab=v3}
-C {lab_pin.sym} 560 -520 0 0 {name=p5 sig_type=std_logic lab=v1}
-C {lab_wire.sym} 680 -970 0 0 {name=p6 sig_type=std_logic lab=vg4}
+C {devices/lab_wire.sym} 1380 -560 0 0 {name=p1 sig_type=std_logic lab=vref}
+C {devices/ammeter.sym} 560 -470 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1200 -640 0 0 {name=Vmeas1 savecurrent=true spice_ignore=0}
+C {devices/lab_pin.sym} 1000 -520 0 0 {name=p3 sig_type=std_logic lab=v2}
+C {devices/lab_pin.sym} 1000 -420 0 0 {name=p4 sig_type=std_logic lab=v3}
+C {devices/lab_pin.sym} 560 -520 0 0 {name=p5 sig_type=std_logic lab=v1}
+C {devices/lab_wire.sym} 680 -970 0 0 {name=p6 sig_type=std_logic lab=vg4}
 C {sg13g2_pr/sg13_lv_pmos.sym} 580 -890 0 1 {name=M4B
 l=1u
 w=50u
@@ -199,9 +199,9 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {lab_wire.sym} 700 -570 0 0 {name=p7 sig_type=std_logic lab=vg1}
-C {lab_wire.sym} 700 -650 0 0 {name=p8 sig_type=std_logic lab=vg2}
-C {lab_wire.sym} 680 -890 0 0 {name=p9 sig_type=std_logic lab=vg3}
+C {devices/lab_wire.sym} 700 -570 0 0 {name=p7 sig_type=std_logic lab=vg1}
+C {devices/lab_wire.sym} 700 -650 0 0 {name=p8 sig_type=std_logic lab=vg2}
+C {devices/lab_wire.sym} 680 -890 0 0 {name=p9 sig_type=std_logic lab=vg3}
 C {sg13g2_pr/sg13_lv_nmos.sym} 580 -650 0 1 {name=M1B
 l=1u
 w=15u
@@ -274,7 +274,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {ammeter.sym} 760 -710 0 0 {name=Vmeas2 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 760 -710 0 0 {name=Vmeas2 savecurrent=true spice_ignore=0}
 C {bandgap_simple_res-6k.sym} 1000 -440 0 1 {name=xr1}
 C {bandgap_simple_res-10k.sym} 560 -720 0 1 {name=xr4}
 C {bandgap_simple_res-10k.sym} 1000 -760 0 0 {name=xr3}

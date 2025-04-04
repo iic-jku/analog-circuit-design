@@ -177,11 +177,11 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {isource.sym} 1240 -350 0 0 {name=Ibias1 value=20u}
-C {lab_pin.sym} 880 -420 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/isource.sym} 1240 -350 0 0 {name=Ibias1 value=20u}
+C {devices/lab_pin.sym} 880 -420 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {devices/vsource.sym} 1130 -300 3 0 {name=Vtest1 value="dc 0 ac 1"}
-C {lab_wire.sym} 1060 -300 0 0 {name=p1 sig_type=std_logic lab=vf1}
-C {lab_wire.sym} 1210 -300 0 0 {name=p3 sig_type=std_logic lab=vr1}
+C {devices/lab_wire.sym} 1060 -300 0 0 {name=p1 sig_type=std_logic lab=vf1}
+C {devices/lab_wire.sym} 1210 -300 0 0 {name=p3 sig_type=std_logic lab=vr1}
 C {devices/gnd.sym} 1740 -160 0 0 {name=l2 lab=GND}
 C {devices/gnd.sym} 1810 -160 0 0 {name=l6 lab=GND}
 C {sg13g2_pr/sg13_lv_nmos.sym} 1720 -250 0 0 {name=M2
@@ -192,12 +192,12 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {isource.sym} 1740 -350 0 0 {name=Ibias2 value=20u}
-C {ammeter.sym} 1670 -300 1 0 {name=Vir1 savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1570 -300 1 0 {name=Vif1 savecurrent=true spice_ignore=0}
-C {isource.sym} 1620 -190 2 0 {name=Itest1 value="dc 0 ac 1"}
+C {devices/isource.sym} 1740 -350 0 0 {name=Ibias2 value=20u}
+C {devices/ammeter.sym} 1670 -300 1 0 {name=Vir1 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1570 -300 1 0 {name=Vif1 savecurrent=true spice_ignore=0}
+C {devices/isource.sym} 1620 -190 2 0 {name=Itest1 value="dc 0 ac 1"}
 C {devices/gnd.sym} 1620 -160 0 0 {name=l7 lab=GND}
-C {lab_wire.sym} 1520 -250 0 0 {name=p4 sig_type=std_logic lab=v_gs}
+C {devices/lab_wire.sym} 1520 -250 0 0 {name=p4 sig_type=std_logic lab=v_gs}
 C {devices/launcher.sym} 860 -1040 0 0 {name=h2
 descr="Annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
@@ -216,8 +216,8 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {isource.sym} 1240 -810 0 0 {name=Ibias3 value=20u}
-C {lab_pin.sym} 880 -880 0 0 {name=p5 sig_type=std_logic lab=v_dd}
+C {devices/isource.sym} 1240 -810 0 0 {name=Ibias3 value=20u}
+C {devices/lab_pin.sym} 880 -880 0 0 {name=p5 sig_type=std_logic lab=v_dd}
 C {devices/gnd.sym} 1740 -620 0 0 {name=l11 lab=GND}
 C {devices/gnd.sym} 1810 -620 0 0 {name=l12 lab=GND}
 C {sg13g2_pr/sg13_lv_nmos.sym} 1720 -710 0 0 {name=M4
@@ -228,14 +228,14 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {isource.sym} 1740 -810 0 0 {name=Ibias4 value=20u}
-C {isource.sym} 1020 -660 2 0 {name=Itest2 value="dc 0 ac 0"}
+C {devices/isource.sym} 1740 -810 0 0 {name=Ibias4 value=20u}
+C {devices/isource.sym} 1020 -660 2 0 {name=Itest2 value="dc 0 ac 0"}
 C {devices/gnd.sym} 1020 -620 0 0 {name=l9 lab=GND}
-C {isource.sym} 1520 -660 2 0 {name=Itest3 value="dc 0 ac 1"}
+C {devices/isource.sym} 1520 -660 2 0 {name=Itest3 value="dc 0 ac 1"}
 C {devices/gnd.sym} 1520 -620 0 0 {name=l13 lab=GND}
 C {devices/vsource.sym} 1070 -760 3 0 {name=Vtest2 value="dc 0 ac 1"}
 C {devices/vsource.sym} 1570 -760 3 0 {name=Vtest3 value="dc 0 ac 0"}
-C {lab_wire.sym} 980 -710 0 0 {name=p6 sig_type=std_logic lab=vmeas1}
-C {lab_wire.sym} 1480 -710 0 0 {name=p7 sig_type=std_logic lab=vmeas2}
-C {ammeter.sym} 1170 -760 1 0 {name=Vimeas1 savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1670 -760 1 0 {name=Vimeas2 savecurrent=true spice_ignore=0}
+C {devices/lab_wire.sym} 980 -710 0 0 {name=p6 sig_type=std_logic lab=vmeas1}
+C {devices/lab_wire.sym} 1480 -710 0 0 {name=p7 sig_type=std_logic lab=vmeas2}
+C {devices/ammeter.sym} 1170 -760 1 0 {name=Vimeas1 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1670 -760 1 0 {name=Vimeas2 savecurrent=true spice_ignore=0}

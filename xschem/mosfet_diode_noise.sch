@@ -69,6 +69,6 @@ C {devices/launcher.sym} 740 -160 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
-C {isource.sym} 750 -470 0 0 {name=Ibias value="dc 20u ac 1"}
-C {lab_pin.sym} 680 -420 0 0 {name=p1 sig_type=std_logic lab=v_gs}
-C {lab_pin.sym} 520 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/isource.sym} 750 -470 0 0 {name=Ibias value="dc 20u ac 1"}
+C {devices/lab_pin.sym} 680 -420 0 0 {name=p1 sig_type=std_logic lab=v_gs}
+C {devices/lab_pin.sym} 520 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}

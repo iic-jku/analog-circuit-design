@@ -159,9 +159,9 @@ C {devices/launcher.sym} 740 -160 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
-C {isource.sym} 610 -490 0 0 {name=Ibias value=20u}
-C {lab_pin.sym} 680 -370 0 1 {name=p1 sig_type=std_logic lab=v_gs}
-C {lab_pin.sym} 380 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/isource.sym} 610 -490 0 0 {name=Ibias value=20u}
+C {devices/lab_pin.sym} 680 -370 0 1 {name=p1 sig_type=std_logic lab=v_gs}
+C {devices/lab_pin.sym} 380 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {sg13g2_pr/sg13_lv_nmos.sym} 800 -370 0 0 {name=M2
 l=5u
 w=2u
@@ -190,13 +190,13 @@ C {devices/vsource.sym} 940 -350 0 0 {name=Vout1 value=0.6
 }
 C {devices/vsource.sym} 1180 -350 0 0 {name=Vout2 value=0.6}
 C {devices/vsource.sym} 1440 -350 0 0 {name=Vout3 value=0.6}
-C {spice_probe.sym} 820 -520 0 0 {name=p3 attrs=""}
-C {spice_probe.sym} 1060 -520 0 0 {name=p4 attrs=""}
-C {spice_probe.sym} 1320 -520 0 0 {name=p5 attrs=""}
-C {spice_probe.sym} 700 -420 0 0 {name=p6 attrs=""}
-C {lab_pin.sym} 940 -520 0 1 {name=p7 sig_type=std_logic lab=out1}
-C {lab_pin.sym} 1180 -520 0 1 {name=p8 sig_type=std_logic lab=out2}
-C {lab_pin.sym} 1440 -520 0 1 {name=p9 sig_type=std_logic lab=out3}
-C {ammeter.sym} 820 -470 0 0 {name=Viout1 savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1060 -470 0 0 {name=Viout2 savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1320 -470 0 0 {name=Viout3 savecurrent=true spice_ignore=0}
+C {devices/spice_probe.sym} 820 -520 0 0 {name=p3 attrs=""}
+C {devices/spice_probe.sym} 1060 -520 0 0 {name=p4 attrs=""}
+C {devices/spice_probe.sym} 1320 -520 0 0 {name=p5 attrs=""}
+C {devices/spice_probe.sym} 700 -420 0 0 {name=p6 attrs=""}
+C {devices/lab_pin.sym} 940 -520 0 1 {name=p7 sig_type=std_logic lab=out1}
+C {devices/lab_pin.sym} 1180 -520 0 1 {name=p8 sig_type=std_logic lab=out2}
+C {devices/lab_pin.sym} 1440 -520 0 1 {name=p9 sig_type=std_logic lab=out3}
+C {devices/ammeter.sym} 820 -470 0 0 {name=Viout1 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1060 -470 0 0 {name=Viout2 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1320 -470 0 0 {name=Viout3 savecurrent=true spice_ignore=0}

@@ -87,15 +87,15 @@ C {devices/launcher.sym} 380 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
 }
-C {res.sym} 800 -370 0 0 {name=Rload
+C {devices/res.sym} 800 -370 0 0 {name=Rload
 value=50
 device=resistor
 m=1}
-C {res.sym} 640 -370 0 0 {name=R2
+C {devices/res.sym} 640 -370 0 0 {name=R2
 value=50
 device=resistor
 m=1}
-C {ammeter.sym} 640 -510 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 640 -510 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
 C {sg13g2_pr/sg13_lv_pmos.sym} 620 -610 0 0 {name=M1
 l=0.13u
 w=260u
@@ -105,18 +105,18 @@ model=sg13_lv_pmos
 spiceprefix=X
 }
 C {devices/vsource.sym} 480 -430 0 0 {name=Vsrc value="dc 0.899 ac 1"}
-C {lab_wire.sym} 480 -680 0 0 {name=p3 sig_type=std_logic lab=vdd}
-C {lab_wire.sym} 560 -610 0 0 {name=p1 sig_type=std_logic lab=vin}
-C {lab_wire.sym} 740 -440 0 0 {name=p2 sig_type=std_logic lab=vout}
+C {devices/lab_wire.sym} 480 -680 0 0 {name=p3 sig_type=std_logic lab=vdd}
+C {devices/lab_wire.sym} 560 -610 0 0 {name=p1 sig_type=std_logic lab=vin}
+C {devices/lab_wire.sym} 740 -440 0 0 {name=p2 sig_type=std_logic lab=vout}
 C {devices/launcher.sym} 620 -160 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
-C {res.sym} 480 -530 0 0 {name=R1
+C {devices/res.sym} 480 -530 0 0 {name=R1
 value=1k
 device=resistor
 m=1}
-C {launcher.sym} 880 -160 0 0 {name=h5
+C {devices/launcher.sym} 880 -160 0 0 {name=h5
 descr="load waves" 
 tclcommand="xschem raw_read $netlist_dir/measurement_amplifier.raw ac"
 }
