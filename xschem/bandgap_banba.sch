@@ -185,10 +185,10 @@ w=1.0e-6
 l=2.0e-6
 m=1
 }
-C {ammeter.sym} 890 -370 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1430 -540 0 0 {name=Vmeas1 savecurrent=true spice_ignore=0}
-C {lab_pin.sym} 1130 -420 0 0 {name=p3 sig_type=std_logic lab=v2}
-C {lab_pin.sym} 1130 -320 0 0 {name=p4 sig_type=std_logic lab=v3}
+C {devices/ammeter.sym} 890 -370 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1430 -540 0 0 {name=Vmeas1 savecurrent=true spice_ignore=0}
+C {devices/lab_pin.sym} 1130 -420 0 0 {name=p3 sig_type=std_logic lab=v2}
+C {devices/lab_pin.sym} 1130 -320 0 0 {name=p4 sig_type=std_logic lab=v3}
 C {ota-5t.sym} 650 -640 0 1 {name=xota}
 C {sg13g2_pr/sg13_lv_pmos.sym} 630 -870 0 1 {name=M4
 l=1u
@@ -198,9 +198,9 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {ammeter.sym} 890 -490 0 0 {name=Vmeas2 savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1130 -490 0 0 {name=Vmeas3 savecurrent=true spice_ignore=0}
-C {lab_pin.sym} 810 -440 0 0 {name=p5 sig_type=std_logic lab=v1}
+C {devices/ammeter.sym} 890 -490 0 0 {name=Vmeas2 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1130 -490 0 0 {name=Vmeas3 savecurrent=true spice_ignore=0}
+C {devices/lab_pin.sym} 810 -440 0 0 {name=p5 sig_type=std_logic lab=v1}
 C {sg13g2_pr/sg13_lv_pmos.sym} 910 -870 0 1 {name=M1
 l=1u
 w=5u
@@ -225,7 +225,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {lab_pin.sym} 490 -740 0 0 {name=p6 sig_type=std_logic lab=vg}
+C {devices/lab_pin.sym} 490 -740 0 0 {name=p6 sig_type=std_logic lab=vg}
 C {sg13g2_pr/sg13_lv_nmos.sym} 470 -320 0 0 {name=M5
 l=0.13u
 w=1u
@@ -266,7 +266,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {lab_wire.sym} 370 -320 0 0 {name=p8 sig_type=std_logic lab=ena_n}
+C {devices/lab_wire.sym} 370 -320 0 0 {name=p8 sig_type=std_logic lab=ena_n}
 C {bandgap_banba_res-13k.sym} 1130 -340 0 0 {name=xr1}
 C {bandgap_banba_res-40k.sym} 1290 -340 0 0 {name=xr2a}
 C {bandgap_banba_res-40k.sym} 1290 -260 0 0 {name=xr2b}
@@ -305,7 +305,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {iopin.sym} 130 -1040 0 1 {name=p9 lab=vdd}
-C {iopin.sym} 130 -200 0 1 {name=p2 lab=vss}
-C {ipin.sym} 130 -520 0 0 {name=p7 lab=d_ena}
-C {opin.sym} 1590 -480 0 0 {name=p10 lab=vref_0v6}
+C {devices/iopin.sym} 130 -1040 0 1 {name=p9 lab=vdd}
+C {devices/iopin.sym} 130 -200 0 1 {name=p2 lab=vss}
+C {devices/ipin.sym} 130 -520 0 0 {name=p7 lab=d_ena}
+C {devices/opin.sym} 1590 -480 0 0 {name=p10 lab=vref_0v6}

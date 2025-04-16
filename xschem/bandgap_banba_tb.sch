@@ -69,11 +69,11 @@ C {devices/launcher.sym} 740 -150 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
-C {lab_pin.sym} 560 -600 0 0 {name=p2 sig_type=std_logic lab=v_dd}
-C {lab_wire.sym} 1120 -520 0 0 {name=p1 sig_type=std_logic lab=vref}
-C {vsource.sym} 660 -390 0 0 {name=V1 value="1.5 pwl(0 0 1u 0 1.001u 1.5)" savecurrent=false}
-C {lab_pin.sym} 660 -520 0 0 {name=p7 sig_type=std_logic lab=ena}
+C {devices/lab_pin.sym} 560 -600 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/lab_wire.sym} 1120 -520 0 0 {name=p1 sig_type=std_logic lab=vref}
+C {devices/vsource.sym} 660 -390 0 0 {name=V1 value="1.5 pwl(0 0 1u 0 1.001u 1.5)" savecurrent=false}
+C {devices/lab_pin.sym} 660 -520 0 0 {name=p7 sig_type=std_logic lab=ena}
 C {bandgap_banba.sym} 890 -520 0 0 {name=xbg}
-C {capa.sym} 1120 -430 0 0 {name=Cload
+C {devices/capa.sym} 1120 -430 0 0 {name=Cload
 m=1
 value=10f}

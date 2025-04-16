@@ -600,11 +600,11 @@ C {devices/launcher.sym} 2950 -2980 0 0 {name=h3
 descr="Annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
-C {vdd.sym} 3760 -2200 0 0 {name=l7 lab=VDD}
-C {vdd.sym} 2340 -2560 0 0 {name=l8 lab=VDD}
+C {devices/vdd.sym} 3760 -2200 0 0 {name=l7 lab=VDD}
+C {devices/vdd.sym} 2340 -2560 0 0 {name=l8 lab=VDD}
 C {devices/gnd.sym} 2340 -2280 0 0 {name=l9 lab=GND}
-C {lab_pin.sym} 2740 -2400 0 1 {name=p3 sig_type=std_logic lab=voutp1}
-C {lab_pin.sym} 2740 -2440 0 1 {name=p4 sig_type=std_logic lab=voutn1}
+C {devices/lab_pin.sym} 2740 -2400 0 1 {name=p3 sig_type=std_logic lab=voutp1}
+C {devices/lab_pin.sym} 2740 -2440 0 1 {name=p4 sig_type=std_logic lab=voutn1}
 C {devices/lab_pin.sym} 1640 -2560 0 0 {name=l10 sig_type=std_logic lab=vinp1}
 C {devices/lab_pin.sym} 1640 -2280 0 0 {name=l11 sig_type=std_logic lab=vinn1
 }
@@ -641,32 +641,32 @@ C {devices/lab_pin.sym} 2670 -2630 0 0 {name=l23 sig_type=std_logic lab=voutp1
 }
 C {devices/vsource.sym} 1320 -2350 0 0 {name=vind1 value="dc 0 ac 1"
 }
-C {res.sym} 2270 -2740 1 0 {name=R2a
+C {devices/res.sym} 2270 -2740 1 0 {name=R2a
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {res.sym} 2270 -2100 1 0 {name=R2b
+C {devices/res.sym} 2270 -2100 1 0 {name=R2b
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {capa.sym} 2270 -2660 1 0 {name=C2a
+C {devices/capa.sym} 2270 -2660 1 0 {name=C2a
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 2270 -2180 1 1 {name=C2b
+C {devices/capa.sym} 2270 -2180 1 1 {name=C2b
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 1930 -2540 1 0 {name=C1a
+C {devices/capa.sym} 1930 -2540 1 0 {name=C1a
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 1930 -2300 1 0 {name=C1b
+C {devices/capa.sym} 1930 -2300 1 0 {name=C1b
 m=1
 value=1p
 footprint=1206
@@ -710,10 +710,10 @@ m=1
 value=5f
 footprint=1206
 device="ceramic capacitor"}
-C {vdd.sym} 1840 -1760 0 0 {name=l27 lab=VDD}
+C {devices/vdd.sym} 1840 -1760 0 0 {name=l27 lab=VDD}
 C {devices/gnd.sym} 1840 -1480 0 0 {name=l29 lab=GND}
-C {lab_pin.sym} 2240 -1600 0 1 {name=p1 sig_type=std_logic lab=voutp2}
-C {lab_pin.sym} 2240 -1640 0 1 {name=p2 sig_type=std_logic lab=voutn2}
+C {devices/lab_pin.sym} 2240 -1600 0 1 {name=p1 sig_type=std_logic lab=voutp2}
+C {devices/lab_pin.sym} 2240 -1640 0 1 {name=p2 sig_type=std_logic lab=voutn2}
 C {devices/lab_pin.sym} 1740 -1620 0 0 {name=l31 sig_type=std_logic lab=Vcm}
 C {devices/lab_pin.sym} 1860 -1740 2 0 {name=l34 sig_type=std_logic lab=amp_en}
 C {devices/capa.sym} 2200 -1490 0 0 {name=C5
@@ -729,32 +729,32 @@ C {devices/lab_pin.sym} 2430 -1600 2 1 {name=l43 sig_type=std_logic lab=voutn2
 }
 C {devices/lab_pin.sym} 2430 -1640 0 0 {name=l44 sig_type=std_logic lab=voutp2
 }
-C {res.sym} 1770 -1940 1 0 {name=R1
+C {devices/res.sym} 1770 -1940 1 0 {name=R1
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {res.sym} 1770 -1300 1 0 {name=R2
+C {devices/res.sym} 1770 -1300 1 0 {name=R2
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {capa.sym} 1770 -1860 1 0 {name=C6
+C {devices/capa.sym} 1770 -1860 1 0 {name=C6
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 1770 -1380 1 1 {name=C7
+C {devices/capa.sym} 1770 -1380 1 1 {name=C7
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 1430 -1740 1 0 {name=C9
+C {devices/capa.sym} 1430 -1740 1 0 {name=C9
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 1430 -1500 1 0 {name=C10
+C {devices/capa.sym} 1430 -1500 1 0 {name=C10
 m=1
 value=1p
 footprint=1206
@@ -765,10 +765,10 @@ m=1
 value=5f
 footprint=1206
 device="ceramic capacitor"}
-C {vdd.sym} 1840 -1020 0 0 {name=l50 lab=VDD}
+C {devices/vdd.sym} 1840 -1020 0 0 {name=l50 lab=VDD}
 C {devices/gnd.sym} 1840 -740 0 0 {name=l51 lab=GND}
-C {lab_pin.sym} 2240 -860 0 1 {name=p5 sig_type=std_logic lab=voutp3}
-C {lab_pin.sym} 2240 -900 0 1 {name=p6 sig_type=std_logic lab=voutn3}
+C {devices/lab_pin.sym} 2240 -860 0 1 {name=p5 sig_type=std_logic lab=voutp3}
+C {devices/lab_pin.sym} 2240 -900 0 1 {name=p6 sig_type=std_logic lab=voutn3}
 C {devices/lab_pin.sym} 1740 -880 0 0 {name=l52 sig_type=std_logic lab=Vcm}
 C {devices/lab_pin.sym} 1860 -1000 2 0 {name=l55 sig_type=std_logic lab=amp_en}
 C {devices/capa.sym} 2200 -750 0 0 {name=C14
@@ -784,37 +784,37 @@ C {devices/lab_pin.sym} 2430 -860 2 1 {name=l59 sig_type=std_logic lab=voutn3
 }
 C {devices/lab_pin.sym} 2430 -900 0 0 {name=l60 sig_type=std_logic lab=voutp3
 }
-C {res.sym} 1770 -1200 1 0 {name=R3
+C {devices/res.sym} 1770 -1200 1 0 {name=R3
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {res.sym} 1770 -560 1 0 {name=R4
+C {devices/res.sym} 1770 -560 1 0 {name=R4
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {capa.sym} 1770 -1120 1 0 {name=C15
+C {devices/capa.sym} 1770 -1120 1 0 {name=C15
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 1770 -640 1 1 {name=C16
+C {devices/capa.sym} 1770 -640 1 1 {name=C16
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 1430 -1000 1 0 {name=C17
+C {devices/capa.sym} 1430 -1000 1 0 {name=C17
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 1430 -760 1 0 {name=C18
+C {devices/capa.sym} 1430 -760 1 0 {name=C18
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {title.sym} 180 -60 0 0 {name=l2 author="Simon Dorrer"}
+C {devices/title.sym} 180 -60 0 0 {name=l2 author="Simon Dorrer"}
 C {devices/lab_pin.sym} 1320 -1620 0 0 {name=l65 sig_type=std_logic lab=Vcm}
 C {devices/lab_pin.sym} 1320 -880 0 0 {name=l32 sig_type=std_logic lab=Vcm}
 C {devices/lab_pin.sym} 2260 -1890 0 1 {name=l48 sig_type=std_logic lab=vf2}
@@ -834,18 +834,18 @@ C {devices/lab_pin.sym} 2430 -1860 0 0 {name=l61 sig_type=std_logic lab=vrp2
 
 }
 C {devices/vsource.sym} 1630 -1660 1 1 {name=Vtestp2 value="dc 0 ac 1"}
-C {lab_wire.sym} 1720 -1660 0 0 {name=p9 sig_type=std_logic lab=vfp2}
-C {lab_wire.sym} 1560 -1660 0 0 {name=p13 sig_type=std_logic lab=vrp2}
+C {devices/lab_wire.sym} 1720 -1660 0 0 {name=p9 sig_type=std_logic lab=vfp2}
+C {devices/lab_wire.sym} 1560 -1660 0 0 {name=p13 sig_type=std_logic lab=vrp2}
 C {devices/vsource.sym} 1630 -1580 1 0 {name=Vtestn2 value="dc 0 ac -1"}
-C {lab_wire.sym} 1720 -1580 0 0 {name=p10 sig_type=std_logic lab=vfn2}
-C {lab_wire.sym} 1560 -1580 0 0 {name=p11 sig_type=std_logic lab=vrn2}
-C {ammeter.sym} 1570 -940 3 1 {name=Virp3 savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1670 -940 3 1 {name=Vifp3 savecurrent=true spice_ignore=0}
-C {isource.sym} 1620 -770 2 1 {name=Itestn3 value="dc 0 ac -1"}
+C {devices/lab_wire.sym} 1720 -1580 0 0 {name=p10 sig_type=std_logic lab=vfn2}
+C {devices/lab_wire.sym} 1560 -1580 0 0 {name=p11 sig_type=std_logic lab=vrn2}
+C {devices/ammeter.sym} 1570 -940 3 1 {name=Virp3 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1670 -940 3 1 {name=Vifp3 savecurrent=true spice_ignore=0}
+C {devices/isource.sym} 1620 -770 2 1 {name=Itestn3 value="dc 0 ac -1"}
 C {devices/gnd.sym} 1620 -720 0 0 {name=l62 lab=GND}
-C {ammeter.sym} 1570 -820 3 0 {name=Virn3 savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1670 -820 3 0 {name=Vifn3 savecurrent=true spice_ignore=0}
-C {isource.sym} 1620 -990 0 0 {name=Itestp3 value="dc 0 ac 1"}
+C {devices/ammeter.sym} 1570 -820 3 0 {name=Virn3 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1670 -820 3 0 {name=Vifn3 savecurrent=true spice_ignore=0}
+C {devices/isource.sym} 1620 -990 0 0 {name=Itestp3 value="dc 0 ac 1"}
 C {devices/gnd.sym} 1620 -1040 2 0 {name=l63 lab=GND}
 C {devices/gnd.sym} 3480 -1400 0 0 {name=l64 lab=GND}
 C {devices/capa.sym} 3480 -1490 0 0 {name=C11
@@ -853,10 +853,10 @@ m=1
 value=5f
 footprint=1206
 device="ceramic capacitor"}
-C {vdd.sym} 3220 -1760 0 0 {name=l66 lab=VDD}
+C {devices/vdd.sym} 3220 -1760 0 0 {name=l66 lab=VDD}
 C {devices/gnd.sym} 3220 -1480 0 0 {name=l67 lab=GND}
-C {lab_pin.sym} 3620 -1600 0 1 {name=p7 sig_type=std_logic lab=voutp4}
-C {lab_pin.sym} 3620 -1640 0 1 {name=p8 sig_type=std_logic lab=voutn4}
+C {devices/lab_pin.sym} 3620 -1600 0 1 {name=p7 sig_type=std_logic lab=voutp4}
+C {devices/lab_pin.sym} 3620 -1640 0 1 {name=p8 sig_type=std_logic lab=voutn4}
 C {devices/lab_pin.sym} 3120 -1620 0 0 {name=l68 sig_type=std_logic lab=Vcm}
 C {devices/lab_pin.sym} 3240 -1740 2 0 {name=l69 sig_type=std_logic lab=amp_en}
 C {devices/capa.sym} 3580 -1490 0 0 {name=C12
@@ -872,32 +872,32 @@ C {devices/lab_pin.sym} 3790 -1600 2 1 {name=l73 sig_type=std_logic lab=voutn4
 }
 C {devices/lab_pin.sym} 3790 -1640 0 0 {name=l74 sig_type=std_logic lab=voutp4
 }
-C {res.sym} 3150 -1940 1 0 {name=R5
+C {devices/res.sym} 3150 -1940 1 0 {name=R5
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {res.sym} 3150 -1300 1 0 {name=R6
+C {devices/res.sym} 3150 -1300 1 0 {name=R6
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {capa.sym} 3150 -1860 1 0 {name=C19
+C {devices/capa.sym} 3150 -1860 1 0 {name=C19
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 3150 -1380 1 1 {name=C20
+C {devices/capa.sym} 3150 -1380 1 1 {name=C20
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 2810 -1740 1 0 {name=C21
+C {devices/capa.sym} 2810 -1740 1 0 {name=C21
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 2810 -1500 1 0 {name=C22
+C {devices/capa.sym} 2810 -1500 1 0 {name=C22
 m=1
 value=1p
 footprint=1206
@@ -908,10 +908,10 @@ m=1
 value=5f
 footprint=1206
 device="ceramic capacitor"}
-C {vdd.sym} 3220 -1020 0 0 {name=l76 lab=VDD}
+C {devices/vdd.sym} 3220 -1020 0 0 {name=l76 lab=VDD}
 C {devices/gnd.sym} 3220 -740 0 0 {name=l77 lab=GND}
-C {lab_pin.sym} 3620 -860 0 1 {name=p12 sig_type=std_logic lab=voutp5}
-C {lab_pin.sym} 3620 -900 0 1 {name=p14 sig_type=std_logic lab=voutn5}
+C {devices/lab_pin.sym} 3620 -860 0 1 {name=p12 sig_type=std_logic lab=voutp5}
+C {devices/lab_pin.sym} 3620 -900 0 1 {name=p14 sig_type=std_logic lab=voutn5}
 C {devices/lab_pin.sym} 3120 -880 0 0 {name=l78 sig_type=std_logic lab=Vcm}
 C {devices/lab_pin.sym} 3240 -1000 2 0 {name=l79 sig_type=std_logic lab=amp_en}
 C {devices/capa.sym} 3580 -750 0 0 {name=C24
@@ -927,32 +927,32 @@ C {devices/lab_pin.sym} 3790 -860 2 1 {name=l83 sig_type=std_logic lab=voutn5
 }
 C {devices/lab_pin.sym} 3790 -900 0 0 {name=l84 sig_type=std_logic lab=voutp5
 }
-C {res.sym} 3150 -1200 1 0 {name=R7
+C {devices/res.sym} 3150 -1200 1 0 {name=R7
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {res.sym} 3150 -560 1 0 {name=R8
+C {devices/res.sym} 3150 -560 1 0 {name=R8
 value=10k
 footprint=1206
 device=resistor
 m=1}
-C {capa.sym} 3150 -1120 1 0 {name=C25
+C {devices/capa.sym} 3150 -1120 1 0 {name=C25
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 3150 -640 1 1 {name=C26
+C {devices/capa.sym} 3150 -640 1 1 {name=C26
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 2810 -1000 1 0 {name=C27
+C {devices/capa.sym} 2810 -1000 1 0 {name=C27
 m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
-C {capa.sym} 2810 -760 1 0 {name=C28
+C {devices/capa.sym} 2810 -760 1 0 {name=C28
 m=1
 value=1p
 footprint=1206
@@ -960,25 +960,25 @@ device="ceramic capacitor"}
 C {devices/lab_pin.sym} 2700 -1620 0 0 {name=l85 sig_type=std_logic lab=Vcm}
 C {devices/lab_pin.sym} 2700 -880 0 0 {name=l86 sig_type=std_logic lab=Vcm}
 C {devices/vsource.sym} 3010 -1680 1 1 {name=Vtestp4 value="dc 0 ac 1"}
-C {ammeter.sym} 2930 -1680 3 0 {name=Vimeasp4 savecurrent=true spice_ignore=0}
-C {isource.sym} 3080 -1730 0 0 {name=Itestp4 value="dc 0 ac 0"}
+C {devices/ammeter.sym} 2930 -1680 3 0 {name=Vimeasp4 savecurrent=true spice_ignore=0}
+C {devices/isource.sym} 3080 -1730 0 0 {name=Itestp4 value="dc 0 ac 0"}
 C {devices/gnd.sym} 3080 -1780 2 0 {name=l88 lab=GND}
-C {ammeter.sym} 2930 -1560 3 0 {name=Vimeasn4 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 2930 -1560 3 0 {name=Vimeasn4 savecurrent=true spice_ignore=0}
 C {devices/vsource.sym} 3010 -1560 1 0 {name=Vtestn4 value="dc 0 ac -1"}
-C {lab_wire.sym} 3080 -1660 2 1 {name=p16 sig_type=std_logic lab=vmeasp4}
-C {isource.sym} 3080 -1510 2 1 {name=Itestn4 value="dc 0 ac 0"}
+C {devices/lab_wire.sym} 3080 -1660 2 1 {name=p16 sig_type=std_logic lab=vmeasp4}
+C {devices/isource.sym} 3080 -1510 2 1 {name=Itestn4 value="dc 0 ac 0"}
 C {devices/gnd.sym} 3080 -1460 0 0 {name=l89 lab=GND}
-C {lab_wire.sym} 3080 -1580 0 0 {name=p15 sig_type=std_logic lab=vmeasn4}
-C {ammeter.sym} 2930 -820 3 0 {name=Vimeasn5 savecurrent=true spice_ignore=0}
+C {devices/lab_wire.sym} 3080 -1580 0 0 {name=p15 sig_type=std_logic lab=vmeasn4}
+C {devices/ammeter.sym} 2930 -820 3 0 {name=Vimeasn5 savecurrent=true spice_ignore=0}
 C {devices/vsource.sym} 3010 -820 1 0 {name=Vtestn5 value="dc 0 ac 0"}
-C {isource.sym} 3080 -770 2 1 {name=Itestn5 value="dc 0 ac -1"}
+C {devices/isource.sym} 3080 -770 2 1 {name=Itestn5 value="dc 0 ac -1"}
 C {devices/gnd.sym} 3080 -720 0 0 {name=l87 lab=GND}
-C {lab_wire.sym} 3080 -840 0 0 {name=p17 sig_type=std_logic lab=vmeasn5}
+C {devices/lab_wire.sym} 3080 -840 0 0 {name=p17 sig_type=std_logic lab=vmeasn5}
 C {devices/vsource.sym} 3010 -940 1 1 {name=Vtestp5 value="dc 0 ac 0"}
-C {ammeter.sym} 2930 -940 3 0 {name=Vimeasp5 savecurrent=true spice_ignore=0}
-C {isource.sym} 3080 -990 0 0 {name=Itestp5 value="dc 0 ac 1"}
+C {devices/ammeter.sym} 2930 -940 3 0 {name=Vimeasp5 savecurrent=true spice_ignore=0}
+C {devices/isource.sym} 3080 -990 0 0 {name=Itestp5 value="dc 0 ac 1"}
 C {devices/gnd.sym} 3080 -1040 2 0 {name=l90 lab=GND}
-C {lab_wire.sym} 3080 -920 2 1 {name=p18 sig_type=std_logic lab=vmeasp5}
+C {devices/lab_wire.sym} 3080 -920 2 1 {name=p18 sig_type=std_logic lab=vmeasp5}
 C {devices/lab_pin.sym} 3860 -1890 0 1 {name=l91 sig_type=std_logic lab=vmeas4}
 C {devices/vcvs.sym} 3860 -1840 0 0 {name=E12 value=0.5}
 C {devices/gnd.sym} 3860 -1780 0 0 {name=l92 lab=GND}

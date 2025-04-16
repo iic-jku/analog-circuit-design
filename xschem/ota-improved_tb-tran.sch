@@ -91,22 +91,22 @@ C {devices/launcher.sym} 740 -160 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
-C {lab_pin.sym} 520 -380 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/lab_pin.sym} 520 -380 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {ota-improved.sym} 1050 -630 0 0 {name=xota}
 C {devices/vsource.sym} 600 -330 0 0 {name=Vss value=0}
 C {devices/gnd.sym} 600 -280 0 0 {name=l1 lab=GND}
-C {lab_pin.sym} 600 -380 0 0 {name=p1 sig_type=std_logic lab=v_ss}
-C {capa.sym} 1300 -560 0 0 {name=C1
+C {devices/lab_pin.sym} 600 -380 0 0 {name=p1 sig_type=std_logic lab=v_ss}
+C {devices/capa.sym} 1300 -560 0 0 {name=C1
 value=50f}
-C {lab_wire.sym} 1300 -630 0 0 {name=p3 sig_type=std_logic lab=v_out}
+C {devices/lab_wire.sym} 1300 -630 0 0 {name=p3 sig_type=std_logic lab=v_out}
 C {devices/vsource.sym} 700 -540 0 0 {name=Vin value=0.8}
-C {lab_wire.sym} 760 -660 0 0 {name=p4 sig_type=std_logic lab=v_in}
-C {isource.sym} 1090 -780 0 0 {name=I0 value="dc 0 pwl(0 0 1.1u 0 1.2u 5u)"}
-C {vsource.sym} 1090 -430 0 0 {name=Venable value="dc 0 pwl(0 0 1u 0 1.1u 1.5)" savecurrent=false}
-C {spice_probe.sym} 820 -660 0 0 {name=p5 attrs=""}
-C {spice_probe.sym} 1180 -630 0 0 {name=p6 attrs=""}
-C {spice_probe.sym} 1090 -470 0 0 {name=p7 attrs=""}
-C {lab_wire.sym} 1090 -530 0 0 {name=p8 sig_type=std_logic lab=v_ena}
+C {devices/lab_wire.sym} 760 -660 0 0 {name=p4 sig_type=std_logic lab=v_in}
+C {devices/isource.sym} 1090 -780 0 0 {name=I0 value="dc 0 pwl(0 0 1.1u 0 1.2u 5u)"}
+C {devices/vsource.sym} 1090 -430 0 0 {name=Venable value="dc 0 pwl(0 0 1u 0 1.1u 1.5)" savecurrent=false}
+C {devices/spice_probe.sym} 820 -660 0 0 {name=p5 attrs=""}
+C {devices/spice_probe.sym} 1180 -630 0 0 {name=p6 attrs=""}
+C {devices/spice_probe.sym} 1090 -470 0 0 {name=p7 attrs=""}
+C {devices/lab_wire.sym} 1090 -530 0 0 {name=p8 sig_type=std_logic lab=v_ena}
 C {devices/code_shown.sym} 0 -170 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
