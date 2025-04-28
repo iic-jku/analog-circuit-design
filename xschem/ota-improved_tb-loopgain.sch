@@ -183,58 +183,58 @@ tclcommand="xschem save; xschem netlist; xschem simulate"
 }
 C {devices/vsource.sym} 720 -190 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 720 -140 0 0 {name=l3 lab=GND}
-C {lab_pin.sym} 720 -240 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/lab_pin.sym} 720 -240 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {devices/vsource.sym} 880 -190 0 0 {name=Vss value=0}
 C {devices/gnd.sym} 880 -140 0 0 {name=l1 lab=GND}
-C {lab_pin.sym} 880 -240 0 0 {name=p1 sig_type=std_logic lab=v_ss}
+C {devices/lab_pin.sym} 880 -240 0 0 {name=p1 sig_type=std_logic lab=v_ss}
 C {devices/vsource.sym} 720 -350 0 0 {name=Vin value="dc 0.75"}
-C {lab_wire.sym} 720 -400 0 0 {name=p4 sig_type=std_logic lab=v_in}
-C {vsource.sym} 880 -350 0 0 {name=Venable value=1.5 savecurrent=false}
-C {lab_wire.sym} 880 -400 0 1 {name=p8 sig_type=std_logic lab=v_ena}
-C {lab_pin.sym} 1340 -580 0 0 {name=p5 sig_type=std_logic lab=v_dd}
-C {lab_pin.sym} 1340 -220 0 0 {name=p6 sig_type=std_logic lab=v_ss}
-C {capa.sym} 1580 -310 0 0 {name=C2
+C {devices/lab_wire.sym} 720 -400 0 0 {name=p4 sig_type=std_logic lab=v_in}
+C {devices/vsource.sym} 880 -350 0 0 {name=Venable value=1.5 savecurrent=false}
+C {devices/lab_wire.sym} 880 -400 0 1 {name=p8 sig_type=std_logic lab=v_ena}
+C {devices/lab_pin.sym} 1340 -580 0 0 {name=p5 sig_type=std_logic lab=v_dd}
+C {devices/lab_pin.sym} 1340 -220 0 0 {name=p6 sig_type=std_logic lab=v_ss}
+C {devices/capa.sym} 1580 -310 0 0 {name=C2
 value=50f}
-C {lab_wire.sym} 1100 -430 0 0 {name=p9 sig_type=std_logic lab=v_in}
-C {isource.sym} 1380 -530 0 0 {name=I1 value=20u pwl(0 0 10u 0 11u 20u)"}
-C {lab_wire.sym} 1380 -300 0 1 {name=p10 sig_type=std_logic lab=v_ena}
-C {lab_pin.sym} 720 -300 0 0 {name=p11 sig_type=std_logic lab=v_ss}
-C {lab_pin.sym} 880 -300 0 0 {name=p12 sig_type=std_logic lab=v_ss}
+C {devices/lab_wire.sym} 1100 -430 0 0 {name=p9 sig_type=std_logic lab=v_in}
+C {devices/isource.sym} 1380 -530 0 0 {name=I1 value=20u pwl(0 0 10u 0 11u 20u)"}
+C {devices/lab_wire.sym} 1380 -300 0 1 {name=p10 sig_type=std_logic lab=v_ena}
+C {devices/lab_pin.sym} 720 -300 0 0 {name=p11 sig_type=std_logic lab=v_ss}
+C {devices/lab_pin.sym} 880 -300 0 0 {name=p12 sig_type=std_logic lab=v_ss}
 C {devices/vsource.sym} 1210 -280 3 0 {name=Vtest1 value="dc 0 ac 1"}
-C {lab_wire.sym} 1140 -280 0 0 {name=p3 sig_type=std_logic lab=vf1}
-C {lab_wire.sym} 1290 -280 0 0 {name=p13 sig_type=std_logic lab=vr1}
-C {lab_pin.sym} 2100 -580 0 0 {name=p14 sig_type=std_logic lab=v_dd}
-C {lab_pin.sym} 2100 -220 0 0 {name=p15 sig_type=std_logic lab=v_ss}
-C {capa.sym} 2340 -310 0 0 {name=C1
+C {devices/lab_wire.sym} 1140 -280 0 0 {name=p3 sig_type=std_logic lab=vf1}
+C {devices/lab_wire.sym} 1290 -280 0 0 {name=p13 sig_type=std_logic lab=vr1}
+C {devices/lab_pin.sym} 2100 -580 0 0 {name=p14 sig_type=std_logic lab=v_dd}
+C {devices/lab_pin.sym} 2100 -220 0 0 {name=p15 sig_type=std_logic lab=v_ss}
+C {devices/capa.sym} 2340 -310 0 0 {name=C1
 value=50f}
-C {lab_wire.sym} 1860 -430 0 0 {name=p17 sig_type=std_logic lab=v_in}
-C {isource.sym} 2140 -530 0 0 {name=I2 value=20u pwl(0 0 10u 0 11u 20u)"}
-C {lab_wire.sym} 2140 -300 0 1 {name=p18 sig_type=std_logic lab=v_ena}
-C {ammeter.sym} 2030 -280 1 0 {name=Vir1 savecurrent=true spice_ignore=0}
-C {ammeter.sym} 1930 -280 1 0 {name=Vif1 savecurrent=true spice_ignore=0}
-C {isource.sym} 1980 -210 2 0 {name=Itest1 value="dc 0 ac 1"}
-C {lab_pin.sym} 1340 -1140 0 0 {name=p19 sig_type=std_logic lab=v_dd}
-C {lab_pin.sym} 1340 -780 0 0 {name=p20 sig_type=std_logic lab=v_ss}
-C {capa.sym} 1580 -870 0 0 {name=C3
+C {devices/lab_wire.sym} 1860 -430 0 0 {name=p17 sig_type=std_logic lab=v_in}
+C {devices/isource.sym} 2140 -530 0 0 {name=I2 value=20u pwl(0 0 10u 0 11u 20u)"}
+C {devices/lab_wire.sym} 2140 -300 0 1 {name=p18 sig_type=std_logic lab=v_ena}
+C {devices/ammeter.sym} 2030 -280 1 0 {name=Vir1 savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 1930 -280 1 0 {name=Vif1 savecurrent=true spice_ignore=0}
+C {devices/isource.sym} 1980 -210 2 0 {name=Itest1 value="dc 0 ac 1"}
+C {devices/lab_pin.sym} 1340 -1140 0 0 {name=p19 sig_type=std_logic lab=v_dd}
+C {devices/lab_pin.sym} 1340 -780 0 0 {name=p20 sig_type=std_logic lab=v_ss}
+C {devices/capa.sym} 1580 -870 0 0 {name=C3
 value=50f}
-C {lab_wire.sym} 1100 -990 0 0 {name=p22 sig_type=std_logic lab=v_in}
-C {isource.sym} 1380 -1090 0 0 {name=I3 value=20u pwl(0 0 10u 0 11u 20u)"}
-C {lab_wire.sym} 1380 -860 0 1 {name=p23 sig_type=std_logic lab=v_ena}
-C {lab_pin.sym} 2100 -1140 0 0 {name=p26 sig_type=std_logic lab=v_dd}
-C {lab_pin.sym} 2100 -780 0 0 {name=p27 sig_type=std_logic lab=v_ss}
-C {capa.sym} 2340 -870 0 0 {name=C4
+C {devices/lab_wire.sym} 1100 -990 0 0 {name=p22 sig_type=std_logic lab=v_in}
+C {devices/isource.sym} 1380 -1090 0 0 {name=I3 value=20u pwl(0 0 10u 0 11u 20u)"}
+C {devices/lab_wire.sym} 1380 -860 0 1 {name=p23 sig_type=std_logic lab=v_ena}
+C {devices/lab_pin.sym} 2100 -1140 0 0 {name=p26 sig_type=std_logic lab=v_dd}
+C {devices/lab_pin.sym} 2100 -780 0 0 {name=p27 sig_type=std_logic lab=v_ss}
+C {devices/capa.sym} 2340 -870 0 0 {name=C4
 value=50f}
-C {lab_wire.sym} 1860 -990 0 0 {name=p29 sig_type=std_logic lab=v_in}
-C {isource.sym} 2140 -1090 0 0 {name=I4 value=20u pwl(0 0 10u 0 11u 20u)"}
-C {lab_wire.sym} 2140 -860 0 1 {name=p30 sig_type=std_logic lab=v_ena}
-C {isource.sym} 1100 -750 2 1 {name=Itest3 value="dc 0 ac 0"}
+C {devices/lab_wire.sym} 1860 -990 0 0 {name=p29 sig_type=std_logic lab=v_in}
+C {devices/isource.sym} 2140 -1090 0 0 {name=I4 value=20u pwl(0 0 10u 0 11u 20u)"}
+C {devices/lab_wire.sym} 2140 -860 0 1 {name=p30 sig_type=std_logic lab=v_ena}
+C {devices/isource.sym} 1100 -750 2 1 {name=Itest3 value="dc 0 ac 0"}
 C {devices/vsource.sym} 1170 -840 3 0 {name=Vtest2 value="dc 0 ac 1"}
-C {lab_wire.sym} 1140 -800 2 0 {name=p24 sig_type=std_logic lab=vmeas1}
-C {ammeter.sym} 1270 -840 1 0 {name=Vimeas1 savecurrent=true spice_ignore=0}
-C {isource.sym} 1860 -750 2 1 {name=Itest2 value="dc 0 ac 1"}
+C {devices/lab_wire.sym} 1140 -800 2 0 {name=p24 sig_type=std_logic lab=vmeas1}
+C {devices/ammeter.sym} 1270 -840 1 0 {name=Vimeas1 savecurrent=true spice_ignore=0}
+C {devices/isource.sym} 1860 -750 2 1 {name=Itest2 value="dc 0 ac 1"}
 C {devices/vsource.sym} 1930 -840 3 0 {name=Vtest3 value="dc 0 ac 0"}
-C {lab_wire.sym} 1900 -800 2 0 {name=p25 sig_type=std_logic lab=vmeas2}
-C {ammeter.sym} 2030 -840 1 0 {name=Vimeas2 savecurrent=true spice_ignore=0}
+C {devices/lab_wire.sym} 1900 -800 2 0 {name=p25 sig_type=std_logic lab=vmeas2}
+C {devices/ammeter.sym} 2030 -840 1 0 {name=Vimeas2 savecurrent=true spice_ignore=0}
 C {ota-improved.sym} 1340 -400 0 0 {name=x1}
 C {ota-improved.sym} 2100 -400 0 0 {name=x2}
 C {ota-improved.sym} 1340 -960 0 0 {name=x3}

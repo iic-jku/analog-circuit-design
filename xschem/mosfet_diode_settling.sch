@@ -105,13 +105,13 @@ C {devices/launcher.sym} 380 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
 }
-C {isource.sym} 570 -630 0 0 {name=Ibias value="dc 0 pwl(0 0 10p 0 11p 20u 100p 20u 101p 0)"}
-C {lab_pin.sym} 500 -370 0 0 {name=p1 sig_type=std_logic lab=v_gs}
-C {lab_pin.sym} 340 -680 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/isource.sym} 570 -630 0 0 {name=Ibias value="dc 0 pwl(0 0 10p 0 11p 20u 100p 20u 101p 0)"}
+C {devices/lab_pin.sym} 500 -370 0 0 {name=p1 sig_type=std_logic lab=v_gs}
+C {devices/lab_pin.sym} 340 -680 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {devices/launcher.sym} 620 -160 0 0 {name=h1
 descr="load waves" 
 tclcommand="xschem raw_read $netlist_dir/mosfet_diode_settling.raw"
 }
-C {spice_probe.sym} 500 -500 0 0 {name=p3 attrs=""}
-C {ammeter.sym} 570 -450 0 0 {name=Vid savecurrent=true spice_ignore=0}
-C {ammeter.sym} 570 -550 0 0 {name=Vibias savecurrent=true spice_ignore=0}
+C {devices/spice_probe.sym} 500 -500 0 0 {name=p3 attrs=""}
+C {devices/ammeter.sym} 570 -450 0 0 {name=Vid savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 570 -550 0 0 {name=Vibias savecurrent=true spice_ignore=0}

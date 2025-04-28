@@ -91,7 +91,7 @@ C {devices/ngspice_get_value.sym} 320 -260 0 1 {name=r10 node=v(@n.xm1.nsg13_lv_
 descr="sid="}
 C {devices/ngspice_get_value.sym} 220 -170 0 1 {name=r11 node=v(@n.xm1.nsg13_lv_nmos[rg])
 descr="rg="}
-C {isource.sym} 750 -470 0 0 {name=Ibias value=20u}
-C {lab_pin.sym} 680 -420 0 0 {name=p1 sig_type=std_logic lab=v_gs}
-C {lab_pin.sym} 520 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/isource.sym} 750 -470 0 0 {name=Ibias value=20u}
+C {devices/lab_pin.sym} 680 -420 0 0 {name=p1 sig_type=std_logic lab=v_gs}
+C {devices/lab_pin.sym} 520 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {sg13g2_pr/annotate_fet_params.sym} 900 -430 0 0 {name=annot1 ref=M1}

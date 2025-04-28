@@ -2,19 +2,21 @@
 # Johannes Kepler University, Institute for Integrated Circuits
 # shellcheck shell=bash
 
-# Switch to IHP SG13G2 PDK
+# Switch to IHP SG13G2 PDK if not already set
+if [[ "$PDK" != *sg13g2* ]]; then
+    # The PDK name has been changed starting with 2025.01
+    YEAR="${IIC_OSIC_TOOLS_VERSION%%.*}"
+    if [[ -z "$YEAR" || "$YEAR" -ge 2025 ]]; then
+        export PDK=ihp-sg13g2
+    else
+        export PDK=sg13g2
+    fi
 
-# The PDK name has been changed starting with 2025.01
-YEAR="${IIC_OSIC_TOOLS_VERSION%%.*}"
-if [[ -z "$YEAR" || "$YEAR" -ge 2025 ]]; then
-    export PDK=ihp-sg13g2
-else
-    export PDK=sg13g2
+    export PDKPATH=$PDK_ROOT/$PDK
+    export STD_CELL_LIBRARY=sg13g2_stdcell
+    export SPICE_USERINIT_DIR=$PDK_ROOT/$PDK/libs.tech/ngspice 
 fi
 
-export PDKPATH=$PDK_ROOT/$PDK
-export STD_CELL_LIBRARY=sg13g2_stdcell
-export SPICE_USERINIT_DIR=$PDK_ROOT/$PDK/libs.tech/ngspice 
 # Set path for Xschem
 export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem
 
