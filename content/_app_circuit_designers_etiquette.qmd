@@ -30,7 +30,7 @@ A consistent naming and schematic drawing style, as well as VHDL/Verilog coding 
 - In mixed-voltage designs, it might be useful to append the voltage level of a signal to avoid connecting incompatible inputs and outputs. Example: `do_comp_1v2` or `di_poweron_3v3`.
 - Digital buses always have the MSB to the left and LSB to the right. Example: `do_adc[7:0]`.
 - Analog signals should start with a `v` for a voltage signal or `i` for a current signal. It is often useful to include a value for bias signals or make the naming meaningful. RF signals, which are often neither voltage nor current signals, start the name with `rf_`. Examples: Signal and pin names like `ibias_30u` (30uA of bias current), `vbg_1v2` (a bandgap voltage of 1.2V), `vin_p`, `v_filt_out_n`, and `rf_lna_i` speak for themselves.
-- Appending analog signals with `_i` and `_o` might be useful if a clear direction is obvious in the signal flow. If a signal is bi-directional, it is better to skip `_io`.
+- Appending analog signals with `_i` and `_o` might be useful if a clear direction is obvious in the signal flow. If a signal is bi-directional, it is better to skip `_io`. If using `_p` or `_n` in combination with `_i` or `_o` then use `_pi`/`_ni` or `_po`/`_no`.
 - Consistently use pin types `input`, `output`, or `inout` to indicate signal flow. Power supply pins are of `inout` type.
 
 ## Schematics
@@ -91,7 +91,7 @@ A consistent naming and schematic drawing style, as well as VHDL/Verilog coding 
 These recommendations are specifically targeted at Verilog; however, they apply similarly to VHDL.
 
 - Use automatic checkers (linters) to see whether your code contains errors or vulnerabilities. Commercial or open-source tools allow this, e.g., Icarus Verilog (`iverilog -g2005 -tnull FILE.v`) or Verilator (`verilator --lint-only -Wall FILE.v`).
-- Write readable and maintainable code; use speaking variable names, and use a naming convention for inputs (beginning with `i_`) and outputs (beginning with `o_`). Active-low signals have an `_n` or `_b` in their name, like `i_reset_n`. Use comments to explain the intention.
+- Write readable and maintainable code; use speaking variable names, and use a naming convention for inputs (ending with `_i`) and outputs (ending with `_o`). IO signals are using `_io`. Active-low signals have an `n` or `b` in their name (coming before the direction), like `reset_ni`. Use comments to explain the intention.
 - With a synchronous reset reset-related racing conditions are often avoided. If an asynchronous reset is desirable (which is often the case), ensure the reset signals are free from race conditions.
 - Module-local registers and wires could append `_w` (for Verilog `wire`) or `_r` (for Verilog  `reg`) to make their function clear. This is not required in SystemVerilog where the unified type `logic` should be used.
 - Use an `assign` statement for logic as this often is easier to read than an `always @(*)` block. The ternary operator `COND ? TRUE : FALSE` can help with conditional assignments and is often a better choice than a (nested) `if ... else` statement.
@@ -104,6 +104,8 @@ These recommendations are specifically targeted at Verilog; however, they apply 
 - Make your code flexible by making bit widths and other values parameterized using a `localparam` or module parameter.
 - Be cautious of implicit type conversions and bit-width adaptions; better make explicit conversions and match bit widths in assignments.
 - Use only blocking assignments (`=`) in `always @(*)` blocks, and only non-blocking assignments (`<=`) in clocked `always @(posedge ...)` blocks.
+
+A comprehensive coding style guide for Verilog/SystemVerilog can be found [here](https://github.com/lowRISC/style-guides/blob/master/VerilogCodingStyle.md), and it is highly recommended to follow it.
 
 ## Further Reading
 
