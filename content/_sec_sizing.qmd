@@ -32,7 +32,7 @@ The $\gmid$ methodology has the huge advantage that it catches MOSFET behavior q
 
 ## MOSFET Characterization Testbench {#sec-techsweep-testbench}
 
-In order to get the required tabulated data we use a testbench in Xschem which sweeps the terminal voltages, and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in @fig-techsweep-nmos-tb, and the TB for the LV PMOS is shown in @fig-techsweep-pmos-tb.
+In order to get the required tabulated data we use a testbench in Xschem which sweeps the length $L$ and the terminal voltages ($\VGS$, $\VDS$ and $\VSB$) for a fixed device width $W = 5\,\text{µm}$ and records various large- and small-signal parameters, which are then stored in large tables. The testbench for the LV NMOS is shown in @fig-techsweep-nmos-tb, and the TB for the LV PMOS is shown in @fig-techsweep-pmos-tb.
 
 ::: {.callout-note title="Note on Characterization Testbench"}
 The testbenches are relatively straightforward, with one exception: The drain current noise is sensed via the drain voltage source `vd` and converted to a noise voltage (node `n`) using a current-controlled voltage source (CCVS). This is necessary as the `.noise` simulation statement works with voltages.
@@ -43,6 +43,14 @@ The testbenches are relatively straightforward, with one exception: The drain cu
 ![Testbench for LV PMOS $\gmid$ characterization.](./xschem/techsweep_sg13g2_lv_pmos.svg){#fig-techsweep-pmos-tb}
 
 We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behavior.
+
+::: {.callout-note title="Note on width $W$"}
+In general, the device width could be included as a fifth sweep variable. However, this is not necessary since the parameters scale approximately linearly with $W$ across the typical range encountered in analog design. For $W > 2\,\text{µm}$ the error lies within about 1.5% for $\gmid$, $\gmgds$ and $\gmCgg$ as described in [@Jespers_Murmann_2017].
+:::
+
+The resulting four-dimensional data is saved into a .txt file and imported into two Jupyter notebooks as visualized in @fig-techsweep-procedure. The first notebook outputs .mat files, which are compatible with the pygmid Python package used for sizing. The second notebook generates vector graphic characterization plots, which are shown in @sec-techsweep-nmos for LV NMOS and @sec-techsweep-pmos for LV PMOS. With these plots, an immediate understanding of the tradeoffs for the given transistor can be acquired. Furthermore, they can be used for fast hand calculations in small circuits.
+
+![Overview of the $\gmid$ MOSFET characterization procedure [@Dorrer_Master_Thesis].](./figures/_fig_gmid_overview/_fig_gmid_overview.svg){#fig-techsweep-procedure}
 
 ## NMOS Characterization in Saturation {#sec-techsweep-nmos}
 
@@ -169,6 +177,12 @@ Flicker noise corner frequency $f_\mathrm{co}$ versus $\gmid$ and $L$. If you co
 
 During the design phase, it might be convenient to have an overview of the most relevant sizing plots of the PMOST on one page. This overview can be downloaded [here](./sizing/techsweep_sg13_plots_pmos_overview/techsweep_sg13_plots_pmos_overview.pdf).
 
+## Tradeoffs in Saturation {#sec-tradeoffs-saturation}
+
+In @fig-tradeoffs-saturation, an overview of the tradeoffs mentioned above is presented. The design parameters are only shown once for their best-case implementation. Their worst-case value is then located at the opposite arrow. In conclusion, strong inversion with short channels is for high-speed applications, whereas weak inversion with long channels is for low-power and low-noise applications. Moderate inversion with longer channels is used for current sources to maximize their output resistance. Note that the two arrows for strong inversion with long channels and weak inversion with short channels are empty since they make practically no sense. This tradeoff overview simplifies the choice of the starting $\gmid$ and $L$ values in the sizing scripts.
+
+![Overview of key design tradeoffs depending on the channel length $L$ and transconductance efficiency $\gmid$ [@Dorrer_Master_Thesis].](./figures/_fig_tradeoffs/_fig_tradeoffs_gmID.svg){#fig-tradeoffs-saturation}
+
 ## NMOS and PMOS Characterization in Triode
 
 Besides using the MOSFET as a transconductor in saturation we often use the MOSFET as a switch in triode mode (to either switch voltages or currents). In this triode/switch mode of operation we are mainly interested in two parameters:
@@ -188,4 +202,8 @@ As can be seen in the previous plot, an NMOS can be used to switch at potentials
 
 As the switch on-resistance gets lower when increasing $W$, the off-capacitance gets larger. Thus, a good performance indicator for comparing switches in a given technology is the $R_\mathrm{on} C_\mathrm{off}$ product. 
 
-When designing switches, often the unwanted effects of charge injection and clock feed-through have to be considered and, as always, a trade-off has to be chosen. More details can be found in literature, e.g, [@Johns_Martin_2nd_ed] or [@Razavi_Analog_CMOS].
+## Tradeoffs in Triode {#sec-tradeoffs-triode}
+
+Some might think that sizing switches is a straightforward task, but in reality, they also come with several tradeoffs, and depending on the application, they can be incredibly complicated. The essential design parameters in switches are the on-resistance $R_\mathrm{on}$, the off-capacitance $C_\mathrm{off}$, the drain-source leakage current $I_\mathrm{leak}$, and their impact on clock feedthrough and charge injection [@Johns_Martin_2nd_ed]. In @fig-tradeoffs-triode, an overview of the tradeoffs of these design parameters depending on the channel width $W$ and the channel length $L$ is presented. In conclusion, if $W/L$ increases, $R_\mathrm{on}$ decreases, and the switching speed increases. If $W/L$ decreases, $I_\mathrm{leak}$, $C_\mathrm{off}$, and the drain-source overlap capacitance decrease, effectively reducing clock feedthrough and charge injection [@Gray_Meyer_5th_ed]. Practically, it does not make sense to make the switch both wide and long.
+
+![Overview of key design tradeoffs in switches depending on the channel width $W$ and the channel length $L$ [@Dorrer_Master_Thesis].](./figures/_fig_tradeoffs/_fig_tradeoffs_switches.svg){#fig-tradeoffs-triode}
