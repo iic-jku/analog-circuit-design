@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.2}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 N 320 -300 320 -260 {
 lab=rp,r[1]}
@@ -16,6 +17,7 @@ N 180 -160 220 -160 {
 lab=rn}
 N 180 -300 220 -300 {
 lab=rp}
+N 180 -100 220 -100 {lab=bn}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
 C {devices/iopin.sym} 180 -300 0 1 {name=p2 lab=rp}
 C {devices/iopin.sym} 180 -160 0 1 {name=p1 lab=rn}
@@ -25,7 +27,10 @@ C {sg13g2_pr/rppd.sym} 320 -230 0 0 {name=R[1..2]
 w=0.5e-6
 l=10e-6
 model=rppd
+body=bn
 spiceprefix=X
 b=0
 m=1
 }
+C {devices/iopin.sym} 180 -100 0 1 {name=p5 lab=bn}
+C {noconn.sym} 220 -100 2 0 {name=l1}

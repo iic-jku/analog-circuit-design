@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.2}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 T {Keep a few dummy resistors around
 to compensate TC.} 420 -470 0 0 0.4 0.4 {}
@@ -27,6 +28,7 @@ N 320 -460 360 -460 {lab=rp}
 N 360 -500 360 -460 {lab=rp}
 N 220 -500 360 -500 {lab=rp}
 N 220 -500 220 -460 {lab=rp}
+N 180 -100 220 -100 {lab=bn}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 H. Pretl, Apache-2.0 license"}
 C {devices/iopin.sym} 180 -300 0 1 {name=p2 lab=rp}
 C {devices/iopin.sym} 180 -160 0 1 {name=p1 lab=rn}
@@ -36,6 +38,7 @@ C {sg13g2_pr/rppd.sym} 460 -230 0 0 {name=R[1..7]
 w=0.5e-6
 l=10e-6
 model=rppd
+body=bn
 spiceprefix=X
 b=0
 m=1
@@ -44,6 +47,7 @@ C {sg13g2_pr/rppd.sym} 290 -300 1 0 {name=R1[1..2]
 w=0.5e-6
 l=10e-6
 model=rppd
+body=bn
 spiceprefix=X
 b=0
 m=1
@@ -53,7 +57,10 @@ C {sg13g2_pr/rppd.sym} 290 -460 1 0 {name=Rdummy[1..5]
 w=0.5e-6
 l=10e-6
 model=rppd
+body=bn
 spiceprefix=X
 b=0
 m=1
 }
+C {devices/iopin.sym} 180 -100 0 1 {name=p4 lab=bn}
+C {noconn.sym} 220 -100 2 0 {name=l1}
