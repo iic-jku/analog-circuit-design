@@ -6,4 +6,4 @@
 # Johannes Kepler University, Institute for Integrated Circuits
 # SPDX-License-Identifier: Apache-2.0
 
-find xschem -type f -name "*.sch" -exec iic-sch2svg.sh {} \;
+find xschem -type f -name "*.sch" -exec sak-sch2svg.sh {} \;
