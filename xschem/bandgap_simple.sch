@@ -5,12 +5,15 @@ V {}
 S {}
 F {}
 E {}
-T {m=32} 890 -410 0 0 0.4 0.4 {}
+L 4 -20 -45 -20 -15 {}
+L 4 -30 -30 -20 -30 {}
+B 5 -32.5 -32.5 -27.5 -27.5 {name=b dir=inout}
+T {m=32} 910 -400 0 0 0.4 0.4 {}
 T {10uA} 540 -280 0 0 0.4 0.4 {}
 T {10uA} 960 -280 0 0 0.4 0.4 {}
 T {10uA} 1170 -280 0 0 0.4 0.4 {}
-T {m=2} 610 -410 0 0 0.4 0.4 {}
-T {m=32} 1100 -410 0 0 0.4 0.4 {}
+T {m=2} 590 -400 0 0 0.4 0.4 {}
+T {m=32} 1110 -400 0 0 0.4 0.4 {}
 T {1.16V} 1240 -590 0 0 0.4 0.4 {}
 T {1.16V} 840 -600 0 0 0.4 0.4 {}
 T {1.28V} 840 -680 0 0 0.4 0.4 {}
@@ -18,6 +21,7 @@ T {1.10V} 760 -1000 0 0 0.4 0.4 {}
 T {0.98V} 760 -920 0 0 0.4 0.4 {}
 T {0.78V} 570 -440 0 0 0.4 0.4 {}
 T {1.5V (typ)} 590 -1080 0 0 0.4 0.4 {}
+T {b} -25 -49 0 1 0.2 0.2 {}
 N 380 -300 380 -280 {
 lab=GND}
 N 380 -340 380 -300 {
@@ -126,6 +130,10 @@ N 760 -680 760 -650 {lab=vg2}
 N 640 -650 760 -650 {lab=vg2}
 N 850 -1040 850 -810 {lab=v_dd}
 N 760 -760 760 -740 {lab=#net9}
+N 590 -750 600 -750 {lab=GND}
+N 960 -790 970 -790 {lab=GND}
+N 1160 -470 1170 -470 {lab=GND}
+N 1030 -470 1040 -470 {lab=GND}
 C {devices/code_shown.sym} 0 -160 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
@@ -139,7 +147,6 @@ value="
 .control
 save all
 set filetype=ascii
-option method=gear
 
 op
 write bandgap_simple.raw
@@ -164,19 +171,19 @@ descr="annotate OP"
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
 C {devices/lab_pin.sym} 380 -1040 0 0 {name=p2 sig_type=std_logic lab=v_dd}
-C {sg13g2_pr/pnpMPA.sym} 580 -370 0 1 {name=Q1[1..2]
+C {sg13g2_pr/pnpMPA.sym} 580 -370 0 1 {name=Q1
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
 l=2.0e-6
-m=1
+m=2
 }
-C {sg13g2_pr/pnpMPA.sym} 980 -370 0 0 {name=Q2[1..32]
+C {sg13g2_pr/pnpMPA.sym} 980 -370 0 0 {name=Q2
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
 l=2.0e-6
-m=1
+m=32
 }
 C {sg13g2_pr/sg13_lv_nmos.sym} 580 -570 0 1 {name=M1A
 l=1u
@@ -186,12 +193,12 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/pnpMPA.sym} 1180 -370 0 0 {name=Q3[1..32]
+C {sg13g2_pr/pnpMPA.sym} 1180 -370 0 0 {name=Q3
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
 l=2.0e-6
-m=1
+m=32
 }
 C {devices/lab_wire.sym} 1380 -560 0 0 {name=p1 sig_type=std_logic lab=vref}
 C {devices/ammeter.sym} 560 -470 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
@@ -288,3 +295,7 @@ C {bandgap_simple_res-6k.sym} 1000 -440 0 1 {name=xr1}
 C {bandgap_simple_res-10k.sym} 560 -720 0 1 {name=xr4}
 C {bandgap_simple_res-10k.sym} 1000 -760 0 0 {name=xr3}
 C {bandgap_simple_res-37k5.sym} 1200 -440 0 0 {name=xr2}
+C {devices/gnd.sym} 600 -750 3 0 {name=l1 lab=GND}
+C {devices/gnd.sym} 1040 -470 3 0 {name=l2 lab=GND}
+C {devices/gnd.sym} 1160 -470 1 1 {name=l4 lab=GND}
+C {devices/gnd.sym} 960 -790 1 1 {name=l6 lab=GND}
