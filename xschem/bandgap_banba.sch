@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.2}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 T {m=32} 1140 -240 0 0 0.4 0.4 {}
 T {15uA} 820 -180 0 0 0.4 0.4 {}
@@ -10,6 +11,7 @@ T {15uA} 1180 -180 0 0 0.4 0.4 {}
 T {15uA} 1400 -180 0 0 0.4 0.4 {}
 T {m=2} 900 -330 0 0 0.4 0.4 {}
 T {0.6V} 1480 -510 0 0 0.4 0.4 {}
+T {1.5V (nom)} 160 -1070 0 0 0.4 0.4 {}
 N 1130 -240 1130 -200 {lab=vss}
 N 890 -240 890 -200 {lab=vss}
 N 1070 -270 1090 -270 {lab=vss}
@@ -28,9 +30,9 @@ N 490 -640 550 -640 {lab=vg}
 N 1430 -870 1490 -870 {lab=vdd}
 N 1370 -870 1390 -870 {lab=vg}
 N 1370 -870 1370 -820 {lab=vg}
-N 810 -440 810 -400 {lab=v1}
-N 810 -440 890 -440 {lab=v1}
-N 810 -200 890 -200 {
+N 780 -440 780 -400 {lab=v1}
+N 780 -440 890 -440 {lab=v1}
+N 830 -200 890 -200 {
 lab=vss}
 N 1130 -440 1290 -440 {lab=v2}
 N 1290 -440 1290 -400 {lab=v2}
@@ -42,13 +44,13 @@ N 1430 -840 1430 -570 {lab=#net2}
 N 890 -460 890 -440 {lab=v1}
 N 1130 -440 1130 -400 {lab=v2}
 N 1130 -460 1130 -440 {lab=v2}
-N 1430 -340 1430 -200 {lab=vss}
+N 1430 -300 1430 -200 {lab=vss}
 N 610 -840 610 -720 {lab=#net3}
 N 730 -610 890 -610 {lab=#net4}
 N 890 -840 890 -610 {lab=#net4}
 N 730 -670 1130 -670 {lab=#net5}
 N 1130 -840 1130 -670 {lab=#net5}
-N 1430 -480 1430 -400 {lab=vref_0v6}
+N 1430 -480 1430 -360 {lab=vref_0v6}
 N 890 -420 890 -400 {lab=v1}
 N 490 -290 490 -200 {lab=vss}
 N 490 -640 490 -350 {lab=vg}
@@ -98,23 +100,23 @@ N 400 -1040 430 -1040 {lab=vdd}
 N 460 -1040 460 -980 {lab=vdd}
 N 430 -1040 460 -1040 {lab=vdd}
 N 890 -420 1010 -420 {lab=v1}
-N 1010 -420 1010 -380 {lab=v1}
-N 980 -340 980 -200 {lab=vss}
+N 1010 -420 1010 -340 {lab=v1}
+N 980 -300 980 -200 {lab=vss}
 N 950 -200 980 -200 {
 lab=vss}
-N 1010 -340 1010 -200 {lab=vss}
+N 1010 -300 1010 -200 {lab=vss}
 N 980 -200 1010 -200 {
 lab=vss}
-N 1040 -340 1040 -200 {lab=vss}
+N 1040 -300 1040 -200 {lab=vss}
 N 1010 -200 1040 -200 {
 lab=vss}
 N 1290 -260 1290 -200 {lab=vss}
-N 1130 -200 1290 -200 {lab=vss}
+N 1240 -200 1290 -200 {lab=vss}
 N 1290 -340 1290 -320 {lab=#net6}
-N 810 -260 810 -200 {lab=vss}
-N 650 -200 810 -200 {
+N 780 -260 780 -200 {lab=vss}
+N 650 -200 780 -200 {
 lab=vss}
-N 810 -340 810 -320 {lab=#net7}
+N 780 -340 780 -320 {lab=#net7}
 N 1430 -1040 1430 -1000 {lab=vdd}
 N 1190 -1040 1430 -1040 {lab=vdd}
 N 1430 -940 1430 -900 {lab=#net8}
@@ -170,20 +172,35 @@ N 1430 -510 1430 -480 {lab=vref_0v6}
 N 310 -270 350 -270 {lab=vss}
 N 350 -270 350 -200 {lab=vss}
 N 310 -200 350 -200 {lab=vss}
+N 1460 -330 1480 -330 {lab=vss}
+N 1480 -330 1480 -200 {lab=vss}
+N 1430 -200 1480 -200 {lab=vss}
+N 1240 -370 1260 -370 {lab=vss}
+N 1240 -290 1240 -200 {lab=vss}
+N 1130 -200 1240 -200 {lab=vss}
+N 1240 -290 1260 -290 {lab=vss}
+N 1240 -370 1240 -290 {lab=vss}
+N 1160 -370 1240 -370 {lab=vss}
+N 810 -370 830 -370 {lab=vss}
+N 830 -290 830 -200 {lab=vss}
+N 780 -200 830 -200 {
+lab=vss}
+N 810 -290 830 -290 {lab=vss}
+N 830 -370 830 -290 {lab=vss}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 H. Pretl, Apache-2.0 license"}
-C {sg13g2_pr/pnpMPA.sym} 910 -270 0 1 {name=Q1[1..2]
+C {sg13g2_pr/pnpMPA.sym} 910 -270 0 1 {name=Q1
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
 l=2.0e-6
-m=1
+m=2
 }
-C {sg13g2_pr/pnpMPA.sym} 1110 -270 0 0 {name=Q2[1..32]
+C {sg13g2_pr/pnpMPA.sym} 1110 -270 0 0 {name=Q2
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
 l=2.0e-6
-m=1
+m=32
 }
 C {devices/ammeter.sym} 890 -370 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 1430 -540 0 0 {name=Vmeas1 savecurrent=true spice_ignore=0}
@@ -200,7 +217,7 @@ spiceprefix=X
 }
 C {devices/ammeter.sym} 890 -490 0 0 {name=Vmeas2 savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 1130 -490 0 0 {name=Vmeas3 savecurrent=true spice_ignore=0}
-C {devices/lab_pin.sym} 810 -440 0 0 {name=p5 sig_type=std_logic lab=v1}
+C {devices/lab_pin.sym} 780 -440 0 0 {name=p5 sig_type=std_logic lab=v1}
 C {sg13g2_pr/sg13_lv_pmos.sym} 910 -870 0 1 {name=M1
 l=1u
 w=5u
@@ -258,7 +275,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1010 -360 3 1 {name=Mstab1
+C {sg13g2_pr/sg13_lv_nmos.sym} 1010 -320 3 1 {name=Mstab1
 l=1u
 w=300u
 ng=60
@@ -267,12 +284,12 @@ model=sg13_lv_nmos
 spiceprefix=X
 }
 C {devices/lab_wire.sym} 370 -320 0 0 {name=p8 sig_type=std_logic lab=ena_n}
-C {bandgap_banba_res-13k.sym} 1130 -340 0 0 {name=xr1}
+C {bandgap_banba_res-13k.sym} 1130 -340 0 1 {name=xr1}
 C {bandgap_banba_res-40k.sym} 1290 -340 0 0 {name=xr2a}
 C {bandgap_banba_res-40k.sym} 1290 -260 0 0 {name=xr2b}
-C {bandgap_banba_res-40k.sym} 810 -340 0 1 {name=xr3a}
-C {bandgap_banba_res-40k.sym} 810 -260 0 1 {name=xr3b}
-C {bandgap_banba_res-40k.sym} 1430 -340 0 0 {name=xr4}
+C {bandgap_banba_res-40k.sym} 780 -340 0 1 {name=xr3a}
+C {bandgap_banba_res-40k.sym} 780 -260 0 1 {name=xr3b}
+C {bandgap_banba_res-40k.sym} 1430 -300 0 1 {name=xr4}
 C {sg13g2_pr/sg13_lv_pmos.sym} 1410 -970 0 0 {name=M3sw
 l=0.13u
 w=5u
