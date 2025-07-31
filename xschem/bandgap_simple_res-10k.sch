@@ -18,7 +18,7 @@ lab=rn}
 N 180 -300 220 -300 {
 lab=rp}
 N 180 -100 220 -100 {lab=bn}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 H. Pretl, Apache-2.0 license"}
 C {devices/iopin.sym} 180 -300 0 1 {name=p2 lab=rp}
 C {devices/iopin.sym} 180 -160 0 1 {name=p1 lab=rn}
 C {devices/lab_wire.sym} 310 -300 0 0 {name=p3 sig_type=std_logic lab=rp,r[1]}
