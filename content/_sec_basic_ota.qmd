@@ -369,6 +369,22 @@ Luckily, there are open-source versions of simulation runners available, and we 
 
 There is a CACE setup available for our 5T-OTA. The [datasheet](./cace/voltage-buffer-ota.yaml) describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, [this one](./cace/templates/ota-5t-ac.sch) is used for ac simulations, [this one](./cace/templates/ota-5t-noise.sch) is used for noise simulation, and [this one](./cace/templates/ota-5t-tran.sch) is used for transient simulation.
 
+::: {.callout-warning title="Running CACE Simulation"}
+
+The CACE simulation run can be started with
+
+```bash
+cace cace/voltage-buffer-ota.yaml
+```
+
+The simulation results are then placed into the `cace/_docs` folder. If in addition to the default Markdown report an HTML output is needed for easier review then using Pandoc it can be easily converted and viewed with with 
+
+```bash
+cace/cace_view.sh cace/_docs/ota-5t_schematic.md
+```
+
+:::
+
 After a successful run, a documentation is automatically generated. The result of a full run of this [OTA design](./xschem/ota-5t.svg) is presented here:
 
 ::: {#nte-basic-ota-cace-result .callout-note title="CACE Summary for 5T-OTA" collapse="true"}
