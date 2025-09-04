@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-08-28">
+<meta name="dcterms.date" content="2025-09-04">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -95,9 +95,9 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-e8e54fbf2d9ade825dca367f4b247db7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -551,7 +551,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 28, 2025</p>
+      <p class="date">September 4, 2025</p>
     </div>
   </div>
   
@@ -1922,7 +1922,7 @@ Exercise: Total Output Noise of RC-Lowpass
 <p>You fill find that the output noise is <span class="math display">\[
 V_\mathrm{n,rms}^2 = \frac{k T}{C}
 \]</span> which is independent of <span class="math inline">\(R\)</span>! This is a surprising result, and is the well-known <span class="math inline">\(kT/C\)</span> noise. Intuitively, we could argue that the noise increases with larger <span class="math inline">\(R\)</span>, but at the same time, the bandwidth decreases and therefore <span class="math inline">\(R\)</span> does not add additional noise. More detailed information and an intuitive explanation of <span class="math inline">\(kT/C\)</span> noise can be found in <span class="citation" data-cites="Sheikholeslami_2025_kTC">(<a href="#ref-Sheikholeslami_2025_kTC" role="doc-biblioref">Sheikholeslami 2025</a>)</span>.</p>
-<p>Side note: The shortest derivation of this formula involves the <a href="https://en.wikipedia.org/wiki/Equipartition_theorem">equipartition theorem</a>: Any system in thermal equilibrium has an energy of <span class="math inline">\(kT/2\)</span> per degree of freedom. This <span class="math inline">\(RC\)</span> system has one degree of freedom in the capacitor, and the stored energy in the capacitor is <span class="math inline">\(CV_\mathrm{rms}^2/2\)</span>. Equating both energies we find that <span class="math inline">\(V_\mathrm{rms}^2 = kT/C\)</span>.</p>
+<p>Side note: The shortest derivation of this formula involves the <a href="https://en.wikipedia.org/wiki/Equipartition_theorem">equipartition theorem</a>: Any system in thermal equilibrium with a reservoir of temperature <span class="math inline">\(T\)</span> has a fluctuation energy of <span class="math inline">\(kT/2\)</span> per degree of freedom. This <span class="math inline">\(RC\)</span> system has one degree of freedom in the voltage on the capacitor, and the stored energy in the capacitor is <span class="math inline">\(CV_\mathrm{rms}^2/2\)</span>. Equating both energies we find that <span class="math inline">\(V_\mathrm{rms}^2 = kT/C\)</span> <span class="citation" data-cites="Sarpeshkar_1993">(<a href="#ref-Sarpeshkar_1993" role="doc-biblioref">Sarpeshkar, Delbruck, and Mead 1993</a>)</span>.</p>
 <p>To calculate the total output noise of a generalized passive network Bode’s noise theorem is quite practical (see <a href="#sec-bode-noise-theorem" class="quarto-xref">Section&nbsp;16.2</a>).</p>
 </div>
 </div>
@@ -5196,6 +5196,9 @@ Razavi, Behzad. 2017. <em><span class="nocase">Design of Analog CMOS Integrated 
 <div id="ref-Rosenstark_1984" class="csl-entry" role="listitem">
 Rosenstark, S. 1984. <span>“Loop Gain Measurement in Feedback Amplifiers.”</span> <em>International Journal of Electronics</em> 57 (3): 415–21. <a href="https://doi.org/10.1080/00207218408938921">https://doi.org/10.1080/00207218408938921</a>.
 </div>
+<div id="ref-Sarpeshkar_1993" class="csl-entry" role="listitem">
+Sarpeshkar, R., T. Delbruck, and C. A. Mead. 1993. <span>“<span class="nocase">White noise in MOS transistors and resistors</span>.”</span> <em>IEEE Circuits and Devices Magazine</em> 9 (6): 23–29. <a href="https://doi.org/10.1109/101.261888">https://doi.org/10.1109/101.261888</a>.
+</div>
 <div id="ref-Sheikholeslami_2015" class="csl-entry" role="listitem">
 Sheikholeslami, Ali. 2015. <span>“<span class="nocase">Miller’s Theorem [Circuit Intuitions]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 7 (3): 9–10. <a href="https://doi.org/10.1109/mssc.2015.2446457">https://doi.org/10.1109/mssc.2015.2446457</a>.
 </div>
@@ -5217,14 +5220,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-08-28},
+  date = {2025-09-04},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> August 28, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> September 4, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
