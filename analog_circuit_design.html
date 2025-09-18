@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-09-08">
+<meta name="dcterms.date" content="2025-09-18">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -91,18 +91,19 @@ div.csl-indent {
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e8e54fbf2d9ade825dca367f4b247db7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-f4a5ee9f428d00c6bef4a716450a67ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-e8e54fbf2d9ade825dca367f4b247db7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3bfab430b3a0f1eddad8a0d61863e953.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a2bfeeca8d941e7f328a7b92742c06b1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-3bfab430b3a0f1eddad8a0d61863e953.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -148,7 +149,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -335,6 +336,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Analog Circuit Design</span>
     </a>
@@ -554,7 +557,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 8, 2025</p>
+      <p class="date">September 18, 2025</p>
     </div>
   </div>
   
@@ -696,7 +699,7 @@ Table&nbsp;1: IHP SG13G2 devices
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Preparation
+<span class="screen-reader-only">Warning</span>Preparation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -710,7 +713,7 @@ Preparation
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Linux
+<span class="screen-reader-only">Warning</span>Linux
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -759,7 +762,7 @@ Linux
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Git Merge Conflicts
+<span class="screen-reader-only">Warning</span>Git Merge Conflicts
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -796,7 +799,7 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-MOSFET Background
+<span class="screen-reader-only">Note</span>MOSFET Background
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -856,7 +859,7 @@ Figure&nbsp;3: The MOSFET large-signal model. In general, all capacitors are non
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-MOSFET Bulk Terminal
+<span class="screen-reader-only">Note</span>MOSFET Bulk Terminal
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -872,7 +875,7 @@ MOSFET Bulk Terminal
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Mathematical Notation
+<span class="screen-reader-only">Important</span>Mathematical Notation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -892,7 +895,7 @@ Mathematical Notation
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-A Comment on Active and Passive Devices and Linear vs.&nbsp;Nonlinear
+<span class="screen-reader-only">Note</span>A Comment on Active and Passive Devices and Linear vs.&nbsp;Nonlinear
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -918,7 +921,7 @@ Figure&nbsp;4: Testbench for NMOS dc sweeps.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-MOSFET Simulation Model
+<span class="screen-reader-only">Note</span>MOSFET Simulation Model
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -937,7 +940,7 @@ MOSFET Simulation Model
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: MOSFET Investigation
+<span class="screen-reader-only">Tip</span>Exercise: MOSFET Investigation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1023,7 +1026,7 @@ Figure&nbsp;6: The MOSFET small-signal model when source and bulk are shorted.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-MOSFET Triode and Saturation Region
+<span class="screen-reader-only">Note</span>MOSFET Triode and Saturation Region
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1067,7 +1070,7 @@ Figure&nbsp;8: The MOSFET small-signal basic T-model.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: MOSFET Model Transformation
+<span class="screen-reader-only">Tip</span>Exercise: MOSFET Model Transformation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1083,7 +1086,7 @@ Exercise: MOSFET Model Transformation
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: MOSFET Transit Frequency
+<span class="screen-reader-only">Tip</span>Exercise: MOSFET Transit Frequency
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1097,7 +1100,7 @@ Exercise: MOSFET Transit Frequency
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: MOSFET Small-Signal Parameters
+<span class="screen-reader-only">Tip</span>Exercise: MOSFET Small-Signal Parameters
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1164,7 +1167,7 @@ C_\mathrm{GG}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{G}}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-MOSFET Square-Law Model
+<span class="screen-reader-only">Note</span>MOSFET Square-Law Model
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1183,7 +1186,7 @@ MOSFET Square-Law Model
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note on Characterization Testbench
+<span class="screen-reader-only">Note</span>Note on Characterization Testbench
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1217,7 +1220,7 @@ Figure&nbsp;10: Testbench for LV PMOS <span class="math inline">\(g_\mathrm{m}/I
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note on width <span class="math inline">\(W\)</span>
+<span class="screen-reader-only">Note</span>Note on width <span class="math inline">\(W\)</span>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1247,7 +1250,7 @@ Figure&nbsp;11: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Power Consumption
+<span class="screen-reader-only">Note</span>Power Consumption
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1267,7 +1270,7 @@ Power Consumption
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Why 300K?
+<span class="screen-reader-only">Note</span>Why 300K?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1343,7 +1346,7 @@ Why 300K?
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Noise Notation
+<span class="screen-reader-only">Note</span>Noise Notation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1372,7 +1375,7 @@ Noise Notation
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-MOSFET Flicker Noise
+<span class="screen-reader-only">Note</span>MOSFET Flicker Noise
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1402,7 +1405,7 @@ MOSFET Flicker Noise
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-PMOS Sign Convention
+<span class="screen-reader-only">Note</span>PMOS Sign Convention
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1440,7 +1443,7 @@ PMOS Sign Convention
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Beware of Modelling Issues
+<span class="screen-reader-only">Important</span>Beware of Modelling Issues
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1596,7 +1599,7 @@ Figure&nbsp;14: A MOSFET connected as a diode (drain shorted with gate).
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Feedback in the MOSFET Diode
+<span class="screen-reader-only">Note</span>Feedback in the MOSFET Diode
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1612,7 +1615,7 @@ Feedback in the MOSFET Diode
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: MOSFET Diode Sizing
+<span class="screen-reader-only">Tip</span>Exercise: MOSFET Diode Sizing
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1626,12 +1629,12 @@ Exercise: MOSFET Diode Sizing
 </div>
 <p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: MOSFET Diode Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution: MOSFET Diode Sizing
+<span class="screen-reader-only">Tip</span>Solution: MOSFET Diode Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1669,7 +1672,7 @@ Figure&nbsp;15: Testbench for MOSFET diode transient settling.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Power-Down Switches
+<span class="screen-reader-only">Important</span>Power-Down Switches
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1701,7 +1704,7 @@ Figure&nbsp;16: The MOSFET diode small-signal model (drain and gate are shorted,
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Ground Node Selection
+<span class="screen-reader-only">Note</span>Ground Node Selection
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1721,7 +1724,7 @@ Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-The Admittance is Your Friend
+<span class="screen-reader-only">Important</span>The Admittance is Your Friend
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1740,7 +1743,7 @@ The Admittance is Your Friend
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Open-Loop Gain, Closed-Loop Gain, and Loop-Gain—A Short Recap
+<span class="screen-reader-only">Note</span>Open-Loop Gain, Closed-Loop Gain, and Loop-Gain—A Short Recap
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1771,7 +1774,7 @@ Figure&nbsp;17: The block diagram of a negative feedback system.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Gain-Bandwidth Product in Feedback Systems
+<span class="screen-reader-only">Note</span>Gain-Bandwidth Product in Feedback Systems
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1824,7 +1827,7 @@ H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: MOSFET Diode Loop Analysis
+<span class="screen-reader-only">Tip</span>Exercise: MOSFET Diode Loop Analysis
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1849,7 +1852,7 @@ Figure&nbsp;19: Testbench for MOSFET diode stability analysis.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What About Large-Signal Stability?
+<span class="screen-reader-only">Important</span>What About Large-Signal Stability?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1895,7 +1898,7 @@ Figure&nbsp;20: The MOSFET diode small-signal model with drain noise source.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Useful Integral for Noise Calculations
+<span class="screen-reader-only">Note</span>Useful Integral for Noise Calculations
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1917,7 +1920,7 @@ V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Total Output Noise of RC-Lowpass
+<span class="screen-reader-only">Tip</span>Exercise: Total Output Noise of RC-Lowpass
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1938,7 +1941,7 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Be Careful with Parasitic Capacitances in IC Design
+<span class="screen-reader-only">Important</span>Be Careful with Parasitic Capacitances in IC Design
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1951,7 +1954,7 @@ Be Careful with Parasitic Capacitances in IC Design
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Large Bandwidth and Noise
+<span class="screen-reader-only">Important</span>Large Bandwidth and Noise
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1965,7 +1968,7 @@ Large Bandwidth and Noise
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: MOSFET Diode Noise
+<span class="screen-reader-only">Tip</span>Exercise: MOSFET Diode Noise
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2043,7 +2046,7 @@ Figure&nbsp;23: A MOSFET common-source amplifier with 50 Ohm load.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: PMOS-Based Measurement Amplifier
+<span class="screen-reader-only">Tip</span>Exercise: PMOS-Based Measurement Amplifier
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2075,7 +2078,7 @@ Important&nbsp;1: MOSFET Parameters NG and M
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Measurement Amplifier Simulation
+<span class="screen-reader-only">Tip</span>Exercise: Measurement Amplifier Simulation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2133,7 +2136,7 @@ I_\mathrm{out2} \approx I_\mathrm{bias} \frac{W_3}{L_3} \frac{L_1}{W_1}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Current Mirror
+<span class="screen-reader-only">Tip</span>Exercise: Current Mirror
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2254,7 +2257,7 @@ Figure&nbsp;29: The 5-transistor OTA.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Refresh MOSFET Basic Circuits
+<span class="screen-reader-only">Warning</span>Refresh MOSFET Basic Circuits
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2269,7 +2272,7 @@ Refresh MOSFET Basic Circuits
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Operational Amplifier (op-amp, OPA) vs.&nbsp;Operational Transconductance Amplifier (OTA)
+<span class="screen-reader-only">Note</span>Operational Amplifier (op-amp, OPA) vs.&nbsp;Operational Transconductance Amplifier (OTA)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2424,7 +2427,7 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Small-Signal vs.&nbsp;Large-Signal Operation
+<span class="screen-reader-only">Important</span>Small-Signal vs.&nbsp;Large-Signal Operation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2447,7 +2450,7 @@ Small-Signal vs.&nbsp;Large-Signal Operation
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Refresh MOSFET Small-Signal Model
+<span class="screen-reader-only">Warning</span>Refresh MOSFET Small-Signal Model
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2512,7 +2515,7 @@ s_\mathrm{zd} = -\frac{2 g_\mathrm{m34}}{C_\mathrm{gs34}}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Why a Pole-Zero Doublet?
+<span class="screen-reader-only">Note</span>Why a Pole-Zero Doublet?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2546,7 +2549,7 @@ Figure&nbsp;33: 5-transistor OTA small-signal model for noise calculation.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Noise Addition
+<span class="screen-reader-only">Important</span>Noise Addition
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2580,7 +2583,7 @@ Figure&nbsp;34: Output impedance calculation of a voltage buffer.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Output Impedance of the Voltage Buffer
+<span class="screen-reader-only">Note</span>Output Impedance of the Voltage Buffer
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2621,7 +2624,7 @@ V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) df = \fr
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Derivation of 5T-OTA Performance
+<span class="screen-reader-only">Tip</span>Exercise: Derivation of 5T-OTA Performance
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2643,7 +2646,7 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: 5T-OTA Sizing
+<span class="screen-reader-only">Tip</span>Exercise: 5T-OTA Sizing
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2652,12 +2655,12 @@ Exercise: 5T-OTA Sizing
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution: 5T-OTA Sizing
+<span class="screen-reader-only">Tip</span>Solution: 5T-OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -2668,16 +2671,16 @@ Solution: 5T-OTA Sizing
 <p><strong>Copyright 2024 Harald Pretl</strong></p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
 <div id="cell-1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read table data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read table data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pygmid <span class="im">import</span> Lookup <span class="im">as</span> lk</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>lv_nmos <span class="op">=</span> lk(<span class="st">'sg13_lv_nmos.mat'</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>lv_pmos <span class="op">=</span> lk(<span class="st">'sg13_lv_pmos.mat'</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># list of parameters: VGS, VDS, VSB, L, W, NFING, ID, VT, GM, GMB, GDS, CGG, CGB, CGD, CGS, CDD, CSS, STH, SFL</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># if not specified, minimum L, VDS=max(vgs)/2=0.9 and VSB=0 are used </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># if not specified, minimum L, VDS=max(vgs)/2=0.9 and VSB=0 are used </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-2" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the given parameters as taken from the specification table or inital guesses</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the given parameters as taken from the specification table or inital guesses</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>c_load <span class="op">=</span> <span class="fl">50e-15</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>gm_id_m12 <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>gm_id_m34 <span class="op">=</span> <span class="dv">5</span></span>
@@ -2692,21 +2695,21 @@ Solution: 5T-OTA Sizing
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>vin_min <span class="op">=</span> <span class="fl">0.7</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>vin_max <span class="op">=</span> <span class="fl">0.9</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>vdd_min <span class="op">=</span> <span class="fl">1.45</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>vdd_max <span class="op">=</span> <span class="fl">1.55</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>vdd_max <span class="op">=</span> <span class="fl">1.55</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-3" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we get the required gm of M1/2 from the -3dB bandwidth requirement of the voltage buffer specification</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we get the required gm of M1/2 from the -3dB bandwidth requirement of the voltage buffer specification</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note that the -3dB bandwidth of the voltage buffer with gain Av=1 is equal to the unity gain bandwidth</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the ota, hence we wet them equal here</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we add a factor of 3 to allow for PVT variation plus additional MOSFET parasitic loading</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>gm_m12 <span class="op">=</span> f_bw <span class="op">*</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>c_load</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gm12 = 0.0188 mS</code></pre>
 </div>
 </div>
 <div id="cell-4" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># since we know gm12 and the gmid we can calculate the bias current</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># since we know gm12 and the gmid we can calculate the bias current</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>id_m12 <span class="op">=</span> gm_m12 <span class="op">/</span> gm_id_m12</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>i_total <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>id_m12</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'i_total (exact) ='</span>, <span class="bu">round</span>(i_total<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µA'</span>)</span>
@@ -2718,7 +2721,7 @@ Solution: 5T-OTA Sizing
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i_total <span class="op">&lt;</span> i_total_limit:</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'[info] power consumption target is met!'</span>)</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'[info] power consumption target is NOT met!'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'[info] power consumption target is NOT met!'</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>i_total (exact) = 3.8 µA
 i_total (rounded) = 4.0 µA
@@ -2726,7 +2729,7 @@ i_total (rounded) = 4.0 µA
 </div>
 </div>
 <div id="cell-5" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we calculate the dc gain</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we calculate the dc gain</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gm_gds_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gm_gds_m34 <span class="op">=</span> lv_pmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_m34, L<span class="op">=</span>l_34, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -2735,13 +2738,13 @@ i_total (rounded) = 4.0 µA
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>gds_m34 <span class="op">=</span> gm_m34 <span class="op">/</span> gm_gds_m34</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>a0 <span class="op">=</span> gm_m12 <span class="op">/</span> (gds_m12 <span class="op">+</span> gds_m34)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'a0 ='</span>, <span class="bu">round</span>(<span class="dv">20</span><span class="op">*</span>np.log10(a0), <span class="dv">1</span>), <span class="st">'dB'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'a0 ='</span>, <span class="bu">round</span>(<span class="dv">20</span><span class="op">*</span>np.log10(a0), <span class="dv">1</span>), <span class="st">'dB'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>a0 = 34.8 dB</code></pre>
 </div>
 </div>
 <div id="cell-6" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we calculate the MOSFET capacitance which adds to Cload, to see the impact on the BW</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we calculate the MOSFET capacitance which adds to Cload, to see the impact on the BW</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gm_cgs_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_CGS'</span>, GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>gm_cdd_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_CDD'</span>, GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>gm_cdd_m34 <span class="op">=</span> lv_pmos.lookup(<span class="st">'GM_CDD'</span>, GM_ID<span class="op">=</span>gm_id_m34, L<span class="op">=</span>l_34, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
@@ -2750,21 +2753,21 @@ i_total (rounded) = 4.0 µA
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'additional load capacitance ='</span>, <span class="bu">round</span>(c_load_parasitic<span class="op">/</span><span class="fl">1e-15</span>, <span class="dv">1</span>), <span class="st">'fF'</span>)</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>f_bw <span class="op">=</span> gm_m12 <span class="op">/</span> (<span class="dv">4</span><span class="op">*</span>np.pi <span class="op">*</span> (c_load <span class="op">+</span> c_load_parasitic))</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'unity gain bandwidth incl. parasitics ='</span>, <span class="bu">round</span>(f_bw<span class="op">/</span><span class="fl">1e6</span>, <span class="dv">2</span>), <span class="st">'MHz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'unity gain bandwidth incl. parasitics ='</span>, <span class="bu">round</span>(f_bw<span class="op">/</span><span class="fl">1e6</span>, <span class="dv">2</span>), <span class="st">'MHz'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>additional load capacitance = 54.9 fF
 unity gain bandwidth incl. parasitics = 14.3 MHz</code></pre>
 </div>
 </div>
 <div id="cell-7" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can now look up the VGS of the MOSFET</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can now look up the VGS of the MOSFET</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>vgs_m12 <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="fl">0.0</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>vgs_m34 <span class="op">=</span> lv_pmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_m34, L<span class="op">=</span>l_34, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="fl">0.0</span>) </span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>vgs_m56 <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_m56, L<span class="op">=</span>l_56, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="fl">0.0</span>) </span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_12 ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m12), <span class="dv">3</span>), <span class="st">'V'</span>)</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_34 ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m34), <span class="dv">3</span>), <span class="st">'V'</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_56 ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m56), <span class="dv">3</span>), <span class="st">'V'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_56 ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m56), <span class="dv">3</span>), <span class="st">'V'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>vgs_12 = 0.367 V
 vgs_34 = 0.729 V
@@ -2772,26 +2775,26 @@ vgs_56 = 0.591 V</code></pre>
 </div>
 </div>
 <div id="cell-8" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate settling time due to slewing with the calculated bias current</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate settling time due to slewing with the calculated bias current</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>t_slew <span class="op">=</span> (c_load <span class="op">+</span> c_load_parasitic) <span class="op">*</span> output_voltage <span class="op">/</span> i_total</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'slewing time ='</span>, <span class="bu">round</span>(t_slew<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'µs'</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>t_settle <span class="op">=</span> <span class="dv">5</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>f_bw)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'settling time ='</span>, <span class="bu">round</span>(t_settle<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'µs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'settling time ='</span>, <span class="bu">round</span>(t_settle<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'µs'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>slewing time = 0.034 µs
 settling time = 0.056 µs</code></pre>
 </div>
 </div>
 <div id="cell-9" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate voltage gain error</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate voltage gain error</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gain_error <span class="op">=</span> a0 <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> a0)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'voltage gain error ='</span>, <span class="bu">round</span>((gain_error<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span>, <span class="dv">1</span>), <span class="st">'%'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'voltage gain error ='</span>, <span class="bu">round</span>((gain_error<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span>, <span class="dv">1</span>), <span class="st">'%'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>voltage gain error = -1.8 %</code></pre>
 </div>
 </div>
 <div id="cell-10" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate total rms output noise</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate total rms output noise</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sth_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'STH_GM'</span>, VGS<span class="op">=</span>vgs_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span><span class="fl">0.75</span>, VSB<span class="op">=</span><span class="dv">0</span>) <span class="op">*</span> gm_m12</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>gamma_m12 <span class="op">=</span> sth_m12<span class="op">/</span>(<span class="dv">4</span><span class="op">*</span><span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span><span class="op">*</span>gm_m12)</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -2799,13 +2802,13 @@ settling time = 0.056 µs</code></pre>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>gamma_m34 <span class="op">=</span> sth_m34<span class="op">/</span>(<span class="dv">4</span><span class="op">*</span><span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span><span class="op">*</span>gm_m34)</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>output_noise_rms <span class="op">=</span> np.sqrt(<span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span> <span class="op">/</span> (c_load <span class="op">+</span> c_load_parasitic) <span class="op">*</span> (<span class="dv">2</span><span class="op">*</span>gamma_m12 <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>gamma_m34 <span class="op">*</span> gm_m34<span class="op">/</span>gm_m12))</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output noise ='</span>, <span class="bu">round</span>(output_noise_rms<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µVrms'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output noise ='</span>, <span class="bu">round</span>(output_noise_rms<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µVrms'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output noise = 354.2 µVrms</code></pre>
 </div>
 </div>
 <div id="cell-11" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate all widths</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate all widths</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>id_w_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span>vgs_m12, VSB<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>w_12 <span class="op">=</span> id_m12 <span class="op">/</span> id_w_m12</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>w_12_round <span class="op">=</span> <span class="bu">max</span>(<span class="bu">round</span>(w_12<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="fl">0.5</span>)</span>
@@ -2823,7 +2826,7 @@ settling time = 0.056 µs</code></pre>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'M5 W ='</span>, <span class="bu">round</span>(w_5, <span class="dv">2</span>), <span class="st">'um, rounded W ='</span>, w_5_round, <span class="st">'um'</span>)</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>w_6 <span class="op">=</span> w_5_round <span class="op">*</span> i_bias_in <span class="op">/</span> i_total</span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>w_6_round <span class="op">=</span> <span class="bu">max</span>(<span class="bu">round</span>(w_6<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="fl">0.5</span>)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'M6 W ='</span>, <span class="bu">round</span>(w_6_round, <span class="dv">2</span>), <span class="st">'um'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'M6 W ='</span>, <span class="bu">round</span>(w_6_round, <span class="dv">2</span>), <span class="st">'um'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>M1/2 W = 1.77 um, rounded W = 2.0 um
 M3/4 W = 1.64 um, rounded W = 1.5 um
@@ -2832,7 +2835,7 @@ M6 W = 2.5 um</code></pre>
 </div>
 </div>
 <div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print out final design values</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print out final design values</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'5T-OTA dimensioning:'</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'--------------------'</span>)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'M1/2 W='</span>, w_12_round, <span class="st">', L='</span>, l_12)</span>
@@ -2852,7 +2855,7 @@ M6 W = 2.5 um</code></pre>
 <span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'------------------------'</span>)</span>
 <span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'headroom M1 ='</span>, <span class="bu">round</span>(vdd_min<span class="op">-</span>vgs_m34<span class="op">+</span>vgs_m12<span class="op">-</span>vin_max, <span class="dv">3</span>), <span class="st">'V'</span>)</span>
 <span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'headroom M4 ='</span>, <span class="bu">round</span>(vdd_min<span class="op">-</span>vin_max, <span class="dv">3</span>), <span class="st">'V'</span>)</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'headroom M5 ='</span>, <span class="bu">round</span>(vin_min<span class="op">-</span>vgs_m12, <span class="dv">3</span>), <span class="st">'V'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'headroom M5 ='</span>, <span class="bu">round</span>(vin_min<span class="op">-</span>vgs_m12, <span class="dv">3</span>), <span class="st">'V'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>5T-OTA dimensioning:
 --------------------
@@ -2890,7 +2893,7 @@ headroom M5 = 0.333 V</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: 5T-OTA Design and Testbench
+<span class="screen-reader-only">Tip</span>Exercise: 5T-OTA Design and Testbench
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2919,7 +2922,7 @@ Exercise: 5T-OTA Design and Testbench
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-MOSFET Mismatch
+<span class="screen-reader-only">Note</span>MOSFET Mismatch
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2954,7 +2957,7 @@ V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \frac{\Del
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Number of Monte Carlo Simulation Runs
+<span class="screen-reader-only">Note</span>Number of Monte Carlo Simulation Runs
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -2999,19 +3002,19 @@ Number of Monte Carlo Simulation Runs
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Running CACE Simulation
+<span class="screen-reader-only">Warning</span>Running CACE Simulation
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>The CACE simulation run can be started with</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cace</span> cace/voltage-buffer-ota.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cace</span> cace/voltage-buffer-ota.yaml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The simulation results are then placed into the <code>cace/_docs</code> folder. If in addition to the default Markdown report an HTML output is needed for easier review then using Pandoc it can be easily converted and viewed with with</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cace/cace_view.sh</span> cace/_docs/ota-5t_schematic.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cace/cace_view.sh</span> cace/_docs/ota-5t_schematic.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-60-contents" aria-controls="callout-60" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-60-contents" aria-controls="callout-60" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3308,7 +3311,7 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Re-Sizing of 5T-OTA for Mismatch
+<span class="screen-reader-only">Tip</span>Exercise: Re-Sizing of 5T-OTA for Mismatch
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3457,7 +3460,7 @@ g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\ma
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Benefit of Cascode (Output)
+<span class="screen-reader-only">Important</span>Benefit of Cascode (Output)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3496,7 +3499,7 @@ g_\mathrm{in} = \frac{i_\mathrm{in}}{v_\mathrm{in}} = \frac{(g_\mathrm{m}+ g_\ma
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Benefit of Cascode (Input)
+<span class="screen-reader-only">Important</span>Benefit of Cascode (Input)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3529,7 +3532,7 @@ Figure&nbsp;44: The improved OTA based on the 5T-OTA design.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Cascode Bias Voltage Generation
+<span class="screen-reader-only">Important</span>Cascode Bias Voltage Generation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3543,7 +3546,7 @@ Cascode Bias Voltage Generation
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Cascode Current Mirror vs.&nbsp;High-Swing Cascode Current Mirror
+<span class="screen-reader-only">Tip</span>Exercise: Cascode Current Mirror vs.&nbsp;High-Swing Cascode Current Mirror
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3563,12 +3566,12 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5,6}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-66-contents" aria-controls="callout-66" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-66-contents" aria-controls="callout-66" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Improved OTA Sizing
+<span class="screen-reader-only">Note</span>Improved OTA Sizing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -3579,16 +3582,16 @@ Improved OTA Sizing
 <p><strong>Copyright 2024-2025 Harald Pretl</strong></p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
 <div id="cell-1" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read table data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read table data</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pygmid <span class="im">import</span> Lookup <span class="im">as</span> lk</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>lv_nmos <span class="op">=</span> lk(<span class="st">'sg13_lv_nmos.mat'</span>)</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>lv_pmos <span class="op">=</span> lk(<span class="st">'sg13_lv_pmos.mat'</span>)</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># list of parameters: VGS, VDS, VSB, L, W, NFING, ID, VT, GM, GMB, GDS, CGG, CGB, CGD, CGS, CDD, CSS, STH, SFL</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># if not specified, minimum L, VDS=max(vgs)/2=0.9 and VSB=0 are used </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># if not specified, minimum L, VDS=max(vgs)/2=0.9 and VSB=0 are used </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-2" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the given parameters as taken from the specification table or initial guesses</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the given parameters as taken from the specification table or initial guesses</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>c_load <span class="op">=</span> <span class="fl">50e-15</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>gm_id_m12 <span class="op">=</span> <span class="dv">13</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>gm_id_m12c <span class="op">=</span> <span class="dv">13</span></span>
@@ -3608,22 +3611,22 @@ Improved OTA Sizing
 <span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>vin_max <span class="op">=</span> <span class="fl">0.9</span></span>
 <span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>vdd_min <span class="op">=</span> <span class="fl">1.45</span></span>
 <span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>vdd_max <span class="op">=</span> <span class="fl">1.55</span></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>vds_headroom <span class="op">=</span> <span class="fl">0.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>vds_headroom <span class="op">=</span> <span class="fl">0.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-3" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we get the required gm of M1/2 from the -3dB bandwidth requirement of the voltage buffer specification</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we get the required gm of M1/2 from the -3dB bandwidth requirement of the voltage buffer specification</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note that the -3dB bandwidth of the voltage buffer with gain Av=1 is equal to the unity gain bandwidth</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the ota, hence we wet them equal here</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we add a factor of 3 to allow for PVT variation plus additional MOSFET parasitic loading</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># we also add an additional factor of 2 to get more dc gain (and there is power still in the budget)</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>gm_m12 <span class="op">=</span> f_bw <span class="op">*</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>c_load <span class="op">*</span> <span class="dv">3</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gm12 = 0.0565 mS</code></pre>
 </div>
 </div>
 <div id="cell-4" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># since we know gm12 and the gmid we can calculate the bias current</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># since we know gm12 and the gmid we can calculate the bias current</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>id_m12 <span class="op">=</span> gm_m12 <span class="op">/</span> gm_id_m12</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>i_total <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>id_m12</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'i_total (exact) ='</span>, <span class="bu">round</span>(i_total<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µA'</span>)</span>
@@ -3637,7 +3640,7 @@ Improved OTA Sizing
 <span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i_total <span class="op">&lt;</span> i_total_limit:</span>
 <span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'[info] power consumption target is met!'</span>)</span>
 <span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'[info] power consumption target is NOT met!'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'[info] power consumption target is NOT met!'</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>i_total (exact) = 8.7 µA
 i_total (rounded) = 8.0 µA
@@ -3645,7 +3648,7 @@ i_total (rounded) = 8.0 µA
 </div>
 </div>
 <div id="cell-5" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we calculate the dc gain</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we calculate the dc gain</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>gm_gds_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">2</span><span class="op">*</span>vds_headroom)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>gm_gds_m12c <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_m12c, L<span class="op">=</span>l_12c, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">3</span><span class="op">*</span>vds_headroom)</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>gm_gds_m34 <span class="op">=</span> lv_pmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_m34, L<span class="op">=</span>l_34, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">0</span>)</span>
@@ -3664,7 +3667,7 @@ i_total (rounded) = 8.0 µA
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm_34c/gds_34c ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(gm_gds_m34c), <span class="dv">1</span>))</span>
 <span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>a0 <span class="op">=</span> gm_m12 <span class="op">/</span> (gds_m12_casc <span class="op">+</span> gds_m34_casc)</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'a0 ='</span>, <span class="bu">round</span>(<span class="dv">20</span><span class="op">*</span>np.log10(a0), <span class="dv">1</span>), <span class="st">'dB'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'a0 ='</span>, <span class="bu">round</span>(<span class="dv">20</span><span class="op">*</span>np.log10(a0), <span class="dv">1</span>), <span class="st">'dB'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gds_12 = 4.026 µs
 gm_12c/gds_12c = 13.4
@@ -3674,7 +3677,7 @@ a0 = 43.4 dB</code></pre>
 </div>
 </div>
 <div id="cell-6" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we calculate the MOSFET capacitance which adds to Cload, to see the impact on the BW</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we calculate the MOSFET capacitance which adds to Cload, to see the impact on the BW</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>gm_cgs_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_CGS'</span>, GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">2</span><span class="op">*</span>vds_headroom)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>gm_cdd_m12c <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_CDD'</span>, GM_ID<span class="op">=</span>gm_id_m12c, L<span class="op">=</span>l_12c, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">3</span><span class="op">*</span>vds_headroom)</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>gm_cdd_m34c <span class="op">=</span> lv_pmos.lookup(<span class="st">'GM_CDD'</span>, GM_ID<span class="op">=</span>gm_id_m34c, L<span class="op">=</span>l_34c, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span>vds_headroom)</span>
@@ -3683,14 +3686,14 @@ a0 = 43.4 dB</code></pre>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'additional load capacitance ='</span>, <span class="bu">round</span>(c_load_parasitic<span class="op">/</span><span class="fl">1e-15</span>, <span class="dv">1</span>), <span class="st">'fF'</span>)</span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>f_bw <span class="op">=</span> gm_m12 <span class="op">/</span> (<span class="dv">4</span><span class="op">*</span>np.pi <span class="op">*</span> (c_load <span class="op">+</span> c_load_parasitic))</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'unity gain bandwidth incl. parasitics ='</span>, <span class="bu">round</span>(f_bw<span class="op">/</span><span class="fl">1e6</span>, <span class="dv">2</span>), <span class="st">'MHz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'unity gain bandwidth incl. parasitics ='</span>, <span class="bu">round</span>(f_bw<span class="op">/</span><span class="fl">1e6</span>, <span class="dv">2</span>), <span class="st">'MHz'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>additional load capacitance = 5.5 fF
 unity gain bandwidth incl. parasitics = 81.15 MHz</code></pre>
 </div>
 </div>
 <div id="cell-7" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can now look up the VGS of the MOSFET</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can now look up the VGS of the MOSFET</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>vgs_m12 <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">2</span><span class="op">*</span>vds_headroom)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>vgs_m12c <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_m12c, L<span class="op">=</span>l_12c, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">3</span><span class="op">*</span>vds_headroom)</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>vgs_m34 <span class="op">=</span> lv_pmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_m34, L<span class="op">=</span>l_34, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="fl">0.0</span>) </span>
@@ -3701,7 +3704,7 @@ unity gain bandwidth incl. parasitics = 81.15 MHz</code></pre>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_12c ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m12c), <span class="dv">3</span>), <span class="st">'V'</span>)</span>
 <span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_34  ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m34), <span class="dv">3</span>), <span class="st">'V'</span>)</span>
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_34c ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m34c), <span class="dv">3</span>), <span class="st">'V'</span>)</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_56  ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m56), <span class="dv">3</span>), <span class="st">'V'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vgs_56  ='</span>, <span class="bu">round</span>(<span class="bu">float</span>(vgs_m56), <span class="dv">3</span>), <span class="st">'V'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>vgs_12  = 0.436 V
 vgs_12c = 0.458 V
@@ -3711,26 +3714,26 @@ vgs_56  = 0.318 V</code></pre>
 </div>
 </div>
 <div id="cell-8" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate settling time due to slewing with the calculated bias current</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate settling time due to slewing with the calculated bias current</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>t_slew <span class="op">=</span> (c_load <span class="op">+</span> c_load_parasitic) <span class="op">*</span> output_voltage <span class="op">/</span> i_total</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'slewing time  ='</span>, <span class="bu">round</span>(t_slew<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'µs'</span>)</span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>t_settle <span class="op">=</span> <span class="dv">5</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>f_bw)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'settling time ='</span>, <span class="bu">round</span>(t_settle<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'µs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'settling time ='</span>, <span class="bu">round</span>(t_settle<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'µs'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>slewing time  = 0.009 µs
 settling time = 0.01 µs</code></pre>
 </div>
 </div>
 <div id="cell-9" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate voltage gain error</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate voltage gain error</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>gain_error <span class="op">=</span> a0 <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> a0)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'voltage gain error ='</span>, <span class="bu">round</span>((gain_error<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span>, <span class="dv">1</span>), <span class="st">'%'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'voltage gain error ='</span>, <span class="bu">round</span>((gain_error<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span>, <span class="dv">1</span>), <span class="st">'%'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>voltage gain error = -0.7 %</code></pre>
 </div>
 </div>
 <div id="cell-10" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate total rms output noise</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate total rms output noise</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>sth_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'STH_GM'</span>, VGS<span class="op">=</span>vgs_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">2</span><span class="op">*</span>vds_headroom) <span class="op">*</span> gm_m12</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>gamma_m12 <span class="op">=</span> sth_m12<span class="op">/</span>(<span class="dv">4</span><span class="op">*</span><span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span><span class="op">*</span>gm_m12)</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3738,13 +3741,13 @@ settling time = 0.01 µs</code></pre>
 <span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>gamma_m34 <span class="op">=</span> sth_m34<span class="op">/</span>(<span class="dv">4</span><span class="op">*</span><span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span><span class="op">*</span>gm_m34)</span>
 <span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>output_noise_rms <span class="op">=</span> np.sqrt(<span class="fl">1.38e-23</span><span class="op">*</span><span class="dv">300</span> <span class="op">/</span> (c_load <span class="op">+</span> c_load_parasitic) <span class="op">*</span> (<span class="dv">2</span><span class="op">*</span>gamma_m12 <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>gamma_m34 <span class="op">*</span> gm_m34<span class="op">/</span>gm_m12))</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output noise ='</span>, <span class="bu">round</span>(output_noise_rms<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µVrms'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output noise ='</span>, <span class="bu">round</span>(output_noise_rms<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">1</span>), <span class="st">'µVrms'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output noise = 555.4 µVrms</code></pre>
 </div>
 </div>
 <div id="cell-11" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate all widths</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate all widths</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>id_w_m12 <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_m12, L<span class="op">=</span>l_12, VDS<span class="op">=</span>vds_headroom, VSB<span class="op">=</span><span class="dv">2</span><span class="op">*</span>vds_headroom)</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>w_12 <span class="op">=</span> id_m12 <span class="op">/</span> id_w_m12</span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>w_12_round <span class="op">=</span> <span class="bu">max</span>(<span class="bu">round</span>(w_12<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="fl">0.5</span>)</span>
@@ -3774,7 +3777,7 @@ settling time = 0.01 µs</code></pre>
 <span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'M5    W ='</span>, <span class="bu">round</span>(w_5, <span class="dv">2</span>), <span class="st">'um, rounded W ='</span>, w_5_round, <span class="st">'um'</span>)</span>
 <span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a>w_6 <span class="op">=</span> w_5_round <span class="op">*</span> i_bias_in <span class="op">/</span> i_total</span>
-<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'M6    W ='</span>, <span class="bu">round</span>(w_6, <span class="dv">2</span>), <span class="st">'um'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'M6    W ='</span>, <span class="bu">round</span>(w_6, <span class="dv">2</span>), <span class="st">'um'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>M1/2  W = 0.83 um, rounded W = 1.0 um
 M1/2c W = 0.8 um, rounded W = 1.0 um
@@ -3785,7 +3788,7 @@ M6    W = 8.75 um</code></pre>
 </div>
 </div>
 <div id="cell-12" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out final design values</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out final design values</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Improved OTA dimensioning:'</span>)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'--------------------------'</span>)</span>
 <span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'M1/2  W='</span>, w_12_round, <span class="st">', L='</span>, l_12)</span>
@@ -3807,7 +3810,7 @@ M6    W = 8.75 um</code></pre>
 <span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'------------------------------'</span>)</span>
 <span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'headroom M1+M1c ='</span>, <span class="bu">round</span>(vdd_min<span class="op">-</span>vgs_m34<span class="op">+</span>vgs_m12<span class="op">-</span>vin_max, <span class="dv">3</span>), <span class="st">'V'</span>)</span>
 <span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'headroom M4+M4c ='</span>, <span class="bu">round</span>(vdd_min<span class="op">-</span>vin_max, <span class="dv">3</span>), <span class="st">'V'</span>)</span>
-<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'headroom M5     ='</span>, <span class="bu">round</span>(vin_min<span class="op">-</span>vgs_m12, <span class="dv">3</span>), <span class="st">'V'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'headroom M5     ='</span>, <span class="bu">round</span>(vin_min<span class="op">-</span>vgs_m12, <span class="dv">3</span>), <span class="st">'V'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Improved OTA dimensioning:
 --------------------------
@@ -3844,7 +3847,7 @@ headroom M5     = 0.264 V</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Improved OTA Sizing
+<span class="screen-reader-only">Tip</span>Exercise: Improved OTA Sizing
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3885,7 +3888,7 @@ Figure&nbsp;45: Improved OTA design in Xschem.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Parallel Connection
+<span class="screen-reader-only">Note</span>Parallel Connection
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3933,7 +3936,7 @@ Figure&nbsp;48: Simulation testbench of the improved OTA design (loop gain analy
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Improved OTA Initial Simulation
+<span class="screen-reader-only">Tip</span>Exercise: Improved OTA Initial Simulation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3951,7 +3954,7 @@ Exercise: Improved OTA Initial Simulation
 <h2 data-number="10.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">10.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-70-contents" aria-controls="callout-70" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-70-contents" aria-controls="callout-70" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4378,7 +4381,7 @@ V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Improved Bandgap Reference
+<span class="screen-reader-only">Note</span>Improved Bandgap Reference
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4466,7 +4469,7 @@ Figure&nbsp;55: Reference voltage from simulated Banba bandgap circuit.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Improved Low-Voltage Bandgap
+<span class="screen-reader-only">Tip</span>Exercise: Improved Low-Voltage Bandgap
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4601,7 +4604,7 @@ R_\mathrm{m} &gt; \frac{2}{g_\mathrm{m}}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Differential and Common-Mode Loops
+<span class="screen-reader-only">Important</span>Differential and Common-Mode Loops
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4635,7 +4638,7 @@ V_\mathrm{out,cm} = V_\mathrm{GS7,8} + \frac{R_{3,4} I_\mathrm{D11}}{2}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Modify Bias Points with Currents
+<span class="screen-reader-only">Warning</span>Modify Bias Points with Currents
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4657,7 +4660,7 @@ Modify Bias Points with Currents
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Feedback
+<span class="screen-reader-only">Important</span>Feedback
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4670,7 +4673,7 @@ Feedback
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Further Reading
+<span class="screen-reader-only">Note</span>Further Reading
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -4766,7 +4769,7 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Miller’s Secret
+<span class="screen-reader-only">Note</span>Miller’s Secret
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -5110,6 +5113,7 @@ i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
 <li>Make your code flexible by making bit widths and other values parameterized using a <code>localparam</code> or module parameter.</li>
 <li>Be cautious of implicit type conversions and bit-width adaptions; better make explicit conversions and match bit widths in assignments.</li>
 <li>Use only blocking assignments (<code>=</code>) in <code>always @(*)</code> blocks, and only non-blocking assignments (<code>&lt;=</code>) in clocked <code>always @(posedge ...)</code> blocks.</li>
+<li>It is recommended to follow this naming convention for latches and flip-flops: <strong>Synchronous</strong> set and reset should be called <code>set</code> (for setting, i.e., <code>Q=1</code>) and <code>res</code> (for resetting, i.e., <code>Q=0</code>). <strong>Asynchronous</strong> set and reset should be called <code>pre</code> (for presetting) and <code>clr</code> (for clearing). In this way it is immediately clear whether a control input is acting independent of the <code>clk</code> (i.e., asynchronous) or dependent on the <code>clk</code> (i.e., synchronous).</li>
 </ul>
 <p>A comprehensive coding style guide for Verilog/SystemVerilog can be found <a href="https://github.com/lowRISC/style-guides/blob/master/VerilogCodingStyle.md">here</a>, and it is highly recommended to follow it.</p>
 </section>
@@ -5223,14 +5227,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-09-08},
+  date = {2025-09-18},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> September 8, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> September 18, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -5296,13 +5300,14 @@ Circuit Design.”</span> September 8, 2025. <a href="https://doi.org/10.5281/ze
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
     <meta charset="utf-8">
-    <meta name="generator" content="quarto-1.7.34">
+    <meta name="generator" content="quarto-1.8.24">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -155,18 +155,19 @@
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e8e54fbf2d9ade825dca367f4b247db7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f4a5ee9f428d00c6bef4a716450a67ee.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-e8e54fbf2d9ade825dca367f4b247db7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3bfab430b3a0f1eddad8a0d61863e953.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a2bfeeca8d941e7f328a7b92742c06b1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-3bfab430b3a0f1eddad8a0d61863e953.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -375,6 +376,8 @@
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Analog Circuit Design</span>
     </a>
@@ -447,18 +450,18 @@
 <p>This notebook displays various important metrics for the SG13G2 CMOS technology. The corresponding Xschem testbenches are named <code>techsweep_sg13g2_lv_nmos.sch</code> and <code>techsweep_sg13g2_lv_pmos.sch</code> (to be found in the <code>xschem</code> folder).</p>
 </div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:06.633703Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:06.630544Z&quot;}}" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devices <span class="op">=</span> [<span class="st">'sg13_lv_nmos'</span>, <span class="st">'sg13_lv_pmos'</span>]</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>choice <span class="op">=</span> <span class="dv">0</span> <span class="co"># select which device to plot, start from 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devices <span class="op">=</span> [<span class="st">'sg13_lv_nmos'</span>, <span class="st">'sg13_lv_pmos'</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>choice <span class="op">=</span> <span class="dv">0</span> <span class="co"># select which device to plot, start from 0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:07.236438Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:06.635041Z&quot;}}" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># widths used for characterization</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:07.765889Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.239219Z&quot;}}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read ngspice data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read ngspice data</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'./techsweep_'</span><span class="op">+</span>devices[choice]<span class="op">+</span><span class="st">'.txt'</span>, sep<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>par_names <span class="op">=</span> df_raw.columns.to_list()</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>par_prefix <span class="op">=</span> par_names[<span class="dv">1</span>].split(<span class="st">'['</span>)[<span class="dv">0</span>]</span>
@@ -481,7 +484,7 @@
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Note on noise data: </span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.: sid, sfl are thermal and flicker noise current densities at 1 Hz in A^2/Hz from operating point data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.: sid, sfl are thermal and flicker noise current densities at 1 Hz in A^2/Hz from operating point data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Index(['cdd', 'cgb', 'cgd', 'cgdol', 'cgg', 'cgs', 'cgsol', 'cjd', 'cjs',
        'css', 'fug', 'gds', 'gm', 'gmb', 'ids', 'l', 'rg', 'sfl', 'sid', 'vds',
@@ -490,14 +493,14 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:07.777041Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.766665Z&quot;}}" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sweep variable vectors</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sweep variable vectors</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'l'</span>]))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>vgs <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vgs'</span>]))</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>vds <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vds'</span>]))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vsb <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vsb <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}}" data-tags="[&quot;fig-nmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/ID and fT versus gate bias</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/ID and fT versus gate bias</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-nmos-gmid-ft-vs-vgs</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $g_m/I_D$ and $f_T$ as a function of the gate-source voltage.</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> <span class="bu">min</span>(l)<span class="op">;</span> VDS1<span class="op">=</span><span class="fl">0.75</span><span class="op">;</span> VSB1<span class="op">=</span><span class="dv">0</span></span>
@@ -525,7 +528,7 @@
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.5</span>)</span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>plt.axvline(x <span class="op">=</span> df1[<span class="st">'vth'</span>].values[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'k'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gmID_fT_VGS.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gmID_fT_VGS.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -535,7 +538,7 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.306593Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.153371Z&quot;}}" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot product of gm/ID and fT versus gm/ID</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot product of gm/ID and fT versus gm/ID</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.plot(gm_id1, gm_id1<span class="op">*</span>ft1<span class="op">/</span><span class="fl">1e9</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">2</span>, <span class="dv">26</span>)</span>
@@ -544,7 +547,7 @@
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="st">', $L$='</span><span class="op">+</span><span class="bu">str</span>(L1)<span class="op">+</span><span class="vs">r'µm, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fTgmID_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fTgmID_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -554,7 +557,7 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.495380Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.307983Z&quot;}}" data-tags="[&quot;fig-nmos-ft-vs-gmid&quot;]" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-nmos-ft-vs-gmid</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $f_T$ vs. $g_m/I_D$.</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.plot(gm_id1, ft1<span class="op">/</span><span class="fl">1e9</span>)</span>
@@ -563,7 +566,7 @@
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'</span><span class="dv">$</span><span class="vs">f_</span><span class="dv">\m</span><span class="vs">athrm{T}</span><span class="dv">$</span><span class="vs"> </span><span class="kw">(</span><span class="vs">GHz</span><span class="kw">)</span><span class="vs">'</span>)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="st">', $L$='</span><span class="op">+</span><span class="bu">str</span>(L1)<span class="op">+</span><span class="vs">r'µm, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -573,7 +576,7 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}}" data-tags="[&quot;fig-nmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID for all L</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID for all L</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-nmos-ft-vs-gmid-vs-l</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $f_T$ vs. $g_m/I_D$ as a function of $L$.</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>VDS2<span class="op">=</span><span class="fl">0.75</span><span class="op">;</span> VSB2<span class="op">=</span><span class="dv">0</span></span>
@@ -592,7 +595,7 @@
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fT_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fT_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -605,7 +608,7 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}}" data-tags="[&quot;fig-nmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/gds versus gm/ID for all L</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/gds versus gm/ID for all L</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-nmos-gmgds-vs-gmid-vs-l</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $g_m/g_{ds}$ vs. $g_m/I_D$ as a function of $L$.</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>gm_gds2 <span class="op">=</span> df2[<span class="st">'gm'</span>].values<span class="op">/</span>df2[<span class="st">'gds'</span>].values</span>
@@ -621,7 +624,7 @@
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gmgds_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gmgds_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -634,7 +637,7 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [10]:</pre></div><div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}}" data-tags="[&quot;fig-nmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Id/W (Jd) versus gm/ID for all L</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Id/W (Jd) versus gm/ID for all L</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-nmos-jd-vs-gmid-vs-l</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $I_D/W$ vs. $g_m/I_D$ as a function of $L$.</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>jd2 <span class="op">=</span> df2[<span class="st">'ids'</span>].values<span class="op">/</span>w[choice]<span class="op">/</span><span class="fl">1e-6</span></span>
@@ -654,7 +657,7 @@
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_IDW_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_IDW_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -667,7 +670,7 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}}" data-tags="[&quot;fig-nmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Vdss versus gm/ID for all L</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Vdss versus gm/ID for all L</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-nmos-vdsat-vs-gmid-vs-l</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $V_{ds,sat}$ vs. $g_m/I_D$ as a function of $L$.</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>vdss2 <span class="op">=</span> df2[<span class="st">'vdss'</span>]</span>
@@ -683,7 +686,7 @@
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_Vdssat_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_Vdssat_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -696,7 +699,7 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [12]:</pre></div><div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gamm versus gm/ID for all L</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gamm versus gm/ID for all L</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-nmos-gamma-vs-gmid-vs-l</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $\gamma$ vs. $g_m/I_D$ as a function of $L$.</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>sid2 <span class="op">=</span> df2[<span class="st">'sid'</span>].values</span>
@@ -719,7 +722,7 @@
 <span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gamma_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gamma_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -732,7 +735,7 @@
 </div>
 </div></div>
 <div class="cell-container"><div class="cell-decorator"><pre>In [13]:</pre></div><div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}}" data-tags="[&quot;fig-nmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fco versus gm/ID for all L</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fco versus gm/ID for all L</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-nmos-fco-vs-gmid-vs-l</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Flicker-noise corner frequency vs. $g_m/I_D$ as a function of $L$.</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>sfl2 <span class="op">=</span> df2[<span class="st">'sfl'</span>].values</span>
@@ -749,7 +752,7 @@
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fco_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fco_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="">
 <figure class="figure">
@@ -827,13 +830,14 @@
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
