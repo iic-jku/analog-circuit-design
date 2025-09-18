@@ -104,6 +104,7 @@ These recommendations are specifically targeted at Verilog; however, they apply 
 - Make your code flexible by making bit widths and other values parameterized using a `localparam` or module parameter.
 - Be cautious of implicit type conversions and bit-width adaptions; better make explicit conversions and match bit widths in assignments.
 - Use only blocking assignments (`=`) in `always @(*)` blocks, and only non-blocking assignments (`<=`) in clocked `always @(posedge ...)` blocks.
+- It is recommended to follow this naming convention for latches and flip-flops: **Synchronous** set and reset should be called `set` (for setting, i.e., `Q=1`) and `res` (for resetting, i.e., `Q=0`). **Asynchronous** set and reset should be called `pre` (for presetting) and `clr` (for clearing). In this way it is immediately clear whether a control input is acting independent of the `clk` (i.e., asynchronous) or dependent on the `clk` (i.e., synchronous).
 
 A comprehensive coding style guide for Verilog/SystemVerilog can be found [here](https://github.com/lowRISC/style-guides/blob/master/VerilogCodingStyle.md), and it is highly recommended to follow it.
 
