@@ -1,9 +1,9 @@
-v {xschem version=3.4.6RC file_version=1.2
-}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 B 2 860 -780 1700 -440 {flags=graph
 y1=-2.3e-19
@@ -92,7 +92,7 @@ C {devices/gnd.sym} 570 -280 0 0 {name=l1 lab=GND}
 C {devices/vsource.sym} 340 -370 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 340 -280 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 640 -280 0 0 {name=l4 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 550 -370 0 0 {name=M1
 l=0.13u
 w=1u

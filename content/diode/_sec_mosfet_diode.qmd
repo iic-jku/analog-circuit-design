@@ -1,5 +1,5 @@
 ::: {.content-hidden}
-Copyright (C) 2024 Harald Pretl and co-authors (harald.pretl@jku.at)
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ limitations under the License.
 
 The first (simple) circuit which we will investigate is a MOSFET, where the gate is shorted with the drain, a so-called MOSFET "diode", which is shown in @fig-mosfet-diode. This diode is one half of a current mirror, which we will investigate in @sec-current-mirror.
 
-{{< include /figures/_fig_mosfet_diode.qmd >}}
+{{< include /content/diode/_fig_mosfet_diode.qmd >}}
 
 Why looking at a single-transistor circuit at all? By starting with the simplest possible circuit we can develop important skills in circuit analysis (setting up and calculating a small-signal model, calculating open-loop gain, calculate noise, etc.) and Xschem/ngspice simulation testbench creation. We safely assume that also the Mona Lisa was not Leonardo da Vinci's first painting, so let's start slow.
 
@@ -49,14 +49,14 @@ Before continuing, please finish the previous exercise. Once you are done, compa
 4. Since we are looking at the graphs, we further find $\gamma = 0.84$, $V_\mathrm{ds,sat} = 0.18\,\text{V}$, and $f_\mathrm{co} \approx 15\,\text{MHz}$.
 5. In addition, we expect $\VGS \approx 0.6\,\text{V}$.
 
-An example Jupyter notebook to extract these values accurately you can find [here](./sizing/sizing_mosfet_diode.ipynb). An Xschem schematic for this exercise is provide [as well](./xschem/mosfet_diode_sizing.sch).
+An example Jupyter notebook to extract these values accurately you can find [here](./gmid/sizing_mosfet_diode.ipynb). An Xschem schematic for this exercise is provide [as well](./xschem/mosfet_diode_sizing.sch).
 :::
 
 ## MOSFET Diode Large-Signal Behavior
 
 As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyze this loop in small-signal, we want to investigate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behavior. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some picoseconds. The resulting Xschem testbench is shown in @fig-mosfet-diode-settling-tb.
 
-![Testbench for MOSFET diode transient settling.](./xschem/mosfet_diode_settling.svg){#fig-mosfet-diode-settling-tb}
+![Testbench for MOSFET diode transient settling.](/xschem/mosfet_diode_settling.svg){#fig-mosfet-diode-settling-tb}
 
 When simulating the circuit in @fig-mosfet-diode-settling-tb another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current, the $\VGS$ drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to a capacitor discharge by a diode [@Hellen_2003].
 
@@ -70,7 +70,7 @@ Exemplary implementations of power-down switches are shown in the Xschem impleme
 
 We now want to investigate the small-signal behavior of the MOSFET diode. Based on the small-signal model of the MOSFET in @fig-mosfet-small-signal-model we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circuit to the one shown in @fig-mosfet-diode-small-signal.
 
-{{< include ./figures/_fig_mosfet_diode_small_signal.qmd >}}
+{{< include /content/diode/_fig_mosfet_diode_small_signal.qmd >}}
 
 ::: {.callout-note title="Ground Node Selection"}
 For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only $N-1$ independent KCL equations, $N$ being the number of nodes in the circuit), and the potential difference equations are simpler if one node is at $0\,V$.
@@ -110,7 +110,7 @@ If the open-loop gain is sufficiently large $H_\mathrm{ol}(s) \gg 1$, then the c
 
 In the case of the MOSFET diode, $G(s) = 1$ and therefore $T(s) = H_\mathrm{ol}(s)$ and $H_\mathrm{cl}(s) \approx 1$. Therefore, this chapter uses open-loop gain and loop-gain as synonyms.
 
-{{< include ./figures/_fig_feedback_system.qmd >}}
+{{< include /content/diode/_fig_feedback_system.qmd >}}
 :::
 
 ::: {.callout-note title="Gain-Bandwidth Product in Feedback Systems"}
@@ -135,7 +135,7 @@ This theory might be interesting when Middlebrook's and Tian's methods for loop 
 
 The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy $\Cgs^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
 
-{{< include ./figures/_fig_mosfet_diode_openloop.qmd >}}
+{{< include /content/diode/_fig_mosfet_diode_openloop.qmd >}}
 
 We are now driving (with a voltage source) $v_\mathrm{in}$ and record the output voltage $v_\mathrm{out}$ to find the open-loop response $H_\mathrm{ol}(s)$. By inspecting @fig-mosfet-diode-openloop we see that 
 $$
@@ -160,14 +160,14 @@ There is an alternative method which breaks the loop open only by adding an ac v
 
 There are several other methods like Tian's method [@Tian_2001], for example. A comprehensive overview can be found in [@Neag_2015] which describes ten different simulation-based loop gain analysis methods.
 
-We now want to simulate the open-loop transfer function $H_\mathrm{ol}(s)$ by using Middlebrook's method and confirm our analysis above.
+We now want to simulate the open-loop transfer function $H_\mathrm{ol}(s)$ by using Middlebrook's and Tian's method and confirm our analysis above.
 
 ::: {.callout-tip title="Exercise: MOSFET Diode Loop Analysis"}
 Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by @eq-mosfet-diode-openloop-gain.
 
 If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_loopgain.sch), shown in @fig-mosfet-diode-loopgain-tb.
 
-![Testbench for MOSFET diode stability analysis.](./xschem/mosfet_diode_loopgain.svg){#fig-mosfet-diode-loopgain-tb}
+![Testbench for MOSFET diode stability analysis.](/xschem/mosfet_diode_loopgain.svg){#fig-mosfet-diode-loopgain-tb}
 :::
 
 From simulation we see that the open-loop gain is $24.9\,\text{dB}$ at low frequencies, which matches quite well our prediction of $26.4\,\text{dB}$. In the Bode plot we see a low-pass with a $-3\,\text{dB}$ corner frequency of $1.4\,\text{GHz}$, which again is fairly close to our prediction of $1.1\,\text{GHz}$. 
@@ -184,7 +184,7 @@ As a final exercise on the MOSFET diode circuit we want to calculate the output 
 
 We are going to use the small-signal circuit shown in @fig-mosfet-diode-small-signal-w-noise.
 
-{{< include ./figures/_fig_mosfet_diode_small_signal_w_noise.qmd >}}
+{{< include /content/diode/_fig_mosfet_diode_small_signal_w_noise.qmd >}}
 
 As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $\vgs$ is thus given as
 $$
