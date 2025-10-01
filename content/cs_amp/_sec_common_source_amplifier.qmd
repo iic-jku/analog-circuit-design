@@ -1,5 +1,5 @@
 ::: {.content-hidden}
-Copyright (C) 2024 Harald Pretl and co-authors (harald.pretl@jku.at)
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ limitations under the License.
 
 We now want to step up our game, and use more components to design something useful. We will use a basic circuit structure, namely a single-ended common-source amplifier. The structure of this circuit, using a resistor as a load, is shown in @fig-cs-amplifier.
 
-{{< include ./figures/_fig_cs_amplifier.qmd >}}
+{{< include /content/cs_amp/_fig_cs_amplifier.qmd >}}
 
 The function of this circuit is as follows: Assuming the MOSFET $M_1$ is kept in saturation, then a small-signal voltage $v_\mathrm{in}$ applied at the gate is converted into a drain current $i_\mathrm{d}$ by the MOSFET's transconductance $\gm$. Then, this current is converted into a voltage again in the resistor $R_1$. Ultimately, we have a dc voltage gain $A_\mathrm{v}$ of
 
@@ -41,7 +41,7 @@ Let us now size and design an exemplary implementation of this amplifier (of cou
 
 The resulting circuit is shown in @fig-meas-amplifier. As the load is usually ground-referred, and we want to avoid a dc-block at the output, we use a PMOS amplifier stage (compare with @fig-cs-amplifier).
 
-{{< include ./figures/_fig_meas_amplifier.qmd >}}
+{{< include /content/cs_amp/_fig_meas_amplifier.qmd >}}
 
 ::: {.callout-tip title="Exercise: PMOS-Based Measurement Amplifier"}
 Please think about why exactly we want this measurement amplifier be based on a PMOS instead of an NMOS.
@@ -49,7 +49,7 @@ Please think about why exactly we want this measurement amplifier be based on a 
 
 The [power matching](https://en.wikipedia.org/wiki/Impedance_matching) requirement at the output mandates that $R_1 = R_\mathrm{load}$, so $R'_1 = R_\mathrm{load} \parallel R_1 = 25\,\Omega$. The voltage gain requirement of $|A_\mathrm{v}| = 1$ results in $\gm = 1 / R'_1 = 40\,\text{mS}$.
 
-We now need to find $W$ and $L$ of $M_1$ and calculate the required bias current $\ID$. We also need to find the proper $\VGS$ to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a $\gmid=8$ and set $L = 0.13\,\mu\text{m}$. The notebook is available [here](./sizing/sizing_measurement_amplifier.ipynb). The resulting circuit including all component values is shown at the end of the notebook (the red input capacitor shows the $\Cgg$ of the MOSFET).
+We now need to find $W$ and $L$ of $M_1$ and calculate the required bias current $\ID$. We also need to find the proper $\VGS$ to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a $\gmid=8$ and set $L = 0.13\,\mu\text{m}$. The notebook is available [here](./gmid/sizing_measurement_amplifier.ipynb). The resulting circuit including all component values is shown at the end of the notebook (the red input capacitor shows the $\Cgg$ of the MOSFET).
 
 ::: {.callout-important title="MOSFET Parameters NG and M" #imp-mosfet-params-ng-m}
 When sizing the MOSFET for this example we found that we need a fairly large $W$, resulting in a MOSFET aspect ratio of $W/L \gg 1000$. When constructing an integrated circuit out of individual MOSFET we strive for an overall IC dimension that is roughly quadratic. For MOSFET with large aspect ratios we need to get them into a comfortable shape.
@@ -64,7 +64,7 @@ When to use `ng` and when to use `m`? The use of `ng` results in a more compact 
 :::
 
 ::: {.callout-tip title="Exercise: Measurement Amplifier Simulation"}
-Please go through the [sizing notebook](./sizing/sizing_measurement_amplifier.ipynb) of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?
+Please go through the [sizing notebook](./gmid/sizing_measurement_amplifier.ipynb) of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?
 
 Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain $A_\mathrm{v}$ of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter `ng` accordingly (see @imp-mosfet-params-ng-m).
 
