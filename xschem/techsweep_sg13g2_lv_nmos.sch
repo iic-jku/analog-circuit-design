@@ -1,10 +1,11 @@
-v {xschem version=3.4.5 file_version=1.2
-}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
+T {Original implementation by (c) Boris Murmann} 830 -30 0 0 0.4 0.4 {}
 N 650 -210 650 -110 {
 lab=GND}
 N 650 -240 720 -240 {
@@ -87,7 +88,7 @@ C {devices/vsource.sym} 520 -160 0 0 {name=vg value="0.65 AC 1"}
 C {devices/vsource.sym} 780 -240 0 0 {name=vd value=0.75}
 C {devices/gnd.sym} 780 -110 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 720 -110 0 0 {name=l4 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license (adapted from B. Murmann)"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 630 -240 0 0 {name=M1
 l=\{lx\}
 w=\{wx\}
