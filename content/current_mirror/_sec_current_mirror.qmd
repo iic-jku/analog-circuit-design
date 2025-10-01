@@ -1,5 +1,5 @@
 ::: {.content-hidden}
-Copyright (C) 2024 Harald Pretl and co-authors (harald.pretl@jku.at)
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ limitations under the License.
 
 In this section we will look into a fundamental building block which is often used in integrated circuit design, the **current mirror** [@Widlar_1965]. A diagram is shown in @fig-current-mirror with one MOSFET diode converting the incoming bias current into a voltage $\VGS = f(\ID[1]) = f(I_\mathrm{bias})$, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all $W$ and $L$ the input current can be scaled, and multiple copies can be created at once. Shown in the figure are two output currents $I_\mathrm{out1}$ and $I_\mathrm{out2}$, but any number of parallel branches can be realized (note that this is true for MOSFET as no gate current flows; for the case of BJTs, the base current flowing into the various transistors is subtracted from $I_\mathrm{bias}$, so usually a compensation circuit is added).
 
-{{< include ./figures/_fig_current_mirror.qmd >}}
+{{< include /content/current_mirror/_fig_current_mirror.qmd >}}
 
 Neglecting the impact of $\gds[1]$ and $\gds[2]$, the output current $I_\mathrm{out1}$ is then given by
 $$
