@@ -1,5 +1,5 @@
 ::: {.content-hidden}
-Copyright (C) 2024 Harald Pretl and co-authors (harald.pretl@jku.at)
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22,6 +22,10 @@ In this first chapter we will learn to use Xschem for schematic entry, and how t
 
 In this course, we will **not** dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics or a simplified solid-state physics based approach resulting in the well-known square-law model. Instead, we will treat the MOSFET behaviorally by assuming a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model.
 
+{{< include /content/first_steps/_fig_amplifiers.qmd >}}
+
+Look at the transistor symbols shown in @fig-amplifiers. By treating them as a black box, where the output current is controlled by an input voltage, we can design circuits with all of them, even vacuum tubes would work in the same way.
+
 Since we have an emphasis on integrated circuit design in this course the size of the MOSFET can be adapted by changing its width $W$ and its length $L$. As we will see later, $L$ has a profound impact on the MOSFET performance allowing to trade-off speed versus output conductance versus device-to-device matching. The width $W$ is more of a scaling parameter to adapt the current **density** (strictly speaking charge density) forming in the MOSFET channel to a desired current. More about this later.
 
 The circuit symbol that we will use for the n-channel MOSFET is shown in @fig-nmos-symbol, and for the p-channel MOSFET it is shown in @fig-pmos-symbol. A control voltage between gate ("G") and source ("S") controls the current flow between drain ("D") and source. The MOSFET is a 4-terminal device, so the bulk ("B") can also control the drain-source current flow. Often, the bulk is connected to source, and then the bulk terminal is not shown to declutter the schematics.
@@ -34,12 +38,12 @@ This focus on gate-source suggests that the source is special compared to the dr
 Unfortunately, this focus on a "special" source has made its way into some MOSFET compact models. The model that is used in SG13G2 luckily uses the PSP model, which is formulated symmetrically with regards to drain and source, and is thus very well suited for analog and RF circuit design. For a detailed understanding of the PSP model please refer to the [model documentation](https://www.cea.fr/cea-tech/leti/pspsupport/Documents/psp103p6_summary.pdf).
 :::
 
-{{< include ./figures/_fig_nmos_symbol.qmd >}}
-{{< include ./figures/_fig_pmos_symbol.qmd >}}
+{{< include /content/first_steps/_fig_nmos_symbol.qmd >}}
+{{< include /content/first_steps/_fig_pmos_symbol.qmd >}}
 
 For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in @fig-mosfet-large-signal-model. A current source $\ID$ models the current flow between drain and source, and it is controlled by the three control voltages $\VGS$, $\VDS$, and $V_\mathrm{SB}$. Note that in this way (since $\ID = f(\VDS)$) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply $V_\mathrm{SB} = 0$ and $\CSB$ is shorted.
 
-{{< include ./figures/_fig_mosfet_large_signal_model.qmd >}}
+{{< include /content/first_steps/_fig_mosfet_large_signal_model.qmd >}}
 
 In an ideal MOSFET no dc current is flowing into the gate, the behavior is purely capacitive. We model this by two capacitors: $\CGG = \CGS + \CGD + \CGB$ is the total capacitance when looking into the gate of the MOSFET. $\CGS$ is usually the dominant capacitance, and $\CGD$ models the capacitive feedback between D and G, usually induced by a topological overlap capacitance in the physical construction of the MOSFET. This capacitance is often small compared to $\CGS$, but in situations where we have a large voltage swing at the drain this capacitance will be affected by the [Miller effect](https://en.wikipedia.org/wiki/Miller_effect) (see @sec-miller-theorem). In hand calculations we will often set $\CGD = \CGB = \CDB = \CSB = 0$.
 
@@ -73,7 +77,7 @@ In contrast to the **passive** devices resistor $R$, inductor $L$, and capacitor
 
 We start with an investigation into the large-signal MOSFET model shown in @fig-mosfet-large-signal-model by using the simple testbench for the LV NMOS shown in @fig-simple-nmos-tb.
 
-![Testbench for NMOS dc sweeps.](./xschem/dc_lv_nmos.svg){#fig-simple-nmos-tb}
+![Testbench for NMOS dc sweeps.](/xschem/dc_lv_nmos.svg){#fig-simple-nmos-tb}
 
 ::: {.callout-note title="MOSFET Simulation Model"}
 For modelling the MOSFET behavior in a circuit simulator like ngspice different models are available. Some of these models have been widely adopted, like the [BSIM](https://en.wikipedia.org/wiki/BSIM) (Berkeley Short-channel IGFET Model) or PSP (Philips Penn State) model. The PSP model version 103.6 is used in the IHP SG13G2 PDK for the LV and HV MOSFET. This model has several advantages:
@@ -129,11 +133,11 @@ $$
 $$
 
 
-{{< include ./figures/_fig_mosfet_small_signal_model.qmd >}}
+{{< include /content/first_steps/_fig_mosfet_small_signal_model.qmd >}}
 
 As has been mentioned before, in many situations (and whenever we want to use a simplified model) we connect source and bulk of the MOSFET together. This results in the much simplified small-signal model shown in @fig-mosfet-small-signal-model-simplified.
 
-{{< include ./figures/_fig_mosfet_small_signal_model_simplified.qmd >}}
+{{< include /content/first_steps/_fig_mosfet_small_signal_model_simplified.qmd >}}
 
 As any electronic device the MOSFET introduces noise into the circuit. In this course we will only consider the **drain-source current noise** of the MOSFET, given by
 
@@ -153,8 +157,8 @@ As you can see in the large-signal investigations, these transitions happen grad
 
 We can also consider an even more reduced small-signal MOSFET model compared to @fig-mosfet-small-signal-model-simplified, which is shown in @fig-mosfet-small-signal-model-basic. In this, we just consider the transconductance $\gm$, the input capacitor $\Cgg$, as well as the output conductance $\gds$. Note that we can redraw the pi-model of @fig-mosfet-small-signal-model-basic into the $\tau$-model of @fig-mosfet-small-signal-model-basic-t. Depending on the circuit configuration, either the first or the second form results in simpler calculations of the circuit equations.
 
-{{< include ./figures/_fig_mosfet_small_signal_model_basic.qmd >}}
-{{< include ./figures/_fig_mosfet_small_signal_model_basic_t.qmd >}}
+{{< include /content/first_steps/_fig_mosfet_small_signal_model_basic.qmd >}}
+{{< include /content/first_steps/_fig_mosfet_small_signal_model_basic_t.qmd >}}
 
 ::: {.callout-tip title="Exercise: MOSFET Model Transformation"}
 Can you show, with which circuit manipulations you can transform the pi-model of @fig-mosfet-small-signal-model-basic into the T-model of @fig-mosfet-small-signal-model-basic-t? 
