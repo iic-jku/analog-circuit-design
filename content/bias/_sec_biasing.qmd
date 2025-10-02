@@ -26,7 +26,7 @@ $$
 
 Using $A_1$ and $M_1$ the voltage $V_\mathrm{ref}$ is regulated across $R_1$ and available at the drain of $M_1$.
 
-{{< include /figures/_fig_bias_current_gen.qmd >}}
+{{< include /content/bias/_fig_bias_current_gen.qmd >}}
 
 The resistor $R_1$ will show variation with the process tolerance, but we can either (a) use an external resistor for a precise current generation, or (b) use some sort of trimming to correct this resistor value. Depending on the further use of the bias currents a variation of the resistor might no be a bad thing. Assuming we use the resulting bias current to generate somewhere a bias voltage $V_\mathrm{bias}$ by running the current through resistor $R_2$, then this voltage is given by
 
@@ -68,13 +68,13 @@ $$
 V_\mathrm{ref} =  V_\mathrm{g0}
 $$ {#eq-bandgap-voltage}
 
-remains. We thus have created an on-chip reference (called the [*bandgap voltage reference*](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)) which is almost independent of manufacturing tolerances with zero temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of $\pm 1 \ldots 3\%$ without trimming are perfectly possible.
+remains. We thus have created an on-chip reference (called the [*bandgap voltage reference*](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)) which is almost independent of manufacturing tolerances with a very small temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of $\pm 1 \ldots 3\%$ without trimming are perfectly possible.
 
 The original implementation in [@Widlar_1971] uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of this available layers are available for free without extra processing cost, they are very slow, show unusually small $\beta < 10$, and the collector is tied to $\VSS$ as it is the substrate. Still, for bandgap references, they are very useful.
 
 A simple implementation of a bandgap reference circuit is shown in @fig-bandgap-simple [@Gray_Meyer_5th_ed]. If we scale $R_1$ and $R_2$ correctly then we can achieve @eq-bandgap-voltage. Note that the output voltage is ca. $1.2\,\text{V}$, so operating this circuit on low supply voltages will be problematic.
 
-{{< include /figures/_fig_bandgap_reference_simple.qmd >}}
+{{< include /content/bias/_fig_bandgap_reference_simple.qmd >}}
 
 $M_1$ to $M_4$ are scaled in a way that in both branches the same bias current is flowing. Further, $M_1$ and $M_2$ ensure that there is the same potential at their sources. Since the PNP are scaled by the factor $n$ (thus the current density is different) so that the following voltage develops across $R_1$:
 
