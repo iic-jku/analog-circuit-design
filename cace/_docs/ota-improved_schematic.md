@@ -7,8 +7,8 @@
 | :------------------- | :------------------- | :-------------- | ---------: | -----------: | ---------: | -----------: | ---------: | -----------: | :------: |
 | Output voltage ratio | ngspice              | gain                 |        0.99 V/V |  1.000 V/V |          any |  1.002 V/V |     1.01 V/V |  1.006 V/V |   Pass ✅    |
 | Bandwidth            | ngspice              | bw                   |         10e6 Hz | 146600000.000 Hz |          any | 206653000.000 Hz |          any | 254164000.000 Hz |   Pass ✅    |
-| Output voltage ratio (MC) | ngspice              | gain_mc              |             any |  0.809 V/V |          any |  1.023 V/V |          any |  1.304 V/V |   Pass ✅    |
-| Bandwidth (MC)       | ngspice              | bw_mc                |         10e6 Hz | 24169400.000 Hz |          any | 171443500.000 Hz |          any | 279056000.000 Hz |   Pass ✅    |
+| Output voltage ratio (MC) | ngspice              | gain_mc              |             any |  1.002 V/V |          any |  1.002 V/V |          any |  1.002 V/V |   Pass ✅    |
+| Bandwidth (MC)       | ngspice              | bw_mc                |         10e6 Hz | 204156000.000 Hz |          any | 207620500.000 Hz |          any | 210269000.000 Hz |   Pass ✅    |
 | Output noise         | ngspice              | noise                |             any |   0.309 mV |          any |   0.391 mV |       0.6 mV |   0.530 mV |   Pass ✅    |
 | Settling time        | ngspice              | tsettle              |             any |   0.134 us |          any |   0.141 us |         1 us |   0.151 us |   Pass ✅    |
 
