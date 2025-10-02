@@ -1,4 +1,4 @@
-v {xschem version=3.4.8RC file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
@@ -144,6 +144,7 @@ value="
 C {devices/code_shown.sym} 0 -550 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
+.include bandgap_simple.save
 .control
 save all
 set filetype=ascii
@@ -161,7 +162,7 @@ wrdata bandgap_simple.txt vref
 "}
 C {devices/vsource.sym} 380 -370 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 380 -280 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 Harald Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 500 -150 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
@@ -299,3 +300,13 @@ C {devices/gnd.sym} 600 -750 3 0 {name=l1 lab=GND}
 C {devices/gnd.sym} 1040 -470 3 0 {name=l2 lab=GND}
 C {devices/gnd.sym} 1160 -470 1 1 {name=l4 lab=GND}
 C {devices/gnd.sym} 960 -790 1 1 {name=l6 lab=GND}
+C {sg13g2_pr/annotate_fet_params.sym} 1490 -980 0 0 {name=annot1 ref=M5A}
+C {sg13g2_pr/annotate_fet_params.sym} 1490 -830 0 0 {name=annot2 ref=M5B}
+C {sg13g2_pr/annotate_fet_params.sym} 210 -1020 0 0 {name=annot3 ref=M4A}
+C {sg13g2_pr/annotate_fet_params.sym} 210 -870 0 0 {name=annot4 ref=M4B}
+C {sg13g2_pr/annotate_fet_params.sym} 1320 -360 0 0 {name=annot5 ref=M1B}
+C {sg13g2_pr/annotate_fet_params.sym} 1320 -210 0 0 {name=annot6 ref=M1A}
+C {sg13g2_pr/annotate_fet_params.sym} 1450 -360 0 0 {name=annot7 ref=M2B}
+C {sg13g2_pr/annotate_fet_params.sym} 1450 -210 0 0 {name=annot8 ref=M2A}
+C {sg13g2_pr/annotate_fet_params.sym} 1370 -980 0 0 {name=annot9 ref=M3A}
+C {sg13g2_pr/annotate_fet_params.sym} 1370 -830 0 0 {name=annot10 ref=M3B}

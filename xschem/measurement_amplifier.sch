@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 B 2 960 -710 1840 -270 {flags=graph
 
@@ -67,6 +68,7 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -650 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
+.include measurement_amplifier.save
 .control
 option sparse
 save all
@@ -82,7 +84,7 @@ write measurement_amplifier.raw
 "}
 C {devices/vsource.sym} 340 -370 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 340 -280 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 380 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
@@ -120,3 +122,4 @@ C {devices/launcher.sym} 880 -160 0 0 {name=h5
 descr="load waves" 
 tclcommand="xschem raw_read $netlist_dir/measurement_amplifier.raw ac"
 }
+C {sg13g2_pr/annotate_fet_params.sym} 780 -640 0 0 {name=annot1 ref=M1}

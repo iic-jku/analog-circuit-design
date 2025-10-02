@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 P 4 5 800 -460 1880 -460 1880 -120 800 -120 800 -460 {dash = 4}
 P 4 5 800 -920 1880 -920 1880 -580 800 -580 800 -920 {dash = 4}
@@ -118,6 +119,7 @@ C {devices/code_shown.sym} 60 -1090 0 0 {name=NGSPICE
 only_toplevel=true
 value="
 .param temp=27
+.include mosfet_diode_loopgain.save
 .options savecurrents reltol=1e-3 abstol=1e-12 gmin=1e-15
 .control
 save all
@@ -168,7 +170,7 @@ C {devices/gnd.sym} 1240 -160 0 0 {name=l1 lab=GND}
 C {devices/vsource.sym} 880 -250 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 880 -160 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 1310 -160 0 0 {name=l4 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, S. Dorrer, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, S. Dorrer, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 1220 -250 0 0 {name=M1
 l=0.13u
 w=1u
@@ -239,3 +241,4 @@ C {devices/lab_wire.sym} 980 -710 0 0 {name=p6 sig_type=std_logic lab=vmeas1}
 C {devices/lab_wire.sym} 1480 -710 0 0 {name=p7 sig_type=std_logic lab=vmeas2}
 C {devices/ammeter.sym} 1170 -760 1 0 {name=Vimeas1 savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 1670 -760 1 0 {name=Vimeas2 savecurrent=true spice_ignore=0}
+C {sg13g2_pr/annotate_fet_params.sym} 1340 -300 0 0 {name=annot1 ref=M1}

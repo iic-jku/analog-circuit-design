@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-10-01">
+<meta name="dcterms.date" content="2025-10-02">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -513,7 +513,7 @@ window.Quarto = {
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">21.8</span> Further Reading</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="analog_circuit_design.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="sizing/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2</a></li><li><a href="sizing/techsweep_sg13_plots_triode-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2 in Triode Region</a></li><li><a href="sizing/sizing_basic_ota_improved-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic (Improved) OTA</a></li><li><a href="sizing/sizing_basic_ota-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic 5T-OTA</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="analog_circuit_design.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="gmid/techsweep_sg13_plots_nmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS</a></li><li><a href="gmid/techsweep_sg13_plots_pmos-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Evaluation Script for IHP SG13G2 PMOS</a></li><li><a href="gmid/techsweep_sg13_plots_triode-preview.html"><i class="bi bi-journal-code"></i>MOSFET gm/ID Lookup for IHP SG13G2 in Triode Region</a></li><li><a href="gmid/sizing_basic_ota_improved-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic (Improved) OTA</a></li><li><a href="gmid/sizing_basic_ota-preview.html"><i class="bi bi-journal-code"></i>Sizing for Basic 5T-OTA</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -557,7 +557,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 1, 2025</p>
+      <p class="date">October 2, 2025</p>
     </div>
   </div>
   
@@ -602,7 +602,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please use the IIC-OSIC-TOOLS image with tag <code>2025.09</code> or later, as the NMOS symbols changed in this version!</p>
+<p>Please use the IIC-OSIC-TOOLS image with tag <code>2025.09</code> or later!</p>
 </div>
 </div>
 <section id="ihps-sg13g2-130nm-cmos-technology" class="level2" data-number="1.1">
@@ -1190,7 +1190,7 @@ C_\mathrm{GG}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{G}}
 </div>
 </div>
 <p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.</p>
-<p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/sizing/Ref_Murmann_gmID.pdf">here</a> as well.</p>
+<p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by P. Jespers and B. Murmann in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/gmid/Ref_Murmann_gmID.pdf">here</a> as well.</p>
 <p>The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology has the huge advantage that it catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.</p>
 <section id="sec-techsweep-testbench" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-techsweep-testbench"><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</h2>
@@ -1246,7 +1246,7 @@ Figure&nbsp;11: Testbench for LV PMOS <span class="math inline">\(g_\mathrm{m}/I
 <div id="fig-techsweep-procedure" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-techsweep-procedure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./figures/_fig_gmid_overview/_fig_gmid_overview.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: Overview of the g_\mathrm{m}/I_\mathrm{D} MOSFET characterization procedure [@Dorrer_Master_Thesis]."><img src="./figures/_fig_gmid_overview/_fig_gmid_overview.svg" class="img-fluid figure-img"></a>
+<a href="./content/sizing/_fig_gmid_overview.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: Overview of the g_\mathrm{m}/I_\mathrm{D} MOSFET characterization procedure [@Dorrer_Master_Thesis]."><img src="./content/sizing/_fig_gmid_overview.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-techsweep-procedure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> MOSFET characterization procedure <span class="citation" data-cites="Dorrer_Master_Thesis">(<a href="#ref-Dorrer_Master_Thesis" role="doc-biblioref">Dorrer 2025</a>)</span>.
@@ -1299,20 +1299,20 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<a class="quarto-notebook-link" id="nblink-1" href="sizing/techsweep_sg13_plots_nmos-preview.html#cell-5">Source: MOSFET gm/ID Evaluation Script for IHP SG13G2</a></div>
+<a class="quarto-notebook-link" id="nblink-1" href="gmid/techsweep_sg13_plots_nmos-preview.html#cell-5">Source: MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS</a></div>
 <p>The following figure plots <span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. As you can see, device speed maximizes for a low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and a short <span class="math inline">\(L\)</span>. Note, that the drain-source voltage is kept at <span class="math inline">\(V_\mathrm{DS}= 0.75\,\text{V} = V_\mathrm{DD}/ 2\)</span>, which is a typical value keeping the MOSFET in saturation across the characterization sweeps. Further, the source-bulk voltage is kept at <span class="math inline">\(V_\mathrm{SB}= V_\mathrm{S} - V_\mathrm{B} = 0\,\text{V}\)</span>, which means bulk and source terminals are connected. If <span class="math inline">\(V_\mathrm{SB}\neq 0\,\text{V}\)</span>, then the so-called <a href="https://en.wikipedia.org/wiki/Threshold_voltage#Body_effect">body effect</a>, bulk effect or back-gate effect occurs.</p>
 <p>If <span class="math inline">\(V_\mathrm{SB}&gt; 0\,\text{V}\)</span>, then <span class="math inline">\(V_\mathrm{th}\)</span> increases. If <span class="math inline">\(V_\mathrm{SB}&lt; 0\,\text{V}\)</span>, then <span class="math inline">\(V_\mathrm{th}\)</span> decreases. At first glance, this effect may sound unwanted (and often also is), however, improved circuit designs by changing the bulk potential can be realized. For example, circuit 16 in <span class="citation" data-cites="Pretl_Fifty_Nifty_Circuits">(<a href="#ref-Pretl_Fifty_Nifty_Circuits" role="doc-biblioref">Pretl and Eberlein 2021</a>)</span> shows an implementation of a current mirror by exploiting the body effect. However, keep in mind that a deep-n-well (DNW), also called triple-well, is needed for NMOS transistors when the bulk is not tied to GND. This DNW may not be supported by the used PDK or can add additional costs to the wafer processing.</p>
 <div class="quarto-embed-nb-cell">
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}}" data-tags="[&quot;fig-nmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}}" data-tags="[&quot;fig-nmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1320,11 +1320,11 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <p>The next plot shows the ratio of <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> versus <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. The ratio <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the so-called <strong>“self-gain”</strong> of the MOSFET, and shows the maximum voltage gain we can achieve in a single transistor configuration. As one can see the self gain increases for increasing <span class="math inline">\(L\)</span>, but this also gives a slower transistor, so again there is a trade-off. This plot allows us to select the proper <span class="math inline">\(L\)</span> of a MOSFET if we know which amount of self gain we need.</p>
 <div class="quarto-embed-nb-cell">
-<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}}" data-tags="[&quot;fig-nmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}}" data-tags="[&quot;fig-nmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1332,11 +1332,11 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <p>The following figure plots the drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. With this plot we can find out how to set the <span class="math inline">\(W\)</span> of a MOSFET once we know the biasing current <span class="math inline">\(I_\mathrm{D}\)</span>, the <span class="math inline">\(L\)</span> (selected according to self gain, <span class="math inline">\(f_\mathrm{T}\)</span>, and other considerations) and the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> design point we selected. The drain current density <span class="math inline">\(I_\mathrm{D}/W\)</span> is a very useful normalized metric to use, because the physical action in the MOSFET establishes a charge density in the channel below the gate, and the changing of the <span class="math inline">\(W\)</span> of the device merely transforms this charge density into an absolute parameter (together with <span class="math inline">\(L\)</span>).</p>
 <div class="quarto-embed-nb-cell">
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}}" data-tags="[&quot;fig-nmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}}" data-tags="[&quot;fig-nmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1344,11 +1344,11 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <p>The following plot shows the minimum drain-source voltage <span class="math inline">\(V_\mathrm{ds,sat}\)</span> that we need to establish in order to keep the MOSFET in saturation. As you can see, this value is almost independent of <span class="math inline">\(L\)</span>, and increases for small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>. So for low-voltage circuits, where headroom is precious, we tend to bias at <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\ge 10\)</span>, wheres for fast circuits we need to go to small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\le 5\)</span> requiring substantial voltage headroom per MOSFET stage that we stack on top of each other.</p>
 <div class="quarto-embed-nb-cell">
-<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}}" data-tags="[&quot;fig-nmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}}" data-tags="[&quot;fig-nmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1373,11 +1373,11 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <p>In this lecture the only MOSFET noise we consider is the drain noise (as discussed in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>), showing up as a current noise between drain and source. For a realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.</p>
 <p>The factor <span class="math inline">\(\gamma\)</span> (<a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a>) is a function of many things (in classical theory, <span class="math inline">\(\gamma = 2/3\)</span> in saturation and <span class="math inline">\(\gamma = 1\)</span> in triode), and it is characterized in the following plot as a function of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(L\)</span>. So when calculating MOSFET noise we can lookup <span class="math inline">\(\gamma\)</span> in the below plot, and use <a href="#eq-mosfet-noise" class="quarto-xref">Equation&nbsp;1</a> to calculate the effective drain current noise.</p>
 <div class="quarto-embed-nb-cell">
-<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}}" data-tags="[&quot;fig-nmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1399,17 +1399,17 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <p>As you can see in the following plot, <span class="math inline">\(f_\mathrm{co}\)</span> can reach well into the 10’s of MHz for short MOSFETs, significantly degrading the noise performance of a circuit.</p>
 <div class="quarto-embed-nb-cell">
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}}" data-tags="[&quot;fig-nmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}}" data-tags="[&quot;fig-nmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_nmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_nmos-cell-15-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>During the design phase, it might be convenient to have an overview of the most relevant sizing plots of the NMOST on one page. This overview can be downloaded <a href="./sizing/techsweep_sg13_plots_nmos_overview/techsweep_sg13_plots_nmos_overview.pdf">here</a>.</p>
+<p>During the design phase, it might be convenient to have an overview of the most relevant sizing plots of the NMOST on one page. This overview can be downloaded <a href="./gmid/techsweep_sg13_plots_nmos_overview/techsweep_sg13_plots_nmos_overview.pdf">here</a>.</p>
 </section>
 <section id="sec-techsweep-pmos" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-techsweep-pmos"><span class="header-section-number">3.3</span> PMOS Characterization in Saturation</h2>
@@ -1433,19 +1433,19 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-6-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<a class="quarto-notebook-link" id="nblink-2" href="sizing/techsweep_sg13_plots_pmos-preview.html#cell-5">Source: MOSFET gm/ID Evaluation Script for IHP SG13G2</a></div>
+<a class="quarto-notebook-link" id="nblink-2" href="gmid/techsweep_sg13_plots_pmos-preview.html#cell-5">Source: MOSFET gm/ID Evaluation Script for IHP SG13G2 PMOS</a></div>
 <p><span class="math inline">\(f_\mathrm{T}\)</span> against <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for several different <span class="math inline">\(L\)</span>. One can see a significantly lower top speed for the PMOS compared to the NMOS, which means for high-speed circuits the NMOS should be used. The reason for this is the approximately two to three times higher mobility of electrons compared to the mobility of holes.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}}" data-tags="[&quot;fig-pmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-9-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1470,7 +1470,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-10-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1482,7 +1482,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-11-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1494,7 +1494,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-12-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1506,7 +1506,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-13-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1518,13 +1518,13 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_pmos-cell-14-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>During the design phase, it might be convenient to have an overview of the most relevant sizing plots of the PMOST on one page. This overview can be downloaded <a href="./sizing/techsweep_sg13_plots_pmos_overview/techsweep_sg13_plots_pmos_overview.pdf">here</a>.</p>
+<p>During the design phase, it might be convenient to have an overview of the most relevant sizing plots of the PMOST on one page. This overview can be downloaded <a href="./gmid/techsweep_sg13_plots_pmos_overview/techsweep_sg13_plots_pmos_overview.pdf">here</a>.</p>
 </section>
 <section id="sec-tradeoffs-saturation" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-tradeoffs-saturation"><span class="header-section-number">3.4</span> Tradeoffs in Saturation</h2>
@@ -1532,7 +1532,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div id="fig-tradeoffs-saturation" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tradeoffs-saturation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./figures/_fig_tradeoffs/_fig_tradeoffs_gmID.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Figure&nbsp;13: Overview of key design tradeoffs depending on the channel length L and transconductance efficiency g_\mathrm{m}/I_\mathrm{D} [@Dorrer_Master_Thesis]."><img src="./figures/_fig_tradeoffs/_fig_tradeoffs_gmID.svg" class="img-fluid figure-img"></a>
+<a href="./content/sizing/_fig_tradeoffs_gmID.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Figure&nbsp;13: Overview of key design tradeoffs depending on the channel length L and transconductance efficiency g_\mathrm{m}/I_\mathrm{D} [@Dorrer_Master_Thesis]."><img src="./content/sizing/_fig_tradeoffs_gmID.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tradeoffs-saturation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13: Overview of key design tradeoffs depending on the channel length <span class="math inline">\(L\)</span> and transconductance efficiency <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> <span class="citation" data-cites="Dorrer_Master_Thesis">(<a href="#ref-Dorrer_Master_Thesis" role="doc-biblioref">Dorrer 2025</a>)</span>.
@@ -1554,19 +1554,19 @@ Figure&nbsp;13: Overview of key design tradeoffs depending on the channel length
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_triode-cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_triode-cell-4-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_triode-cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_triode-cell-4-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<a class="quarto-notebook-link" id="nblink-3" href="sizing/techsweep_sg13_plots_triode-preview.html#cell-3">Source: MOSFET gm/ID Lookup for IHP SG13G2 in Triode Region</a></div>
+<a class="quarto-notebook-link" id="nblink-3" href="gmid/techsweep_sg13_plots_triode-preview.html#cell-3">Source: MOSFET gm/ID Lookup for IHP SG13G2 in Triode Region</a></div>
 <p>As can be seen in the previous plot, an NMOS can be used to switch at potentials close to <span class="math inline">\(V_\mathrm{SS}\)</span>, while a PMOS is the better choice when switching at potentials close to <span class="math inline">\(V_\mathrm{DD}\)</span>. To construct a switch which can work for all voltage levels between <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span> an NMOS is put in parallel to a PMOS, resulting in the well-known <strong>transmission gate</strong>.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-11-19T16:09:53.680720Z&quot;,&quot;start_time&quot;:&quot;2024-11-19T16:09:53.597301Z&quot;}}" data-tags="[&quot;fig-triode-coff-vs-vsource&quot;]" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_triode-cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img src="analog_circuit_design_files/figure-html/.-sizing-techsweep_sg13_plots_triode-cell-7-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_triode-cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img src="analog_circuit_design_files/figure-html/.-gmid-techsweep_sg13_plots_triode-cell-7-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1580,7 +1580,7 @@ Figure&nbsp;13: Overview of key design tradeoffs depending on the channel length
 <div id="fig-tradeoffs-triode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tradeoffs-triode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./figures/_fig_tradeoffs/_fig_tradeoffs_switches.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure&nbsp;14: Overview of key design tradeoffs in switches depending on the channel width W and the channel length L [@Dorrer_Master_Thesis]."><img src="./figures/_fig_tradeoffs/_fig_tradeoffs_switches.svg" class="img-fluid figure-img"></a>
+<a href="./content/sizing/_fig_tradeoffs_switches.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure&nbsp;14: Overview of key design tradeoffs in switches depending on the channel width W and the channel length L [@Dorrer_Master_Thesis]."><img src="./content/sizing/_fig_tradeoffs_switches.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tradeoffs-triode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;14: Overview of key design tradeoffs in switches depending on the channel width <span class="math inline">\(W\)</span> and the channel length <span class="math inline">\(L\)</span> <span class="citation" data-cites="Dorrer_Master_Thesis">(<a href="#ref-Dorrer_Master_Thesis" role="doc-biblioref">Dorrer 2025</a>)</span>.
@@ -1662,7 +1662,7 @@ Figure&nbsp;15: A MOSFET connected as a diode (drain shorted with gate).
 <li>Since we are looking at the graphs, we further find <span class="math inline">\(\gamma = 0.84\)</span>, <span class="math inline">\(V_\mathrm{ds,sat} = 0.18\,\text{V}\)</span>, and <span class="math inline">\(f_\mathrm{co} \approx 15\,\text{MHz}\)</span>.</li>
 <li>In addition, we expect <span class="math inline">\(V_\mathrm{GS}\approx 0.6\,\text{V}\)</span>.</li>
 </ol>
-<p>An example Jupyter notebook to extract these values accurately you can find <a href="./sizing/sizing_mosfet_diode.html">here</a>. An Xschem schematic for this exercise is provide <a href="./xschem/mosfet_diode_sizing.sch">as well</a>.</p>
+<p>An example Jupyter notebook to extract these values accurately you can find <a href="./gmid/sizing_mosfet_diode.html">here</a>. An Xschem schematic for this exercise is provide <a href="./xschem/mosfet_diode_sizing.sch">as well</a>.</p>
 </div>
 </div>
 </div>
@@ -1835,7 +1835,7 @@ H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g
 <p>The question is now how to simulate this open-loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. This is called <strong>Rosenstark’s method</strong> <span class="citation" data-cites="Rosenstark_1984">(<a href="#ref-Rosenstark_1984" role="doc-biblioref">Rosenstark 1984</a>)</span>. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
 <p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using an ac current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> and is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;15</a>.</p>
 <p>There are several other methods like Tian’s method <span class="citation" data-cites="Tian_2001">(<a href="#ref-Tian_2001" role="doc-biblioref">Tian et al. 2001</a>)</span>, for example. A comprehensive overview can be found in <span class="citation" data-cites="Neag_2015">(<a href="#ref-Neag_2015" role="doc-biblioref">Neag et al. 2015</a>)</span> which describes ten different simulation-based loop gain analysis methods.</p>
-<p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s method and confirm our analysis above.</p>
+<p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s and Tian’s method and confirm our analysis above.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Diode Loop Analysis">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2069,7 +2069,7 @@ Figure&nbsp;24: A MOSFET common-source amplifier with 50 Ohm load.
 </div>
 </div>
 <p>The <a href="https://en.wikipedia.org/wiki/Impedance_matching">power matching</a> requirement at the output mandates that <span class="math inline">\(R_1 = R_\mathrm{load}\)</span>, so <span class="math inline">\(R'_1 = R_\mathrm{load} \parallel R_1 = 25\,\Omega\)</span>. The voltage gain requirement of <span class="math inline">\(|A_\mathrm{v}| = 1\)</span> results in <span class="math inline">\(g_\mathrm{m}= 1 / R'_1 = 40\,\text{mS}\)</span>.</p>
-<p>We now need to find <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of <span class="math inline">\(M_1\)</span> and calculate the required bias current <span class="math inline">\(I_\mathrm{D}\)</span>. We also need to find the proper <span class="math inline">\(V_\mathrm{GS}\)</span> to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=8\)</span> and set <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>. The notebook is available <a href="./sizing/sizing_measurement_amplifier.html">here</a>. The resulting circuit including all component values is shown at the end of the notebook (the red input capacitor shows the <span class="math inline">\(C_\mathrm{gg}\)</span> of the MOSFET).</p>
+<p>We now need to find <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of <span class="math inline">\(M_1\)</span> and calculate the required bias current <span class="math inline">\(I_\mathrm{D}\)</span>. We also need to find the proper <span class="math inline">\(V_\mathrm{GS}\)</span> to set this current. As usual, we use a Jupyter notebook to calculate these values. Since we require modest speed of this buffer we use a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=8\)</span> and set <span class="math inline">\(L = 0.13\,\mu\text{m}\)</span>. The notebook is available <a href="./gmid/sizing_measurement_amplifier.html">here</a>. The resulting circuit including all component values is shown at the end of the notebook (the red input capacitor shows the <span class="math inline">\(C_\mathrm{gg}\)</span> of the MOSFET).</p>
 <div id="imp-mosfet-params-ng-m" class="callout callout-style-default callout-important callout-titled" title="MOSFET Parameters NG and M">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2097,7 +2097,7 @@ Important&nbsp;1: MOSFET Parameters NG and M
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please go through the <a href="./sizing/sizing_measurement_amplifier.html">sizing notebook</a> of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?</p>
+<p>Please go through the <a href="./gmid/sizing_measurement_amplifier.html">sizing notebook</a> of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?</p>
 <p>Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter <code>ng</code> accordingly (see <a href="#imp-mosfet-params-ng-m" class="quarto-xref">Important&nbsp;1</a>).</p>
 <ul>
 <li>What is the dc gain of this amplifier when loaded with 50<span class="math inline">\(\Omega\)</span>?</li>
@@ -2683,7 +2683,7 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
-<p><strong>Copyright 2024 Harald Pretl</strong></p>
+<p><strong>Copyright 2024-2025 Harald Pretl</strong></p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
 <div id="cell-1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read table data</span></span>
@@ -2894,7 +2894,7 @@ headroom M4 = 0.55 V
 headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
-<a class="quarto-notebook-link" id="nblink-4" href="sizing/sizing_basic_ota-preview.html#cell-0">Source: Sizing for Basic 5T-OTA</a></section>
+<a class="quarto-notebook-link" id="nblink-4" href="gmid/sizing_basic_ota-preview.html#cell-0">Source: Sizing for Basic 5T-OTA</a></section>
 </div>
 </div>
 </div>
@@ -3099,11 +3099,11 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 <td style="text-align: left;">ngspice</td>
 <td style="text-align: left;">gain_mc</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">0.837 V/V</td>
+<td style="text-align: right;">0.998 V/V</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">1.010 V/V</td>
+<td style="text-align: right;">0.999 V/V</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">1.185 V/V</td>
+<td style="text-align: right;">1.001 V/V</td>
 <td style="text-align: center;">Pass ✅</td>
 </tr>
 <tr class="even">
@@ -3111,11 +3111,11 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 <td style="text-align: left;">ngspice</td>
 <td style="text-align: left;">bw_mc</td>
 <td style="text-align: right;">10e6 Hz</td>
-<td style="text-align: right;">18988400.000 Hz</td>
+<td style="text-align: right;">24312600.000 Hz</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">26567100.000 Hz</td>
+<td style="text-align: right;">26806900.000 Hz</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">29443100.000 Hz</td>
+<td style="text-align: right;">28104300.000 Hz</td>
 <td style="text-align: center;">Pass ✅</td>
 </tr>
 <tr class="odd">
@@ -3851,7 +3851,7 @@ headroom M4+M4c = 0.55 V
 headroom M5     = 0.264 V</code></pre>
 </div>
 </div>
-<a class="quarto-notebook-link" id="nblink-5" href="sizing/sizing_basic_ota_improved-preview.html#cell-0">Source: Sizing for Basic (Improved) OTA</a></section>
+<a class="quarto-notebook-link" id="nblink-5" href="gmid/sizing_basic_ota_improved-preview.html#cell-0">Source: Sizing for Basic (Improved) OTA</a></section>
 </div>
 </div>
 </div>
@@ -4039,11 +4039,11 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <td style="text-align: left;">ngspice</td>
 <td style="text-align: left;">gain_mc</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">0.809 V/V</td>
+<td style="text-align: right;">1.002 V/V</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">1.023 V/V</td>
+<td style="text-align: right;">1.002 V/V</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">1.304 V/V</td>
+<td style="text-align: right;">1.002 V/V</td>
 <td style="text-align: center;">Pass ✅</td>
 </tr>
 <tr class="even">
@@ -4051,11 +4051,11 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <td style="text-align: left;">ngspice</td>
 <td style="text-align: left;">bw_mc</td>
 <td style="text-align: right;">10e6 Hz</td>
-<td style="text-align: right;">24169400.000 Hz</td>
+<td style="text-align: right;">204156000.000 Hz</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">171443500.000 Hz</td>
+<td style="text-align: right;">207620500.000 Hz</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">279056000.000 Hz</td>
+<td style="text-align: right;">210269000.000 Hz</td>
 <td style="text-align: center;">Pass ✅</td>
 </tr>
 <tr class="odd">
@@ -4360,7 +4360,7 @@ V_\mathrm{ref} =  V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + V_\mathrm{BE0
 <p><span id="eq-bandgap-voltage"><span class="math display">\[
 V_\mathrm{ref} =  V_\mathrm{g0}
 \tag{40}\]</span></span></p>
-<p>remains. We thus have created an on-chip reference (called the <a href="https://en.wikipedia.org/wiki/Bandgap_voltage_reference"><em>bandgap voltage reference</em></a>) which is almost independent of manufacturing tolerances with zero temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of <span class="math inline">\(\pm 1 \ldots 3\%\)</span> without trimming are perfectly possible.</p>
+<p>remains. We thus have created an on-chip reference (called the <a href="https://en.wikipedia.org/wiki/Bandgap_voltage_reference"><em>bandgap voltage reference</em></a>) which is almost independent of manufacturing tolerances with a very small temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of <span class="math inline">\(\pm 1 \ldots 3\%\)</span> without trimming are perfectly possible.</p>
 <p>The original implementation in <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">R. J. Widlar 1971</a>)</span> uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of this available layers are available for free without extra processing cost, they are very slow, show unusually small <span class="math inline">\(\beta &lt; 10\)</span>, and the collector is tied to <span class="math inline">\(V_\mathrm{SS}\)</span> as it is the substrate. Still, for bandgap references, they are very useful.</p>
 <p>A simple implementation of a bandgap reference circuit is shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;51</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;40</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
 <div id="cell-fig-bandgap-simple" class="cell" data-execution_count="37">
@@ -4406,7 +4406,7 @@ V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.
 <p>The circuit of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;51</a> has been implemented in Xschem and is shown in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;52</a>. The current sources have been improved by using cascodes. We are using the low-voltage current mirror type already introduced in <a href="#sec-improved-ota" class="quarto-xref">Section&nbsp;10</a>. The bias voltages for the cascodes are generated via the voltage drops of <span class="math inline">\(R_3\)</span> and <span class="math inline">\(R_4\)</span>, respectively.</p>
 <p>No base current compensation for the BJTs is implemented, as it is assumed that the <span class="math inline">\(\beta\)</span> of the PNP are similar although they are operated at different emitter current densities.</p>
 <p>Note the addition of a startup branch with <span class="math inline">\(M_\mathrm{startup}\)</span> which is inactive during normal operation but will inject a startup current if no proper bias point has yet been found.</p>
-<p>There is no circuitry added for enabling/disabling the circuit, which would also be needed for a practical implementation. As usual, the MOSFET sizing has been done in this <a href="./sizing/sizing_bandgap_simple.html">notebook</a>.</p>
+<p>There is no circuitry added for enabling/disabling the circuit, which would also be needed for a practical implementation. As usual, the MOSFET sizing has been done in this <a href="sizing/sizing_bandgap_simple.ipynb">notebook</a>.</p>
 <p>The resistors <span class="math inline">\(R_{1-4}\)</span> have been implemented out of unit elements of ca. <span class="math inline">\(5\,\text{k}\Omega\)</span> for optimum matching. Building a bandgap for the first time on silicon likely will show a slightly deviating temperature coefficient, which is why we keep a few dummy resistors around in <span class="math inline">\(R_2\)</span> to compensate the TC in a redesign.</p>
 <div id="fig-bandgap-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -5242,14 +5242,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-10-01},
+  date = {2025-10-02},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> October 1, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> October 2, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
