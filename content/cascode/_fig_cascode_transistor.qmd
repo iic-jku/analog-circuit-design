@@ -1,5 +1,5 @@
 ::: {.content-hidden}
-Copyright (C) 2024 Harald Pretl and co-authors (harald.pretl@jku.at)
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@ limitations under the License.
 :::
 
 ```{python}
-#| label: fig-cascode-small-signal
+#| label: fig-cascode-transistor
 #| echo: false
-#| fig-cap: "The MOSFET cascode small-signal model."
+#| fig-cap: "A MOSFET cascode circuit."
 import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
@@ -25,29 +25,11 @@ with sd.Drawing(canvas='svg') as d:
     d.config(unit=2)
     d.config(fontsize=16)
 
-    d.push()
-    elm.Line().left().length(2).idot()
-    elm.Ground()
-
-    d.pop()
-    d.push()
-    Cgs = elm.Capacitor().down().label(r'$C_\mathrm{gs}$')
-    elm.Line().right().length(3).dot()
+    elm.Vdd()
+    Gd = elm.Resistor().down().label(r'$G_\mathrm{D}$')
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).reverse().label('$M_1$', loc='right')
     Gs = elm.Resistor().down().label(r'$G_\mathrm{S}$')
     elm.Ground()
 
-    d.pop()
-    Cgd = elm.Capacitor().right().length(3).label(r'$C_\mathrm{gd}$').dot()
-    d.push()
-    
-    Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} v_\mathrm{gs}$')
-    elm.Line().right().length(3)
-
-    Gds = elm.Resistor().up().label(r'$g_\mathrm{ds}$')
-    elm.Line().left().length(3)
-    
-    Gd = elm.Resistor().up().label(r'$G_\mathrm{D}$')
-    elm.Line().up().length(0.5)
-    elm.Line().right().length(1)
-    elm.Ground()
+    elm.Line().left().at(M1.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{B}$', loc='left')
 ```
