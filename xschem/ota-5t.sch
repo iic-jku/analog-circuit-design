@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 T {1.45 < 1.5(nom) < 1.55V} 370 -890 0 0 0.4 0.4 {}
 T {4uA} 880 -150 0 0 0.4 0.4 {}
@@ -195,7 +196,7 @@ N 160 -500 1080 -500 {lab=vinn}
 N 1000 -640 1140 -640 {lab=vout}
 N 1000 -680 1000 -640 {
 lab=vout}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 880 -280 0 0 {name=M5
 l=5u
 w=0.5u

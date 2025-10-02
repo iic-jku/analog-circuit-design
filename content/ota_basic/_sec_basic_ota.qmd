@@ -18,7 +18,7 @@ limitations under the License.
 
 Suited with the insights of basic transistor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
 
-{{< include ./figures/_fig_basic_ota.qmd >}}
+{{< include /content/ota_basic/_fig_basic_ota.qmd >}}
 
 ::: {.callout-warning title="Refresh MOSFET Basic Circuits"}
 While we repeat the basics of elementary MOSFET amplifier stages (like common-source stage, common-gate stage, and current mirror) in this course material, the following compendium [@Murmann_MOS_stages_2013] is recommended for review. It is freely available at <https://github.com/bmurmann/Book-on-MOS-stages>.
@@ -52,7 +52,7 @@ We note that $M_{1,2}$ and $M_{3,4}$ need to be symmetric, thus will have the sa
 
 In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lightly loads an input voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in @fig-voltage-buffer-ota.
 
-{{< include ./figures/_fig_voltage_buffer_ota.qmd >}}
+{{< include /content/ota_basic/_fig_voltage_buffer_ota.qmd >}}
 
 If the voltage gain of the OTA in @fig-voltage-buffer-ota is high, then $V_\mathrm{out} \approx V_\mathrm{in}$. We now want to design an OTA for this application fitting the following specification values (see @tbl-voltage-buffer-spec). These values are rather typical of what could be expected for such a buffer design.
 
@@ -130,13 +130,13 @@ The resulting small-signal equivalent circuit is shown in @fig-basic-ota-small-s
 Please review the MOSFET small-signal equivalent model in @fig-mosfet-small-signal-model at this point. For the PMOS just flip the model upside-down.
 :::
 
-{{< include ./figures/_fig_basic_ota_small_signal.qmd >}}
+{{< include /content/ota_basic/_fig_basic_ota_small_signal.qmd >}}
 
 We can further simplify the output side by recognizing that the impedance (when looking from the output down) is $\gds[2]$ in series with $\gds[5] + \gm[12]$. This is a valid simplification as we treat $M_1$ as a common-gate stage when looking from the output, and since it is loaded by a low impedance of $\gm[34]^{-1}$, we can approximate the impedance looking into the source of $M_1$ with $\gm[12]^{-1}$. With the approximation that $\gm \gg \gds$ the parallel connection of $\gm[12]$ and $\gds[5]$ is dominated by $\gm[12]$ ($\gm[12] + \gds[5] \approx \gm[12]$) and its series connection with $\gds[2]$ ($\gm[12]^{-1} + \gds[2]^{-1} \approx \gds[2]^{-1}$), resulting in the fact that we can ground the lower end of $\gds[2]$. You should probably stop here and read this paragraph again, slowly.
 
 Therefore, we can move $\gds[2] + \gds[4]$ in parallel to $C_\mathrm{load}$. Further, assuming a differential drive with a virtual ground at the tailpoint we can remove $\gds[5]$. The current source $\gm[34] \vgs[34]$ is replaced with the equivalent conductance $\gm[34]$. All the previous steps result in the further simplified equivalent circuit shown in @fig-basic-ota-small-signal-simplified.
 
-{{< include ./figures/_fig_basic_ota_small_signal_simplified.qmd >}}
+{{< include /content/ota_basic/_fig_basic_ota_small_signal_simplified.qmd >}}
 
 In the simplified circuit model in @fig-basic-ota-small-signal-simplified we can see that we have two poles in the circuit, one at the gate note of $M_{3,4}$, and one at the output. Realizing that $v_\mathrm{in,p} = v_\mathrm{in}/2$ and $v_\mathrm{in,n} = - v_\mathrm{in}/2$ we can formulate KCL at the output node to
 $$
@@ -185,7 +185,7 @@ may cause severe degradation of settling time while only causing minor changes i
 
 For the noise analysis we ignore the pole-zero doublet due to $\Cgs[34]$ (we assume minor impact due to this) and just consider the dominant pole given by @eq-basic-ota-dominant-pole. For the noise analysis at the output we set the input signal to zero, and thus we arrive at the simplified small-signal circuit shown in @fig-basic-ota-small-signal-noise.
 
-{{< include ./figures/_fig_basic_ota_small_signal_noise.qmd >}}
+{{< include /content/ota_basic/_fig_basic_ota_small_signal_noise.qmd >}}
 
 We see that
 $$
@@ -208,7 +208,7 @@ $$ {#eq-simple-ota-gain-simplified}
 
 Inspecting @eq-simple-ota-gain-simplified we can interpret the OTA transfer function as a transconductor $\gm[12]$ driving a load of $Y_\mathrm{load} = \gds[2] + \gds[4] + s C_\mathrm{load}$. We can thus redraw @fig-voltage-buffer-ota in the following way, injecting the previously calculated noise current into the output node. The result is shown in @fig-voltage-buffer-ota-noise.
 
-{{< include ./figures/_fig_voltage_buffer_ota_noise_zout.qmd >}}
+{{< include /content/ota_basic/_fig_voltage_buffer_ota_noise_zout.qmd >}}
 
 ::: {.callout-note title="Output Impedance of the Voltage Buffer"}
 First we short the input terminal to ground and then we connect a current source $I_\mathrm{out}$ at the output terminal, see @fig-voltage-buffer-ota-noise-zout. Since we can neglect the gate leakage current into the inverting  input terminal of the OTA, KCL at the output node is simply:
@@ -222,7 +222,7 @@ $$
 
 :::
 
-{{< include ./figures/_fig_voltage_buffer_ota_noise.qmd >}}
+{{< include /content/ota_basic/_fig_voltage_buffer_ota_noise.qmd >}}
 
 We see that the feedback around the transconductor $\gm[12]$ creates an impedance of $1/\gm[12]$. We can now calculate the effective load conductance of
 $$
@@ -262,7 +262,7 @@ Please size the 5T-OTA according to the previous $\gmid$ and $L$ suggestions. Pl
 The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:
 
 ::: {.callout-tip title="Solution: 5T-OTA Sizing" collapse="true"}
-{{< embed ./sizing/sizing_basic_ota.ipynb echo=true >}}
+{{< embed ./gmid/sizing_basic_ota.ipynb echo=true >}}
 :::
 
 ## 5T-OTA Simulation {#sec-basic-ota-simulation}
@@ -389,7 +389,7 @@ After a successful run, a documentation is automatically generated. The result o
 
 ::: {#nte-basic-ota-cace-result .callout-note title="CACE Summary for 5T-OTA" collapse="true"}
 
-{{< include ./cace/_docs/ota-5t_schematic.md >}}
+{{< include /cace/_docs/ota-5t_schematic.md >}}
 :::
 
 ### PVT Simulation Analysis
@@ -414,15 +414,15 @@ Following, we are going to discuss two popular variants of the simple 5T-OTA. Th
 
 Being a single-stage amplifier stability is usually not an issue, as only the output node is high-ohmic; all other nodes feature a MOSFET diode so the node impedance is $\approx \gm^{-1}$ and thus the according poles are located at high frequencies.
 
-{{< include ./figures/_fig_ota_se_r2r.qmd >}}
+{{< include /content/ota_basic/_fig_ota_se_r2r.qmd >}}
 
 Another popular version is shown in @fig-ota-se-twostage. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. @fig-ota-se-twostage shows a very simplistic Miller-compensation using $C_\mathrm{M}$. Often, we would want to implement a more advanced scheme. Some examples can be found in [@Baker_compensating_OPAMP]. An interesting technique is the indirect compensation with cascoded input differential pairs (see @fig-improved-ota) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from $\VDD$ of one $\VGS$ ($\VGS[3]$ on the left side, $\VGS[5]$ on the right side).
 
-{{< include ./figures/_fig_ota_se_twostage.qmd >}}
+{{< include /content/ota_basic/_fig_ota_se_twostage.qmd >}}
 
 Note that the circuit of @fig-ota-se-twostage can be easily modified into a low-dropout voltage regulator (LDO). This simple yet often effective circuit is shown in @fig-simple-ldo. The pass transistor $M_\mathrm{pass}$ has to be sized according to the load current and the dropout voltage.
 
-{{< include ./figures/_fig_simple_ldo.qmd >}}
+{{< include /content/ota_basic/_fig_simple_ldo.qmd >}}
 
 The reference voltage $V_\mathrm{ref}$ is scaled by $R_1$ and $R_2$, so that the output voltage $V_\mathrm{out}$ is given by
 
