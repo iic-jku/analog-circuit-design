@@ -155,6 +155,64 @@ $$
 V_\mathrm{out,cm} = \VGS[7,8] + \frac{R_{3,4} \ID[11]}{2}.
 $$
 
+We can realize the advantage of using the resistor/MOSFET load in the input as well as the output stage when we calculate the common-mode gain of the OTA. We realize that we can use half-circuits due to the inherent symmetry of the circuit in @fig-diff-ota-resload. The gain of the first stage (the MOSFET-diode loaded differential pair $M_{1,2}$) is given by (using @eq-differential-pair-cm)
+
+$$
+A_\mathrm{cm,1} \approx -\frac{1}{\gm[3,5]} \frac{\gm[1,2] \gds[10]}{\gm[1,2] + \gds[10]} \approx -\frac{\gds[10]}{\gm[3,5]}.
+$$ {#eq-diff-ota-cmgain1}
+
+The common-mode gain of the second stage is similarly given by
+
+$$
+A_\mathrm{cm,2} \approx -\frac{\gm[4,6]}{\gm[7,8]}.
+$$ {#eq-diff-ota-cmgain2}
+
+Combining @eq-diff-ota-cmgain1 and @eq-diff-ota-cmgain2 we arrive at (assuming that $\gm[3,5] = \gm[4,6]$)
+
+$$
+A_\mathrm{cm} = A_\mathrm{cm,1} A_\mathrm{cm,2} = \frac{\gds[10]}{\gm[7,8]}
+$$ {#eq-diff-ota-cmgain}
+
+which is a low common-mode gain with very likely $A_\mathrm{cm} < 1$, which is very good news for the common-mode stability!
+
+Likewise, we can compute the differential gain of the OTA by formulating the voltage gain of the first stage as
+
+$$
+A_\mathrm{d,1} \approx \frac{\gm[1,2]}{R_{1,2}^{-1} + \gds[3,5] + \gds[1,2]}
+$$ {#eq-diff-ota-dmgain1}
+
+and the differential voltage gain of the second stage as
+
+$$
+A_\mathrm{d,2} = \frac{\gm[4,6]}{R_{3,4}^{-1} + \gds[7,8] + \gds[4,6]}.
+$$ {#eq-diff-ota-dmgain2}
+
+Combining @eq-diff-ota-dmgain1 and @eq-diff-ota-cmgain2 we arrive at the total differential voltage gain (of an **unloaded** OTA) of
+
+$$
+A_\mathrm{d} = A_\mathrm{d,1} A_\mathrm{d,2} = \frac{\gm[1,2] \gm[4,6]}{(R_{1,2}^{-1} + \gds[3,5] + \gds[1,2])(R_{3,4}^{-1} + \gds[7,8] + \gds[4,6])}
+$$ {#eq-diff-ota-dmgain}
+
+which can lead to signifcant differential voltage gain, ultimately limited by the $\gds$ of the MOSFETs $M_{1-8}$.
+
 ::: {.callout-warning title="Modify Bias Points with Currents"}
 Keep the technique shown in @fig-diff-ota-resload-miller-cm (using $R_{3,4}$ and $M_{11}$) in mind: You can always modify a bias point by injecting a dc current into a node, or by pulling a dc current out of a node (or do both to increase or lower the quiescent current through a resistor or transistor)! Since we likely have already current mirrors in the circuit it is usually a minor effort adding MOSFETs to create these bias currents.
 :::
+
+## Final Differential OTA
+
+When designing the OTA with the above mentioned techniques like Miller compensation and the common-mode setting we find that we have issues with common-mode stability. There is one issue not obvious on first sight with the MOSFET-R load of the first stage: At the node $X$ there is significant capacitance due to the gates of $M_{3,5}$. This capacitance forms a lowpass response with the resistance of $R_{1,2}$ and thus creates a low-frequency pole. This pole is in the common-mode path, and leads to a zero for the common-mode gain.
+
+In other words: At low frequencies the common-mode gain is given by @eq-diff-ota-cmgain, but at higher frequencies (above the pole at node $X$) the common-mode gain increases signficantly as the load resistance of the first stage increases from $\gm[3]^{-1} \parallel \gm[5]^{-1}$ to $\gds[3]^{-1} \parallel \gds[5]^{-1}$. We need to counteract this effect by adding a capacitor in parallel to $R_{1,2}$, as shown in @fig-diff-ota-final. We use the opportunity to also add a series resistor to this capacitor to introduce an additional zero to improve phase margin.
+
+{{< include /content/ota_diff/_fig_ota_diff_twostage_final.qmd >}}
+
+You can find the sizing script for the differential OTA [here](./gmid/sizing_diff_ota.ipynb), as well as the circuit-level design in Xschem [here](./xschem/ota-diff.sch). The testbench for differential and common-mode gain analysis can be found [here](./xschem/ota-diff_tb-acol.sch).
+
+The final Xschem schematics of the differential OTA and the testbench are also shown in the figures below.
+
+![Differential OTA design in Xschem.](./xschem/ota-diff.svg){#fig-diff-ota-design}
+
+![Simulation testbench of the differential OTA design (DM and CM gain analysis).](./xschem/ota-diff_tb-acol.svg){#fig-diff-ota-design-tb-gain}
+
+As you can see when you run the simulation, the differential OTA is stable for differential and common-mode gain. However, the stabilization measures resulted in a GBW which falls considerably short of the target value of 1 GHz. Here we would need to start another round of optimization, either giving up some stability margin, or increasing the power dissipation, or using a more advanced topology.
