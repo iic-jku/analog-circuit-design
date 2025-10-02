@@ -20,7 +20,7 @@ So far, we have discussed the implementation of OTAs with a differential input a
 
 The OTA presented in @sec-ota-variants-single-ended can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in @fig-diff-ota-resload.
 
-{{< include ./figures/_fig_ota_diff_twostage.qmd >}}
+{{< include /content/ota_diff/_fig_ota_diff_twostage.qmd >}}
 
 This OTA shows a load on top of the differential pair that we have not yet studied. It is instructive to analyze this structure in terms of differential and common-mode operation.
 
@@ -46,11 +46,11 @@ Luckily, we know from the analysis in @sec-miller-theorem that we can use voltag
 
 We can now add these so-called "Miller capacitors" to our circuit. The result is shown in @fig-diff-ota-resload-miller. (We have also added resistors in series with the capacitors; we ignore these resistors for the time being).
 
-{{< include ./figures/_fig_ota_diff_twostage_miller.qmd >}}
+{{< include /content/ota_diff/_fig_ota_diff_twostage_miller.qmd >}}
 
 It is instructive to look at the small-signal equivalent circuit of the common-source stage $M_4$ loaded by current-source $M_7$. The resulting model is shown in @fig-miller-comp-model (we are ignoring the bulk effect of $M_4$, and lump components of $M_{4,7}$ into the input and the output impedances formed by $C_\mathrm{L}$, $C_\mathrm{in}$, $g_\mathrm{in}$ and $g_\mathrm{out}$).
 
-{{< include ./figures/_fig_miller_comp_model.qmd >}}
+{{< include /content/ota_diff/_fig_miller_comp_model.qmd >}}
 
 In order to analyze the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through $C_\mathrm{m}$ (we set $R_\mathrm{m}=0$ for now):
 
@@ -147,7 +147,7 @@ In summary, stability investigations are critically important for differential c
 
 Instead of a common-mode regulation loop (and all its complications regarding stability) often a common-mode setting is sufficient (after all, a somewhat imprecise setting of the dc points is good enough). A common-mode setting has the advantage that no error amplifier is required. We will also use this approach of a common-mode loop setting in the adapted differential OTA shown in @fig-diff-ota-resload-miller-cm.
 
-{{< include ./figures/_fig_ota_diff_twostage_miller_cm.qmd >}}
+{{< include /content/ota_diff/_fig_ota_diff_twostage_miller_cm.qmd >}}
 
 Resistors $R_{3,4}$ sense the output voltages and create a replica of the common-mode point (assuming $R_3 = R_4$). This common-mode point is connected to the gates of $M_{7,8}$ to essentially connect $M_{7,8}$ like a diode (only for common-mode operation); in differential mode, $M_7$ and $M_8$ act as current source, like the load of the differential pair $M_{3,5}$. However, since we want to set the common-mode voltage at the output independently from $\VGS[7,8]$ we also pull a current through $R_{3,4}$ to cause $\VDS[7,8] \neq \VGS[7,8]$; essentially, this is a diode connection including a voltage shift! The output common-mode voltage is then given by
 
