@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 T {1.45 < 1.5(nom) < 1.55V} 160 -1550 0 0 0.4 0.4 {}
 T {15uA} 1590 -160 0 0 0.4 0.4 {}
@@ -451,7 +452,7 @@ N 920 -1190 980 -1190 {lab=vdd}
 N 1430 -1060 1430 -890 {lab=dp_casc}
 N 1290 -1060 1430 -1060 {
 lab=dp_casc}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 1590 -410 0 0 {name=M5
 l=5u
 w=6u
@@ -745,3 +746,14 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
+C {sg13g2_pr/annotate_fet_params.sym} 1740 -470 0 0 {name=annot1 ref=M5}
+C {sg13g2_pr/annotate_fet_params.sym} 1990 -800 0 0 {name=annot2 ref=M1}
+C {sg13g2_pr/annotate_fet_params.sym} 2130 -800 0 0 {name=annot3 ref=M2}
+C {sg13g2_pr/annotate_fet_params.sym} 1990 -950 0 0 {name=annot4 ref=M1c}
+C {sg13g2_pr/annotate_fet_params.sym} 2130 -950 0 0 {name=annot5 ref=M2c}
+C {sg13g2_pr/annotate_fet_params.sym} 1950 -1520 0 0 {name=annot6 ref=M3}
+C {sg13g2_pr/annotate_fet_params.sym} 2090 -1520 0 0 {name=annot7 ref=M4}
+C {sg13g2_pr/annotate_fet_params.sym} 1950 -1370 0 0 {name=annot8 ref=M3c}
+C {sg13g2_pr/annotate_fet_params.sym} 2090 -1370 0 0 {name=annot9 ref=M4c}
+C {sg13g2_pr/annotate_fet_params.sym} 1150 -500 0 0 {name=annot10 ref=M7}
+C {sg13g2_pr/annotate_fet_params.sym} 1410 -300 0 0 {name=annot11 ref=Mdecoup1}

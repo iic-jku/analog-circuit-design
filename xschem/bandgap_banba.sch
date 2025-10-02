@@ -1,4 +1,4 @@
-v {xschem version=3.4.8RC file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
@@ -187,7 +187,7 @@ N 780 -200 830 -200 {
 lab=vss}
 N 810 -290 830 -290 {lab=vss}
 N 830 -370 830 -290 {lab=vss}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 Harald Pretl, Apache-2.0 license"}
 C {sg13g2_pr/pnpMPA.sym} 910 -270 0 1 {name=Q1
 model=pnpMPA
 spiceprefix=X

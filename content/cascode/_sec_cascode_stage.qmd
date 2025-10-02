@@ -1,0 +1,87 @@
+::: {.content-hidden}
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Cascode Stage {#sec-cascode-stage}
+
+As we have seen in @sec-basic-ota the performance of the OTA is generally quite acceptable (see @tbl-voltage-buffer-spec), but we might want to aim for better output voltage accuracy. As our analysis has shown the output voltage tolerance is limited by the open-loop dc gain $A_0$ of the OTA (see @eq-voltage-buffer-tolerance), which in turn is limited by the output conductance of $M_2$ and $M_4$ in @fig-basic-ota, which is also confirmed by the analytical result in @eq-simple-ota-gain-dc.
+
+During the sizing procedure we have seen that the achievable $\gm / \gds$ ratio of a single MOSFET is limited, even if we increase $L$. We are thus searching for a better option, and here (local) feedback in form of a **cascode** comes to help.
+
+For analysis of a cascode, we use the following single-transistor stage shown in @fig-cascode-transistor.
+
+{{< include /content/cascode/_fig_cascode_transistor.qmd >}}
+
+In order to derive the operation of the cascode analytically, we draw the small-signal equivalent circuit in @fig-cascode-small-signal. We assume that $V_\mathrm{B}$ is a low-ohmic bias voltage, thus we replace it by ac ground. We further set $\gmb = 0$.
+
+{{< include /content/cascode/_fig_cascode_small_signal.qmd >}}
+
+Since the gate is assumed at a fixed potential, we can put $\Cgs$ in parallel to $G_\mathrm{S}$ as $G_\mathrm{S}^{*} = G_\mathrm{S} + s \Cgs$, and we can put $\Cgd$ in parallel to $G_\mathrm{D}$ as $G_\mathrm{D}^{*} = G_\mathrm{D} + s \Cgd$. As a result we will disregard these capacitors for now, and just consider $G_\mathrm{S}$ and $G_\mathrm{D}$. 
+
+{{< include /content/cascode/_fig_cascode_small_signal_simplified.qmd >}}
+
+## Cascode Output Impedance
+
+As a first step, we want to calculate the output impedance at the drain of the MOSFET (i.e., looking into the drain). For this, we replace $G_\mathrm{D}$ with a current source. The resulting small-signal equivalent circuit is shown in @fig-cascode-small-signal-simplified-out.
+
+{{< include /content/cascode/_fig_cascode_small_signal_simplified_out.qmd >}}
+
+We realize that $i_\mathrm{out}$ flows through $G_\mathrm{S}$ and drops $\vgs$ (note the sign):
+$$
+\vgs = -\frac{i_\mathrm{out}}{G_\mathrm{S}}
+$$
+
+Further, $v_\mathrm{out} = -\vgs + \vds$. Calculating KCL at the output node results in
+$$
+i_\mathrm{out} - \gm \vgs - \gds \vds = 0.
+$$
+
+Using the previously found identities, and after a bit of algebraic manipulations we arrive at
+$$
+g_\mathrm{out} = \frac{i_\mathrm{out}}{v_\mathrm{out}} = \frac{\gds}{1 + \frac{\gm + \gds}{G_\mathrm{S}}} = \frac{\gds \cdot G_\mathrm{S}}{G_\mathrm{S} + \gm + \gds}
+$$ {#eq-cascode-output}
+
+We find that if $G_\mathrm{S} = 0$ (an open) then $g_\mathrm{out} = 0$, and if $G_\mathrm{S} = \infty$ (a short) then $g_\mathrm{out} = \gds$. We can calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus $G_\mathrm{S} = \gds'$) and get
+$$
+g_\mathrm{out} = \frac{\gds \cdot \gds'}{\gds' + \gm + \gds} \approx \gds' \frac{\gds}{\gm}.
+$$ {#eq-cs-cascode-output-impedance}
+
+::: {.callout-important title="Benefit of Cascode (Output)"}
+The output impedance of the lower MOSFET ($r_\mathrm{ds} = 1 / \gds'$) is **increased** by the self-gain of the cascode transistor! This is a powerful technique to increase the output impedance of a transistor stage by cascoding, much better than increasing $L$.
+:::
+
+## Cascode Input Impedance
+
+To calculate the input impedance of a cascode (i.e., looking into the source) we replace $G_\mathrm{S}$ with a current source. The resulting small-signal equivalent circuit is shown in @fig-cascode-small-signal-simplified-in. 
+
+{{< include /content/cascode/_fig_cascode_small_signal_simplified_in.qmd >}}
+
+We note that $\vgs = -v_\mathrm{in}$ and that $i_\mathrm{in}$ flows through $G_\mathrm{D}$, resulting in $v_\mathrm{D} = i_\mathrm{in} / G_\mathrm{D}$. Note that $\vds =  v_\mathrm{D} - v_\mathrm{in}$. Formulating KCL at the input node results in
+$$
+i_\mathrm{in} + \gds \vds + \gm \vgs = 0.
+$$
+
+After some manipulation we find that
+$$
+g_\mathrm{in} = \frac{i_\mathrm{in}}{v_\mathrm{in}} = \frac{(\gm + \gds) \cdot G_\mathrm{D}}{\gds + G_\mathrm{D}}.
+$$ {#eq-cascode-input}
+
+Setting $G_\mathrm{D} = 0$ (an open) results in $g_\mathrm{in} = 0$ as well, so the input impedance of the cascode is very large when the drain impedance is large.
+
+However, setting $G_\mathrm{D} = \infty$ (a short or low-ohmic impedance) results in the well-known result of $g_\mathrm{in} = \gm + \gds \approx \gm$, which means that the input impedance looking into a cascode is approximately $1/\gm$. 
+
+::: {.callout-important title="Benefit of Cascode (Input)"}
+This has the practical benefit that a capacitance connected at this node results in a high-frequency pole, which is often not critical in terms of stability. Further, the voltage swing at a cascode input node is small due to the often small impedance, and this minimizes the Miller effect at connected inter-node capacitors (see @sec-miller-theorem).
+:::

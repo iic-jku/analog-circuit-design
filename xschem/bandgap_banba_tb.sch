@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 N 560 -320 560 -300 {
 lab=GND}
@@ -33,6 +34,7 @@ value="
 "}
 C {devices/code_shown.sym} 0 -710 0 0 {name=NGSPICE only_toplevel=true 
 value="
+.include bandgap_banba_tb.save
 .control
 option klu
 option method=gear
@@ -60,7 +62,7 @@ wrdata bandgap_banba.txt vref_vec vs temp_vec
 "}
 C {devices/vsource.sym} 560 -390 0 0 {name=Vdd value=1.5 savecurrent=true}
 C {devices/gnd.sym} 560 -300 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 Harald Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 480 -150 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"

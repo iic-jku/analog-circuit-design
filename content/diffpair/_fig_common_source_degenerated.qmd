@@ -1,0 +1,33 @@
+::: {.content-hidden}
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-common-source-degenerated
+#| echo: false
+#| fig-cap: "A MOSFET common-source amplifier with resistive degeneration."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+    
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).reverse().label(r'$g_\mathrm{m}$', loc='right')
+    Rdegen = elm.Resistor().down().label(r'$R_\mathrm{degen}$')
+    elm.Ground()
+    elm.Line().left().at(M1.gate).dot(open=True).length(1).label(r'$v_\mathrm{in}$', 'left')
+    elm.Line().up().at(M1.drain).dot(open=True).length(0.5).label(r'$i_\mathrm{out}$', 'right')
+```

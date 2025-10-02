@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 N 520 -300 520 -280 {
 lab=GND}
@@ -82,7 +83,7 @@ print tsettle
 "}
 C {devices/vsource.sym} 520 -330 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 520 -280 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 500 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"

@@ -1,4 +1,4 @@
-v {xschem version=3.4.8RC file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
@@ -29,7 +29,7 @@ N 360 -500 360 -460 {lab=rp}
 N 220 -500 360 -500 {lab=rp}
 N 220 -500 220 -460 {lab=rp}
 N 180 -100 220 -100 {lab=bn}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 Harald Pretl, Apache-2.0 license"}
 C {devices/iopin.sym} 180 -300 0 1 {name=p2 lab=rp}
 C {devices/iopin.sym} 180 -160 0 1 {name=p1 lab=rn}
 C {devices/lab_wire.sym} 450 -300 0 0 {name=p5 sig_type=std_logic lab=rp1,r[1..6]}

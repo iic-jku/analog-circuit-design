@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 P 4 5 1040 -620 2460 -620 2460 -120 1040 -120 1040 -620 {dash = 4}
 P 4 5 1040 -1180 2460 -1180 2460 -680 1040 -680 1040 -1180 {dash = 4}
@@ -172,7 +173,7 @@ write ota-improved_tb-loopgain.raw
 *quit
 .endc
 "}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, S. Dorrer, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, S. Dorrer, Apache-2.0 license"}
 C {devices/launcher.sym} 750 -480 0 0 {name=h2
 descr="Annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"

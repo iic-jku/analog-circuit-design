@@ -1,0 +1,62 @@
+::: {.content-hidden}
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-basic-ota-small-signal-noise
+#| echo: false
+#| fig-cap: "5-transistor OTA small-signal model for noise calculation."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    elm.Ground()
+    d.push()
+    In1 = elm.SourceI().label(r'$\overline{I_\mathrm{n1}^2}$').reverse()
+    elm.Line().length(2).dot()
+    d.push()
+    gm34 = elm.Resistor().up().label(r'$g_\mathrm{m34}$')
+    elm.Vdd()
+    d.pop()
+    elm.Line().right().length(3)
+    In3 = elm.SourceI().label(r'$\overline{I_\mathrm{n3}^2}$')
+    elm.Vdd()
+
+    d.pop()
+    d.move(dx=7)
+    elm.Ground()
+    Ids2 = elm.SourceI().label(r'$\overline{I_\mathrm{n2}^2}$').reverse()
+    elm.Line().up().length(1).dot()
+    out = d.here
+    elm.Line().up().length(1).dot()
+    d.push()
+    Ids4 = elm.SourceI().label(r'$g_\mathrm{m34} V_\mathrm{gs34}$')
+    elm.Vdd()
+    d.pop()
+    elm.Line().right().length(3)
+    In4 = elm.SourceI().label(r'$\overline{I_\mathrm{n4}^2}$')
+    elm.Vdd()
+
+    l1 = elm.Line().right().at(out).length(3).dot(open=True).label(r'$V_\mathrm{out}$', 'right')
+    elm.CurrentLabelInline(direction='in', ofst=-0.15).at(l1).label(r'$\overline{I_\mathrm{n}^2$')
+    
+    elm.Line().left().length(3).at(gm34.start).dot(open=True)
+    elm.Gap().up().label(['+', r'$V_\mathrm{gs34}$', '-'])
+    elm.Dot(open=True)
+    elm.Vdd()
+```

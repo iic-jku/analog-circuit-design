@@ -1,0 +1,275 @@
+::: {.content-hidden}
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# First Circuit: MOSFET Diode {#sec-mosfet-diode}
+
+The first (simple) circuit which we will investigate is a MOSFET, where the gate is shorted with the drain, a so-called MOSFET "diode", which is shown in @fig-mosfet-diode. This diode is one half of a current mirror, which we will investigate in @sec-current-mirror.
+
+{{< include /content/diode/_fig_mosfet_diode.qmd >}}
+
+Why looking at a single-transistor circuit at all? By starting with the simplest possible circuit we can develop important skills in circuit analysis (setting up and calculating a small-signal model, calculating open-loop gain, calculate noise, etc.) and Xschem/ngspice simulation testbench creation. We safely assume that also the Mona Lisa was not Leonardo da Vinci's first painting, so let's start slow.
+
+This diode is usually biased by a current source, shown as $I_\mathrm{bias}$ in the figure. Depending on MOSFET sizing with $W$ and $L$, a certain gate-source voltage $\VGS$ will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.
+
+::: {.callout-note title="Feedback in the MOSFET Diode"}
+It is important to realize that this configuration employs a feedback loop for operation. The voltage at the drain of the MOSFET is sensed by the gate, and the gate voltage changes until $I_\mathrm{D}$ is exactly equal to $I_\mathrm{bias}$. In this sense this is probably the smallest feedback circuit one can build. 
+:::
+
+## MOSFET Diode Sizing
+
+We will now build this circuit in Xschem. For sizing the MOSFET we will use the $\gmid$ methodology introduced in @sec-gmid-method.
+
+::: {.callout-tip title="Exercise: MOSFET Diode Sizing"}
+Please build a MOSFET diode circuit in Xschem where you use an LV NMOS, set $I_\mathrm{bias} = 20\,\mu\text{A}$, $L = 0.13\,\mu\text{m}$, and we want to use $\gmid = 10$ (often a suitable compromise between transistor speed and $\gm$ efficiency).
+
+1. Use the figures in @sec-techsweep-nmos to find out the proper value for $W$.
+2. What is the $f_\mathrm{T}$ for this MOSFET? What is the value for $\gm$ and $\gds$?
+3. Draw the circuit in Xschem, and simulate the operating point. Do the values match to the values found out before during circuit sizing?
+:::
+
+Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.
+
+::: {.callout-tip title="Solution: MOSFET Diode Sizing" collapse="true"}
+1. Using the fact that $I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}$ and $\gmid = 10$ directly provides $\gm = 0.2\,\text{mS}$.
+2. Using the self-gain plot, we see that $\gm/\gds \approx 21$, so $\gds \approx 9.5\,\mu\text{S}$. The $f_\mathrm{T}$ can easily be found in the respective plot to be $f_\mathrm{T} = 23\,\text{GHz}$.
+3. The $W$ of the MOSFET we find using the drain current density plot and the given bias current. Rounding to half-microns results in $W = 1\,\mu\text{m}$.
+4. Since we are looking at the graphs, we further find $\gamma = 0.84$, $V_\mathrm{ds,sat} = 0.18\,\text{V}$, and $f_\mathrm{co} \approx 15\,\text{MHz}$.
+5. In addition, we expect $\VGS \approx 0.6\,\text{V}$.
+
+An example Jupyter notebook to extract these values accurately you can find [here](./gmid/sizing_mosfet_diode.ipynb). An Xschem schematic for this exercise is provide [as well](./xschem/mosfet_diode_sizing.sch).
+:::
+
+## MOSFET Diode Large-Signal Behavior
+
+As discussed above, the MOSFET diode configuration is essentially a feedback loop. Before we will analyze this loop in small-signal, we want to investigate how this loop settles in the time domain, and by doing this we can observe the large-signal settling behavior. To simulate this, we change the dc bias source from the previous example to a transient current source, which we will turn on after some picoseconds. The resulting Xschem testbench is shown in @fig-mosfet-diode-settling-tb.
+
+![Testbench for MOSFET diode transient settling.](/xschem/mosfet_diode_settling.svg){#fig-mosfet-diode-settling-tb}
+
+When simulating the circuit in @fig-mosfet-diode-settling-tb another interesting effect can be observed: While the turn-on happens quite rapidly (essentially the bias current source charges the gate capacitance, until the gate-source voltage is large enough that the drain current counteracts the bias current), the turn-off shows a very long settling tail. This is due to the fact that as the gate capacitance is discharged by the drain current, the $\VGS$ drops, which in turn reduces the drain current, which will make the discharge even slower. We have an effect similar to a capacitor discharge by a diode [@Hellen_2003].
+
+::: {.callout-important title="Power-Down Switches"}
+It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually $\VDD$ or $\VSS$) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.
+:::
+
+Exemplary implementations of power-down switches are shown in the Xschem implementation of the improved OTA in @fig-improved-ota-design. Which $W/L$ ratio should these transistors have? Well, in general, switches often have minimum length to be fast and to have low $R_\mathrm{on}$. However, if there are no critical specifications (e.g., like power-down time), then these transistors are often used as dummy transistors for other circuit parts and are sized to fit the layout best.
+
+## MOSFET Diode Small-Signal Analysis
+
+We now want to investigate the small-signal behavior of the MOSFET diode. Based on the small-signal model of the MOSFET in @fig-mosfet-small-signal-model we realize that gate and drain are shorted, and we also connect bulk to source. We can thus simplify the circuit to the one shown in @fig-mosfet-diode-small-signal.
+
+{{< include /content/diode/_fig_mosfet_diode_small_signal.qmd >}}
+
+::: {.callout-note title="Ground Node Selection"}
+For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only $N-1$ independent KCL equations, $N$ being the number of nodes in the circuit), and the potential difference equations are simpler if one node is at $0\,V$.
+:::
+
+For calculating the small-signal impedance of the MOSFET diode we formulate Kirchhoff's current law (KCL, also Kirchhoff's first law or Kirchhoff's junction rule) at the top node to get
+$$
+i_\mathrm{bias} - s \Cgs \vgs - \gm \vgs - \gds \vgs = 0.
+$$
+
+It follows that
+$$
+Z_\mathrm{diode}(s) = \frac{\vgs}{i_\mathrm{bias}} = \frac{1}{\gm + \gds + s \Cgs}.
+$$ {#eq-mosfet-diode-impedance}
+
+When neglecting $\gds$, at dc we get $Z_\mathrm{diode} = 1 / \gm$, which is an important result and should be memorized.
+
+::: {.callout-important title="The Admittance is Your Friend"}
+In circuit analysis it is often algebraically easier to work with admittance instead of impedance, so please remember that Ohm's law for a conductance is $I = G \cdot V$, and for a capacitance is $I = s C \cdot V$. When writing equations, it is also practical to keep $s C$ together, so we will strive to sort terms accordingly.
+:::
+
+Looking at @eq-mosfet-diode-impedance we see that for low frequencies, the diode impedance is resistive, and for high frequencies it becomes capacitive as the gate-source capacitance starts to dominate. The corner frequency of this low-pass can be calculated as
+$$
+\omega_\mathrm{c} = \frac{\gm + \gds}{\Cgs} \approx \omega_\mathrm{T}
+$$
+which is pretty much the transit frequency of the MOSFET!
+
+## MOSFET Diode Stability Analysis
+
+::: {.callout-note title="Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap"}
+@fig-feedback-system shows a negative feedback system with input $X(s)$ and output $Y(s)$, where $H_\mathrm{ol}(s)$ is the transfer function of the feed-forward path (also called **open-loop gain**) and $G(s)$ is the transfer function of the feedback network. The **loop-gain** is the product of both transfer functions $T(s) = H_\mathrm{ol}(s) G(s)$ and is used for the stability analysis. The **closed-loop** gain is defined as $H_\mathrm{cl}(s) = Y(s) / X(s)$ can be derived with $Y(s) = H_\mathrm{ol}(s) [X(s) - Y(s) G(s)]$ to be
+$$
+H_\mathrm{cl}(s) = \frac{Y(s)}{X(s)} = \frac{H_\mathrm{ol}(s)}{1 + H_\mathrm{ol}(s) G(s)} = \frac{H_\mathrm{ol}(s)}{1 + T(s)}
+$${#eq-closed-loop-gain}
+
+If the open-loop gain is sufficiently large $H_\mathrm{ol}(s) \gg 1$, then the closed-loop gain simplifies to $H_\mathrm{cl}(s) \approx 1 / G(s)$. This result is convenient, since it is independent of $H_\mathrm{ol}(s)$. Therefore, the overall gain is only set with the feedback gain $G(s)$ in operational amplifier circuits.
+
+In the case of the MOSFET diode, $G(s) = 1$ and therefore $T(s) = H_\mathrm{ol}(s)$ and $H_\mathrm{cl}(s) \approx 1$. Therefore, this chapter uses open-loop gain and loop-gain as synonyms.
+
+{{< include /content/diode/_fig_feedback_system.qmd >}}
+:::
+
+::: {.callout-note title="Gain-Bandwidth Product in Feedback Systems"}
+The gain-bandwidth product (GBP or GBWP) or transit frequency $f_\mathrm{T}$ of a first-order open-loop system is the product of the open-loop dc gain $H_\mathrm{ol,dc} = H_\mathrm{ol}(f = 0\,\text{Hz})$ and the open-loop $-3\,\text{dB}$ cut-off frequency $f_\mathrm{c,ol}$ of $H_\mathrm{ol}(s)$.
+$$
+\text{GBWP} = f_\mathrm{T,ol} = H_\mathrm{ol,dc} f_\mathrm{c,ol}
+$$
+
+If a frequency-independent negative feedback $G$ (e.g., a resistive divider) is applied to this open-loop system, the transit frequency changes to
+$$
+f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
+$$
+Hence, the closed-loop transit frequency is slightly lower than the open-loop transit frequency $f_\mathrm{T,cl} < f_\mathrm{T,ol}$.
+
+The closed-loop $-3\,\text{dB}$ cut-off frequency $f_\mathrm{c,cl}$ can then be calculated from the open-loop transit frequency and the feedback gain.
+$$
+f_\mathrm{c,cl} = H_\mathrm{ol,DC} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
+$$
+
+This theory might be interesting when Middlebrook's and Tian's methods for loop gain analysis are later compared in the MOSFET diode testbench (see @fig-mosfet-diode-loopgain-tb).
+:::
+
+The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy $\Cgs^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
+
+{{< include /content/diode/_fig_mosfet_diode_openloop.qmd >}}
+
+We are now driving (with a voltage source) $v_\mathrm{in}$ and record the output voltage $v_\mathrm{out}$ to find the open-loop response $H_\mathrm{ol}(s)$. By inspecting @fig-mosfet-diode-openloop we see that 
+$$
+v_\mathrm{out} = - \gm v_\mathrm{in} \frac{1}{\gds + s \Cgs}.
+$$
+
+The open-loop gain $H_\mathrm{ol}(s)$ is thus
+$$
+H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{\gm}{\gds + s \Cgs} = - \frac{\gm}{\gds} \frac{1}{1 + s \frac{\Cgs}{\gds}}.
+$$ {#eq-mosfet-diode-openloop-gain}
+
+Inspecting @eq-mosfet-diode-openloop-gain we realize that:
+
+1. The dc gain $\gm / \gds$ is the self-gain of the MOSFET, so $20 \log_{10}(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}$.
+2. There is a pole at $\omega_\mathrm{p} = -\gds / \Cgs$, which is at $9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}$.
+
+With this single pole location in $H_\mathrm{ol}(s)$ this loop is perfectly stable at under all conditions (remember that a single pole results in a maximum phase shift of --90$^\circ$).
+
+The question is now how to simulate this open-loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. This is called **Rosenstark's method** [@Rosenstark_1984]. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. 
+
+There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using an ac current source. Based on both measurements the open-loop gain can be calculated. This is called **Middlebrook's method** [@Middlebrook_1975] and is based on double injection, and we will use it for our loop simulations. This method is detailed in @sec-middlebrook-method.
+
+There are several other methods like Tian's method [@Tian_2001], for example. A comprehensive overview can be found in [@Neag_2015] which describes ten different simulation-based loop gain analysis methods.
+
+We now want to simulate the open-loop transfer function $H_\mathrm{ol}(s)$ by using Middlebrook's and Tian's method and confirm our analysis above.
+
+::: {.callout-tip title="Exercise: MOSFET Diode Loop Analysis"}
+Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by @eq-mosfet-diode-openloop-gain.
+
+If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_loopgain.sch), shown in @fig-mosfet-diode-loopgain-tb.
+
+![Testbench for MOSFET diode stability analysis.](/xschem/mosfet_diode_loopgain.svg){#fig-mosfet-diode-loopgain-tb}
+:::
+
+From simulation we see that the open-loop gain is $24.9\,\text{dB}$ at low frequencies, which matches quite well our prediction of $26.4\,\text{dB}$. In the Bode plot we see a low-pass with a $-3\,\text{dB}$ corner frequency of $1.4\,\text{GHz}$, which again is fairly close to our prediction of $1.1\,\text{GHz}$. 
+
+::: {.callout-important title="What About Large-Signal Stability?"}
+Keep in mind that the above simulation only verifies the small-signal stability in one certain operating point. If we later look at the stability of an OTA it might be a good idea to verify the small-signal stability in different operating points.
+
+Furthermore, one can apply a step response to the closed-loop system input and estimate the phase margin from the overshoot at the output (see *"Automatic Control"* lecture). One could also use a step-wise step response to simulate different operating points for a certain time (see *"Introduction in Integrated Circuit Design"* lecture).
+:::
+
+## MOSFET Diode Noise Calculation
+
+As a final exercise on the MOSFET diode circuit we want to calculate the output noise when we consider $\VGS$ the output reference voltage which is created when passing a bias current through the MOSFET diode. The bias current we will assume noiseless.
+
+We are going to use the small-signal circuit shown in @fig-mosfet-diode-small-signal-w-noise.
+
+{{< include /content/diode/_fig_mosfet_diode_small_signal_w_noise.qmd >}}
+
+As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $\vgs$ is thus given as
+$$
+\overline{V_\mathrm{n}^2} = |Z_\mathrm{diode}|^2 \overline{I_\mathrm{n,d}^2}.
+$$
+
+The drain current noise of the MOSFET is given as (introduced in @sec-mosfet-smallsignal-model)
+$$
+\overline{I_\mathrm{n,d}^2} = 4 k T \gamma \gm.
+$$
+
+For low frequencies (ignoring $\gds$ and $\Cgs$) we get
+$$
+\overline{V_\mathrm{n}^2} = |Z_\mathrm{diode}|^2 \overline{I_\mathrm{n,d}^2} = \frac{1}{\gm^2} 4 k T \gamma \gm = \frac{4 k T \gamma}{\gm}
+$$
+which is the thermal noise of a resistor of value $1 / \gm$ enhanced by the factor $\gamma$.
+
+We now calculate the full equation, and after a bit of algebra arrive at
+$$
+\overline{V_\mathrm{n}^2}(f) = \frac{4 k T \gamma \gm}{(\gm + \gds)^2 + (2 \pi f \Cgs)^2}.
+$$ {#eq-mosfet-diode-noise-psd}
+
+If we are interested in the PSD of the noise then @eq-mosfet-diode-noise-psd gives us the result. If we are interested in the rms value (the total noise) we need to integrate this equation, using the following identity:
+
+::: {.callout-note title="Useful Integral for Noise Calculations"}
+
+$$
+\int_0^\infty {\frac{a}{b^2 + c^2 f^2} df} = \frac{\pi}{2} \frac{a}{b \cdot c}
+$$ {#eq-integral-identity}
+
+:::
+
+Using the integral help in @eq-integral-identity, we can easily transform @eq-mosfet-diode-noise-psd to
+$$
+V_\mathrm{n,rms}^2 = \int_0^\infty \overline{V_\mathrm{n}^2}(f) df = \frac{k T \gamma \gm}{(\gm + \gds) \Cgs}.
+$$ {#eq-mosfet-diode-noise-rms}
+
+The form of @eq-mosfet-diode-noise-rms is the exact solution, but we gain additional insight if we assume that $\gm + \gds \approx \gm$ and then
+$$
+V_\mathrm{n,rms}^2 = \frac{k T \gamma}{\Cgs}.
+$$ {#eq-mosfet-diode-noise-rms-simplified}
+
+Inspecting @eq-mosfet-diode-noise-rms-simplified we see our familiar $kT/C$ noise multiplied by the factor $\gamma$! 
+
+:::{.callout-tip title="Exercise: Total Output Noise of RC-Lowpass"}
+If you have never calculated this before then you should work through the following: Calculate the total output noise of an $RC$-lowpass filter. Formulate the transfer function in the Laplace domain, and put the eqivalent resistor noise voltage source at the input, calculate the transfer to the output, and then integrate the output PSD (like we did for the MOSFET diode noise).
+
+You fill find that the output noise is
+$$
+V_\mathrm{n,rms}^2 = \frac{k T}{C} 
+$$
+which is independent of $R$! This is a surprising result, and is the well-known $kT/C$ noise. 
+Intuitively, we could argue that the noise increases with larger $R$, but at the same time, the bandwidth decreases and therefore $R$ does not add additional noise. More detailed information and an intuitive explanation of $kT/C$ noise can be found in [@Sheikholeslami_2025_kTC].
+
+Side note: The shortest derivation of this formula involves the [equipartition theorem](https://en.wikipedia.org/wiki/Equipartition_theorem): Any system in thermal equilibrium with a reservoir of temperature $T$ has a fluctuation energy of $kT/2$ per degree of freedom. This $RC$ system has one degree of freedom in the voltage on the capacitor, and the stored energy in the capacitor is $CV_\mathrm{rms}^2/2$. Equating both energies we find that $V_\mathrm{rms}^2 = kT/C$ [@Sarpeshkar_1993].
+
+To calculate the total output noise of a generalized passive network Bode's noise theorem is quite practical (see @sec-bode-noise-theorem).
+:::
+
+Calculating the rms noise voltage for our MOSFET diode we get
+$$
+\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV},
+$$
+which is a sizeable value! Think about it, can this rms noise voltage be measured with an oscilloscope? If not, why? We run circuits in this technology at $\VDD = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$ (single-ended), resulting in a dynamic range in this case of $20 \log_{10} (0.39 / 1.58 \cdot 10^{-3}) \approx 48\,\text{dB}$ assuming a sinusoidal signal. In order to get a feeling which dynamic range is "good", we can calculate the required dynamic range of a 16-bit audio ADC to be $6.02 \cdot 16 + 1.76\,\text{dB} = 98.08\,\text{dB} \approx 100\,\text{dB}$. This calculation should make clear that, for example, the correct sizing of the sample&hold capacitor is crucial for low rms noise voltage.
+
+::: {.callout-important title="Be Careful with Parasitic Capacitances in IC Design"}
+In general, in integrated circuit design, we often have only small parasitic capacitances on many nodes that could sum up to unwanted high noise according to @eq-mosfet-diode-noise-rms-simplified. If one wants to lower the noise an increased capacitance could limit the bandwidth (and thus the $kT/C$ noise).
+:::
+
+::: {.callout-important title="Large Bandwidth and Noise"}
+Remember: Large bandwidth circuits integrate noise over a wide bandwidth resulting in (potentially) considerable rms noise. The way to lower the total noise is to lower the PSD of the noise contributions, which usually requires increased power consumption. So in a nutshell:
+
+Large bandwidth plus small noise equals large power consumption.
+:::
+
+::: {.callout-tip title="Exercise: MOSFET Diode Noise"}
+Please build a simulation testbench in Xschem to simulate the noise performance of the MOSFET diode, and confirm the rms noise value that we just calculated. Look at the rms value and the PSD of the noise, and play around with the integration limits. What is the effect? Can you see the flicker noise in the PSD? How much is its contribution to the rms noise? What is the value of $\fco$, and does it correspond to the above calculated one?
+
+If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_noise.sch), shown in @fig-mosfet-diode-noise-tb.
+
+![Testbench for MOSFET diode noise analysis.](./xschem/mosfet_diode_noise.svg){#fig-mosfet-diode-noise-tb}
+:::
+
+## Conclusion
+
+In this section we investigated the simple MOSFET-diode circuit. We learned important skills like how to derive a small-signal model and how to calculate important features like noise and open-loop gain for stability analysis. We introduced Middlebrook's method to have a mechanism to open up loops in simulation (and calculation) without disturbing dc operating points or introduce errors by changing loading conditions.
+
+If you feel that you have not yet mastered these topics or are uncertain in the operation of Xschem or ngspice, please go back to the beginning of the section and read through the theory and redo the exercises.

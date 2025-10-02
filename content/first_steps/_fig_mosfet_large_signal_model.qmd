@@ -1,0 +1,58 @@
+::: {.content-hidden}
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-mosfet-large-signal-model
+#| echo: false
+#| fig-cap: "The MOSFET large-signal model. In general, all capacitors are nonlinear, i.e., they depend on their terminal voltages."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    d.push()
+    elm.Line().left().length(1.5).dot().idot()
+
+    d.push()
+    Cgb = elm.CapacitorVar().down().label(r'$C_\mathrm{GB}$').length(4)
+    elm.Line().right().length(10.5).dot()
+
+    d.pop()
+    elm.Line().left().length(1).dot(open=True).label('G', 'left')
+    d.pop()
+    d.push()
+    Cgs = elm.CapacitorVar().down().label(r'$C_\mathrm{GS}$').length(3)
+    elm.Line().right().length(7).dot()
+    l1 = elm.Line().down().length(2).dot(open=True).label('S', 'left')
+    d.pop()
+    Cgd = elm.CapacitorVar().right().length(7).label(r'$C_\mathrm{GD}$').dot()
+    d.push()
+    Ids = elm.SourceI().down().label(r'$I_\mathrm{DS} = f(W, L, V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})$').length(3)
+    
+    d.pop()
+    elm.Line().right().length(2).dot()
+    d.push()
+    Cdb = elm.CapacitorVar().down().label(r'$C_\mathrm{DB}$').length(3).dot()
+    d.push()
+    Csb = elm.CapacitorVar().left().label(r'$C_\mathrm{SB}$')
+    d.pop()
+    elm.Line().down().toy(l1.end).dot(open=True).label('B', 'left')
+
+    d.pop()
+    elm.Line().right().dot(open=True).length(1).label('D', 'right')
+```

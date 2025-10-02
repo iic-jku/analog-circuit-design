@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 N 380 -300 380 -280 {
 lab=GND}
@@ -125,6 +126,7 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -550 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
+.include current_mirror.save
 .control
 save all
 
@@ -141,7 +143,7 @@ plot i(viout3) vs v(out3)
 "}
 C {devices/vsource.sym} 380 -370 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 380 -280 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {sg13g2_pr/sg13_lv_nmos.sym} 630 -370 0 1 {name=M1
 l=0.13u
 w=1u
@@ -150,11 +152,11 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {devices/launcher.sym} 500 -160 0 0 {name=h2
+C {devices/launcher.sym} 500 -100 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
 }
-C {devices/launcher.sym} 740 -160 0 0 {name=h3
+C {devices/launcher.sym} 740 -100 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
@@ -199,3 +201,7 @@ C {devices/lab_pin.sym} 1440 -520 0 1 {name=p9 sig_type=std_logic lab=out3}
 C {devices/ammeter.sym} 820 -470 0 0 {name=Viout1 savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 1060 -470 0 0 {name=Viout2 savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 1320 -470 0 0 {name=Viout3 savecurrent=true spice_ignore=0}
+C {sg13g2_pr/annotate_fet_params.sym} 600 -270 0 0 {name=annot1 ref=M1}
+C {sg13g2_pr/annotate_fet_params.sym} 810 -270 0 0 {name=annot2 ref=M2}
+C {sg13g2_pr/annotate_fet_params.sym} 1050 -270 0 0 {name=annot3 ref=M3}
+C {sg13g2_pr/annotate_fet_params.sym} 1310 -270 0 0 {name=annot4 ref=M4}
