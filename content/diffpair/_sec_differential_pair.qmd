@@ -1,5 +1,5 @@
 ::: {.content-hidden}
-Copyright (C) 2024 Harald Pretl and co-authors (harald.pretl@jku.at)
+Copyright (C) 2024-2025 Harald Pretl and co-authors (harald.pretl@jku.at)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ limitations under the License.
 
 Like the current mirror in @sec-current-mirror the **differential pair** is an ubiquitous building block often used in integrated circuit design [@Blumlein_1937]. The fundamental structure is given in @fig-differential-pair.
 
-{{< include ./figures/_fig_differential_pair.qmd >}}
+{{< include /content/diffpair/_fig_differential_pair.qmd >}}
 
 In order to understand its operation it is instructive to separate the input condition into (1) a purely differential voltage, and (2) a common-mode voltage, and see what the impact on the output currents is.
 
@@ -58,7 +58,7 @@ $$
 
 However, if we assume a realistic tail current source then $g_\mathrm{tail} > 0$. For analysis we can simply look at a half circuit since the circuit operation is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set $\gds = \gmb = 0$. We then arrive at the small-signal equivalent circuit shown in @fig-differential-pair-cm (note that we set $v_\mathrm{in,p} = v_\mathrm{in,n} = v_\mathrm{in}$ and $i_\mathrm{out,p} = i_\mathrm{out,n} = i_\mathrm{out}$ under symmetry considerations).
 
-{{< include ./figures/_fig_differential_pair_cm.qmd >}}
+{{< include /content/diffpair/_fig_differential_pair_cm.qmd >}}
 
 Formulating KVL for the input-side loop we get
 $$
@@ -83,4 +83,4 @@ $$
 
 When no degeneration resistor is used, then $\gm' = \gm$. If a degeneration of $R_\mathrm{degen} \gg \gm^{-1}$ is used then $\gm' = 1 / R_\mathrm{degen}$. This result is worth memorizing.
 
-{{< include ./figures/_fig_common_source_degenerated.qmd >}}
+{{< include /content/diffpair/_fig_common_source_degenerated.qmd >}}
