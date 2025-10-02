@@ -1,8 +1,9 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.8RC file_version=1.3}
 G {}
 K {}
 V {}
 S {}
+F {}
 E {}
 N 500 -780 500 -760 {
 lab=GND}
@@ -23,8 +24,6 @@ lab=vinn}
 N 690 -510 690 -380 {
 lab=v_ss}
 N 690 -650 690 -570 {
-lab=v_cm}
-N 820 -650 960 -650 {
 lab=v_cm}
 N 1080 -820 1080 -800 {
 lab=v_dd}
@@ -110,6 +109,8 @@ N 1040 -980 1320 -980 {
 lab=v_ss}
 N 1400 -1270 1520 -1270 {lab=voutcmn}
 N 1140 -1150 1320 -1150 {lab=voutcmp}
+N 820 -650 840 -650 {lab=v_cm}
+N 900 -650 960 -650 {lab=vinp}
 C {devices/code_shown.sym} 0 -180 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
@@ -120,6 +121,7 @@ value="
 C {devices/code_shown.sym} 0 -900 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
+.include ota-diff_tb-acol.save
 .control
 option sparse
 set filetype=ascii
@@ -140,7 +142,7 @@ plot cph(voutcm)*180/pi
 "}
 C {devices/vsource.sym} 500 -810 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 500 -760 0 0 {name=l3 lab=GND}
-C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, Apache-2.0 license"}
+C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 500 -160 0 0 {name=h2
 descr="simulate" 
 tclcommand="xschem save; xschem netlist; xschem simulate"
@@ -199,3 +201,4 @@ C {lab_wire.sym} 1270 -1190 0 0 {name=p25 sig_type=std_logic lab=voutcmn}
 C {vcvs.sym} 1560 -1310 0 0 {name=E3 value=0.5}
 C {lab_wire.sym} 930 -650 0 0 {name=p26 sig_type=std_logic lab=vinp}
 C {lab_wire.sym} 930 -610 0 0 {name=p27 sig_type=std_logic lab=vinn}
+C {devices/vsource.sym} 870 -650 3 0 {name=Vin1 value="0"}
