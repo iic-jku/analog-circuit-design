@@ -22,8 +22,7 @@ import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
 with sd.Drawing(canvas='svg') as d:
-    d.config(unit=2)
-    d.config(fontsize=16)
+    d.config(unit=2, fontsize=16)
     
     M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$M_1$', ofst=-1.5).reverse()
     elm.Line().down().length(0.5)
@@ -38,7 +37,6 @@ with sd.Drawing(canvas='svg') as d:
     elm.Ground()
     elm.Line().up().at(M5.drain).length(3.5)
     Ibias = elm.SourceI().up().label(r'$I_\mathrm{bias}$').reverse()
-    elm.Vdd()
 
     elm.Line().right().length(0.5).at(M5.gate).dot()
     elm.Line().up().length(1)
@@ -55,7 +53,6 @@ with sd.Drawing(canvas='svg') as d:
     d.push()
     elm.Line().up().length(0.5)
     M3 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_3$')
-    elm.Vdd().at(M3.source)
 
     elm.Line().up().at(M2.drain).length(0.5).dot()
     d.push()
@@ -73,12 +70,10 @@ with sd.Drawing(canvas='svg') as d:
     d.pop()
     elm.Line().up().length(0.5)
     M4 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_4$', ofst=-1.5).reverse()
-    elm.Vdd().at(M4.source)
 
     elm.Line().at(M4.gate).tox(M3.gate)
     
-    elm.Line().up().at(Mpass.source).toy(M4.source)
-    elm.Vdd()
+    line2 = elm.Line().up().at(Mpass.source).toy(M4.source)
 
     d.pop()
     elm.Line().right().tox(M6.drain)
@@ -95,4 +90,8 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().left().length(0.5)
     elm.Line().up().toy(M1.gate)
     elm.Line().right().tox(M1.gate)
+
+    # vdd line
+    line1 = elm.Line().at(Ibias.end).toy(M3.source)
+    elm.Line().at((line1.end[0]-d.unit/4, line1.end[1])).to((line2.end[0]+d.unit/4, line2.end[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
 ```

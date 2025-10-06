@@ -22,8 +22,7 @@ import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
 with sd.Drawing(canvas='svg') as d:
-    d.config(unit=2)
-    d.config(fontsize=16)
+    d.config(unit=2, fontsize=16)
     
     M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$M_1$', ofst=-1.5).reverse()
     elm.Line().down().length(0.5)
@@ -44,7 +43,6 @@ with sd.Drawing(canvas='svg') as d:
     elm.Ground()
     elm.Line().up().length(6).at(M9.drain)
     Ibias = elm.SourceI().up().label(r'$I_\mathrm{bias}$').reverse()
-    elm.Vdd()
     d.pop()
     elm.Line().left().tox(M9.drain).idot().dot()
 
@@ -60,25 +58,23 @@ with sd.Drawing(canvas='svg') as d:
     pos1 = d.here
     elm.Line().up().length(0.5)
     M3 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_3$')
-    elm.Vdd().at(M3.source)
+    elm.Line().at(M3.source).up().toy(Ibias.end)
 
     elm.Line().up().at(M2.drain).length(2).dot()
     pos2 = d.here
     elm.Line().up().length(0.5)
     M5 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_5$',ofst=-1.5).reverse()
-    elm.Vdd().at(M5.source)
+    elm.Line().at(M5.source).up().toy(Ibias.end)
 
     d.here = pos1
     elm.Line().left().length(2).label('$A$')
     M4 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).label('$M_4$')
-    elm.Line().at(M4.source).up().toy(M3.source)
-    elm.Vdd()
+    elm.Line().at(M4.source).up().toy(Ibias.end)
 
     d.here = pos2
     elm.Line().right().length(2).label("$A'$")
     M6 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).label('$M_6$', ofst=-1.5).reverse()
-    elm.Line().at(M6.source).up().toy(M5.source)
-    elm.Vdd()
+    line1 = elm.Line().at(M6.source).up().toy(Ibias.end)
 
     elm.Line().at(M4.drain).down().length(0.5)
     elm.Dot().label('$B$','right')
@@ -114,4 +110,7 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().left().to(M3.gate)
     d.pop()
     elm.Line().right().to(M5.gate)
+
+    # vdd line
+    elm.Line().at((Ibias.end[0]-d.unit/4, Ibias.end[1])).to((line1.end[0]+d.unit/4, line1.end[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
 ```

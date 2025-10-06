@@ -71,7 +71,6 @@ with sd.Drawing(canvas='svg') as d:
     pos1 = d.here
     elm.Line().up().length(0.5)
     M3 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_3$')
-    elm.Vdd().at(M3.source)
 
     # First stage load - right side
     elm.Line().up().at(M2.drain).length(0.5).dot()
@@ -80,18 +79,15 @@ with sd.Drawing(canvas='svg') as d:
     pos2 = d.here
     elm.Line().up().length(0.5)
     M5 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_5$', ofst=-1.5).reverse()
-    elm.Vdd().at(M5.source)
 
     # MOSFET-R load implementation
     elm.Line().at(pos1).left().length(2).label('$A$')
     M4 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).label('$M_4$')
     elm.Line().at(M4.source).up().toy(M3.source)
-    elm.Vdd()
 
     elm.Line().at(pos2).right().length(2).label("$A'$")
     M6 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).label('$M_6$', ofst=-1.5).reverse()
-    elm.Line().at(M6.source).up().toy(M5.source)
-    elm.Vdd()
+    line2 = elm.Line().at(M6.source).up().toy(M5.source)
 
     elm.Line().at(M4.drain).down().length(0.5).dot()
     d.push()
@@ -151,6 +147,8 @@ with sd.Drawing(canvas='svg') as d:
     elm.Resistor().left().label(r'$R_\mathrm{stab2}$').tox(M10.drain).dot()
 
     # place VDD ontop of Ibias
-    elm.Line().at(Ibias.end).up().toy(M5.source)
-    elm.Vdd()
+    line1 = elm.Line().at(Ibias.end).up().toy(M5.source)
+
+    # vdd line
+    elm.Line().at((line1.end[0]-d.unit/4, line1.end[1])).to((line2.end[0]+d.unit/4, line2.end[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
 ```

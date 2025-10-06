@@ -22,8 +22,7 @@ import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
 with sd.Drawing(canvas='svg') as d:
-    d.config(unit=2)
-    d.config(fontsize=16)
+    d.config(unit=2, fontsize=16)
     
     M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$M_1$', ofst=-1.5).reverse()
     elm.Line().down().length(0.5)
@@ -40,7 +39,6 @@ with sd.Drawing(canvas='svg') as d:
     d.push()
     elm.Line().up().length(1.5)
     Ibias = elm.SourceI().up().label(r'$I_\mathrm{bias}$').reverse()
-    elm.Vdd()
     d.pop()
     elm.Line().right().length(1.5)
     elm.Line().down().toy(M9.gate).dot()
@@ -55,16 +53,13 @@ with sd.Drawing(canvas='svg') as d:
     
     elm.Line().up().at(M1.drain).length(0.5).dot()
     pos1 = d.here
-    #d.push()
     elm.Line().up().length(0.5)
     M3 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_3$', ofst=-1.5).reverse()
-    elm.Vdd().at(M3.source)
 
     elm.Line().up().at(M2.drain).length(0.5).dot()
     pos2 = d.here
     elm.Line().up().length(0.5)
     M5 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_5$')
-    elm.Vdd().at(M5.source)
 
     d.here = pos1
     elm.Line().left().length(1.5)
@@ -74,7 +69,6 @@ with sd.Drawing(canvas='svg') as d:
     d.pop()
     elm.Line().left().length(1)
     M4 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).label('$M_4$')
-    elm.Vdd().at(M4.source)
 
     d.here = pos2
     elm.Line().right().length(1.5)
@@ -84,7 +78,6 @@ with sd.Drawing(canvas='svg') as d:
     d.pop()
     elm.Line().right().length(1)
     M6 = elm.AnalogPFet(offset_gate=False).anchor('gate').theta(0).label('$M_6$', ofst=-1.5).reverse()
-    elm.Vdd().at(M6.source)
 
     elm.Line().at(M4.drain).down().length(6)
     M7 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_7$')
@@ -102,4 +95,8 @@ with sd.Drawing(canvas='svg') as d:
     M8 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_8$', ofst=-1.5).reverse()
     elm.Ground().at(M8.source)
     elm.Line().at(M8.gate).left().to(M7.gate)
+
+    # vdd line
+    line1 = elm.Line().at(Ibias.end).toy(M3.source)
+    elm.Line().at((line1.end[0]-d.unit/4, line1.end[1])).to((M6.source[0]+d.unit/4, M6.source[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
 ```

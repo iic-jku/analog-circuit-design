@@ -22,15 +22,12 @@ import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
 with sd.Drawing(canvas='svg') as d:
-  d.config(unit=2)
-  d.config(fontsize=16)
+  d.config(unit=2, fontsize=16)
 
-  #elm.Vdd()
   M4 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label(r'$M_4$')
   elm.Line().down().length(1)
   M1 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label(r'$M_1$')
   
-
   elm.Line().right().length(1.5).at(M4.gate).dot()
   d.push()
   elm.Line().right().length(0.5)
@@ -43,7 +40,6 @@ with sd.Drawing(canvas='svg') as d:
   elm.Line().left().length(0.5).at(N2.base)
   elm.Line().down().toy(N2.collector)
   elm.Ground()
-  elm.Vdd().at(M3.source)
 
   elm.Line().down().at(M1.source).toy(N2.emitter)
   N1 = elm.BjtPnp().anchor('emitter').right().reverse().label('$1$', ofst=-1)
@@ -51,7 +47,6 @@ with sd.Drawing(canvas='svg') as d:
   elm.Line().right().length(0.5).at(N1.base)
   elm.Line().down().toy(N1.collector)
   elm.Ground()
-  elm.Vdd().at(M4.source)
 
   d.pop()
   elm.Line().down().length(1)
@@ -74,7 +69,6 @@ with sd.Drawing(canvas='svg') as d:
   elm.Line().down().dot()
   d.push()
   elm.Line().right().length(1).dot(open=True).label(r'$V_\mathrm{ref} \approx 1.2\,\text{V}$', 'right')
-  elm.Vdd().at(M5.source)
 
   d.pop()
   elm.Line().down().toy(M2.source)
@@ -84,4 +78,7 @@ with sd.Drawing(canvas='svg') as d:
   elm.Line().left().length(0.5).at(N2.base)
   elm.Line().down().toy(N2.collector)
   elm.Ground()
+
+  # vdd line
+  elm.Line().at((M4.source[0]-d.unit/4, M4.source[1])).to((M5.source[0]+d.unit/4, M5.source[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
 ```
