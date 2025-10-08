@@ -1,0 +1,85 @@
+::: {.content-hidden}
+Copyright (C) 2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-diff-ota-telescopic
+#| echo: false
+#| fig-cap: "The telescopic differential OTA (output common-mode regulation and biasing details are not shown)."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=16)
+    
+    M1C = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label(r'$M_\mathrm{1C}$')
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$M_1$', loc='right').reverse()
+    elm.Line().down().length(d.unit/4)
+    elm.Line().right().length(d.unit).dot()
+    tailpoint=d.here
+
+    d.push()
+    elm.Line().down().length(d.unit/4)
+    M5C = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label(r'$M_\mathrm{5C}$', loc='right').reverse()
+    M5 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label(r'$M_\mathrm{5}$', loc='right').reverse()
+    elm.Ground()
+    elm.Line().left().length(d.unit*2).at(M5.gate)
+    M6 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).label('$M_6$')
+    elm.Ground() 
+    M6C = elm.AnalogNFet(offset_gate=False).anchor('source').at(M6.drain).theta(0).label(r'$M_\mathrm{6C}$')
+    
+    elm.Line().up().dot().at(M6C.drain).length(d.unit/4)
+    d.push()
+    elm.Line().up().length(d.unit*3)
+    Ibias = elm.SourceI().up().label(r'$I_\mathrm{bias}$').reverse()
+    d.pop()
+
+    elm.Line().right().length(d.unit*3/4)
+    elm.Line().down().toy(M6.gate).dot()
+    d.pop()
+
+    elm.Line().right().length(d.unit)
+    elm.Line().up().length(d.unit/4)
+    M2 = elm.AnalogNFet(offset_gate=False).anchor('source').drop('drain').theta(0).label('$M_2$')
+    M2C = elm.AnalogNFet(offset_gate=False).anchor('source').theta(0).label(r'$M_\mathrm{2C}$', loc='right').reverse()
+    
+    elm.Line().left().at(M1.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left')
+    elm.Line().right().at(M2.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right')
+    
+    elm.Line().up().at(M1C.drain).length(d.unit/4).dot()
+    d.push()
+    elm.Line().left().length(d.unit/2).dot(open=True).label(r'$V_\mathrm{out,n}$', loc='left')
+    d.pop()
+    elm.Line().up().length(d.unit/4)
+    M3C = elm.AnalogPFet(offset_gate=False).anchor('drain').drop('source').theta(0).label(r'$M_\mathrm{3C}$')
+    M3 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_3$')
+
+    elm.Line().up().at(M2C.drain).length(d.unit/4).dot()
+    d.push()
+    elm.Line().right().length(d.unit/2).dot(open=True).label(r'$V_\mathrm{out,p}$', 'right')
+    d.pop()
+    elm.Line().up().length(d.unit/4)
+    M4C = elm.AnalogPFet(offset_gate=False).anchor('drain').drop('source').theta(0).label(r'$M_\mathrm{4C}$', loc='right').reverse()
+    M4 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_4$', loc='right').reverse()
+
+    elm.Line().at(M3.gate).to(M4.gate).label(r'$V_\mathrm{bias3}$')
+    elm.Line().at(M1C.gate).to(M2C.gate).label(r'$V_\mathrm{bias1}$')
+    elm.Line().at(M3C.gate).to(M4C.gate).label(r'$V_\mathrm{bias2}$')
+    elm.Line().at(M6C.gate).to(M5C.gate).label(r'$V_\mathrm{bias4}$')
+
+    # vdd line
+    line1 = elm.Line().at(Ibias.end).toy(M3.source)
+    elm.Line().at((line1.end[0]-d.unit/4, line1.end[1])).to((M4.source[0]+d.unit/4, M4.source[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
+```

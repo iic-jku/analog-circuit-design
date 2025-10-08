@@ -1,0 +1,88 @@
+::: {.content-hidden}
+Copyright (C) 2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-diff-ota-folded
+#| echo: false
+#| fig-cap: "The folded-cascode differential OTA (output common-mode regulation and biasing details are not shown)."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=16)
+    
+    # cascode stage
+    M5C = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label(r'$M_\mathrm{5C}$')
+    elm.Line().down().length(d.unit/4)
+    dot1 = elm.Dot()
+    elm.Line().down().length(d.unit/2)
+    M5 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$M_5$', loc='left')
+    elm.Line().down().length(d.unit/4)
+    elm.Line().right().length(d.unit).dot()
+    elm.Ground()
+
+    elm.Line().right().length(d.unit)
+    elm.Line().up().length(d.unit/4)
+    M6 = elm.AnalogNFet(offset_gate=False).anchor('source').drop('drain').theta(0).label('$M_6$', loc='right').reverse()
+    elm.Line().up().length(d.unit/4)
+    dot2 = elm.Dot()
+    elm.Line().up().length(d.unit/2)
+    M6C = elm.AnalogNFet(offset_gate=False).anchor('source').theta(0).label(r'$M_\mathrm{6C}$', loc='right').reverse()
+
+    elm.Line().up().at(M5C.drain).length(d.unit/4).dot()
+    d.push()
+    elm.Line().left().length(d.unit/2).dot(open=True).label(r'$V_\mathrm{out,p}$', loc='left')
+    d.pop()
+    elm.Line().up().length(d.unit/4)
+    M3C = elm.AnalogPFet(offset_gate=False).anchor('drain').drop('source').theta(0).label(r'$M_\mathrm{3C}$')
+    M3 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_3$')
+
+    elm.Line().up().at(M6C.drain).length(d.unit/4).dot()
+    d.push()
+    elm.Line().right().length(d.unit/2).dot(open=True).label(r'$V_\mathrm{out,n}$', 'right')
+    d.pop()
+    elm.Line().up().length(d.unit/4)
+    M4C = elm.AnalogPFet(offset_gate=False).anchor('drain').drop('source').theta(0).label(r'$M_\mathrm{4C}$', loc='right').reverse()
+    M4 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_4$', loc='right').reverse()
+
+    elm.Line().at(M3.gate).to(M4.gate).label(r'$V_\mathrm{bias4}$')
+    elm.Line().at(M5C.gate).to(M6C.gate).label(r'$V_\mathrm{bias2}$')
+    elm.Line().at(M3C.gate).to(M4C.gate).label(r'$V_\mathrm{bias3}$')
+    elm.Line().at(M5.gate).to(M6.gate).label(r'$V_\mathrm{bias1}$')
+
+    # differential input pair
+    elm.Line().left().at(dot1.start).length(d.unit*3)
+    elm.Line().up().length(d.unit/4)
+    M2 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).drop('source').label('$M_2$')
+    elm.Line().up().length(d.unit/4)
+    elm.Line().left().length(d.unit*3/4).dot()
+    d.push()
+    elm.Line().up().length(d.unit/2)
+    Ibias = elm.SourceI().up().label(r'$I_\mathrm{bias}$').reverse()
+    line1 = elm.Line().up().toy(M3.source)
+    d.pop()
+    elm.Line().left().length(d.unit*3/4)
+    elm.Line().down().length(d.unit/4)
+    M1 = elm.AnalogPFet(offset_gate=False).anchor('source').theta(0).drop('drain').label('$M_1$', loc='right').reverse()
+    elm.Line().down().toy(dot2.end) 
+    elm.Line().right().to(dot2.end)
+    
+    elm.Line().left().at(M1.gate).length(d.unit/4).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left') 
+    elm.Line().right().at(M2.gate).length(d.unit/4).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right') 
+
+    # vdd line
+    elm.Line().at((line1.end[0]-d.unit/4, line1.end[1])).to((M4.source[0]+d.unit/4, M4.source[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
+```

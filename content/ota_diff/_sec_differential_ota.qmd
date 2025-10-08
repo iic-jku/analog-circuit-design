@@ -216,3 +216,17 @@ The final Xschem schematics of the differential OTA and the testbench are also s
 ![Simulation testbench of the differential OTA design (DM and CM gain analysis).](./xschem/ota-diff_tb-acol.svg){#fig-diff-ota-design-tb-gain}
 
 As you can see when you run the simulation, the differential OTA is stable for differential and common-mode gain. However, the stabilization measures resulted in a GBW which falls considerably short of the target value of 1 GHz. Here we would need to start another round of optimization, either giving up some stability margin, or increasing the power dissipation, or using a more advanced topology.
+
+## Differential OTA Variants
+
+For inspiration we want to discuss two further variants of the differential OTA. The first one is shown in @fig-diff-ota-telescopic and is a telescopic OTA. The telescopic OTA is a single-stage OTA and is the differential version of the single-ended OTA shown in @fig-improved-ota. It shares its advantages and disadvantages: Stability is often not an issue (because it is single-stage), and the current consumption is low, as there is only one main current branch. The biggest disadvantage is the limited output swing, as we have to stack six MOSFETs on top of each other. Accounting for a minimum headroom per transistor of about 0.1 V, we require at least 0.6V, likely more in practice. This might be an issue in low-voltage designs.
+
+{{< include /content/ota_diff/_fig_diff_ota_telescopic.qmd >}}
+
+Another very popular single-stage differential OTA is the so-called *folded-cascode OTA*, shown in @fig-diff-ota-folded. The folded-cascode OTA has a larger output swing than the telescopic OTA, as we only need to stack four MOSFETs on top of each other. However, the current consumption is higher, as we have three current branches (one for the input pair, and two for the differential cascode stage). The folded-cascode OTA is a very popular choice for high-gain, moderate-speed OTAs.
+
+{{< include /content/ota_diff/_fig_diff_ota_folded.qmd >}}
+
+Note that the folded-cascode OTA has a large common-mode range at the input. In case of the shown PMOS input differential pair, the input common-mode voltage can be as low as $\VSS$. If an NMOS input stage is used, the input common-mode voltage can be as high as $\VDD$. For a rail-to-rail input stage, a combination of NMOS and PMOS input pairs can be used. Note that the bias current of the input pair needs a suitable control so that the effective input stage $\gm$ is fairly constant over the full input common-mode range.
+
+Note that both the telescopic OTA and the folded-cascode OTA have to be equipped with common-mode setting or regulation loops, otherwise the output common-mode voltage might be ill-defined and might drift up or down depending on bias current mismatch.
