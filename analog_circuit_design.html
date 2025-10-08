@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-10-07">
+<meta name="dcterms.date" content="2025-10-08">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -480,6 +480,7 @@ window.Quarto = {
   <li><a href="#miller-compensation" id="toc-miller-compensation" class="nav-link" data-scroll-target="#miller-compensation"><span class="header-section-number">12.1</span> Miller Compensation</a></li>
   <li><a href="#common-mode-regulation" id="toc-common-mode-regulation" class="nav-link" data-scroll-target="#common-mode-regulation"><span class="header-section-number">12.2</span> Common-Mode Regulation</a></li>
   <li><a href="#final-differential-ota" id="toc-final-differential-ota" class="nav-link" data-scroll-target="#final-differential-ota"><span class="header-section-number">12.3</span> Final Differential OTA</a></li>
+  <li><a href="#differential-ota-variants" id="toc-differential-ota-variants" class="nav-link" data-scroll-target="#differential-ota-variants"><span class="header-section-number">12.4</span> Differential OTA Variants</a></li>
   </ul></li>
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">13</span> An RC-OPAMP Filter</a></li>
   <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion"><span class="header-section-number">14</span> Summary &amp; Conclusion</a></li>
@@ -558,7 +559,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 7, 2025</p>
+      <p class="date">October 8, 2025</p>
     </div>
   </div>
   
@@ -4751,6 +4752,41 @@ Figure&nbsp;63: Simulation testbench of the differential OTA design (DM and CM g
 </div>
 <p>As you can see when you run the simulation, the differential OTA is stable for differential and common-mode gain. However, the stabilization measures resulted in a GBW which falls considerably short of the target value of 1 GHz. Here we would need to start another round of optimization, either giving up some stability margin, or increasing the power dissipation, or using a more advanced topology.</p>
 </section>
+<section id="differential-ota-variants" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="differential-ota-variants"><span class="header-section-number">12.4</span> Differential OTA Variants</h2>
+<p>For inspiration we want to discuss two further variants of the differential OTA. The first one is shown in <a href="#fig-diff-ota-telescopic" class="quarto-xref">Figure&nbsp;64</a> and is a telescopic OTA. The telescopic OTA is a single-stage OTA and is the differential version of the single-ended OTA shown in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;45</a>. It shares its advantages and disadvantages: Stability is often not an issue (because it is single-stage), and the current consumption is low, as there is only one main current branch. The biggest disadvantage is the limited output swing, as we have to stack six MOSFETs on top of each other. Accounting for a minimum headroom per transistor of about 0.1 V, we require at least 0.6V, likely more in practice. This might be an issue in low-voltage designs.</p>
+<div id="cell-fig-diff-ota-telescopic" class="cell" data-execution_count="45">
+<div class="cell-output cell-output-display">
+<div id="fig-diff-ota-telescopic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diff-ota-telescopic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="analog_circuit_design_files/figure-html/fig-diff-ota-telescopic-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-116" title="Figure&nbsp;64: The telescopic differential OTA (output common-mode regulation and biasing details are not shown)."><img src="analog_circuit_design_files/figure-html/fig-diff-ota-telescopic-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-telescopic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;64: The telescopic differential OTA (output common-mode regulation and biasing details are not shown).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Another very popular single-stage differential OTA is the so-called <em>folded-cascode OTA</em>, shown in <a href="#fig-diff-ota-folded" class="quarto-xref">Figure&nbsp;65</a>. The folded-cascode OTA has a larger output swing than the telescopic OTA, as we only need to stack four MOSFETs on top of each other. However, the current consumption is higher, as we have three current branches (one for the input pair, and two for the differential cascode stage). The folded-cascode OTA is a very popular choice for high-gain, moderate-speed OTAs.</p>
+<div id="cell-fig-diff-ota-folded" class="cell" data-execution_count="46">
+<div class="cell-output cell-output-display">
+<div id="fig-diff-ota-folded" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diff-ota-folded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="analog_circuit_design_files/figure-html/fig-diff-ota-folded-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-117" title="Figure&nbsp;65: The folded-cascode differential OTA (output common-mode regulation and biasing details are not shown)."><img src="analog_circuit_design_files/figure-html/fig-diff-ota-folded-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-folded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;65: The folded-cascode differential OTA (output common-mode regulation and biasing details are not shown).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that the folded-cascode OTA has a large common-mode range at the input. In case of the shown PMOS input differential pair, the input common-mode voltage can be as low as <span class="math inline">\(V_\mathrm{SS}\)</span>. If an NMOS input stage is used, the input common-mode voltage can be as high as <span class="math inline">\(V_\mathrm{DD}\)</span>. For a rail-to-rail input stage, a combination of NMOS and PMOS input pairs can be used. Note that the bias current of the input pair needs a suitable control so that the effective input stage <span class="math inline">\(g_\mathrm{m}\)</span> is fairly constant over the full input common-mode range.</p>
+<p>Note that both the telescopic OTA and the folded-cascode OTA have to be equipped with common-mode setting or regulation loops, otherwise the output common-mode voltage might be ill-defined and might drift up or down depending on bias current mismatch.</p>
+</section>
 </section>
 <section id="an-rc-opamp-filter" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> An RC-OPAMP Filter</h1>
@@ -4788,30 +4824,30 @@ Figure&nbsp;63: Simulation testbench of the differential OTA design (DM and CM g
 </section>
 <section id="sec-middlebrook-method" class="level1" data-number="15">
 <h1 data-number="15"><span class="header-section-number">15</span> Appendix: Middlebrook’s Method</h1>
-<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;64</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;65</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
-<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="45">
+<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;66</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;67</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
+<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="47">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="analog_circuit_design_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-116" title="Figure&nbsp;64: Middlebrook voltage loop gain simulation."><img src="analog_circuit_design_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+<a href="analog_circuit_design_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-118" title="Figure&nbsp;66: Middlebrook voltage loop gain simulation."><img src="analog_circuit_design_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;64: Middlebrook voltage loop gain simulation.
+Figure&nbsp;66: Middlebrook voltage loop gain simulation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="46">
+<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="48">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="analog_circuit_design_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-117" title="Figure&nbsp;65: Middlebrook current loop gain simulation."><img src="analog_circuit_design_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+<a href="analog_circuit_design_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-119" title="Figure&nbsp;67: Middlebrook current loop gain simulation."><img src="analog_circuit_design_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;65: Middlebrook current loop gain simulation.
+Figure&nbsp;67: Middlebrook current loop gain simulation.
 </figcaption>
 </figure>
 </div>
@@ -4832,30 +4868,30 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \
 <h1 data-number="16"><span class="header-section-number">16</span> Appendix: Useful Circuit Theorems</h1>
 <section id="sec-miller-theorem" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">16.1</span> Miller’s Theorem</h2>
-<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;66</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;67</a>.</p>
-<div id="cell-fig-miller-theorem" class="cell" data-execution_count="47">
+<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;68</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;69</a>.</p>
+<div id="cell-fig-miller-theorem" class="cell" data-execution_count="49">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="analog_circuit_design_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-118" title="Figure&nbsp;66: An impedance connected between two nodes A and B."><img src="analog_circuit_design_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
+<a href="analog_circuit_design_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-120" title="Figure&nbsp;68: An impedance connected between two nodes A and B."><img src="analog_circuit_design_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;66: An impedance connected between two nodes A and B.
+Figure&nbsp;68: An impedance connected between two nodes A and B.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="48">
+<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="50">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem-equivalent" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="analog_circuit_design_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-119" title="Figure&nbsp;67: An equivalent circuit using Miller’s theorem."><img src="analog_circuit_design_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
+<a href="analog_circuit_design_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-121" title="Figure&nbsp;69: An equivalent circuit using Miller’s theorem."><img src="analog_circuit_design_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;67: An equivalent circuit using Miller’s theorem.
+Figure&nbsp;69: An equivalent circuit using Miller’s theorem.
 </figcaption>
 </figure>
 </div>
@@ -4895,15 +4931,15 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 <section id="sec-5t-ota-zout" class="level1" data-number="17">
 <h1 data-number="17"><span class="header-section-number">17</span> Appendix: 5T-OTA Small-Signal Output Impedance</h1>
 <p>This section gives additional details to the analysis presented in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>. Here we provide the full calculation of the output impedance/conductance of the 5T-OTA for frequencies below the dominant pole, i.e.&nbsp;we neglect any capacitors.</p>
-<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="49">
+<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="51">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota-small-signal-zout" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="analog_circuit_design_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-120" title="Figure&nbsp;68: 5-transistor OTA small-signal model for output impedance calculations."><img src="analog_circuit_design_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
+<a href="analog_circuit_design_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-122" title="Figure&nbsp;70: 5-transistor OTA small-signal model for output impedance calculations."><img src="analog_circuit_design_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;68: 5-transistor OTA small-signal model for output impedance calculations.
+Figure&nbsp;70: 5-transistor OTA small-signal model for output impedance calculations.
 </figcaption>
 </figure>
 </div>
@@ -5335,14 +5371,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-10-07},
+  date = {2025-10-08},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> October 7, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> October 8, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
