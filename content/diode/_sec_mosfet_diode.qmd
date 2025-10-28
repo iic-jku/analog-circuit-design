@@ -22,7 +22,45 @@ The first (simple) circuit which we will investigate is a MOSFET, where the gate
 
 Why looking at a single-transistor circuit at all? By starting with the simplest possible circuit we can develop important skills in circuit analysis (setting up and calculating a small-signal model, calculating open-loop gain, calculate noise, etc.) and Xschem/ngspice simulation testbench creation. We safely assume that also the Mona Lisa was not Leonardo da Vinci's first painting, so let's start slow.
 
-This diode is usually biased by a current source, shown as $I_\mathrm{bias}$ in the figure. Depending on MOSFET sizing with $W$ and $L$, a certain gate-source voltage $\VGS$ will develop. This voltage can be used as a biasing voltage for other circuit parts, for example.
+This diode is usually biased by a current source, shown as $I_\mathrm{bias}$ in the figure. Depending on MOSFET sizing with $W$ and $L$, a certain gate-source voltage $\VGS$ will develop. This voltage can be used as a biasing voltage for other circuit parts, for example. For exemplary sized MOSFET the $\VGS = f(I_\mathrm{bias})$ characteristic is shown in @fig-mos-diode-simulation. Note that in this MOSFET diode configuration $\VDS = \VGS$.
+
+```{python}
+#| label: fig-mos-diode-simulation
+#| echo: false
+#| fig-cap: "Gate-source voltage of a MOSFET diode with W=1µm and L=0.13µm showing the gate-source voltage as a function of the bias current."
+import numpy as np
+import matplotlib.pyplot as plt
+
+filename = "xschem/mosfet_diode.txt"
+data = np.loadtxt(filename)
+x = data[:, 0]/1e-6
+y = data[:, 1]
+plt.plot(x, y, linestyle='-', color='b')
+plt.xlabel(r"$I_\mathrm{bias}$ (µA)")
+plt.ylabel(r"$V_\mathrm{GS}$ (V)")
+#plt.title("Reference Voltage of Bandgap")
+plt.grid(True)
+```
+
+If we flip @fig-mos-diode-simulation by 90 degrees we can appreciate the name "MOSFET diode" as the characteristic resembles the one of a diode quite well (somewhat steep increase of the current beyond a certain threshold voltage). This is shown in @fig-mos-diode-simulation-rotated.
+
+```{python}
+#| label: fig-mos-diode-simulation-rotated
+#| echo: false
+#| fig-cap: "Drain current of a MOSFET diode with W=1µm and L=0.13µm showing the drain current as a function of the gate-source voltage."
+import numpy as np
+import matplotlib.pyplot as plt
+
+filename = "xschem/mosfet_diode.txt"
+data = np.loadtxt(filename)
+x = data[:, 1]
+y = data[:, 0]/1e-6
+plt.plot(x, y, linestyle='-', color='b')
+plt.xlabel(r"$V_\mathrm{GS}$ (V)")
+plt.ylabel(r"$I_\mathrm{D}$ (µA)")
+#plt.title("Reference Voltage of Bandgap")
+plt.grid(True)
+```
 
 ::: {.callout-note title="Feedback in the MOSFET Diode"}
 It is important to realize that this configuration employs a feedback loop for operation. The voltage at the drain of the MOSFET is sensed by the gate, and the gate voltage changes until $I_\mathrm{D}$ is exactly equal to $I_\mathrm{bias}$. In this sense this is probably the smallest feedback circuit one can build. 
