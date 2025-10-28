@@ -41,7 +41,7 @@ value="
 save all
 op
 write mosfet_diode_sizing.raw
-dc Ibias 0 500u 1u
+dc Ibias -100u 500u 1u
 plot v(v_gs)
 wrdata mosfet_diode.txt v(v_gs)
 .endc

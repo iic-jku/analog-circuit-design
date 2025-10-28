@@ -35,6 +35,8 @@ filename = "xschem/mosfet_diode.txt"
 data = np.loadtxt(filename)
 x = data[:, 0]/1e-6
 y = data[:, 1]
+plt.ylim(0, 1.5)
+plt.xlim(-50, 500)
 plt.plot(x, y, linestyle='-', color='b')
 plt.xlabel(r"$I_\mathrm{bias}$ (µA)")
 plt.ylabel(r"$V_\mathrm{GS}$ (V)")
@@ -42,7 +44,7 @@ plt.ylabel(r"$V_\mathrm{GS}$ (V)")
 plt.grid(True)
 ```
 
-If we flip @fig-mos-diode-simulation by 90 degrees we can appreciate the name "MOSFET diode" as the characteristic resembles the one of a diode quite well (somewhat steep increase of the current beyond a certain threshold voltage). This is shown in @fig-mos-diode-simulation-rotated.
+If we flip @fig-mos-diode-simulation by 90 degrees we can appreciate the name "MOSFET diode" as the characteristic resembles the one of a diode quite well (somewhat steep increase of the current beyond a certain threshold voltage). This is shown in @fig-mos-diode-simulation-rotated. Note that for negative $\VGS$ the drain current is essentially zero, as the MOSFET is off, confirming the diode-like behavior.
 
 ```{python}
 #| label: fig-mos-diode-simulation-rotated
@@ -55,6 +57,7 @@ filename = "xschem/mosfet_diode.txt"
 data = np.loadtxt(filename)
 x = data[:, 1]
 y = data[:, 0]/1e-6
+plt.xlim(-0.8, 1.5)
 plt.plot(x, y, linestyle='-', color='b')
 plt.xlabel(r"$V_\mathrm{GS}$ (V)")
 plt.ylabel(r"$I_\mathrm{D}$ (µA)")
