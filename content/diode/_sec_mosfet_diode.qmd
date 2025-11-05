@@ -119,12 +119,12 @@ For small-signal analysis we would not need to declare one node as the ground po
 
 For calculating the small-signal impedance of the MOSFET diode we formulate Kirchhoff's current law (KCL, also Kirchhoff's first law or Kirchhoff's junction rule) at the top node to get
 $$
-i_\mathrm{bias} - s \Cgs \vgs - \gm \vgs - \gds \vgs = 0.
+I_\mathrm{bias} - s \Cgs \Vgs - \gm \Vgs - \gds \Vgs = 0.
 $$
 
 It follows that
 $$
-Z_\mathrm{diode}(s) = \frac{\vgs}{i_\mathrm{bias}} = \frac{1}{\gm + \gds + s \Cgs}.
+Z_\mathrm{diode}(s) = \frac{\Vgs}{I_\mathrm{bias}} = \frac{1}{\gm + \gds + s \Cgs}.
 $$ {#eq-mosfet-diode-impedance}
 
 When neglecting $\gds$, at dc we get $Z_\mathrm{diode} = 1 / \gm$, which is an important result and should be memorized.
@@ -178,14 +178,14 @@ The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? Fo
 
 {{< include /content/diode/_fig_mosfet_diode_openloop.qmd >}}
 
-We are now driving (with a voltage source) $v_\mathrm{in}$ and record the output voltage $v_\mathrm{out}$ to find the open-loop response $H_\mathrm{ol}(s)$. By inspecting @fig-mosfet-diode-openloop we see that 
+We are now driving (with a voltage source) $V_\mathrm{in}$ and record the output voltage $V_\mathrm{out}$ to find the open-loop response $H_\mathrm{ol}(s)$. By inspecting @fig-mosfet-diode-openloop we see that 
 $$
-v_\mathrm{out} = - \gm v_\mathrm{in} \frac{1}{\gds + s \Cgs}.
+V_\mathrm{out} = - \gm V_\mathrm{in} \frac{1}{\gds + s \Cgs}.
 $$
 
 The open-loop gain $H_\mathrm{ol}(s)$ is thus
 $$
-H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{\gm}{\gds + s \Cgs} = - \frac{\gm}{\gds} \frac{1}{1 + s \frac{\Cgs}{\gds}}.
+H_\mathrm{ol}(s) = \frac{V_\mathrm{out}}{V_\mathrm{in}} = -\frac{\gm}{\gds + s \Cgs} = - \frac{\gm}{\gds} \frac{1}{1 + s \frac{\Cgs}{\gds}}.
 $$ {#eq-mosfet-diode-openloop-gain}
 
 Inspecting @eq-mosfet-diode-openloop-gain we realize that:
@@ -227,7 +227,7 @@ We are going to use the small-signal circuit shown in @fig-mosfet-diode-small-si
 
 {{< include /content/diode/_fig_mosfet_diode_small_signal_w_noise.qmd >}}
 
-As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $\vgs$ is thus given as
+As we have already calculated the small-signal diode impedance in @eq-mosfet-diode-impedance we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at $\Vgs$ is thus given as
 $$
 \overline{V_\mathrm{n}^2} = |Z_\mathrm{diode}|^2 \overline{I_\mathrm{n,d}^2}.
 $$
