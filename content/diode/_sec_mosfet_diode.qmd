@@ -142,16 +142,18 @@ which is pretty much the transit frequency of the MOSFET!
 ## MOSFET Diode Stability Analysis
 
 ::: {.callout-note title="Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap"}
-@fig-feedback-system shows a negative feedback system with input $X(s)$ and output $Y(s)$, where $H_\mathrm{ol}(s)$ is the transfer function of the feed-forward path (also called **open-loop gain**) and $G(s)$ is the transfer function of the feedback network. The **loop-gain** is the product of both transfer functions $T(s) = H_\mathrm{ol}(s) G(s)$ and is used for the stability analysis. The **closed-loop** gain is defined as $H_\mathrm{cl}(s) = Y(s) / X(s)$ can be derived with $Y(s) = H_\mathrm{ol}(s) [X(s) - Y(s) G(s)]$ to be
+@fig-feedback-system shows a generic negative feedback system with input $X(s)$ and output $Y(s)$, where $H_\mathrm{ol}(s)$ is the transfer function of the feed-forward path (also called **open-loop gain**) and $G(s)$ is the transfer function of the feedback network. The **loop-gain** is the product of both transfer functions $T(s) = H_\mathrm{ol}(s) G(s)$ and is used for the stability analysis. The **closed-loop** gain is defined as $H_\mathrm{cl}(s) = Y(s) / X(s)$ can be derived with $Y(s) = H_\mathrm{ol}(s) [X(s) - Y(s) G(s)]$ to be
 $$
 H_\mathrm{cl}(s) = \frac{Y(s)}{X(s)} = \frac{H_\mathrm{ol}(s)}{1 + H_\mathrm{ol}(s) G(s)} = \frac{H_\mathrm{ol}(s)}{1 + T(s)}
 $${#eq-closed-loop-gain}
 
 If the open-loop gain is sufficiently large $H_\mathrm{ol}(s) \gg 1$, then the closed-loop gain simplifies to $H_\mathrm{cl}(s) \approx 1 / G(s)$. This result is convenient, since it is independent of $H_\mathrm{ol}(s)$. Therefore, the overall gain is only set with the feedback gain $G(s)$ in operational amplifier circuits.
 
-In the case of the MOSFET diode, $G(s) = 1$ and therefore $T(s) = H_\mathrm{ol}(s)$ and $H_\mathrm{cl}(s) \approx 1$. Therefore, this chapter uses open-loop gain and loop-gain as synonyms.
+In the case of the MOSFET diode, $G(s) = 1$ and therefore $T(s) = H_\mathrm{ol}(s)$ and $H_\mathrm{cl}(s) \approx 1$.
 
 {{< include /content/diode/_fig_feedback_system.qmd >}}
+
+Note that in the feedback system depicted above shows an inversion in the feedback path. Sometimes this inversion is also included in the definition of $G(s)$. Please be aware of this when reading literature, as different conventions exist.
 :::
 
 ::: {.callout-note title="Gain-Bandwidth Product in Feedback Systems"}
@@ -174,18 +176,18 @@ $$
 This theory might be interesting when Middlebrook's and Tian's methods for loop gain analysis are later compared in the MOSFET diode testbench (see @fig-mosfet-diode-loopgain-tb).
 :::
 
-The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy $\Cgs^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
+The diode-connected MOSFET forms a feedback loop. What is the loop gain? For calculating it, we are breaking the loop, and apply a dummy $\Cgs^{*}$ at the right side to keep the impedances correct. A circuit diagram is shown in @fig-mosfet-diode-openloop, we break the loop at the red crosses. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!
 
 {{< include /content/diode/_fig_mosfet_diode_openloop.qmd >}}
 
-We are now driving (with a voltage source) $V_\mathrm{in}$ and record the output voltage $V_\mathrm{out}$ to find the open-loop response $H_\mathrm{ol}(s)$. By inspecting @fig-mosfet-diode-openloop we see that 
+We are now driving (with a voltage source) $V_\mathrm{in}$ and record the output voltage $V_\mathrm{out}$ to find the loop gain $T(s)$. By inspecting @fig-mosfet-diode-openloop we see that 
 $$
 V_\mathrm{out} = - \gm V_\mathrm{in} \frac{1}{\gds + s \Cgs}.
 $$
 
-The open-loop gain $H_\mathrm{ol}(s)$ is thus
+The loop gain $T(s)$ is thus
 $$
-H_\mathrm{ol}(s) = \frac{V_\mathrm{out}}{V_\mathrm{in}} = -\frac{\gm}{\gds + s \Cgs} = - \frac{\gm}{\gds} \frac{1}{1 + s \frac{\Cgs}{\gds}}.
+T(s) = (-1) \cdot \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{\gm}{\gds + s \Cgs} = \frac{\gm}{\gds} \frac{1}{1 + s \Cgs \gds^{-1}}.
 $$ {#eq-mosfet-diode-openloop-gain}
 
 Inspecting @eq-mosfet-diode-openloop-gain we realize that:
@@ -193,15 +195,15 @@ Inspecting @eq-mosfet-diode-openloop-gain we realize that:
 1. The dc gain $\gm / \gds$ is the self-gain of the MOSFET, so $20 \log_{10}(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}$.
 2. There is a pole at $\omega_\mathrm{p} = -\gds / \Cgs$, which is at $9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}$.
 
-With this single pole location in $H_\mathrm{ol}(s)$ this loop is perfectly stable at under all conditions (remember that a single pole results in a maximum phase shift of --90$^\circ$).
+With this single pole location in $T(s)$ this loop is perfectly stable at under all conditions (remember that a single pole results in a maximum phase shift of --90$^\circ$).
 
-The question is now how to simulate this open-loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. This is called **Rosenstark's method** [@Rosenstark_1984]. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. 
+The question is now how to simulate this loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. This is called **Rosenstark's method** [@Rosenstark_1984]. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration. 
 
-There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using an ac current source. Based on both measurements the open-loop gain can be calculated. This is called **Middlebrook's method** [@Middlebrook_1975] and is based on double injection, and we will use it for our loop simulations. This method is detailed in @sec-middlebrook-method.
+There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using an ac current source. Based on both measurements the loop gain can be calculated. This is called **Middlebrook's method** [@Middlebrook_1975] and is based on double injection, and we will use it for our loop simulations. This method is detailed in @sec-middlebrook-method.
 
 There are several other methods like Tian's method [@Tian_2001], for example. A comprehensive overview can be found in [@Neag_2015] which describes ten different simulation-based loop gain analysis methods.
 
-We now want to simulate the open-loop transfer function $H_\mathrm{ol}(s)$ by using Middlebrook's and Tian's method and confirm our analysis above.
+We now want to simulate the loop transfer function $T(s)$ by using Middlebrook's and Tian's method and confirm our analysis above.
 
 ::: {.callout-tip title="Exercise: MOSFET Diode Loop Analysis"}
 Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by @eq-mosfet-diode-openloop-gain.
