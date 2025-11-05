@@ -1813,11 +1813,11 @@ Z_\mathrm{diode}(s) = \frac{V_\mathrm{gs}}{I_\mathrm{bias}} = \frac{1}{g_\mathrm
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="#fig-feedback-system" class="quarto-xref">Figure&nbsp;20</a> shows a negative feedback system with input <span class="math inline">\(X(s)\)</span> and output <span class="math inline">\(Y(s)\)</span>, where <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is the transfer function of the feed-forward path (also called <strong>open-loop gain</strong>) and <span class="math inline">\(G(s)\)</span> is the transfer function of the feedback network. The <strong>loop-gain</strong> is the product of both transfer functions <span class="math inline">\(T(s) = H_\mathrm{ol}(s) G(s)\)</span> and is used for the stability analysis. The <strong>closed-loop</strong> gain is defined as <span class="math inline">\(H_\mathrm{cl}(s) = Y(s) / X(s)\)</span> can be derived with <span class="math inline">\(Y(s) = H_\mathrm{ol}(s) [X(s) - Y(s) G(s)]\)</span> to be <span id="eq-closed-loop-gain"><span class="math display">\[
+<p><a href="#fig-feedback-system" class="quarto-xref">Figure&nbsp;20</a> shows a generic negative feedback system with input <span class="math inline">\(X(s)\)</span> and output <span class="math inline">\(Y(s)\)</span>, where <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is the transfer function of the feed-forward path (also called <strong>open-loop gain</strong>) and <span class="math inline">\(G(s)\)</span> is the transfer function of the feedback network. The <strong>loop-gain</strong> is the product of both transfer functions <span class="math inline">\(T(s) = H_\mathrm{ol}(s) G(s)\)</span> and is used for the stability analysis. The <strong>closed-loop</strong> gain is defined as <span class="math inline">\(H_\mathrm{cl}(s) = Y(s) / X(s)\)</span> can be derived with <span class="math inline">\(Y(s) = H_\mathrm{ol}(s) [X(s) - Y(s) G(s)]\)</span> to be <span id="eq-closed-loop-gain"><span class="math display">\[
 H_\mathrm{cl}(s) = \frac{Y(s)}{X(s)} = \frac{H_\mathrm{ol}(s)}{1 + H_\mathrm{ol}(s) G(s)} = \frac{H_\mathrm{ol}(s)}{1 + T(s)}
 \tag{6}\]</span></span></p>
 <p>If the open-loop gain is sufficiently large <span class="math inline">\(H_\mathrm{ol}(s) \gg 1\)</span>, then the closed-loop gain simplifies to <span class="math inline">\(H_\mathrm{cl}(s) \approx 1 / G(s)\)</span>. This result is convenient, since it is independent of <span class="math inline">\(H_\mathrm{ol}(s)\)</span>. Therefore, the overall gain is only set with the feedback gain <span class="math inline">\(G(s)\)</span> in operational amplifier circuits.</p>
-<p>In the case of the MOSFET diode, <span class="math inline">\(G(s) = 1\)</span> and therefore <span class="math inline">\(T(s) = H_\mathrm{ol}(s)\)</span> and <span class="math inline">\(H_\mathrm{cl}(s) \approx 1\)</span>. Therefore, this chapter uses open-loop gain and loop-gain as synonyms.</p>
+<p>In the case of the MOSFET diode, <span class="math inline">\(G(s) = 1\)</span> and therefore <span class="math inline">\(T(s) = H_\mathrm{ol}(s)\)</span> and <span class="math inline">\(H_\mathrm{cl}(s) \approx 1\)</span>.</p>
 <div id="cell-fig-feedback-system" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div id="fig-feedback-system" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1832,6 +1832,7 @@ Figure&nbsp;20: The block diagram of a negative feedback system.
 </div>
 </div>
 </div>
+<p>Note that in the feedback system depicted above shows an inversion in the feedback path. Sometimes this inversion is also included in the definition of <span class="math inline">\(G(s)\)</span>. Please be aware of this when reading literature, as different conventions exist.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Gain-Bandwidth Product in Feedback Systems">
@@ -1856,7 +1857,7 @@ f_\mathrm{c,cl} = H_\mathrm{ol,DC} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
 <p>This theory might be interesting when Middlebrook’s and Tian’s methods for loop gain analysis are later compared in the MOSFET diode testbench (see <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;22</a>).</p>
 </div>
 </div>
-<p>The diode-connected MOSFET forms a feedback loop. What is the open-loop gain? For calculating it, we are breaking the loop, and apply a dummy <span class="math inline">\(C_\mathrm{gs}^{*}\)</span> at the right side to keep the impedances correct. A circuit diagram is shown in <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;21</a>, we break the loop at the dotted connection. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!</p>
+<p>The diode-connected MOSFET forms a feedback loop. What is the loop gain? For calculating it, we are breaking the loop, and apply a dummy <span class="math inline">\(C_\mathrm{gs}^{*}\)</span> at the right side to keep the impedances correct. A circuit diagram is shown in <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;21</a>, we break the loop at the red crosses. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!</p>
 <div id="cell-fig-mosfet-diode-openloop" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-diode-openloop" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1871,22 +1872,22 @@ Figure&nbsp;21: The MOSFET diode small-signal circuit for open-loop analysis.
 </div>
 </div>
 </div>
-<p>We are now driving (with a voltage source) <span class="math inline">\(V_\mathrm{in}\)</span> and record the output voltage <span class="math inline">\(V_\mathrm{out}\)</span> to find the open-loop response <span class="math inline">\(H_\mathrm{ol}(s)\)</span>. By inspecting <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;21</a> we see that <span class="math display">\[
+<p>We are now driving (with a voltage source) <span class="math inline">\(V_\mathrm{in}\)</span> and record the output voltage <span class="math inline">\(V_\mathrm{out}\)</span> to find the loop gain <span class="math inline">\(T(s)\)</span>. By inspecting <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;21</a> we see that <span class="math display">\[
 V_\mathrm{out} = - g_\mathrm{m}V_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
 \]</span></p>
-<p>The open-loop gain <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is thus <span id="eq-mosfet-diode-openloop-gain"><span class="math display">\[
-H_\mathrm{ol}(s) = \frac{V_\mathrm{out}}{V_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}} = - \frac{g_\mathrm{m}}{g_\mathrm{ds}} \frac{1}{1 + s \frac{C_\mathrm{gs}}{g_\mathrm{ds}}}.
+<p>The loop gain <span class="math inline">\(T(s)\)</span> is thus <span id="eq-mosfet-diode-openloop-gain"><span class="math display">\[
+T(s) = (-1) \cdot \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}} = \frac{g_\mathrm{m}}{g_\mathrm{ds}} \frac{1}{1 + s C_\mathrm{gs}g_\mathrm{ds}^{-1}}.
 \tag{7}\]</span></span></p>
 <p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;7</a> we realize that:</p>
 <ol type="1">
 <li>The dc gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the self-gain of the MOSFET, so <span class="math inline">\(20 \log_{10}(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}\)</span>.</li>
 <li>There is a pole at <span class="math inline">\(\omega_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\)</span>, which is at <span class="math inline">\(9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\)</span>.</li>
 </ol>
-<p>With this single pole location in <span class="math inline">\(H_\mathrm{ol}(s)\)</span> this loop is perfectly stable at under all conditions (remember that a single pole results in a maximum phase shift of –90<span class="math inline">\(^\circ\)</span>).</p>
-<p>The question is now how to simulate this open-loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. This is called <strong>Rosenstark’s method</strong> <span class="citation" data-cites="Rosenstark_1984">(<a href="#ref-Rosenstark_1984" role="doc-biblioref">Rosenstark 1984</a>)</span>. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
-<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using an ac current source. Based on both measurements the open-loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> and is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;15</a>.</p>
+<p>With this single pole location in <span class="math inline">\(T(s)\)</span> this loop is perfectly stable at under all conditions (remember that a single pole results in a maximum phase shift of –90<span class="math inline">\(^\circ\)</span>).</p>
+<p>The question is now how to simulate this loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. This is called <strong>Rosenstark’s method</strong> <span class="citation" data-cites="Rosenstark_1984">(<a href="#ref-Rosenstark_1984" role="doc-biblioref">Rosenstark 1984</a>)</span>. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
+<p>There is an alternative method which breaks the loop open only by adding an ac voltage source in series (thus keeps the dc operating point intact), or injects current using an ac current source. Based on both measurements the loop gain can be calculated. This is called <strong>Middlebrook’s method</strong> <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span> and is based on double injection, and we will use it for our loop simulations. This method is detailed in <a href="#sec-middlebrook-method" class="quarto-xref">Section&nbsp;15</a>.</p>
 <p>There are several other methods like Tian’s method <span class="citation" data-cites="Tian_2001">(<a href="#ref-Tian_2001" role="doc-biblioref">Tian et al. 2001</a>)</span>, for example. A comprehensive overview can be found in <span class="citation" data-cites="Neag_2015">(<a href="#ref-Neag_2015" role="doc-biblioref">Neag et al. 2015</a>)</span> which describes ten different simulation-based loop gain analysis methods.</p>
-<p>We now want to simulate the open-loop transfer function <span class="math inline">\(H_\mathrm{ol}(s)\)</span> by using Middlebrook’s and Tian’s method and confirm our analysis above.</p>
+<p>We now want to simulate the loop transfer function <span class="math inline">\(T(s)\)</span> by using Middlebrook’s and Tian’s method and confirm our analysis above.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: MOSFET Diode Loop Analysis">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2287,7 +2288,7 @@ I_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail
 </ol>
 <p>Note that the result of <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> is also valid for the general case of a degenerated common-source transistor stage (see <a href="#fig-common-source-degenerated" class="quarto-xref">Figure&nbsp;31</a>). The effective transconductange <span class="math inline">\(g_\mathrm{m}'\)</span> is given by (<span class="math inline">\(R_\mathrm{degen} = g_\mathrm{tail}^{-1}\)</span>)</p>
 <p><span class="math display">\[
-g_\mathrm{m}' = \frac{i_\mathrm{out}}{v_\mathrm{in}} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} = \frac{1}{g_\mathrm{m}^{-1} + R_\mathrm{degen}}.
+g_\mathrm{m}' = \frac{I_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} = \frac{1}{g_\mathrm{m}^{-1} + R_\mathrm{degen}}.
 \]</span></p>
 <p>When no degeneration resistor is used, then <span class="math inline">\(g_\mathrm{m}' = g_\mathrm{m}\)</span>. If a degeneration of <span class="math inline">\(R_\mathrm{degen} \gg g_\mathrm{m}^{-1}\)</span> is used then <span class="math inline">\(g_\mathrm{m}' = 1 / R_\mathrm{degen}\)</span>. This result is worth memorizing.</p>
 <div id="cell-fig-common-source-degenerated" class="cell" data-execution_count="21">
@@ -2544,7 +2545,7 @@ Figure&nbsp;34: 5-transistor OTA small-signal model.
 </div>
 </div>
 <p>We can further simplify the output side by recognizing that the impedance (when looking from the output down) is <span class="math inline">\(g_\mathrm{ds2}\)</span> in series with <span class="math inline">\(g_\mathrm{ds5} + g_\mathrm{m12}\)</span>. This is a valid simplification as we treat <span class="math inline">\(M_1\)</span> as a common-gate stage when looking from the output, and since it is loaded by a low impedance of <span class="math inline">\(g_\mathrm{m34}^{-1}\)</span>, we can approximate the impedance looking into the source of <span class="math inline">\(M_1\)</span> with <span class="math inline">\(g_\mathrm{m12}^{-1}\)</span>. With the approximation that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span> the parallel connection of <span class="math inline">\(g_\mathrm{m12}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> is dominated by <span class="math inline">\(g_\mathrm{m12}\)</span> (<span class="math inline">\(g_\mathrm{m12} + g_\mathrm{ds5} \approx g_\mathrm{m12}\)</span>) and its series connection with <span class="math inline">\(g_\mathrm{ds2}\)</span> (<span class="math inline">\(g_\mathrm{m12}^{-1} + g_\mathrm{ds2}^{-1} \approx g_\mathrm{ds2}^{-1}\)</span>), resulting in the fact that we can ground the lower end of <span class="math inline">\(g_\mathrm{ds2}\)</span>. You should probably stop here and read this paragraph again, slowly.</p>
-<p>Therefore, we can move <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span>. Further, assuming a differential drive with a virtual ground at the tailpoint we can remove <span class="math inline">\(g_\mathrm{ds5}\)</span>. The current source <span class="math inline">\(g_\mathrm{m34} v_\mathrm{gs34}\)</span> is replaced with the equivalent conductance <span class="math inline">\(g_\mathrm{m34}\)</span>. All the previous steps result in the further simplified equivalent circuit shown in <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;35</a>.</p>
+<p>Therefore, we can move <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span>. Further, assuming a differential drive with a virtual ground at the tailpoint we can remove <span class="math inline">\(g_\mathrm{ds5}\)</span>. The current source <span class="math inline">\(g_\mathrm{m34} V_\mathrm{gs34}\)</span> is replaced with the equivalent conductance <span class="math inline">\(g_\mathrm{m34}\)</span>. All the previous steps result in the further simplified equivalent circuit shown in <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;35</a>.</p>
 <div id="cell-fig-basic-ota-small-signal-simplified" class="cell" data-execution_count="25">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota-small-signal-simplified" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2559,7 +2560,7 @@ Figure&nbsp;35: 5-transistor OTA small-signal model with further simplifications
 </div>
 </div>
 </div>
-<p>In the simplified circuit model in <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;35</a> we can see that we have two poles in the circuit, one at the gate note of <span class="math inline">\(M_{3,4}\)</span>, and one at the output. Realizing that <span class="math inline">\(v_\mathrm{in,p} = v_\mathrm{in}/2\)</span> and <span class="math inline">\(v_\mathrm{in,n} = - v_\mathrm{in}/2\)</span> we can formulate KCL at the output node to <span id="eq-simple-ota-eq1"><span class="math display">\[
+<p>In the simplified circuit model in <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;35</a> we can see that we have two poles in the circuit, one at the gate note of <span class="math inline">\(M_{3,4}\)</span>, and one at the output. Realizing that <span class="math inline">\(V_\mathrm{in,p} = V_\mathrm{in}/2\)</span> and <span class="math inline">\(V_\mathrm{in,n} = - V_\mathrm{in}/2\)</span> we can formulate KCL at the output node to <span id="eq-simple-ota-eq1"><span class="math display">\[
 -g_\mathrm{m34} V_\mathrm{gs34} - \left( -g_\mathrm{m12} \frac{V_\mathrm{in}}{2} \right) - V_\mathrm{out} (g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}) = 0.
 \tag{15}\]</span></span> We further realize that <span id="eq-simple-ota-eq2"><span class="math display">\[
 V_\mathrm{gs34} = -g_\mathrm{m12} \frac{V_\mathrm{in}}{2} \frac{1}{g_\mathrm{m34} + s C_\mathrm{gs34}}.
@@ -3514,14 +3515,14 @@ Figure&nbsp;45: The simplified MOSFET cascode small-signal model for calculation
 </div>
 </div>
 </div>
-<p>We realize that <span class="math inline">\(i_\mathrm{out}\)</span> flows through <span class="math inline">\(G_\mathrm{S}\)</span> and drops <span class="math inline">\(v_\mathrm{gs}\)</span> (note the sign): <span class="math display">\[
-v_\mathrm{gs}= -\frac{i_\mathrm{out}}{G_\mathrm{S}}
+<p>We realize that <span class="math inline">\(I_\mathrm{out}\)</span> flows through <span class="math inline">\(G_\mathrm{S}\)</span> and drops <span class="math inline">\(V_\mathrm{gs}\)</span> (note the sign): <span class="math display">\[
+V_\mathrm{gs}= -\frac{I_\mathrm{out}}{G_\mathrm{S}}
 \]</span></p>
-<p>Further, <span class="math inline">\(v_\mathrm{out} = -v_\mathrm{gs}+ v_\mathrm{ds}\)</span>. Calculating KCL at the output node results in <span class="math display">\[
-i_\mathrm{out} - g_\mathrm{m}v_\mathrm{gs}- g_\mathrm{ds}v_\mathrm{ds}= 0.
+<p>Further, <span class="math inline">\(V_\mathrm{out} = -V_\mathrm{gs}+ V_\mathrm{ds}\)</span>. Calculating KCL at the output node results in <span class="math display">\[
+I_\mathrm{out} - g_\mathrm{m}V_\mathrm{gs}- g_\mathrm{ds}V_\mathrm{ds}= 0.
 \]</span></p>
 <p>Using the previously found identities, and after a bit of algebraic manipulations we arrive at <span id="eq-cascode-output"><span class="math display">\[
-g_\mathrm{out} = \frac{i_\mathrm{out}}{v_\mathrm{out}} = \frac{g_\mathrm{ds}}{1 + \frac{g_\mathrm{m}+ g_\mathrm{ds}}{G_\mathrm{S}}} = \frac{g_\mathrm{ds}\cdot G_\mathrm{S}}{G_\mathrm{S} + g_\mathrm{m}+ g_\mathrm{ds}}
+g_\mathrm{out} = \frac{I_\mathrm{out}}{V_\mathrm{out}} = \frac{g_\mathrm{ds}}{1 + \frac{g_\mathrm{m}+ g_\mathrm{ds}}{G_\mathrm{S}}} = \frac{g_\mathrm{ds}\cdot G_\mathrm{S}}{G_\mathrm{S} + g_\mathrm{m}+ g_\mathrm{ds}}
 \tag{33}\]</span></span></p>
 <p>We find that if <span class="math inline">\(G_\mathrm{S} = 0\)</span> (an open) then <span class="math inline">\(g_\mathrm{out} = 0\)</span>, and if <span class="math inline">\(G_\mathrm{S} = \infty\)</span> (a short) then <span class="math inline">\(g_\mathrm{out} = g_\mathrm{ds}\)</span>. We can calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus <span class="math inline">\(G_\mathrm{S} = g_\mathrm{ds}'\)</span>) and get <span id="eq-cs-cascode-output-impedance"><span class="math display">\[
 g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\mathrm{m}+ g_\mathrm{ds}} \approx g_\mathrm{ds}' \frac{g_\mathrm{ds}}{g_\mathrm{m}}.
@@ -3557,11 +3558,11 @@ Figure&nbsp;46: The simplified MOSFET cascode small-signal model for calculation
 </div>
 </div>
 </div>
-<p>We note that <span class="math inline">\(v_\mathrm{gs}= -v_\mathrm{in}\)</span> and that <span class="math inline">\(i_\mathrm{in}\)</span> flows through <span class="math inline">\(G_\mathrm{D}\)</span>, resulting in <span class="math inline">\(v_\mathrm{D} = i_\mathrm{in} / G_\mathrm{D}\)</span>. Note that <span class="math inline">\(v_\mathrm{ds}=  v_\mathrm{D} - v_\mathrm{in}\)</span>. Formulating KCL at the input node results in <span class="math display">\[
-i_\mathrm{in} + g_\mathrm{ds}v_\mathrm{ds}+ g_\mathrm{m}v_\mathrm{gs}= 0.
+<p>We note that <span class="math inline">\(V_\mathrm{gs}= -V_\mathrm{in}\)</span> and that <span class="math inline">\(I_\mathrm{in}\)</span> flows through <span class="math inline">\(G_\mathrm{D}\)</span>, resulting in <span class="math inline">\(V_\mathrm{D} = I_\mathrm{in} / G_\mathrm{D}\)</span>. Note that <span class="math inline">\(V_\mathrm{ds}=  V_\mathrm{D} - V_\mathrm{in}\)</span>. Formulating KCL at the input node results in <span class="math display">\[
+I_\mathrm{in} + g_\mathrm{ds}V_\mathrm{ds}+ g_\mathrm{m}V_\mathrm{gs}= 0.
 \]</span></p>
 <p>After some manipulation we find that <span id="eq-cascode-input"><span class="math display">\[
-g_\mathrm{in} = \frac{i_\mathrm{in}}{v_\mathrm{in}} = \frac{(g_\mathrm{m}+ g_\mathrm{ds}) \cdot G_\mathrm{D}}{g_\mathrm{ds}+ G_\mathrm{D}}.
+g_\mathrm{in} = \frac{I_\mathrm{in}}{V_\mathrm{in}} = \frac{(g_\mathrm{m}+ g_\mathrm{ds}) \cdot G_\mathrm{D}}{g_\mathrm{ds}+ G_\mathrm{D}}.
 \tag{35}\]</span></span></p>
 <p>Setting <span class="math inline">\(G_\mathrm{D} = 0\)</span> (an open) results in <span class="math inline">\(g_\mathrm{in} = 0\)</span> as well, so the input impedance of the cascode is very large when the drain impedance is large.</p>
 <p>However, setting <span class="math inline">\(G_\mathrm{D} = \infty\)</span> (a short or low-ohmic impedance) results in the well-known result of <span class="math inline">\(g_\mathrm{in} = g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span>, which means that the input impedance looking into a cascode is approximately <span class="math inline">\(1/g_\mathrm{m}\)</span>.</p>
@@ -4896,13 +4897,13 @@ T_\mathrm{i} = -\frac{I_\mathrm{r}}{I_\mathrm{f}}.
 T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \frac{V_\mathrm{r} I_\mathrm{r} - V_\mathrm{f} I_\mathrm{f}}{2 V_\mathrm{f} I_\mathrm{f} - V_\mathrm{r} I_\mathrm{f} - V_\mathrm{f} I_\mathrm{r}}.
 \]</span></p>
 <p>The four ac quantities <span class="math inline">\(V_\mathrm{f}\)</span>, <span class="math inline">\(V_\mathrm{r}\)</span>, <span class="math inline">\(I_\mathrm{f}\)</span>, and <span class="math inline">\(I_\mathrm{r}\)</span> we can readily find by circuit simulation or calculation.</p>
-<p>Please note that Middlebrook’s method works well for <span class="math inline">\(T \gg 1\)</span>, so it will show inaccuracies at the crossover frequency of the open-loop gain at <span class="math inline">\(T(s) \approx 0\)</span>. An improved method (slightly more complicated) can be found in <span class="citation" data-cites="Tian_2001">(<a href="#ref-Tian_2001" role="doc-biblioref">Tian et al. 2001</a>)</span>.</p>
+<p>Please note that Middlebrook’s method works well for <span class="math inline">\(|T| \gg 1\)</span>, so it will show inaccuracies at the crossover frequency of the open-loop gain at <span class="math inline">\(T(s) \approx 0\)</span>. An improved method (slightly more complicated) can be found in <span class="citation" data-cites="Tian_2001">(<a href="#ref-Tian_2001" role="doc-biblioref">Tian et al. 2001</a>)</span>.</p>
 </section>
 <section id="appendix-useful-circuit-theorems" class="level1" data-number="16">
 <h1 data-number="16"><span class="header-section-number">16</span> Appendix: Useful Circuit Theorems</h1>
 <section id="sec-miller-theorem" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">16.1</span> Miller’s Theorem</h2>
-<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, and we know the transfer function between these nodes. The given situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;70</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;71</a>.</p>
+<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, if we know the transfer function between these nodes. The original situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;70</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;71</a>.</p>
 <div id="cell-fig-miller-theorem" class="cell" data-execution_count="51">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4981,71 +4982,71 @@ Figure&nbsp;72: 5-transistor OTA small-signal model for output impedance calcula
 </div>
 <section id="open-loop-configuration" class="level2" data-number="17.1">
 <h2 data-number="17.1" class="anchored" data-anchor-id="open-loop-configuration"><span class="header-section-number">17.1</span> Open-Loop Configuration</h2>
-<p>For the open-loop case, the gates of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are tied to ground and thus, both <span class="math inline">\(v_\mathrm{gs}\)</span> are equal. <span class="math display">\[
-v_\mathrm{in,p}=v_\mathrm{in,n}=0~\text{V}
+<p>For the open-loop case, the gates of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are tied to ground and thus, both <span class="math inline">\(V_\mathrm{gs}\)</span> are equal. <span class="math display">\[
+V_\mathrm{in,p} = V_\mathrm{in,n} = 0\,\text{V}
 \]</span> <span id="eq-app-vbufzout-vin-ol"><span class="math display">\[
-v_\mathrm{gs1} = v_\mathrm{gs2}
+V_\mathrm{gs1} = V_\mathrm{gs2}
 \tag{56}\]</span></span></p>
 <p>KCL at the output node: <span id="eq-app-vbufzout-kcl-vout-ol"><span class="math display">\[
-i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - i_{g_\mathrm{ds2}} - g_\mathrm{m2}v_\mathrm{gs2} = 0
+I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m34}V_\mathrm{gs34} - I_{g_\mathrm{ds2}} - g_\mathrm{m2} V_\mathrm{gs2} = 0
 \tag{57}\]</span></span></p>
 <p>KCL at the tail node: <span class="math display">\[
-g_\mathrm{m1}v_\mathrm{gs1} + g_\mathrm{m2}v_\mathrm{gs2} + i_{g_\mathrm{ds2}} + g_\mathrm{ds5}v_\mathrm{gs2} = 0
+g_\mathrm{m1} V_\mathrm{gs1} + g_\mathrm{m2} V_\mathrm{gs2} + I_{g_\mathrm{ds2}} + g_\mathrm{ds5} V_\mathrm{gs2} = 0
 \]</span></p>
-<p>Using <a href="#eq-app-vbufzout-vin-ol" class="quarto-xref">Equation&nbsp;56</a> we can eliminate <span class="math inline">\(v_\mathrm{gs1}\)</span> and solve for <span class="math inline">\(i_{g_\mathrm{ds2}}\)</span>. <span id="eq-app-vbufzout-igds2"><span class="math display">\[
-i_{g_\mathrm{ds2}} = -\left(g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds5}\right)v_\mathrm{gs2}
+<p>Using <a href="#eq-app-vbufzout-vin-ol" class="quarto-xref">Equation&nbsp;56</a> we can eliminate <span class="math inline">\(V_\mathrm{gs1}\)</span> and solve for <span class="math inline">\(I_{g_\mathrm{ds2}}\)</span>. <span id="eq-app-vbufzout-igds2"><span class="math display">\[
+I_{g_\mathrm{ds2}} = -\left( g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds5} \right) V_\mathrm{gs2}
 \tag{58}\]</span></span></p>
-<p>Furthermore, we need an expression for <span class="math inline">\(v_\mathrm{gs34}\)</span>. Ohm’s law at the conductance <span class="math inline">\(g_\mathrm{m34}\)</span> will suffice. <span id="eq-app-vbufzout-vgs34-ol"><span class="math display">\[
-v_\mathrm{gs34} = -\frac{g_\mathrm{m1}}{g_\mathrm{m34}}v_\mathrm{gs1}
+<p>Furthermore, we need an expression for <span class="math inline">\(V_\mathrm{gs34}\)</span>. Ohm’s law at the conductance <span class="math inline">\(g_\mathrm{m34}\)</span> will suffice. <span id="eq-app-vbufzout-vgs34-ol"><span class="math display">\[
+V_\mathrm{gs34} = -\frac{g_\mathrm{m1}}{g_\mathrm{m34}} V_\mathrm{gs1}
 \tag{59}\]</span></span></p>
-<p>KVL from the output node down to ground (over <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;58</a> gives us an expression for <span class="math inline">\(v_\mathrm{gs2}\)</span> <span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
-v_\mathrm{gs2} = -\frac{g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out}
+<p>KVL from the output node down to ground (over <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;58</a> gives us an expression for <span class="math inline">\(V_\mathrm{gs2}\)</span> <span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
+V_\mathrm{gs2} = -\frac{g_\mathrm{ds2}}{g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
 \tag{60}\]</span></span></p>
 <p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;57</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;58</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>. <span class="math display">\[
-i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} + \left(g_\mathrm{m1}+g_\mathrm{ds5}\right)v_\mathrm{gs2} = 0
+I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m34} V_\mathrm{gs34} + \left( g_\mathrm{m1} + g_\mathrm{ds5} \right) V_\mathrm{gs2} = 0
 \]</span></p>
-<p>Second, <span class="math inline">\(v_\mathrm{gs34}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;59</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m34}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>. <span class="math display">\[
-i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} + \left(2g_\mathrm{m1}+g_\mathrm{ds5}\right)v_\mathrm{gs2} = 0
+<p>Second, <span class="math inline">\(V_\mathrm{gs34}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;59</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m34}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>. <span class="math display">\[
+I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} + \left( 2g_\mathrm{m1} + g_\mathrm{ds5} \right) V_\mathrm{gs2} = 0
 \]</span></p>
-<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;60</a> gives as an expression for the last remaining unknown <span class="math inline">\(v_\mathrm{gs2}\)</span>. Thus, the factor in front of <span class="math inline">\(v_\mathrm{out}\)</span> defines the conductance at the output node. <span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
-i_\mathrm{out} -\left[g_\mathrm{ds4} + \left(2g_\mathrm{m1}+g_\mathrm{ds5}\right)\frac{g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}\right]v_\mathrm{out} = 0
+<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;60</a> gives as an expression for the last remaining unknown <span class="math inline">\(V_\mathrm{gs2}\)</span>. Thus, the factor in front of <span class="math inline">\(V_\mathrm{out}\)</span> defines the conductance at the output node. <span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
+I_\mathrm{out} - \left[ g_\mathrm{ds4} + \left( 2g_\mathrm{m1} + g_\mathrm{ds5} \right) \frac{g_\mathrm{ds2}}{g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds2} + g_\mathrm{ds5}} \right] V_\mathrm{out} = 0
 \tag{61}\]</span></span> Before, we interpret this result, we use are assumption of matched input transistors (<span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span>) and slightly rearrange the equation to give us more insight. <span id="eq-app-vbufzout-zout-ol-2"><span class="math display">\[
-i_\mathrm{out} -\left[g_\mathrm{ds4} + \frac{g_\mathrm{ds2}\cdot\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)}{g_\mathrm{ds2}+\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)}\right]v_\mathrm{out} = 0
+I_\mathrm{out} - \left[ g_\mathrm{ds4} + \frac{g_\mathrm{ds2} \cdot \left( 2g_\mathrm{m12} + g_\mathrm{ds5} \right)}{g_\mathrm{ds2} + \left( 2g_\mathrm{m12} + g_\mathrm{ds5} \right)} \right] V_\mathrm{out} = 0
 \tag{62}\]</span></span> Now, we can identify the common equation of the total resistance of two parallel resistors. However, we are dealing with conductances here, so the same equation describes the total conductance of two conductances in series, while parallel conductances are simply summed. In parallel to <span class="math inline">\(g_\mathrm{ds4}\)</span>, there is effectively the series connection of <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(\left(2g_\mathrm{m12}+g_\mathrm{ds5}\right)\)</span> at work. If we apply the general assumption of <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, only the parallel connection of <span class="math inline">\(g_\mathrm{ds4}\)</span> and <span class="math inline">\(g_\mathrm{ds2}\)</span> remains. Therefore, moving <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span> in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a> was valid. <span id="eq-app-vbufzout-zout-ol-3"><span class="math display">\[
-\frac{i_\mathrm{out}}{v_\mathrm{out}}\approx g_\mathrm{ds4} + g_\mathrm{ds2}
+\frac{I_\mathrm{out}}{V_\mathrm{out}} \approx g_\mathrm{ds4} + g_\mathrm{ds2}
 \tag{63}\]</span></span></p>
 </section>
 <section id="closed-loop-configuration" class="level2" data-number="17.2">
 <h2 data-number="17.2" class="anchored" data-anchor-id="closed-loop-configuration"><span class="header-section-number">17.2</span> Closed-Loop Configuration</h2>
-<p>In contrast to the open-loop case, we keep the gate of <span class="math inline">\(M_1\)</span> connected to ground and tie the input of <span class="math inline">\(M_2\)</span> to the output node <span class="math inline">\(v_\mathrm{out}\)</span>. <span id="eq-app-vbufzout-vin-cl"><span class="math display">\[
-v_\mathrm{in,n} = v_\mathrm{out}
+<p>In contrast to the open-loop case, we keep the gate of <span class="math inline">\(M_1\)</span> connected to ground and tie the input of <span class="math inline">\(M_2\)</span> to the output node <span class="math inline">\(V_\mathrm{out}\)</span>. <span id="eq-app-vbufzout-vin-cl"><span class="math display">\[
+V_\mathrm{in,n} = V_\mathrm{out}
 \tag{64}\]</span></span></p>
 <p>KCL at the output node: <span id="eq-app-vbufzout-kcl-vout-cl"><span class="math display">\[
-i_\mathrm{out} -g_\mathrm{ds4} v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - g_\mathrm{ds2}v_\mathrm{gs2} - g_\mathrm{m2}v_\mathrm{gs2} = 0
+I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m34} V_\mathrm{gs34} - g_\mathrm{ds2} V_\mathrm{gs2} - g_\mathrm{m2} V_\mathrm{gs2} = 0
 \tag{65}\]</span></span></p>
-<p>We use KVL from the output node down to ground to find an expression for <span class="math inline">\(v_\mathrm{gs2}\)</span>. <span id="eq-app-vbufzout-kvl-vout-cl"><span class="math display">\[
-v_\mathrm{gs2} =  v_\mathrm{out} + v_\mathrm{gs1}
+<p>We use KVL from the output node down to ground to find an expression for <span class="math inline">\(V_\mathrm{gs2}\)</span>. <span id="eq-app-vbufzout-kvl-vout-cl"><span class="math display">\[
+V_\mathrm{gs2} =  V_\mathrm{out} + V_\mathrm{gs1}
 \tag{66}\]</span></span></p>
 <p>KCL at the tail node: <span id="eq-app-vbufzout-kcl-vtail-cl"><span class="math display">\[
-g_\mathrm{m1}v_\mathrm{gs1} + g_\mathrm{m2}v_\mathrm{gs2} + g_\mathrm{ds2}v_\mathrm{gs2} + g_\mathrm{ds5}v_\mathrm{gs2} = 0
+g_\mathrm{m1}V_\mathrm{gs1} + g_\mathrm{m2}V_\mathrm{gs2} + g_\mathrm{ds2}V_\mathrm{gs2} + g_\mathrm{ds5}V_\mathrm{gs2} = 0
 \tag{67}\]</span></span></p>
-<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;66</a> to substitute <span class="math inline">\(v_\mathrm{gs2}\)</span> in {#eq-app-vbufzout-kcl-vtail-cl} we find an equation for <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
-v_\mathrm{gs1} = -\frac{g_\mathrm{m2}+g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out}
+<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;66</a> to substitute <span class="math inline">\(V_\mathrm{gs2}\)</span> in {#eq-app-vbufzout-kcl-vtail-cl} we find an equation for <span class="math inline">\(V_\mathrm{gs1}\)</span>. <span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
+V_\mathrm{gs1} = -\frac{g_\mathrm{m2} + g_\mathrm{ds2}}{g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
 \tag{68}\]</span></span></p>
-<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;66</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;59</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;68</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;65</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;66</a> to eliminate <span class="math inline">\(v_\mathrm{gs2}\)</span>. <span class="math display">\[
-i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} - g_\mathrm{m34}v_\mathrm{gs34} - \left(g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{gs1} = 0
+<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;66</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;59</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;68</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;65</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;66</a> to eliminate <span class="math inline">\(V_\mathrm{gs2}\)</span>. <span class="math display">\[
+I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2} \right) V_\mathrm{out} - g_\mathrm{m34} V_\mathrm{gs34} - \left( g_\mathrm{ds2} + g_\mathrm{m2} \right) V_\mathrm{gs1} = 0
 \]</span></p>
-<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;59</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(v_\mathrm{gs34}\)</span>. <span class="math display">\[
-i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} - \left(g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1}\right)v_\mathrm{gs1} = 0
+<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;59</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(V_\mathrm{gs34}\)</span>. <span class="math display">\[
+I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2} \right) V_\mathrm{out} - \left( g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1} \right) V_\mathrm{gs1} = 0
 \]</span></p>
-<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;68</a> to eliminate the remaining unknown <span class="math inline">\(v_\mathrm{gs1}\)</span>. <span class="math display">\[
-i_\mathrm{out} -\left(g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2}\right)v_\mathrm{out} + \left(g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1}\right)\frac{g_\mathrm{m2}+g_\mathrm{ds2}}{g_\mathrm{m1}+g_\mathrm{m2}+g_\mathrm{ds2}+g_\mathrm{ds5}}v_\mathrm{out} = 0
+<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;68</a> to eliminate the remaining unknown <span class="math inline">\(V_\mathrm{gs1}\)</span>. <span class="math display">\[
+I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2} \right) V_\mathrm{out} + \left( g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1} \right) \frac{g_\mathrm{m2} + g_\mathrm{ds2}}{g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out} = 0
 \]</span></p>
 <p>A more simpler result can be obtained, if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;68</a> first (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>) and then plug it into our main equation. Additionally, we use <span class="math inline">\(g_\mathrm{m12}=g_\mathrm{m1}=g_\mathrm{m2}\)</span> to further simplify the equation. <span class="math display">\[
-i_\mathrm{out} -\left(g_\mathrm{ds4} + \frac{3}{2} g_\mathrm{ds2} + g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
+I_\mathrm{out} -\left( g_\mathrm{ds4} + \frac{3}{2} g_\mathrm{ds2} + g_\mathrm{m12} \right) V_\mathrm{out} \approx 0
 \]</span></p>
 <p>If we apply <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span> again, we arrive at the same result which was used for the noise calculation in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>, compare the expression for <span class="math inline">\(Y'_\mathrm{load}\)</span> given by <a href="#eq-basic-ota-output-noise-yload" class="quarto-xref">Equation&nbsp;24</a> . <span class="math display">\[
-i_\mathrm{out} -\left(g_\mathrm{m12}\right)v_\mathrm{out} \approx 0
+I_\mathrm{out} - g_\mathrm{m12} V_\mathrm{out} \approx 0
 \]</span></p>
 </section>
 </section>
