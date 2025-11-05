@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-11-04">
+<meta name="dcterms.date" content="2025-11-05">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -559,7 +559,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 4, 2025</p>
+      <p class="date">November 5, 2025</p>
     </div>
   </div>
   
@@ -1279,7 +1279,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <section id="sec-techsweep-nmos" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-techsweep-nmos"><span class="header-section-number">3.2</span> NMOS Characterization in Saturation</h2>
 <p>First, we will start looking at the LV NMOS. In <a href="#sec-techsweep-pmos" class="quarto-xref">Section&nbsp;3.3</a> we have the corresponding graphs for the LV PMOS. In this lecture, we will only use the LV MOSFETs. While there are also the HV types available, they are mainly used for high-voltage circuits, like circuits connecting to the outside world. Here, we only will design low-voltage circuits running at a nominal supply voltage of <span class="math inline">\(1.5\,\text{V}\)</span>, so only the LV types are of interest to us.</p>
-<p>In the plots that follow we will set <span class="math inline">\(V_\mathrm{ds}= V_\mathrm{DD}/2\)</span> to keep the MOSFET in saturation (as this is the region of operation where most MOSFET are operated when working in class-A). We will later also look at the MOSFET performance in triode operation, as this is the operation mode where the MOSFET is used as a switch. While the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method is primarily intended to be used for circuits where the MOSFETs are held in saturation and are biased by a certain bias current (usually referred to <a href="https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A">class-A</a>), the generated tables using the testbenches of <a href="#sec-techsweep-testbench" class="quarto-xref">Section&nbsp;3.1</a> contain the data for all MOSFET bias points.</p>
+<p>In the plots that follow we will set <span class="math inline">\(V_\mathrm{DS}= V_\mathrm{DD}/2\)</span> to keep the MOSFET in saturation (as this is the region of operation where most MOSFET are operated when working in class-A). We will later also look at the MOSFET performance in triode operation, as this is the operation mode where the MOSFET is used as a switch. While the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method is primarily intended to be used for circuits where the MOSFETs are held in saturation and are biased by a certain bias current (usually referred to <a href="https://en.wikipedia.org/wiki/Power_amplifier_classes#Class_A">class-A</a>), the generated tables using the testbenches of <a href="#sec-techsweep-testbench" class="quarto-xref">Section&nbsp;3.1</a> contain the data for all MOSFET bias points.</p>
 <p>The first import graph is the plot of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> and <span class="math inline">\(f_\mathrm{T}\)</span> versus the gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span>. First let us answer the question why <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good parameter to look at, and actually this is also the central parameter in the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology. In many circuits we want to get a large amplification from a MOSFET, which corresponds to a large <span class="math inline">\(g_\mathrm{m}\)</span>. We want to achieve this by spending the minimum biasing current possible (ideally zero), as we almost always design for lowest power consumption. Thus, a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> ratio is good.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Power Consumption">
 <div class="callout-header d-flex align-content-center">
@@ -1778,10 +1778,10 @@ Figure&nbsp;19: The MOSFET diode small-signal model (drain and gate are shorted,
 </div>
 </div>
 <p>For calculating the small-signal impedance of the MOSFET diode we formulate Kirchhoff’s current law (KCL, also Kirchhoff’s first law or Kirchhoff’s junction rule) at the top node to get <span class="math display">\[
-i_\mathrm{bias} - s C_\mathrm{gs}v_\mathrm{gs}- g_\mathrm{m}v_\mathrm{gs}- g_\mathrm{ds}v_\mathrm{gs}= 0.
+I_\mathrm{bias} - s C_\mathrm{gs}V_\mathrm{gs}- g_\mathrm{m}V_\mathrm{gs}- g_\mathrm{ds}V_\mathrm{gs}= 0.
 \]</span></p>
 <p>It follows that <span id="eq-mosfet-diode-impedance"><span class="math display">\[
-Z_\mathrm{diode}(s) = \frac{v_\mathrm{gs}}{i_\mathrm{bias}} = \frac{1}{g_\mathrm{m}+ g_\mathrm{ds}+ s C_\mathrm{gs}}.
+Z_\mathrm{diode}(s) = \frac{V_\mathrm{gs}}{I_\mathrm{bias}} = \frac{1}{g_\mathrm{m}+ g_\mathrm{ds}+ s C_\mathrm{gs}}.
 \tag{5}\]</span></span></p>
 <p>When neglecting <span class="math inline">\(g_\mathrm{ds}\)</span>, at dc we get <span class="math inline">\(Z_\mathrm{diode} = 1 / g_\mathrm{m}\)</span>, which is an important result and should be memorized.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="The Admittance is Your Friend">
@@ -1871,11 +1871,11 @@ Figure&nbsp;21: The MOSFET diode small-signal circuit for open-loop analysis.
 </div>
 </div>
 </div>
-<p>We are now driving (with a voltage source) <span class="math inline">\(v_\mathrm{in}\)</span> and record the output voltage <span class="math inline">\(v_\mathrm{out}\)</span> to find the open-loop response <span class="math inline">\(H_\mathrm{ol}(s)\)</span>. By inspecting <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;21</a> we see that <span class="math display">\[
-v_\mathrm{out} = - g_\mathrm{m}v_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
+<p>We are now driving (with a voltage source) <span class="math inline">\(V_\mathrm{in}\)</span> and record the output voltage <span class="math inline">\(V_\mathrm{out}\)</span> to find the open-loop response <span class="math inline">\(H_\mathrm{ol}(s)\)</span>. By inspecting <a href="#fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;21</a> we see that <span class="math display">\[
+V_\mathrm{out} = - g_\mathrm{m}V_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
 \]</span></p>
 <p>The open-loop gain <span class="math inline">\(H_\mathrm{ol}(s)\)</span> is thus <span id="eq-mosfet-diode-openloop-gain"><span class="math display">\[
-H_\mathrm{ol}(s) = \frac{v_\mathrm{out}}{v_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}} = - \frac{g_\mathrm{m}}{g_\mathrm{ds}} \frac{1}{1 + s \frac{C_\mathrm{gs}}{g_\mathrm{ds}}}.
+H_\mathrm{ol}(s) = \frac{V_\mathrm{out}}{V_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{ds}+ s C_\mathrm{gs}} = - \frac{g_\mathrm{m}}{g_\mathrm{ds}} \frac{1}{1 + s \frac{C_\mathrm{gs}}{g_\mathrm{ds}}}.
 \tag{7}\]</span></span></p>
 <p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;7</a> we realize that:</p>
 <ol type="1">
@@ -1945,7 +1945,7 @@ Figure&nbsp;23: The MOSFET diode small-signal model with drain noise source.
 </div>
 </div>
 </div>
-<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(v_\mathrm{gs}\)</span> is thus given as <span class="math display">\[
+<p>As we have already calculated the small-signal diode impedance in <a href="#eq-mosfet-diode-impedance" class="quarto-xref">Equation&nbsp;5</a> we will use this result, and just note that the drain current noise of the MOSFET flows through this impedance. The noise voltage at <span class="math inline">\(V_\mathrm{gs}\)</span> is thus given as <span class="math display">\[
 \overline{V_\mathrm{n}^2} = |Z_\mathrm{diode}|^2 \overline{I_\mathrm{n,d}^2}.
 \]</span></p>
 <p>The drain current noise of the MOSFET is given as (introduced in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>) <span class="math display">\[
@@ -2076,16 +2076,16 @@ Figure&nbsp;25: A MOSFET common-source amplifier with resistive load.
 </div>
 </div>
 </div>
-<p>The function of this circuit is as follows: Assuming the MOSFET <span class="math inline">\(M_1\)</span> is kept in saturation, then a small-signal voltage <span class="math inline">\(v_\mathrm{in}\)</span> applied at the gate is converted into a drain current <span class="math inline">\(i_\mathrm{d}\)</span> by the MOSFET’s transconductance <span class="math inline">\(g_\mathrm{m}\)</span>. Then, this current is converted into a voltage again in the resistor <span class="math inline">\(R_1\)</span>. Ultimately, we have a dc voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of</p>
+<p>The function of this circuit is as follows: Assuming the MOSFET <span class="math inline">\(M_1\)</span> is kept in saturation, then a small-signal voltage <span class="math inline">\(V_\mathrm{in}\)</span> applied at the gate is converted into a drain current <span class="math inline">\(I_\mathrm{d}\)</span> by the MOSFET’s transconductance <span class="math inline">\(g_\mathrm{m}\)</span>. Then, this current is converted into a voltage again in the resistor <span class="math inline">\(R_1\)</span>. Ultimately, we have a dc voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of</p>
 <p><span class="math display">\[
-A_\mathrm{v} = \frac{v_\mathrm{out}}{v_\mathrm{in}} \approx - \frac{g_\mathrm{m}v_\mathrm{in} R_1}{v_\mathrm{in}} = - g_\mathrm{m}R_1.
+A_\mathrm{v} = \frac{V_\mathrm{out}}{V_\mathrm{in}} \approx - \frac{g_\mathrm{m}V_\mathrm{in} R_1}{V_\mathrm{in}} = - g_\mathrm{m}R_1.
 \]</span></p>
 <p>As explained above, it is a good approach to see electronic circuit components as</p>
 <ul>
-<li>voltage-to-current (MOSFET as common-source or common-gate; resistor),</li>
-<li>current-to-voltage (resistor),</li>
-<li>current-to-current (MOSFET as common-gate), and</li>
-<li>voltage-to-voltage (MOSFET as common-drain)</li>
+<li><strong>voltage</strong>-to-<strong>current</strong> converter(MOSFET as common-source or common-gate; resistor),</li>
+<li><strong>current</strong>-to-<strong>voltage</strong> converter (resistor),</li>
+<li><strong>current</strong>-to-<strong>current</strong> converter (MOSFET as common-gate), and</li>
+<li><strong>voltage</strong>-to-<strong>voltage</strong> converter (MOSFET as common-drain)</li>
 </ul>
 <p>conversions for better understanding.</p>
 <section id="sense-amplifier-driving-50-ohm-matched-load" class="level2" data-number="5.1">
@@ -2230,7 +2230,12 @@ Figure&nbsp;29: A differential pair.
 </div>
 </div>
 </div>
-<p>In order to understand its operation it is instructive to separate the input condition into (1) a purely differential voltage, and (2) a common-mode voltage, and see what the impact on the output currents is.</p>
+<p>In order to understand its operation it is instructive to separate the input condition into</p>
+<ol type="1">
+<li>a purely differential voltage, and</li>
+<li>a common-mode voltage,</li>
+</ol>
+<p>and see what the impact on the output currents is.</p>
 <section id="differential-operation-of-the-diffpair" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="differential-operation-of-the-diffpair"><span class="header-section-number">7.1</span> Differential Operation of the Diffpair</h2>
 <p>For a differential mode of operation we assume that the input common mode voltage is constant, i.e., <span class="math inline">\((V_\mathrm{in,p} + V_\mathrm{in,n})/2 = V_\mathrm{CM}\)</span>. The differential input voltage <span class="math inline">\(v_\mathrm{in} = V_\mathrm{in,p} - V_\mathrm{in,n}\)</span>, so that <span class="math display">\[
@@ -2239,12 +2244,12 @@ V_\mathrm{in,p} = V_\mathrm{CM} + \frac{v_\mathrm{in}}{2}
 V_\mathrm{in,n} = V_\mathrm{CM} - \frac{v_\mathrm{in}}{2}.
 \]</span></p>
 <p>For a small-signal differential drive the potential at the tail point stays constant and we can treat it as a virtual ground. The output current on each side is then given by (neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and <span class="math inline">\(g_\mathrm{mb}\)</span> of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>) <span class="math display">\[
-i_\mathrm{out,p} = g_\mathrm{m1} \left( \frac{v_\mathrm{in}}{2} \right)
+I_\mathrm{out,p} = g_\mathrm{m1} \left( \frac{V_\mathrm{in}}{2} \right)
 \]</span> and <span class="math display">\[
-i_\mathrm{out,n} = g_\mathrm{m2} \left( -\frac{v_\mathrm{in}}{2} \right).
+I_\mathrm{out,n} = g_\mathrm{m2} \left( -\frac{V_\mathrm{in}}{2} \right).
 \]</span></p>
-<p>Usually we assume symmetry in the differential pair, so <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m}\)</span>. The differential output current <span class="math inline">\(i_\mathrm{out}\)</span> is then given by <span id="eq-differential-pair-dm"><span class="math display">\[
-i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = g_\mathrm{m}v_\mathrm{in}
+<p>Usually we assume symmetry in the differential pair, so <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m}\)</span>. The differential output current <span class="math inline">\(I_\mathrm{out}\)</span> is then given by <span id="eq-differential-pair-dm"><span class="math display">\[
+I_\mathrm{out} = I_\mathrm{out,p} - I_\mathrm{out,n} = g_\mathrm{m}V_\mathrm{in}
 \tag{12}\]</span></span></p>
 <p>We see in <a href="#eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;12</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
 </section>
@@ -2253,7 +2258,7 @@ i_\mathrm{out} = i_\mathrm{out,p} - i_\mathrm{out,n} = g_\mathrm{m}v_\mathrm{in}
 <p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>. If this is the case, then the output currents are not a function of the common-mode input voltage (<span class="math inline">\(I_\mathrm{tail}\)</span> is set by the tail current source), and <span class="math display">\[
 I_\mathrm{out,p} = I_\mathrm{out,n} = \frac{I_\mathrm{tail}}{2}.
 \]</span></p>
-<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since the circuit operation is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We then arrive at the small-signal equivalent circuit shown in <a href="#fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;30</a> (note that we set <span class="math inline">\(v_\mathrm{in,p} = v_\mathrm{in,n} = v_\mathrm{in}\)</span> and <span class="math inline">\(i_\mathrm{out,p} = i_\mathrm{out,n} = i_\mathrm{out}\)</span> under symmetry considerations).</p>
+<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since the circuit operation is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We then arrive at the small-signal equivalent circuit shown in <a href="#fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;30</a> (note that we set <span class="math inline">\(V_\mathrm{in,p} = V_\mathrm{in,n} = V_\mathrm{in}\)</span> and <span class="math inline">\(I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out}\)</span> under symmetry considerations).</p>
 <div id="cell-fig-differential-pair-cm" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div id="fig-differential-pair-cm" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2269,16 +2274,16 @@ Figure&nbsp;30: Small-signal model of the differential pair half-circuit in comm
 </div>
 </div>
 <p>Formulating KVL for the input-side loop we get <span class="math display">\[
-v_\mathrm{in} = v_\mathrm{gs}+ \frac{i_\mathrm{d}}{g_\mathrm{tail}}.
+V_\mathrm{in} = V_\mathrm{gs}+ \frac{I_\mathrm{d}}{g_\mathrm{tail}}.
 \]</span></p>
-<p>With <span class="math inline">\(i_\mathrm{out} = i_\mathrm{d}= g_\mathrm{m}v_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
-i_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} v_\mathrm{in}
+<p>With <span class="math inline">\(I_\mathrm{out} = I_\mathrm{d}= g_\mathrm{m}V_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
+I_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} V_\mathrm{in}
 \tag{13}\]</span></span></p>
 <p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> we can distinguish the following extreme cases:</p>
 <ol type="1">
-<li>If <span class="math inline">\(g_\mathrm{tail} = 0\)</span> (ideal tail current source) then <span class="math inline">\(i_\mathrm{out} = 0\)</span>, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.</li>
-<li>If <span class="math inline">\(g_\mathrm{tail} \rightarrow \infty\)</span> then <span class="math inline">\(i_\mathrm{out} = g_\mathrm{m}v_\mathrm{in}\)</span>, which means the output current is a function of the MOSFET <span class="math inline">\(g_\mathrm{m}\)</span>. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behavior, this configuration is called a “pseudo-differential pair.”</li>
-<li>For the typical case that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{tail}\)</span> then <span class="math inline">\(i_\mathrm{out} \approx g_\mathrm{tail} v_\mathrm{in}\)</span>.</li>
+<li>If <span class="math inline">\(g_\mathrm{tail} = 0\)</span> (ideal tail current source) then <span class="math inline">\(I_\mathrm{out} = 0\)</span>, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.</li>
+<li>If <span class="math inline">\(g_\mathrm{tail} \rightarrow \infty\)</span> then <span class="math inline">\(I_\mathrm{out} = g_\mathrm{m}V_\mathrm{in}\)</span>, which means the output current is a function of the MOSFET <span class="math inline">\(g_\mathrm{m}\)</span>. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behavior, this configuration is called a “pseudo-differential pair.”</li>
+<li>For the typical case that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{tail}\)</span> then <span class="math inline">\(I_\mathrm{out} \approx g_\mathrm{tail} V_\mathrm{in}\)</span>.</li>
 </ol>
 <p>Note that the result of <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> is also valid for the general case of a degenerated common-source transistor stage (see <a href="#fig-common-source-degenerated" class="quarto-xref">Figure&nbsp;31</a>). The effective transconductange <span class="math inline">\(g_\mathrm{m}'\)</span> is given by (<span class="math inline">\(R_\mathrm{degen} = g_\mathrm{tail}^{-1}\)</span>)</p>
 <p><span class="math display">\[
@@ -5400,14 +5405,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-11-04},
+  date = {2025-11-05},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> November 4, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> November 5, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
