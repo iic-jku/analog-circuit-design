@@ -134,11 +134,11 @@ Please review the MOSFET small-signal equivalent model in @fig-mosfet-small-sign
 
 We can further simplify the output side by recognizing that the impedance (when looking from the output down) is $\gds[2]$ in series with $\gds[5] + \gm[12]$. This is a valid simplification as we treat $M_1$ as a common-gate stage when looking from the output, and since it is loaded by a low impedance of $\gm[34]^{-1}$, we can approximate the impedance looking into the source of $M_1$ with $\gm[12]^{-1}$. With the approximation that $\gm \gg \gds$ the parallel connection of $\gm[12]$ and $\gds[5]$ is dominated by $\gm[12]$ ($\gm[12] + \gds[5] \approx \gm[12]$) and its series connection with $\gds[2]$ ($\gm[12]^{-1} + \gds[2]^{-1} \approx \gds[2]^{-1}$), resulting in the fact that we can ground the lower end of $\gds[2]$. You should probably stop here and read this paragraph again, slowly.
 
-Therefore, we can move $\gds[2] + \gds[4]$ in parallel to $C_\mathrm{load}$. Further, assuming a differential drive with a virtual ground at the tailpoint we can remove $\gds[5]$. The current source $\gm[34] \vgs[34]$ is replaced with the equivalent conductance $\gm[34]$. All the previous steps result in the further simplified equivalent circuit shown in @fig-basic-ota-small-signal-simplified.
+Therefore, we can move $\gds[2] + \gds[4]$ in parallel to $C_\mathrm{load}$. Further, assuming a differential drive with a virtual ground at the tailpoint we can remove $\gds[5]$. The current source $\gm[34] \Vgs[34]$ is replaced with the equivalent conductance $\gm[34]$. All the previous steps result in the further simplified equivalent circuit shown in @fig-basic-ota-small-signal-simplified.
 
 {{< include /content/ota_basic/_fig_basic_ota_small_signal_simplified.qmd >}}
 
-In the simplified circuit model in @fig-basic-ota-small-signal-simplified we can see that we have two poles in the circuit, one at the gate note of $M_{3,4}$, and one at the output. Realizing that $v_\mathrm{in,p} = v_\mathrm{in}/2$ and $v_\mathrm{in,n} = - v_\mathrm{in}/2$ we can formulate KCL at the output node to
+In the simplified circuit model in @fig-basic-ota-small-signal-simplified we can see that we have two poles in the circuit, one at the gate note of $M_{3,4}$, and one at the output. Realizing that $V_\mathrm{in,p} = V_\mathrm{in}/2$ and $V_\mathrm{in,n} = - V_\mathrm{in}/2$ we can formulate KCL at the output node to
 $$
 -\gm[34] \Vgs[34] - \left( -\gm[12] \frac{V_\mathrm{in}}{2} \right) - V_\mathrm{out} (\gds[2] + \gds[4] + s C_\mathrm{load}) = 0.
 $$ {#eq-simple-ota-eq1}
