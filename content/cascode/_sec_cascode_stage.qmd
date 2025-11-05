@@ -38,19 +38,19 @@ As a first step, we want to calculate the output impedance at the drain of the M
 
 {{< include /content/cascode/_fig_cascode_small_signal_simplified_out.qmd >}}
 
-We realize that $i_\mathrm{out}$ flows through $G_\mathrm{S}$ and drops $\vgs$ (note the sign):
+We realize that $I_\mathrm{out}$ flows through $G_\mathrm{S}$ and drops $\Vgs$ (note the sign):
 $$
-\vgs = -\frac{i_\mathrm{out}}{G_\mathrm{S}}
+\Vgs = -\frac{I_\mathrm{out}}{G_\mathrm{S}}
 $$
 
-Further, $v_\mathrm{out} = -\vgs + \vds$. Calculating KCL at the output node results in
+Further, $V_\mathrm{out} = -\Vgs + \Vds$. Calculating KCL at the output node results in
 $$
-i_\mathrm{out} - \gm \vgs - \gds \vds = 0.
+I_\mathrm{out} - \gm \Vgs - \gds \Vds = 0.
 $$
 
 Using the previously found identities, and after a bit of algebraic manipulations we arrive at
 $$
-g_\mathrm{out} = \frac{i_\mathrm{out}}{v_\mathrm{out}} = \frac{\gds}{1 + \frac{\gm + \gds}{G_\mathrm{S}}} = \frac{\gds \cdot G_\mathrm{S}}{G_\mathrm{S} + \gm + \gds}
+g_\mathrm{out} = \frac{I_\mathrm{out}}{V_\mathrm{out}} = \frac{\gds}{1 + \frac{\gm + \gds}{G_\mathrm{S}}} = \frac{\gds \cdot G_\mathrm{S}}{G_\mathrm{S} + \gm + \gds}
 $$ {#eq-cascode-output}
 
 We find that if $G_\mathrm{S} = 0$ (an open) then $g_\mathrm{out} = 0$, and if $G_\mathrm{S} = \infty$ (a short) then $g_\mathrm{out} = \gds$. We can calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus $G_\mathrm{S} = \gds'$) and get
@@ -68,14 +68,14 @@ To calculate the input impedance of a cascode (i.e., looking into the source) we
 
 {{< include /content/cascode/_fig_cascode_small_signal_simplified_in.qmd >}}
 
-We note that $\vgs = -v_\mathrm{in}$ and that $i_\mathrm{in}$ flows through $G_\mathrm{D}$, resulting in $v_\mathrm{D} = i_\mathrm{in} / G_\mathrm{D}$. Note that $\vds =  v_\mathrm{D} - v_\mathrm{in}$. Formulating KCL at the input node results in
+We note that $\Vgs = -V_\mathrm{in}$ and that $I_\mathrm{in}$ flows through $G_\mathrm{D}$, resulting in $V_\mathrm{D} = I_\mathrm{in} / G_\mathrm{D}$. Note that $\Vds =  V_\mathrm{D} - V_\mathrm{in}$. Formulating KCL at the input node results in
 $$
-i_\mathrm{in} + \gds \vds + \gm \vgs = 0.
+I_\mathrm{in} + \gds \Vds + \gm \Vgs = 0.
 $$
 
 After some manipulation we find that
 $$
-g_\mathrm{in} = \frac{i_\mathrm{in}}{v_\mathrm{in}} = \frac{(\gm + \gds) \cdot G_\mathrm{D}}{\gds + G_\mathrm{D}}.
+g_\mathrm{in} = \frac{I_\mathrm{in}}{V_\mathrm{in}} = \frac{(\gm + \gds) \cdot G_\mathrm{D}}{\gds + G_\mathrm{D}}.
 $$ {#eq-cascode-input}
 
 Setting $G_\mathrm{D} = 0$ (an open) results in $g_\mathrm{in} = 0$ as well, so the input impedance of the cascode is very large when the drain impedance is large.

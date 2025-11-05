@@ -26,27 +26,27 @@ with sd.Drawing(canvas='svg') as d:
     d.config(fontsize=16)
 
     d.push()
-    elm.Line().left().length(2).idot(open=True)
+    elm.Line().left(d.unit).idot(open=True)
     elm.Ground()
 
     d.pop()
     d.push()
-    elm.Gap().down().label(['+', r'$v_\mathrm{gs}$', '-'])
-    elm.Line().right().length(3).idot(open=True).dot()
+    elm.Gap().down().label(['+', r'$V_\mathrm{gs}$', '-'])
+    elm.Line().right(d.unit*1.5).idot(open=True).dot()
     Gs = elm.Resistor().down().label(r'$G_\mathrm{S}$')
     elm.Ground()
 
     d.pop()
-    d.move(dx=3)
+    d.move(dx=d.unit*1.5)
     d.push()
-    Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} v_\mathrm{gs}$')
-    elm.Line().right().length(3)
+    Ids1 = elm.SourceI().down().label(r'$g_\mathrm{m} V_\mathrm{gs}$')
+    elm.Line().right(d.unit*1.5)
 
     Gds = elm.Resistor().up().label(r'$g_\mathrm{ds}$')
-    elm.Line().left().length(3).dot()
+    elm.Line().left(d.unit*1.5).dot()
     
     Gd = elm.Resistor().up().label(r'$G_\mathrm{D}$')
-    elm.Line().up().length(0.5)
-    elm.Line().right().length(1)
+    elm.Line().up(d.unit/4)
+    elm.Line().right(d.unit/2)
     elm.Ground()
 ```
