@@ -26,10 +26,10 @@ with sd.Drawing(canvas='svg') as d:
     d.config(fontsize=16)
 
     d.push()
-    elm.Line().left().length(1).dot(open=True).label(r'$V_\mathrm{in}$', 'left').idot(open=True)
+    elm.Line().left().length(1).dot(open=True).label(r'$V_\mathrm{in}$', 'left')
     d.pop()
     elm.Gap().down().label(['+', r'$V_\mathrm{gs}$', '-'])
-    elm.Line().right().length(3).dot().idot(open=True)
+    elm.Line().right().length(3).dot()
     d.push()
     Ids = elm.SourceI().up().label(r'$g_\mathrm{m} V_\mathrm{gs}$').reverse()
     elm.Line().up().dot(open=True).length(1).label(r'$I_\mathrm{out}$', 'right')

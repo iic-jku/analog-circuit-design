@@ -17,7 +17,7 @@ limitations under the License.
 ```{python}
 #| label: fig-basic-ota-small-signal
 #| echo: false
-#| fig-cap: "5-transistor OTA small-signal model."
+#| fig-cap: "5-transistor OTA open-loop small-signal model. For the closed-loop model, the input voltage $V_\\mathrm{in,n}$ is connected to the output voltage $V_\\mathrm{out}$."
 import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
@@ -26,10 +26,10 @@ with sd.Drawing(canvas='svg') as d:
     d.config(fontsize=16)
     
     d.push()
-    elm.Line().left().length(1).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left').idot(open=True)
+    elm.Line().left().length(1).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left')
     d.pop()
     elm.Gap().down().label(['+', r'$V_\mathrm{gs1}$', '-'])
-    elm.Line().right().length(3).dot().idot(open=True)
+    elm.Line().right().length(3).dot()
     
     d.push()
     l1 = elm.Line().right().length(4).dot()
@@ -68,12 +68,11 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().down().toy(gds5.start)
     elm.Ground()
 
-    elm.Line().right().at(gds2.start).length(2).idot().dot(open=True)
+    elm.Line().right().at(gds2.start).length(2).idot()
     elm.Gap().up().label(['-', r'$V_\mathrm{gs2}$', '+'])
-    elm.Line().right().length(1).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right').idot(open=True)
+    elm.Line().right().length(1).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right')
 
-    elm.Line().left().length(3).at(Cgs34.start).dot(open=True)
+    elm.Line().left().length(3).at(Cgs34.start)
     elm.Gap().up().label(['+', r'$V_\mathrm{gs34}$', '-'])
-    elm.Dot(open=True)
     elm.Vdd()
 ```

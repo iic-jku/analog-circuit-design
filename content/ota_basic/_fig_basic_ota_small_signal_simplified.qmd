@@ -26,10 +26,10 @@ with sd.Drawing(canvas='svg') as d:
     d.config(fontsize=16)
     
     d.push()
-    elm.Line().left().length(1).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left').idot(open=True)
+    elm.Line().left().length(1).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left')
     d.pop()
     elm.Gap().down().label(['+', r'$V_\mathrm{gs1}$', '-'])
-    elm.Line().right().length(3).dot().idot(open=True)
+    elm.Line().right().length(3).dot()
 
     d.push()
     Ids1 = elm.SourceI().label(r'$g_\mathrm{m12} V_\mathrm{gs1}$').reverse()
@@ -67,12 +67,11 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().down().length(1)
     gds24 = elm.Resistor().down().label(r'$g_\mathrm{ds2} + g_\mathrm{ds4}$')
     elm.Ground()
-    elm.Line().right().at(Ids2.start).length(2).idot().dot(open=True)
+    elm.Line().right().at(Ids2.start).length(2).idot()
     elm.Gap().up().label(['-', r'$V_\mathrm{gs2}$', '+'])
-    elm.Line().right().length(1).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right').idot(open=True)
+    elm.Line().right().length(1).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right')
 
-    elm.Line().left().length(3).at(Cgs34.start).dot(open=True)
+    elm.Line().left().length(3).at(Cgs34.start)
     elm.Gap().up().label(['+', r'$V_\mathrm{gs34}$', '-'])
-    elm.Dot(open=True)
     elm.Vdd()
 ```
