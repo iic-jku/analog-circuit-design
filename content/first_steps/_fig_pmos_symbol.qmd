@@ -17,7 +17,7 @@ limitations under the License.
 ```{python}
 #| label: fig-pmos-symbol
 #| echo: false
-#| fig-cap: "Circuit symbol of p-channel MOSFET."
+#| fig-cap: "Circuit symbol of p-channel MOSFET. As for n-channel MOSFETs, we will mostly use the middle symbol without bulk connection and an arrow indicating the source terminal."
 import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
@@ -25,9 +25,25 @@ with sd.Drawing(canvas='svg') as d:
     d.config(unit=2)
     d.config(fontsize=16)
 
-    M1 = elm.AnalogPFet(bulk=True,offset_gate=False).drop('source').theta(0).reverse()
+    d.push()
+    M1 = elm.AnalogPFet(bulk=True,offset_gate=False).theta(0).reverse()
     elm.Line().down().at(M1.drain).length(0.5).dot(open=True).label('D', 'left')
     elm.Line().up().at(M1.source).length(0.5).dot(open=True).label('S', 'right')
     elm.Line().left().at(M1.gate).length(0.5).dot(open=True).label('G', 'left')
     elm.Line().right().at(M1.bulk).length(0.5).dot(open=True).label('B', 'right')
+    d.pop()
+
+    d.push()
+    d.move(dx=d.unit*2.5, dy=0)
+    M2 = elm.AnalogPFet(offset_gate=False).theta(0).reverse()
+    elm.Line().down().at(M2.drain).length(0.5).dot(open=True).label('D', 'left')
+    elm.Line().up().at(M2.source).length(0.5).dot(open=True).label('S', 'right')
+    elm.Line().left().at(M2.gate).length(0.5).dot(open=True).label('G', 'left')
+    d.pop() 
+
+    d.move(dx=d.unit*5, dy=0)
+    M3 = elm.PFet(offset_gate=False).theta(0).reverse()
+    elm.Line().down().at(M3.drain).length(0.5).dot(open=True).label('D', 'left')
+    elm.Line().up().at(M3.source).length(0.5).dot(open=True).label('S', 'right')
+    elm.Line().left().at(M3.gate).length(0.5).dot(open=True).label('G', 'left')
 ```
