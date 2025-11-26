@@ -76,13 +76,15 @@ If the voltage gain of the OTA in @fig-voltage-buffer-ota is high, then $V_\math
 
 The first step when receiving a design task is to look at the specifications, and see whether they make sense. The detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) do back-of-the-envelope gauging if the specification makes sense, and (b) use the derived analytical equations as guide for the sizing procedure.
 
-In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met. Since we do not know yet the resulting $\VGS$ of the transistors we use $0.6\,\text{V}$ as an initial guess. If we run into issues with that guess we know how to later steer the sizing procedure.
+In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met. Since we do not know yet the resulting $\VGS$ of the transistors we use $0.6\,\text{V}$ as an initial guess. If we run into issues with that guess we know how to later steer the sizing procedure. The follower configuration showing the transistor-level details including estimated operating points is shown in @fig-basic-ota-dcop.
+
+{{< include /content/ota_basic/_fig_basic_ota_dcop.qmd >}}
 
 * When the input is at its maximum of $0.9\,\text{V}$, we see that we need to keep $M_1$ in saturation. We can calculate that $\VDS[1] = \VDD - |\VGS[3]| + \VGS[1] - V_\mathrm{in} = 1.45 - 0.6 + 0.6 - 0.9 = 0.55\,\text{V}$, which leaves enough margin.
 * When the input is at its minimum of $0.7\,\text{V}$, we see that the $\VDS[5]$ of $M_5$ is calculated as $\VDS[5] = V_\mathrm{in} - \VGS[1] = 0.7 - 0.6 = 0.1\,\text{V}$, so this leaves little margin, but we can make $\VGS[1]$ smaller, so it should work out.
 * For the output voltage, when the output voltage is on the high side, it leaves $|\VDS[4]| = \VDD - V_\mathrm{out} = 1.45 - 0.9 = 0.55\,\text{V}$, which is enough margin.
 
-In summary, we think that we can make an NMOS-input OTA like the one in @fig-basic-ota work for the required supply and input- and output-voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.
+In summary, we think that we can make an NMOS-input OTA like the one in @fig-basic-ota (and in @fig-basic-ota-dcop) work for the required supply and input- and output-voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.
 
 Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, the complete bias current in the OTA is steered towards the output (try to understand why this is the case), so when the output capacitor is fully discharged, and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is
 $$
@@ -120,9 +122,9 @@ In order to get the correct dc voltage per the specification we require the larg
 In order to derive the governing small-signal equations for the OTA we will make a few simplifications:
 
 - We will set $\gmb = 0$ for all MOSFETs.
-- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$ (for background please see @sec-miller-theorem). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $\Cgs[34]$ is considered at the gate node of the current mirror load.
+- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$ (for background please see @sec-miller-theorem). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $\Cgs[34] = \Cgs[3] + \Cgs[4]$ is considered at the gate node of the current mirror load.
 - We assume $\gm \gg \gds$, so we set $\gds[1] = \gds[3] = 0$.
-- The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$ we can add to the load capacitance $C_\mathrm{load}$. Note that $\Cgs[2]$ can be added because of the feedback connection between the inverting input and the output. However, this is not shown in the small-signal equivalent circuits below, because we are interested in the open-loop transfer function.
+- The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$, we could add to the load capacitance $C_\mathrm{load}$ (see @fig-basic-ota-dcop). Note that adding $\Cgs[2]$ to $C_\mathrm{load}$ is a simplified (in fact erroneous) view, as the tail point (the source connection of $M_1$ and $M_2$) is not an ac ground, but we ignore this for simplicity and accept the error we make due to this, as in our case $C_\mathrm{load}$ is so large that it will dominate anyway.
 
 The resulting small-signal equivalent circuit is shown in @fig-basic-ota-small-signal.
 
@@ -198,7 +200,7 @@ Remember that **uncorrelated** noise quantities need to be power-summed (i.e., $
 
 We can then sum the output noise current $\overline{I_\mathrm{n}}$ as
 $$
-\overline{I_\mathrm{n}^2} = \overline{I_\mathrm{n2}^2} + \overline{I_\mathrm{n4}^2} + \gm[34]^2 \frac{1}{\gm[34]^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right) = 2 \left( \overline{I_\mathrm{n12}^2} + \overline{I_\mathrm{n34}^2} \right).
+\overline{I_\mathrm{n}^2} = \overline{I_\mathrm{n2}^2} + \overline{I_\mathrm{n4}^2} + \gm[34]^2 \frac{1}{\gm[34]^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right) = 2 \left( \overline{I_\mathrm{n1,2}^2} + \overline{I_\mathrm{n3,4}^2} \right).
 $$
 
 As a next step, let us rewrite the OTA transfer function $A(s)$ (see @eq-simple-ota-gain) by getting rid of the pole-zero doublet as a simplifying assumption to get
@@ -208,14 +210,19 @@ $$ {#eq-simple-ota-gain-simplified}
 
 Inspecting @eq-simple-ota-gain-simplified we can interpret the OTA transfer function as a transconductor $\gm[12]$ driving a load of $Y_\mathrm{load} = \gds[2] + \gds[4] + s C_\mathrm{load}$. We can thus redraw @fig-voltage-buffer-ota in the following way, injecting the previously calculated noise current into the output node. The result is shown in @fig-voltage-buffer-ota-noise.
 
+::: {.callout-note title="Output Impedance of the Voltage Buffer"}
+For the following analysis it is helpful to calculate the output impedance of the voltage buffer configuration shown in @fig-voltage-buffer-ota-noise. To do that, first we short the input terminal to ground and then we connect a current source $I_\mathrm{out}$ at the output terminal, see @fig-voltage-buffer-ota-noise-zout.
+
 {{< include /content/ota_basic/_fig_voltage_buffer_ota_noise_zout.qmd >}}
 
-::: {.callout-note title="Output Impedance of the Voltage Buffer"}
-First we short the input terminal to ground and then we connect a current source $I_\mathrm{out}$ at the output terminal, see @fig-voltage-buffer-ota-noise-zout. Since we can neglect the gate leakage current into the inverting  input terminal of the OTA, KCL at the output node is simply:
+Since we can neglect the gate leakage current into the inverting input terminal of the OTA, KCL at the output node is simply:
+
 $$
 I_\mathrm{out} + \gm[12]\left(-V_\mathrm{out}\right) = 0
 $$
+
 Thus, the output impedance is easily calculated.
+
 $$
 Z_\mathrm{out} = \frac{V_\mathrm{out}}{I_\mathrm{out}} = \frac{V_\mathrm{out}}{\gm[12]V_\mathrm{out}} = \frac{1}{\gm[12]}
 $$
@@ -224,19 +231,19 @@ $$
 
 {{< include /content/ota_basic/_fig_voltage_buffer_ota_noise.qmd >}}
 
-We see that the feedback around the transconductor $\gm[12]$ creates an impedance of $1/\gm[12]$. We can now calculate the effective load conductance of
+We see that the feedback around the transconductor $\gm[1,2]$ creates an impedance of $1/\gm[1,2]$. We can now calculate the effective load conductance of
 $$
-Y'_\mathrm{load} = \gds[2] + \gds[4] + s C_\mathrm{load} + \gm[12] \approx \gm[12] + s C_\mathrm{load}.
+Y'_\mathrm{load} = \gds[2] + \gds[4] + s C_\mathrm{load} + \gm[1,2] \approx \gm[1,2] + s C_\mathrm{load}.
 $$ {#eq-basic-ota-output-noise-yload}
 
 The output noise voltage is then (using @eq-mosfet-noise)
 $$
-\overline{V_\mathrm{n,out}^2}(f) = \frac{\overline{I_\mathrm{n}^2}}{|Y'_\mathrm{load}|^2} = \frac{\overline{I_\mathrm{n}^2}}{\gm[12]^2 + (2 \pi f C_\mathrm{load})2^2} = \frac{8 k T (\gamma_{12} \gm[12] + \gamma_{34} \gm[34])}{\gm[12]^2 + (2 \pi f C_\mathrm{load})^2}.
+\overline{V_\mathrm{n,out}^2}(f) = \frac{\overline{I_\mathrm{n}^2}}{|Y'_\mathrm{load}|^2} = \frac{\overline{I_\mathrm{n}^2}}{\gm[1,2]^2 + (2 \pi f C_\mathrm{load})2^2} = \frac{8 k T (\gamma_{1,2} \gm[1,2] + \gamma_{3,4} \gm[3,4])}{\gm[1,2]^2 + (2 \pi f C_\mathrm{load})^2}.
 $$
 
 We can use the identity @eq-integral-identity to calculate the rms output noise to
 $$
-V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{12} + 2 \gamma_{34} \frac{\gm[34]}{\gm[12]} \right).
+V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{1,2} + 2 \gamma_{3,4} \frac{\gm[3,4]}{\gm[1,2]} \right).
 $$ {#eq-basic-ota-output-noise}
 
 Inspecting @eq-basic-ota-output-noise we can see that the integrated output noise is the $k T / C$ noise of the output load capacitor, enhanced by the $\gamma_{12}$ of the input differential pair, plus a (smaller) contribution of the current mirror load $M_{3,4}$. Intuitively, this result makes sense.
