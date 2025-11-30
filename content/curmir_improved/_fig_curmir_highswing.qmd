@@ -1,0 +1,50 @@
+::: {.content-hidden}
+Copyright (C) 2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-current-mirror-highswing
+#| echo: false
+#| fig-cap: "A high-swing cascoded current mirror. The voltage drop across the resistor $R$ sets the drain-source voltage of the lower transistors (together with the sizing of the MOSFETs)."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    elm.Vdd()
+    ibias = elm.SourceI().down().label(r'$I_\mathrm{bias}$').dot()
+    res = elm.Resistor().down().dot().label('$R$')
+    M3 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$W_2/L_2$')
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$W_1/L_1$')
+    elm.Ground()
+    elm.Line().right(d.unit/4).at(M1.gate).dot()
+    elm.Line().up().toy(res.end)
+    elm.Line().left().to(res.end)
+
+    elm.Line().right().at(M1.gate).length(d.unit*1.5)
+    M2 = elm.AnalogNFet(offset_gate=False).anchor('gate').drop('drain').theta(0).reverse().label(r'$k \cdot W_1/L_1$', ofst=-2.8)
+    M4 = elm.AnalogNFet(offset_gate=False).anchor('source').theta(0).reverse().label(r'$k \cdot W_2/L_2$', ofst=-2.8)
+    elm.Ground().at(M2.source)
+    elm.Line().at(M4.drain).up().length(d.unit).dot(open=True).label(r'$I_\mathrm{out} = k \cdot I_\mathrm{bias}$', 'right')
+
+    elm.Line().right(d.unit*3/4).at(M3.gate).dot()
+    d.push()
+    elm.Line().right().to(M4.gate)
+    d.pop()
+    elm.Line().up().toy(res.start)
+    elm.Line().left().to(res.start)
+```

@@ -1,0 +1,44 @@
+::: {.content-hidden}
+Copyright (C) 2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-current-mirror-degeneration
+#| echo: false
+#| fig-cap: "A current mirror with resistive degeneration."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    elm.Vdd()
+    elm.SourceI().down().label(r'$I_\mathrm{bias}$')
+    l1 = elm.Line().down(d.unit/4).dot()
+    elm.Line().down(d.unit/4)
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$W/L$')
+    elm.Resistor().down().label(r'$k \cdot R$')
+    elm.Ground()
+    elm.Line().right(d.unit/4).at(M1.gate).dot()
+    elm.Line().up().toy(l1.end)
+    elm.Line().left().to(l1.end)
+
+    elm.Line().right().at(M1.gate).length(1.5)
+    M2 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).reverse().label(r'$k \cdot W/L$', ofst=-2.5)
+    elm.Resistor().down().label('$R$')
+    elm.Ground()
+    elm.Line().at(M2.drain).up().length(1).dot(open=True).label(r'$I_\mathrm{out} = k \cdot I_\mathrm{bias}$', 'right')
+```

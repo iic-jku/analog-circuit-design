@@ -1,0 +1,233 @@
+::: {.content-hidden}
+Copyright (C) 2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+# Improved Current Mirrors {#sec-current-mirror-improved}
+
+In @sec-current-mirror, we have looked into the operation of the basic current mirror. While it is a useful structure and easy to implement, its output resistance is limited by the MOSFET's output conductance $\gds$, and its current mirroring accuracy is also limited by channel-length modulation effects since the $\VDS$ of the output transistor varies with load conditions, and is thus different from the $\VDS$ of the reference transistor.
+
+Using the cascode principle introduced in @sec-cascode-stage, we can improve both the output resistance and the current mirroring accuracy of the current mirror. The improved current mirror structure is shown in @fig-current-mirror-highswing. We are using the so-called "high-swing" cascode structure here.
+
+{{< include /content/curmir_improved/_fig_curmir_highswing.qmd >}}
+
+The output impedance according to @eq-cs-cascode-output-impedance of the improved current mirror is approximately given by ($r_\mathrm{ds} = \gds^{-1}$ and $\gm[casc]$ are the parameters of the cascode transistor, and $r_\mathrm{ds} = \gds^{-1}$ are the parameters of the bottom transistor):
+
+$$
+r_\mathrm{out} = r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot (1 + \gm[casc] \cdot r_\mathrm{ds,casc}).
+$$ {#eq-curmir-cascoded-rout}
+
+We can bias the gate voltages of the cascode transistors with any suitable bias circuit, but a simple way is to use a resistor $R$ as shown in the figure. The voltage drop across this resistor sets the drain-source voltage of the lower transistors (together with the sizing of the MOSFETs). By choosing a sufficiently large value for $R$, we can ensure that both transistors remain in saturation for the desired range of output currents. The cascode transistors make sure that the drain-source voltage of the output transistor remains nearly constant and equal to the drain-source voltage of the reference transistor, thus improving the current mirroring accuracy.
+
+Another option is to use source degeneration with a resistor. This configuration is shown in @fig-current-mirror-degeneration. Here, the source degeneration resistors $R$ help to stabilize the operating point of the current mirror using series feedback.
+
+{{< include /content/curmir_improved/_fig_curmir_degeneration.qmd >}}
+
+Here, similar to @eq-curmir-cascoded-rout, the output resistance can be approximated by
+
+$$
+r_\mathrm{out} = r_\mathrm{ds} + R \cdot (1 + \gm \cdot r_\mathrm{ds}).
+$$ {#eq-curmir-degeneration-rout}
+
+A third popular option is to use the so-called regulated current mirror, which uses an additional amplifier to sense the drain potential of the bottom transistor and keep it constant [@Hosticka.1979]. Note that the output current will not change if the $\VDS$ of the bottom transistor is kept constant. We can use any suitable amplifier for this purpose, e.g., a simple OTA as introduced in @sec-basic-ota. In the most basic form, we use a common-source stage with a current mirror load as shown in @fig-current-mirror-reg-casc.
+
+{{< include /content/curmir_improved/_fig_curmir_regcasc.qmd >}}
+
+We assume the voltage gain of the auxiliary amplifier to be $A_\mathrm{v} = \gm[aux] / \gds[aux]$, where $\gm[aux]$ and $\gds[aux]$ are the transconductance and output conductance of the auxiliary amplifier, respectively. The output resistance of the regulated cascode current mirror can then be approximated by
+
+$$
+\begin{split}
+r_\mathrm{out} &= r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot [1 + \gm[casc] \cdot r_\mathrm{ds,casc} \cdot (1 + \gm[aux] / \gds[aux])] \\
+& \approx r_\mathrm{ds} \cdot \gm[casc] \cdot r_\mathrm{ds,casc} \cdot \gm[aux] \cdot r_\mathrm{ds,aux} 
+\end{split}
+$$ {#eq-curmir-regcasc-rout}
+
+which, compared to @eq-curmir-cascoded-rout, is further improved by the gain of the auxiliary amplifier.
+
+We now want to size all these current mirror structures and simulate their performance. We try to size them for similar chip area in order to get a fair comparison. We assume a reference current of $I_\mathrm{bias} = 50\,\mu\text{A}$ and a mirror ratio of 1:1. We size for a minimum voltage headroom for the current sources of $V_\mathrm{DS,min} = 0.4\,\text{V}$. The calculations are summarized in this [sizing notebook](./gmid/sizing_improved_current_mirror.ipynb).
+
+The resulting circuits are drawn in @fig-curmir-variations-tb. The testbench simulates the dc output characteristics of all four current mirror variations (the three improved ones and the basic one for reference). The testbench also runs a Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch (see @sec-mosfet-mismatch).
+
+![Simulation schematic of the improved current mirrors.](./xschem/current_mirror_variations.svg){#fig-curmir-variations-tb}
+
+The output characteristics from the dc sweep simulation are shown in @fig-curmir-output, and a zoom-in in @fig-curmir-output-zoom. We can see that all improved current mirror structures achieve a significantly higher output resistance compared to the basic current mirror. The regulated cascode structure achieves the highest output resistance, as expected.
+
+```{python}
+#| label: fig-curmir-output
+#| echo: false
+#| fig-cap: "Output characteristics of the four current mirror structures."
+import numpy as np
+import matplotlib.pyplot as plt
+
+filename = "xschem/curmir_variations.txt"
+data = np.loadtxt(filename)
+
+# Extract data for all four current mirror variations
+x1, y1 = data[:, 0], data[:, 1]  # Basic current mirror
+x2, y2 = data[:, 2], data[:, 3]  # High-swing cascode
+x3, y3 = data[:, 4], data[:, 5]  # Source degeneration
+x4, y4 = data[:, 6], data[:, 7]  # Regulated cascode
+
+plt.figure(figsize=(8, 6))
+plt.plot(x1, y1*1e6, linestyle='-', color='b', linewidth=2, label='Basic current mirror')
+plt.plot(x2, y2*1e6, linestyle='-', color='r', linewidth=2, label='High-swing cascode')
+plt.plot(x3, y3*1e6, linestyle='-', color='g', linewidth=2, label='Source degeneration')
+plt.plot(x4, y4*1e6, linestyle='-', color='m', linewidth=2, label='Regulated cascode')
+
+plt.xlabel("Output voltage (V)")
+plt.ylabel("Output current (µA)")
+plt.ylim(0, 60)
+plt.xlim(0, 1.5)
+plt.legend(loc='best')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+```
+
+```{python}
+#| label: fig-curmir-output-zoom
+#| echo: false
+#| fig-cap: "Output characteristics of the four current mirror structures (zoom in). The high-swing cascode and the regulated cascode achieve significantly higher output resistance compared to the basic and degenerated current mirror."
+import numpy as np
+import matplotlib.pyplot as plt
+
+filename = "xschem/curmir_variations.txt"
+data = np.loadtxt(filename)
+
+# Extract data for all four current mirror variations
+x1, y1 = data[:, 0], data[:, 1]  # Basic current mirror
+x2, y2 = data[:, 2], data[:, 3]  # High-swing cascode
+x3, y3 = data[:, 4], data[:, 5]  # Source degeneration
+x4, y4 = data[:, 6], data[:, 7]  # Regulated cascode
+
+plt.figure(figsize=(8, 6))
+plt.plot(x1, y1*1e6, linestyle='-', color='b', linewidth=2, label='Basic current mirror')
+plt.plot(x2, y2*1e6, linestyle='-', color='r', linewidth=2, label='High-swing cascode')
+plt.plot(x3, y3*1e6, linestyle='-', color='g', linewidth=2, label='Source degeneration')
+plt.plot(x4, y4*1e6, linestyle='-', color='m', linewidth=2, label='Regulated cascode')
+
+plt.xlabel("Output voltage (V)")
+plt.ylabel("Output current (µA)")
+plt.ylim(45, 55)
+plt.xlim(0, 1.5)
+plt.legend(loc='best')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+```
+
+We now look into the results of the Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch using 500 runs and a compliance voltage of 0.4 V. The results are summarized in @fig-curmir-mc. We can see that the high-swing cascode and the regulated cascode achieve a very precise nominal current accuracy of almost 50 µA. However, the source-degnerated current mirror shows a significantly reduced spread of the output current, indicating a reduced mismatch of the poly-silicon resistors compared to the MOSFETs.
+
+```{python}
+#| label: fig-curmir-mc
+#| echo: false
+#| fig-cap: "Monte Carlo analysis of the four current mirror structures showing current distribution and fitted Gaussian curves."
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+from scipy.stats import norm
+
+def gaussian(x, mu, sigma, A):
+    return A * np.exp(-(x - mu)**2 / (2 * sigma**2))
+
+# Function to extract current values from file
+def extract_current_values(filename):
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+    values = []
+    for line in lines:
+        if '=' in line:
+            value_str = line.split('=')[1].strip()
+            values.append(float(value_str))
+    return np.array(values)
+
+# Load Monte Carlo data for all four current mirrors
+mc1_data = extract_current_values("xschem/curmir_variations_mc1.txt") * 1e6  # Convert to µA
+mc2_data = extract_current_values("xschem/curmir_variations_mc2.txt") * 1e6
+mc3_data = extract_current_values("xschem/curmir_variations_mc3.txt") * 1e6
+mc4_data = extract_current_values("xschem/curmir_variations_mc4.txt") * 1e6
+
+data_sets = [mc1_data, mc2_data, mc3_data, mc4_data]
+labels = ['Basic current mirror', 'High-swing cascode', 'Source degeneration', 'Regulated cascode']
+colors = ['b', 'r', 'g', 'm']
+
+fig, axes = plt.subplots(2, 2, figsize=(8, 8))
+axes = axes.flatten()
+
+for i, (data, label, color) in enumerate(zip(data_sets, labels, colors)):
+    ax = axes[i]
+    
+    # Create histogram
+    counts, bins, patches = ax.hist(data, bins=30, alpha=0.7, color=color, density=True, label='Histogram')
+    
+    # Fit Gaussian
+    mu, sigma = norm.fit(data)
+    
+    # Plot fitted Gaussian
+    x_fit = np.linspace(data.min(), data.max(), 100)
+    y_fit = norm.pdf(x_fit, mu, sigma)
+    ax.plot(x_fit, y_fit, 'k-', linewidth=2, label=f'Gaussian fit\nμ={mu:.2f} µA\nσ={sigma:.3f} µA')
+    
+    ax.set_title(label, fontsize=12, fontweight='bold')
+    ax.set_xlabel('Output current (µA)')
+    ax.set_ylabel('Probability density')
+    ax.set_xlim(45, 55)  # Set consistent x-axis range
+    ax.legend(loc='upper right', fontsize=9)
+    ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+```
+
+Finally, we compare the output noise of the four different current mirror structures in @fig-curmir-noise. We can see that the regulated cascode has the highest output noise due to the additional auxiliary amplifier, while the source-degenerated mirror has the lowest output noise.
+
+```{python}
+#| label: fig-curmir-noise
+#| echo: false
+#| fig-cap: "Output noise current vs. frequency for the four current mirror structures."
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load noise data for all four current mirrors
+noise1_data = np.loadtxt("xschem/curmir_variations_noise1.txt")
+noise2_data = np.loadtxt("xschem/curmir_variations_noise2.txt")
+noise3_data = np.loadtxt("xschem/curmir_variations_noise3.txt")
+noise4_data = np.loadtxt("xschem/curmir_variations_noise4.txt")
+
+# Extract frequency and noise current
+freq1, noise1 = noise1_data[:, 0], noise1_data[:, 1]
+freq2, noise2 = noise2_data[:, 0], noise2_data[:, 1]
+freq3, noise3 = noise3_data[:, 0], noise3_data[:, 1]
+freq4, noise4 = noise4_data[:, 0], noise4_data[:, 1]
+
+plt.figure(figsize=(8, 6))
+plt.loglog(freq1, noise1*1e12, linestyle='-', color='b', linewidth=2, label='Basic current mirror')
+plt.loglog(freq2, noise2*1e12, linestyle='-', color='r', linewidth=2, label='High-swing cascode')
+plt.loglog(freq3, noise3*1e12, linestyle='-', color='g', linewidth=2, label='Source degeneration')
+plt.loglog(freq4, noise4*1e12, linestyle='-', color='m', linewidth=2, label='Regulated cascode')
+
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Output noise current (pA/√Hz)")
+plt.legend(loc='best')
+plt.grid(True, alpha=0.3, which='major')
+plt.grid(True, alpha=0.15, which='minor')
+ax = plt.gca()
+plt.tight_layout()
+```
+
+In summary, we can classify the usage of the different current mirror structures as follows:
+
+- For general applications where output resistance and current accuracy are not critical, the **basic current mirror** can be used. It also has the lowest compliance voltage since only one transistor is stacked.
+- The **high-swing cascode current mirror** is a good choice when higher output resistance are needed, while still keeping the circuit relatively simple.
+- The **source-degenerated current mirror** is a good choice when best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used. 
+- The **regulated cascode current mirror** is the best choice when the highest output resistance are required, and the additional complexity and output noise are acceptable.
+
+Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are sized for similar chip area and a fair comparison.
