@@ -17,7 +17,7 @@ limitations under the License.
 ```{python}
 #| label: fig-amplifiers
 #| echo: false
-#| fig-cap: "Circuit symbols for different voltage-controlled amplifiers (aka transistors)."
+#| fig-cap: "Circuit symbols for different voltage-controlled amplifiers (from left to right: MOSFET, bipolar junction transistor, junction FET, triode)."
 import schemdraw as sd
 import schemdraw.elements as elm
 sd.svgconfig.svg2 = False
@@ -25,9 +25,29 @@ with sd.Drawing(canvas='svg') as d:
     d.config(unit=2)
     d.config(fontsize=16)
 
-    elm.AnalogNFet(bulk=True,offset_gate=False).theta(0).reverse()
+    f1 = elm.AnalogNFet(offset_gate=False).theta(0).reverse()
+    d.push()
+    elm.Line().left(d.unit/8).at(f1.gate)
+    elm.Line().up(d.unit/8).at(f1.drain)
+    elm.Line().down(d.unit/8).at(f1.source)
+    d.pop()
     d.move(3,0.75)
-    elm.BjtNpn().theta(0)
-    d.move(3,0)
-    elm.JFetN().theta(0).reverse()
+    f2 = elm.BjtNpn().theta(0)
+    d.push()
+    elm.Line().left(d.unit/6).at(f2.base)
+    elm.Line().up(d.unit/6).at(f2.collector)
+    elm.Line().down(d.unit/6).at(f2.emitter)
+    d.pop()
+    d.move(4,0)
+    f3 = elm.JFetN().theta(0).reverse()
+    d.push()
+    elm.Line().left(d.unit/6).at(f3.gate)
+    elm.Line().up(d.unit/6).at(f3.drain)
+    elm.Line().down(d.unit/6).at(f3.source)
+    d.pop()
+    d.move(3,1)
+    tri = elm.Triode()
+    elm.Line().left(d.unit/3).at(tri.control)
+    elm.Line().up(d.unit/7).at(tri.anode)
+    elm.Line().down(d.unit/3).at(tri.cathode)
 ```
