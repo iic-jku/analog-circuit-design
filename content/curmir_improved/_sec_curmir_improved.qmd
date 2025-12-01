@@ -16,9 +16,9 @@ limitations under the License.
 
 # Improved Current Mirrors {#sec-current-mirror-improved}
 
-In @sec-current-mirror, we have looked into the operation of the basic current mirror. While it is a useful structure and easy to implement, its output resistance is limited by the MOSFET's output conductance $\gds$, and its current mirroring accuracy is also limited by channel-length modulation effects since the $\VDS$ of the output transistor varies with load conditions, and is thus different from the $\VDS$ of the reference transistor.
+In @sec-current-mirror, we looked into the operation of the basic current mirror. While it is a useful structure and easy to implement, its output resistance is limited by the MOSFET's output conductance $\gds$, and its current mirroring accuracy is also limited by channel-length modulation effects since the $\VDS$ of the output transistor varies with load conditions, and is thus different from the $\VDS$ of the reference transistor.
 
-Using the cascode principle introduced in @sec-cascode-stage, we can improve both the output resistance and the current mirroring accuracy of the current mirror. The improved current mirror structure is shown in @fig-current-mirror-highswing. We are using the so-called "high-swing" cascode structure here.
+Using the cascode principle introduced in @sec-cascode-stage, we can improve both the output resistance and the current mirroring accuracy of the current mirror. The improved current mirror structure is shown in @fig-current-mirror-highswing. We use the so-called "high-swing" cascode structure here.
 
 {{< include /content/curmir_improved/_fig_curmir_highswing.qmd >}}
 
@@ -125,7 +125,7 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 ```
 
-We now look into the results of the Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch using 500 runs and a compliance voltage of 0.4 V. The results are summarized in @fig-curmir-mc. We can see that the high-swing cascode and the regulated cascode achieve a very precise nominal current accuracy of almost 50 µA. However, the source-degnerated current mirror shows a significantly reduced spread of the output current, indicating a reduced mismatch of the poly-silicon resistors compared to the MOSFETs.
+We now look into the results of the Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch using 500 runs and a compliance voltage of 0.4 V. The results are summarized in @fig-curmir-mc. We can see that the high-swing cascode and the regulated cascode achieve a very precise nominal current accuracy of almost 50 µA. However, the source-degenerated current mirror shows a significantly reduced spread of the output current, indicating a reduced mismatch of the poly-silicon resistors compared to the MOSFETs.
 
 ```{python}
 #| label: fig-curmir-mc
@@ -226,15 +226,15 @@ plt.tight_layout()
 In summary, we can classify the usage of the different current mirror structures as follows:
 
 - For general applications where output resistance and current accuracy are not critical, the **basic current mirror** can be used. It also has the lowest compliance voltage since only one transistor is stacked.
-- The **high-swing cascode current mirror** is a good choice when higher output resistance are needed, while still keeping the circuit relatively simple.
-- The **source-degenerated current mirror** is a good choice when best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used. 
-- The **regulated cascode current mirror** is the best choice when the highest output resistance are required, and the additional complexity and output noise are acceptable.
+- The **high-swing cascode current mirror** is a good choice when higher output resistance is needed, while still keeping the circuit relatively simple.
+- The **source-degenerated current mirror** is a good choice when the best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used. 
+- The **regulated cascode current mirror** is the best choice when the highest output resistance is required, and the additional complexity and output noise are acceptable.
 
 Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are sized for similar chip area and a fair comparison.
 
 ## Current Mirror Matching {#sec-current-mirror-matching}
 
-Looking at the different current mirror architectures in @sec-current-mirror-improved, we can see that the current mirror matching is dominated by the bottom transistor pair (assuming equal $\VDS$), with the exception of the resistively degenerated current mirror. We have asserted that the matching of the resistively-degenerated current is improved due to the lower impact of MOSFET mismatch compared to resistor mismatch. We will now substantiate this claim.
+Looking at the different current mirror architectures in @sec-current-mirror-improved, we can see that the current mirror matching is dominated by the bottom transistor pair (assuming equal $\VDS$), with the exception of the resistively degenerated current mirror. We asserted that the matching of the resistively-degenerated current mirror is improved due to the lower impact of MOSFET mismatch compared to resistor mismatch. We will now substantiate this claim.
 
 We will derive the current mirror matching of a pair of resistively-degenerated current mirror transistors shown in @fig-current-mirror-degeneration.
 
@@ -243,33 +243,113 @@ We will derive the current mirror matching of a pair of resistively-degenerated 
 The standard deviation $\sigma$ of the output current difference, normalized to the current, is given by [@Gray_Meyer_5th_ed]
 
 $$
-\sigma \left( \frac{\Delta \ID}{\ID} \right) \approx \sqrt{ \left( \frac{\sigma(\Delta \Vth)}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 + \left[ \frac{V_\mathrm{drv}}{V_\mathrm{drv} + V_\mathrm{deg}} \cdot \sigma \left(\frac{\Delta K}{K}\right) \right]^2 + \left[ \frac{V_\mathrm{deg}}{V_\mathrm{drv} + V_\mathrm{deg}} \cdot \sigma \left( \frac{\Delta R}{R} \right) \right]^2}.
-$$
+\begin{split}
+\var[\frac{\Delta \ID}{\ID}] & = \frac{\var[\Delta \Vth]}{(V_\mathrm{drv} + V_\mathrm{deg})^2}
++ \left( \frac{V_\mathrm{drv}}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 \cdot \var[\frac{\Delta K}{K}] \\
+& + \left( \frac{V_\mathrm{deg}}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 \cdot \var[\frac{\Delta R}{R}].
+\end{split}
+$$ {#eq-curmir-matching}
 
-The definition of $V_\mathrm{drv}$ is adapted here and understood as half of the $\VDS$ saturation voltage, i.e., $V_\mathrm{drv} = \VDS[,sat] / 2$. The degeneration voltage is the voltage drop across the degeneration resistors and given by $V_\mathrm{deg} = \ID \cdot R$.
+The definition of $V_\mathrm{drv}$ is adapted here and understood as half of the $\VDS$ saturation voltage, i.e., $V_\mathrm{drv} = \VDS[,sat] / 2 \approx \ID/ \gm$. The degeneration voltage is the voltage drop across the degeneration resistors and given by $V_\mathrm{deg} = \ID \cdot R$.
 
 The standard deviation of the resistor $\sigma(\Delta R / R)$ can be calculated using @eq-resistor-mismatch. Further, the threshold voltage mismatch $\sigma(\Delta \Vth)$ can be calculated using @eq-mosfet-mismatch-vth.
 
-The standard deviation of the transconductance parameter mismatch $\sigma(\Delta K / K)$ can be calculated similarly as (which is an alternative form to @eq-mosfet-mismatch-kp) as
+By using the approximation of @eq-mosfet-gmid-stronginversion, we can express @eq-curmir-matching in terms of our preferred sizing parameter $\gm / \ID$:
 
 $$
-\sigma \left( \frac{\Delta K}{K} \right) = \sqrt{ \left[ \frac{\sigma (\Delta W)}{W} \right]^2 + \left[ \frac{\sigma (\Delta L)}{L} \right]^2 },
+\begin{split}
+\var[\frac{\Delta \ID}{\ID}] & = \frac{\var[\Delta \Vth]}{[(\gmid)^{-1} + V_\mathrm{deg}]^2}
++ \left( \frac{1}{1 + V_\mathrm{deg}\cdot \gmid} \right)^2 \cdot \var[\frac{\Delta K}{K}] \\
+& + \left( \frac{V_\mathrm{deg} \cdot \gmid}{1 + V_\mathrm{deg} \cdot \gmid} \right)^2 \cdot \var[\frac{\Delta R}{R}].
+\end{split}
+$$ {#eq-curmir-matching-alt}
+
+The standard deviation of the transconductance parameter mismatch $\sigma(\Delta K / K)$ can be calculated similarly as (which is an alternative form to @eq-mosfet-mismatch-kp)
+
+$$
+\var[\frac{\Delta K}{K}] = \frac{\var[\Delta W]}{W^2} + \frac{\var[\Delta L]}{L^2} + \var[\frac{\Delta \mu}{\mu}],
 $$ {#eq-mosfet-mismatch-kp-alt}
 
-where $\sigma (\Delta W)$ and $\sigma (\Delta L)$ are the process-dependent mismatch parameter for the width $W$ and length $L$, respectively.
+where $\sigma (\Delta W)$ and $\sigma (\Delta L)$ are the process-dependent mismatch parameters for the width $W$ and length $L$, respectively, and $\sigma(\Delta \mu / \mu)$ is the mobility mismatch parameter.
 
 The standard deviations of the components of the SG13G2 process are summarized in @tbl-sg13g2-mismatch. For mismatch calculations we can assume them as uncorrelated.
 
-| Component             | Standard deviation     | Value     |
-|:----------------------|------------------------|-----------|
-| Resistor `rsil`       | $\sigma(\Delta R / R)$ | 1.2 %µm   |
-| Resistor `rppd`       | $\sigma(\Delta R / R)$ | 1.5 %µm   |
-| Resistor `rhigh`      | $\sigma(\Delta R / R)$ | 5 %µm     |
-| MOSFET `sg13_lv_nmos` | $\sigma(\Delta \Vth)$  | 2 mV µm   |
-| MOSFET `sg13_lv_nmos` | $\sigma(\Delta W)$     | 4 nm      |
-| MOSFET `sg13_lv_nmos` | $\sigma(\Delta L)$     | 2 nm      |
-| MOSFET `sg13_lv_pmos` | $\sigma(\Delta \Vth)$  | 2.5 mV µm |
-| MOSFET `sg13_lv_pmos` | $\sigma(\Delta W)$     | 5 nm      |
-| MOSFET `sg13_lv_pmos` | $\sigma(\Delta L)$     | 1.5 nm    |
+| Component             | Matching Parameter                     | Value     |
+|:----------------------|----------------------------------------|-----------|
+| Resistor `rsil`       | $\sigma(\Delta R / R) \cdot \sqrt{WL}$ | 1.2 %µm   |
+| Resistor `rppd`       | $\sigma(\Delta R / R) \cdot \sqrt{WL}$ | 1.5 %µm   |
+| Resistor `rhigh`      | $\sigma(\Delta R / R) \cdot \sqrt{WL}$ | 5 %µm     |
+| MOSFET `sg13_lv_nmos` | $\sigma(\Delta \Vth) \cdot \sqrt{WL}$  | 2 mV µm   |
+| MOSFET `sg13_lv_nmos` | $\sigma(\Delta W)$                     | 4 nm      |
+| MOSFET `sg13_lv_nmos` | $\sigma(\Delta L)$                     | 2 nm      |
+| MOSFET `sg13_lv_nmos` | $\sigma(\Delta \mu/\mu)$               | 1 %       |
+| MOSFET `sg13_lv_pmos` | $\sigma(\Delta \Vth) \cdot \sqrt{WL}$  | 2.5 mV µm |
+| MOSFET `sg13_lv_pmos` | $\sigma(\Delta W)$                     | 5 nm      |
+| MOSFET `sg13_lv_pmos` | $\sigma(\Delta L)$                     | 1.5 nm    |
+| MOSFET `sg13_lv_pmos` | $\sigma(\Delta \mu/\mu)$               | 0.5 %     |
 
 : IHP SG13G2 device mismatch {#tbl-sg13g2-mismatch}
+
+Inspecting @eq-curmir-matching we can see that by implementing a common-source transistor without source degeneration (i.e., $V_\mathrm{deg} = 0$), the current mirror matching is dominated by the threshold voltage mismatch and the transconductance parameter mismatch of the MOSFETs:
+
+$$
+\var[\frac{\Delta \ID}{\ID}] = \var[\Delta \Vth] \left( \frac{\gm}{\ID} \right)^2 + \var[\frac{\Delta K}{K}]
+$$ {#eq-curmir-matching-nodeg}
+
+The first term in @eq-curmir-matching-nodeg can be minimized by choosing a low $\gm / \ID$ ratio, while the latter term is minimized by increasing the device area (i.e., increasing $W$ and $L$).
+
+Looking at the resistively-degenerated current mirror, and using a large degeneration voltage $V_\mathrm{deg}$, we can simplify @eq-curmir-matching-alt to
+
+$$
+\var[\frac{\Delta \ID}{\ID}] = \var[\frac{\Delta R}{R}]
+$$ {#eq-curmir-matching-strongdeg}
+
+indicating that now the current matching of the degenerated current mirror is defined by the resistor matching only. Since resistors typically have a significantly better matching than MOSFETs, this can lead to a significant improvement in current mirror accuracy.
+
+::: {.callout-note title="Current Mirror Matching Calculation"}
+Let us now calculate the current mirror matching of the simple current mirror. Using @eq-curmir-matching-nodeg, and using the sizing values of $\gm / \ID = 5\,\text{V}^{-1}$, $W = 10\,\mu\text{m}$, and $L = 5\,\mu\text{m}$, we can calculate the standard deviation of the transconductance parameter mismatch using @eq-mosfet-mismatch-kp-alt and @tbl-sg13g2-mismatch:
+$$
+\sigma \left( \frac{\Delta K}{K} \right) = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
+$$
+
+The standard deviation of the threshold voltage mismatch can be calculated using @eq-mosfet-mismatch-vth and @tbl-sg13g2-mismatch:
+$$
+\sigma (\Delta \Vth) = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.28\,\text{mV}.
+$$
+
+Bringing both results into @eq-curmir-matching-nodeg, we get
+$$
+\sigma \left( \frac{\Delta \ID}{\ID} \right) = \sqrt{ (0.28\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (1.00\,\%)^2} \approx 1\,\%.
+$$
+ Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this matches quite ok with the standard deviation of about $0.7\,\mu\text{A}/48.9\,\mu\text{A} = 1.4\,\%$ obtained from the Monte-Carlo simulation.
+
+ Let us now calculate the current mirror matching of the resistively-degenerated current mirror. Using @eq-curmir-matching-alt, we can analyze this configuration. We use the sizing values of $\gm / \ID = 10\,\text{V}^{-1}$, $W = 20\,\mu\text{m}$, and $L = 3\,\mu\text{m}$, for the MOSFET, and $V_\mathrm{deg} = 0.2\,\text{V}$, $L = 15\,\mu\text{m}$ / $W = 1\,\mu\text{m}$ for the used `rppd` resistor.
+ 
+The standard deviation of the transconductance parameter mismatch can be calculated as
+$$
+\sigma \left( \frac{\Delta K}{K} \right) = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
+$$
+
+The standard deviation of the threshold voltage mismatch can be calculated
+$$
+\sigma (\Delta \Vth) = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.26\,\text{mV}.
+$$
+
+The standard deviation of the resistor mismatch can be calculated using @eq-resistor-mismatch and @tbl-sg13g2-mismatch:
+$$
+\sigma \left( \frac{\Delta R}{R} \right) = \frac{1.5\,\%\mu\text{m}}{\sqrt{15\,\mu\text{m} \cdot 1\,\mu\text{m}}} = 0.39\,\%.
+$$
+
+Plugging these results into @eq-curmir-matching-alt, we get
+$$
+\begin{split}
+\var[\frac{\Delta \ID}{\ID}] =&
+\left( \frac{0.26\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2 +
+\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 1\,\% \right)^2 \\
+& + \left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.39\,\%\right)^2 \\
+=& (0.43\,\%)^2.
+\end{split}
+$$
+
+We see that compared to the basic current mirror, the resistively-degenerated current mirror achieves a significantly improved current matching. This matches quite well with the simulation results in @fig-curmir-mc for the resistively-degenerated current mirror, where we obtained a standard deviation of about $0.28\,\mu\text{A}/48.8\,\mu\text{A} = 0.57\,\%$ from the Monte-Carlo simulation.
+:::

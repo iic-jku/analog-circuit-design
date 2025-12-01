@@ -293,41 +293,41 @@ For a typical MOSFET, we usually consider two main mismatch effects [@Pelgrom_19
 
 Both effects influence the drain current of the MOSFET, and they are indirectly proportional to the size of the MOSFET. So, if we want to reduce the mismatch, we have to increase the size of the MOSFET by increasing its gate area $W \cdot L$.
 
-If we formulate the drain current mismatch $\Delta \ID / \ID$ of two nominally identical MOSFET we get
+If we formulate the drain current mismatch standard deviation $\sigma(\Delta \ID / \ID)$ of two nominally identical MOSFET we get
 
 $$
-\frac{\Delta \ID}{\ID} = \frac{A_\mathrm{mosfet}}{\sqrt{W L}}
+\sigma \left( \frac{\Delta \ID}{\ID} \right) = \frac{A_\mathrm{mosfet}}{\sqrt{W L}}
 $$ {#eq-mosfet-mismatch}
 
-with $A_\mathrm{mosfet}$ being a mismatch parameter for a given CMOS technology.
+with $A_\mathrm{mosfet}$ being a mismatch parameter for a given CMOS technology and $\sigma (\cdot)$ being the standard deviation of the parameter in parentheses.
 
 ::: {.callout-note title="MOSFET Mismatch"}
 Usually, the mismatch in MOSFETs is characterized via two mismatch parameters [@Pelgrom_1989]:
 
-- The threshold voltage mismatch
+- The threshold voltage mismatch standard deviation
 
 $$
-\Delta \Vth = \frac{A_\mathrm{vth}}{\sqrt{W L}}
+\sigma (\Delta \Vth) = \frac{A_\mathrm{vth}}{\sqrt{W L}}
 $$ {#eq-mosfet-mismatch-vth}
 
-- and the size mismatch
+- and standard deviation of the size mismatch
 
 $$
-\frac{\Delta (W/L)}{(W/L)} = \frac{A_\mathrm{k}}{\sqrt{W L}}.
+\sigma \left( \frac{\Delta (W/L)}{(W/L)} \right) = \frac{A_\mathrm{k}}{\sqrt{W L}}.
 $$ {#eq-mosfet-mismatch-kp}
 
-The resulting input offset voltage $V_\mathrm{offs}$ of a differential pair is then given by [@Razavi_Analog_CMOS]
+The resulting standard deviation of the input offset voltage $V_\mathrm{offs}$ of a differential pair with small $\gmid$ is then given by [@Razavi_Analog_CMOS]
 $$
-V_\mathrm{offs} = \sqrt{\left( \frac{\VGS - \Vth}{2} \frac{\Delta (W/L)}{{(W/L)}} \right)^2 + \Delta \Vth^2}.
+V_\mathrm{offs} = \sqrt{\left( \frac{\VGS - \Vth}{2} \right)^2 \cdot \var[\frac{\Delta (W/L)}{{(W/L)}}] + \var[\Delta \Vth]}.
 $$ {#eq-diffpair-offset}
 
-The mismatch in the drain current of two current-mirror transistors is given by [@Razavi_Analog_CMOS]
+The mismatch in the drain current of two current-mirror transistors, characterized as the standard deviation and for small $\gmid$, is given by [@Razavi_Analog_CMOS]
 
 $$
-\frac{\Delta \ID}{\ID} = \frac{\Delta (W/L)}{(W/L)} - 2 \frac{\Delta \Vth}{\VGS - \Vth}.
+\var[\frac{\Delta \ID}{\ID}] = \var[\frac{\Delta (W/L)}{(W/L)}] + 4 \cdot \var[\frac{\Delta \Vth}{\VGS - \Vth}].
 $$ {#eq-currentmirror-offset}
 
-To minimize the input offset voltage in a differential pair we should strive to minimize $\VGS$ (see @eq-diffpair-offset) and to minimize the mismatch in current mirrors we should target a large $\VGS$ (see @eq-currentmirror-offset). In both cases the MOSFET area $W \cdot L$ needs to be large enough (see @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp).
+To minimize the input offset voltage in a differential pair we should strive to minimize $\VGS$ (i.e., to maximize $\gmid$, see @eq-diffpair-offset) and to minimize the mismatch in current mirrors we should target a large $\VGS$ (i.e., to minimize $\gmid$, see @eq-currentmirror-offset). In both cases the MOSFET area $W \cdot L$ needs to be large enough (see @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp).
 :::
 
 How can we now cope with mismatch in design and simulation? We can account the transitor mismatch according to @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.
@@ -342,10 +342,10 @@ As you can see in the previous discussion, running Monte Carlo simulations is a 
 
 ## Resistor Mismatch {#sec-resistor-mismatch}
 
-Similar to the MOSFET mismatch discussed in @sec-mosfet-mismatch, resistors will also show mismatch. Equivalently to @eq-mosfet-mismatch the resistor mismatch $\Delta R / R$ can be characterized by
+Similar to the MOSFET mismatch discussed in @sec-mosfet-mismatch, resistors will also show mismatch. Equivalently to @eq-mosfet-mismatch the standard deviation of the resistor mismatch $\sigma(\Delta R / R)$ can be characterized by
 
 $$
-\frac{\Delta R}{R} = \frac{A_\mathrm{res}}{\sqrt{W L}}
+\sigma \left( \frac{\Delta R}{R} \right) = \frac{A_\mathrm{res}}{\sqrt{W L}}
 $$ {#eq-resistor-mismatch}
 
 with $A_\mathrm{res}$ being a mismatch parameter for a given CMOS technology.
