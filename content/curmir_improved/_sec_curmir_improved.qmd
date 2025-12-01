@@ -231,3 +231,45 @@ In summary, we can classify the usage of the different current mirror structures
 - The **regulated cascode current mirror** is the best choice when the highest output resistance are required, and the additional complexity and output noise are acceptable.
 
 Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are sized for similar chip area and a fair comparison.
+
+## Current Mirror Matching {#sec-current-mirror-matching}
+
+Looking at the different current mirror architectures in @sec-current-mirror-improved, we can see that the current mirror matching is dominated by the bottom transistor pair (assuming equal $\VDS$), with the exception of the resistively degenerated current mirror. We have asserted that the matching of the resistively-degenerated current is improved due to the lower impact of MOSFET mismatch compared to resistor mismatch. We will now substantiate this claim.
+
+We will derive the current mirror matching of a pair of resistively-degenerated current mirror transistors shown in @fig-current-mirror-degeneration.
+
+{{< include /content/curmir_improved/_fig_curmir_matching.qmd >}}
+
+The standard deviation $\sigma$ of the output current difference, normalized to the current, is given by [@Gray_Meyer_5th_ed]
+
+$$
+\sigma \left( \frac{\Delta \ID}{\ID} \right) \approx \sqrt{ \left( \frac{\sigma(\Delta \Vth)}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 + \left[ \frac{V_\mathrm{drv}}{V_\mathrm{drv} + V_\mathrm{deg}} \cdot \sigma \left(\frac{\Delta K}{K}\right) \right]^2 + \left[ \frac{V_\mathrm{deg}}{V_\mathrm{drv} + V_\mathrm{deg}} \cdot \sigma \left( \frac{\Delta R}{R} \right) \right]^2}.
+$$
+
+The definition of $V_\mathrm{drv}$ is adapted here and understood as half of the $\VDS$ saturation voltage, i.e., $V_\mathrm{drv} = \VDS[,sat] / 2$. The degeneration voltage is the voltage drop across the degeneration resistors and given by $V_\mathrm{deg} = \ID \cdot R$.
+
+The standard deviation of the resistor $\sigma(\Delta R / R)$ can be calculated using @eq-resistor-mismatch. Further, the threshold voltage mismatch $\sigma(\Delta \Vth)$ can be calculated using @eq-mosfet-mismatch-vth.
+
+The standard deviation of the transconductance parameter mismatch $\sigma(\Delta K / K)$ can be calculated similarly as (which is an alternative form to @eq-mosfet-mismatch-kp) as
+
+$$
+\sigma \left( \frac{\Delta K}{K} \right) = \sqrt{ \left[ \frac{\sigma (\Delta W)}{W} \right]^2 + \left[ \frac{\sigma (\Delta L)}{L} \right]^2 },
+$$ {#eq-mosfet-mismatch-kp-alt}
+
+where $\sigma (\Delta W)$ and $\sigma (\Delta L)$ are the process-dependent mismatch parameter for the width $W$ and length $L$, respectively.
+
+The standard deviations of the components of the SG13G2 process are summarized in @tbl-sg13g2-mismatch. For mismatch calculations we can assume them as uncorrelated.
+
+| Component             | Standard deviation     | Value     |
+|:----------------------|------------------------|-----------|
+| Resistor `rsil`       | $\sigma(\Delta R / R)$ | 1.2 %µm   |
+| Resistor `rppd`       | $\sigma(\Delta R / R)$ | 1.5 %µm   |
+| Resistor `rhigh`      | $\sigma(\Delta R / R)$ | 5 %µm     |
+| MOSFET `sg13_lv_nmos` | $\sigma(\Delta \Vth)$  | 2 mV µm   |
+| MOSFET `sg13_lv_nmos` | $\sigma(\Delta W)$     | 4 nm      |
+| MOSFET `sg13_lv_nmos` | $\sigma(\Delta L)$     | 2 nm      |
+| MOSFET `sg13_lv_pmos` | $\sigma(\Delta \Vth)$  | 2.5 mV µm |
+| MOSFET `sg13_lv_pmos` | $\sigma(\Delta W)$     | 5 nm      |
+| MOSFET `sg13_lv_pmos` | $\sigma(\Delta L)$     | 1.5 nm    |
+
+: IHP SG13G2 device mismatch {#tbl-sg13g2-mismatch}
