@@ -284,7 +284,7 @@ If you get stuck, you can find the testbench and 5T-OTA schematic [here](./xsche
 
 ## MOSFET Mismatch {#sec-mosfet-mismatch}
 
-So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show **mismatch** due to tiny random fluctuations in manufacturing, and we have to account for this.
+So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show **mismatch** due to tiny random fluctuations in manufacturing, and we have to account for this. The mismatch parameters for various components are summarized in @tbl-sg13g2-mismatch.
 
 For a typical MOSFET, we usually consider two main mismatch effects [@Pelgrom_1989]:
 
@@ -356,6 +356,14 @@ With @eq-resistor-mismatch we now have two criteria for how to select the width 
 2. the resistor mismatch (the larger the $W$, the larger the $W L$ for a given $L/W$).
 
 If a resistor's dimensions are not limited by the two criteria above then we usually choose the minimum width that is allowed for a given resistor in a specific technology (for SG13G2 it is $L_\mathrm{min} = 0.5\,\mu\text{m}$) to save area and to minimize the parasitic capacitance of the resistor to substrate. 
+
+## Capacitor Mismatch {#sec-capacitor-mismatch}
+
+Similar to the resistor matching discussed in @sec-resistor-mismatch, capacitors will also show mismatch. Equivalently to @eq-mosfet-mismatch the standard deviation of the capacitor mismatch $\sigma(\Delta C / C)$ can be characterized by
+
+$$
+\sigma \left( \frac{\Delta C}{C} \right) = \frac{A_\mathrm{cap}}{\sqrt{W L}}
+$$ {#eq-capacitor-mismatch}
 
 ## 5T-OTA Simulation versus PVT and MC {#sec-basic-ota-simulation-pvt}
 
