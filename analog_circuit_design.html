@@ -505,6 +505,7 @@ window.Quarto = {
   <li><a href="#commands" id="toc-commands" class="nav-link" data-scroll-target="#commands"><span class="header-section-number">21.1</span> Commands</a></li>
   <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options"><span class="header-section-number">21.2</span> Options</a></li>
   <li><a href="#convergence-helper" id="toc-convergence-helper" class="nav-link" data-scroll-target="#convergence-helper"><span class="header-section-number">21.3</span> Convergence Helper</a></li>
+  <li><a href="#internal-variables" id="toc-internal-variables" class="nav-link" data-scroll-target="#internal-variables"><span class="header-section-number">21.4</span> Internal Variables</a></li>
   </ul></li>
   <li><a href="#sec-designers-etiquette" id="toc-sec-designers-etiquette" class="nav-link" data-scroll-target="#sec-designers-etiquette"><span class="header-section-number">22</span> Appendix: Circuit Designer’s Etiquette</a>
   <ul class="collapse">
@@ -5538,6 +5539,18 @@ I_\mathrm{out} - g_\mathrm{m12} V_\mathrm{out} \approx 0
 <li><code>option method=gear</code> can lead to improved convergence</li>
 <li><code>.nodeset</code> can be used to specify initial node voltage guesses</li>
 <li><code>.ic</code> can be used to set initial conditions</li>
+</ul>
+</section>
+<section id="internal-variables" class="level2" data-number="21.4">
+<h2 data-number="21.4" class="anchored" data-anchor-id="internal-variables"><span class="header-section-number">21.4</span> Internal Variables</h2>
+<p>Variables can be set using <code>set var=value</code> and accessed with <code>$var</code>. Useful internal variables are:</p>
+<ul>
+<li>To set the fontsize of plots, use <code>xfont_size</code></li>
+<li>To append data to an existing RAW file, use <code>appendwrite=1</code></li>
+<li>Get the name of the current plot with <code>curplot</code></li>
+<li>The filetype of the RAW file can be set with <code>filetype</code>, either <code>binary</code> (default) or <code>ascii</code></li>
+<li>The number of threads can be set with <code>num_threads</code></li>
+<li>The noise PSDs will be given in V^2/Hz or A^2/Hz when setting <code>sqrnoise=1</code> (otherwise V/rtHz or A/rtHz)</li>
 </ul>
 </section>
 </section>
