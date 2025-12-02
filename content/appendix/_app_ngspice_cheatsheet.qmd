@@ -71,3 +71,14 @@ Use `option option=val option=val` to set various options; important ones are:
 - `option method=gear` can lead to improved convergence
 - `.nodeset` can be used to specify initial node voltage guesses
 - `.ic` can be used to set initial conditions
+
+## Internal Variables
+
+Variables can be set using `set var=value` and accessed with `$var`. Useful internal variables are:
+
+- To set the fontsize of plots, use `xfont_size`
+- To append data to an existing RAW file, use `appendwrite=1`
+- Get the name of the current plot with `curplot`
+- The filetype of the RAW file can be set with `filetype`, either `binary` (default) or `ascii`
+- The number of threads can be set with `num_threads`
+- The noise PSDs will be given in V^2/Hz or A^2/Hz when setting `sqrnoise=1` (otherwise V/rtHz or A/rtHz)
