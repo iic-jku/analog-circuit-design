@@ -61,6 +61,10 @@ N 700 -380 1050 -380 {
 lab=v_ss}
 N 1090 -550 1090 -460 {
 lab=v_ena}
+N 1420 -480 1420 -380 {lab=v_ss}
+N 1300 -380 1420 -380 {lab=v_ss}
+N 1420 -630 1420 -540 {lab=v_out}
+N 1300 -630 1420 -630 {lab=v_out}
 C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib cornerMOSlv.lib mos_tt
@@ -123,3 +127,4 @@ C {devices/code_shown.sym} 0 -190 0 0 {name=SAVE only_toplevel=true
 format="tcleval( @value )"
 value=".include [file rootname [xschem get schname]].save
 "}
+C {isource.sym} 1420 -510 2 0 {name=I1 value="dc 0 ac 0"}
