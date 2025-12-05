@@ -32,30 +32,27 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().right().length(3).dot()
 
     d.push()
-    Ids1 = elm.SourceI().label(r'$g_\mathrm{m12} V_\mathrm{gs1}$').reverse()
+    Ids1 = elm.SourceI().label(r'$g_\mathrm{m1,2} V_\mathrm{gs1}$').reverse()
     elm.Line().length(2).dot()
     d.push()
-    Cgs34 = elm.Capacitor().label(r'$C_\mathrm{gs34}$')
+    gm34 = elm.Resistor().up().label(r'$g_\mathrm{m3,4}$')
     elm.Vdd()
     d.pop()
     elm.Line().right().length(3)
-    gm34 = elm.Resistor().up().label(r'$g_\mathrm{m34}$')
+    Cgs34 = elm.Capacitor().up().label(r'$2 \cdot C_\mathrm{gs3,4}$')
     elm.Vdd()
     d.pop()
     elm.Ground()
 
     d.move(dx=7)
     elm.Ground()
-    Ids2 = elm.SourceI().label(r'$g_\mathrm{m12} V_\mathrm{gs2}$').reverse()
+    Ids2 = elm.SourceI().label(r'$g_\mathrm{m1,2} V_\mathrm{gs2}$').reverse()
     elm.Line().up().length(1).dot()
     out = d.here
     elm.Line().up().length(1)
-    Ids4 = elm.SourceI().label(r'$g_\mathrm{m34} V_\mathrm{gs34}$')
+    Ids4 = elm.SourceI().label(r'$g_\mathrm{m3,4} V_\mathrm{gs3}$')
     elm.Vdd()
     
-#    gds2 = elm.Resistor().up().label('gds2')
-#    gds4 = elm.Resistor().up().label('gds4')
-
     elm.Line().right().at(out).length(6).label(r'$V_\mathrm{out}$').dot()
     d.push()
     elm.Line().down().length(1)
@@ -71,7 +68,7 @@ with sd.Drawing(canvas='svg') as d:
     elm.Gap().up().label(['-', r'$V_\mathrm{gs2}$', '+'])
     elm.Line().right().length(1).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right')
 
-    elm.Line().left().length(3).at(Cgs34.start)
-    elm.Gap().up().label(['+', r'$V_\mathrm{gs34}$', '-'])
+    elm.Line().left().length(3).at(gm34.start)
+    elm.Gap().up().label(['+', r'$V_\mathrm{gs3}$', '-'])
     elm.Vdd()
 ```
