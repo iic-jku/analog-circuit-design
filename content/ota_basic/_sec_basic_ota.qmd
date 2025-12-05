@@ -16,7 +16,7 @@ limitations under the License.
 
 # A Basic 5-Transistor OTA {#sec-basic-ota}
 
-Suited with the insights of basic transistor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
+Armed with the insights of basic transistor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
 
 {{< include /content/ota_basic/_fig_basic_ota.qmd >}}
 
@@ -26,7 +26,7 @@ While we repeat the basics of elementary MOSFET amplifier stages (like common-so
 In addition, we can highly recommend these references [@Gray_Meyer_5th_ed, @Razavi_Analog_CMOS] for further study.
 :::
 
-The operation is as follows: $M_{1,2}$ form a differential pair which is biased by the current source $M_5$. $M_{5,6}$ form a current mirror, thus the input bias current $I_\mathrm{bias}$ sets the bias current in the OTA. The differential pair $M_{1,2}$ is loaded by the current mirror $M_{3,4}$ which mirrors the drain current of $M_1$ to the right side. Here, the currents from $M_4$ and $M_2$ are summed, and together with the conductance effective at the output node a voltage builds up.
+The operation is as follows: $M_{1,2}$ form a differential pair which is biased by the current source $M_5$. $M_{5,6}$ form a current mirror, thus the input bias current $I_\mathrm{bias}$ sets the bias current in the OTA. The differential pair $M_{1,2}$ is loaded by the current mirror $M_{3,4}$ which mirrors the drain current of $M_1$ to the right side. Here, the currents from $M_4$ and $M_2$ are summed, and together with the conductance effective at the output node, a voltage builds up.
 
 ::: {.callout-note title="Operational Amplifier (op-amp, OPA) vs. Operational Transconductance Amplifier (OTA)"}
 An [operational amplifier](https://en.wikipedia.org/wiki/Operational_amplifier) is a universal electronic building block characterized by (in the ideal case):
@@ -88,13 +88,13 @@ In summary, we think that we can make an NMOS-input OTA like the one in @fig-bas
 
 Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, the complete bias current in the OTA is steered towards the output (try to understand why this is the case), so when the output capacitor is fully discharged, and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is
 $$
-T_\mathrm{slew} \approx \frac{C_\mathrm{load} V_\mathrm{out}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 1.3}{10 \cdot 10^{-6}} = 6.5\,\text{ns}
+T_\mathrm{slew} \approx \frac{C_\mathrm{load} \cdot V_\mathrm{out,max}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 0.9}{10 \cdot 10^{-6}} = 4.5\,\text{ns}
 $$
 so this leaves plenty of margin for additional slow-signal settling due to the limited bandwidth, as well as reducing the supply current.
 
 The small-signal settling (assuming one pole at the bandwidth corner frequency) leads to an approximate settling time (1% error corresponds to $\approx 5 \tau$) of
 $$
-T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 1 \cdot 10^{6}} = 0.8\,\mu\text{s}.
+T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10 \times 10^{6}} = 0.08\,\mu\text{s}.
 $$
 which also checks out.
 
@@ -106,9 +106,9 @@ In order to size the OTA components we need to derive how the MOSFET parameters 
 - gain-bandwidth product (GBW)
 - output noise
 
-The specification for GBW is directly given in @tbl-voltage-buffer-spec, while the dc gain we have to calculate from the voltage accuracy specification. For a voltage follower in the configuration shown in @fig-voltage-buffer-ota the voltage gain is given by
+The specification for GBW is directly given in @tbl-voltage-buffer-spec, while the dc gain we have to calculate from the voltage accuracy specification. For a voltage follower in the configuration shown in @fig-voltage-buffer-ota the voltage gain is given by (see @fig-voltage-buffer-ota)
 $$
-\frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
+(V_\mathrm{in} - V_\mathrm{out}) \cdot A_0 = V_\mathrm{out} \to \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
 $$ {#eq-voltage-buffer-tolerance}
 
 So in order to reach an output voltage accuracy of at least 3% we need a dc gain of $A_0 > 30.2\,\text{dB}$. To allow for process and temperature variation we need to add a bit of extra gain as margin. 
@@ -121,10 +121,11 @@ In order to get the correct dc voltage per the specification we require the larg
 
 In order to derive the governing small-signal equations for the OTA we will make a few simplifications:
 
+- We assume that $\gm[1,2] = \gm[1] = \gm[2]$, $\gm[3,4] = \gm[3] = \gm[4]$, and $\Cgs[3,4] = \Cgs[3] = \Cgs[4]$ for symmetry reasons (as $M_1$ and $M_2$ will have to be equally sized, as well as $M_3$ and $M_4$).
 - We will set $\gmb = 0$ for all MOSFETs.
-- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$ (for background please see @sec-miller-theorem). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $\Cgs[34] = \Cgs[3] + \Cgs[4]$ is considered at the gate node of the current mirror load.
-- We assume $\gm \gg \gds$, so we set $\gds[1] = \gds[3] = 0$.
-- The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$, we could add to the load capacitance $C_\mathrm{load}$ (see @fig-basic-ota-dcop). Note that adding $\Cgs[2]$ to $C_\mathrm{load}$ is a simplified (in fact erroneous) view, as the tail point (the source connection of $M_1$ and $M_2$) is not an ac ground, but we ignore this for simplicity and accept the error we make due to this, as in our case $C_\mathrm{load}$ is so large that it will dominate anyway.
+- We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$ (for background please see @sec-miller-theorem). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $2\Cgs[3,4]$ is considered at the gate node of the current mirror load.
+- We assume $\gm \gg \gds$, so we set $\gds[1] = \gds[3] = 0$ as this node is dominated by $\gm[3]^{-1}$.
+- The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$, we could add to the load capacitance $C_\mathrm{load}$ (see @fig-basic-ota-dcop).
 
 The resulting small-signal equivalent circuit is shown in @fig-basic-ota-small-signal.
 
@@ -134,48 +135,54 @@ Please review the MOSFET small-signal equivalent model in @fig-mosfet-small-sign
 
 {{< include /content/ota_basic/_fig_basic_ota_small_signal.qmd >}}
 
-We can further simplify the output side by recognizing that the impedance (when looking from the output down) is $\gds[2]$ in series with $\gds[5] + \gm[12]$. This is a valid simplification as we treat $M_1$ as a common-gate stage when looking from the output, and since it is loaded by a low impedance of $\gm[34]^{-1}$, we can approximate the impedance looking into the source of $M_1$ with $\gm[12]^{-1}$. With the approximation that $\gm \gg \gds$ the parallel connection of $\gm[12]$ and $\gds[5]$ is dominated by $\gm[12]$ ($\gm[12] + \gds[5] \approx \gm[12]$) and its series connection with $\gds[2]$ ($\gm[12]^{-1} + \gds[2]^{-1} \approx \gds[2]^{-1}$), resulting in the fact that we can ground the lower end of $\gds[2]$. You should probably stop here and read this paragraph again, slowly.
-
-Therefore, we can move $\gds[2] + \gds[4]$ in parallel to $C_\mathrm{load}$. Further, assuming a differential drive with a virtual ground at the tailpoint we can remove $\gds[5]$. The current source $\gm[34] \Vgs[34]$ is replaced with the equivalent conductance $\gm[34]$. All the previous steps result in the further simplified equivalent circuit shown in @fig-basic-ota-small-signal-simplified.
+We can further simplify @fig-basic-ota-small-signal by realizing that we operate the circuit purely differential and thus the tail point of $M_1$ and $M_2$ can be treated like a virtual ground, we thus short $\gds[5]$. Therefore, we can move $\gds[2] + \gds[4]$ in parallel to $C_\mathrm{load}$. The current source $\gm[3,4] \Vgs[3]$ is replaced with the equivalent conductance $\gm[3,4]$. All the previous steps result in the further simplified equivalent circuit shown in @fig-basic-ota-small-signal-simplified.
 
 {{< include /content/ota_basic/_fig_basic_ota_small_signal_simplified.qmd >}}
 
-In the simplified circuit model in @fig-basic-ota-small-signal-simplified we can see that we have two poles in the circuit, one at the gate note of $M_{3,4}$, and one at the output. Realizing that $V_\mathrm{in,p} = V_\mathrm{in}/2$ and $V_\mathrm{in,n} = - V_\mathrm{in}/2$ we can formulate KCL at the output node to
+In the simplified circuit model in @fig-basic-ota-small-signal-simplified we can see that we have two poles in the circuit, one at the gate note of $M_{3,4}$, and one at the output. Realizing that $\Vgs[1] = V_\mathrm{in,p} = V_\mathrm{in}/2$ and $\Vgs[2] = V_\mathrm{in,n} = - V_\mathrm{in}/2$ we can formulate KCL at the output node to
 $$
--\gm[34] \Vgs[34] - \left( -\gm[12] \frac{V_\mathrm{in}}{2} \right) - V_\mathrm{out} (\gds[2] + \gds[4] + s C_\mathrm{load}) = 0.
+-\gm[3,4] \Vgs[3] - \gm[1,2] \left( - \frac{V_\mathrm{in}}{2} \right) - V_\mathrm{out} (\gds[2] + \gds[4] + s C_\mathrm{load}) = 0.
 $$ {#eq-simple-ota-eq1}
+
  We further realize that
+
  $$
-\Vgs[34] = -\gm[12] \frac{V_\mathrm{in}}{2} \frac{1}{\gm[34] + s \Cgs[34]}.
+\Vgs[3] = -\gm[1,2] \frac{V_\mathrm{in}}{2} \frac{1}{\gm[3,4] + 2 \cdot s \Cgs[3,4]}.
  $$ {#eq-simple-ota-eq2}
 
 By combining @eq-simple-ota-eq1 and @eq-simple-ota-eq2 and after a bit of algebraic manipulation we arrive at
+
 $$
-A(s) = \frac{V_\mathrm{out}(s)}{V_\mathrm{in}(s)} = \frac{\gm[12]}{2} \frac{2 \gm[34] + s \Cgs[34]}{(\gm[34] + s \Cgs[34]) (\gds[2] + \gds[4] + s C_\mathrm{load})}.
+A(s) = \frac{V_\mathrm{out}(s)}{V_\mathrm{in}(s)} = \frac{\gm[1,2]}{2} \frac{2 \cdot \gm[34] + 2 \cdot s \Cgs[3,4]}{(\gm[3,4] + 2 \cdot s \Cgs[3,4]) (\gds[2] + \gds[4] + s C_\mathrm{load})}.
 $$ {#eq-simple-ota-gain}
 
-When we now inspect @eq-simple-ota-gain we can see that for low frequencies the (open-loop) gain is
+When we inspect @eq-simple-ota-gain we can see that for low frequencies the (open-loop) gain is
+
 $$
-A(s \rightarrow 0) = A_0 = \frac{\gm[12]}{\gds[2] + \gds[4]}
+A(s \to 0) = A_0 = \frac{\gm[1,2]}{\gds[2] + \gds[4]}
 $$ {#eq-simple-ota-gain-dc}
+
 which is plausible, and confirms the requirement of a high impedance at the output node. For very large frequencies we get
+
 $$
-A (s \gg) = \frac{\gm[12]}{2 s C_\mathrm{load}}
+A (s \gg) = \frac{\gm[1,2]}{2 \cdot s C_\mathrm{load}}
 $$ {#eq-simple-ota-highf}
-which is essentially the behavior of an integrator, and we can use @eq-simple-ota-highf to calculate the frequency where the gain drops to $|A(s_\mathrm{ug})| = 1 = \gm[12]/|2 j \omega_\mathrm{ug} C_\mathrm{load}|$:
+
+which is essentially the behavior of an integrator, and we can use @eq-simple-ota-highf to calculate the frequency where the gain drops to $|A(s_\mathrm{ug})| = 1 = \gm[1,2]/|2 j \omega_\mathrm{ug} C_\mathrm{load}|$:
+
 $$
-f_\mathrm{ug} = \frac{\gm[12]}{4 \pi C_\mathrm{load}}
+f_\mathrm{ug} = \frac{\gm[1,2]}{4 \pi C_\mathrm{load}}
 $$
 
-When looking at @eq-simple-ota-gain we see that we have a dominant pole at $s_\mathrm{p}$ and a pole-zero doublet with $s_\mathrm{pd}$/$s_\mathrm{zd}$:
+Looking at @eq-simple-ota-gain, we see that we have a dominant pole at $s_\mathrm{p}$ and a pole-zero doublet with $s_\mathrm{pd}$/$s_\mathrm{zd}$:
 $$
 s_\mathrm{p} = -\frac{\gds[2] + \gds[4]}{C_\mathrm{load}}
 $$ {#eq-basic-ota-dominant-pole}
 $$
-s_\mathrm{pd} = -\frac{\gm[34]}{\Cgs[34]}
+s_\mathrm{pd} = -\frac{\gm[3,4]}{2 \cdot \Cgs[3,4]}
 $$ {#eq-basic-ota-doublet-pole}
 $$
-s_\mathrm{zd} = -\frac{2 \gm[34]}{\Cgs[34]}
+s_\mathrm{zd} = -\frac{\gm[3,4]}{\Cgs[3,4]}
 $$ {#eq-basic-ota-doublet-zero}
 
 ::: {.callout-note title="Why a Pole-Zero Doublet?"}
@@ -185,76 +192,52 @@ may cause severe degradation of settling time while only causing minor changes i
 
 ### OTA Noise
 
-For the noise analysis we ignore the pole-zero doublet due to $\Cgs[34]$ (we assume minor impact due to this) and just consider the dominant pole given by @eq-basic-ota-dominant-pole. For the noise analysis at the output we set the input signal to zero, and thus we arrive at the simplified small-signal circuit shown in @fig-basic-ota-small-signal-noise.
+For the noise analysis we ignore the pole-zero doublet due to $\Cgs[3,4]$ (we assume minor impact due to this, hence we set $\Cgs[3,4] = 0$) and just consider the dominant pole given by @eq-basic-ota-dominant-pole due to the load capacitance. For the noise analysis at the output we set the positive input signal to ground and connect the output to the negative input, and thus starting from @fig-basic-ota-small-signal-simplified we arrive at the adapted small-signal circuit shown in @fig-basic-ota-small-signal-noise.
 
 {{< include /content/ota_basic/_fig_basic_ota_small_signal_noise.qmd >}}
 
+For symmetry reasons we can set $\overline{I_\mathrm{n1,2}^2} = \overline{I_\mathrm{n1}^2} = \overline{I_\mathrm{n2}^2}$ and $\overline{I_\mathrm{n3,4}^2} = \overline{I_\mathrm{n3}^2} = \overline{I_\mathrm{n4}^2}$. We see that we can replace the current source $\gm[1,2] V_\mathrm{gs2}$ with its equivalent conductance of $\gm[1,2]$, and this conductance is in parallel to $\gds[2] + \gds[4]$, hence $\gm[1,2] + \gds[2] + \gds[4] \approx \gm[1,2]$. The resulting simplified small-signal noise equivalent circuit is shown in @fig-basic-ota-small-signal-noise-simplified.
+
+{{< include /content/ota_basic/_fig_basic_ota_small_signal_noise_simplified.qmd >}}
+
 We see that
 $$
-\overline{\Vgs[34]^2} = \frac{1}{\gm[34]^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right).
+\overline{\Vgs[3]^2} = \frac{1}{\gm[3,4]^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right).
 $$
 
 ::: {.callout-important title="Noise Addition"}
 Remember that **uncorrelated** noise quantities need to be power-summed (i.e., $I^2 = I_1^2 + I_2^2$)!
 :::
 
-We can then sum the output noise current $\overline{I_\mathrm{n}}$ as
+We can then sum the total output noise current $\overline{I_\mathrm{n}}$ as
 $$
-\overline{I_\mathrm{n}^2} = \overline{I_\mathrm{n2}^2} + \overline{I_\mathrm{n4}^2} + \gm[34]^2 \frac{1}{\gm[34]^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right) = 2 \left( \overline{I_\mathrm{n1,2}^2} + \overline{I_\mathrm{n3,4}^2} \right).
-$$
-
-As a next step, let us rewrite the OTA transfer function $A(s)$ (see @eq-simple-ota-gain) by getting rid of the pole-zero doublet as a simplifying assumption to get
-$$
-A'(s) = \frac{\gm[12]}{\gds[2] + \gds[4] + s C_\mathrm{load}}.
-$$ {#eq-simple-ota-gain-simplified}
-
-Inspecting @eq-simple-ota-gain-simplified we can interpret the OTA transfer function as a transconductor $\gm[12]$ driving a load of $Y_\mathrm{load} = \gds[2] + \gds[4] + s C_\mathrm{load}$. We can thus redraw @fig-voltage-buffer-ota in the following way, injecting the previously calculated noise current into the output node. The result is shown in @fig-voltage-buffer-ota-noise.
-
-::: {.callout-note title="Output Impedance of the Voltage Buffer"}
-For the following analysis it is helpful to calculate the output impedance of the voltage buffer configuration shown in @fig-voltage-buffer-ota-noise. To do that, first we short the input terminal to ground and then we connect a current source $I_\mathrm{out}$ at the output terminal, see @fig-voltage-buffer-ota-noise-zout.
-
-{{< include /content/ota_basic/_fig_voltage_buffer_ota_noise_zout.qmd >}}
-
-Since we can neglect the gate leakage current into the inverting input terminal of the OTA, KCL at the output node is simply:
-
-$$
-I_\mathrm{out} + \gm[12]\left(-V_\mathrm{out}\right) = 0
+\overline{I_\mathrm{n}^2} = \overline{I_\mathrm{n2}^2} + \overline{I_\mathrm{n4}^2} + \gm[3,4]^2 \frac{1}{\gm[3,4]^2} \left( \overline{I_\mathrm{n1}^2} + \overline{I_\mathrm{n3}^2} \right) = 2 \left( \overline{I_\mathrm{n1,2}^2} + \overline{I_\mathrm{n3,4}^2} \right).
 $$
 
-Thus, the output impedance is easily calculated.
 
-$$
-Z_\mathrm{out} = \frac{V_\mathrm{out}}{I_\mathrm{out}} = \frac{V_\mathrm{out}}{\gm[12]V_\mathrm{out}} = \frac{1}{\gm[12]}
-$$
-
-:::
-
-{{< include /content/ota_basic/_fig_voltage_buffer_ota_noise.qmd >}}
-
-We see that the feedback around the transconductor $\gm[1,2]$ creates an impedance of $1/\gm[1,2]$. We can now calculate the effective load conductance of
-$$
-Y'_\mathrm{load} = \gds[2] + \gds[4] + s C_\mathrm{load} + \gm[1,2] \approx \gm[1,2] + s C_\mathrm{load}.
-$$ {#eq-basic-ota-output-noise-yload}
 
 The output noise voltage is then (using @eq-mosfet-noise)
 $$
-\overline{V_\mathrm{n,out}^2}(f) = \frac{\overline{I_\mathrm{n}^2}}{|Y'_\mathrm{load}|^2} = \frac{\overline{I_\mathrm{n}^2}}{\gm[1,2]^2 + (2 \pi f C_\mathrm{load})2^2} = \frac{8 k T (\gamma_{1,2} \gm[1,2] + \gamma_{3,4} \gm[3,4])}{\gm[1,2]^2 + (2 \pi f C_\mathrm{load})^2}.
+\begin{split}
+\overline{V_\mathrm{n,out}^2}(f) &= \frac{\overline{I_\mathrm{n}^2}}{\left| \gm[1,2] + s C_\mathrm{load} \right|^{2}} = \frac{\overline{I_\mathrm{n}^2}}{\gm[1,2]^2 + (2 \pi f C_\mathrm{load})^2} \\
+&= \frac{8 k T (\gamma_{1,2} \gm[1,2] + \gamma_{3,4} \gm[3,4])}{\gm[1,2]^2 + (2 \pi f C_\mathrm{load})^2}.
+\end{split}
 $$
 
 We can use the identity @eq-integral-identity to calculate the rms output noise to
 $$
-V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{1,2} + 2 \gamma_{3,4} \frac{\gm[3,4]}{\gm[1,2]} \right).
+V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) \cdot df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{1,2} + 2 \gamma_{3,4} \frac{\gm[3,4]}{\gm[1,2]} \right).
 $$ {#eq-basic-ota-output-noise}
 
-Inspecting @eq-basic-ota-output-noise we can see that the integrated output noise is the $k T / C$ noise of the output load capacitor, enhanced by the $\gamma_{12}$ of the input differential pair, plus a (smaller) contribution of the current mirror load $M_{3,4}$. Intuitively, this result makes sense.
+Inspecting @eq-basic-ota-output-noise we can see that the integrated output noise is the $k T / C$ noise of the output load capacitor, enhanced by the $\gamma_{12}$ of the input differential pair, plus a (smaller) contribution of the current mirror load $M_{3,4}$. Intuitively, this result makes sense. We learn that to reduce the output noise we should set $\gm[3,4] < \gm[1,2]$.
 
 ::: {.callout-tip title="Exercise: Derivation of 5T-OTA Performance"}
-Please take your time and carefully go through the explanations and derivations for the 5-transistor-OTA in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal. Try to do the calculations yourself; if you get stuck, review the previous chapters.
+Please take your time and carefully go through the explanations and derivations for the 5-transistor-OTA in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal. Try to do the calculations yourself; if you get stuck, review the previous chapters. There are additional useful derivations in @sec-5t-ota-zout.
 :::
 
 ## 5T-OTA Sizing {#sec-basic-ota-sizing}
 
-Outfitted with the governing equations derived in @sec-basic-ota-small-signal we can now size the MOSFETs in the OTA, we remember that we have to size $M_{1,2}$ and $M_{3,4}$ equally.
+Armed with the governing equations derived in @sec-basic-ota-small-signal we can now size the MOSFETs in the OTA, we remember that we have to size $M_{1,2}$ and $M_{3,4}$ equally.
 
 First, we need to select a proper $\gmid$ for the MOSFET. Remembering @sec-gmid-method we see that for the input differential pair we should go for a large $\gm$, thus we select a $\gmid = 10$. As $\gds$ of $M_2$ could limit the dc gain (@eq-simple-ota-gain-dc) we go with a rather long $L = 5\,\mu\text{m}$. For current sources a small $\gmid$ is a good idea, so we start with $\gmid=5$ (because we can not go too low because of $V_\mathrm{ds,sat}$) and also an $L = 5\,\mu\text{m}$. The $\gmid$ is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the $\gds$ small) with this approximate relationship:
 
@@ -413,7 +396,7 @@ Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) t
 
 ### Monte Carlo Simulation Analysis
 
-Looking at the CACE report in @nte-basic-ota-cace-result we see that the output voltage specification is not met due to MOSFET mismatch! We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions proof to be too small. We should now go back and change the transistor sizing (increasing $L$ significantly while keeping the $\gmid$ values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.
+Looking at the CACE report in @nte-basic-ota-cace-result we see that the output voltage specification is not met due to MOSFET mismatch! We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions prove to be too small. We should now go back and change the transistor sizing (increasing $L$ significantly while keeping the $\gmid$ values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.
 
 It is not unusual that the power consumption now increases, as we have to increase the size of the MOSFETs for matching, and these larger MOSFETs increase the parasitic capacitances which in turn lead to larger power consumption to keep the required bandwidth by increasing the $\gm$.
 
