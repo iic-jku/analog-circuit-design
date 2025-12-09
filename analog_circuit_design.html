@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2025-12-05">
+<meta name="dcterms.date" content="2025-12-09">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -444,15 +444,18 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-basic-ota-sizing" id="toc-sec-basic-ota-sizing" class="nav-link" data-scroll-target="#sec-basic-ota-sizing"><span class="header-section-number">8.4</span> 5T-OTA Sizing</a></li>
   <li><a href="#sec-basic-ota-simulation" id="toc-sec-basic-ota-simulation" class="nav-link" data-scroll-target="#sec-basic-ota-simulation"><span class="header-section-number">8.5</span> 5T-OTA Simulation</a></li>
-  <li><a href="#sec-mosfet-mismatch" id="toc-sec-mosfet-mismatch" class="nav-link" data-scroll-target="#sec-mosfet-mismatch"><span class="header-section-number">8.6</span> MOSFET Mismatch</a></li>
-  <li><a href="#sec-resistor-mismatch" id="toc-sec-resistor-mismatch" class="nav-link" data-scroll-target="#sec-resistor-mismatch"><span class="header-section-number">8.7</span> Resistor Mismatch</a></li>
-  <li><a href="#sec-capacitor-mismatch" id="toc-sec-capacitor-mismatch" class="nav-link" data-scroll-target="#sec-capacitor-mismatch"><span class="header-section-number">8.8</span> Capacitor Mismatch</a></li>
-  <li><a href="#sec-basic-ota-simulation-pvt" id="toc-sec-basic-ota-simulation-pvt" class="nav-link" data-scroll-target="#sec-basic-ota-simulation-pvt"><span class="header-section-number">8.9</span> 5T-OTA Simulation versus PVT and MC</a>
+  <li><a href="#sec-mimatch" id="toc-sec-mimatch" class="nav-link" data-scroll-target="#sec-mimatch"><span class="header-section-number">8.6</span> Component Mismatch</a>
   <ul class="collapse">
-  <li><a href="#pvt-simulation-analysis" id="toc-pvt-simulation-analysis" class="nav-link" data-scroll-target="#pvt-simulation-analysis"><span class="header-section-number">8.9.1</span> PVT Simulation Analysis</a></li>
-  <li><a href="#monte-carlo-simulation-analysis" id="toc-monte-carlo-simulation-analysis" class="nav-link" data-scroll-target="#monte-carlo-simulation-analysis"><span class="header-section-number">8.9.2</span> Monte Carlo Simulation Analysis</a></li>
+  <li><a href="#sec-mosfet-mismatch" id="toc-sec-mosfet-mismatch" class="nav-link" data-scroll-target="#sec-mosfet-mismatch"><span class="header-section-number">8.6.1</span> MOSFET Mismatch</a></li>
+  <li><a href="#sec-resistor-mismatch" id="toc-sec-resistor-mismatch" class="nav-link" data-scroll-target="#sec-resistor-mismatch"><span class="header-section-number">8.6.2</span> Resistor Mismatch</a></li>
+  <li><a href="#sec-capacitor-mismatch" id="toc-sec-capacitor-mismatch" class="nav-link" data-scroll-target="#sec-capacitor-mismatch"><span class="header-section-number">8.6.3</span> Capacitor Mismatch</a></li>
   </ul></li>
-  <li><a href="#sec-ota-variants-single-ended" id="toc-sec-ota-variants-single-ended" class="nav-link" data-scroll-target="#sec-ota-variants-single-ended"><span class="header-section-number">8.10</span> OTA Variants</a></li>
+  <li><a href="#sec-basic-ota-simulation-pvt" id="toc-sec-basic-ota-simulation-pvt" class="nav-link" data-scroll-target="#sec-basic-ota-simulation-pvt"><span class="header-section-number">8.7</span> 5T-OTA Simulation versus PVT and MC</a>
+  <ul class="collapse">
+  <li><a href="#pvt-simulation-analysis" id="toc-pvt-simulation-analysis" class="nav-link" data-scroll-target="#pvt-simulation-analysis"><span class="header-section-number">8.7.1</span> PVT Simulation Analysis</a></li>
+  <li><a href="#monte-carlo-simulation-analysis" id="toc-monte-carlo-simulation-analysis" class="nav-link" data-scroll-target="#monte-carlo-simulation-analysis"><span class="header-section-number">8.7.2</span> Monte Carlo Simulation Analysis</a></li>
+  </ul></li>
+  <li><a href="#sec-ota-variants-single-ended" id="toc-sec-ota-variants-single-ended" class="nav-link" data-scroll-target="#sec-ota-variants-single-ended"><span class="header-section-number">8.8</span> OTA Variants</a></li>
   </ul></li>
   <li><a href="#sec-cascode-stage" id="toc-sec-cascode-stage" class="nav-link" data-scroll-target="#sec-cascode-stage"><span class="header-section-number">9</span> Cascode Stage</a>
   <ul class="collapse">
@@ -563,7 +566,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 5, 2025</p>
+      <p class="date">December 9, 2025</p>
     </div>
   </div>
   
@@ -2967,8 +2970,10 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </section>
-<section id="sec-mosfet-mismatch" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="sec-mosfet-mismatch"><span class="header-section-number">8.6</span> MOSFET Mismatch</h2>
+<section id="sec-mimatch" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="sec-mimatch"><span class="header-section-number">8.6</span> Component Mismatch</h2>
+<section id="sec-mosfet-mismatch" class="level3" data-number="8.6.1">
+<h3 data-number="8.6.1" class="anchored" data-anchor-id="sec-mosfet-mismatch"><span class="header-section-number">8.6.1</span> MOSFET Mismatch</h3>
 <p>So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show <strong>mismatch</strong> due to tiny random fluctuations in manufacturing, and we have to account for this. The mismatch parameters for various components are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>.</p>
 <p>For a typical MOSFET, we usually consider two main mismatch effects <span class="citation" data-cites="Pelgrom_1989">(<a href="#ref-Pelgrom_1989" role="doc-biblioref">Pelgrom, Duinmaijer, and Welbers 1989</a>)</span>:</p>
 <ul>
@@ -2976,11 +2981,11 @@ headroom M5 = 0.333 V</code></pre>
 <li>A variation of the critical dimensions of the MOSFET (<span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> as well as vertical dimensions).</li>
 </ul>
 <p>Both effects influence the drain current of the MOSFET, and they are indirectly proportional to the size of the MOSFET. So, if we want to reduce the mismatch, we have to increase the size of the MOSFET by increasing its gate area <span class="math inline">\(W \cdot L\)</span>.</p>
-<p>If we formulate the drain current mismatch standard deviation <span class="math inline">\(\sigma(\Delta I_\mathrm{D}/ I_\mathrm{D})\)</span> of two nominally identical MOSFET we get</p>
+<p>If we formulate the drain current mismatch standard deviation <span class="math inline">\(\sigma\left\{\Delta I_\mathrm{D}/ I_\mathrm{D}\right\}\)</span> of two nominally identical MOSFET we get</p>
 <p><span id="eq-mosfet-mismatch"><span class="math display">\[
-\sigma \left( \frac{\Delta I_\mathrm{D}}{I_\mathrm{D}} \right) = \frac{A_\mathrm{mosfet}}{\sqrt{W L}}
+\sigma\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \frac{A_\mathrm{mosfet}}{\sqrt{W L}}
 \tag{25}\]</span></span></p>
-<p>with <span class="math inline">\(A_\mathrm{mosfet}\)</span> being a mismatch parameter for a given CMOS technology and <span class="math inline">\(\sigma (\cdot)\)</span> being the standard deviation of the parameter in parentheses.</p>
+<p>with <span class="math inline">\(A_\mathrm{mosfet}\)</span> being a mismatch parameter for a given CMOS technology and <span class="math inline">\(\sigma\left\{\cdot\right\}\)</span> being the standard deviation of the parameter in parentheses.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Mismatch">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2996,20 +3001,20 @@ headroom M5 = 0.333 V</code></pre>
 <li>The threshold voltage mismatch standard deviation</li>
 </ul>
 <p><span id="eq-mosfet-mismatch-vth"><span class="math display">\[
-\sigma (\Delta V_\mathrm{th}) = \frac{A_\mathrm{vth}}{\sqrt{W L}}
+\sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{A_\mathrm{vth}}{\sqrt{W L}}
 \tag{26}\]</span></span></p>
 <ul>
 <li>and standard deviation of the size mismatch</li>
 </ul>
 <p><span id="eq-mosfet-mismatch-kp"><span class="math display">\[
-\sigma \left( \frac{\Delta (W/L)}{(W/L)} \right) = \frac{A_\mathrm{k}}{\sqrt{W L}}.
+\sigma\left\{\frac{\Delta (W/L)}{(W/L)}\right\} = \frac{A_\mathrm{k}}{\sqrt{W L}}.
 \tag{27}\]</span></span></p>
 <p>The resulting standard deviation of the input offset voltage <span class="math inline">\(V_\mathrm{offs}\)</span> of a differential pair with small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is then given by <span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span> <span id="eq-diffpair-offset"><span class="math display">\[
-V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 \cdot \sigma^2\left(\frac{\Delta (W/L)}{{(W/L)}}\right) + \sigma^2\left(\Delta V_\mathrm{th}\right)}.
+V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 \cdot \sigma^2\left\{\frac{\Delta (W/L)}{{(W/L)}}\right\} + \sigma^2\left\{\Delta V_\mathrm{th}\right\}}.
 \tag{28}\]</span></span></p>
 <p>The mismatch in the drain current of two current-mirror transistors, characterized as the standard deviation and for small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, is given by <span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span></p>
 <p><span id="eq-currentmirror-offset"><span class="math display">\[
-\sigma^2\left(\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right) = \sigma^2\left(\frac{\Delta (W/L)}{(W/L)}\right) + 4 \cdot \sigma^2\left(\frac{\Delta V_\mathrm{th}}{V_\mathrm{GS}- V_\mathrm{th}}\right).
+\sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sigma^2\left\{\frac{\Delta (W/L)}{(W/L)}\right\} + 4 \cdot \sigma^2\left\{\frac{\Delta V_\mathrm{th}}{V_\mathrm{GS}- V_\mathrm{th}}\right\}.
 \tag{29}\]</span></span></p>
 <p>To minimize the input offset voltage in a differential pair we should strive to minimize <span class="math inline">\(V_\mathrm{GS}\)</span> (i.e., to maximize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#eq-diffpair-offset" class="quarto-xref">Equation&nbsp;28</a>) and to minimize the mismatch in current mirrors we should target a large <span class="math inline">\(V_\mathrm{GS}\)</span> (i.e., to minimize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;29</a>). In both cases the MOSFET area <span class="math inline">\(W \cdot L\)</span> needs to be large enough (see <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a>).</p>
 </div>
@@ -3029,13 +3034,13 @@ V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 
 <p>The number of Monte Carlo simulation runs <span class="math inline">\(N\)</span> has to be large enough to approach Gaussian distributions to allow estimation of the variances. However, this comes at the cost of a large simulation time, so a balance has to be found. Often, <span class="math inline">\(N = 250\)</span> is a good compromise between simulation time and well-behaved parameter distributions.</p>
 </div>
 </div>
-<p>As you can see in the previous discussion, running Monte Carlo simulations is a tedious process due to the large number of involved simulations and the required data processing of the heaps of simulation data. Luckily, CACE supports this type of simulation, and we will use it in <a href="#sec-basic-ota-simulation-pvt" class="quarto-xref">Section&nbsp;8.9</a>.</p>
+<p>As you can see in the previous discussion, running Monte Carlo simulations is a tedious process due to the large number of involved simulations and the required data processing of the heaps of simulation data. Luckily, CACE supports this type of simulation, and we will use it in <a href="#sec-basic-ota-simulation-pvt" class="quarto-xref">Section&nbsp;8.7</a>.</p>
 </section>
-<section id="sec-resistor-mismatch" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="sec-resistor-mismatch"><span class="header-section-number">8.7</span> Resistor Mismatch</h2>
-<p>Similar to the MOSFET mismatch discussed in <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6</a>, resistors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;25</a> the standard deviation of the resistor mismatch <span class="math inline">\(\sigma(\Delta R / R)\)</span> can be characterized by</p>
+<section id="sec-resistor-mismatch" class="level3" data-number="8.6.2">
+<h3 data-number="8.6.2" class="anchored" data-anchor-id="sec-resistor-mismatch"><span class="header-section-number">8.6.2</span> Resistor Mismatch</h3>
+<p>Similar to the MOSFET mismatch discussed in <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6.1</a>, resistors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;25</a> the standard deviation of the resistor mismatch <span class="math inline">\(\sigma\left\{\Delta R / R\right\}\)</span> can be characterized by</p>
 <p><span id="eq-resistor-mismatch"><span class="math display">\[
-\sigma \left( \frac{\Delta R}{R} \right) = \frac{A_\mathrm{res}}{\sqrt{W L}}
+\sigma\left\{\frac{\Delta R}{R}\right\} = \frac{A_\mathrm{res}}{\sqrt{W L}}
 \tag{30}\]</span></span></p>
 <p>with <span class="math inline">\(A_\mathrm{res}\)</span> being a mismatch parameter for a given CMOS technology.</p>
 <p>With <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a> we now have two criteria for how to select the width <span class="math inline">\(W\)</span> of a specific resistor (the length <span class="math inline">\(L\)</span> is then derived from the required resistance value with <span class="math inline">\(R = R_\square \cdot L / W\)</span>):</p>
@@ -3045,15 +3050,16 @@ V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 
 </ol>
 <p>If a resistor’s dimensions are not limited by the two criteria above then we usually choose the minimum width that is allowed for a given resistor in a specific technology (for SG13G2 it is <span class="math inline">\(L_\mathrm{min} = 0.5\,\mu\text{m}\)</span>) to save area and to minimize the parasitic capacitance of the resistor to substrate.</p>
 </section>
-<section id="sec-capacitor-mismatch" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="sec-capacitor-mismatch"><span class="header-section-number">8.8</span> Capacitor Mismatch</h2>
-<p>Similar to the resistor matching discussed in <a href="#sec-resistor-mismatch" class="quarto-xref">Section&nbsp;8.7</a>, capacitors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;25</a> the standard deviation of the capacitor mismatch <span class="math inline">\(\sigma(\Delta C / C)\)</span> can be characterized by</p>
+<section id="sec-capacitor-mismatch" class="level3" data-number="8.6.3">
+<h3 data-number="8.6.3" class="anchored" data-anchor-id="sec-capacitor-mismatch"><span class="header-section-number">8.6.3</span> Capacitor Mismatch</h3>
+<p>Similar to the resistor matching discussed in <a href="#sec-resistor-mismatch" class="quarto-xref">Section&nbsp;8.6.2</a>, capacitors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;25</a> the standard deviation of the capacitor mismatch <span class="math inline">\(\sigma\left\{\Delta C / C\right\}\)</span> can be characterized by</p>
 <p><span id="eq-capacitor-mismatch"><span class="math display">\[
-\sigma \left( \frac{\Delta C}{C} \right) = \frac{A_\mathrm{cap}}{\sqrt{W L}}
+\sigma\left\{\frac{\Delta C}{C}\right\} = \frac{A_\mathrm{cap}}{\sqrt{W L}}
 \tag{31}\]</span></span></p>
 </section>
-<section id="sec-basic-ota-simulation-pvt" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="sec-basic-ota-simulation-pvt"><span class="header-section-number">8.9</span> 5T-OTA Simulation versus PVT and MC</h2>
+</section>
+<section id="sec-basic-ota-simulation-pvt" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="sec-basic-ota-simulation-pvt"><span class="header-section-number">8.7</span> 5T-OTA Simulation versus PVT and MC</h2>
 <p>As you have seen in <a href="#sec-basic-ota-simulation" class="quarto-xref">Section&nbsp;8.5</a> running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:</p>
 <ol type="1">
 <li>The supply voltage of the circuit has tolerances, and thus we need to check the performance against this variation.</li>
@@ -3369,12 +3375,12 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </section>
 </div>
 </div>
-<section id="pvt-simulation-analysis" class="level3" data-number="8.9.1">
-<h3 data-number="8.9.1" class="anchored" data-anchor-id="pvt-simulation-analysis"><span class="header-section-number">8.9.1</span> PVT Simulation Analysis</h3>
+<section id="pvt-simulation-analysis" class="level3" data-number="8.7.1">
+<h3 data-number="8.7.1" class="anchored" data-anchor-id="pvt-simulation-analysis"><span class="header-section-number">8.7.1</span> PVT Simulation Analysis</h3>
 <p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a> we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitic (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.</p>
 </section>
-<section id="monte-carlo-simulation-analysis" class="level3" data-number="8.9.2">
-<h3 data-number="8.9.2" class="anchored" data-anchor-id="monte-carlo-simulation-analysis"><span class="header-section-number">8.9.2</span> Monte Carlo Simulation Analysis</h3>
+<section id="monte-carlo-simulation-analysis" class="level3" data-number="8.7.2">
+<h3 data-number="8.7.2" class="anchored" data-anchor-id="monte-carlo-simulation-analysis"><span class="header-section-number">8.7.2</span> Monte Carlo Simulation Analysis</h3>
 <p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a> we see that the output voltage specification is not met due to MOSFET mismatch! We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions prove to be too small. We should now go back and change the transistor sizing (increasing <span class="math inline">\(L\)</span> significantly while keeping the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.</p>
 <p>It is not unusual that the power consumption now increases, as we have to increase the size of the MOSFETs for matching, and these larger MOSFETs increase the parasitic capacitances which in turn lead to larger power consumption to keep the required bandwidth by increasing the <span class="math inline">\(g_\mathrm{m}\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Re-Sizing of 5T-OTA for Mismatch">
@@ -3393,8 +3399,8 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 </section>
 </section>
-<section id="sec-ota-variants-single-ended" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="sec-ota-variants-single-ended"><span class="header-section-number">8.10</span> OTA Variants</h2>
+<section id="sec-ota-variants-single-ended" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="sec-ota-variants-single-ended"><span class="header-section-number">8.8</span> OTA Variants</h2>
 <p>Following, we are going to discuss two popular variants of the simple 5T-OTA. The first version provides an almost rail-to-rail single-ended output, and can thus be used for a variety of applications requiring this range. The arrangement is shown in <a href="#fig-ota-se-rail-to-rail" class="quarto-xref">Figure&nbsp;39</a>. It is a single-stage amplifier, as the only high-impedance point is at the output where significant voltage-gain is produced. The current mirrors can be used to scale up the current generated in the input differential pair to some extent in the output stage (or can be used to lower the current compared to the bias current in the diffpair); i.e., the bias currents of the input stage and the output stage can be set independently.</p>
 <p>Being a single-stage amplifier stability is usually not an issue, as only the output node is high-ohmic; all other nodes feature a MOSFET diode so the node impedance is <span class="math inline">\(\approx g_\mathrm{m}^{-1}\)</span> and thus the according poles are located at high frequencies.</p>
 <div id="cell-fig-ota-se-rail-to-rail" class="cell" data-execution_count="29">
@@ -3646,7 +3652,7 @@ r_\mathrm{out} &amp;= r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot [1 + g_\mathrm{mc
 \tag{37}\]</span></span></p>
 <p>which, compared to <a href="#eq-curmir-cascoded-rout" class="quarto-xref">Equation&nbsp;35</a>, is further improved by the gain of the auxiliary amplifier.</p>
 <p>We now want to size all these current mirror structures and simulate their performance. We try to size them for similar chip area in order to get a fair comparison. We assume a reference current of <span class="math inline">\(I_\mathrm{bias} = 50\,\mu\text{A}\)</span> and a mirror ratio of 1:1. We size for a minimum voltage headroom for the current sources of <span class="math inline">\(V_\mathrm{DS,min} = 0.4\,\text{V}\)</span>. The calculations are summarized in this <a href="./gmid/sizing_improved_current_mirror.html">sizing notebook</a>.</p>
-<p>The resulting circuits are drawn in <a href="#fig-curmir-variations-tb" class="quarto-xref">Figure&nbsp;50</a>. The testbench simulates the dc output characteristics of all four current mirror variations (the three improved ones and the basic one for reference). The testbench also runs a Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch (see <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6</a>).</p>
+<p>The resulting circuits are drawn in <a href="#fig-curmir-variations-tb" class="quarto-xref">Figure&nbsp;50</a>. The testbench simulates the dc output characteristics of all four current mirror variations (the three improved ones and the basic one for reference). The testbench also runs a Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch (see <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6.1</a>).</p>
 <div id="fig-curmir-variations-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-curmir-variations-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3745,26 +3751,26 @@ Figure&nbsp;55: A current mirror pair with resistive degeneration.
 <p>The standard deviation <span class="math inline">\(\sigma\)</span> of the output current difference, normalized to the current, is given by <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span></p>
 <p><span id="eq-curmir-matching"><span class="math display">\[
 \begin{split}
-\sigma^2\left(\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right) &amp; = \frac{\sigma^2\left(\Delta V_\mathrm{th}\right)}{(V_\mathrm{drv} + V_\mathrm{deg})^2}
-+ \left( \frac{V_\mathrm{drv}}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 \cdot \sigma^2\left(\frac{\Delta K}{K}\right) \\
-&amp; + \left( \frac{V_\mathrm{deg}}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 \cdot \sigma^2\left(\frac{\Delta R}{R}\right).
+\sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} &amp; = \frac{\sigma^2\left\{\Delta V_\mathrm{th}\right\}}{(V_\mathrm{drv} + V_\mathrm{deg})^2}
++ \left( \frac{V_\mathrm{drv}}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 \cdot \sigma^2\left\{\frac{\Delta K}{K}\right\} \\
+&amp; + \left( \frac{V_\mathrm{deg}}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 \cdot \sigma^2\left\{\frac{\Delta R}{R}\right\}.
 \end{split}
 \tag{38}\]</span></span></p>
 <p>The definition of <span class="math inline">\(V_\mathrm{drv}\)</span> is adapted here and understood as half of the <span class="math inline">\(V_\mathrm{DS}\)</span> saturation voltage, i.e., <span class="math inline">\(V_\mathrm{drv} = V_\mathrm{DS,sat} / 2 \approx I_\mathrm{D}/ g_\mathrm{m}\)</span>. The degeneration voltage is the voltage drop across the degeneration resistors and given by <span class="math inline">\(V_\mathrm{deg} = I_\mathrm{D}\cdot R\)</span>.</p>
-<p>The standard deviation of the resistor <span class="math inline">\(\sigma(\Delta R / R)\)</span> can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a>. Further, the threshold voltage mismatch <span class="math inline">\(\sigma(\Delta V_\mathrm{th})\)</span> can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a>.</p>
+<p>The standard deviation of the resistor <span class="math inline">\(\sigma\left\{\Delta R / R\right\}\)</span> can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a>. Further, the threshold voltage mismatch <span class="math inline">\(\sigma\left\{\Delta V_\mathrm{th}\right\}\)</span> can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a>.</p>
 <p>By using the approximation of <a href="#eq-mosfet-gmid-stronginversion" class="quarto-xref">Equation&nbsp;4</a>, we can express <a href="#eq-curmir-matching" class="quarto-xref">Equation&nbsp;38</a> in terms of our preferred sizing parameter <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}\)</span>:</p>
 <p><span id="eq-curmir-matching-alt"><span class="math display">\[
 \begin{split}
-\sigma^2\left(\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right) &amp; = \frac{\sigma^2\left(\Delta V_\mathrm{th}\right)}{[(g_\mathrm{m}/I_\mathrm{D})^{-1} + V_\mathrm{deg}]^2}
-+ \left( \frac{1}{1 + V_\mathrm{deg}\cdot g_\mathrm{m}/I_\mathrm{D}} \right)^2 \cdot \sigma^2\left(\frac{\Delta K}{K}\right) \\
-&amp; + \left( \frac{V_\mathrm{deg} \cdot g_\mathrm{m}/I_\mathrm{D}}{1 + V_\mathrm{deg} \cdot g_\mathrm{m}/I_\mathrm{D}} \right)^2 \cdot \sigma^2\left(\frac{\Delta R}{R}\right).
+\sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} &amp; = \frac{\sigma^2\left\{\Delta V_\mathrm{th}\right\}}{[(g_\mathrm{m}/I_\mathrm{D})^{-1} + V_\mathrm{deg}]^2}
++ \left( \frac{1}{1 + V_\mathrm{deg}\cdot g_\mathrm{m}/I_\mathrm{D}} \right)^2 \cdot \sigma^2\left\{\frac{\Delta K}{K}\right\} \\
+&amp; + \left( \frac{V_\mathrm{deg} \cdot g_\mathrm{m}/I_\mathrm{D}}{1 + V_\mathrm{deg} \cdot g_\mathrm{m}/I_\mathrm{D}} \right)^2 \cdot \sigma^2\left\{\frac{\Delta R}{R}\right\}.
 \end{split}
 \tag{39}\]</span></span></p>
-<p>The standard deviation of the transconductance parameter mismatch <span class="math inline">\(\sigma(\Delta K / K)\)</span> can be calculated similarly as (which is an alternative form to <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a>)</p>
+<p>The standard deviation of the transconductance parameter mismatch <span class="math inline">\(\sigma\left\{\Delta K / K\right\}\)</span> can be calculated similarly as (which is an alternative form to <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a>)</p>
 <p><span id="eq-mosfet-mismatch-kp-alt"><span class="math display">\[
-\sigma^2\left(\frac{\Delta K}{K}\right) = \frac{\sigma^2\left(\Delta W\right)}{W^2} + \frac{\sigma^2\left(\Delta L\right)}{L^2} + \sigma^2\left(\frac{\Delta \mu}{\mu}\right),
+\sigma^2\left\{\frac{\Delta K}{K}\right\} = \frac{\sigma^2\left\{\Delta W\right\}}{W^2} + \frac{\sigma^2\left\{\Delta L\right\}}{L^2} + \sigma^2\left\{\frac{\Delta \mu}{\mu}\right\},
 \tag{40}\]</span></span></p>
-<p>where <span class="math inline">\(\sigma (\Delta W)\)</span> and <span class="math inline">\(\sigma (\Delta L)\)</span> are the process-dependent mismatch parameters for the width <span class="math inline">\(W\)</span> and length <span class="math inline">\(L\)</span>, respectively, and <span class="math inline">\(\sigma(\Delta \mu / \mu)\)</span> is the mobility mismatch parameter.</p>
+<p>where <span class="math inline">\(\sigma\left\{\Delta W\right\}\)</span> and <span class="math inline">\(\sigma\left\{\Delta L\right\}\)</span> are the process-dependent mismatch parameters for the width <span class="math inline">\(W\)</span> and length <span class="math inline">\(L\)</span>, respectively, and <span class="math inline">\(\sigma\left\{\Delta \mu / \mu\right\}\)</span> is the mobility mismatch parameter.</p>
 <p>The standard deviations of the components of the SG13G2 process are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>. For mismatch calculations we can assume them as uncorrelated.</p>
 <div id="tbl-sg13g2-mismatch" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -3788,62 +3794,62 @@ Table&nbsp;3: IHP SG13G2 device mismatch
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Resistor <code>rsil</code></td>
-<td><span class="math inline">\(\sigma(\Delta R / R) \cdot \sqrt{WL}\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta R / R\right\} \cdot \sqrt{WL}\)</span></td>
 <td>1.2 % µm</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Resistor <code>rppd</code></td>
-<td><span class="math inline">\(\sigma(\Delta R / R) \cdot \sqrt{WL}\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta R / R\right\} \cdot \sqrt{WL}\)</span></td>
 <td>1.5 % µm</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Resistor <code>rhigh</code></td>
-<td><span class="math inline">\(\sigma(\Delta R / R) \cdot \sqrt{WL}\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta R / R\right\} \cdot \sqrt{WL}\)</span></td>
 <td>5 % µm</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MIM <code>cap_cmim</code></td>
-<td><span class="math inline">\(\sigma(\Delta C / C) \cdot \sqrt{WL}\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta C / C\right\} \cdot \sqrt{WL}\)</span></td>
 <td>1 % µm (estimated)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MOSFET <code>sg13_lv_nmos</code></td>
-<td><span class="math inline">\(\sigma(\Delta V_\mathrm{th}) \cdot \sqrt{WL}\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta V_\mathrm{th}\right\} \cdot \sqrt{WL}\)</span></td>
 <td>2 mV µm</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MOSFET <code>sg13_lv_nmos</code></td>
-<td><span class="math inline">\(\sigma(\Delta W)\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta W\right\}\)</span></td>
 <td>4 nm</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MOSFET <code>sg13_lv_nmos</code></td>
-<td><span class="math inline">\(\sigma(\Delta L)\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta L\right\}\)</span></td>
 <td>2 nm</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MOSFET <code>sg13_lv_nmos</code></td>
-<td><span class="math inline">\(\sigma(\Delta \mu/\mu)\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta \mu/\mu\right\}\)</span></td>
 <td>1 %</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MOSFET <code>sg13_lv_pmos</code></td>
-<td><span class="math inline">\(\sigma(\Delta V_\mathrm{th}) \cdot \sqrt{WL}\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta V_\mathrm{th}\right\} \cdot \sqrt{WL}\)</span></td>
 <td>2.5 mV µm</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MOSFET <code>sg13_lv_pmos</code></td>
-<td><span class="math inline">\(\sigma(\Delta W)\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta W\right\}\)</span></td>
 <td>5 nm</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MOSFET <code>sg13_lv_pmos</code></td>
-<td><span class="math inline">\(\sigma(\Delta L)\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta L\right\}\)</span></td>
 <td>1.5 nm</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MOSFET <code>sg13_lv_pmos</code></td>
-<td><span class="math inline">\(\sigma(\Delta \mu/\mu)\)</span></td>
+<td><span class="math inline">\(\sigma\left\{\Delta \mu/\mu\right\}\)</span></td>
 <td>0.5 %</td>
 </tr>
 </tbody>
@@ -3853,12 +3859,12 @@ Table&nbsp;3: IHP SG13G2 device mismatch
 </div>
 <p>Inspecting <a href="#eq-curmir-matching" class="quarto-xref">Equation&nbsp;38</a> we can see that by implementing a common-source transistor without source degeneration (i.e., <span class="math inline">\(V_\mathrm{deg} = 0\)</span>), the current mirror matching is dominated by the threshold voltage mismatch and the transconductance parameter mismatch of the MOSFETs:</p>
 <p><span id="eq-curmir-matching-nodeg"><span class="math display">\[
-\sigma^2\left(\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right) = \sigma^2\left(\Delta V_\mathrm{th}\right) \left( \frac{g_\mathrm{m}}{I_\mathrm{D}} \right)^2 + \sigma^2\left(\frac{\Delta K}{K}\right)
+\sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sigma^2\left\{\Delta V_\mathrm{th}\right\} \left( \frac{g_\mathrm{m}}{I_\mathrm{D}} \right)^2 + \sigma^2\left\{\frac{\Delta K}{K}\right\}
 \tag{41}\]</span></span></p>
 <p>The first term in <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a> can be minimized by choosing a low <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}\)</span> ratio, while the latter term is minimized by increasing the device area (i.e., increasing <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>).</p>
 <p>Looking at the resistively-degenerated current mirror, and using a large degeneration voltage <span class="math inline">\(V_\mathrm{deg}\)</span>, we can simplify <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;39</a> to</p>
 <p><span id="eq-curmir-matching-strongdeg"><span class="math display">\[
-\sigma^2\left(\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right) = \sigma^2\left(\frac{\Delta R}{R}\right)
+\sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sigma^2\left\{\frac{\Delta R}{R}\right\}
 \tag{42}\]</span></span></p>
 <p>indicating that now the current matching of the degenerated current mirror is defined by the resistor matching only. Since resistors typically have a significantly better matching than MOSFETs, this can lead to a significant improvement in current mirror accuracy.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Current Mirror Matching Calculation">
@@ -3872,27 +3878,27 @@ Table&nbsp;3: IHP SG13G2 device mismatch
 </div>
 <div class="callout-body-container callout-body">
 <p>Let us now calculate the current mirror matching of the simple current mirror. Using <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a>, and using the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 5\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 10\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 5\,\mu\text{m}\)</span>, we can calculate the standard deviation of the transconductance parameter mismatch using <a href="#eq-mosfet-mismatch-kp-alt" class="quarto-xref">Equation&nbsp;40</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>: <span class="math display">\[
-\sigma \left( \frac{\Delta K}{K} \right) = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
+\sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
 \]</span></p>
 <p>The standard deviation of the threshold voltage mismatch can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>: <span class="math display">\[
-\sigma (\Delta V_\mathrm{th}) = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.28\,\text{mV}.
+\sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.28\,\text{mV}.
 \]</span></p>
 <p>Bringing both results into <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a>, we get <span class="math display">\[
-\sigma \left( \frac{\Delta I_\mathrm{D}}{I_\mathrm{D}} \right) = \sqrt{ (0.28\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (1.00\,\%)^2} \approx 1\,\%.
+\sigma\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sqrt{ (0.28\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (1.00\,\%)^2} \approx 1\,\%.
 \]</span> Comparing with the simulation results in <a href="#fig-curmir-mc" class="quarto-xref">Figure&nbsp;53</a> for the basic current mirror, we can see that this matches quite ok with the standard deviation of about <span class="math inline">\(0.7\,\mu\text{A}/48.9\,\mu\text{A} = 1.4\,\%\)</span> obtained from the Monte-Carlo simulation.</p>
 <p>Let us now calculate the current mirror matching of the resistively-degenerated current mirror. Using <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;39</a>, we can analyze this configuration. We use the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 10\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 20\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 3\,\mu\text{m}\)</span>, for the MOSFET, and <span class="math inline">\(V_\mathrm{deg} = 0.2\,\text{V}\)</span>, <span class="math inline">\(L = 15\,\mu\text{m}\)</span> / <span class="math inline">\(W = 1\,\mu\text{m}\)</span> for the used <code>rppd</code> resistor.</p>
 <p>The standard deviation of the transconductance parameter mismatch can be calculated as <span class="math display">\[
-\sigma \left( \frac{\Delta K}{K} \right) = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
+\sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
 \]</span></p>
 <p>The standard deviation of the threshold voltage mismatch can be calculated <span class="math display">\[
-\sigma (\Delta V_\mathrm{th}) = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.26\,\text{mV}.
+\sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.26\,\text{mV}.
 \]</span></p>
 <p>The standard deviation of the resistor mismatch can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>: <span class="math display">\[
-\sigma \left( \frac{\Delta R}{R} \right) = \frac{1.5\,\%\mu\text{m}}{\sqrt{15\,\mu\text{m} \cdot 1\,\mu\text{m}}} = 0.39\,\%.
+\sigma\left\{\frac{\Delta R}{R}\right\} = \frac{1.5\,\%\mu\text{m}}{\sqrt{15\,\mu\text{m} \cdot 1\,\mu\text{m}}} = 0.39\,\%.
 \]</span></p>
 <p>Plugging these results into <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;39</a>, we get <span class="math display">\[
 \begin{split}
-\sigma^2\left(\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right) =&amp;
+\sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} =&amp;
 \left( \frac{0.26\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2 +
 \left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 1\,\% \right)^2 \\
 &amp; + \left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.39\,\%\right)^2 \\
@@ -4878,7 +4884,7 @@ Figure&nbsp;67: Reference voltage from simulated Banba bandgap circuit.
 <section id="sec-differential-ota" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> Differential OTAs</h1>
 <p>So far, we have discussed the implementation of OTAs with a differential input and a single-ended output. Often, in integrated circuits, we want to implement fully differential signal chains, as this allows an almost-rail-to-rail swing around a common-mode voltage. Further, noise pickup due to limited power-supply rejection ratio (PSRR) or coupling into the differential signal routing can be suppressed by designing amplifiers with high common-mode rejection ratio (CMRR).</p>
-<p>The OTA presented in <a href="#sec-ota-variants-single-ended" class="quarto-xref">Section&nbsp;8.10</a> can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;68</a>.</p>
+<p>The OTA presented in <a href="#sec-ota-variants-single-ended" class="quarto-xref">Section&nbsp;8.8</a> can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;68</a>.</p>
 <div id="cell-fig-diff-ota-resload" class="cell" data-execution_count="50">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-resload" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5767,14 +5773,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2025,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2025-12-05},
+  date = {2025-12-09},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2025. <span>“Analog
-Circuit Design.”</span> December 5, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> December 9, 2025. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
