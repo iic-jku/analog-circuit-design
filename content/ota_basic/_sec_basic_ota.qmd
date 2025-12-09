@@ -265,7 +265,9 @@ Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schem
 If you get stuck, you can find the testbench and 5T-OTA schematic [here](./xschem/ota-5t_tb-ac.svg) (for the small-signal analysis) and [here](./xschem/ota-5t_tb-tran.svg) (for the large-signal settling simulation). For interested students, the loop gain analysis with Middlebrook's and Tian's method of the 5T-OTA can be found [here](./xschem/ota-5t_tb-loopgain.svg).
 :::
 
-## MOSFET Mismatch {#sec-mosfet-mismatch}
+## Component Mismatch {#sec-mimatch}
+
+### MOSFET Mismatch {#sec-mosfet-mismatch}
 
 So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show **mismatch** due to tiny random fluctuations in manufacturing, and we have to account for this. The mismatch parameters for various components are summarized in @tbl-sg13g2-mismatch.
 
@@ -276,13 +278,13 @@ For a typical MOSFET, we usually consider two main mismatch effects [@Pelgrom_19
 
 Both effects influence the drain current of the MOSFET, and they are indirectly proportional to the size of the MOSFET. So, if we want to reduce the mismatch, we have to increase the size of the MOSFET by increasing its gate area $W \cdot L$.
 
-If we formulate the drain current mismatch standard deviation $\sigma(\Delta \ID / \ID)$ of two nominally identical MOSFET we get
+If we formulate the drain current mismatch standard deviation $\sdev[\Delta \ID / \ID]$ of two nominally identical MOSFET we get
 
 $$
-\sigma \left( \frac{\Delta \ID}{\ID} \right) = \frac{A_\mathrm{mosfet}}{\sqrt{W L}}
+\sdev[\frac{\Delta \ID}{\ID}] = \frac{A_\mathrm{mosfet}}{\sqrt{W L}}
 $$ {#eq-mosfet-mismatch}
 
-with $A_\mathrm{mosfet}$ being a mismatch parameter for a given CMOS technology and $\sigma (\cdot)$ being the standard deviation of the parameter in parentheses.
+with $A_\mathrm{mosfet}$ being a mismatch parameter for a given CMOS technology and $\sdev[\cdot]$ being the standard deviation of the parameter in parentheses.
 
 ::: {.callout-note title="MOSFET Mismatch"}
 Usually, the mismatch in MOSFETs is characterized via two mismatch parameters [@Pelgrom_1989]:
@@ -290,13 +292,13 @@ Usually, the mismatch in MOSFETs is characterized via two mismatch parameters [@
 - The threshold voltage mismatch standard deviation
 
 $$
-\sigma (\Delta \Vth) = \frac{A_\mathrm{vth}}{\sqrt{W L}}
+\sdev[\Delta \Vth] = \frac{A_\mathrm{vth}}{\sqrt{W L}}
 $$ {#eq-mosfet-mismatch-vth}
 
 - and standard deviation of the size mismatch
 
 $$
-\sigma \left( \frac{\Delta (W/L)}{(W/L)} \right) = \frac{A_\mathrm{k}}{\sqrt{W L}}.
+\sdev[\frac{\Delta (W/L)}{(W/L)}] = \frac{A_\mathrm{k}}{\sqrt{W L}}.
 $$ {#eq-mosfet-mismatch-kp}
 
 The resulting standard deviation of the input offset voltage $V_\mathrm{offs}$ of a differential pair with small $\gmid$ is then given by [@Razavi_Analog_CMOS]
@@ -323,12 +325,12 @@ The number of Monte Carlo simulation runs $N$ has to be large enough to approach
 
 As you can see in the previous discussion, running Monte Carlo simulations is a tedious process due to the large number of involved simulations and the required data processing of the heaps of simulation data. Luckily, CACE supports this type of simulation, and we will use it in @sec-basic-ota-simulation-pvt.
 
-## Resistor Mismatch {#sec-resistor-mismatch}
+### Resistor Mismatch {#sec-resistor-mismatch}
 
-Similar to the MOSFET mismatch discussed in @sec-mosfet-mismatch, resistors will also show mismatch. Equivalently to @eq-mosfet-mismatch the standard deviation of the resistor mismatch $\sigma(\Delta R / R)$ can be characterized by
+Similar to the MOSFET mismatch discussed in @sec-mosfet-mismatch, resistors will also show mismatch. Equivalently to @eq-mosfet-mismatch the standard deviation of the resistor mismatch $\sdev[\Delta R / R]$ can be characterized by
 
 $$
-\sigma \left( \frac{\Delta R}{R} \right) = \frac{A_\mathrm{res}}{\sqrt{W L}}
+\sdev[\frac{\Delta R}{R}] = \frac{A_\mathrm{res}}{\sqrt{W L}}
 $$ {#eq-resistor-mismatch}
 
 with $A_\mathrm{res}$ being a mismatch parameter for a given CMOS technology.
@@ -340,12 +342,12 @@ With @eq-resistor-mismatch we now have two criteria for how to select the width 
 
 If a resistor's dimensions are not limited by the two criteria above then we usually choose the minimum width that is allowed for a given resistor in a specific technology (for SG13G2 it is $L_\mathrm{min} = 0.5\,\mu\text{m}$) to save area and to minimize the parasitic capacitance of the resistor to substrate. 
 
-## Capacitor Mismatch {#sec-capacitor-mismatch}
+### Capacitor Mismatch {#sec-capacitor-mismatch}
 
-Similar to the resistor matching discussed in @sec-resistor-mismatch, capacitors will also show mismatch. Equivalently to @eq-mosfet-mismatch the standard deviation of the capacitor mismatch $\sigma(\Delta C / C)$ can be characterized by
+Similar to the resistor matching discussed in @sec-resistor-mismatch, capacitors will also show mismatch. Equivalently to @eq-mosfet-mismatch the standard deviation of the capacitor mismatch $\sdev[\Delta C / C]$ can be characterized by
 
 $$
-\sigma \left( \frac{\Delta C}{C} \right) = \frac{A_\mathrm{cap}}{\sqrt{W L}}
+\sdev[\frac{\Delta C}{C}] = \frac{A_\mathrm{cap}}{\sqrt{W L}}
 $$ {#eq-capacitor-mismatch}
 
 ## 5T-OTA Simulation versus PVT and MC {#sec-basic-ota-simulation-pvt}

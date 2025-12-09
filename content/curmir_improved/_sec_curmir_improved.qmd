@@ -252,7 +252,7 @@ $$ {#eq-curmir-matching}
 
 The definition of $V_\mathrm{drv}$ is adapted here and understood as half of the $\VDS$ saturation voltage, i.e., $V_\mathrm{drv} = \VDS[,sat] / 2 \approx \ID/ \gm$. The degeneration voltage is the voltage drop across the degeneration resistors and given by $V_\mathrm{deg} = \ID \cdot R$.
 
-The standard deviation of the resistor $\sigma(\Delta R / R)$ can be calculated using @eq-resistor-mismatch. Further, the threshold voltage mismatch $\sigma(\Delta \Vth)$ can be calculated using @eq-mosfet-mismatch-vth.
+The standard deviation of the resistor $\sdev[\Delta R / R]$ can be calculated using @eq-resistor-mismatch. Further, the threshold voltage mismatch $\sdev[\Delta \Vth]$ can be calculated using @eq-mosfet-mismatch-vth.
 
 By using the approximation of @eq-mosfet-gmid-stronginversion, we can express @eq-curmir-matching in terms of our preferred sizing parameter $\gm / \ID$:
 
@@ -264,30 +264,30 @@ $$
 \end{split}
 $$ {#eq-curmir-matching-alt}
 
-The standard deviation of the transconductance parameter mismatch $\sigma(\Delta K / K)$ can be calculated similarly as (which is an alternative form to @eq-mosfet-mismatch-kp)
+The standard deviation of the transconductance parameter mismatch $\sdev[\Delta K / K]$ can be calculated similarly as (which is an alternative form to @eq-mosfet-mismatch-kp)
 
 $$
 \var[\frac{\Delta K}{K}] = \frac{\var[\Delta W]}{W^2} + \frac{\var[\Delta L]}{L^2} + \var[\frac{\Delta \mu}{\mu}],
 $$ {#eq-mosfet-mismatch-kp-alt}
 
-where $\sigma (\Delta W)$ and $\sigma (\Delta L)$ are the process-dependent mismatch parameters for the width $W$ and length $L$, respectively, and $\sigma(\Delta \mu / \mu)$ is the mobility mismatch parameter.
+where $\sdev[\Delta W]$ and $\sdev[\Delta L]$ are the process-dependent mismatch parameters for the width $W$ and length $L$, respectively, and $\sdev[\Delta \mu / \mu]$ is the mobility mismatch parameter.
 
 The standard deviations of the components of the SG13G2 process are summarized in @tbl-sg13g2-mismatch. For mismatch calculations we can assume them as uncorrelated.
 
 | Component             | Matching Parameter                     | Value              |
 |:----------------------|----------------------------------------|--------------------|
-| Resistor `rsil`       | $\sigma(\Delta R / R) \cdot \sqrt{WL}$ | 1.2 % µm           |
-| Resistor `rppd`       | $\sigma(\Delta R / R) \cdot \sqrt{WL}$ | 1.5 % µm           |
-| Resistor `rhigh`      | $\sigma(\Delta R / R) \cdot \sqrt{WL}$ | 5 % µm             |
-| MIM `cap_cmim`        | $\sigma(\Delta C / C) \cdot \sqrt{WL}$ | 1 % µm (estimated) |
-| MOSFET `sg13_lv_nmos` | $\sigma(\Delta \Vth) \cdot \sqrt{WL}$  | 2 mV µm            |
-| MOSFET `sg13_lv_nmos` | $\sigma(\Delta W)$                     | 4 nm               |
-| MOSFET `sg13_lv_nmos` | $\sigma(\Delta L)$                     | 2 nm               |
-| MOSFET `sg13_lv_nmos` | $\sigma(\Delta \mu/\mu)$               | 1 %                |
-| MOSFET `sg13_lv_pmos` | $\sigma(\Delta \Vth) \cdot \sqrt{WL}$  | 2.5 mV µm          |
-| MOSFET `sg13_lv_pmos` | $\sigma(\Delta W)$                     | 5 nm               |
-| MOSFET `sg13_lv_pmos` | $\sigma(\Delta L)$                     | 1.5 nm             |
-| MOSFET `sg13_lv_pmos` | $\sigma(\Delta \mu/\mu)$               | 0.5 %              |
+| Resistor `rsil`       | $\sdev[\Delta R / R] \cdot \sqrt{WL}$ | 1.2 % µm           |
+| Resistor `rppd`       | $\sdev[\Delta R / R] \cdot \sqrt{WL}$ | 1.5 % µm           |
+| Resistor `rhigh`      | $\sdev[\Delta R / R] \cdot \sqrt{WL}$ | 5 % µm             |
+| MIM `cap_cmim`        | $\sdev[\Delta C / C] \cdot \sqrt{WL}$ | 1 % µm (estimated) |
+| MOSFET `sg13_lv_nmos` | $\sdev[\Delta \Vth] \cdot \sqrt{WL}$  | 2 mV µm            |
+| MOSFET `sg13_lv_nmos` | $\sdev[\Delta W]$                     | 4 nm               |
+| MOSFET `sg13_lv_nmos` | $\sdev[\Delta L]$                     | 2 nm               |
+| MOSFET `sg13_lv_nmos` | $\sdev[\Delta \mu/\mu]$               | 1 %                |
+| MOSFET `sg13_lv_pmos` | $\sdev[\Delta \Vth] \cdot \sqrt{WL}$  | 2.5 mV µm          |
+| MOSFET `sg13_lv_pmos` | $\sdev[\Delta W]$                     | 5 nm               |
+| MOSFET `sg13_lv_pmos` | $\sdev[\Delta L]$                     | 1.5 nm             |
+| MOSFET `sg13_lv_pmos` | $\sdev[\Delta \mu/\mu]$               | 0.5 %              |
 
 : IHP SG13G2 device mismatch {#tbl-sg13g2-mismatch}
 
@@ -310,17 +310,17 @@ indicating that now the current matching of the degenerated current mirror is de
 ::: {.callout-note title="Current Mirror Matching Calculation"}
 Let us now calculate the current mirror matching of the simple current mirror. Using @eq-curmir-matching-nodeg, and using the sizing values of $\gm / \ID = 5\,\text{V}^{-1}$, $W = 10\,\mu\text{m}$, and $L = 5\,\mu\text{m}$, we can calculate the standard deviation of the transconductance parameter mismatch using @eq-mosfet-mismatch-kp-alt and @tbl-sg13g2-mismatch:
 $$
-\sigma \left( \frac{\Delta K}{K} \right) = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
+\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
 $$
 
 The standard deviation of the threshold voltage mismatch can be calculated using @eq-mosfet-mismatch-vth and @tbl-sg13g2-mismatch:
 $$
-\sigma (\Delta \Vth) = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.28\,\text{mV}.
+\sdev[\Delta \Vth] = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.28\,\text{mV}.
 $$
 
 Bringing both results into @eq-curmir-matching-nodeg, we get
 $$
-\sigma \left( \frac{\Delta \ID}{\ID} \right) = \sqrt{ (0.28\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (1.00\,\%)^2} \approx 1\,\%.
+\sdev[\frac{\Delta \ID}{\ID}] = \sqrt{ (0.28\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (1.00\,\%)^2} \approx 1\,\%.
 $$
  Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this matches quite ok with the standard deviation of about $0.7\,\mu\text{A}/48.9\,\mu\text{A} = 1.4\,\%$ obtained from the Monte-Carlo simulation.
 
@@ -328,17 +328,17 @@ $$
  
 The standard deviation of the transconductance parameter mismatch can be calculated as
 $$
-\sigma \left( \frac{\Delta K}{K} \right) = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
+\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
 $$
 
 The standard deviation of the threshold voltage mismatch can be calculated
 $$
-\sigma (\Delta \Vth) = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.26\,\text{mV}.
+\sdev[\Delta \Vth] = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.26\,\text{mV}.
 $$
 
 The standard deviation of the resistor mismatch can be calculated using @eq-resistor-mismatch and @tbl-sg13g2-mismatch:
 $$
-\sigma \left( \frac{\Delta R}{R} \right) = \frac{1.5\,\%\mu\text{m}}{\sqrt{15\,\mu\text{m} \cdot 1\,\mu\text{m}}} = 0.39\,\%.
+\sdev[\frac{\Delta R}{R}] = \frac{1.5\,\%\mu\text{m}}{\sqrt{15\,\mu\text{m} \cdot 1\,\mu\text{m}}} = 0.39\,\%.
 $$
 
 Plugging these results into @eq-curmir-matching-alt, we get
