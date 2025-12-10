@@ -1,0 +1,68 @@
+::: {.content-hidden}
+Copyright (C) 2025 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-current-mirror-reg-casc-lv
+#| echo: false
+#| fig-cap: "A low-voltage regulated-cascode current mirror. The differential common-gate error amplifier is used to keep the drain voltage of the bottom transistors constant, thus improving the current mirroring accuracy and output resistance."
+import schemdraw as sd
+import schemdraw.elements as elm
+sd.svgconfig.svg2 = False
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2)
+    d.config(fontsize=16)
+
+    ibias1 = elm.SourceI().down().label(r'$I_\mathrm{bias1}$').dot()
+    res = elm.Resistor().down().dot().label('$R$')
+    M3 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$W_2/L_2$')
+    elm.Line().down(d.unit)
+    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$W_1/L_1$')
+    elm.Ground()
+    elm.Line().right(d.unit/4).at(M1.gate).dot()
+    elm.Line().up().toy(res.end)
+    elm.Line().left().to(res.end)
+
+    elm.Line().right().at(M1.gate).length(d.unit*4)
+    M2 = elm.AnalogNFet(offset_gate=False).anchor('gate').drop('drain').theta(0).reverse().label(r'$k \cdot W_1/L_1$', ofst=-2.8)
+    elm.Line().up(d.unit)
+    M4 = elm.AnalogNFet(offset_gate=False).anchor('source').theta(0).reverse().label(r'$k \cdot W_2/L_2$', ofst=-2.8)
+    elm.Ground().at(M2.source)
+    elm.Line().at(M4.drain).up().length(d.unit).dot(open=True).label(r'$I_\mathrm{out} = k \cdot I_\mathrm{bias1}$', 'right')
+
+    elm.Line().right(d.unit*3/4).at(M3.gate)
+    elm.Line().up().toy(res.start)
+    elm.Line().left().to(res.start)
+
+    # auxiliary amplifier
+    elm.Line().at(M4.gate).left(d.unit).dot().color('blue')
+    Maux1 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).drop('source').reverse().color('blue')
+    elm.Line().down(d.unit*2/4).color('blue')
+    elm.Line().left().tox(M1.drain).dot().color('blue')
+    elm.Line().left(d.unit/4).at(Maux1.gate).color('blue').dot()
+    d.push()
+    elm.Line().left(d.unit/4).color('blue')
+    Maux2 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).drop('source').color('blue')
+    elm.Line().down(d.unit*1/4).color('blue')
+    elm.Line().right().tox(M2.drain).dot().color('blue')
+    d.pop()
+    elm.Line().up().toy(Maux2.drain).color('blue')
+    elm.Line().to(Maux2.drain).dot().color('blue')
+    ibias2 = elm.SourceI().at(Maux1.drain).up().toy(ibias1.start).reverse().label(r'$I_\mathrm{bias3}$').color('blue')
+    ibias3 = elm.SourceI().at(Maux2.drain).up().toy(ibias1.start).reverse().label(r'$I_\mathrm{bias2}$').color('blue')
+
+    # vdd line
+    elm.Line().at((ibias1.start[0]-d.unit/4, ibias1.start[1])).to((ibias2.end[0]+d.unit/4, ibias2.end[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
+```

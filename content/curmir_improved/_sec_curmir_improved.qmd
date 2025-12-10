@@ -223,6 +223,12 @@ ax = plt.gca()
 plt.tight_layout()
 ```
 
+## Low-Voltage Regulated Current Mirror {#sec-low-voltage-regulated-curmir}
+
+The one drawback of the regulated cascode current mirror shown in @fig-current-mirror-reg-casc is its relatively high compliance voltage, which is due to the fact that $\VDS[1] = \VGS[aux]$. One alternative implementation that reduces the compliance voltage is shown in @fig-current-mirror-reg-casc-lv. Here, we use a differential common-gate stage (essentially a current mirror with inputs at the sources of the transistors) as an auxiliary amplifier, which significantly reduces the required voltage headroom, at the expense of a slightly increased circuit complexity [@Ivanov_Opamp]. However, the bias current sources $I_\mathrm{bias2,3}$ of the auxiliary amplifier introduce some additional noise and mismatch.
+
+{{< include /content/curmir_improved/_fig_curmir_regcasc_lv.qmd >}}
+
 ## Current Source Variations Summary {#sec-curmir-variations-summary}
 
 In summary, we can classify the usage of the different current mirror structures as follows:
@@ -231,6 +237,7 @@ In summary, we can classify the usage of the different current mirror structures
 - The **high-swing cascode current mirror** is a good choice when higher output resistance is needed, while still keeping the circuit relatively simple.
 - The **source-degenerated current mirror** is a good choice when the best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used. 
 - The **regulated cascode current mirror** is the best choice when the highest output resistance is required, and the additional complexity and output noise are acceptable.
+- The **low-voltage regulated cascode current mirror** is a good alternative to the regulated cascode when a low compliance voltage is required.
 
 Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are sized for similar chip area and a fair comparison.
 
