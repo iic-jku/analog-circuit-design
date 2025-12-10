@@ -223,6 +223,8 @@ ax = plt.gca()
 plt.tight_layout()
 ```
 
+## Current Source Variations Summary {#sec-curmir-variations-summary}
+
 In summary, we can classify the usage of the different current mirror structures as follows:
 
 - For general applications where output resistance and current accuracy are not critical, the **basic current mirror** can be used. It also has the lowest compliance voltage since only one transistor is stacked.
@@ -267,28 +269,27 @@ $$ {#eq-curmir-matching-alt}
 The standard deviation of the transconductance parameter mismatch $\sdev[\Delta K / K]$ can be calculated similarly as (which is an alternative form to @eq-mosfet-mismatch-kp)
 
 $$
-\var[\frac{\Delta K}{K}] = \frac{\var[\Delta W]}{W^2} + \frac{\var[\Delta L]}{L^2} + \var[\frac{\Delta \mu}{\mu}],
+\var[\frac{\Delta K}{K}] = \var[\Delta W] \cdot \frac{1}{W^2} + \var[\Delta L] \cdot \frac{1}{L^2} + \var[\frac{\Delta \mu}{\mu}] \cdot \frac{1}{W L},
 $$ {#eq-mosfet-mismatch-kp-alt}
 
 where $\sdev[\Delta W]$ and $\sdev[\Delta L]$ are the process-dependent mismatch parameters for the width $W$ and length $L$, respectively, and $\sdev[\Delta \mu / \mu]$ is the mobility mismatch parameter.
 
 The standard deviations of the components of the SG13G2 process are summarized in @tbl-sg13g2-mismatch. For mismatch calculations we can assume them as uncorrelated.
 
-| Component             | Matching Parameter                     | Value              |
-|:----------------------|----------------------------------------|--------------------|
-| Resistor `rsil`       | $\sdev[\Delta R / R] \cdot \sqrt{WL}$ | 1.2 % µm           |
-| Resistor `rppd`       | $\sdev[\Delta R / R] \cdot \sqrt{WL}$ | 1.5 % µm           |
-| Resistor `rhigh`      | $\sdev[\Delta R / R] \cdot \sqrt{WL}$ | 5 % µm             |
-| MIM `cap_cmim`        | $\sdev[\Delta C / C] \cdot \sqrt{WL}$ | 1 % µm (estimated) |
-| MOSFET `sg13_lv_nmos` | $\sdev[\Delta \Vth] \cdot \sqrt{WL}$  | 2 mV µm            |
-| MOSFET `sg13_lv_nmos` | $\sdev[\Delta W]$                     | 4 nm               |
-| MOSFET `sg13_lv_nmos` | $\sdev[\Delta L]$                     | 2 nm               |
-| MOSFET `sg13_lv_nmos` | $\sdev[\Delta \mu/\mu]$               | 1 %                |
-| MOSFET `sg13_lv_pmos` | $\sdev[\Delta \Vth] \cdot \sqrt{WL}$  | 2.5 mV µm          |
-| MOSFET `sg13_lv_pmos` | $\sdev[\Delta W]$                     | 5 nm               |
-| MOSFET `sg13_lv_pmos` | $\sdev[\Delta L]$                     | 1.5 nm             |
-| MOSFET `sg13_lv_pmos` | $\sdev[\Delta \mu/\mu]$               | 0.5 %              |
-
+| Component             | Matching Parameter                      | Value              |
+|:----------------------|-----------------------------------------|--------------------|
+| Resistor `rsil`       | $\sdev[\Delta R / R] \cdot \sqrt{WL}$   | 1.2 % µm           |
+| Resistor `rppd`       | $\sdev[\Delta R / R] \cdot \sqrt{WL}$   | 1.5 % µm           |
+| Resistor `rhigh`      | $\sdev[\Delta R / R] \cdot \sqrt{WL}$   | 5 % µm             |
+| MIM `cap_cmim`        | $\sdev[\Delta C / C] \cdot \sqrt{WL}$   | 1 % µm (estimated) |
+| MOSFET `sg13_lv_nmos` | $\sdev[\Delta \Vth] \cdot \sqrt{WL}$    | 3.9 mV µm          |
+| MOSFET `sg13_lv_nmos` | $\sdev[\Delta W]$                       | 4 nm               |
+| MOSFET `sg13_lv_nmos` | $\sdev[\Delta L]$                       | 2 nm               |
+| MOSFET `sg13_lv_nmos` | $\sdev[\Delta \mu/\mu] \cdot \sqrt{WL}$ | 0.5 % µm           |
+| MOSFET `sg13_lv_pmos` | $\sdev[\Delta \Vth] \cdot \sqrt{WL}$    | 2.2 mV µm          |
+| MOSFET `sg13_lv_pmos` | $\sdev[\Delta W]$                       | 4 nm               |
+| MOSFET `sg13_lv_pmos` | $\sdev[\Delta L]$                       | 2 nm               |
+| MOSFET `sg13_lv_pmos` | $\sdev[\Delta \mu/\mu] \cdot \sqrt{WL}$ | 0.33 % µm          |
 : IHP SG13G2 device mismatch {#tbl-sg13g2-mismatch}
 
 Inspecting @eq-curmir-matching we can see that by implementing a common-source transistor without source degeneration (i.e., $V_\mathrm{deg} = 0$), the current mirror matching is dominated by the threshold voltage mismatch and the transconductance parameter mismatch of the MOSFETs:
@@ -310,7 +311,7 @@ indicating that now the current matching of the degenerated current mirror is de
 ::: {.callout-note title="Current Mirror Matching Calculation"}
 Let us now calculate the current mirror matching of the simple current mirror. Using @eq-curmir-matching-nodeg, and using the sizing values of $\gm / \ID = 5\,\text{V}^{-1}$, $W = 10\,\mu\text{m}$, and $L = 5\,\mu\text{m}$, we can calculate the standard deviation of the transconductance parameter mismatch using @eq-mosfet-mismatch-kp-alt and @tbl-sg13g2-mismatch:
 $$
-\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
+\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} \right)^2 } = 0.08\,\%.
 $$
 
 The standard deviation of the threshold voltage mismatch can be calculated using @eq-mosfet-mismatch-vth and @tbl-sg13g2-mismatch:
@@ -320,15 +321,15 @@ $$
 
 Bringing both results into @eq-curmir-matching-nodeg, we get
 $$
-\sdev[\frac{\Delta \ID}{\ID}] = \sqrt{ (0.28\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (1.00\,\%)^2} \approx 1\,\%.
+\sdev[\frac{\Delta \ID}{\ID}] = \sqrt{ (0.28\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (0.08\,\%)^2} \approx 0.16\,\%.
 $$
- Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this matches quite ok with the standard deviation of about $0.7\,\mu\text{A}/48.9\,\mu\text{A} = 1.4\,\%$ obtained from the Monte-Carlo simulation.
+ Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this matches quite ok with the standard deviation of about $0.21\,\mu\text{A}/48.9\,\mu\text{A} = 0.43\,\%$ obtained from the Monte-Carlo simulation.
 
  Let us now calculate the current mirror matching of the resistively-degenerated current mirror. Using @eq-curmir-matching-alt, we can analyze this configuration. We use the sizing values of $\gm / \ID = 10\,\text{V}^{-1}$, $W = 20\,\mu\text{m}$, and $L = 3\,\mu\text{m}$, for the MOSFET, and $V_\mathrm{deg} = 0.2\,\text{V}$, $L = 15\,\mu\text{m}$ / $W = 1\,\mu\text{m}$ for the used `rppd` resistor.
  
 The standard deviation of the transconductance parameter mismatch can be calculated as
 $$
-\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + (1\,\%)^2 } = 1.00\,\%.
+\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.07\,\%.
 $$
 
 The standard deviation of the threshold voltage mismatch can be calculated
@@ -346,11 +347,11 @@ $$
 \begin{split}
 \var[\frac{\Delta \ID}{\ID}] =&
 \left( \frac{0.26\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2 +
-\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 1\,\% \right)^2 \\
+\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.07\,\% \right)^2 \\
 & + \left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.39\,\%\right)^2 \\
-=& (0.43\,\%)^2.
+=& (0.26\,\%)^2.
 \end{split}
 $$
 
-We see that compared to the basic current mirror, the resistively-degenerated current mirror achieves a significantly improved current matching. This matches quite well with the simulation results in @fig-curmir-mc for the resistively-degenerated current mirror, where we obtained a standard deviation of about $0.28\,\mu\text{A}/48.8\,\mu\text{A} = 0.57\,\%$ from the Monte-Carlo simulation.
+We see that compared to the basic current mirror, the resistively-degenerated current mirror achieves a significantly improved current matching. This matches quite well with the simulation results in @fig-curmir-mc for the resistively-degenerated current mirror, where we obtained a standard deviation of about $0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.25\,\%$ from the Monte-Carlo simulation.
 :::

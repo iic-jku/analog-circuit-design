@@ -416,8 +416,8 @@ b=0
 m=1
 }
 C {sg13g2_pr/rppd.sym} 970 -400 0 0 {name=R31
-w=1e-6
-l=15e-6
+w=3e-6
+l=45e-6
 model=rppd
 body=gnd
 spiceprefix=X
@@ -425,8 +425,8 @@ b=0
 m=1
 }
 C {sg13g2_pr/rppd.sym} 1180 -400 0 1 {name=R32
-w=1e-6
-l=15e-6
+w=3e-6
+l=45e-6
 model=rppd
 body=gnd
 spiceprefix=X
