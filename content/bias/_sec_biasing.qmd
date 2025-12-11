@@ -98,6 +98,8 @@ By proper selection of $R_1$, $R_2$ and $m$ we can satisfy @eq-bandgap-voltage-w
 
 ::: {.callout-note title="Improved Bandgap Reference"}
 For an improved implementation of @fig-bandgap-simple, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, @eq-vbe-vs-temp and @eq-delta-vbe-vs-temp build on the relationship $I_\mathrm{C} = f(\VBE)$, while we control $I_\mathrm{E}$ in this circuit. If $\beta$ is large then $I_\mathrm{C} \approx I_\mathrm{E}$, but this is not the case for the used PNPs.
+
+Many more different bandgap architectures exist, with the Kuijk [@Kuijk_bandgap] or the Brokaw [@Brokaw_bandgap] types being popular choices.
 :::
 
 The circuit of @fig-bandgap-simple has been implemented in Xschem and is shown in @fig-bandgap-schematic. The current sources have been improved by using cascodes. We are using the low-voltage current mirror type already introduced in @sec-improved-ota. The bias voltages for the cascodes are generated via the voltage drops of $R_3$ and $R_4$, respectively. 
