@@ -362,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"techsweep_sg13_plots_nmos_overview/plots"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"overview/plots"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># widths used for characterization</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -434,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="fl">1.5</span>)</span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>plt.axvline(x <span class="op">=</span> df1[<span class="st">'vth'</span>].values[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'k'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gmID_fT_VGS.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"overview/plots/NMOS_gmID_fT_VGS.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -453,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="st">', $L$='</span><span class="op">+</span><span class="bu">str</span>(L1)<span class="op">+</span><span class="vs">r'µm, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fTgmID_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"overview/plots/NMOS_fTgmID_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -501,7 +501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fT_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"overview/plots/NMOS_fT_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -530,7 +530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gmgds_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"overview/plots/NMOS_gmgds_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -563,7 +563,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_IDW_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"overview/plots/NMOS_IDW_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -592,7 +592,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_Vdssat_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"overview/plots/NMOS_Vdssat_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -628,7 +628,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_gamma_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"overview/plots/NMOS_gamma_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -658,7 +658,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plt.grid(which<span class="op">=</span><span class="st">'major'</span>)</span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plt.title(devices[choice]<span class="op">+</span><span class="vs">r', </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{DS}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VDS1)<span class="op">+</span><span class="vs">r'V, </span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{SB}</span><span class="dv">$</span><span class="vs">='</span><span class="op">+</span><span class="bu">str</span>(VSB1)<span class="op">+</span><span class="st">'V'</span>)</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"techsweep_sg13_plots_nmos_overview/plots/NMOS_fco_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"overview/plots/NMOS_fco_gmID.eps"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
