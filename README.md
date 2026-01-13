@@ -3,7 +3,7 @@
 [![Quarto Publish](https://github.com/iic-jku/analog-circuit-design/actions/workflows/quarto-publish.yml/badge.svg?branch=main)](https://github.com/iic-jku/analog-circuit-design/actions/workflows/quarto-publish.yml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14387481.svg)](https://doi.org/10.5281/zenodo.14387481)
 
-**(c) 2024-2025 Harald Pretl and co-authors, Department for Integrated Circuits (ICD), Johannes Kepler University, Linz (JKU)**
+**(c) 2024-2026 Harald Pretl and co-authors, Department for Integrated Circuits (ICD), Johannes Kepler University, Linz (JKU)**
 
 This is the material for an intermediate-level MOSFET circuit design course, held at JKU under course number 336.009 ("KV Analoge Schaltungstechnik"). Follow this [link to access the material](https://iic-jku.github.io/analog-circuit-design/analog_circuit_design.html).
 
