@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-01-08">
+<meta name="dcterms.date" content="2026-01-13">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -485,7 +485,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-differential-ota" id="toc-sec-differential-ota" class="nav-link" data-scroll-target="#sec-differential-ota"><span class="header-section-number">13</span> Differential OTAs</a>
   <ul class="collapse">
-  <li><a href="#miller-compensation" id="toc-miller-compensation" class="nav-link" data-scroll-target="#miller-compensation"><span class="header-section-number">13.1</span> Miller Compensation</a></li>
+  <li><a href="#sec-miller-compensation" id="toc-sec-miller-compensation" class="nav-link" data-scroll-target="#sec-miller-compensation"><span class="header-section-number">13.1</span> Miller Compensation</a></li>
   <li><a href="#common-mode-regulation" id="toc-common-mode-regulation" class="nav-link" data-scroll-target="#common-mode-regulation"><span class="header-section-number">13.2</span> Common-Mode Regulation</a></li>
   <li><a href="#final-differential-ota" id="toc-final-differential-ota" class="nav-link" data-scroll-target="#final-differential-ota"><span class="header-section-number">13.3</span> Final Differential OTA</a></li>
   <li><a href="#differential-ota-variants" id="toc-differential-ota-variants" class="nav-link" data-scroll-target="#differential-ota-variants"><span class="header-section-number">13.4</span> Differential OTA Variants</a></li>
@@ -568,7 +568,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 8, 2026</p>
+      <p class="date">January 13, 2026</p>
     </div>
   </div>
   
@@ -3419,7 +3419,7 @@ Figure&nbsp;39: Single-ended OTA with rail-to-rail output stage.
 </div>
 </div>
 </div>
-<p>Another popular version is shown in <a href="#fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a>. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. <a href="#fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a> shows a very simplistic Miller-compensation using <span class="math inline">\(C_\mathrm{M}\)</span>. Often, we would want to implement a more advanced scheme. Some examples can be found in <span class="citation" data-cites="Baker_compensating_OPAMP">(<a href="#ref-Baker_compensating_OPAMP" role="doc-biblioref">Baker, n.d.</a>)</span>. An interesting technique is the indirect compensation with cascoded input differential pairs (see <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;57</a>) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from <span class="math inline">\(V_\mathrm{DD}\)</span> of one <span class="math inline">\(V_\mathrm{GS}\)</span> (<span class="math inline">\(V_\mathrm{GS3}\)</span> on the left side, <span class="math inline">\(V_\mathrm{GS5}\)</span> on the right side).</p>
+<p>Another popular version is shown in <a href="#fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a>. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. <a href="#fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a> shows a very simplistic Miller-compensation (see <a href="#sec-miller-compensation" class="quarto-xref">Section&nbsp;13.1</a>) using <span class="math inline">\(C_\mathrm{M}\)</span>. Often, we would want to implement a more advanced scheme. Some examples can be found in <span class="citation" data-cites="Baker_compensating_OPAMP">(<a href="#ref-Baker_compensating_OPAMP" role="doc-biblioref">Baker, n.d.</a>)</span>. An interesting technique is the indirect compensation with cascoded input differential pairs (see <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;57</a>) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from <span class="math inline">\(V_\mathrm{DD}\)</span> of one <span class="math inline">\(V_\mathrm{GS}\)</span> (<span class="math inline">\(V_\mathrm{GS3}\)</span> on the left side, <span class="math inline">\(V_\mathrm{GS5}\)</span> on the right side).</p>
 <div id="cell-fig-ota-se-twostage" class="cell" data-execution_count="30">
 <div class="cell-output cell-output-display">
 <div id="fig-ota-se-twostage" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4931,8 +4931,8 @@ Figure&nbsp;69: Differential two-stage OTA with resistive load.
 <p>For differential operation, the differential pair of <span class="math inline">\(M_{1,2}\)</span> is loaded by <span class="math inline">\(R_\mathrm{load}\)</span> and provides fairly high gain. The second gain stage is formed by current-source-loaded common-source stages <span class="math inline">\(M_{4,6}\)</span> and provides additional gain (of course, this is a function of the load impedance).</p>
 <p>As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;69</a> we have a low-frequency pole at the drains of <span class="math inline">\(M_{1,3}\)</span> and <span class="math inline">\(M_{2,5}\)</span> and a further low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into <em>Miller compensation</em>.</p>
 <p>Of course, loop gain analysis of differential OTAs can and should be carried out. An exemplary testbench where the loop gain is simulated with Rosenstark’s, Middlebrook’s, and Tian’s method can be found <a href="xschem/ota-differential_tb-loopgain.sch">here</a>. Note that there is no underlying circuit right now and it should only show how it could be done.</p>
-<section id="miller-compensation" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="miller-compensation"><span class="header-section-number">13.1</span> Miller Compensation</h2>
+<section id="sec-miller-compensation" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="sec-miller-compensation"><span class="header-section-number">13.1</span> Miller Compensation</h2>
 <p>A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies, that we have enough <a href="https://en.wikipedia.org/wiki/Phase_margin">phase margin</a> in the closed-loop system. We may strive for <span class="math inline">\(60^\circ\)</span> as this will only cause a minor peaking in the frequency response <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span>.</p>
 <p>The question now is where to implement this dominant pole. In order to create a low-frequency pole we need a high-impedance point and a large capacitance. Placing just a large capacitor is unwelcome, as this causes large area consumption on chip.</p>
 <p>Luckily, we know from the analysis in <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;17.1</a> that we can use voltage gain to increase the apparent value of a capacitor by feedback. Inspecting our circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;69</a> we see that we have voltage gain from node <span class="math inline">\(A\)</span> to node <span class="math inline">\(B\)</span> and node <span class="math inline">\(A'\)</span> and <span class="math inline">\(B'\)</span>, respectively. This means we have an opportunity to strap a capacitor between those nodes, and create a dominant pole at node <span class="math inline">\(A\)</span> (and <span class="math inline">\(A'\)</span>).</p>
@@ -5810,14 +5810,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2026-01-08},
+  date = {2026-01-13},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-Circuit Design.”</span> January 8, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> January 13, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
