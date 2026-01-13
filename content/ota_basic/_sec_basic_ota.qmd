@@ -16,7 +16,7 @@ limitations under the License.
 
 # A Basic 5-Transistor OTA {#sec-basic-ota}
 
-Armed with the insights of basic transistor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair) we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
+Armed with the insights of basic transistor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair), we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
 
 {{< include /content/ota_basic/_fig_basic_ota.qmd >}}
 
@@ -54,7 +54,7 @@ In order to design an OTA we need an application, and from this we need to deriv
 
 {{< include /content/ota_basic/_fig_voltage_buffer_ota.qmd >}}
 
-If the voltage gain of the OTA in @fig-voltage-buffer-ota is high, then $V_\mathrm{out} \approx V_\mathrm{in}$. We now want to design an OTA for this application fitting the following specification values (see @tbl-voltage-buffer-spec). These values are rather typical of what could be expected for such a buffer design.
+If the voltage gain of the OTA in @fig-voltage-buffer-ota is high, then $V_\mathrm{out} \approx V_\mathrm{in}$. We now want to design an OTA for this application, fitting the following specification values (see @tbl-voltage-buffer-spec). These values are rather typical of what could be expected for such a buffer design.
 
 | Specification                                           | Value                              | Unit    |
 |:--------------------------------------------------------|:----------------------------------:|:-------:|
@@ -74,9 +74,9 @@ If the voltage gain of the OTA in @fig-voltage-buffer-ota is high, then $V_\math
 
 ## Large-Signal Analysis of the OTA {#sec-basic-ota-large-signal}
 
-The first step when receiving a design task is to look at the specifications, and see whether they make sense. The detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) do back-of-the-envelope gauging if the specification makes sense, and (b) use the derived analytical equations as guide for the sizing procedure.
+The first step when receiving a design task is to look at the specifications and see whether they make sense. The detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) do back-of-the-envelope gauging if the specification makes sense, and (b) use the derived analytical equations as guide for the sizing procedure.
 
-In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met. Since we do not know yet the resulting $\VGS$ of the transistors we use $0.6\,\text{V}$ as an initial guess. If we run into issues with that guess we know how to later steer the sizing procedure. The follower configuration showing the transistor-level details including estimated operating points is shown in @fig-basic-ota-dcop.
+In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met. Since we do not know yet the resulting $\VGS$ of the transistors, we use $0.6\,\text{V}$ as an initial guess. If we run into issues with that guess, we know how to later steer the sizing procedure. The follower configuration showing the transistor-level details including estimated operating points is shown in @fig-basic-ota-dcop.
 
 {{< include /content/ota_basic/_fig_basic_ota_dcop.qmd >}}
 
@@ -84,19 +84,22 @@ In terms of large-signal operation, we will now check whether the input and outp
 * When the input is at its minimum of $0.7\,\text{V}$, we see that the $\VDS[5]$ of $M_5$ is calculated as $\VDS[5] = V_\mathrm{in} - \VGS[1] = 0.7 - 0.6 = 0.1\,\text{V}$, so this leaves little margin, but we can make $\VGS[1]$ smaller, so it should work out.
 * For the output voltage, when the output voltage is on the high side, it leaves $|\VDS[4]| = \VDD - V_\mathrm{out} = 1.45 - 0.9 = 0.55\,\text{V}$, which is enough margin.
 
-In summary, we think that we can make an NMOS-input OTA like the one in @fig-basic-ota (and in @fig-basic-ota-dcop) work for the required supply and input- and output-voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA, or a NMOS/PMOS-input OTA.
+In summary, we think that we can make an NMOS-input OTA like the one in @fig-basic-ota (and in @fig-basic-ota-dcop) work for the required supply and input and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA or an NMOS/PMOS-input OTA.
 
-Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, the complete bias current in the OTA is steered towards the output (try to understand why this is the case), so when the output capacitor is fully discharged, and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is
+Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, the complete bias current in the OTA is steered toward the output (try to understand why this is the case), so when the output capacitor is fully discharged and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is
+
 $$
-T_\mathrm{slew} \approx \frac{C_\mathrm{load} \cdot V_\mathrm{out,max}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 0.9}{10 \cdot 10^{-6}} = 4.5\,\text{ns}
+T_\mathrm{slew} \approx \frac{C_\mathrm{load} \cdot V_\mathrm{out,max}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 0.9}{10 \cdot 10^{-6}} = 4.5\,\text{ns}.
 $$
-so this leaves plenty of margin for additional slow-signal settling due to the limited bandwidth, as well as reducing the supply current.
+
+This leaves plenty of margin for additional slow-signal settling due to the limited bandwidth, as well as for reducing the supply current.
 
 The small-signal settling (assuming one pole at the bandwidth corner frequency) leads to an approximate settling time (1% error corresponds to $\approx 5 \tau$) of
 $$
 T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10 \times 10^{6}} = 0.08\,\mu\text{s}.
 $$
-which also checks out.
+
+This also checks out.
 
 ## Small-Signal Analysis of the OTA {#sec-basic-ota-small-signal}
 
@@ -139,7 +142,7 @@ We can further simplify @fig-basic-ota-small-signal by realizing that we operate
 
 {{< include /content/ota_basic/_fig_basic_ota_small_signal_simplified.qmd >}}
 
-In the simplified circuit model in @fig-basic-ota-small-signal-simplified we can see that we have two poles in the circuit, one at the gate note of $M_{3,4}$, and one at the output. Realizing that $\Vgs[1] = V_\mathrm{in,p} = V_\mathrm{in}/2$ and $\Vgs[2] = V_\mathrm{in,n} = - V_\mathrm{in}/2$ we can formulate KCL at the output node to
+In the simplified circuit model in @fig-basic-ota-small-signal-simplified, we can see that we have two poles in the circuit, one at the gate node of $M_{3,4}$ and one at the output. Realizing that $\Vgs[1] = V_\mathrm{in,p} = V_\mathrm{in}/2$ and $\Vgs[2] = V_\mathrm{in,n} = - V_\mathrm{in}/2$ we can formulate KCL at the output node to
 $$
 -\gm[3,4] \Vgs[3] - \gm[1,2] \left( - \frac{V_\mathrm{in}}{2} \right) - V_\mathrm{out} (\gds[2] + \gds[4] + s C_\mathrm{load}) = 0.
 $$ {#eq-simple-ota-eq1}
@@ -217,6 +220,7 @@ $$
 
 
 The output noise voltage is then (using @eq-mosfet-noise)
+
 $$
 \begin{split}
 \overline{V_\mathrm{n,out}^2}(f) &= \frac{\overline{I_\mathrm{n}^2}}{\left| \gm[1,2] + s C_\mathrm{load} \right|^{2}} = \frac{\overline{I_\mathrm{n}^2}}{\gm[1,2]^2 + (2 \pi f C_\mathrm{load})^2} \\
@@ -225,6 +229,7 @@ $$
 $$
 
 We can use the identity @eq-integral-identity to calculate the rms output noise to
+
 $$
 V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) \cdot df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{1,2} + 2 \gamma_{3,4} \frac{\gm[3,4]}{\gm[1,2]} \right).
 $$ {#eq-basic-ota-output-noise}
@@ -237,9 +242,9 @@ Please take your time and carefully go through the explanations and derivations 
 
 ## 5T-OTA Sizing {#sec-basic-ota-sizing}
 
-Armed with the governing equations derived in @sec-basic-ota-small-signal we can now size the MOSFETs in the OTA, we remember that we have to size $M_{1,2}$ and $M_{3,4}$ equally.
+Armed with the governing equations derived in @sec-basic-ota-small-signal, we can now size the MOSFETs in the OTA. We remember that we have to size $M_{1,2}$ and $M_{3,4}$ equally.
 
-First, we need to select a proper $\gmid$ for the MOSFET. Remembering @sec-gmid-method we see that for the input differential pair we should go for a large $\gm$, thus we select a $\gmid = 10$. As $\gds$ of $M_2$ could limit the dc gain (@eq-simple-ota-gain-dc) we go with a rather long $L = 5\,\mu\text{m}$. For current sources a small $\gmid$ is a good idea, so we start with $\gmid=5$ (because we can not go too low because of $V_\mathrm{ds,sat}$) and also an $L = 5\,\mu\text{m}$. The $\gmid$ is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the $\gds$ small) with this approximate relationship:
+First, we need to select a proper $\gmid$ for the MOSFET. Remembering @sec-gmid-method, we see that for the input differential pair we should go for a large $\gm$, thus we select a $\gmid = 10$. As $\gds$ of $M_2$ could limit the dc gain (@eq-simple-ota-gain-dc), we go with a rather long $L = 5\,\mu\text{m}$. For current sources, a small $\gmid$ is a good idea, so we start with $\gmid=5$ (because we cannot go too low because of $V_\mathrm{ds,sat}$) and also an $L = 5\,\mu\text{m}$. The $\gmid$ is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the $\gds$ small) with this approximate relationship:
 
 $$
 \Vds[,sat] = \frac{2}{\gmid}
@@ -257,10 +262,10 @@ The sizing procedure and its calculation are best performed in a Jupyter noteboo
 
 ## 5T-OTA Simulation {#sec-basic-ota-simulation}
 
-With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and setup a simulation testbench to check the performance parameters. Since this is the first time we draw a more complex schematic, and use a hierarchical design, we should note that drawing a schematic is an art, and there exists a set of rules and recommendations how to name pins, how to use annotations, and so on. Please read @sec-designers-etiquette before you start into your design work.
+With the initial sizing of the MOSFETs of the 5T-OTA done, we can design the 5T-OTA circuit and set up a simulation testbench to check the performance parameters. Since this is the first time we draw a more complex schematic, and use a hierarchical design, we should note that drawing a schematic is an art, and there exists a set of rules and recommendations how to name pins, how to use annotations, and so on. Please read @sec-designers-etiquette before you start into your design work.
 
 ::: {.callout-tip title="Exercise: 5T-OTA Design and Testbench"}
-Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as shown in @fig-voltage-buffer-ota. Use typical conditions for the simulation, and check how well the specification in @tbl-voltage-buffer-spec is met, and how well the derivations in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal fit to the simulation results.
+Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as shown in @fig-voltage-buffer-ota. Use typical conditions for the simulation and check how well the specification in @tbl-voltage-buffer-spec is met and how well the derivations in @sec-basic-ota-large-signal and @sec-basic-ota-small-signal fit to the simulation results.
 
 If you get stuck, you can find the testbench and 5T-OTA schematic [here](./xschem/ota-5t_tb-ac.svg) (for the small-signal analysis) and [here](./xschem/ota-5t_tb-tran.svg) (for the large-signal settling simulation). For interested students, the loop gain analysis with Middlebrook's and Tian's method of the 5T-OTA can be found [here](./xschem/ota-5t_tb-loopgain.svg). A comprehensive technical white paper by Texas Instruments about operational amplifier stability theory and compensation methods can be found in [@Kay_2025].
 :::
@@ -317,7 +322,7 @@ To minimize the input offset voltage in a differential pair we should strive to 
 
 How can we now cope with mismatch in design and simulation? We can account the transitor mismatch according to @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.
 
-We can also simulate the effects of MOSFET mismatch on circuit performance by doing a [**Monte Carlo**](https://en.wikipedia.org/wiki/Monte_Carlo_method) simulation. Here, a random realization of the variations of all circuit components (where mismatch is modelled) is taken and the circuit is simulated. Then, another random realization is simulated, and so on. In summary, we run the same simulation for different realizations $N$ times and evaluate the resulting variations of the circuit parameters. If $N$ is large enough then the distributions should approach a [Gaussian distribution](https://en.wikipedia.org/wiki/Normal_distribution), and we can then estimate the variances of the circuit parameters. Using statistical analysis we can then assess the [**yield**](https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield) of a circuit, i.e., how many circuit realizations will meet the specification.
+We can also simulate the effects of MOSFET mismatch on circuit performance by doing a [**Monte Carlo**](https://en.wikipedia.org/wiki/Monte_Carlo_method) simulation. Here, a random realization of the variations of all circuit components (where mismatch is modelled) is taken and the circuit is simulated. Then, another random realization is simulated, and so on. In summary, we run the same simulation for different realizations $N$ times and evaluate the resulting variations of the circuit parameters. If $N$ is large enough, then the distributions should approach a [Gaussian distribution](https://en.wikipedia.org/wiki/Normal_distribution), and we can then estimate the variances of the circuit parameters. Using statistical analysis we can then assess the [**yield**](https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield) of a circuit, i.e., how many circuit realizations will meet the specification.
 
 ::: {.callout-note title="Number of Monte Carlo Simulation Runs"}
 The number of Monte Carlo simulation runs $N$ has to be large enough to approach Gaussian distributions to allow estimation of the variances. However, this comes at the cost of a large simulation time, so a balance has to be found. Often, $N = 250$ is a good compromise between simulation time and well-behaved parameter distributions.
@@ -358,14 +363,14 @@ As you have seen in @sec-basic-ota-simulation running simulations by hand is ted
 2. The temperature at which the circuit is operated is likely changing. Also the performance against this has to be verified.
 3. When manufacturing the wafers random variations in various process parameters lead to changed parameters of the integrated circuit components. In order to check for this effect, wafer foundries provide model files which shall cover these manufacturing excursions. Simplified, this leads to a slower or faster MOSFET, and usually NMOS and PMOS are not correlated, so we have the process corners **SS**, **SF**, **TT**, **FS**, and **FF**. So far, we have only used the **TT** models in our simulations.
 
-The variations listed in the previous list are abbreviated as **PVT** (process, voltage, temperature) variations. In order to finalize a circuit all combinations of these (plus the variations in operating conditions like input voltage) have to be simulated. As you can imagine, this leads to a huge number of simulations, and simulation results which have to be evaluated for pass/fail.
+The variations listed in the previous list are abbreviated as **PVT** (process, voltage, temperature) variations. In order to finalize a circuit all combinations of these (plus the variations in operating conditions like input voltage) have to be simulated. As you can imagine, this leads to a huge number of simulations and simulation results that have to be evaluated for pass/fail.
 
 There are two options how to tackle this efficiently:
 
 1. As an experienced designer you have a very solid understanding of the circuit, plus based on the analytic equations you can identify which combination of operating conditions will lead to a worst case performance. Thus, you can drastically reduce the number of corners to simulate, and you run them by hand.
 2. You are using a framework which highly automates this task of running a plethora of different simulations and evaluating the outcome. These frameworks are called simulation runners.
 
-Luckily, there are open-source versions of simulation runners available, and we will use [CACE](https://github.com/efabless/cace) in this lecture. CACE is written in Python and allows to setup a datasheet in [YAML](https://yaml.org) which defines the simulation problem and the performance parameters to evaluate against which limits. The resulting simulations are then run in parallel and the simulation data is evaluated and summarized in various forms.
+Luckily, there are open-source versions of simulation runners available, and we will use [CACE](https://github.com/efabless/cace) in this lecture. CACE is written in Python and allows one to set up a datasheet in [YAML](https://yaml.org) that defines the simulation problem and the performance parameters to evaluate against specified limits. The resulting simulations are then run in parallel and the simulation data is evaluated and summarized in various forms.
 
 There is a CACE setup available for our 5T-OTA. The [datasheet](./cace/voltage-buffer-ota.yaml) describes the operating conditions and the simulations tasks. For each simulation a testbench template is needed, [this one](./cace/templates/ota-5t-ac.sch) is used for ac simulations, [this one](./cace/templates/ota-5t-noise.sch) is used for noise simulation, and [this one](./cace/templates/ota-5t-tran.sch) is used for transient simulation.
 
@@ -394,29 +399,29 @@ After a successful run, a documentation is automatically generated. The result o
 
 ### PVT Simulation Analysis
 
-Looking at the CACE report in @nte-basic-ota-cace-result we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners, and which is ready for layout. Once we have the layout ready, we can extract the wiring parasitic ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points then our design is finished.
+Looking at the CACE report in @nte-basic-ota-cace-result, we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners and that is ready for layout. Once we have the layout ready, we can extract the wiring parasitics ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist, we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points, then our design is finished.
 
 ### Monte Carlo Simulation Analysis
 
-Looking at the CACE report in @nte-basic-ota-cace-result we see that the output voltage specification is not met due to MOSFET mismatch! We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions prove to be too small. We should now go back and change the transistor sizing (increasing $L$ significantly while keeping the $\gmid$ values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.
+Looking at the CACE report in @nte-basic-ota-cace-result, we see that the output voltage specification is not met due to MOSFET mismatch! We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions prove to be too small. We should now go back and change the transistor sizing (increasing $L$ significantly while keeping the $\gmid$ values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.
 
 It is not unusual that the power consumption now increases, as we have to increase the size of the MOSFETs for matching, and these larger MOSFETs increase the parasitic capacitances which in turn lead to larger power consumption to keep the required bandwidth by increasing the $\gm$.
 
 ::: {.callout-tip title="Exercise: Re-Sizing of 5T-OTA for Mismatch"}
 Go back to @sec-basic-ota-sizing and repeat the sizing procedure of the 5T-OTA by increasing the $L$ of the MOSFETs significantly. Focus first on the differential pair as it will likely have the biggest impact (see @eq-diffpair-offset). Then, tune the size of the output current mirror if necessary (see @eq-currentmirror-offset).
 
-Once you are happy with the sizing result repeat the PVT simulations in CACE to confirm the performance of the voltage buffer including mismatch.
+Once you are happy with the sizing result, repeat the PVT simulations in CACE to confirm the performance of the voltage buffer including mismatch.
 :::
 
 ## OTA Variants {#sec-ota-variants-single-ended}
 
-Following, we are going to discuss two popular variants of the simple 5T-OTA. The first version provides an almost rail-to-rail single-ended output, and can thus be used for a variety of applications requiring this range. The arrangement is shown in @fig-ota-se-rail-to-rail. It is a single-stage amplifier, as the only high-impedance point is at the output where significant voltage-gain is produced. The current mirrors can be used to scale up the current generated in the input differential pair to some extent in the output stage (or can be used to lower the current compared to the bias current in the diffpair); i.e., the bias currents of the input stage and the output stage can be set independently.
+Following, we are going to discuss two popular variants of the simple 5T-OTA. The first version provides an almost rail-to-rail single-ended output and can thus be used for a variety of applications requiring this range. The arrangement is shown in @fig-ota-se-rail-to-rail. It is a single-stage amplifier, as the only high-impedance point is at the output where significant voltage-gain is produced. The current mirrors can be used to scale up the current generated in the input differential pair to some extent in the output stage (or can be used to lower the current compared to the bias current in the diffpair); i.e., the bias currents of the input stage and the output stage can be set independently.
 
 Being a single-stage amplifier stability is usually not an issue, as only the output node is high-ohmic; all other nodes feature a MOSFET diode so the node impedance is $\approx \gm^{-1}$ and thus the according poles are located at high frequencies.
 
 {{< include /content/ota_basic/_fig_ota_se_r2r.qmd >}}
 
-Another popular version is shown in @fig-ota-se-twostage. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. @fig-ota-se-twostage shows a very simplistic Miller-compensation using $C_\mathrm{M}$. Often, we would want to implement a more advanced scheme. Some examples can be found in [@Baker_compensating_OPAMP]. An interesting technique is the indirect compensation with cascoded input differential pairs (see @fig-improved-ota) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from $\VDD$ of one $\VGS$ ($\VGS[3]$ on the left side, $\VGS[5]$ on the right side).
+Another popular version is shown in @fig-ota-se-twostage. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. @fig-ota-se-twostage shows a very simplistic Miller-compensation (see @sec-miller-compensation) using $C_\mathrm{M}$. Often, we would want to implement a more advanced scheme. Some examples can be found in [@Baker_compensating_OPAMP]. An interesting technique is the indirect compensation with cascoded input differential pairs (see @fig-improved-ota) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from $\VDD$ of one $\VGS$ ($\VGS[3]$ on the left side and $\VGS[5]$ on the right side).
 
 {{< include /content/ota_basic/_fig_ota_se_twostage.qmd >}}
 
@@ -424,7 +429,7 @@ Note that the circuit of @fig-ota-se-twostage can be easily modified into a low-
 
 {{< include /content/ota_basic/_fig_simple_ldo.qmd >}}
 
-The reference voltage $V_\mathrm{ref}$ is scaled by $R_1$ and $R_2$, so that the output voltage $V_\mathrm{out}$ is given by
+The reference voltage $V_\mathrm{ref}$ is scaled by $R_1$ and $R_2$ so that the output voltage $V_\mathrm{out}$ is given by
 
 $$
 V_\mathrm{out} \approx V_\mathrm{ref} \left( 1 + \frac{R_1}{R_2} \right)
