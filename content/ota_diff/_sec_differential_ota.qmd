@@ -38,7 +38,7 @@ Of course, loop gain analysis of differential OTAs can and should be carried out
 
 ## Miller Compensation
 
-A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies, that we have enough [phase margin](https://en.wikipedia.org/wiki/Phase_margin) in the closed-loop system. We may strive for $60^\circ$ as this will only cause a minor peaking in the frequency response [@Gray_Meyer_5th_ed].
+A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies [@Mangelsdorf_2025_miller], that we have enough [phase margin](https://en.wikipedia.org/wiki/Phase_margin) in the closed-loop system. We may strive for $60^\circ$ as this will only cause a minor peaking in the frequency response [@Gray_Meyer_5th_ed].
 
 The question now is where to implement this dominant pole. In order to create a low-frequency pole we need a high-impedance point and a large capacitance. Placing just a large capacitor is unwelcome, as this causes large area consumption on chip.
 
@@ -111,9 +111,9 @@ $$
 s_\mathrm{z} = +\frac{\gm}{C_\mathrm{m}}
 $$ {#eq-miller-zero}
 
-we see that it is located in the *right half-plane* of the s-domain. Such a zero leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are loosing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!
+we see that it is located in the *right half-plane* of the s-domain. Such a zero, abbreviated as RHPZ, leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are loosing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!
 
-A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift.
+A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift. A more detailed analysis of this RHPZ can be found in [@Mangelsdorf_2025_RHPZ].
 
 Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see @fig-diff-ota-resload-miller and @fig-miller-comp-model). Doing this we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!
 
