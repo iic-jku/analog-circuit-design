@@ -634,6 +634,13 @@ Important
 <li><span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span> is a great reference for MOSFET device physics and modeling.</li>
 <li><span class="citation" data-cites="Tsividis_McAndrew_2011">(<a href="#ref-Tsividis_McAndrew_2011" role="doc-biblioref">Tsividis and McAndrew 2011</a>)</span> is the in-depth reference for MOSFET device operation.</li>
 </ul>
+<p>Additionally, there are several noteworthy IEEE paper series that we recommend:</p>
+<ul>
+<li><em>Shop Talk: What you didn’t Learn in School</em> by Chris Mangelsdorf</li>
+<li><em>The Analog Mind</em> by Behzad Razavi</li>
+<li><em>A Circuit for All Seasons</em> by Behzad Razavi</li>
+<li><em>Circuit Intuitions</em> by Ali Sheikholeslami</li>
+</ul>
 </div>
 </div>
 <section id="ihps-sg13g2-130nm-cmos-technology" class="level2" data-number="1.1">
@@ -2973,7 +2980,7 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as shown in <a href="#fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a>. Use typical conditions for the simulation and check how well the specification in <a href="#tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a> is met and how well the derivations in <a href="#sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;8.2</a> and <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a> fit to the simulation results.</p>
-<p>If you get stuck, you can find the testbench and 5T-OTA schematic <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="./xschem/ota-5t_tb-tran.svg">here</a> (for the large-signal settling simulation). For interested students, the loop gain analysis with Middlebrook’s and Tian’s method of the 5T-OTA can be found <a href="./xschem/ota-5t_tb-loopgain.svg">here</a>.</p>
+<p>If you get stuck, you can find the testbench and 5T-OTA schematic <a href="./xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="./xschem/ota-5t_tb-tran.svg">here</a> (for the large-signal settling simulation). For interested students, the loop gain analysis with Middlebrook’s and Tian’s method of the 5T-OTA can be found <a href="./xschem/ota-5t_tb-loopgain.svg">here</a>. A comprehensive technical white paper by Texas Instruments about operational amplifier stability theory and compensation methods can be found in <span class="citation" data-cites="Kay_2025">(<a href="#ref-Kay_2025" role="doc-biblioref">Kay and Wells 2025</a>)</span>.</p>
 </div>
 </div>
 </section>
@@ -4938,7 +4945,7 @@ Figure&nbsp;69: Differential two-stage OTA with resistive load.
 <p>Of course, loop gain analysis of differential OTAs can and should be carried out. An exemplary testbench where the loop gain is simulated with Rosenstark’s, Middlebrook’s, and Tian’s method can be found <a href="xschem/ota-differential_tb-loopgain.sch">here</a>. Note that there is no underlying circuit right now and it should only show how it could be done.</p>
 <section id="sec-miller-compensation" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="sec-miller-compensation"><span class="header-section-number">13.1</span> Miller Compensation</h2>
-<p>A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies, that we have enough <a href="https://en.wikipedia.org/wiki/Phase_margin">phase margin</a> in the closed-loop system. We may strive for <span class="math inline">\(60^\circ\)</span> as this will only cause a minor peaking in the frequency response <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span>.</p>
+<p>A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies <span class="citation" data-cites="Mangelsdorf_2025_miller">(<a href="#ref-Mangelsdorf_2025_miller" role="doc-biblioref">Mangelsdorf 2025a</a>)</span>, that we have enough <a href="https://en.wikipedia.org/wiki/Phase_margin">phase margin</a> in the closed-loop system. We may strive for <span class="math inline">\(60^\circ\)</span> as this will only cause a minor peaking in the frequency response <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span>.</p>
 <p>The question now is where to implement this dominant pole. In order to create a low-frequency pole we need a high-impedance point and a large capacitance. Placing just a large capacitor is unwelcome, as this causes large area consumption on chip.</p>
 <p>Luckily, we know from the analysis in <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;17.1</a> that we can use voltage gain to increase the apparent value of a capacitor by feedback. Inspecting our circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;69</a> we see that we have voltage gain from node <span class="math inline">\(A\)</span> to node <span class="math inline">\(B\)</span> and node <span class="math inline">\(A'\)</span> and <span class="math inline">\(B'\)</span>, respectively. This means we have an opportunity to strap a capacitor between those nodes, and create a dominant pole at node <span class="math inline">\(A\)</span> (and <span class="math inline">\(A'\)</span>).</p>
 <p>We can now add these so-called “Miller capacitors” to our circuit. The result is shown in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;70</a>. (We have also added resistors in series with the capacitors; we ignore these resistors for the time being).</p>
@@ -5013,8 +5020,8 @@ s_\mathrm{p2} = -\frac{g_\mathrm{m}}{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mat
 <p><span id="eq-miller-zero"><span class="math display">\[
 s_\mathrm{z} = +\frac{g_\mathrm{m}}{C_\mathrm{m}}
 \tag{55}\]</span></span></p>
-<p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are loosing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
-<p>A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not, we have this unwanted effect of phase shift.</p>
+<p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero, abbreviated as RHPZ, leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are loosing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
+<p>A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift. A more detailed analysis of this RHPZ can be found in <span class="citation" data-cites="Mangelsdorf_2025_RHPZ">(<a href="#ref-Mangelsdorf_2025_RHPZ" role="doc-biblioref">Mangelsdorf 2025b</a>)</span>.</p>
 <p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;70</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;71</a>). By doing this, we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
 <p>Repeating the calculation of the transfer function <span class="math inline">\(V_\mathrm{out} / I_\mathrm{in}\)</span> including <span class="math inline">\(R_\mathrm{m}\)</span> we see that the zero location is changed and can be calculated as (the pole locations are also slightly changed due to the addition of <span class="math inline">\(R_\mathrm{m}\)</span>, but we will not discuss the resulting equations here)</p>
 <p><span id="eq-miller-zero-comp"><span class="math display">\[
@@ -5308,7 +5315,7 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note that Miller’s compensation is so much more than just making a big capacitor out of a small one. There are layers upon layers of subtlety, and huge hidden benefits which can be read in <span class="citation" data-cites="Mangelsdorf_2025_miller">(<a href="#ref-Mangelsdorf_2025_miller" role="doc-biblioref">Mangelsdorf 2025</a>)</span>.</p>
+<p>Note that Miller’s compensation is so much more than just making a big capacitor out of a small one. There are layers upon layers of subtlety, and huge hidden benefits which can be read in <span class="citation" data-cites="Mangelsdorf_2025_miller">(<a href="#ref-Mangelsdorf_2025_miller" role="doc-biblioref">Mangelsdorf 2025a</a>)</span> and <span class="citation" data-cites="Mangelsdorf_2025_RHPZ">(<a href="#ref-Mangelsdorf_2025_RHPZ" role="doc-biblioref">Mangelsdorf 2025b</a>)</span>.</p>
 </div>
 </div>
 </section>
@@ -5746,11 +5753,17 @@ Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CM
 <div id="ref-Kamath_1974" class="csl-entry" role="listitem">
 Kamath, B. Y. T., R. G. Meyer, and P. R. Gray. 1974. <span>“Relationship Between Frequency Response and Settling Time of Operational Amplifiers.”</span> <em>IEEE Journal of Solid-State Circuits</em> 9 (6): 347–52. <a href="https://doi.org/10.1109/JSSC.1974.1050527">https://doi.org/10.1109/JSSC.1974.1050527</a>.
 </div>
+<div id="ref-Kay_2025" class="csl-entry" role="listitem">
+Kay, A., and C. Wells. 2025. <span>“<span class="nocase">Technical White Paper - Operational Amplifier Stability Theory and Compensation Methods</span>.”</span> Texas Instruments. 2025. <a href="https://www.ti.com/lit/wp/sboa626/sboa626.pdf">https://www.ti.com/lit/wp/sboa626/sboa626.pdf</a>.
+</div>
 <div id="ref-Kuijk_bandgap" class="csl-entry" role="listitem">
 Kuijk, K E. 1973. <span>“<span class="nocase">A precision reference voltage source</span>.”</span> <em>IEEE Journal of Solid-State Circuits</em> 8 (3): 222–26. <a href="https://doi.org/10.1109/JSSC.1973.1050378">https://doi.org/10.1109/JSSC.1973.1050378</a>.
 </div>
 <div id="ref-Mangelsdorf_2025_miller" class="csl-entry" role="listitem">
-Mangelsdorf, Chris. 2025. <span>“Miller’s Secret [Shop Talk: What You Didn’t Learn in School].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (1): 21–27. <a href="https://doi.org/10.1109/MSSC.2024.3503792">https://doi.org/10.1109/MSSC.2024.3503792</a>.
+Mangelsdorf, Chris. 2025a. <span>“Miller’s Secret [Shop Talk: What You Didn’t Learn in School].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (1): 21–27. <a href="https://doi.org/10.1109/MSSC.2024.3503792">https://doi.org/10.1109/MSSC.2024.3503792</a>.
+</div>
+<div id="ref-Mangelsdorf_2025_RHPZ" class="csl-entry" role="listitem">
+———. 2025b. <span>“Miller’s Wrong Half-Plane Zero [Shop Talk: What You Didn’t Learn in School].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (2): 19–29. <a href="https://doi.org/10.1109/MSSC.2025.3562109">https://doi.org/10.1109/MSSC.2025.3562109</a>.
 </div>
 <div id="ref-Maxwell_1873" class="csl-entry" role="listitem">
 Maxwell, James Clerk. 1873. <em>A Treatise on Electricity and Magnetism</em>. Vol. 1. Clarendon Press.
