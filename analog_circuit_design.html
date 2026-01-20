@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-01-16">
+<meta name="dcterms.date" content="2026-01-20">
 
 <title>Analog Circuit Design</title>
 <style>
@@ -568,7 +568,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 16, 2026</p>
+      <p class="date">January 20, 2026</p>
     </div>
   </div>
   
@@ -3487,7 +3487,7 @@ Figure&nbsp;42: A MOSFET cascode circuit.
 </div>
 </div>
 </div>
-<p>In order to derive the operation of the cascode analytically, we draw the small-signal equivalent circuit in <a href="#fig-cascode-small-signal" class="quarto-xref">Figure&nbsp;43</a>. We assume that <span class="math inline">\(V_\mathrm{B}\)</span> is a low-ohmic bias voltage, thus we replace it by ac ground. We further set <span class="math inline">\(g_\mathrm{mb}= 0\)</span>.</p>
+<p>In order to derive the operation of the cascode analytically, we draw the small-signal equivalent circuit in <a href="#fig-cascode-small-signal" class="quarto-xref">Figure&nbsp;43</a>. We assume that <span class="math inline">\(V_\mathrm{B}\)</span> is a low-ohmic bias voltage, thus we replace it with ac ground. We further set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> (and ignore a couple of capacitances for now).</p>
 <div id="cell-fig-cascode-small-signal" class="cell" data-execution_count="33">
 <div class="cell-output cell-output-display">
 <div id="fig-cascode-small-signal" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3534,7 +3534,7 @@ Figure&nbsp;45: The simplified MOSFET cascode small-signal model for calculation
 </div>
 </div>
 </div>
-<p>We realize that <span class="math inline">\(I_\mathrm{out}\)</span> flows through <span class="math inline">\(G_\mathrm{S}\)</span> and drops <span class="math inline">\(V_\mathrm{gs}\)</span> (note the sign): <span class="math display">\[
+<p>We realize that <span class="math inline">\(I_\mathrm{out}\)</span> flows through <span class="math inline">\(G_\mathrm{S}\)</span> (as there is no other way to go) and drops <span class="math inline">\(V_\mathrm{gs}\)</span> (note the sign): <span class="math display">\[
 V_\mathrm{gs}= -\frac{I_\mathrm{out}}{G_\mathrm{S}}
 \]</span></p>
 <p>Further, <span class="math inline">\(V_\mathrm{out} = -V_\mathrm{gs}+ V_\mathrm{ds}\)</span>. Calculating KCL at the output node results in <span class="math display">\[
@@ -3543,8 +3543,9 @@ I_\mathrm{out} - g_\mathrm{m}V_\mathrm{gs}- g_\mathrm{ds}V_\mathrm{ds}= 0.
 <p>Using the previously found identities, and after a bit of algebraic manipulations we arrive at <span id="eq-cascode-output"><span class="math display">\[
 g_\mathrm{out} = \frac{I_\mathrm{out}}{V_\mathrm{out}} = \frac{g_\mathrm{ds}}{1 + \frac{g_\mathrm{m}+ g_\mathrm{ds}}{G_\mathrm{S}}} = \frac{g_\mathrm{ds}\cdot G_\mathrm{S}}{G_\mathrm{S} + g_\mathrm{m}+ g_\mathrm{ds}}
 \tag{32}\]</span></span></p>
-<p>We find that if <span class="math inline">\(G_\mathrm{S} = 0\)</span> (an open) then <span class="math inline">\(g_\mathrm{out} = 0\)</span>, and if <span class="math inline">\(G_\mathrm{S} = \infty\)</span> (a short) then <span class="math inline">\(g_\mathrm{out} = g_\mathrm{ds}\)</span>. We can calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus <span class="math inline">\(G_\mathrm{S} = g_\mathrm{ds}'\)</span>) and get <span id="eq-cs-cascode-output-impedance"><span class="math display">\[
-g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\mathrm{m}+ g_\mathrm{ds}} \approx g_\mathrm{ds}' \frac{g_\mathrm{ds}}{g_\mathrm{m}}.
+<p>We find that if <span class="math inline">\(G_\mathrm{S} = 0\)</span> (<span class="math inline">\(R_\mathrm{S} \to \infty\)</span>) then <span class="math inline">\(g_\mathrm{out} = 0\)</span> (<span class="math inline">\(r_\mathrm{out} \to \infty\)</span>), and if <span class="math inline">\(G_\mathrm{S} \to \infty\)</span> (<span class="math inline">\(R_\mathrm{S} = 0\)</span>) then <span class="math inline">\(g_\mathrm{out} = g_\mathrm{ds}\)</span>.</p>
+<p>We can further calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus <span class="math inline">\(G_\mathrm{S} = g_\mathrm{ds}'\)</span>) and get <span id="eq-cs-cascode-output-impedance"><span class="math display">\[
+g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\mathrm{m}+ g_\mathrm{ds}} \approx g_\mathrm{ds}' \frac{g_\mathrm{ds}}{g_\mathrm{m}}!
 \tag{33}\]</span></span></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Benefit of Cascode (Output)">
 <div class="callout-header d-flex align-content-center">
@@ -3556,7 +3557,7 @@ g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\ma
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The output impedance of the lower MOSFET (<span class="math inline">\(r_\mathrm{ds} = 1 / g_\mathrm{ds}'\)</span>) is <strong>increased</strong> by the self-gain of the cascode transistor! This is a powerful technique to increase the output impedance of a transistor stage by cascoding, much better than increasing <span class="math inline">\(L\)</span>.</p>
+<p>The output impedance of the lower MOSFET (<span class="math inline">\(r_\mathrm{out} = 1 / g_\mathrm{ds}'\)</span>) is <strong>increased</strong> by the self-gain (<span class="math inline">\(g_\mathrm{ds}/ g_\mathrm{m}\)</span>) of the cascode transistor! This is a powerful technique to increase the output impedance of a transistor stage by cascoding, much better than increasing <span class="math inline">\(L\)</span>!</p>
 </div>
 </div>
 </section>
@@ -3577,14 +3578,18 @@ Figure&nbsp;46: The simplified MOSFET cascode small-signal model for calculation
 </div>
 </div>
 </div>
-<p>We note that <span class="math inline">\(V_\mathrm{gs}= -V_\mathrm{in}\)</span> and that <span class="math inline">\(I_\mathrm{in}\)</span> flows through <span class="math inline">\(G_\mathrm{D}\)</span>, resulting in <span class="math inline">\(V_\mathrm{D} = I_\mathrm{in} / G_\mathrm{D}\)</span>. Note that <span class="math inline">\(V_\mathrm{ds}=  V_\mathrm{D} - V_\mathrm{in}\)</span>. Formulating KCL at the input node results in <span class="math display">\[
+<p>We note that <span class="math inline">\(V_\mathrm{gs}= -V_\mathrm{in}\)</span> and that <span class="math inline">\(I_\mathrm{in}\)</span> flows through <span class="math inline">\(G_\mathrm{D}\)</span> (again, there is no other way to go), resulting in <span class="math inline">\(V_\mathrm{D} = I_\mathrm{in} / G_\mathrm{D}\)</span>. Note that <span class="math inline">\(V_\mathrm{ds}=  V_\mathrm{D} - V_\mathrm{in}\)</span>. Formulating KCL at the input node results in <span class="math display">\[
 I_\mathrm{in} + g_\mathrm{ds}V_\mathrm{ds}+ g_\mathrm{m}V_\mathrm{gs}= 0.
 \]</span></p>
 <p>After some manipulation we find that <span id="eq-cascode-input"><span class="math display">\[
 g_\mathrm{in} = \frac{I_\mathrm{in}}{V_\mathrm{in}} = \frac{(g_\mathrm{m}+ g_\mathrm{ds}) \cdot G_\mathrm{D}}{g_\mathrm{ds}+ G_\mathrm{D}}.
 \tag{34}\]</span></span></p>
-<p>Setting <span class="math inline">\(G_\mathrm{D} = 0\)</span> (an open) results in <span class="math inline">\(g_\mathrm{in} = 0\)</span> as well, so the input impedance of the cascode is very large when the drain impedance is large.</p>
-<p>However, setting <span class="math inline">\(G_\mathrm{D} = \infty\)</span> (a short or low-ohmic impedance) results in the well-known result of <span class="math inline">\(g_\mathrm{in} = g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m}\)</span>, which means that the input impedance looking into a cascode is approximately <span class="math inline">\(1/g_\mathrm{m}\)</span>.</p>
+<p>Setting <span class="math inline">\(G_\mathrm{D} = 0\)</span> (<span class="math inline">\(R_\mathrm{D} \to \infty\)</span>) results in <span class="math inline">\(g_\mathrm{in} = 0\)</span> (<span class="math inline">\(r_\mathrm{in} \to \infty\)</span>) as well, so the input impedance of the cascode becomes very large when the drain impedance is large.</p>
+<p>However, setting <span class="math inline">\(G_\mathrm{D} = \infty\)</span> (<span class="math inline">\(R_\mathrm{D} = 0\)</span>) results in the well-known result of</p>
+<p><span class="math display">\[
+g_\mathrm{in} = g_\mathrm{m}+ g_\mathrm{ds}\approx g_\mathrm{m},
+\]</span></p>
+<p>which means that the input impedance looking into a cascode is <span class="math inline">\(r_\mathrm{in}\approx g_\mathrm{m}^{-1}\)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Benefit of Cascode (Input)">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5828,14 +5833,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {Circuit} {Design}},
-  date = {2026-01-16},
+  date = {2026-01-20},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-Circuit Design.”</span> January 16, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+Circuit Design.”</span> January 20, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
