@@ -39,7 +39,7 @@ with sd.Drawing(canvas='svg') as d:
 
     elm.Line().right().at(M1.gate).length(d.unit*2)
     M2 = elm.AnalogNFet(offset_gate=False).anchor('gate').drop('drain').theta(0).reverse().label(r'$k \cdot W_1/L_1$', ofst=-2.8)
-    l1 = elm.Line().up(d.unit/4).dot()
+    l1 = elm.Line().up(d.unit/4)
     d.push()
     elm.Line().up(d.unit/4)
     M4 = elm.AnalogNFet(offset_gate=False).anchor('source').theta(0).reverse().label(r'$k \cdot W_2/L_2$', ofst=-2.8)
@@ -47,18 +47,17 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().at(M4.drain).up(d.unit/2).dot(open=True).label(r'$I_\mathrm{out} = k \cdot I_\mathrm{bias1}$', 'right')
     d.pop()
 
-    elm.Line().left(d.unit*3/4)
-    M5 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).label(r'$M_\mathrm{aux}$')
-    elm.Line().at(M5.source).down().toy(M1.source)
-    elm.Ground()
-    l2 = elm.Line().at(M5.drain).up().toy(M3.gate).dot()
-    elm.Line().up().toy(ibias1.end)
-    ibias2 = elm.SourceI().up().label(r'$I_\mathrm{bias2}$').reverse()
+    elm.Line().left(d.unit*3/4).idot().color('blue')
+    M5 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).label(r'$M_\mathrm{aux}$').color('blue')
+    elm.Line().at(M5.source).down().toy(M1.source).color('blue')
+    elm.Ground().color('blue')
+    l2 = elm.Line().at(M5.drain).up().toy(M3.gate).dot().color('blue')
+    elm.Line().up().toy(ibias1.end).color('blue')
+    ibias2 = elm.SourceI().up().label(r'$I_\mathrm{bias2}$').reverse().color('blue')
 
     elm.Line().at(l2.end).to(M3.gate)
     elm.Line().at(l2.end).to(M4.gate)
 
     # vdd line
     elm.Line().at((ibias1.start[0]-d.unit/4, ibias1.start[1])).to((ibias2.end[0]+d.unit/4, ibias2.end[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
-
 ```

@@ -30,7 +30,7 @@ with sd.Drawing(canvas='svg') as d:
     l1 = elm.Line().down(d.unit/4).dot()
     elm.Line().down(d.unit/4)
     M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$W/L$')
-    elm.Resistor().down().label(r'$k \cdot R$')
+    elm.Resistor().down().label(r'$k \cdot R_\mathrm{deg}$')
     elm.Ground()
     elm.Line().right(d.unit/4).at(M1.gate).dot()
     elm.Line().up().toy(l1.end)
@@ -38,7 +38,7 @@ with sd.Drawing(canvas='svg') as d:
 
     elm.Line().right().at(M1.gate).length(1.5)
     M2 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).reverse().label(r'$k \cdot W/L$', ofst=-2.5)
-    elm.Resistor().down().label('$R$')
+    elm.Resistor().down().label(r'$R_\mathrm{deg}$')
     elm.Ground()
     elm.Line().at(M2.drain).up().length(1).dot(open=True).label(r'$I_\mathrm{out} = k \cdot I_\mathrm{bias}$', 'right')
 ```
