@@ -24,7 +24,7 @@ For analysis of a cascode, we use the following single-transistor stage shown in
 
 {{< include /content/cascode/_fig_cascode_transistor.qmd >}}
 
-In order to derive the operation of the cascode analytically, we draw the small-signal equivalent circuit in @fig-cascode-small-signal. We assume that $V_\mathrm{B}$ is a low-ohmic bias voltage, thus we replace it by ac ground. We further set $\gmb = 0$.
+In order to derive the operation of the cascode analytically, we draw the small-signal equivalent circuit in @fig-cascode-small-signal. We assume that $V_\mathrm{B}$ is a low-ohmic bias voltage, thus we replace it with ac ground. We further set $\gmb = 0$ (and ignore a couple of capacitances for now).
 
 {{< include /content/cascode/_fig_cascode_small_signal.qmd >}}
 
@@ -38,7 +38,7 @@ As a first step, we want to calculate the output impedance at the drain of the M
 
 {{< include /content/cascode/_fig_cascode_small_signal_simplified_out.qmd >}}
 
-We realize that $I_\mathrm{out}$ flows through $G_\mathrm{S}$ and drops $\Vgs$ (note the sign):
+We realize that $I_\mathrm{out}$ flows through $G_\mathrm{S}$ (as there is no other way to go) and drops $\Vgs$ (note the sign):
 $$
 \Vgs = -\frac{I_\mathrm{out}}{G_\mathrm{S}}
 $$
@@ -53,13 +53,15 @@ $$
 g_\mathrm{out} = \frac{I_\mathrm{out}}{V_\mathrm{out}} = \frac{\gds}{1 + \frac{\gm + \gds}{G_\mathrm{S}}} = \frac{\gds \cdot G_\mathrm{S}}{G_\mathrm{S} + \gm + \gds}
 $$ {#eq-cascode-output}
 
-We find that if $G_\mathrm{S} = 0$ (an open) then $g_\mathrm{out} = 0$, and if $G_\mathrm{S} = \infty$ (a short) then $g_\mathrm{out} = \gds$. We can calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus $G_\mathrm{S} = \gds'$) and get
+We find that if $G_\mathrm{S} = 0$ ($R_\mathrm{S} \to \infty$) then $g_\mathrm{out} = 0$ ($r_\mathrm{out} \to \infty$), and if $G_\mathrm{S} \to \infty$ ($R_\mathrm{S} = 0$) then $g_\mathrm{out} = \gds$.
+
+We can further calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus $G_\mathrm{S} = \gds'$) and get
 $$
-g_\mathrm{out} = \frac{\gds \cdot \gds'}{\gds' + \gm + \gds} \approx \gds' \frac{\gds}{\gm}.
+g_\mathrm{out} = \frac{\gds \cdot \gds'}{\gds' + \gm + \gds} \approx \gds' \frac{\gds}{\gm}!
 $$ {#eq-cs-cascode-output-impedance}
 
 ::: {.callout-important title="Benefit of Cascode (Output)"}
-The output impedance of the lower MOSFET ($r_\mathrm{ds} = 1 / \gds'$) is **increased** by the self-gain of the cascode transistor! This is a powerful technique to increase the output impedance of a transistor stage by cascoding, much better than increasing $L$.
+The output impedance of the lower MOSFET ($r_\mathrm{out} = 1 / \gds'$) is **increased** by the self-gain ($\gds / \gm$) of the cascode transistor! This is a powerful technique to increase the output impedance of a transistor stage by cascoding, much better than increasing $L$!
 :::
 
 ## Cascode Input Impedance
@@ -68,7 +70,7 @@ To calculate the input impedance of a cascode (i.e., looking into the source) we
 
 {{< include /content/cascode/_fig_cascode_small_signal_simplified_in.qmd >}}
 
-We note that $\Vgs = -V_\mathrm{in}$ and that $I_\mathrm{in}$ flows through $G_\mathrm{D}$, resulting in $V_\mathrm{D} = I_\mathrm{in} / G_\mathrm{D}$. Note that $\Vds =  V_\mathrm{D} - V_\mathrm{in}$. Formulating KCL at the input node results in
+We note that $\Vgs = -V_\mathrm{in}$ and that $I_\mathrm{in}$ flows through $G_\mathrm{D}$ (again, there is no other way to go), resulting in $V_\mathrm{D} = I_\mathrm{in} / G_\mathrm{D}$. Note that $\Vds =  V_\mathrm{D} - V_\mathrm{in}$. Formulating KCL at the input node results in
 $$
 I_\mathrm{in} + \gds \Vds + \gm \Vgs = 0.
 $$
@@ -78,9 +80,15 @@ $$
 g_\mathrm{in} = \frac{I_\mathrm{in}}{V_\mathrm{in}} = \frac{(\gm + \gds) \cdot G_\mathrm{D}}{\gds + G_\mathrm{D}}.
 $$ {#eq-cascode-input}
 
-Setting $G_\mathrm{D} = 0$ (an open) results in $g_\mathrm{in} = 0$ as well, so the input impedance of the cascode is very large when the drain impedance is large.
+Setting $G_\mathrm{D} = 0$ ($R_\mathrm{D} \to \infty$) results in $g_\mathrm{in} = 0$ ($r_\mathrm{in} \to \infty$) as well, so the input impedance of the cascode becomes very large when the drain impedance is large.
 
-However, setting $G_\mathrm{D} = \infty$ (a short or low-ohmic impedance) results in the well-known result of $g_\mathrm{in} = \gm + \gds \approx \gm$, which means that the input impedance looking into a cascode is approximately $1/\gm$. 
+However, setting $G_\mathrm{D} = \infty$ ($R_\mathrm{D} = 0$) results in the well-known result of
+
+$$
+g_\mathrm{in} = \gm + \gds \approx \gm,
+$$
+
+which means that the input impedance looking into a cascode is $r_\mathrm{in}\approx \gm^{-1}$. 
 
 ::: {.callout-important title="Benefit of Cascode (Input)"}
 This has the practical benefit that a capacitance connected at this node results in a high-frequency pole, which is often not critical in terms of stability. Further, the voltage swing at a cascode input node is small due to the often small impedance, and this minimizes the Miller effect at connected inter-node capacitors (see @sec-miller-theorem).
