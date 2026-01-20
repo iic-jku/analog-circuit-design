@@ -16,21 +16,30 @@ limitations under the License.
 
 # Improved Current Mirrors {#sec-current-mirror-improved}
 
-In @sec-current-mirror, we looked into the operation of the basic current mirror. While it is a useful structure and easy to implement, its output resistance is limited by the MOSFET's output conductance $\gds$, and its current mirroring accuracy is also limited by channel-length modulation effects since the $\VDS$ of the output transistor varies with load conditions, and is thus different from the $\VDS$ of the reference transistor.
+In @sec-current-mirror, we looked into the operation of the basic current mirror. While it is a useful structure and easy to implement, its output resistance is limited by the MOSFET's output conductance to $r_\mathrm{out} = \gds^{-1}$, and its current mirroring accuracy is also limited by channel-length modulation effects since the $\VDS$ of the output transistor varies with load conditions, and is thus different from the $\VDS$ of the reference transistor.
 
-Using the cascode principle introduced in @sec-cascode-stage, we can improve both the output resistance and the current mirroring accuracy of the current mirror. The improved current mirror structure is shown in @fig-current-mirror-highswing. We use the so-called "high-swing" cascode structure here.
+Using the cascode principle introduced in @sec-cascode-stage, we can improve both the output resistance and the current mirroring accuracy of the current mirror. The improved current mirror structure is shown in @fig-current-mirror-cascode. 
+
+{{< include /content/curmir_improved/_fig_curmir_cascode.qmd >}}
+
+We can see that by introducing the cascode transistors we achieve the following benefits:
+
+1. Increased output resistance, as we have seen in @eq-cascode-output.
+2. Improved current mirroring accuracy, since the cascode transistors help to keep the drain-source voltage of the output transistor nearly constant and equal to that of the reference transistor.
+
+There are several ways to implement the bias voltage $V_\mathrm{bias}$ for setting the cascode transistors' gate potential. One simple option is to use a resistor $R$ as shown in @fig-current-mirror-highswing, which is called a "high-swing" cascode structure.
 
 {{< include /content/curmir_improved/_fig_curmir_highswing.qmd >}}
 
-The output impedance according to @eq-cs-cascode-output-impedance of the improved current mirror is approximately given by ($r_\mathrm{ds} = \gds^{-1}$ and $\gm[casc]$ are the parameters of the cascode transistor, and $r_\mathrm{ds} = \gds^{-1}$ are the parameters of the bottom transistor):
+The output impedance according to @eq-cs-cascode-output-impedance of the improved current mirror is approximately given by ($r_\mathrm{ds,casc} = \gds[,casc]^{-1}$ and $\gm[,casc]$ are the parameters of the cascode transistor, and $r_\mathrm{ds} = \gds^{-1}$ is the parameter of the bottom transistor):
 
 $$
-r_\mathrm{out} = r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot (1 + \gm[casc] \cdot r_\mathrm{ds,casc}).
+r_\mathrm{out} = r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot (1 + \gm[,casc] \cdot r_\mathrm{ds,casc}).
 $$ {#eq-curmir-cascoded-rout}
 
 We can bias the gate voltages of the cascode transistors with any suitable bias circuit, but a simple way is to use a resistor $R$ as shown in the figure. The voltage drop across this resistor sets the drain-source voltage of the lower transistors (together with the sizing of the MOSFETs). By choosing a sufficiently large value for $R$, we can ensure that both transistors remain in saturation for the desired range of output currents. The cascode transistors make sure that the drain-source voltage of the output transistor remains nearly constant and equal to the drain-source voltage of the reference transistor, thus improving the current mirroring accuracy.
 
-Another option is to use source degeneration with a resistor. This configuration is shown in @fig-current-mirror-degeneration. Here, the source degeneration resistors $R$ help to stabilize the operating point of the current mirror using series feedback.
+Another option for an improved current mirror is to use source degeneration with a resistor. This configuration is shown in @fig-current-mirror-degeneration. Here, the source degeneration resistors $R$ help to stabilize the operating point of the current mirror using series feedback.
 
 {{< include /content/curmir_improved/_fig_curmir_degeneration.qmd >}}
 
@@ -40,7 +49,7 @@ $$
 r_\mathrm{out} = r_\mathrm{ds} + R \cdot (1 + \gm \cdot r_\mathrm{ds}).
 $$ {#eq-curmir-degeneration-rout}
 
-A third popular option is to use the so-called regulated current mirror, which uses an additional amplifier to sense the drain potential of the bottom transistor and keep it constant [@Hosticka.1979]. Note that the output current will not change if the $\VDS$ of the bottom transistor is kept constant. We can use any suitable amplifier for this purpose, e.g., a simple OTA as introduced in @sec-basic-ota. In the most basic form, we use a common-source stage with a current mirror load as shown in @fig-current-mirror-reg-casc.
+A third popular option to implement an improved current mirror is to use the so-called regulated current mirror, which uses an additional amplifier to sense the drain potential of the bottom transistor and keep it constant [@Hosticka.1979]. Note that the output current will not change if the $\VDS$ of the bottom transistor is kept constant. We can use any suitable amplifier for this purpose, e.g., a simple OTA as introduced in @sec-basic-ota. In the most basic form, we use a common-source stage with a current mirror load as shown in @fig-current-mirror-reg-casc.
 
 {{< include /content/curmir_improved/_fig_curmir_regcasc.qmd >}}
 
@@ -48,8 +57,8 @@ We assume the voltage gain of the auxiliary amplifier to be $A_\mathrm{v} = \gm[
 
 $$
 \begin{split}
-r_\mathrm{out} &= r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot [1 + \gm[casc] \cdot r_\mathrm{ds,casc} \cdot (1 + \gm[aux] / \gds[aux])] \\
-& \approx r_\mathrm{ds} \cdot \gm[casc] \cdot r_\mathrm{ds,casc} \cdot \gm[aux] \cdot r_\mathrm{ds,aux} 
+r_\mathrm{out} &= r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot [1 + \gm[,casc] \cdot r_\mathrm{ds,casc} \cdot (1 + \gm[aux] / \gds[aux])] \\
+& \approx r_\mathrm{ds} \cdot \gm[,casc] \cdot r_\mathrm{ds,casc} \cdot \gm[,aux] \cdot r_\mathrm{ds,aux} 
 \end{split}
 $$ {#eq-curmir-regcasc-rout}
 
@@ -330,16 +339,16 @@ Bringing both results into @eq-curmir-matching-nodeg, we get
 $$
 \sdev[\frac{\Delta \ID}{\ID}] = \sqrt{ (0.28\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (0.08\,\%)^2} \approx 0.16\,\%.
 $$
- Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this matches quite ok with the standard deviation of about $0.21\,\mu\text{A}/48.9\,\mu\text{A} = 0.43\,\%$ obtained from the Monte-Carlo simulation.
+ Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this matches quite well with the standard deviation of about $0.21\,\mu\text{A}/48.9\,\mu\text{A} = 0.43\,\%$ obtained from the Monte-Carlo simulation.
 
- Let us now calculate the current mirror matching of the resistively-degenerated current mirror. Using @eq-curmir-matching-alt, we can analyze this configuration. We use the sizing values of $\gm / \ID = 10\,\text{V}^{-1}$, $W = 20\,\mu\text{m}$, and $L = 3\,\mu\text{m}$, for the MOSFET, and $V_\mathrm{deg} = 0.2\,\text{V}$, $L = 15\,\mu\text{m}$ / $W = 1\,\mu\text{m}$ for the used `rppd` resistor.
+ Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use @eq-curmir-matching-alt to analyze this configuration. We use the sizing values of $\gm / \ID = 10\,\text{V}^{-1}$, $W = 20\,\mu\text{m}$, and $L = 3\,\mu\text{m}$, for the MOSFET, and $V_\mathrm{deg} = 0.2\,\text{V}$, $L = 15\,\mu\text{m}$ / $W = 1\,\mu\text{m}$ for the used `rppd` resistor.
  
 The standard deviation of the transconductance parameter mismatch can be calculated as
 $$
 \sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.07\,\%.
 $$
 
-The standard deviation of the threshold voltage mismatch can be calculated
+The standard deviation of the threshold voltage mismatch can be calculated as
 $$
 \sdev[\Delta \Vth] = \frac{2\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.26\,\text{mV}.
 $$
