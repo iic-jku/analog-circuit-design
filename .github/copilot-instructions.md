@@ -6,7 +6,7 @@ Educational material for intermediate-level MOSFET analog circuit design course 
 ## Architecture & Structure
 
 ### Content Organization
-- `analog_circuit_design.qmd` - Main document orchestrator that includes all sections via `{{< include >}}`
+- `aicd.qmd` - Main document orchestrator that includes all sections via `{{< include >}}`
 - `content/*/` - Modular Quarto chapters (intro, sizing, current_mirror, ota_basic, etc.)
 - `content/_macros.qmd` - LaTeX macros for circuit notation (e.g., `\VDD`, `\VGS`, `\gmid`) included in all documents
 - `gmid/*.ipynb` - Python Jupyter notebooks for MOSFET sizing using gm/ID methodology
