@@ -16,7 +16,7 @@ limitations under the License.
 
 # First Steps {#sec-first-steps}
 
-In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe heterojunction bipolar transistors (HBTs), we will use it as a pure CMOS technology, which is available from IHP under the name SG13C.
+In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourselves familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe heterojunction bipolar transistors (HBTs), we will use it as a pure CMOS technology, which is available from IHP under the name SG13C.
 
 ## The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET) {#sec-mosfet}
 
@@ -57,7 +57,7 @@ Now, as we are skipping the bottom-up approach of deriving the MOSFET large-sign
 
 As a side note, the students who want to understand MOSFET behavior from a physical angle should consult the MOSFET chapter from the JKU course "Design of Complex Integrated Circuits" (VL 336.048). A great introduction into MOSFET operation and fabrication is given in [@Chenming_Hu_2010], which is available freely [online](https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/) and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in [@Tsividis_McAndrew_2011].
 
-Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!
+Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the important note below!
 
 ::: {.callout-important title="Mathematical Notation"}
 Throughout this material, we will largely stick to the following notation standardized by IEEE:
@@ -171,7 +171,7 @@ $$ {#eq-mosfet-transit-frequency}
 This frequency is an extrapolated frequency where the MOSFET operation is dominated by several second-order effects (hence @eq-mosfet-transit-frequency is not valid any longer). A rule-of-thumb is to use a MOSFET up to approximately $f_\mathrm{T} / 10$. In any case, $f_\mathrm{T}$ is a proxy of the speed of a MOSFET; in other words, how much input capacitance $\Cgg$ is incurred when creating a certain $\gm$.
 
 ::: {.callout-tip title="Exercise: MOSFET Transit Frequency"}
-As a home exercise, try to derive @eq-mosfet-transit-frequency starting from @fig-mosfet-small-signal-model-simplified. By showing this transformation you can proof that indeed both circuits are electrically equivalent.
+As a home exercise, try to derive @eq-mosfet-transit-frequency starting from @fig-mosfet-small-signal-model-simplified. By showing this transformation you can prove that indeed both circuits are electrically equivalent.
 ::: 
 
 Now we need to see how the small-signal parameters seen in @fig-mosfet-small-signal-model can be investigated and estimated using circuit simulation.
@@ -185,7 +185,7 @@ Please try to execute the following steps and answer the following questions:
    2. What is the ratio of $\gm$ to $g_\mathrm{mb}$? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?
    3. Take a look at the device capacitances $\Cgs$, $\Cgd$, and $\Cgb$. Why are they important? What is the $f_\mathrm{T}$ of the MOSFET?
    4. Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor $\gamma$, which in triode is $\gamma=1$ and in saturation is $\gamma=2/3$ according to basic text books. Which value of $\gamma$ are you calculating? Why might it be different?
-3. Go back to your testbench for the LVS PMOS `sg13_lv_pmos`:
+3. Go back to your testbench for the LV PMOS `sg13_lv_pmos`:
    1. What is the difference in $\gm$, $\gds$, and other parameters between the NMOS and the PMOS? Why could they be different?
 :::
 

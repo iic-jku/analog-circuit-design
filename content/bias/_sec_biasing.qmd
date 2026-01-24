@@ -16,9 +16,9 @@ limitations under the License.
 
 # Biasing
 
-So far, we have pushed one unresolved issue in front of us. We have studied ways to multiply and scale bias currents using current mirrors (see @sec-current-mirror) and we have also found ways to buffer (and scale) bias voltages (see @sec-voltage-buffer-with-ota, scaling can be readily achieved by using a resistive divider in the feedback path). We can generate bias voltages by running a current through a resistor. However, what has not been discussed so far is **how to generate one stable bias current in the first place**.
+So far, we have deferred one unresolved issue. We have studied ways to multiply and scale bias currents using current mirrors (see @sec-current-mirror) and we have also found ways to buffer (and scale) bias voltages (see @sec-voltage-buffer-with-ota, scaling can be readily achieved by using a resistive divider in the feedback path). We can generate bias voltages by running a current through a resistor. However, what has not been discussed so far is **how to generate one stable bias current in the first place**.
 
-If we would have a stable reference voltage, then we can use the arrangement shown in @fig-bias-current-gen to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)
+If we had a stable reference voltage, then we could use the arrangement shown in @fig-bias-current-gen to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)
 
 $$
 I_\mathrm{bias} = \frac{V_\mathrm{ref}}{R_1}.
@@ -28,7 +28,7 @@ Using $A_1$ and $M_1$ the voltage $V_\mathrm{ref}$ is regulated across $R_1$ and
 
 {{< include /content/bias/_fig_bias_current_gen.qmd >}}
 
-The resistor $R_1$ will show variation with the process tolerance, but we can either (a) use an external resistor for a precise current generation, or (b) use some sort of trimming to correct this resistor value. Depending on the further use of the bias currents a variation of the resistor might no be a bad thing. Assuming we use the resulting bias current to generate somewhere a bias voltage $V_\mathrm{bias}$ by running the current through resistor $R_2$, then this voltage is given by
+The resistor $R_1$ will show variation with the process tolerance, but we can either (a) use an external resistor for a precise current generation, or (b) use some sort of trimming to correct this resistor value. Depending on the further use of the bias currents a variation of the resistor might not be a bad thing. Assuming we use the resulting bias current to generate somewhere a bias voltage $V_\mathrm{bias}$ by running the current through resistor $R_2$, then this voltage is given by
 
 $$
 V_\mathrm{bias} = R_2 I_\mathrm{bias} = \frac{R_2}{R_1} V_\mathrm{ref}.

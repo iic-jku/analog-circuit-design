@@ -62,7 +62,7 @@ If the voltage gain of the OTA in @fig-voltage-buffer-ota is high, then $V_\math
 | Temperature range (industrial)                          | $-40 < \underline{27} < 125$       | degC    |
 | Load capacitance $C_\mathrm{load}$                      | $50$                               | fF      |
 | Input voltage range (for buffering 2/3 bandgap voltage) | $0.7 < \underline{0.8} < 0.9$      | V       |
-| Signal bandwidth (3dB)                                  | $>10$                              | MHz     |
+| Signal bandwidth (3 dB)                                 | $>10$                              | MHz     |
 | Output voltage error                                    | $<3$                               | %       |
 | Total output noise (rms)                                | $<1$                               | mV~rms~ |
 | Supply current (as low as possible)                     | $<10$                              | µA      |
@@ -320,7 +320,7 @@ $$ {#eq-currentmirror-offset}
 To minimize the input offset voltage in a differential pair we should strive to minimize $\VGS$ (i.e., to maximize $\gmid$, see @eq-diffpair-offset) and to minimize the mismatch in current mirrors we should target a large $\VGS$ (i.e., to minimize $\gmid$, see @eq-currentmirror-offset). In both cases the MOSFET area $W \cdot L$ needs to be large enough (see @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp).
 :::
 
-How can we now cope with mismatch in design and simulation? We can account the transitor mismatch according to @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.
+How can we now cope with mismatch in design and simulation? We can account for the transistor mismatch according to @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.
 
 We can also simulate the effects of MOSFET mismatch on circuit performance by doing a [**Monte Carlo**](https://en.wikipedia.org/wiki/Monte_Carlo_method) simulation. Here, a random realization of the variations of all circuit components (where mismatch is modelled) is taken and the circuit is simulated. Then, another random realization is simulated, and so on. In summary, we run the same simulation for different realizations $N$ times and evaluate the resulting variations of the circuit parameters. If $N$ is large enough, then the distributions should approach a [Gaussian distribution](https://en.wikipedia.org/wiki/Normal_distribution), and we can then estimate the variances of the circuit parameters. Using statistical analysis we can then assess the [**yield**](https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield) of a circuit, i.e., how many circuit realizations will meet the specification.
 

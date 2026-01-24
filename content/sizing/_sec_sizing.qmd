@@ -18,10 +18,10 @@ limitations under the License.
 
 When designing integrated circuits it is an important question how to select various parameters of a MOSFET, like $W$, $L$, or the bias current $I_\mathrm{D}$. In comparison to using discrete components in PCB design, or also compared to a bipolar junction transistor (BJT), we have these degrees of freedom, which make integrated circuit design so interesting.
 
-Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behavior is much more complex than these simple models. Also, this highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.
+Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behavior is much more complex than these simple models. Also, these highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.
 
 ::: {.callout-note title="MOSFET Square-Law Model"}
-One of the many simplifications of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existence of a threshold voltage is assumed, but in fact this voltage is just existing given a certain definition, and depending on definition, its value changed. In addition, in nm CMOS, the threshold voltage is a function on many thing, like $W$ and $L$.
+One of the many simplifications of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existence of a threshold voltage is assumed, but in fact this voltage exists only given a certain definition, and depending on definition, its value changes. In addition, in nm CMOS, the threshold voltage is a function of many things, like $W$ and $L$.
 :::
 
 An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e. for large $\VGS$ where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like $W$, $L$, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.
@@ -78,11 +78,11 @@ $$
 $$ {#eq-mosfet-gmid-stronginversion}
 with $\Vth$ the threshold voltage and $V_\mathrm{od}$ the so-called "overdrive voltage." The latter is sometimes also dubbed the effective gate-source voltage $V_\mathrm{eff}$ [@Johns_Martin_2nd_ed].
 
-::: {.callout-note title="Why 300K?"}
+::: {.callout-note title="Why 300 K?"}
 Why are we so often using a temperature of $300\,\text{K}$ for a typical condition? As this corresponds to roughly $27^{\circ}\text{C}$, this accounts for some self heating compared to otherwise cooler usual room temperatures. Further, engineers like round numbers which are easy to remember, so $300\,\text{K}$ is used as a proxy for room temperature.
 :::
 
-As we can also see from belows plot, the peak transit frequency of the LV NMOS is about $75\,\text{GHz}$, which allows building radio-frequency circuits up to ca. $f_\mathrm{T} / 10 = 7.5\,\text{GHz}$, which is a respectable number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the time frame when 130nm CMOS became available (ca. 2000). 
+As we can also see from the plot below, the peak transit frequency of the LV NMOS is about $75\,\text{GHz}$, which allows building radio-frequency circuits up to ca. $f_\mathrm{T} / 10 = 7.5\,\text{GHz}$, which is a respectable number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the time frame when 130nm CMOS became available (ca. 2000). 
 
 Note that $f_\mathrm{T}$ saturates and even decreases again at around $\VGS = 1.2\,\text{V}$ due to second-order effects of the transistor like [velocity saturation](https://en.wikipedia.org/wiki/Saturation_velocity) and [DIBL](https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering). Velocity saturation describes the saturation of the velocity of the electrons at a certain $\VGS$. As a consequence, also $\gm$ saturates. Since $f_\mathrm{T} \propto \gm / \Cgs$, $f_\mathrm{T}$ can not further increase. DIBL explains the effect when a too high $\VGS$ is applied and therefore the channel is confined to a narrow region at the surface, leading to
 more carrier scattering and thus lower mobility.
