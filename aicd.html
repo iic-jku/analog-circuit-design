@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-01-22">
+<meta name="dcterms.date" content="2026-01-24">
 
 <title>Analog (Integrated) Circuit Design</title>
 <style>
@@ -568,7 +568,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 22, 2026</p>
+      <p class="date">January 24, 2026</p>
     </div>
   </div>
   
@@ -626,11 +626,11 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>These notes are considered to be self-contained, although some explanations are kept short and probably lack depth. To dive into details, there are many excellent textbooks on analog circuit design available. Among then, we can recommend the following ones:</p>
+<p>These notes are considered to be self-contained, although some explanations are kept short and probably lack depth. To dive into details, there are many excellent textbooks on analog circuit design available. Among them, we can recommend the following ones:</p>
 <ul>
 <li><span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span> is a classic book and a definitive read.</li>
 <li><span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span> is an excellent introduction into CMOS analog circuit design.</li>
-<li><span class="citation" data-cites="Sansen_Essentials">(<a href="#ref-Sansen_Essentials" role="doc-biblioref">Sansen 2006</a>)</span> is an book with a lot of very useful information hard to find elsewhere.</li>
+<li><span class="citation" data-cites="Sansen_Essentials">(<a href="#ref-Sansen_Essentials" role="doc-biblioref">Sansen 2006</a>)</span> is a book with a lot of very useful information hard to find elsewhere.</li>
 <li><span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span> is a great reference for MOSFET device physics and modeling.</li>
 <li><span class="citation" data-cites="Tsividis_McAndrew_2011">(<a href="#ref-Tsividis_McAndrew_2011" role="doc-biblioref">Tsividis and McAndrew 2011</a>)</span> is the in-depth reference for MOSFET device operation.</li>
 </ul>
@@ -825,7 +825,7 @@ Important
 </section>
 <section id="sec-first-steps" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> First Steps</h1>
-<p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourself familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe heterojunction bipolar transistors (HBTs), we will use it as a pure CMOS technology, which is available from IHP under the name SG13C.</p>
+<p>In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourselves familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe heterojunction bipolar transistors (HBTs), we will use it as a pure CMOS technology, which is available from IHP under the name SG13C.</p>
 <section id="sec-mosfet" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-mosfet"><span class="header-section-number">2.1</span> The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h2>
 <p>In this course, we will <strong>not</strong> dive into semiconductor physics and derive the device operation bottom-up starting from a fundamental level governed by quantum mechanics or a simplified solid-state physics based approach resulting in the well-known square-law model. Instead, we will treat the MOSFET behaviorally by assuming a 4-terminal device, and the performance of this device regarding its terminal voltages and currents we will largely derive from the simulation model.</p>
@@ -921,7 +921,7 @@ Figure&nbsp;4: The MOSFET large-signal model. In general, all capacitors are non
 </div>
 <p>Now, as we are skipping the bottom-up approach of deriving the MOSFET large-signal behavior from basic principles, we need to understand the behavior of the elements of the large-signal model in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;4</a> by using a circuit simulator and observing what happens. And generally, a first step in any new IC technology should be to investigate basic MOSFET performance, by doing simple dc sweeps of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> and looking at <span class="math inline">\(I_\mathrm{D}\)</span> and other large- and small-signal parameters.</p>
 <p>As a side note, the students who want to understand MOSFET behavior from a physical angle should consult the MOSFET chapter from the JKU course “Design of Complex Integrated Circuits” (VL 336.048). A great introduction into MOSFET operation and fabrication is given in <span class="citation" data-cites="Chenming_Hu_2010">(<a href="#ref-Chenming_Hu_2010" role="doc-biblioref">Hu 2010</a>)</span>, which is available freely <a href="https://www.chu.berkeley.edu/modern-semiconductor-devices-for-integrated-circuits-chenming-calvin-hu-2010/">online</a> and is a recommended read. A very detailed description of the MOSFET (leaving usually no question unanswered) is provided in <span class="citation" data-cites="Tsividis_McAndrew_2011">(<a href="#ref-Tsividis_McAndrew_2011" role="doc-biblioref">Tsividis and McAndrew 2011</a>)</span>.</p>
-<p>Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the import note below!</p>
+<p>Now, in order to get started, basic Xschem testbenches are prepared, and first simple dc sweeps of various voltages and currents will be done. But before that, please look at the important note below!</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Mathematical Notation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1143,7 +1143,7 @@ Figure&nbsp;9: The MOSFET small-signal basic T-model.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As a home exercise, try to derive <a href="#eq-mosfet-transit-frequency" class="quarto-xref">Equation&nbsp;2</a> starting from <a href="#fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;7</a>. By showing this transformation you can proof that indeed both circuits are electrically equivalent.</p>
+<p>As a home exercise, try to derive <a href="#eq-mosfet-transit-frequency" class="quarto-xref">Equation&nbsp;2</a> starting from <a href="#fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;7</a>. By showing this transformation you can prove that indeed both circuits are electrically equivalent.</p>
 </div>
 </div>
 <p>Now we need to see how the small-signal parameters seen in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;6</a> can be investigated and estimated using circuit simulation.</p>
@@ -1167,7 +1167,7 @@ Figure&nbsp;9: The MOSFET small-signal basic T-model.
 <li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{gs}\)</span>, <span class="math inline">\(C_\mathrm{gd}\)</span>, and <span class="math inline">\(C_\mathrm{gb}\)</span>. Why are they important? What is the <span class="math inline">\(f_\mathrm{T}\)</span> of the MOSFET?</li>
 <li>Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
 </ol></li>
-<li>Go back to your testbench for the LVS PMOS <code>sg13_lv_pmos</code>:
+<li>Go back to your testbench for the LV PMOS <code>sg13_lv_pmos</code>:
 <ol type="1">
 <li>What is the difference in <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(g_\mathrm{ds}\)</span>, and other parameters between the NMOS and the PMOS? Why could they be different?</li>
 </ol></li>
@@ -1213,7 +1213,7 @@ C_\mathrm{GG}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{G}}
 <section id="sec-gmid-method" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Transistor Sizing Using gm/ID Methodology</h1>
 <p>When designing integrated circuits it is an important question how to select various parameters of a MOSFET, like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, or the bias current <span class="math inline">\(I_\mathrm{D}\)</span>. In comparison to using discrete components in PCB design, or also compared to a bipolar junction transistor (BJT), we have these degrees of freedom, which make integrated circuit design so interesting.</p>
-<p>Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behavior is much more complex than these simple models. Also, this highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.</p>
+<p>Often, transistor sizing in entry-level courses is based on the square-law model, where a simple analytical equation for the drain current can be derived. However, in nanometer CMOS, the MOSFET behavior is much more complex than these simple models. Also, these highly simplified derivations introduce concepts like the threshold voltage or the overdrive voltage, which are interesting from a theoretical viewpoint, but bear little practical use.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Square-Law Model">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1224,7 +1224,7 @@ C_\mathrm{GG}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{G}}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>One of the many simplifications of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existence of a threshold voltage is assumed, but in fact this voltage is just existing given a certain definition, and depending on definition, its value changed. In addition, in nm CMOS, the threshold voltage is a function on many thing, like <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>.</p>
+<p>One of the many simplifications of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existence of a threshold voltage is assumed, but in fact this voltage exists only given a certain definition, and depending on definition, its value changes. In addition, in nm CMOS, the threshold voltage is a function of many things, like <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>.</p>
 </div>
 </div>
 <p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.</p>
@@ -1317,20 +1317,20 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
 \tag{4}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.” The latter is sometimes also dubbed the effective gate-source voltage <span class="math inline">\(V_\mathrm{eff}\)</span> <span class="citation" data-cites="Johns_Martin_2nd_ed">(<a href="#ref-Johns_Martin_2nd_ed" role="doc-biblioref">Carusone, Johns, and Martin 2011</a>)</span>.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Why 300K?">
+<div class="callout callout-style-default callout-note callout-titled" title="Why 300 K?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why 300K?
+<span class="screen-reader-only">Note</span>Why 300 K?
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Why are we so often using a temperature of <span class="math inline">\(300\,\text{K}\)</span> for a typical condition? As this corresponds to roughly <span class="math inline">\(27^{\circ}\text{C}\)</span>, this accounts for some self heating compared to otherwise cooler usual room temperatures. Further, engineers like round numbers which are easy to remember, so <span class="math inline">\(300\,\text{K}\)</span> is used as a proxy for room temperature.</p>
 </div>
 </div>
-<p>As we can also see from belows plot, the peak transit frequency of the LV NMOS is about <span class="math inline">\(75\,\text{GHz}\)</span>, which allows building radio-frequency circuits up to ca. <span class="math inline">\(f_\mathrm{T} / 10 = 7.5\,\text{GHz}\)</span>, which is a respectable number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the time frame when 130nm CMOS became available (ca. 2000).</p>
+<p>As we can also see from the plot below, the peak transit frequency of the LV NMOS is about <span class="math inline">\(75\,\text{GHz}\)</span>, which allows building radio-frequency circuits up to ca. <span class="math inline">\(f_\mathrm{T} / 10 = 7.5\,\text{GHz}\)</span>, which is a respectable number. It is no coincidence, that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the time frame when 130nm CMOS became available (ca. 2000).</p>
 <p>Note that <span class="math inline">\(f_\mathrm{T}\)</span> saturates and even decreases again at around <span class="math inline">\(V_\mathrm{GS}= 1.2\,\text{V}\)</span> due to second-order effects of the transistor like <a href="https://en.wikipedia.org/wiki/Saturation_velocity">velocity saturation</a> and <a href="https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering">DIBL</a>. Velocity saturation describes the saturation of the velocity of the electrons at a certain <span class="math inline">\(V_\mathrm{GS}\)</span>. As a consequence, also <span class="math inline">\(g_\mathrm{m}\)</span> saturates. Since <span class="math inline">\(f_\mathrm{T} \propto g_\mathrm{m}/ C_\mathrm{gs}\)</span>, <span class="math inline">\(f_\mathrm{T}\)</span> can not further increase. DIBL explains the effect when a too high <span class="math inline">\(V_\mathrm{GS}\)</span> is applied and therefore the channel is confined to a narrow region at the surface, leading to more carrier scattering and thus lower mobility.</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}}" data-tags="[&quot;fig-nmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
@@ -1644,8 +1644,8 @@ Figure&nbsp;15: A MOSFET connected as a diode (drain shorted with gate).
 </div>
 </div>
 </div>
-<p>Why looking at a single-transistor circuit at all? By starting with the simplest possible circuit we can develop important skills in circuit analysis (setting up and calculating a small-signal model, calculating open-loop gain, calculate noise, etc.) and Xschem/ngspice simulation testbench creation. We safely assume that also the Mona Lisa was not Leonardo da Vinci’s first painting, so let’s start slow.</p>
-<p>This diode is usually biased by a current source, shown as <span class="math inline">\(I_\mathrm{bias}\)</span> in the figure. Depending on MOSFET sizing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>, a certain gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span> will develop. This voltage can be used as a biasing voltage for other circuit parts, for example. For exemplary sized MOSFET the <span class="math inline">\(V_\mathrm{GS}= f(I_\mathrm{bias})\)</span> characteristic is shown in <a href="#fig-mos-diode-simulation" class="quarto-xref">Figure&nbsp;16</a>. Note that in this MOSFET diode configuration <span class="math inline">\(V_\mathrm{DS}= V_\mathrm{GS}\)</span>.</p>
+<p>Why look at a single-transistor circuit at all? By starting with the simplest possible circuit we can develop important skills in circuit analysis (setting up and calculating a small-signal model, calculating open-loop gain, calculating noise, etc.) and Xschem/ngspice simulation testbench creation. We safely assume that the Mona Lisa also was not Leonardo da Vinci’s first painting, so let’s start slow.</p>
+<p>This diode is usually biased by a current source, shown as <span class="math inline">\(I_\mathrm{bias}\)</span> in the figure. Depending on MOSFET sizing with <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>, a certain gate-source voltage <span class="math inline">\(V_\mathrm{GS}\)</span> will develop. This voltage can be used as a biasing voltage for other circuit parts, for example. For an exemplarily sized MOSFET the <span class="math inline">\(V_\mathrm{GS}= f(I_\mathrm{bias})\)</span> characteristic is shown in <a href="#fig-mos-diode-simulation" class="quarto-xref">Figure&nbsp;16</a>. Note that in this MOSFET diode configuration <span class="math inline">\(V_\mathrm{DS}= V_\mathrm{GS}\)</span>.</p>
 <div id="cell-fig-mos-diode-simulation" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-mos-diode-simulation" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2169,9 +2169,9 @@ Important&nbsp;1: MOSFET Parameters NG and M
 <p>Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter <code>ng</code> accordingly (see <a href="#imp-mosfet-params-ng-m" class="quarto-xref">Important&nbsp;1</a>).</p>
 <ul>
 <li>What is the dc gain of this amplifier when loaded with 50<span class="math inline">\(\Omega\)</span>?</li>
-<li>The dc gain is likely not exactly 0dB. Why is this so?</li>
+<li>The dc gain is likely not exactly 0 dB. Why is this so?</li>
 <li>Increase the width <span class="math inline">\(W\)</span> of the PMOS until the gain is correct. What is the <span class="math inline">\(W\)</span> that you had to set, and how much is <span class="math inline">\(I_\mathrm{D}\)</span> now?</li>
-<li>What is the bandwidth (i.e., the -3dB corner frequency) of the output voltage, when the voltage source has a source resistance of 1k<span class="math inline">\(\Omega\)</span>?</li>
+<li>What is the bandwidth (i.e., the -3 dB corner frequency) of the output voltage, when the voltage source has a source resistance of 1k<span class="math inline">\(\Omega\)</span>?</li>
 </ul>
 <p>If you get stuck, <a href="./xschem/measurement_amplifier.sch">here</a> is the solution to this exercise, and it is also shown in <a href="#fig-meas-amp-tb" class="quarto-xref">Figure&nbsp;27</a>.</p>
 <div id="fig-meas-amp-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2191,7 +2191,7 @@ Figure&nbsp;27: Simulation schematic of the common-source measurement amplifier.
 </section>
 <section id="sec-current-mirror" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Current Mirror</h1>
-<p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the <strong>current mirror</strong> <span class="citation" data-cites="Widlar_1965">(<a href="#ref-Widlar_1965" role="doc-biblioref">R. Widlar 1965</a>)</span>. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;28</a> with one MOSFET diode converting the incoming bias current into a voltage <span class="math inline">\(V_\mathrm{GS}= f(I_\mathrm{D1}) = f(I_\mathrm{bias})\)</span>, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created at once. Shown in the figure are two output currents <span class="math inline">\(I_\mathrm{out1}\)</span> and <span class="math inline">\(I_\mathrm{out2}\)</span>, but any number of parallel branches can be realized (note that this is true for MOSFET as no gate current flows; for the case of BJTs, the base current flowing into the various transistors is subtracted from <span class="math inline">\(I_\mathrm{bias}\)</span>, so usually a compensation circuit is added).</p>
+<p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the <strong>current mirror</strong> <span class="citation" data-cites="Widlar_1965">(<a href="#ref-Widlar_1965" role="doc-biblioref">R. Widlar 1965</a>)</span>. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;28</a> with a MOSFET diode converting the incoming bias current into a voltage <span class="math inline">\(V_\mathrm{GS}= f(I_\mathrm{D1}) = f(I_\mathrm{bias})\)</span>, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created at once. Shown in the figure are two output currents <span class="math inline">\(I_\mathrm{out1}\)</span> and <span class="math inline">\(I_\mathrm{out2}\)</span>, but any number of parallel branches can be realized (note that this is true for MOSFET as no gate current flows; for the case of BJTs, the base current flowing into the various transistors is subtracted from <span class="math inline">\(I_\mathrm{bias}\)</span>, so usually a compensation circuit is added).</p>
 <div id="cell-fig-current-mirror" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div id="fig-current-mirror" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2225,14 +2225,14 @@ I_\mathrm{out2} \approx I_\mathrm{bias} \frac{W_3}{L_3} \frac{L_1}{W_1}.
 <div class="callout-body-container callout-body">
 <p>Please construct a current mirror based on the MOSFET-diode which we sized in <a href="#sec-mosfet-diode" class="quarto-xref">Section&nbsp;4</a>. The input current <span class="math inline">\(I_\mathrm{bias} = 20\,\mu\text{A}\)</span>, and we want three output currents of size <span class="math inline">\(10\,\mu\text{A}\)</span>, <span class="math inline">\(20\,\mu\text{A}\)</span>, and <span class="math inline">\(40\,\mu\text{A}\)</span>.</p>
 <p>Sweep the output voltage of all three current branches and see over which voltage range an acceptable current is created. For which output voltage range is the current departing from its ideal value, and why?</p>
-<p>You see that the slope of the output current is quite bad, as <span class="math inline">\(g_\mathrm{ds}\)</span> is too large. We can improve this by changing the length to <span class="math inline">\(L = 5\,\mu\text{m}\)</span> (for motivation, please look at the graphs in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>). In addition, for a current mirror we are not interested in a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> value, so we can use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 5\)</span> in this case. Please size the current mirror MOSFETs accordingly (please round the <span class="math inline">\(W\)</span> to half micron, to keep sizes a bit more practical). Compare this result to the previous one, what changed?</p>
+<p>You see that the slope of the output current is poor, as <span class="math inline">\(g_\mathrm{ds}\)</span> is too large. We can improve this by changing the length to <span class="math inline">\(L = 5\,\mu\text{m}\)</span> (for motivation, please look at the graphs in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>). In addition, for a current mirror we are not interested in a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> value, so we can use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 5\)</span> in this case. Please size the current mirror MOSFETs accordingly (please round the <span class="math inline">\(W\)</span> to half micron, to keep sizes a bit more practical). Compare this result to the previous one, what changed?</p>
 <p>In case you get stuck, here are Xschem schematics for the <a href="./xschem/current_mirror.sch">original</a> and the <a href="./xschem/current_mirror_improved.sch">improved</a> current mirrors.</p>
 </div>
 </div>
 </section>
 <section id="sec-diff-pair" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Differential Pair</h1>
-<p>Like the current mirror in <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;6</a> the <strong>differential pair</strong> is an ubiquitous building block often used in integrated circuit design <span class="citation" data-cites="Blumlein_1937">(<a href="#ref-Blumlein_1937" role="doc-biblioref">Blumlein 1937</a>)</span>. The fundamental structure is given in <a href="#fig-differential-pair" class="quarto-xref">Figure&nbsp;29</a>.</p>
+<p>Like the current mirror in <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;6</a> the <strong>differential pair</strong> is a ubiquitous building block often used in integrated circuit design <span class="citation" data-cites="Blumlein_1937">(<a href="#ref-Blumlein_1937" role="doc-biblioref">Blumlein 1937</a>)</span>. The fundamental structure is given in <a href="#fig-differential-pair" class="quarto-xref">Figure&nbsp;29</a>.</p>
 <div id="cell-fig-differential-pair" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div id="fig-differential-pair" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2441,7 +2441,7 @@ Table&nbsp;2: Voltage buffer specification
 <td style="text-align: center;">V</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Signal bandwidth (3dB)</td>
+<td style="text-align: left;">Signal bandwidth (3 dB)</td>
 <td style="text-align: center;"><span class="math inline">\(&gt;10\)</span></td>
 <td style="text-align: center;">MHz</td>
 </tr>
@@ -3033,7 +3033,7 @@ V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 
 <p>To minimize the input offset voltage in a differential pair we should strive to minimize <span class="math inline">\(V_\mathrm{GS}\)</span> (i.e., to maximize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#eq-diffpair-offset" class="quarto-xref">Equation&nbsp;28</a>) and to minimize the mismatch in current mirrors we should target a large <span class="math inline">\(V_\mathrm{GS}\)</span> (i.e., to minimize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;29</a>). In both cases the MOSFET area <span class="math inline">\(W \cdot L\)</span> needs to be large enough (see <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a>).</p>
 </div>
 </div>
-<p>How can we now cope with mismatch in design and simulation? We can account the transitor mismatch according to <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a> in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.</p>
+<p>How can we now cope with mismatch in design and simulation? We can account for the transistor mismatch according to <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a> in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.</p>
 <p>We can also simulate the effects of MOSFET mismatch on circuit performance by doing a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"><strong>Monte Carlo</strong></a> simulation. Here, a random realization of the variations of all circuit components (where mismatch is modelled) is taken and the circuit is simulated. Then, another random realization is simulated, and so on. In summary, we run the same simulation for different realizations <span class="math inline">\(N\)</span> times and evaluate the resulting variations of the circuit parameters. If <span class="math inline">\(N\)</span> is large enough, then the distributions should approach a <a href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian distribution</a>, and we can then estimate the variances of the circuit parameters. Using statistical analysis we can then assess the <a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield"><strong>yield</strong></a> of a circuit, i.e., how many circuit realizations will meet the specification.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Number of Monte Carlo Simulation Runs">
 <div class="callout-header d-flex align-content-center">
@@ -3633,7 +3633,7 @@ Figure&nbsp;47: A cascoded current mirror using a biasing voltage to set the cas
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
 &lt;&gt;:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
-/tmp/ipykernel_3347/2155856820.py:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+/tmp/ipykernel_3408/2155856820.py:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
   res = elm.Resistor().down().label('$R_\mathrm{bias}$').color('blue')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -3979,7 +3979,7 @@ Table&nbsp;3: IHP SG13G2 device mismatch
 </section>
 <section id="sec-improved-ota" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Improved (Telescopic) OTA</h1>
-<p>With the new learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means to add cascodes to <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;32</a>. For symmetry reasons we will add cascodes to both sides, and the resulting schematic is shown in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>. This configuration is also referred to as <strong>“telescopic OTA”</strong> (likely because of the stacked structure, where all the transistors are stacked in current path like the tubes of a telescope).</p>
+<p>With the newly learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means adding cascodes to <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;32</a>. For symmetry reasons we will add cascodes to both sides, and the resulting schematic is shown in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>. This configuration is also referred to as <strong>“telescopic OTA”</strong> (likely because of the stacked structure, where all the transistors are stacked in a current path like the tubes of a telescope).</p>
 <div id="cell-fig-improved-ota" class="cell" data-execution_count="47">
 <div class="cell-output cell-output-display">
 <div id="fig-improved-ota" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4005,7 +4005,7 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It is critically import for a stable performance across PVT that the bias voltages for the cascode gates are created in a manner that tracks variations with process, temperature, and supply voltage!</p>
+<p>It is critically important for stable performance across PVT that the bias voltages for the cascode gates are created in a manner that tracks variations with process, temperature, and supply voltage!</p>
 </div>
 </div>
 <p>The current mirror constructed out of <span class="math inline">\(M_\mathrm{3,3C}\)</span> and <span class="math inline">\(M_\mathrm{4,4C}\)</span> is a special kind of <strong>cascode current mirror for low-voltage operation</strong>, also referred to as high-swing cascode current mirror <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#ref-Jespers_Murmann_2017" role="doc-biblioref">Jespers and Murmann 2017</a>)</span>. This type is very often used, as it forces the <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{3,4}\)</span> to be equal, so the current mirror ratio is independent of <span class="math inline">\(g_\mathrm{ds}\)</span>.</p>
@@ -4768,8 +4768,8 @@ Table&nbsp;4: Voltage buffer specification
 </section>
 <section id="biasing" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Biasing</h1>
-<p>So far, we have pushed one unresolved issue in front of us. We have studied ways to multiply and scale bias currents using current mirrors (see <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;6</a>) and we have also found ways to buffer (and scale) bias voltages (see <a href="#sec-voltage-buffer-with-ota" class="quarto-xref">Section&nbsp;8.1</a>, scaling can be readily achieved by using a resistive divider in the feedback path). We can generate bias voltages by running a current through a resistor. However, what has not been discussed so far is <strong>how to generate one stable bias current in the first place</strong>.</p>
-<p>If we would have a stable reference voltage, then we can use the arrangement shown in <a href="#fig-bias-current-gen" class="quarto-xref">Figure&nbsp;63</a> to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)</p>
+<p>So far, we have deferred one unresolved issue. We have studied ways to multiply and scale bias currents using current mirrors (see <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;6</a>) and we have also found ways to buffer (and scale) bias voltages (see <a href="#sec-voltage-buffer-with-ota" class="quarto-xref">Section&nbsp;8.1</a>, scaling can be readily achieved by using a resistive divider in the feedback path). We can generate bias voltages by running a current through a resistor. However, what has not been discussed so far is <strong>how to generate one stable bias current in the first place</strong>.</p>
+<p>If we had a stable reference voltage, then we could use the arrangement shown in <a href="#fig-bias-current-gen" class="quarto-xref">Figure&nbsp;63</a> to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)</p>
 <p><span class="math display">\[
 I_\mathrm{bias} = \frac{V_\mathrm{ref}}{R_1}.
 \]</span></p>
@@ -4788,7 +4788,7 @@ Figure&nbsp;63: A constant-current generator based on OTA.
 </div>
 </div>
 </div>
-<p>The resistor <span class="math inline">\(R_1\)</span> will show variation with the process tolerance, but we can either (a) use an external resistor for a precise current generation, or (b) use some sort of trimming to correct this resistor value. Depending on the further use of the bias currents a variation of the resistor might no be a bad thing. Assuming we use the resulting bias current to generate somewhere a bias voltage <span class="math inline">\(V_\mathrm{bias}\)</span> by running the current through resistor <span class="math inline">\(R_2\)</span>, then this voltage is given by</p>
+<p>The resistor <span class="math inline">\(R_1\)</span> will show variation with the process tolerance, but we can either (a) use an external resistor for a precise current generation, or (b) use some sort of trimming to correct this resistor value. Depending on the further use of the bias currents a variation of the resistor might not be a bad thing. Assuming we use the resulting bias current to generate somewhere a bias voltage <span class="math inline">\(V_\mathrm{bias}\)</span> by running the current through resistor <span class="math inline">\(R_2\)</span>, then this voltage is given by</p>
 <p><span class="math display">\[
 V_\mathrm{bias} = R_2 I_\mathrm{bias} = \frac{R_2}{R_1} V_\mathrm{ref}.
 \]</span></p>
@@ -5051,7 +5051,7 @@ s_\mathrm{p2} = -\frac{g_\mathrm{m}}{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mat
 <p><span id="eq-miller-zero"><span class="math display">\[
 s_\mathrm{z} = +\frac{g_\mathrm{m}}{C_\mathrm{m}}
 \tag{55}\]</span></span></p>
-<p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero, abbreviated as RHPZ, leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are loosing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
+<p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero, abbreviated as RHPZ, leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are losing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
 <p>A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift. A more detailed analysis of this RHPZ can be found in <span class="citation" data-cites="Mangelsdorf_2025_RHPZ">(<a href="#ref-Mangelsdorf_2025_RHPZ" role="doc-biblioref">Mangelsdorf 2025b</a>)</span>.</p>
 <p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;71</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;72</a>). By doing this, we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
 <p>Repeating the calculation of the transfer function <span class="math inline">\(V_\mathrm{out} / I_\mathrm{in}\)</span> including <span class="math inline">\(R_\mathrm{m}\)</span> we see that the zero location is changed and can be calculated as (the pole locations are also slightly changed due to the addition of <span class="math inline">\(R_\mathrm{m}\)</span>, but we will not discuss the resulting equations here)</p>
@@ -5859,14 +5859,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {(Integrated)} {Circuit} {Design}},
-  date = {2026-01-22},
+  date = {2026-01-24},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-(Integrated) Circuit Design.”</span> January 22, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+(Integrated) Circuit Design.”</span> January 24, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
