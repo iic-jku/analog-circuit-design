@@ -16,7 +16,7 @@ limitations under the License.
 
 # Improved (Telescopic) OTA {#sec-improved-ota}
 
-With the newly learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means adding cascodes to $M_2$ and $M_4$ in @fig-basic-ota. For symmetry reasons we will add cascodes to both sides, and the resulting schematic is shown in @fig-improved-ota. This configuration is also referred to as **"telescopic OTA"** (likely because of the stacked structure, where all the transistors are stacked in a current path like the tubes of a telescope).
+With the newly learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means adding cascodes to $M_2$ and $M_4$ in @fig-basic-ota. For symmetry reasons we add cascodes to both sides, and the resulting schematic is shown in @fig-improved-ota. This configuration is also referred to as **"telescopic OTA"** (likely because of the stacked structure, where all the transistors are stacked in a current path like the tubes of a telescope).
 
 {{< include /content/ota_improved/_fig_improved_ota.qmd >}}
 
@@ -38,14 +38,14 @@ A simplified small-signal gain calculation of this improved OTA uses the result 
 $$
 A_0 \approx \frac{\gm[12]}{\gds[2] \frac{\gds[2C]}{\gm[2C]} + \gds[4] \frac{\gds[4C]}{\gm[4C]}}
 $$ {#eq-improved-ota-gain-dc}
-leading to a significant boost in dc gain due to cascoding. We will use this increased gain to reduce the $L$ of all MOSFET to
+leading to a significant boost in dc gain due to cascoding. We use this increased gain to reduce the $L$ of all MOSFET to
 
 1. save area (a smaller $L$ will lead to a smaller $W$ for a given $W/L$ ratio) and
 2. push the additional poles and zeros at the inner nodes of the cascode transistors (e.g., the connection of the drain of $M_4$ to the source of $M_\mathrm{4C}$) to higher frequencies to result in stable behavior and a reasonable gain transfer function (too many poles and zeros in the pass band of the amplifier create many issues with stability margin).
 
 ## Sizing the Improved OTA {#sec-improved-ota-sizing}
 
-Like the sizing of the 5T-OTA in @sec-basic-ota-sizing we will again use the $\gmid$ method using a Python notebook. Instead of using $L = 5\,\mu\text{m}$ we will this time use a reduced $L = 0.5\,\mu\text{m}$ for $M_\mathrm{1/1C,2/2C,3/3C,4/4C}$ (for speed reasons) and $L = 5\,\mu\text{m}$ for $M_\mathrm{5,6}$ for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).
+Like the sizing of the 5T-OTA in @sec-basic-ota-sizing we again use the $\gmid$ method using a Python notebook. Instead of using $L = 5\,\mu\text{m}$ we this time use a reduced $L = 0.5\,\mu\text{m}$ for $M_\mathrm{1/1C,2/2C,3/3C,4/4C}$ (for speed reasons) and $L = 5\,\mu\text{m}$ for $M_\mathrm{5,6}$ for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).
 
 We set $\gmid = 13$ across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at @sec-gmid-method to confirm this choice.
 
@@ -61,19 +61,23 @@ Please take a detailed look at the above sizing notebook and play with the numbe
 
 ## Designing the Improved OTA
 
-Based on the collected experience in this lecture and the result of the sizing procedure in @sec-improved-ota-sizing you should be able to design this OTA. If you want, please go ahead and try an implementation and check its performance with CACE.
+Based on the collected experience in this lecture and the result of the sizing procedure in @sec-improved-ota-sizing you should be able to design this OTA. If you want, please go ahead and try an implementation and check its performance with CACE. Looking at the design in @fig-improved-ota we can see that we still have the task to create the bias voltages $V_\mathrm{bias1}$ and $V_\mathrm{bias2}$, and we have to take care of practical issues like power-down, proper biasing, and so on.
 
-As an alternative there is a prepared OTA design shown in @fig-improved-ota-design which we will discuss in detail next.
+In @fig-improved-ota-w-bias you can see a possible implementation of the bias voltage generation which we will then implement in @fig-improved-ota-design. The additional current mirror transistors $M_\mathrm{8,9}$ create a small current flowing through $M_\mathrm{10}$ to establish $V_\mathrm{bias1} = \VGS[10] + V_\mathrm{tail}$. The $\VGS$ of $M_8$ is used to create $V_\mathrm{bias2} = \VDD - \VGS[8]$. Note that it is an important design aspect that $V_\mathrm{bias1}$ tracks variations in $V_\mathrm{tail}$ to keep the $\VDS$ of $M_{1,2}$ constant with changing common-mode input voltage. Likewise, $V_\mathrm{bias2}$ has to track variations in $\VDD$ to keep the $\VDS$ of $M_{3,4}$ constant with changing supply voltage.
+
+{{< include /content/ota_improved/_fig_improved_ota_w_bias.qmd >}}
+
+The transistor-level implementation is finally shown in @fig-improved-ota-design, and it also includes practical design aspects like power-down transistors, current sensing elements, and decoupling capacitors on sensitive bias nodes.
 
 ![Improved OTA design in Xschem.](./xschem/ota-improved.svg){#fig-improved-ota-design}
 
 ### Discussion of the OTA Design
 
-We will now do an analysis of the circuit design of the OTA including all the complications which make this design practical.
+We now do an analysis of the circuit design of the OTA including all the complications which make this design practical.
 
-1. For easier navigation, the device identifier are consistent with the circuit sketch in @fig-improved-ota.
+1. For easier navigation, the device identifiers are consistent with the circuit sketch in @fig-improved-ota.
 2. Some MOSFET dimensions are rounded to make a better fit in the IC layout. Please also look carefully at $W$, $L$, and $\mathrm{ng}$. The parameter $\mathrm{ng}$ defines how the total $W$ of a MOSFET should be split into individual MOSFET fingers with $W_\mathrm{f} = W / \mathrm{ng}$. This is done to arrive at a suitably sized MOSFET physical implementation. As we will not deal with IC layout in this lecture we will leave it at that.
-3. In order to allow good matching in the IC layout, MOSFETs (and other components) have to be constructed from equal pieces. To that end, $W/L$ scaling is done using unit elements (see finger width $W_\mathrm{f}$). Sometimes, besides $W$ the length $L$ has to be scaled, and this leads to the oddly-looking series stacking of some MOSFET (easily recognizable by the connected gates). In order to increase circuit readability, a subcircuit could be constructed hiding this series stacking of MOSFET, but it is sometimes easier to avoid subcircuits. There is a fine line in this trade-off, sometime a depth of 4 is the decision point between subcircuit use/no-use.
+3. In order to allow good matching in the IC layout, MOSFETs (and other components) have to be constructed from equal pieces. To that end, $W/L$ scaling is done using unit elements (see finger width $W_\mathrm{f}$). Sometimes, besides $W$ the length $L$ has to be scaled, and this leads to the oddly-looking series stacking of some MOSFET (easily recognizable by the connected gates). In order to increase circuit readability, a subcircuit could be constructed hiding this series stacking of MOSFET, but it is sometimes easier to avoid subcircuits. There is a fine line in this trade-off, sometimes a depth of 4 is the decision point between subcircuit use/no-use.
 4. As you can (hopefully) see the circuit is carefully drawn to ease readability. Important nets are named, text comments state certain properties like nominal voltage levels, bias currents, etc. Current sensing elements are added to directly see the dc currents in the circuit simulation.
 5. The bias voltage generation for the cascodes is included as well. The voltage drop for the bottom transistors is developed by properly scaling the MOSFETs in the reference branch. We reduce the $W/L$ ratio to increase the $\VGS$ to create a voltage headroom for the bottom MOSFET. We are using a dummy branch for bias generation (constructed with $M_\mathrm{7-10}$).
 6. The floating bias voltage $V_\mathrm{bias1}$ is created by implementing a current source from $\VDD$ ($M_\mathrm{9}$), then a MOSFET diode $M_{10}$, and an increased current towards $\VSS$ through $M_\mathrm{5}$.

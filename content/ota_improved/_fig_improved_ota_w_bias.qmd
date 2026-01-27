@@ -1,0 +1,148 @@
+::: {.content-hidden}
+Copyright (C) 2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-improved-ota-w-bias
+#| echo: false
+#| fig-cap: "The improved OTA based on the 5T-OTA design with biasing details shown."
+import schemdraw as sd
+import schemdraw.elements as elm
+
+sd.svgconfig.svg2 = False
+
+# Helper functions for cleaner code
+def nfet(label=None, loc=None, reverse=False):
+    """Create an NMOS transistor with common settings."""
+    fet = elm.AnalogNFet(offset_gate=False).theta(0)
+    if reverse:
+        fet = fet.reverse()
+    if label:
+        fet = fet.label(label, loc=loc) if loc else fet.label(label)
+    return fet
+
+def pfet(label=None, loc=None, reverse=False):
+    """Create a PMOS transistor with common settings."""
+    fet = elm.AnalogPFet(offset_gate=False).theta(0)
+    if reverse:
+        fet = fet.reverse()
+    if label:
+        fet = fet.label(label, loc=loc) if loc else fet.label(label)
+    return fet
+
+with sd.Drawing(canvas='svg') as d:
+    d.config(unit=2, fontsize=16)
+
+    # === Input differential pair (M1, M2) with cascode (M1C, M2C) ===
+    M1C = nfet().drop('source')
+    M1 = nfet('$M_1$', loc='right', reverse=True).drop('source')
+    elm.Line().down(0.5)
+    elm.Line().right(2.5).dot().label(r'$V_\mathrm{tail}$')
+    d.push()
+
+    # === Tail current source (M5) ===
+    elm.Line().down(0.5)
+    M5 = nfet('$M_5$', loc='right', reverse=True).anchor('drain')
+    elm.Ground()
+
+    # === Bias current mirror (M6, M7) ===
+    elm.Line().left(9).at(M5.gate)
+    d.push()
+    M7 = nfet(reverse=True).anchor('gate').drop('source')
+    elm.Ground()
+    d.pop()
+    elm.Line().left(1.5)
+    M6 = nfet('$M_6$').anchor('gate')
+    elm.Ground()
+
+    # Bias current source connection
+    elm.Line().up(0.5).dot().at(M6.drain)
+    d.push()
+    elm.Line().up().length(6.5)
+    Ibias = elm.SourceI().up().label(r'$I_\mathrm{bias}$').reverse()
+    d.pop()
+    elm.Line().right().length(1.5)
+    elm.Line().down().toy(M6.gate).dot()
+
+    # === Continue with M2 side ===
+    d.pop()
+    elm.Line().right().length(2.5)
+    elm.Line().up().length(0.5)
+    M2 = nfet('$M_2$').anchor('source').drop('drain')
+    M2C = nfet(reverse=True).anchor('source')
+
+    # === Input terminals ===
+    elm.Line().left().at(M1.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left')
+    elm.Line().right().at(M2.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right')
+
+    # === Load transistors (M3, M4) with cascode (M3C, M4C) ===
+    # Left side (M3C, M3)
+    elm.Line().up().at(M1C.drain).length(1).dot()
+    d.push()
+    elm.Line().up().length(0.5)
+    M3C = pfet().anchor('drain').drop('source')
+    elm.Line().up().length(0.25)
+    M3 = pfet('$M_3$').anchor('drain')
+
+    # Right side (M4C, M4) with output
+    elm.Line().up().at(M2C.drain).length(1).dot()
+    d.push()
+    elm.Line().right().length(1.5).dot(open=True).label(r'$V_\mathrm{out}$', 'right')
+    d.pop()
+    elm.Line().up().length(0.5)
+    M4C = pfet(reverse=True).anchor('drain').drop('source')
+    elm.Line().up().length(0.25)
+    M4 = pfet('$M_4$', loc='right', reverse=True).anchor('drain')
+
+    # Connect M3-M4 gates and diode connection
+    elm.Line().at(M4.gate).tox(M3.gate)
+    d.pop()
+    elm.Line().right().length(1.5)
+    elm.Line().up().toy(M3.gate).dot()
+
+    # === Bias voltage labels ===
+    elm.Line().at(M1C.gate).to(M2C.gate).label(r'$V_\mathrm{bias1}$')
+    elm.Line().at(M3C.gate).to(M4C.gate).label(r'$V_\mathrm{bias2}$')
+
+    # === VDD rail ===
+    line1 = elm.Line().at(Ibias.end).toy(M3.source)
+    elm.Line().at((line1.end[0] - d.unit/4, line1.end[1])).to(
+        (M4.source[0] + d.unit/4, M4.source[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
+
+    # === Bias generation circuitry (M8, M9, M10) ===
+    # M8 - PMOS bias
+    elm.Line().at(M7.drain).up().toy(M3.drain)
+    M8 = pfet('$M_8$').anchor('drain')
+    elm.Line().at(M8.gate).right(0.5).dot()
+    d.push()
+    elm.Line().right(0.5)
+    M9 = pfet('$M_9$', loc='right', reverse=True).anchor('gate').drop('drain')
+    d.pop()
+    elm.Line().down().toy(M3C.gate).dot()
+    elm.Line().right().to(M3C.gate).hold()
+    elm.Line().left().tox(M8.drain).dot()
+
+    # M10 - NMOS bias
+    elm.Line().at(M9.drain).down().toy(M1C.drain)
+    M10 = nfet('$M_{10}$').anchor('drain').drop('source')
+    elm.Line().down().toy(M1.source - 0.5)
+    elm.Line().right().tox(M1.source).dot()
+
+    # M10 gate connection to cascode bias
+    elm.Line().at(M10.gate).right(0.5).dot()
+    elm.Line().right().to(M1C.gate).hold()
+    elm.Line().up().toy(M10.drain + 0.5)
+    elm.Line().left().tox(M10.drain).dot()
+```
