@@ -20,24 +20,50 @@ limitations under the License.
 #| fig-cap: "The improved OTA based on the 5T-OTA design."
 import schemdraw as sd
 import schemdraw.elements as elm
+
 sd.svgconfig.svg2 = False
+
+# Helper functions for cleaner code
+def nfet(label=None, loc=None, reverse=False):
+    """Create an NMOS transistor with common settings."""
+    fet = elm.AnalogNFet(offset_gate=False).theta(0)
+    if reverse:
+        fet = fet.reverse()
+    if label:
+        fet = fet.label(label, loc=loc) if loc else fet.label(label)
+    return fet
+
+def pfet(label=None, loc=None, reverse=False):
+    """Create a PMOS transistor with common settings."""
+    fet = elm.AnalogPFet(offset_gate=False).theta(0)
+    if reverse:
+        fet = fet.reverse()
+    if label:
+        fet = fet.label(label, loc=loc) if loc else fet.label(label)
+    return fet
+
 with sd.Drawing(canvas='svg') as d:
     d.config(unit=2, fontsize=16)
-    
-    M1C = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label(r'$M_\mathrm{1C}$')
-    M1 = elm.AnalogNFet(offset_gate=False).drop('source').theta(0).label('$M_1$', ofst=-1.5).reverse()
+
+    # === Input differential pair (M1, M2) with cascode (M1C, M2C) ===
+    M1C = nfet(r'$M_\mathrm{1C}$').drop('source')
+    M1 = nfet('$M_1$', loc='right', reverse=True).drop('source')
     elm.Line().down().length(0.5)
     elm.Line().right().length(3).dot()
-    tailpoint=d.here
+    tailpoint = d.here
     d.push()
 
+    # === Tail current source (M5) ===
     elm.Line().down().length(0.5)
-    M5 = elm.AnalogNFet(offset_gate=False).anchor('drain').theta(0).label('$M_5$', ofst=-1.5).reverse()
-    elm.Ground()
-    elm.Line().left().length(6).at(M5.gate)
-    M6 = elm.AnalogNFet(offset_gate=False).anchor('gate').theta(0).label('$M_6$')
+    M5 = nfet('$M_5$', loc='right', reverse=True).anchor('drain')
     elm.Ground()
 
+    # === Bias current mirror (M6) ===
+    elm.Line().left().length(6).at(M5.gate)
+    M6 = nfet('$M_6$').anchor('gate')
+    elm.Ground()
+
+    # Bias current source connection
     elm.Line().up().dot().at(M6.drain).length(0.5)
     d.push()
     elm.Line().up().length(6.5)
@@ -46,51 +72,58 @@ with sd.Drawing(canvas='svg') as d:
     elm.Line().right().length(1.5)
     elm.Line().down().toy(M6.gate).dot()
 
+    # === Continue with M2 side ===
     d.pop()
     elm.Line().right().length(3)
     elm.Line().up().length(0.5)
-    M2 = elm.AnalogNFet(offset_gate=False).anchor('source').drop('drain').theta(0).label('$M_2$')
-    M2C = elm.AnalogNFet(offset_gate=False).anchor('source').theta(0).label(r'$M_\mathrm{2C}$', ofst=-1.5).reverse()
-    
+    M2 = nfet('$M_2$').anchor('source').drop('drain')
+    M2C = nfet(r'$M_\mathrm{2C}$', loc='right', reverse=True).anchor('source')
+
+    # === Input terminals ===
     elm.Line().left().at(M1.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{in,p}$', 'left')
     elm.Line().right().at(M2.gate).length(0.5).dot(open=True).label(r'$V_\mathrm{in,n}$', 'right')
-    
+
+    # === Load transistors (M3, M4) with cascode (M3C, M4C) ===
+    # Left side (M3C, M3)
     elm.Line().up().at(M1C.drain).length(1).dot()
     d.push()
     elm.Line().up().length(0.5)
-    M3C = elm.AnalogPFet(offset_gate=False).anchor('drain').drop('source').theta(0).label(r'$M_\mathrm{3C}$')
+    M3C = pfet(r'$M_\mathrm{3C}$').anchor('drain').drop('source')
     elm.Line().up().length(0.25)
-    M3 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_3$')
+    M3 = pfet('$M_3$').anchor('drain')
 
+    # Right side (M4C, M4) with output
     elm.Line().up().at(M2C.drain).length(1).dot()
     d.push()
     elm.Line().right().length(1.5).dot(open=True).label(r'$V_\mathrm{out}$', 'right')
     d.pop()
     elm.Line().up().length(0.5)
-    M4C = elm.AnalogPFet(offset_gate=False).anchor('drain').drop('source').theta(0).label(r'$M_\mathrm{4C}$', ofst=-1.5).reverse()
+    M4C = pfet(r'$M_\mathrm{4C}$', loc='right', reverse=True).anchor('drain').drop('source')
     elm.Line().up().length(0.25)
-    M4 = elm.AnalogPFet(offset_gate=False).anchor('drain').theta(0).label('$M_4$', ofst=-1.5).reverse()
+    M4 = pfet('$M_4$', loc='right', reverse=True).anchor('drain')
 
+    # Connect M3-M4 gates and diode connection
     elm.Line().at(M4.gate).tox(M3.gate)
-    
     d.pop()
     elm.Line().right().length(1.5)
     elm.Line().up().toy(M3.gate).dot()
 
+    # === Bias voltage sources ===
     elm.Line().at(M1C.gate).tox(M5.drain).dot()
     d.push()
     elm.Line().tox(M2C.gate)
     d.pop()
-    Vbias1 = elm.SourceV().down().to(tailpoint).label(r'$V_\mathrm{bias1}$', ofst=-2.2).reverse()
+    Vbias1 = elm.SourceV().down().to(tailpoint).label(r'$V_\mathrm{bias1}$', loc='bottom').reverse()
 
     elm.Line().at(M3C.gate).tox(M5.drain).dot()
     d.push()
     elm.Line().to(M4C.gate)
     d.pop()
-    Vbias2 = elm.SourceV().up().label(r'$V_\mathrm{bias2}$', ofst=-2.2)
+    Vbias2 = elm.SourceV().up().label(r'$V_\mathrm{bias2}$', loc='bottom')
     elm.Line().toy(M3.source)
 
-    # vdd line
+    # === VDD rail ===
     line1 = elm.Line().at(Ibias.end).toy(M3.source)
-    elm.Line().at((line1.end[0]-d.unit/4, line1.end[1])).to((M4.source[0]+d.unit/4, M4.source[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
+    elm.Line().at((line1.end[0] - d.unit/4, line1.end[1])).to(
+        (M4.source[0] + d.unit/4, M4.source[1])).label(r'$V_\mathrm{DD}$').linewidth(3)
 ```
