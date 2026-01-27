@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-01-24">
+<meta name="dcterms.date" content="2026-01-27">
 
 <title>Analog (Integrated) Circuit Design</title>
 <style>
@@ -568,7 +568,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 24, 2026</p>
+      <p class="date">January 27, 2026</p>
     </div>
   </div>
   
@@ -1761,7 +1761,7 @@ Figure&nbsp;18: Testbench for MOSFET diode transient settling.
 <p>It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually <span class="math inline">\(V_\mathrm{DD}\)</span> or <span class="math inline">\(V_\mathrm{SS}\)</span>) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.</p>
 </div>
 </div>
-<p>Exemplary implementations of power-down switches are shown in the Xschem implementation of the improved OTA in <a href="#fig-improved-ota-design" class="quarto-xref">Figure&nbsp;59</a>. Which <span class="math inline">\(W/L\)</span> ratio should these transistors have? Well, in general, switches often have minimum length to be fast and to have low <span class="math inline">\(R_\mathrm{on}\)</span>. However, if there are no critical specifications (e.g., like power-down time), then these transistors are often used as dummy transistors for other circuit parts and are sized to fit the layout best.</p>
+<p>Exemplary implementations of power-down switches are shown in the Xschem implementation of the improved OTA in <a href="#fig-improved-ota-design" class="quarto-xref">Figure&nbsp;60</a>. Which <span class="math inline">\(W/L\)</span> ratio should these transistors have? Well, in general, switches often have minimum length to be fast and to have low <span class="math inline">\(R_\mathrm{on}\)</span>. However, if there are no critical specifications (e.g., like power-down time), then these transistors are often used as dummy transistors for other circuit parts and are sized to fit the layout best.</p>
 </section>
 <section id="mosfet-diode-small-signal-analysis" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="mosfet-diode-small-signal-analysis"><span class="header-section-number">4.3</span> MOSFET Diode Small-Signal Analysis</h2>
@@ -3633,7 +3633,7 @@ Figure&nbsp;47: A cascoded current mirror using a biasing voltage to set the cas
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
 &lt;&gt;:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
-/tmp/ipykernel_3406/2155856820.py:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+/tmp/ipykernel_3408/2155856820.py:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
   res = elm.Resistor().down().label('$R_\mathrm{bias}$').color('blue')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -3979,7 +3979,7 @@ Table&nbsp;3: IHP SG13G2 device mismatch
 </section>
 <section id="sec-improved-ota" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Improved (Telescopic) OTA</h1>
-<p>With the newly learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means adding cascodes to <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;32</a>. For symmetry reasons we will add cascodes to both sides, and the resulting schematic is shown in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>. This configuration is also referred to as <strong>“telescopic OTA”</strong> (likely because of the stacked structure, where all the transistors are stacked in a current path like the tubes of a telescope).</p>
+<p>With the newly learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means adding cascodes to <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="#fig-basic-ota" class="quarto-xref">Figure&nbsp;32</a>. For symmetry reasons we add cascodes to both sides, and the resulting schematic is shown in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>. This configuration is also referred to as <strong>“telescopic OTA”</strong> (likely because of the stacked structure, where all the transistors are stacked in a current path like the tubes of a telescope).</p>
 <div id="cell-fig-improved-ota" class="cell" data-execution_count="47">
 <div class="cell-output cell-output-display">
 <div id="fig-improved-ota" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4025,14 +4025,14 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 <p>Further, by properly selecting the bias voltages of the cascode a low-voltage operation is achieved as <span class="math inline">\(V_\mathrm{DS}\)</span> can be minimized, allowing even triode operation of the current-mirror MOSFETs (as, noted above, a large <span class="math inline">\(g_\mathrm{ds}\)</span> is not a big issue).</p>
 <p>A simplified small-signal gain calculation of this improved OTA uses the result of <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;18</a> and <a href="#eq-cs-cascode-output-impedance" class="quarto-xref">Equation&nbsp;33</a> to arrive at the approximate dc gain of <span id="eq-improved-ota-gain-dc"><span class="math display">\[
 A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathrm{m2C}} + g_\mathrm{ds4} \frac{g_\mathrm{ds4C}}{g_\mathrm{m4C}}}
-\tag{43}\]</span></span> leading to a significant boost in dc gain due to cascoding. We will use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
+\tag{43}\]</span></span> leading to a significant boost in dc gain due to cascoding. We use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
 <ol type="1">
 <li>save area (a smaller <span class="math inline">\(L\)</span> will lead to a smaller <span class="math inline">\(W\)</span> for a given <span class="math inline">\(W/L\)</span> ratio) and</li>
 <li>push the additional poles and zeros at the inner nodes of the cascode transistors (e.g., the connection of the drain of <span class="math inline">\(M_4\)</span> to the source of <span class="math inline">\(M_\mathrm{4C}\)</span>) to higher frequencies to result in stable behavior and a reasonable gain transfer function (too many poles and zeros in the pass band of the amplifier create many issues with stability margin).</li>
 </ol>
 <section id="sec-improved-ota-sizing" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="sec-improved-ota-sizing"><span class="header-section-number">11.1</span> Sizing the Improved OTA</h2>
-<p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> we will again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we will this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5,6}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
+<p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> we again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5,6}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we stack now double as many MOSFET at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-67-contents" aria-controls="callout-67" aria-expanded="false" aria-label="Toggle callout">
@@ -4326,25 +4326,40 @@ headroom M5     = 0.264 V</code></pre>
 </section>
 <section id="designing-the-improved-ota" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="designing-the-improved-ota"><span class="header-section-number">11.2</span> Designing the Improved OTA</h2>
-<p>Based on the collected experience in this lecture and the result of the sizing procedure in <a href="#sec-improved-ota-sizing" class="quarto-xref">Section&nbsp;11.1</a> you should be able to design this OTA. If you want, please go ahead and try an implementation and check its performance with CACE.</p>
-<p>As an alternative there is a prepared OTA design shown in <a href="#fig-improved-ota-design" class="quarto-xref">Figure&nbsp;59</a> which we will discuss in detail next.</p>
+<p>Based on the collected experience in this lecture and the result of the sizing procedure in <a href="#sec-improved-ota-sizing" class="quarto-xref">Section&nbsp;11.1</a> you should be able to design this OTA. If you want, please go ahead and try an implementation and check its performance with CACE. Looking at the design in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a> we can see that we still have the task to create the bias voltages <span class="math inline">\(V_\mathrm{bias1}\)</span> and <span class="math inline">\(V_\mathrm{bias2}\)</span>, and we have to take care of practical issues like power-down, proper biasing, and so on.</p>
+<p>In <a href="#fig-improved-ota-w-bias" class="quarto-xref">Figure&nbsp;59</a> you can see a possible implementation of the bias voltage generation which we will then implement in <a href="#fig-improved-ota-design" class="quarto-xref">Figure&nbsp;60</a>. The additional current mirror transistors <span class="math inline">\(M_\mathrm{8,9}\)</span> create a small current flowing through <span class="math inline">\(M_\mathrm{10}\)</span> to establish <span class="math inline">\(V_\mathrm{bias1} = V_\mathrm{GS10} + V_\mathrm{tail}\)</span>. The <span class="math inline">\(V_\mathrm{GS}\)</span> of <span class="math inline">\(M_8\)</span> is used to create <span class="math inline">\(V_\mathrm{bias2} = V_\mathrm{DD}- V_\mathrm{GS8}\)</span>. Note that it is an important design aspect that <span class="math inline">\(V_\mathrm{bias1}\)</span> tracks variations in <span class="math inline">\(V_\mathrm{tail}\)</span> to keep the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{1,2}\)</span> constant with changing common-mode input voltage. Likewise, <span class="math inline">\(V_\mathrm{bias2}\)</span> has to track variations in <span class="math inline">\(V_\mathrm{DD}\)</span> to keep the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{3,4}\)</span> constant with changing supply voltage.</p>
+<div id="cell-fig-improved-ota-w-bias" class="cell" data-execution_count="48">
+<div class="cell-output cell-output-display">
+<div id="fig-improved-ota-w-bias" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-improved-ota-w-bias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="aicd_files/figure-html/fig-improved-ota-w-bias-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-93" title="Figure&nbsp;59: The improved OTA based on the 5T-OTA design with biasing details shown."><img src="aicd_files/figure-html/fig-improved-ota-w-bias-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-improved-ota-w-bias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;59: The improved OTA based on the 5T-OTA design with biasing details shown.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The transistor-level implementation is finally shown in <a href="#fig-improved-ota-design" class="quarto-xref">Figure&nbsp;60</a>, and it also includes practical design aspects like power-down transistors, current sensing elements, and decoupling capacitors on sensitive bias nodes.</p>
 <div id="fig-improved-ota-design" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-improved-ota-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/ota-improved.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-93" title="Figure&nbsp;59: Improved OTA design in Xschem."><img src="./xschem/ota-improved.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/ota-improved.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-94" title="Figure&nbsp;60: Improved OTA design in Xschem."><img src="./xschem/ota-improved.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-improved-ota-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;59: Improved OTA design in Xschem.
+Figure&nbsp;60: Improved OTA design in Xschem.
 </figcaption>
 </figure>
 </div>
 <section id="discussion-of-the-ota-design" class="level3" data-number="11.2.1">
 <h3 data-number="11.2.1" class="anchored" data-anchor-id="discussion-of-the-ota-design"><span class="header-section-number">11.2.1</span> Discussion of the OTA Design</h3>
-<p>We will now do an analysis of the circuit design of the OTA including all the complications which make this design practical.</p>
+<p>We now do an analysis of the circuit design of the OTA including all the complications which make this design practical.</p>
 <ol type="1">
-<li>For easier navigation, the device identifier are consistent with the circuit sketch in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>.</li>
+<li>For easier navigation, the device identifiers are consistent with the circuit sketch in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>.</li>
 <li>Some MOSFET dimensions are rounded to make a better fit in the IC layout. Please also look carefully at <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(\mathrm{ng}\)</span>. The parameter <span class="math inline">\(\mathrm{ng}\)</span> defines how the total <span class="math inline">\(W\)</span> of a MOSFET should be split into individual MOSFET fingers with <span class="math inline">\(W_\mathrm{f} = W / \mathrm{ng}\)</span>. This is done to arrive at a suitably sized MOSFET physical implementation. As we will not deal with IC layout in this lecture we will leave it at that.</li>
-<li>In order to allow good matching in the IC layout, MOSFETs (and other components) have to be constructed from equal pieces. To that end, <span class="math inline">\(W/L\)</span> scaling is done using unit elements (see finger width <span class="math inline">\(W_\mathrm{f}\)</span>). Sometimes, besides <span class="math inline">\(W\)</span> the length <span class="math inline">\(L\)</span> has to be scaled, and this leads to the oddly-looking series stacking of some MOSFET (easily recognizable by the connected gates). In order to increase circuit readability, a subcircuit could be constructed hiding this series stacking of MOSFET, but it is sometimes easier to avoid subcircuits. There is a fine line in this trade-off, sometime a depth of 4 is the decision point between subcircuit use/no-use.</li>
+<li>In order to allow good matching in the IC layout, MOSFETs (and other components) have to be constructed from equal pieces. To that end, <span class="math inline">\(W/L\)</span> scaling is done using unit elements (see finger width <span class="math inline">\(W_\mathrm{f}\)</span>). Sometimes, besides <span class="math inline">\(W\)</span> the length <span class="math inline">\(L\)</span> has to be scaled, and this leads to the oddly-looking series stacking of some MOSFET (easily recognizable by the connected gates). In order to increase circuit readability, a subcircuit could be constructed hiding this series stacking of MOSFET, but it is sometimes easier to avoid subcircuits. There is a fine line in this trade-off, sometimes a depth of 4 is the decision point between subcircuit use/no-use.</li>
 <li>As you can (hopefully) see the circuit is carefully drawn to ease readability. Important nets are named, text comments state certain properties like nominal voltage levels, bias currents, etc. Current sensing elements are added to directly see the dc currents in the circuit simulation.</li>
 <li>The bias voltage generation for the cascodes is included as well. The voltage drop for the bottom transistors is developed by properly scaling the MOSFETs in the reference branch. We reduce the <span class="math inline">\(W/L\)</span> ratio to increase the <span class="math inline">\(V_\mathrm{GS}\)</span> to create a voltage headroom for the bottom MOSFET. We are using a dummy branch for bias generation (constructed with <span class="math inline">\(M_\mathrm{7-10}\)</span>).</li>
 <li>The floating bias voltage <span class="math inline">\(V_\mathrm{bias1}\)</span> is created by implementing a current source from <span class="math inline">\(V_\mathrm{DD}\)</span> (<span class="math inline">\(M_\mathrm{9}\)</span>), then a MOSFET diode <span class="math inline">\(M_{10}\)</span>, and an increased current towards <span class="math inline">\(V_\mathrm{SS}\)</span> through <span class="math inline">\(M_\mathrm{5}\)</span>.</li>
@@ -4368,34 +4383,34 @@ Figure&nbsp;59: Improved OTA design in Xschem.
 </section>
 <section id="simulation-of-improved-ota" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="simulation-of-improved-ota"><span class="header-section-number">11.3</span> Simulation of Improved OTA</h2>
-<p>Now that the circuit design of the improved OTA is done, we can use the same simulation testbenches as for the basic OTA. The testbenches are shown in <a href="#fig-improved-ota-design-tb-ac" class="quarto-xref">Figure&nbsp;60</a>, <a href="#fig-improved-ota-design-tb-tran" class="quarto-xref">Figure&nbsp;61</a>, and <a href="#fig-improved-ota-design-tb-loopgain" class="quarto-xref">Figure&nbsp;62</a>.</p>
+<p>Now that the circuit design of the improved OTA is done, we can use the same simulation testbenches as for the basic OTA. The testbenches are shown in <a href="#fig-improved-ota-design-tb-ac" class="quarto-xref">Figure&nbsp;61</a>, <a href="#fig-improved-ota-design-tb-tran" class="quarto-xref">Figure&nbsp;62</a>, and <a href="#fig-improved-ota-design-tb-loopgain" class="quarto-xref">Figure&nbsp;63</a>.</p>
 <div id="fig-improved-ota-design-tb-ac" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-improved-ota-design-tb-ac-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/ota-improved_tb-ac.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-94" title="Figure&nbsp;60: Simulation testbench of the improved OTA design (small-signal)."><img src="./xschem/ota-improved_tb-ac.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/ota-improved_tb-ac.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-95" title="Figure&nbsp;61: Simulation testbench of the improved OTA design (small-signal)."><img src="./xschem/ota-improved_tb-ac.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-improved-ota-design-tb-ac-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;60: Simulation testbench of the improved OTA design (small-signal).
+Figure&nbsp;61: Simulation testbench of the improved OTA design (small-signal).
 </figcaption>
 </figure>
 </div>
 <div id="fig-improved-ota-design-tb-tran" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-improved-ota-design-tb-tran-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/ota-improved_tb-tran.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-95" title="Figure&nbsp;61: Simulation testbench of the improved OTA design (large-signal)."><img src="./xschem/ota-improved_tb-tran.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/ota-improved_tb-tran.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-96" title="Figure&nbsp;62: Simulation testbench of the improved OTA design (large-signal)."><img src="./xschem/ota-improved_tb-tran.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-improved-ota-design-tb-tran-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;61: Simulation testbench of the improved OTA design (large-signal).
+Figure&nbsp;62: Simulation testbench of the improved OTA design (large-signal).
 </figcaption>
 </figure>
 </div>
 <div id="fig-improved-ota-design-tb-loopgain" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-improved-ota-design-tb-loopgain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/ota-improved_tb-loopgain.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-96" title="Figure&nbsp;62: Simulation testbench of the improved OTA design (loop gain analysis)."><img src="./xschem/ota-improved_tb-loopgain.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/ota-improved_tb-loopgain.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-97" title="Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analysis)."><img src="./xschem/ota-improved_tb-loopgain.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-improved-ota-design-tb-loopgain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;62: Simulation testbench of the improved OTA design (loop gain analysis).
+Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analysis).
 </figcaption>
 </figure>
 </div>
@@ -4545,7 +4560,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_temp-1">gain_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/gain_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-97" title="gain_vs_temp"><img src="./cace/_docs/ota-improved/schematic/gain_vs_temp.png" class="img-fluid figure-img" alt="gain_vs_temp"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/gain_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-98" title="gain_vs_temp"><img src="./cace/_docs/ota-improved/schematic/gain_vs_temp.png" class="img-fluid figure-img" alt="gain_vs_temp"></a></p>
 <figcaption>gain_vs_temp</figcaption>
 </figure>
 </div>
@@ -4554,7 +4569,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_vin-1">gain_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/gain_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-98" title="gain_vs_vin"><img src="./cace/_docs/ota-improved/schematic/gain_vs_vin.png" class="img-fluid figure-img" alt="gain_vs_vin"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/gain_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-99" title="gain_vs_vin"><img src="./cace/_docs/ota-improved/schematic/gain_vs_vin.png" class="img-fluid figure-img" alt="gain_vs_vin"></a></p>
 <figcaption>gain_vs_vin</figcaption>
 </figure>
 </div>
@@ -4563,7 +4578,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_vdd-1">gain_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/gain_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-99" title="gain_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/gain_vs_vdd.png" class="img-fluid figure-img" alt="gain_vs_vdd"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/gain_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-100" title="gain_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/gain_vs_vdd.png" class="img-fluid figure-img" alt="gain_vs_vdd"></a></p>
 <figcaption>gain_vs_vdd</figcaption>
 </figure>
 </div>
@@ -4572,7 +4587,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="gain_vs_corner-1">gain_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/gain_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-100" title="gain_vs_corner"><img src="./cace/_docs/ota-improved/schematic/gain_vs_corner.png" class="img-fluid figure-img" alt="gain_vs_corner"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/gain_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-101" title="gain_vs_corner"><img src="./cace/_docs/ota-improved/schematic/gain_vs_corner.png" class="img-fluid figure-img" alt="gain_vs_corner"></a></p>
 <figcaption>gain_vs_corner</figcaption>
 </figure>
 </div>
@@ -4581,7 +4596,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_temp-1">bw_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/bw_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-101" title="bw_vs_temp"><img src="./cace/_docs/ota-improved/schematic/bw_vs_temp.png" class="img-fluid figure-img" alt="bw_vs_temp"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/bw_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-102" title="bw_vs_temp"><img src="./cace/_docs/ota-improved/schematic/bw_vs_temp.png" class="img-fluid figure-img" alt="bw_vs_temp"></a></p>
 <figcaption>bw_vs_temp</figcaption>
 </figure>
 </div>
@@ -4590,7 +4605,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_vin-1">bw_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/bw_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-102" title="bw_vs_vin"><img src="./cace/_docs/ota-improved/schematic/bw_vs_vin.png" class="img-fluid figure-img" alt="bw_vs_vin"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/bw_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-103" title="bw_vs_vin"><img src="./cace/_docs/ota-improved/schematic/bw_vs_vin.png" class="img-fluid figure-img" alt="bw_vs_vin"></a></p>
 <figcaption>bw_vs_vin</figcaption>
 </figure>
 </div>
@@ -4599,7 +4614,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_vdd-1">bw_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/bw_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-103" title="bw_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/bw_vs_vdd.png" class="img-fluid figure-img" alt="bw_vs_vdd"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/bw_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-104" title="bw_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/bw_vs_vdd.png" class="img-fluid figure-img" alt="bw_vs_vdd"></a></p>
 <figcaption>bw_vs_vdd</figcaption>
 </figure>
 </div>
@@ -4608,7 +4623,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="bw_vs_corner-1">bw_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/bw_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-104" title="bw_vs_corner"><img src="./cace/_docs/ota-improved/schematic/bw_vs_corner.png" class="img-fluid figure-img" alt="bw_vs_corner"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/bw_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="bw_vs_corner"><img src="./cace/_docs/ota-improved/schematic/bw_vs_corner.png" class="img-fluid figure-img" alt="bw_vs_corner"></a></p>
 <figcaption>bw_vs_corner</figcaption>
 </figure>
 </div>
@@ -4617,7 +4632,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="gain_mc-1">gain_mc</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/gain_mc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-105" title="gain_mc"><img src="./cace/_docs/ota-improved/schematic/gain_mc.png" class="img-fluid figure-img" alt="gain_mc"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/gain_mc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-106" title="gain_mc"><img src="./cace/_docs/ota-improved/schematic/gain_mc.png" class="img-fluid figure-img" alt="gain_mc"></a></p>
 <figcaption>gain_mc</figcaption>
 </figure>
 </div>
@@ -4626,7 +4641,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="bw_mc-1">bw_mc</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/bw_mc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-106" title="bw_mc"><img src="./cace/_docs/ota-improved/schematic/bw_mc.png" class="img-fluid figure-img" alt="bw_mc"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/bw_mc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-107" title="bw_mc"><img src="./cace/_docs/ota-improved/schematic/bw_mc.png" class="img-fluid figure-img" alt="bw_mc"></a></p>
 <figcaption>bw_mc</figcaption>
 </figure>
 </div>
@@ -4635,7 +4650,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_temp-1">noise_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/noise_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-107" title="noise_vs_temp"><img src="./cace/_docs/ota-improved/schematic/noise_vs_temp.png" class="img-fluid figure-img" alt="noise_vs_temp"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/noise_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-108" title="noise_vs_temp"><img src="./cace/_docs/ota-improved/schematic/noise_vs_temp.png" class="img-fluid figure-img" alt="noise_vs_temp"></a></p>
 <figcaption>noise_vs_temp</figcaption>
 </figure>
 </div>
@@ -4644,7 +4659,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_vin-1">noise_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/noise_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-108" title="noise_vs_vin"><img src="./cace/_docs/ota-improved/schematic/noise_vs_vin.png" class="img-fluid figure-img" alt="noise_vs_vin"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/noise_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-109" title="noise_vs_vin"><img src="./cace/_docs/ota-improved/schematic/noise_vs_vin.png" class="img-fluid figure-img" alt="noise_vs_vin"></a></p>
 <figcaption>noise_vs_vin</figcaption>
 </figure>
 </div>
@@ -4653,7 +4668,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_vdd-1">noise_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/noise_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-109" title="noise_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/noise_vs_vdd.png" class="img-fluid figure-img" alt="noise_vs_vdd"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/noise_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-110" title="noise_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/noise_vs_vdd.png" class="img-fluid figure-img" alt="noise_vs_vdd"></a></p>
 <figcaption>noise_vs_vdd</figcaption>
 </figure>
 </div>
@@ -4662,7 +4677,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="noise_vs_corner-1">noise_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/noise_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-110" title="noise_vs_corner"><img src="./cace/_docs/ota-improved/schematic/noise_vs_corner.png" class="img-fluid figure-img" alt="noise_vs_corner"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/noise_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-111" title="noise_vs_corner"><img src="./cace/_docs/ota-improved/schematic/noise_vs_corner.png" class="img-fluid figure-img" alt="noise_vs_corner"></a></p>
 <figcaption>noise_vs_corner</figcaption>
 </figure>
 </div>
@@ -4671,7 +4686,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_temp-1">settling_vs_temp</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/settling_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-111" title="settling_vs_temp"><img src="./cace/_docs/ota-improved/schematic/settling_vs_temp.png" class="img-fluid figure-img" alt="settling_vs_temp"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/settling_vs_temp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-112" title="settling_vs_temp"><img src="./cace/_docs/ota-improved/schematic/settling_vs_temp.png" class="img-fluid figure-img" alt="settling_vs_temp"></a></p>
 <figcaption>settling_vs_temp</figcaption>
 </figure>
 </div>
@@ -4680,7 +4695,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_vin-1">settling_vs_vin</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/settling_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-112" title="settling_vs_vin"><img src="./cace/_docs/ota-improved/schematic/settling_vs_vin.png" class="img-fluid figure-img" alt="settling_vs_vin"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/settling_vs_vin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-113" title="settling_vs_vin"><img src="./cace/_docs/ota-improved/schematic/settling_vs_vin.png" class="img-fluid figure-img" alt="settling_vs_vin"></a></p>
 <figcaption>settling_vs_vin</figcaption>
 </figure>
 </div>
@@ -4689,7 +4704,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_vdd-1">settling_vs_vdd</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/settling_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-113" title="settling_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/settling_vs_vdd.png" class="img-fluid figure-img" alt="settling_vs_vdd"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/settling_vs_vdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-114" title="settling_vs_vdd"><img src="./cace/_docs/ota-improved/schematic/settling_vs_vdd.png" class="img-fluid figure-img" alt="settling_vs_vdd"></a></p>
 <figcaption>settling_vs_vdd</figcaption>
 </figure>
 </div>
@@ -4698,7 +4713,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 <h2 class="unnumbered unlisted anchored" data-anchor-id="settling_vs_corner-1">settling_vs_corner</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./cace/_docs/ota-improved/schematic/settling_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-114" title="settling_vs_corner"><img src="./cace/_docs/ota-improved/schematic/settling_vs_corner.png" class="img-fluid figure-img" alt="settling_vs_corner"></a></p>
+<p><a href="./cace/_docs/ota-improved/schematic/settling_vs_corner.png" class="lightbox" data-gallery="quarto-lightbox-gallery-115" title="settling_vs_corner"><img src="./cace/_docs/ota-improved/schematic/settling_vs_corner.png" class="img-fluid figure-img" alt="settling_vs_corner"></a></p>
 <figcaption>settling_vs_corner</figcaption>
 </figure>
 </div>
@@ -4769,20 +4784,20 @@ Table&nbsp;4: Voltage buffer specification
 <section id="biasing" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Biasing</h1>
 <p>So far, we have deferred one unresolved issue. We have studied ways to multiply and scale bias currents using current mirrors (see <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;6</a>) and we have also found ways to buffer (and scale) bias voltages (see <a href="#sec-voltage-buffer-with-ota" class="quarto-xref">Section&nbsp;8.1</a>, scaling can be readily achieved by using a resistive divider in the feedback path). We can generate bias voltages by running a current through a resistor. However, what has not been discussed so far is <strong>how to generate one stable bias current in the first place</strong>.</p>
-<p>If we had a stable reference voltage, then we could use the arrangement shown in <a href="#fig-bias-current-gen" class="quarto-xref">Figure&nbsp;63</a> to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)</p>
+<p>If we had a stable reference voltage, then we could use the arrangement shown in <a href="#fig-bias-current-gen" class="quarto-xref">Figure&nbsp;64</a> to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)</p>
 <p><span class="math display">\[
 I_\mathrm{bias} = \frac{V_\mathrm{ref}}{R_1}.
 \]</span></p>
 <p>Using <span class="math inline">\(A_1\)</span> and <span class="math inline">\(M_1\)</span> the voltage <span class="math inline">\(V_\mathrm{ref}\)</span> is regulated across <span class="math inline">\(R_1\)</span> and available at the drain of <span class="math inline">\(M_1\)</span>.</p>
-<div id="cell-fig-bias-current-gen" class="cell" data-execution_count="48">
+<div id="cell-fig-bias-current-gen" class="cell" data-execution_count="49">
 <div class="cell-output cell-output-display">
 <div id="fig-bias-current-gen" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bias-current-gen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-bias-current-gen-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-115" title="Figure&nbsp;63: A constant-current generator based on OTA."><img src="aicd_files/figure-html/fig-bias-current-gen-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-bias-current-gen-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-116" title="Figure&nbsp;64: A constant-current generator based on OTA."><img src="aicd_files/figure-html/fig-bias-current-gen-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bias-current-gen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;63: A constant-current generator based on OTA.
+Figure&nbsp;64: A constant-current generator based on OTA.
 </figcaption>
 </figure>
 </div>
@@ -4816,16 +4831,16 @@ V_\mathrm{ref} =  V_\mathrm{g0}
 \tag{47}\]</span></span></p>
 <p>remains. We thus have created an on-chip reference (called the <a href="https://en.wikipedia.org/wiki/Bandgap_voltage_reference"><em>bandgap voltage reference</em></a>) which is almost independent of manufacturing tolerances with a very small temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of <span class="math inline">\(\pm 1 \ldots 3\%\)</span> without trimming are perfectly possible.</p>
 <p>The original implementation in <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">R. J. Widlar 1971</a>)</span> uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of this available layers are available for free without extra processing cost, they are very slow, show unusually small <span class="math inline">\(\beta &lt; 10\)</span>, and the collector is tied to <span class="math inline">\(V_\mathrm{SS}\)</span> as it is the substrate. Still, for bandgap references, they are very useful.</p>
-<p>A simple implementation of a bandgap reference circuit is shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;64</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;47</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
-<div id="cell-fig-bandgap-simple" class="cell" data-execution_count="49">
+<p>A simple implementation of a bandgap reference circuit is shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;47</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
+<div id="cell-fig-bandgap-simple" class="cell" data-execution_count="50">
 <div class="cell-output cell-output-display">
 <div id="fig-bandgap-simple" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-bandgap-simple-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-116" title="Figure&nbsp;64: A simple bandgap reference."><img src="aicd_files/figure-html/fig-bandgap-simple-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-bandgap-simple-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-117" title="Figure&nbsp;65: A simple bandgap reference."><img src="aicd_files/figure-html/fig-bandgap-simple-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;64: A simple bandgap reference.
+Figure&nbsp;65: A simple bandgap reference.
 </figcaption>
 </figure>
 </div>
@@ -4854,11 +4869,11 @@ V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For an improved implementation of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;64</a>, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;44</a> and <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;45</a> build on the relationship <span class="math inline">\(I_\mathrm{C} = f(V_\mathrm{BE})\)</span>, while we control <span class="math inline">\(I_\mathrm{E}\)</span> in this circuit. If <span class="math inline">\(\beta\)</span> is large then <span class="math inline">\(I_\mathrm{C} \approx I_\mathrm{E}\)</span>, but this is not the case for the used PNPs.</p>
+<p>For an improved implementation of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;44</a> and <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;45</a> build on the relationship <span class="math inline">\(I_\mathrm{C} = f(V_\mathrm{BE})\)</span>, while we control <span class="math inline">\(I_\mathrm{E}\)</span> in this circuit. If <span class="math inline">\(\beta\)</span> is large then <span class="math inline">\(I_\mathrm{C} \approx I_\mathrm{E}\)</span>, but this is not the case for the used PNPs.</p>
 <p>Many more different bandgap architectures exist, with the Kuijk <span class="citation" data-cites="Kuijk_bandgap">(<a href="#ref-Kuijk_bandgap" role="doc-biblioref">Kuijk 1973</a>)</span> or the Brokaw <span class="citation" data-cites="Brokaw_bandgap">(<a href="#ref-Brokaw_bandgap" role="doc-biblioref">Brokaw 1974</a>)</span> types being popular choices.</p>
 </div>
 </div>
-<p>The circuit of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;64</a> has been implemented in Xschem and is shown in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;65</a>. The current sources have been improved by using cascodes. We are using the low-voltage current mirror type already introduced in <a href="#sec-improved-ota" class="quarto-xref">Section&nbsp;11</a>. The bias voltages for the cascodes are generated via the voltage drops of <span class="math inline">\(R_3\)</span> and <span class="math inline">\(R_4\)</span>, respectively.</p>
+<p>The circuit of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a> has been implemented in Xschem and is shown in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;66</a>. The current sources have been improved by using cascodes. We are using the low-voltage current mirror type already introduced in <a href="#sec-improved-ota" class="quarto-xref">Section&nbsp;11</a>. The bias voltages for the cascodes are generated via the voltage drops of <span class="math inline">\(R_3\)</span> and <span class="math inline">\(R_4\)</span>, respectively.</p>
 <p>No base current compensation for the BJTs is implemented, as it is assumed that the <span class="math inline">\(\beta\)</span> of the PNP are similar although they are operated at different emitter current densities.</p>
 <p>Note the addition of a startup branch with <span class="math inline">\(M_\mathrm{startup}\)</span> which is inactive during normal operation but will inject a startup current if no proper bias point has yet been found.</p>
 <p>There is no circuitry added for enabling/disabling the circuit, which would also be needed for a practical implementation. As usual, the MOSFET sizing has been done in this <a href="./gmid/sizing_bandgap_simple.html">notebook</a>.</p>
@@ -4866,67 +4881,67 @@ V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.
 <div id="fig-bandgap-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/bandgap_simple.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-117" title="Figure&nbsp;65: Simple bandgap reference circuit in Xschem."><img src="./xschem/bandgap_simple.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/bandgap_simple.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-118" title="Figure&nbsp;66: Simple bandgap reference circuit in Xschem."><img src="./xschem/bandgap_simple.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;65: Simple bandgap reference circuit in Xschem.
+Figure&nbsp;66: Simple bandgap reference circuit in Xschem.
 </figcaption>
 </figure>
 </div>
-<p>The Xschem schematic is available <a href="./xschem/bandgap_simple.sch">here</a> and the simulated reference voltage vs.&nbsp;temperature is shown in <a href="#fig-bandgap-sim-result" class="quarto-xref">Figure&nbsp;66</a>. For a typical process we achieve a TC of <span class="math inline">\(\pm 0.2\%\)</span>.</p>
-<div id="cell-fig-bandgap-sim-result" class="cell" data-execution_count="50">
+<p>The Xschem schematic is available <a href="./xschem/bandgap_simple.sch">here</a> and the simulated reference voltage vs.&nbsp;temperature is shown in <a href="#fig-bandgap-sim-result" class="quarto-xref">Figure&nbsp;67</a>. For a typical process we achieve a TC of <span class="math inline">\(\pm 0.2\%\)</span>.</p>
+<div id="cell-fig-bandgap-sim-result" class="cell" data-execution_count="51">
 <div class="cell-output cell-output-display">
 <div id="fig-bandgap-sim-result" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-bandgap-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-118" title="Figure&nbsp;66: Reference voltage from simulated bandgap circuit."><img src="aicd_files/figure-html/fig-bandgap-sim-result-output-1.png" width="614" height="429" class="figure-img"></a>
+<a href="aicd_files/figure-html/fig-bandgap-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-119" title="Figure&nbsp;67: Reference voltage from simulated bandgap circuit."><img src="aicd_files/figure-html/fig-bandgap-sim-result-output-1.png" width="614" height="429" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;66: Reference voltage from simulated bandgap circuit.
+Figure&nbsp;67: Reference voltage from simulated bandgap circuit.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;65</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist; see <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> or <span class="citation" data-cites="Eberlein_2018">(<a href="#ref-Eberlein_2018" role="doc-biblioref">Eberlein, Panagopoulos, and Pretl 2018</a>)</span>.</p>
+<p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;66</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist; see <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> or <span class="citation" data-cites="Eberlein_2018">(<a href="#ref-Eberlein_2018" role="doc-biblioref">Eberlein, Panagopoulos, and Pretl 2018</a>)</span>.</p>
 </section>
 <section id="sec-banba-bandgap" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="sec-banba-bandgap"><span class="header-section-number">12.2</span> Banba Bandgap Reference</h2>
-<p>The Banba reference <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> is quite a bit trickier to design than the classical bandgap shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;64</a>. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;8</a>. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.</p>
-<p>A first design has been implemented and is shown in <a href="#fig-bandgap-banba-schematic" class="quarto-xref">Figure&nbsp;67</a>, and the testbench is shown in <a href="#fig-bandgap-banba-tb" class="quarto-xref">Figure&nbsp;68</a>. The supply voltage (which could be lower than <span class="math inline">\(1.5\,\text{V}\)</span>) is limited by our OTA design; however, it works well at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>. The simulated reference voltage (which is scaled to roughly <span class="math inline">\(V_\mathrm{bandgap} / 2\)</span>) is shown in <a href="#fig-bandgap-banba-sim-result" class="quarto-xref">Figure&nbsp;69</a>.</p>
+<p>The Banba reference <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> is quite a bit trickier to design than the classical bandgap shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;8</a>. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.</p>
+<p>A first design has been implemented and is shown in <a href="#fig-bandgap-banba-schematic" class="quarto-xref">Figure&nbsp;68</a>, and the testbench is shown in <a href="#fig-bandgap-banba-tb" class="quarto-xref">Figure&nbsp;69</a>. The supply voltage (which could be lower than <span class="math inline">\(1.5\,\text{V}\)</span>) is limited by our OTA design; however, it works well at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>. The simulated reference voltage (which is scaled to roughly <span class="math inline">\(V_\mathrm{bandgap} / 2\)</span>) is shown in <a href="#fig-bandgap-banba-sim-result" class="quarto-xref">Figure&nbsp;70</a>.</p>
 <div id="fig-bandgap-banba-schematic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-banba-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/bandgap_banba.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-119" title="Figure&nbsp;67: Banba bandgap reference circuit in Xschem."><img src="./xschem/bandgap_banba.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/bandgap_banba.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-120" title="Figure&nbsp;68: Banba bandgap reference circuit in Xschem."><img src="./xschem/bandgap_banba.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-banba-schematic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;67: Banba bandgap reference circuit in Xschem.
+Figure&nbsp;68: Banba bandgap reference circuit in Xschem.
 </figcaption>
 </figure>
 </div>
 <p>Note the self-biasing of the OTA with the current generated in the reference branches. The feedback loop needs capacitors for stabilization, and we use area-efficient MOSFET for this task. For a detailed explanation of this circuit please refer to <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span>, but in brief, the operation is as follows:</p>
 <p>The CTAT and PTAT currents required for compensating each others TC’s are built using a <span class="math inline">\(\Delta V_\mathrm{BE}\)</span> cell (given the PTAT current) with parallel resistors (providing the CTAT current). Voltages are sensed using an error amplifier and current sources are controlled to achieve matching currents in both branches. This current can then also be mirrored to flow through another resistor which can be scaled to produce the output voltage.</p>
-<p>In comparison to the classical bandgap reference shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;64</a> (where the developed currents in all branches are PTAT) the currents developed in the Banba reference are constant vs.&nbsp;temperature.</p>
+<p>In comparison to the classical bandgap reference shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a> (where the developed currents in all branches are PTAT) the currents developed in the Banba reference are constant vs.&nbsp;temperature.</p>
 <p>The minimum supply voltage for the Banba reference is the <span class="math inline">\(V_\mathrm{BE}\)</span> of the PNP plus the saturation voltage of one MOSFET current source, so ca. <span class="math inline">\(V_\mathrm{DDmin} \ge 0.8\,\text{V} + 0.2\,\text{V} \approx 1\,\text{V}\)</span>. Of course we also need to design an OTA which can work at this low supply.</p>
 <div id="fig-bandgap-banba-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-banba-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/bandgap_banba_tb.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-120" title="Figure&nbsp;68: Banba bandgap testbench Xschem."><img src="./xschem/bandgap_banba_tb.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/bandgap_banba_tb.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-121" title="Figure&nbsp;69: Banba bandgap testbench Xschem."><img src="./xschem/bandgap_banba_tb.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-banba-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;68: Banba bandgap testbench Xschem.
+Figure&nbsp;69: Banba bandgap testbench Xschem.
 </figcaption>
 </figure>
 </div>
-<div id="cell-fig-bandgap-banba-sim-result" class="cell" data-execution_count="51">
+<div id="cell-fig-bandgap-banba-sim-result" class="cell" data-execution_count="52">
 <div class="cell-output cell-output-display">
 <div id="fig-bandgap-banba-sim-result" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bandgap-banba-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-121" title="Figure&nbsp;69: Reference voltage from simulated Banba bandgap circuit."><img src="aicd_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" width="614" height="429" class="figure-img"></a>
+<a href="aicd_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-122" title="Figure&nbsp;70: Reference voltage from simulated Banba bandgap circuit."><img src="aicd_files/figure-html/fig-bandgap-banba-sim-result-output-1.png" width="614" height="429" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-banba-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;69: Reference voltage from simulated Banba bandgap circuit.
+Figure&nbsp;70: Reference voltage from simulated Banba bandgap circuit.
 </figcaption>
 </figure>
 </div>
@@ -4952,16 +4967,16 @@ Figure&nbsp;69: Reference voltage from simulated Banba bandgap circuit.
 <section id="sec-differential-ota" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> Differential OTAs</h1>
 <p>So far, we have discussed the implementation of OTAs with a differential input and a single-ended output. Often, in integrated circuits, we want to implement fully differential signal chains, as this allows an almost-rail-to-rail swing around a common-mode voltage. Further, noise pickup due to limited power-supply rejection ratio (PSRR) or coupling into the differential signal routing can be suppressed by designing amplifiers with high common-mode rejection ratio (CMRR).</p>
-<p>The OTA presented in <a href="#sec-ota-variants-single-ended" class="quarto-xref">Section&nbsp;8.8</a> can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;70</a>.</p>
-<div id="cell-fig-diff-ota-resload" class="cell" data-execution_count="52">
+<p>The OTA presented in <a href="#sec-ota-variants-single-ended" class="quarto-xref">Section&nbsp;8.8</a> can be readily adapted for differential output. Striving for maximum utility, we are discussing a popular two-stage differential-output OTA with a special kind of load, shown in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;71</a>.</p>
+<div id="cell-fig-diff-ota-resload" class="cell" data-execution_count="53">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-resload" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-resload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-diff-ota-resload-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-122" title="Figure&nbsp;70: Differential two-stage OTA with resistive load."><img src="aicd_files/figure-html/fig-diff-ota-resload-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-diff-ota-resload-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-123" title="Figure&nbsp;71: Differential two-stage OTA with resistive load."><img src="aicd_files/figure-html/fig-diff-ota-resload-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-resload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;70: Differential two-stage OTA with resistive load.
+Figure&nbsp;71: Differential two-stage OTA with resistive load.
 </figcaption>
 </figure>
 </div>
@@ -4972,38 +4987,38 @@ Figure&nbsp;70: Differential two-stage OTA with resistive load.
 <p>For pure differential operation, the mid-point <span class="math inline">\(X\)</span> of <span class="math inline">\(R_{1,2}\)</span> acts as a virtual ground. The bias voltage <span class="math inline">\(V_\mathrm{GS3,5}\)</span> is thus not changed (it is set only by the common-mode operation) and thus <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_5\)</span> operate as current sources. The differential load impedance is high and is given by <span class="math inline">\(R_\mathrm{load} = (R_1 + R_2) \parallel (g_\mathrm{ds3}^{-1} + g_\mathrm{ds5}^{-1})\)</span>.</p>
 <p>In addition, we realize that <span class="math inline">\(V_\mathrm{GS4} = V_\mathrm{GS3} = V_\mathrm{GS5} = V_\mathrm{GS6}\)</span> for common-mode operation, hence the quiescent current of <span class="math inline">\(M_{4,6}\)</span> is set in a current-mirror-like fashion by the diode-connected <span class="math inline">\(M_{3,5}\)</span>.</p>
 <p>For differential operation, the differential pair of <span class="math inline">\(M_{1,2}\)</span> is loaded by <span class="math inline">\(R_\mathrm{load}\)</span> and provides fairly high gain. The second gain stage is formed by current-source-loaded common-source stages <span class="math inline">\(M_{4,6}\)</span> and provides additional gain (of course, this is a function of the load impedance).</p>
-<p>As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;70</a> we have a low-frequency pole at the drains of <span class="math inline">\(M_{1,3}\)</span> and <span class="math inline">\(M_{2,5}\)</span> and a further low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into <em>Miller compensation</em>.</p>
+<p>As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;71</a> we have a low-frequency pole at the drains of <span class="math inline">\(M_{1,3}\)</span> and <span class="math inline">\(M_{2,5}\)</span> and a further low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into <em>Miller compensation</em>.</p>
 <p>Of course, loop gain analysis of differential OTAs can and should be carried out. An exemplary testbench where the loop gain is simulated with Rosenstark’s, Middlebrook’s, and Tian’s method can be found <a href="xschem/ota-differential_tb-loopgain.sch">here</a>. Note that there is no underlying circuit right now and it should only show how it could be done.</p>
 <section id="sec-miller-compensation" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="sec-miller-compensation"><span class="header-section-number">13.1</span> Miller Compensation</h2>
 <p>A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies <span class="citation" data-cites="Mangelsdorf_2025_miller">(<a href="#ref-Mangelsdorf_2025_miller" role="doc-biblioref">Mangelsdorf 2025a</a>)</span>, that we have enough <a href="https://en.wikipedia.org/wiki/Phase_margin">phase margin</a> in the closed-loop system. We may strive for <span class="math inline">\(60^\circ\)</span> as this will only cause a minor peaking in the frequency response <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span>.</p>
 <p>The question now is where to implement this dominant pole. In order to create a low-frequency pole we need a high-impedance point and a large capacitance. Placing just a large capacitor is unwelcome, as this causes large area consumption on chip.</p>
-<p>Luckily, we know from the analysis in <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;17.1</a> that we can use voltage gain to increase the apparent value of a capacitor by feedback. Inspecting our circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;70</a> we see that we have voltage gain from node <span class="math inline">\(A\)</span> to node <span class="math inline">\(B\)</span> and node <span class="math inline">\(A'\)</span> and <span class="math inline">\(B'\)</span>, respectively. This means we have an opportunity to strap a capacitor between those nodes, and create a dominant pole at node <span class="math inline">\(A\)</span> (and <span class="math inline">\(A'\)</span>).</p>
-<p>We can now add these so-called “Miller capacitors” to our circuit. The result is shown in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;71</a>. (We have also added resistors in series with the capacitors; we ignore these resistors for the time being).</p>
-<div id="cell-fig-diff-ota-resload-miller" class="cell" data-execution_count="53">
+<p>Luckily, we know from the analysis in <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;17.1</a> that we can use voltage gain to increase the apparent value of a capacitor by feedback. Inspecting our circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;71</a> we see that we have voltage gain from node <span class="math inline">\(A\)</span> to node <span class="math inline">\(B\)</span> and node <span class="math inline">\(A'\)</span> and <span class="math inline">\(B'\)</span>, respectively. This means we have an opportunity to strap a capacitor between those nodes, and create a dominant pole at node <span class="math inline">\(A\)</span> (and <span class="math inline">\(A'\)</span>).</p>
+<p>We can now add these so-called “Miller capacitors” to our circuit. The result is shown in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;72</a>. (We have also added resistors in series with the capacitors; we ignore these resistors for the time being).</p>
+<div id="cell-fig-diff-ota-resload-miller" class="cell" data-execution_count="54">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-resload-miller" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-resload-miller-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-123" title="Figure&nbsp;71: Differential two-stage OTA with resistive load and Miller compensation."><img src="aicd_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-124" title="Figure&nbsp;72: Differential two-stage OTA with resistive load and Miller compensation."><img src="aicd_files/figure-html/fig-diff-ota-resload-miller-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-resload-miller-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;71: Differential two-stage OTA with resistive load and Miller compensation.
+Figure&nbsp;72: Differential two-stage OTA with resistive load and Miller compensation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>It is instructive to look at the small-signal equivalent circuit of the common-source stage <span class="math inline">\(M_4\)</span> loaded by current-source <span class="math inline">\(M_7\)</span>. The resulting model is shown in <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;72</a> (we are ignoring the bulk effect of <span class="math inline">\(M_4\)</span>, and lump components of <span class="math inline">\(M_{4,7}\)</span> into the input and the output impedances formed by <span class="math inline">\(C_\mathrm{L}\)</span>, <span class="math inline">\(C_\mathrm{in}\)</span>, <span class="math inline">\(g_\mathrm{in}\)</span> and <span class="math inline">\(g_\mathrm{out}\)</span>).</p>
-<div id="cell-fig-miller-comp-model" class="cell" data-execution_count="54">
+<p>It is instructive to look at the small-signal equivalent circuit of the common-source stage <span class="math inline">\(M_4\)</span> loaded by current-source <span class="math inline">\(M_7\)</span>. The resulting model is shown in <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;73</a> (we are ignoring the bulk effect of <span class="math inline">\(M_4\)</span>, and lump components of <span class="math inline">\(M_{4,7}\)</span> into the input and the output impedances formed by <span class="math inline">\(C_\mathrm{L}\)</span>, <span class="math inline">\(C_\mathrm{in}\)</span>, <span class="math inline">\(g_\mathrm{in}\)</span> and <span class="math inline">\(g_\mathrm{out}\)</span>).</p>
+<div id="cell-fig-miller-comp-model" class="cell" data-execution_count="55">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-comp-model" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-comp-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-miller-comp-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-124" title="Figure&nbsp;72: Small-signal model of common-source stage with Miller compensation."><img src="aicd_files/figure-html/fig-miller-comp-model-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-miller-comp-model-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-125" title="Figure&nbsp;73: Small-signal model of common-source stage with Miller compensation."><img src="aicd_files/figure-html/fig-miller-comp-model-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-comp-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;72: Small-signal model of common-source stage with Miller compensation.
+Figure&nbsp;73: Small-signal model of common-source stage with Miller compensation.
 </figcaption>
 </figure>
 </div>
@@ -5053,7 +5068,7 @@ s_\mathrm{z} = +\frac{g_\mathrm{m}}{C_\mathrm{m}}
 \tag{55}\]</span></span></p>
 <p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero, abbreviated as RHPZ, leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are losing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
 <p>A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift. A more detailed analysis of this RHPZ can be found in <span class="citation" data-cites="Mangelsdorf_2025_RHPZ">(<a href="#ref-Mangelsdorf_2025_RHPZ" role="doc-biblioref">Mangelsdorf 2025b</a>)</span>.</p>
-<p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;71</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;72</a>). By doing this, we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
+<p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;72</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;73</a>). By doing this, we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
 <p>Repeating the calculation of the transfer function <span class="math inline">\(V_\mathrm{out} / I_\mathrm{in}\)</span> including <span class="math inline">\(R_\mathrm{m}\)</span> we see that the zero location is changed and can be calculated as (the pole locations are also slightly changed due to the addition of <span class="math inline">\(R_\mathrm{m}\)</span>, but we will not discuss the resulting equations here)</p>
 <p><span id="eq-miller-zero-comp"><span class="math display">\[
 s_\mathrm{z} = \frac{g_\mathrm{m}}{C_\mathrm{m} (1 - g_\mathrm{m}R_\mathrm{m})}
@@ -5065,9 +5080,9 @@ R_\mathrm{m} &gt; \frac{2}{g_\mathrm{m}}.
 </section>
 <section id="common-mode-regulation" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="common-mode-regulation"><span class="header-section-number">13.2</span> Common-Mode Regulation</h2>
-<p>In fully-differential (i.e., differential inputs and outputs) OTAs, we have a new issue concerning common-mode voltage control: Depending on the feedback network around the OTA, we might or might not have a defined dc operating point (common-mode wise). Think of the following scenario: If we implement an integrator with an OTA, then the feedback network from output to input consists of a capacitor. This means that the output of the OTA is loaded very high ohmic, and any small current mismatch between <span class="math inline">\(M_4\)</span>/<span class="math inline">\(M_7\)</span> or <span class="math inline">\(M_6\)</span>/<span class="math inline">\(M_8\)</span> (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;71</a>) will cause a strong deviation of the dc operating point at the output!</p>
-<p>We cannot accept that the dc operating points in a circuit are ill-defined. We thus need a way to establish the dc operating point. Using the diode-resistive load for the differential pair in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;71</a> the dc operating point there is well-defined by the diode-connected <span class="math inline">\(M_{3,5}\)</span>. However, the output stage is different, and we need to add circuitry to also control the dc operating point there.</p>
-<p>One well-known way is to sense the common-mode voltage using two resistors (similar to <span class="math inline">\(R_{1,2}\)</span> in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;71</a>), and compare this measured common-mode voltage to a reference voltage using an error amplifier. Then the output of the error amplifier controls the common-mode voltage, e.g., by driving the gates of <span class="math inline">\(M_{7,8}\)</span> in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;71</a>.</p>
+<p>In fully-differential (i.e., differential inputs and outputs) OTAs, we have a new issue concerning common-mode voltage control: Depending on the feedback network around the OTA, we might or might not have a defined dc operating point (common-mode wise). Think of the following scenario: If we implement an integrator with an OTA, then the feedback network from output to input consists of a capacitor. This means that the output of the OTA is loaded very high ohmic, and any small current mismatch between <span class="math inline">\(M_4\)</span>/<span class="math inline">\(M_7\)</span> or <span class="math inline">\(M_6\)</span>/<span class="math inline">\(M_8\)</span> (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;72</a>) will cause a strong deviation of the dc operating point at the output!</p>
+<p>We cannot accept that the dc operating points in a circuit are ill-defined. We thus need a way to establish the dc operating point. Using the diode-resistive load for the differential pair in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;72</a> the dc operating point there is well-defined by the diode-connected <span class="math inline">\(M_{3,5}\)</span>. However, the output stage is different, and we need to add circuitry to also control the dc operating point there.</p>
+<p>One well-known way is to sense the common-mode voltage using two resistors (similar to <span class="math inline">\(R_{1,2}\)</span> in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;72</a>), and compare this measured common-mode voltage to a reference voltage using an error amplifier. Then the output of the error amplifier controls the common-mode voltage, e.g., by driving the gates of <span class="math inline">\(M_{7,8}\)</span> in <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;72</a>.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Differential and Common-Mode Loops">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5083,16 +5098,16 @@ R_\mathrm{m} &gt; \frac{2}{g_\mathrm{m}}.
 <p>In summary, stability investigations are critically important for differential circuits, and you should never forget to check for common-mode stability as well!</p>
 </div>
 </div>
-<p>Instead of a common-mode regulation loop (and all its complications regarding stability) often a common-mode setting is sufficient (after all, a somewhat imprecise setting of the dc points is good enough). A common-mode setting has the advantage that no error amplifier is required. We will also use this approach of a common-mode loop setting in the adapted differential OTA shown in <a href="#fig-diff-ota-resload-miller-cm" class="quarto-xref">Figure&nbsp;73</a>.</p>
-<div id="cell-fig-diff-ota-resload-miller-cm" class="cell" data-execution_count="55">
+<p>Instead of a common-mode regulation loop (and all its complications regarding stability) often a common-mode setting is sufficient (after all, a somewhat imprecise setting of the dc points is good enough). A common-mode setting has the advantage that no error amplifier is required. We will also use this approach of a common-mode loop setting in the adapted differential OTA shown in <a href="#fig-diff-ota-resload-miller-cm" class="quarto-xref">Figure&nbsp;74</a>.</p>
+<div id="cell-fig-diff-ota-resload-miller-cm" class="cell" data-execution_count="56">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-resload-miller-cm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-resload-miller-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-diff-ota-resload-miller-cm-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-125" title="Figure&nbsp;73: Differential two-stage OTA with resistive load, Miller compensation and output common-mode control."><img src="aicd_files/figure-html/fig-diff-ota-resload-miller-cm-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-diff-ota-resload-miller-cm-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-126" title="Figure&nbsp;74: Differential two-stage OTA with resistive load, Miller compensation and output common-mode control."><img src="aicd_files/figure-html/fig-diff-ota-resload-miller-cm-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-resload-miller-cm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;73: Differential two-stage OTA with resistive load, Miller compensation and output common-mode control.
+Figure&nbsp;74: Differential two-stage OTA with resistive load, Miller compensation and output common-mode control.
 </figcaption>
 </figure>
 </div>
@@ -5102,7 +5117,7 @@ Figure&nbsp;73: Differential two-stage OTA with resistive load, Miller compensat
 <p><span class="math display">\[
 V_\mathrm{out,cm} = V_\mathrm{GS7,8} + \frac{R_{3,4} I_\mathrm{D11}}{2}.
 \]</span></p>
-<p>We can realize the advantage of using the resistor/MOSFET load in the input as well as the output stage when we calculate the common-mode gain of the OTA. We realize that we can use half-circuits due to the inherent symmetry of the circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;70</a>. The gain of the first stage (the MOSFET-diode loaded differential pair <span class="math inline">\(M_{1,2}\)</span>) is given by (using <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a>)</p>
+<p>We can realize the advantage of using the resistor/MOSFET load in the input as well as the output stage when we calculate the common-mode gain of the OTA. We realize that we can use half-circuits due to the inherent symmetry of the circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;71</a>. The gain of the first stage (the MOSFET-diode loaded differential pair <span class="math inline">\(M_{1,2}\)</span>) is given by (using <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a>)</p>
 <p><span id="eq-diff-ota-cmgain1"><span class="math display">\[
 A_\mathrm{cm,1} \approx -\frac{1}{g_\mathrm{m3,5}} \frac{g_\mathrm{m1,2} g_\mathrm{ds10}}{g_\mathrm{m1,2} + g_\mathrm{ds10}} \approx -\frac{g_\mathrm{ds10}}{g_\mathrm{m3,5}}.
 \tag{57}\]</span></span></p>
@@ -5138,23 +5153,23 @@ A_\mathrm{d} = A_\mathrm{d,1} A_\mathrm{d,2} = \frac{g_\mathrm{m1,2} g_\mathrm{m
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Keep the technique shown in <a href="#fig-diff-ota-resload-miller-cm" class="quarto-xref">Figure&nbsp;73</a> (using <span class="math inline">\(R_{3,4}\)</span> and <span class="math inline">\(M_{11}\)</span>) in mind: You can always modify a bias point by injecting a dc current into a node, or by pulling a dc current out of a node (or do both to increase or lower the quiescent current through a resistor or transistor)! Since we likely have already current mirrors in the circuit it is usually a minor effort adding MOSFETs to create these bias currents.</p>
+<p>Keep the technique shown in <a href="#fig-diff-ota-resload-miller-cm" class="quarto-xref">Figure&nbsp;74</a> (using <span class="math inline">\(R_{3,4}\)</span> and <span class="math inline">\(M_{11}\)</span>) in mind: You can always modify a bias point by injecting a dc current into a node, or by pulling a dc current out of a node (or do both to increase or lower the quiescent current through a resistor or transistor)! Since we likely have already current mirrors in the circuit it is usually a minor effort adding MOSFETs to create these bias currents.</p>
 </div>
 </div>
 </section>
 <section id="final-differential-ota" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="final-differential-ota"><span class="header-section-number">13.3</span> Final Differential OTA</h2>
 <p>When designing the OTA with the above-mentioned techniques like Miller compensation and the common-mode setting, we find that we have issues with common-mode stability. There is one issue not obvious at first sight with the MOSFET-R load of the first stage: At the node <span class="math inline">\(X\)</span> there is significant capacitance due to the gates of <span class="math inline">\(M_{3,5}\)</span>. This capacitance forms a low-pass response with the resistance of <span class="math inline">\(R_{1,2}\)</span> and thus creates a low-frequency pole. This pole is in the common-mode path, and leads to a zero for the common-mode gain.</p>
-<p>In other words: At low frequencies, the common-mode gain is given by <a href="#eq-diff-ota-cmgain" class="quarto-xref">Equation&nbsp;59</a>, but at higher frequencies (above the pole at node <span class="math inline">\(X\)</span>), the common-mode gain increases significantly as the load resistance of the first stage increases from <span class="math inline">\(g_\mathrm{m3}^{-1} \parallel g_\mathrm{m5}^{-1}\)</span> to <span class="math inline">\(g_\mathrm{ds3}^{-1} \parallel g_\mathrm{ds5}^{-1}\)</span>. We need to counteract this effect by adding a capacitor in parallel to <span class="math inline">\(R_{1,2}\)</span>, as shown in <a href="#fig-diff-ota-final" class="quarto-xref">Figure&nbsp;74</a>. We use the opportunity to also add a series resistor to this capacitor to introduce an additional zero to improve phase margin.</p>
-<div id="cell-fig-diff-ota-final" class="cell" data-execution_count="56">
+<p>In other words: At low frequencies, the common-mode gain is given by <a href="#eq-diff-ota-cmgain" class="quarto-xref">Equation&nbsp;59</a>, but at higher frequencies (above the pole at node <span class="math inline">\(X\)</span>), the common-mode gain increases significantly as the load resistance of the first stage increases from <span class="math inline">\(g_\mathrm{m3}^{-1} \parallel g_\mathrm{m5}^{-1}\)</span> to <span class="math inline">\(g_\mathrm{ds3}^{-1} \parallel g_\mathrm{ds5}^{-1}\)</span>. We need to counteract this effect by adding a capacitor in parallel to <span class="math inline">\(R_{1,2}\)</span>, as shown in <a href="#fig-diff-ota-final" class="quarto-xref">Figure&nbsp;75</a>. We use the opportunity to also add a series resistor to this capacitor to introduce an additional zero to improve phase margin.</p>
+<div id="cell-fig-diff-ota-final" class="cell" data-execution_count="57">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-final" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-diff-ota-final-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-126" title="Figure&nbsp;74: Differential two-stage OTA with adapted MOSFET-R load of first stage and output common-mode control by MOSFET-R load in second stage."><img src="aicd_files/figure-html/fig-diff-ota-final-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-diff-ota-final-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-127" title="Figure&nbsp;75: Differential two-stage OTA with adapted MOSFET-R load of first stage and output common-mode control by MOSFET-R load in second stage."><img src="aicd_files/figure-html/fig-diff-ota-final-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;74: Differential two-stage OTA with adapted MOSFET-R load of first stage and output common-mode control by MOSFET-R load in second stage.
+Figure&nbsp;75: Differential two-stage OTA with adapted MOSFET-R load of first stage and output common-mode control by MOSFET-R load in second stage.
 </figcaption>
 </figure>
 </div>
@@ -5165,20 +5180,20 @@ Figure&nbsp;74: Differential two-stage OTA with adapted MOSFET-R load of first s
 <div id="fig-diff-ota-design" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/ota-diff.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-127" title="Figure&nbsp;75: Differential OTA design in Xschem."><img src="./xschem/ota-diff.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/ota-diff.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-128" title="Figure&nbsp;76: Differential OTA design in Xschem."><img src="./xschem/ota-diff.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;75: Differential OTA design in Xschem.
+Figure&nbsp;76: Differential OTA design in Xschem.
 </figcaption>
 </figure>
 </div>
 <div id="fig-diff-ota-design-tb-gain" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-design-tb-gain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="./xschem/ota-diff_tb-acol.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-128" title="Figure&nbsp;76: Simulation testbench of the differential OTA design (DM and CM gain analysis)."><img src="./xschem/ota-diff_tb-acol.svg" class="img-fluid figure-img"></a>
+<a href="./xschem/ota-diff_tb-acol.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-129" title="Figure&nbsp;77: Simulation testbench of the differential OTA design (DM and CM gain analysis)."><img src="./xschem/ota-diff_tb-acol.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-design-tb-gain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;76: Simulation testbench of the differential OTA design (DM and CM gain analysis).
+Figure&nbsp;77: Simulation testbench of the differential OTA design (DM and CM gain analysis).
 </figcaption>
 </figure>
 </div>
@@ -5186,31 +5201,31 @@ Figure&nbsp;76: Simulation testbench of the differential OTA design (DM and CM g
 </section>
 <section id="differential-ota-variants" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="differential-ota-variants"><span class="header-section-number">13.4</span> Differential OTA Variants</h2>
-<p>For inspiration we want to discuss two further variants of the differential OTA. The first one is shown in <a href="#fig-diff-ota-telescopic" class="quarto-xref">Figure&nbsp;77</a> and is a telescopic OTA. The telescopic OTA is a single-stage OTA and is the differential version of the single-ended OTA shown in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>. It shares its advantages and disadvantages: Stability is often not an issue (because it is single-stage), and the current consumption is low, as there is only one main current branch. The biggest disadvantage is the limited output swing, as we have to stack six MOSFETs on top of each other. Accounting for a minimum headroom per transistor of about 0.1 V, we require at least 0.6V, likely more in practice. This might be an issue in low-voltage designs.</p>
-<div id="cell-fig-diff-ota-telescopic" class="cell" data-execution_count="57">
+<p>For inspiration we want to discuss two further variants of the differential OTA. The first one is shown in <a href="#fig-diff-ota-telescopic" class="quarto-xref">Figure&nbsp;78</a> and is a telescopic OTA. The telescopic OTA is a single-stage OTA and is the differential version of the single-ended OTA shown in <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>. It shares its advantages and disadvantages: Stability is often not an issue (because it is single-stage), and the current consumption is low, as there is only one main current branch. The biggest disadvantage is the limited output swing, as we have to stack six MOSFETs on top of each other. Accounting for a minimum headroom per transistor of about 0.1 V, we require at least 0.6V, likely more in practice. This might be an issue in low-voltage designs.</p>
+<div id="cell-fig-diff-ota-telescopic" class="cell" data-execution_count="58">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-telescopic" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-telescopic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-diff-ota-telescopic-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-129" title="Figure&nbsp;77: The telescopic differential OTA (output common-mode regulation and biasing details are not shown)."><img src="aicd_files/figure-html/fig-diff-ota-telescopic-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-diff-ota-telescopic-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-130" title="Figure&nbsp;78: The telescopic differential OTA (output common-mode regulation and biasing details are not shown)."><img src="aicd_files/figure-html/fig-diff-ota-telescopic-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-telescopic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;77: The telescopic differential OTA (output common-mode regulation and biasing details are not shown).
+Figure&nbsp;78: The telescopic differential OTA (output common-mode regulation and biasing details are not shown).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Another very popular single-stage differential OTA is the so-called <em>folded-cascode OTA</em>, shown in <a href="#fig-diff-ota-folded" class="quarto-xref">Figure&nbsp;78</a>. The folded-cascode OTA has a larger output swing than the telescopic OTA, as we only need to stack four MOSFETs on top of each other. However, the current consumption is higher, as we have three current branches (one for the input pair, and two for the differential cascode stage). The folded-cascode OTA is a very popular choice for high-gain, moderate-speed OTAs.</p>
-<div id="cell-fig-diff-ota-folded" class="cell" data-execution_count="58">
+<p>Another very popular single-stage differential OTA is the so-called <em>folded-cascode OTA</em>, shown in <a href="#fig-diff-ota-folded" class="quarto-xref">Figure&nbsp;79</a>. The folded-cascode OTA has a larger output swing than the telescopic OTA, as we only need to stack four MOSFETs on top of each other. However, the current consumption is higher, as we have three current branches (one for the input pair, and two for the differential cascode stage). The folded-cascode OTA is a very popular choice for high-gain, moderate-speed OTAs.</p>
+<div id="cell-fig-diff-ota-folded" class="cell" data-execution_count="59">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-folded" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-diff-ota-folded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-diff-ota-folded-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-130" title="Figure&nbsp;78: The folded-cascode differential OTA (output common-mode regulation and biasing details are not shown)."><img src="aicd_files/figure-html/fig-diff-ota-folded-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-diff-ota-folded-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-131" title="Figure&nbsp;79: The folded-cascode differential OTA (output common-mode regulation and biasing details are not shown)."><img src="aicd_files/figure-html/fig-diff-ota-folded-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diff-ota-folded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;78: The folded-cascode differential OTA (output common-mode regulation and biasing details are not shown).
+Figure&nbsp;79: The folded-cascode differential OTA (output common-mode regulation and biasing details are not shown).
 </figcaption>
 </figure>
 </div>
@@ -5256,30 +5271,30 @@ Figure&nbsp;78: The folded-cascode differential OTA (output common-mode regulati
 </section>
 <section id="sec-middlebrook-method" class="level1" data-number="16">
 <h1 data-number="16"><span class="header-section-number">16</span> Appendix: Middlebrook’s Method</h1>
-<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;79</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;80</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
-<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="59">
+<p>If we want to do a closed-loop gain analysis (for stability or other investigations), we have the need to break the loop at one point, apply a stimulus, and monitor the response on the other end. By doing this we want to keep the loading (i.e.&nbsp;the impedance) on both ends similar to the original case. To achieve this, we break the loop at one point by inserting (1) an ac voltage source, and (2) attach an ac current source, as shown in <a href="#fig-middlebrook-voltage" class="quarto-xref">Figure&nbsp;80</a> and <a href="#fig-middlebrook-current" class="quarto-xref">Figure&nbsp;81</a>. The derivation of this approach is presented in <span class="citation" data-cites="Middlebrook_1975">(<a href="#ref-Middlebrook_1975" role="doc-biblioref">Middlebrook 1975</a>)</span>, and has the big advantage that loading is not changed compared to the closed-loop situation, and the bias points are also unchanged.</p>
+<div id="cell-fig-middlebrook-voltage" class="cell" data-execution_count="60">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-voltage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-131" title="Figure&nbsp;79: Middlebrook voltage loop gain simulation."><img src="aicd_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-132" title="Figure&nbsp;80: Middlebrook voltage loop gain simulation."><img src="aicd_files/figure-html/fig-middlebrook-voltage-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-voltage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;79: Middlebrook voltage loop gain simulation.
+Figure&nbsp;80: Middlebrook voltage loop gain simulation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="60">
+<div id="cell-fig-middlebrook-current" class="cell" data-execution_count="61">
 <div class="cell-output cell-output-display">
 <div id="fig-middlebrook-current" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-132" title="Figure&nbsp;80: Middlebrook current loop gain simulation."><img src="aicd_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-middlebrook-current-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-133" title="Figure&nbsp;81: Middlebrook current loop gain simulation."><img src="aicd_files/figure-html/fig-middlebrook-current-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-middlebrook-current-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;80: Middlebrook current loop gain simulation.
+Figure&nbsp;81: Middlebrook current loop gain simulation.
 </figcaption>
 </figure>
 </div>
@@ -5300,30 +5315,30 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \
 <h1 data-number="17"><span class="header-section-number">17</span> Appendix: Useful Circuit Theorems</h1>
 <section id="sec-miller-theorem" class="level2" data-number="17.1">
 <h2 data-number="17.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">17.1</span> Miller’s Theorem</h2>
-<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, if we know the transfer function between these nodes. The original situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;81</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;82</a>.</p>
-<div id="cell-fig-miller-theorem" class="cell" data-execution_count="61">
+<p>Using Miller’s theorem we can find the equivalent circuit of an impedance connected between two nodes, if we know the transfer function between these nodes. The original situation is shown in <a href="#fig-miller-theorem" class="quarto-xref">Figure&nbsp;82</a>, and the equivalent circuit is shown in <a href="#fig-miller-theorem-equivalent" class="quarto-xref">Figure&nbsp;83</a>.</p>
+<div id="cell-fig-miller-theorem" class="cell" data-execution_count="62">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-133" title="Figure&nbsp;81: An impedance connected between two nodes A and B."><img src="aicd_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-miller-theorem-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-134" title="Figure&nbsp;82: An impedance connected between two nodes A and B."><img src="aicd_files/figure-html/fig-miller-theorem-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;81: An impedance connected between two nodes A and B.
+Figure&nbsp;82: An impedance connected between two nodes A and B.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="62">
+<div id="cell-fig-miller-theorem-equivalent" class="cell" data-execution_count="63">
 <div class="cell-output cell-output-display">
 <div id="fig-miller-theorem-equivalent" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-134" title="Figure&nbsp;82: An equivalent circuit using Miller’s theorem."><img src="aicd_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-135" title="Figure&nbsp;83: An equivalent circuit using Miller’s theorem."><img src="aicd_files/figure-html/fig-miller-theorem-equivalent-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miller-theorem-equivalent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;82: An equivalent circuit using Miller’s theorem.
+Figure&nbsp;83: An equivalent circuit using Miller’s theorem.
 </figcaption>
 </figure>
 </div>
@@ -5363,15 +5378,15 @@ Z_2 = \frac{Z}{1 - A^{-1}} = \frac{Z}{1 - V_\mathrm{A} / V_\mathrm{B}}
 <section id="sec-5t-ota-zout" class="level1" data-number="18">
 <h1 data-number="18"><span class="header-section-number">18</span> Appendix: 5T-OTA Small-Signal Output Impedance</h1>
 <p>This section gives additional details to the analysis presented in <a href="#sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>. Here we provide the full calculation of the output impedance/conductance of the 5T-OTA for frequencies below the dominant pole, i.e., we neglect any capacitors.</p>
-<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="63">
+<div id="cell-fig-basic-ota-small-signal-zout" class="cell" data-execution_count="64">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota-small-signal-zout" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-135" title="Figure&nbsp;83: 5-transistor OTA small-signal model for output impedance calculations."><img src="aicd_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
+<a href="aicd_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-136" title="Figure&nbsp;84: 5-transistor OTA small-signal model for output impedance calculations."><img src="aicd_files/figure-html/fig-basic-ota-small-signal-zout-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic-ota-small-signal-zout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;83: 5-transistor OTA small-signal model for output impedance calculations.
+Figure&nbsp;84: 5-transistor OTA small-signal model for output impedance calculations.
 </figcaption>
 </figure>
 </div>
@@ -5859,14 +5874,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {(Integrated)} {Circuit} {Design}},
-  date = {2026-01-24},
+  date = {2026-01-27},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-(Integrated) Circuit Design.”</span> January 24, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+(Integrated) Circuit Design.”</span> January 27, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
