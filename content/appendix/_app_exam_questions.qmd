@@ -9,15 +9,13 @@ This appendix contains a collection of exemplary examination questions covering 
 ### MOSFET Fundamentals
 
 ::: {.callout-note title="Question 1.1 --- Small-Signal Parameters" collapse="true"}
-**Question:** Define the three main small-signal parameters of a MOSFET ($\gm$, $\gds$, $\gmb$) and explain their physical meaning.
+**Question:** Define the two main small-signal parameters of a MOSFET ($\gm$ and $\gds$) and explain their physical meaning.
 
 **Solution:**
 
 - **Transconductance** $\gm = {\partial \ID}/{\partial \VGS}$: Describes how the drain current changes with gate-source voltage. It represents the amplification capability of the transistor.
 
-- **Output conductance** $\gds = {\partial \ID}/{\partial \VDS} = r_\mathrm{out}^{-1}$: Describes how the drain current varies with drain-source voltage in saturation (ideally zero, but finite due to channel-length modulation). It limits the maximum achievable voltage gain.
-
-- **Bulk transconductance** $\gmb = {\partial \ID}/{\partial \VSB}$: Describes how the drain current changes with source-bulk voltage due to the body effect. Typically $\gmb \approx 0.1 \cdot \gm$ to $0.3 \cdot \gm$.
+- **Output conductance** $\gds = {\partial \ID}/{\partial \VDS} = r_\mathrm{out}^{-1}$: Describes how the drain current varies with drain-source voltage (ideally zero in saturation, but finite due to channel-length modulation). It limits the maximum achievable voltage gain. In the triode region, $\gds$ is the resistance of the channel, which can be electrically controlled by $\VGS$.
 :::
 
 ::: {.callout-note title="Question 1.2 --- Operating Regions" collapse="true"}
@@ -25,21 +23,21 @@ This appendix contains a collection of exemplary examination questions covering 
 
 **Solution:**
 
-- **Triode region:** $\VGS > \Vth$ and $\VDS < \VGS - \Vth$ (or $\VDS < V_\mathrm{ds,sat}$)
-- **Saturation region:** $\VGS > \Vth$ and $\VDS \geq \VGS - \Vth$ (or $\VDS \geq V_\mathrm{ds,sat}$)
+- **Triode region:** $\VDS < V_\mathrm{ds,sat}$
+- **Saturation region:** $\VDS \geq V_\mathrm{ds,sat}$
 
 Saturation is preferred for analog amplifiers because:
 
-1. The drain current is largely independent of $\VDS$, resulting in high output impedance ($r_\mathrm{out} = 1/\gds$)
+1. The drain current is largely independent of $\VDS$, resulting in high output impedance ($r_\mathrm{out} = 1 / \gds$)
 2. The transistor acts as a voltage-controlled current source
-3. High intrinsic gain ($\gmgds$) can be achieved
-4. Linear relationship between small-signal input voltage and output current
+3. High intrinsic gain ($\gm / \gds$) can be achieved
+4. Linear relationship between small-signal input voltage and output current given by $\gm$
 
 The triode region is important when operating the MOSFET as a (variable) resistor or switch.
 :::
 
 ::: {.callout-note title="Question 1.3 --- Transit Frequency" collapse="true"}
-**Question:** Define the transit frequency $f_T$ of a MOSFET. How does it relate to the transistor's speed capability?
+**Question:** Define the transit frequency $f_\mathrm{T}$ of a MOSFET. How does it relate to the transistor's speed capability?
 
 **Solution:**
 
@@ -52,7 +50,7 @@ It represents the frequency at which the current gain of the transistor drops to
 - Higher potential bandwidth in amplifier applications
 - Better high-frequency performance
 
-The $f_\mathrm{T}$ increases with higher $\gm$ (higher bias current or larger W/L) and decreases with larger parasitic capacitances (larger device area).
+The $f_\mathrm{T}$ increases with higher $\gm$ (higher bias current or larger $W/L$) and decreases with larger parasitic capacitances (larger device area).
 :::
 
 ---
@@ -60,7 +58,7 @@ The $f_\mathrm{T}$ increases with higher $\gm$ (higher bias current or larger W/
 ### gm/ID Sizing Methodology
 
 ::: {.callout-note title="Question 2.1 --- gm/ID in Different Inversion Regions" collapse="true"}
-**Question:** Derive the theoretical limits of $\gmid$ in weak inversion and strong inversion. What is the typical range of $\gmid$ used in practical analog design?
+**Question:** Derive the theoretical limits of $\gmid$ in weak inversion ($\VGS$ small) and strong inversion ($\VGS$ large). What is the typical range of $\gmid$ used in practical analog design?
 
 **Solution:**
 
@@ -87,14 +85,12 @@ For typical overdrive voltages of 100---300 mV, this gives $\gmid \approx 7-20\,
 
 **Solution:**
 
-| Parameter | High $\gmid$ (>15) | Low $\gmid$ (<10) |
-|-----------|-------------------|-------------------|
-| Current consumption | Lower (for same $\gm$) | Higher |
-| Speed ($f_\mathrm{T}$) | Lower | Higher |
-| $V_\mathrm{ds,sat}$ | Lower | Higher (more headroom needed) |
-| Noise (thermal) | Same $\gm$ → same noise | Same |
-| Matching | Generally better | Depends on area |
-| Operating region | Weak/moderate inversion | Strong inversion |
+| Parameter              | High $\gmid$ (>15)      | Low $\gmid$ (<8)             |
+|------------------------|-------------------------|-------------------------------|
+| Current consumption    | Lower (for same $\gm$)  | Higher                        |
+| Speed ($f_\mathrm{T}$) | Lower                   | Higher                        |
+| $V_\mathrm{ds,sat}$    | Lower                   | Higher (more headroom needed) |
+| Operating region       | Weak/moderate inversion | Strong inversion              |
 
 The choice depends on application requirements:
 
@@ -125,38 +121,36 @@ Note: This approximation is based on the strong inversion relationship and provi
 
 **Solution:**
 
-For a MOSFET with gate shorted to drain, applying KCL at the drain node:
-$$i_{test} = \gm \vgs + \gds \vds + s\Cgs \vgs$$
+For a MOSFET with gate shorted to drain, applying KCL at the drain node (we only keep $\gm$, $\gds$, and $\Cgs$ from the small-signal model):
+$$i_\mathrm{test} = \gm \vgs + \gds \vds + s\Cgs \vgs$$
 
-Since $\vgs = \vds = v_{test}$:
-$$i_{test} = (\gm + \gds + s\Cgs) v_{test}$$
+Since $\vgs = \vds = v_\mathrm{test}$:
+$$i_\mathrm{test} = (\gm + \gds + s\Cgs) v_\mathrm{test}$$
 
 Therefore:
-$$Z_{diode}(s) = \frac{v_{test}}{i_{test}} = \frac{1}{\gm + \gds + s\Cgs}$$
+$$Z_\mathrm{diode}(s) = \frac{v_\mathrm{test}}{i_\mathrm{test}} = \frac{1}{\gm + \gds + s\Cgs}$$
 
-**At DC:** $Z_{diode} \approx \frac{1}{\gm}$ (since $\gm \gg \gds$)
+**At dc:** $Z_\mathrm{diode} \approx \frac{1}{\gm}$ (since $\gm \gg \gds$)
 
-**Corner frequency:** $f_c = \frac{\gm + \gds}{2\pi \Cgs} \approx \frac{\gm}{2\pi \Cgs} \approx f_T$
+**Corner frequency:** $f_\mathrm{c} = \frac{\gm + \gds}{2\pi \Cgs} \approx \frac{\gm}{2\pi \Cgs} \approx f_T$
 
-The impedance is resistive ($\approx 1/\gm$) at low frequencies and becomes capacitive at high frequencies.
+The impedance is resistive ($\approx 1/\gm$) at low frequencies and becomes capacitive at (very) high frequencies.
 :::
 
 ::: {.callout-note title="Question 3.2 --- Noise Consideration" collapse="true"}
-**Question:** What is the output noise voltage (RMS) of a MOSFET diode, and how does it relate to kT/C noise?
+**Question:** What is the output noise voltage (RMS) of a MOSFET diode, and how does it relate to $kT/C$ noise?
 
 **Solution:**
 
-The integrated output noise of a MOSFET diode follows the kT/C relationship:
-$$V_{n,rms}^2 = \frac{kT\gamma}{\Cgs}$$
+The integrated output noise of a MOSFET diode follows the $kT/C$ relationship:
+$$V_\mathrm{n,rms}^2 = \frac{k T \gamma}{\Cgs}$$
 
 where $\gamma$ is the thermal noise excess factor (approximately 2/3 for long-channel devices, higher for short-channel).
 
-This is analogous to the kT/C noise of an RC network, with the effective capacitance being $\Cgs$. To reduce noise:
+This is analogous to the $kT/C$ noise of an RC network, with the effective capacitance being $\Cgs$. To reduce noise:
 
 - Increase $\Cgs$ (larger device)
 - Note: Bandwidth also decreases with larger $\Cgs$
-
-The noise-bandwidth product remains constant, which is a fundamental trade-off.
 :::
 
 ---
@@ -164,26 +158,26 @@ The noise-bandwidth product remains constant, which is a fundamental trade-off.
 ### Current Mirror
 
 ::: {.callout-note title="Question 4.1 --- Basic Current Mirror" collapse="true"}
-**Question:** For a basic NMOS current mirror with input transistor M1 and output transistor M2, derive the output current ratio. What are the main sources of error in a practical current mirror?
+**Question:** For a basic NMOS current mirror with input transistor $M_1$ and output transistor $M_2$, derive the output current ratio. What are the main sources of error in a practical current mirror?
 
 **Solution:**
 
 **Ideal output current:**
-$$I_{out} = I_{ref} \cdot \frac{(W/L)_2}{(W/L)_1}$$
+$$I_\mathrm{out} = I_\mathrm{ref} \cdot \frac{(W/L)_2}{(W/L)_1}$$
 
 **Main error sources:**
 
-1. **Channel-length modulation:** Different $\VDS$ on M1 and M2 causes current mismatch
-$$\frac{\Delta I}{I} \approx \frac{\Delta \VDS}{\VDS + 1/\lambda} = \frac{\Delta \VDS \cdot \gds}{\ID}$$
+1. **Channel-length modulation:** Different $\VDS$ on $M_1$ and $M_2$ causes current mismatch
+$$\frac{\Delta I}{I} \approx \frac{\Delta \VDS \cdot \gds}{\ID}$$
 
 2. **Threshold voltage mismatch:** Random $\Delta\Vth$ variations
-$$\frac{\Delta I}{I} \approx \gm \cdot \frac{\Delta \Vth}{\ID} = \gmid \cdot \Delta \Vth$$
+$$\frac{\Delta I}{I} \approx \frac{\gm \cdot \Delta \Vth}{\ID} = \gmid \cdot \Delta \Vth$$
 
-3. **W/L mismatch:** Lithographic variations in device dimensions
+3. **W/L mismatch:** Lithographic variations in device dimensions during manufacturing
 
-4. **Temperature gradients:** Different operating temperatures across the chip
+4. **Temperature gradients:** Different operating temperatures for the transistors
 
-5. **Finite output resistance:** Limits the current source quality ($r_{out} = 1/\gds$)
+5. **Finite output resistance:** Limits the current source quality ($r_\mathrm{out} = 1 / \gds$)
 :::
 
 ::: {.callout-note title="Question 4.2 --- Output Resistance" collapse="true"}
@@ -191,20 +185,20 @@ $$\frac{\Delta I}{I} \approx \gm \cdot \frac{\Delta \Vth}{\ID} = \gmid \cdot \De
 
 **Solution:**
 
-**Simple current mirror:** $r_{out} = r_{ds} = \frac{1}{\gds}$
+**Simple current mirror:** $r_\mathrm{out} = r_\mathrm{ds} = \frac{1}{\gds}$
 
 **Improvements:**
 
 1. **Cascode current mirror:**
-$$r_{out} = r_{ds,casc} + r_{ds}(1 + \gm[,casc] \cdot r_{ds,casc}) \approx \gm[,casc] \cdot r_{ds,casc} \cdot r_{ds}$$
+$$r_\mathrm{out} = r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot (1 + \gm[,casc] \cdot r_\mathrm{ds,casc}) \approx \gm[,casc] \cdot r_\mathrm{ds,casc} \cdot r_\mathrm{ds}$$
 
 2. **Source degeneration:**
-$$r_{out} = r_{ds} + R_{deg}(1 + \gm \cdot r_{ds}) \approx \gm \cdot r_{ds} \cdot R_{deg}$$
+$$r_\mathrm{out} = r_\mathrm{ds} + R_\mathrm{deg} \cdot (1 + \gm \cdot r_\mathrm{ds}) \approx \gm \cdot r_\mathrm{ds} \cdot R_\mathrm{deg}$$
 
 3. **Regulated cascode:**
-$$r_{out} \approx r_{ds} \cdot \gm[,casc] \cdot r_{ds,casc} \cdot \gm[,aux] \cdot r_{ds,aux}$$
+$$r_\mathrm{out} \approx r_\mathrm{ds} \cdot \gm[,casc] \cdot r_\mathrm{ds,casc} \cdot \gm[,aux] \cdot r_\mathrm{ds,aux}$$
 
-The improvement factor for cascoding is approximately $\gmgds$ (intrinsic gain).
+The improvement factor for cascoding is approximately $\gm / \gds$ (intrinsic gain).
 :::
 
 ::: {.callout-note title="Question 4.3 --- High-Swing Cascode" collapse="true"}
@@ -212,16 +206,16 @@ The improvement factor for cascoding is approximately $\gmgds$ (intrinsic gain).
 
 **Solution:**
 
-In a high-swing cascode, the bias voltage $V_{bias}$ for the cascode transistor is chosen such that both the main transistor and the cascode transistor operate just at the edge of saturation:
+In a high-swing cascode, the bias voltage $V_\mathrm{bias}$ for the cascode transistor is chosen such that both the main transistor and the cascode transistor operate just at the edge of saturation:
 
-$$V_{bias} = \VGS[,casc] + V_{ds,sat,main}$$
+$$V_\mathrm{bias} = V_\mathrm{GS[,casc]} + V_\mathrm{ds,sat,main}$$
 
 **Minimum output voltage:**
-$$V_{out,min} = V_{ds,sat,casc} + V_{ds,sat,main} = 2 \cdot V_{ds,sat}$$
+$$V_\mathrm{out,min} = V_\mathrm{ds,sat,casc} + V_\mathrm{ds,sat,main} = 2 \cdot V_\mathrm{ds,sat}$$
 
-For typical $\gmid = 15\,\text{V}^{-1}$: $V_{out,min} \approx 2 \times 133\,\text{mV} \approx 270\,\text{mV}$
+For typical $\gmid = 15\,\text{V}^{-1}$: $V_\mathrm{out,min} \approx 2 \times 133\,\text{mV} \approx 270\,\text{mV}$
 
-This is significantly lower than a standard cascode where $V_{out,min} = \VGS + V_{ds,sat}$ (typically >500 mV).
+This is significantly lower than a standard cascode where $V_\mathrm{out,min} = \VGS + V_\mathrm{ds,sat}$ (typically >500 mV).
 :::
 
 ---
@@ -360,8 +354,8 @@ $$A_0 \approx \frac{(\gmgds)^2}{2}$$
 **Solution:**
 
 **Telescopic OTA output swing:**
-$$V_{out,max} = \VDD - V_{ds,sat,M3} - V_{ds,sat,M4C}$$
-$$V_{out,min} = V_{ds,sat,M5} + V_{ds,sat,M2} + V_{ds,sat,M2C}$$
+$$V_{out,max} = \VDD - V_{ds,sat,M4} - V_{ds,sat,M4C}$$
+$$V_{out,min} = V_{ds,sat,M2} + V_{ds,sat,M2C}$$
 
 Total swing: $\VDD - 4 \cdot V_{ds,sat}$
 
@@ -636,12 +630,11 @@ This is too high for a single device → need cascode!
 **Step 3: Cascode design**
 With cascode: $r_{out} \approx \gm[,casc] \cdot r_{ds,casc} \cdot r_{ds,main} \approx (\gmgds)^2 / \gm$
 For $\gmgds = 100$ (achievable with L = 1 µm) at $\gm = 900\,\mu\text{S}$:
-$r_{out} = 100^2 / 900\,\mu\text{S} \approx 11\,\text{k}\Omega$
+$r_{out} = 100^2 / 900\,\mu\text{S} = 10000 / 0.0009\,\text{S} \approx 11\,\text{M}\Omega$
 
-This is far too low! Need much longer L. With L = 5 µm for $\gmgds \approx 500$:
-$r_{out} \approx 500^2 / 900\,\mu\text{S} \approx 280\,\text{k}\Omega$ --- still insufficient for 10 MΩ.
+This meets the requirement of $r_{out} > 10\,\text{M}\Omega$ ✓
 
-**Conclusion:** A regulated cascode or gain-boosted topology is required to achieve $r_{out} > 10\,\text{M}\Omega$.
+**Conclusion:** A standard cascode current mirror with $L \approx 1\,\mu\text{m}$ achieving $\gmgds \approx 100$ is sufficient.
 
 **Step 4: Minimum output voltage (high-swing)**
 $V_{out,min} = 2 \times V_{ds,sat} \approx 2 \times 111\,\text{mV} = 222\,\text{mV}$
