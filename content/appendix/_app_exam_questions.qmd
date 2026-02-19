@@ -697,12 +697,12 @@ The gain is less than unity because source degeneration reduces gain. To achieve
 :::
 
 ::: {.callout-note title="Question 13.3" collapse="true"}
-**Question:** Why does the GBW of an OTA depend only on $\gm$ and $C_L$, not on the output resistance?
+**Question:** Why does the GBW of an OTA depend only on $\gm$ and $C_\mathrm{L}$, not on the output resistance?
 
 **Solution:** 
-$$GBW = A_0 \cdot f_p = \frac{\gm}{g_{out}} \cdot \frac{g_{out}}{2\pi C_L} = \frac{\gm}{2\pi C_L}$$
+$$\text{GBW} = A_0 \cdot f_\mathrm{p} = \frac{\gm}{g_\mathrm{out}} \cdot \frac{g_\mathrm{out}}{2\pi C_\mathrm{L}} = \frac{\gm}{2\pi C_\mathrm{L}}$$
 
-The output conductance $g_{out}$ appears in both the gain ($A_0 = \gm/g_{out}$) and the pole frequency ($f_p = g_{out}/(2\pi C_L)$), so it cancels out. This is a fundamental property of single-pole systems.
+The output conductance $g_\mathrm{out}$ appears in both the gain ($A_0 = \gm/g_\mathrm{out}$) and the pole frequency ($f_\mathrm{p} = g_\mathrm{out}/(2\pi C_\mathrm{L})$), so it cancels out. This is a fundamental property of single-pole systems.
 :::
 
 ::: {.callout-note title="Question 13.4" collapse="true"}
@@ -710,9 +710,9 @@ The output conductance $g_{out}$ appears in both the gain ($A_0 = \gm/g_{out}$) 
 
 **Solution:**
 
-1. **Wider input common-mode range:** Input pair can swing from rail to rail
-2. **Decoupled input and output DC levels:** More flexibility in biasing
-3. **Same output swing:** Both have $\VDD - 4V_{ds,sat}$
+1. **Wider input common-mode range:** Input pair can swing from rail to rail (if NMOS and PMOS input stage are combined)
+2. **Decoupled input and output dc levels:** More flexibility in biasing
+3. **High output swing:** Using cascoded output transistors then swing is $\VDD - 4V_\mathrm{ds,sat}$
 
 **Disadvantage:** Higher power consumption (needs additional bias current for folding transistors)
 :::
@@ -735,8 +735,8 @@ The output conductance $g_{out}$ appears in both the gain ($A_0 = \gm/g_{out}$) 
 
 In a regulated cascode, an auxiliary amplifier forces the drain voltage of the main current source transistor to be constant:
 
-1. Simple cascode: $r_{out} \approx \gm \cdot r_{ds,casc} \cdot r_{ds,main}$
-2. Regulated cascode: $r_{out} \approx A_{aux} \cdot \gm \cdot r_{ds,casc} \cdot r_{ds,main}$
+1. Simple cascode: $r_\mathrm{out} \approx \gm \cdot r_\mathrm{ds,casc} \cdot r_\mathrm{ds,main}$
+2. Regulated cascode: $r_\mathrm{out} \approx A_\mathrm{aux} \cdot \gm \cdot r_\mathrm{ds,casc} \cdot r_\mathrm{ds,main}$
 
-The auxiliary amplifier gain $A_{aux}$ provides an additional multiplication factor, dramatically increasing output impedance. This is essentially applying negative feedback to stabilize the drain voltage.
+The auxiliary amplifier gain $A_\mathrm{aux}$ provides an additional multiplication factor, dramatically increasing output impedance. This is essentially applying negative feedback to stabilize the drain voltage.
 :::
