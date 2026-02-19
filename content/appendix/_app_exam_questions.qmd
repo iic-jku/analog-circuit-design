@@ -328,19 +328,19 @@ For higher accuracy, the dc gain must be increased (e.g., using cascode structur
 ### Improved (Telescopic) OTA
 
 ::: {.callout-note title="Question 7.1 --- Gain Enhancement with Cascodes" collapse="true"}
-**Question:** How does adding cascode transistors to a 5T-OTA improve the DC gain? Derive the new gain expression.
+**Question:** How does adding cascode transistors to a 5T-OTA improve the dc gain? Derive the new gain expression.
 
 **Solution:**
 
-With cascode transistors (M2C, M4C) added:
+With cascode transistors ($M_\mathrm{2C}$, $M_\mathrm{4C}$) added:
 
-$$A_0 = \frac{\gm[12]}{g_{out,n} + g_{out,p}}$$
+$$A_0 = \frac{\gm[1,2]}{g_\mathrm{out,n} + g_\mathrm{out,p}}$$
 
 where:
-$$g_{out,n} = \gds[2] \cdot \frac{\gds[2C]}{\gm[2C]} \quad \text{and} \quad g_{out,p} = \gds[4] \cdot \frac{\gds[4C]}{\gm[4C]}$$
+$$g_\mathrm{out,n} = \gds[2] \cdot \frac{\gds[,2C]}{\gm[,2C]} \quad \text{and} \quad g_\mathrm{out,p} = \gds[4] \cdot \frac{\gds[,4C]}{\gm[,4C]}$$
 
 Therefore:
-$$A_0 \approx \frac{\gm[12]}{\gds[2] \cdot \frac{\gds[2C]}{\gm[2C]} + \gds[4] \cdot \frac{\gds[4C]}{\gm[4C]}}$$
+$$A_0 \approx \frac{\gm[1,2]}{\gds[2] \cdot \frac{\gds[,2C]}{\gm[,2C]} + \gds[4] \cdot \frac{\gds[,4C]}{\gm[,4C]}}$$
 
 If all transistors have similar $\gmgds$:
 $$A_0 \approx \frac{(\gmgds)^2}{2}$$
@@ -354,18 +354,18 @@ $$A_0 \approx \frac{(\gmgds)^2}{2}$$
 **Solution:**
 
 **Telescopic OTA output swing:**
-$$V_{out,max} = \VDD - V_{ds,sat,M4} - V_{ds,sat,M4C}$$
-$$V_{out,min} = V_{ds,sat,M2} + V_{ds,sat,M2C}$$
+$$V_\mathrm{out,max} = \VDD - V_\mathrm{ds,sat,M4} - V_\mathrm{ds,sat,M4C}$$
+$$V_\mathrm{out,min} = V_\mathrm{ds,sat,M2} + V_\mathrm{ds,sat,M2C} + V_\mathrm{ds,sat,M5C} + V_\mathrm{ds,sat,M5}$$
 
-Total swing: $\VDD - 4 \cdot V_{ds,sat}$
+Total swing: $\VDD - 6 \cdot V_\mathrm{ds,sat}$
 
 **Folded-cascode OTA output swing:**
-$$V_{out,max} = \VDD - 2 \cdot V_{ds,sat}$$
-$$V_{out,min} = 2 \cdot V_{ds,sat}$$
+$$V_\mathrm{out,max} = \VDD - 2 \cdot V_\mathrm{ds,sat}$$
+$$V_\mathrm{out,min} = 2 \cdot V_\mathrm{ds,sat}$$
 
-Total swing: $\VDD - 4 \cdot V_{ds,sat}$ (similar)
+Total swing: $\VDD - 4 \cdot V_\mathrm{ds,sat}$
 
-**Key difference:** The folded-cascode allows rail-to-rail input common-mode range, while telescopic has limited input CM range.
+**Key difference:** The folded-cascode OTA allows a higher output swing and has a wider input common-mode range at the cost of increased power consumption; the telescopic OTA has limited input common-mode range and smaller swing, but only one current path.
 :::
 
 ---
@@ -373,23 +373,23 @@ Total swing: $\VDD - 4 \cdot V_{ds,sat}$ (similar)
 ### Cascode Stage
 
 ::: {.callout-note title="Question 8.1 --- Output Impedance" collapse="true"}
-**Question:** Derive the output impedance looking into the drain of a cascode transistor, assuming the source is connected to a current source with output resistance $r_{ds,CS}$.
+**Question:** Derive the output impedance looking into the drain of a cascode transistor, assuming the source is connected to a current source with output resistance $r_\mathrm{ds,CS}$.
 
 **Solution:**
 
-Using small-signal analysis with test voltage $v_t$ at the drain:
+Using small-signal analysis with test voltage $v_\mathrm{test}$ at the drain:
 
-$$g_{out} = \frac{i_t}{v_t} = \frac{\gds \cdot G_S}{G_S + \gm + \gds}$$
+$$g_\mathrm{out} = \frac{i_\mathrm{test}}{v_\mathrm{test}} = \frac{\gds \cdot G_\mathrm{S}}{G_\mathrm{S} + \gm + \gds}$$
 
-where $G_S = 1/r_{ds,CS} = \gds[,CS]$ is the source conductance.
+where $G_\mathrm{S} = 1/r_\mathrm{ds,CS} = \gds[,CS]$ is the source conductance.
 
-For $\gm \gg \gds$ and $\gm \gg G_S$:
-$$g_{out} \approx \frac{\gds \cdot G_S}{\gm} = \gds[,CS] \cdot \frac{\gds}{\gm}$$
+For $\gm \gg \gds$ and $\gm \gg G_\mathrm{S}$:
+$$g_\mathrm{out} \approx \frac{\gds \cdot G_\mathrm{S}}{\gm} = \gds[,CS] \cdot \frac{\gds}{\gm}$$
 
 Therefore:
-$$r_{out} = \frac{1}{g_{out}} = r_{ds,CS} \cdot \frac{\gm}{\gds} = r_{ds,CS} \cdot (\gmgds)$$
+$$r_\mathrm{out} = \frac{1}{g_\mathrm{out}} = r_\mathrm{ds,CS} \cdot \frac{\gm}{\gds} = r_\mathrm{ds,CS} \cdot (\gmgds)$$
 
-**Conclusion:** The cascode increases output impedance by a factor equal to the intrinsic gain ($\gmgds$).
+**Conclusion:** The cascode increases the output impedance by a factor equal to the intrinsic gain ($\gmgds$).
 :::
 
 ::: {.callout-note title="Question 8.2 --- Input Impedance" collapse="true"}
@@ -397,11 +397,11 @@ $$r_{out} = \frac{1}{g_{out}} = r_{ds,CS} \cdot \frac{\gm}{\gds} = r_{ds,CS} \cd
 
 **Solution:**
 
-With drain shorted to AC ground ($G_D \to \infty$):
+With drain shorted to ac ground ($G_\mathrm{D} \to \infty$):
 
-$$g_{in} = \frac{(\gm + \gds) \cdot G_D}{\gds + G_D} \approx \gm + \gds \approx \gm$$
+$$g_\mathrm{in} = \frac{(\gm + \gds) \cdot G_\mathrm{D}}{\gds + G_\mathrm{D}} \approx \gm + \gds \approx \gm$$
 
-Therefore: $Z_{in} \approx 1/\gm$
+Therefore: $Z_\mathrm{in} \approx 1 / \gm$
 
 This low input impedance makes the cascode an effective "current buffer" that isolates the high-impedance current source from the output node variations.
 :::
