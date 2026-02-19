@@ -223,25 +223,25 @@ This is significantly lower than a standard cascode where $V_\mathrm{out,min} = 
 ### Differential Pair
 
 ::: {.callout-note title="Question 5.1 --- Differential vs. Common-Mode" collapse="true"}
-**Question:** For an ideal differential pair with tail current source $I_{tail}$, derive the differential-mode and common-mode transconductance.
+**Question:** For an ideal differential pair with tail current source $I_\mathrm{tail}$, derive the differential-mode and common-mode transconductance.
 
 **Solution:**
 
-**Differential mode:** With $v_{in,dm} = v_{inp} - v_{inn}$ applied:
+**Differential mode:** With $v_\mathrm{in,dm} = v_\mathrm{in,p} - v_\mathrm{in,n}$ applied:
 
 - The tail node acts as a virtual ground
-- Each transistor sees $v_{gs} = v_{in,dm}/2$
-- $i_{out} = \gm \cdot v_{in,dm}/2 - (-\gm \cdot v_{in,dm}/2) = \gm \cdot v_{in,dm}$
+- Each transistor sees $\vgs = v_\mathrm{in,dm}/2$
+- $i_\mathrm{out} = \gm \cdot v_\mathrm{in,dm}/2 - (-\gm \cdot v_\mathrm{in,dm}/2) = \gm \cdot v_\mathrm{in,dm}$
 
-$$G_{m,dm} = \gm$$
+$$G_\mathrm{m,dm} = \gm$$
 
-**Common mode:** With $v_{in,cm}$ applied to both inputs:
+**Common mode:** With $v_\mathrm{in,cm}$ applied to both inputs:
 
-- The tail current source presents impedance $r_{tail} = 1/\gds[,tail]$
-- Due to source degeneration: $G_{m,cm} = \frac{\gm}{1 + 2\gm \cdot r_{tail}} \approx \frac{1}{2 \cdot r_{tail}}$
+- The tail current source presents impedance $r_\mathrm{tail} = 1 / \gds[,tail]$
+- Due to source degeneration: $G_\mathrm{m,cm} = \frac{\gm}{1 + \gm \cdot r_\mathrm{tail}} \approx \frac{1}{r_\mathrm{tail}}$
 
 **Common-mode rejection ratio (CMRR):**
-$$CMRR = \frac{G_{m,dm}}{G_{m,cm}} = \gm \cdot (2 \cdot r_{tail}) = 2 \cdot \gm \cdot r_{tail}$$
+$$\text{CMRR} = \frac{G_\mathrm{m,dm}}{G_\mathrm{m,cm}} = \gm \cdot r_\mathrm{tail}$$
 :::
 
 ::: {.callout-note title="Question 5.2 --- Input-Referred Offset" collapse="true"}
@@ -251,14 +251,14 @@ $$CMRR = \frac{G_{m,dm}}{G_{m,cm}} = \gm \cdot (2 \cdot r_{tail}) = 2 \cdot \gm 
 
 The input-referred offset voltage has two components:
 
-$$V_{os} = \sqrt{\sigma^2(\Delta\Vth) + \left(\frac{\VGS - \Vth}{2}\right)^2 \cdot \sigma^2\left(\frac{\Delta\gm}{\gm}\right)}$$
+$$V_\mathrm{os} = \sqrt{\sigma^2\{\Delta\Vth\} + \left(\frac{\VGS - \Vth}{2}\right)^2 \cdot \sigma^2\left\{\frac{\Delta\gm}{\gm}\right\}}$$
 
 Or equivalently:
-$$V_{os} = \sqrt{\sigma^2(\Delta\Vth) + \left(\frac{V_{od}}{2}\right)^2 \cdot \sigma^2\left(\frac{\Delta(W/L)}{(W/L)}\right)}$$
+$$V_\mathrm{os} = \sqrt{\sigma^2\{\Delta\Vth\} + \left(\frac{V_{od}}{2}\right)^2 \cdot \sigma^2\left\{\frac{\Delta(W/L)}{(W/L)}\right\}}$$
 
 **To minimize offset:**
 
-- Use large device area (mismatch $\propto 1/\sqrt{WL}$)
+- Use large device area (mismatch $\propto 1 / \sqrt{WL}$)
 - Use moderate $\gmid$ (not too low overdrive)
 - Match layout carefully (common-centroid, dummy devices)
 :::
@@ -268,59 +268,59 @@ $$V_{os} = \sqrt{\sigma^2(\Delta\Vth) + \left(\frac{V_{od}}{2}\right)^2 \cdot \s
 ### Basic 5-Transistor OTA
 
 ::: {.callout-note title="Question 6.1 --- DC Gain Derivation" collapse="true"}
-**Question:** Derive the DC voltage gain of a basic 5-transistor OTA with differential pair (M1, M2), current mirror load (M3, M4), and tail current source (M5).
+**Question:** Derive the dc voltage gain of an unloaded basic 5-transistor OTA with differential pair ($M_1$, $M_2$), current mirror load ($M_3$, $M_4$), and tail current source ($M_5$).
 
 **Solution:**
 
 The small-signal analysis yields:
 
-$$A_0 = \frac{v_{out}}{v_{in,dm}} = \frac{\gm[12]}{\gds[2] + \gds[4]}$$
+$$A_0 = \frac{v_\mathrm{out}}{v_\mathrm{in,dm}} = \frac{\gm[1,2]}{\gds[2] + \gds[4]}$$
 
 where:
 
-- $\gm[12]$ is the transconductance of the input transistors
+- $\gm[1,2]$ is the transconductance of the input transistors
 - $\gds[2]$ is the output conductance of the NMOS input transistor
 - $\gds[4]$ is the output conductance of the PMOS load transistor
 
 This can be rewritten as:
-$$A_0 = \frac{\gm[12]}{\gds[2]} \cdot \frac{1}{1 + \gds[4]/\gds[2]} = \frac{(\gmgds)_{12}}{1 + \gds[4]/\gds[2]}$$
+$$A_0 = \frac{\gm[1,2]}{\gds[2]} \cdot \frac{1}{1 + \gds[4]/\gds[2]} = \frac{(\gmgds)_{1,2}}{1 + \gds[4]/\gds[2]}$$
 
-For equal output conductances: $A_0 \approx \frac{(\gmgds)_{12}}{2}$
+For equal output conductances: $A_0 \approx \frac{(\gmgds)_{1,2}}{2}$
 :::
 
 ::: {.callout-note title="Question 6.2 --- Bandwidth and GBW" collapse="true"}
-**Question:** For a 5T-OTA driving a load capacitance $C_L$, derive the dominant pole frequency and the gain-bandwidth product (GBW).
+**Question:** For a 5T-OTA driving a load capacitance $C_\mathrm{L}$, derive the dominant pole frequency and the gain-bandwidth product (GBW).
 
 **Solution:**
 
-**Dominant pole:** The output node has total capacitance $C_L$ (assuming $C_L \gg$ parasitic capacitances) and total conductance $\gds[2] + \gds[4]$:
+**Dominant pole:** The output node has total capacitance $C_\mathrm{L}$ (assuming $C_\mathrm{L} \gg$ parasitic capacitances) and total conductance $\gds[2] + \gds[4]$:
 
-$$f_p = \frac{\gds[2] + \gds[4]}{2\pi C_L}$$
+$$f_\mathrm{p} = \frac{\gds[2] + \gds[4]}{2\pi C_\mathrm{L}}$$
 
 **Gain-bandwidth product:**
-$$GBW = A_0 \cdot f_p = \frac{\gm[12]}{\gds[2] + \gds[4]} \cdot \frac{\gds[2] + \gds[4]}{2\pi C_L} = \frac{\gm[12]}{2\pi C_L}$$
+$$\text{GBW} = A_0 \cdot f_\mathrm{p} = \frac{\gm[1,2]}{\gds[2] + \gds[4]} \cdot \frac{\gds[2] + \gds[4]}{2\pi C_\mathrm{L}} = \frac{\gm[1,2]}{2\pi C_\mathrm{L}}$$
 
-Note that GBW is independent of the output conductances and depends only on $\gm$ and $C_L$.
+Note that GBW is independent of the output conductances and depends only on $\gm$ and $C_\mathrm{L}$.
 
 **Design implication:** For a given GBW requirement and load capacitance:
-$$\gm[12] = 2\pi \cdot GBW \cdot C_L$$
+$$\gm[1,2] = 2\pi \cdot \text{GBW} \cdot C_\mathrm{L}$$
 :::
 
 ::: {.callout-note title="Question 6.3 --- Unity-Gain Buffer Accuracy" collapse="true"}
-**Question:** A 5T-OTA with DC gain $A_0 = 50\,\text{dB}$ is configured as a unity-gain buffer. Calculate the closed-loop gain error.
+**Question:** A 5T-OTA with dc gain $A_0 = 50\,\text{dB}$ is configured as a unity-gain buffer. Calculate the closed-loop gain error.
 
 **Solution:**
 
 For a unity-gain buffer (100% feedback):
-$$\frac{V_{out}}{V_{in}} = \frac{A_0}{1 + A_0}$$
+$$\frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}$$
 
 With $A_0 = 50\,\text{dB} = 316$:
-$$\frac{V_{out}}{V_{in}} = \frac{316}{317} = 0.9968$$
+$$\frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{316}{317} = 0.9968$$
 
 **Gain error:**
 $$\epsilon = 1 - \frac{A_0}{1 + A_0} = \frac{1}{1 + A_0} \approx \frac{1}{A_0} = \frac{1}{316} = 0.32\%$$
 
-For higher accuracy, the DC gain must be increased (e.g., using cascode structures).
+For higher accuracy, the dc gain must be increased (e.g., using cascode structures).
 :::
 
 ---
