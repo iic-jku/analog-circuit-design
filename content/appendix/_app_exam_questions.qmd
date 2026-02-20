@@ -570,7 +570,7 @@ For example: $W = 5\,\mu\text{m}$, $L = 5\,\mu\text{m}$ or $W = 10\,\mu\text{m}$
 ::: {.callout-note title="Question 12.1 --- OTA Design" collapse="true"}
 **Question:** Design a 5T-OTA to meet the following specifications using gm/ID methodology:
 
-- GBW = 10 MHz with $C_L = 5\,\text{pF}$
+- GBW = 10 MHz with $C_\mathrm{L} = 5\,\text{pF}$
 - DC gain > 50 dB
 - Power supply: $\VDD = 1.5\,\text{V}$
 - Power consumption < 100 µW
@@ -578,95 +578,95 @@ For example: $W = 5\,\mu\text{m}$, $L = 5\,\mu\text{m}$ or $W = 10\,\mu\text{m}$
 **Solution:**
 
 **Step 1: Calculate required $\gm$**
-$$\gm = 2\pi \cdot GBW \cdot C_L = 2\pi \cdot 10\,\text{MHz} \cdot 5\,\text{pF} = 314\,\mu\text{S}$$
+$$\gm = 2\pi \cdot \text{GBW} \cdot C_\mathrm{L} = 2\pi \cdot 10\,\text{MHz} \cdot 5\,\text{pF} = 314\,\mu\text{S}$$
 
 **Step 2: Choose $\gmid$ and calculate current**
-For moderate speed/power trade-off, choose $\gmid = 15\,\text{V}^{-1}$:
+
+For a moderate speed/power trade-off, choose $\gmid = 15\,\text{V}^{-1}$:
 $$\ID = \frac{\gm}{\gmid} = \frac{314\,\mu\text{S}}{15\,\text{V}^{-1}} = 21\,\mu\text{A}$$
 
-Total tail current: $I_{tail} = 2 \times 21\,\mu\text{A} = 42\,\mu\text{A}$
+Total tail current: $I_\mathrm{tail} = 2 \times 21\,\mu\text{A} = 42\,\mu\text{A}$
 
-Power: $P = \VDD \cdot I_{tail} = 1.5\,\text{V} \times 42\,\mu\text{A} = 63\,\mu\text{W}$ ✓
+Power: $P = \VDD \cdot I_\mathrm{tail} = 1.5\,\text{V} \times 42\,\mu\text{A} = 63\,\mu\text{W}$
 
-**Step 3: Check DC gain requirement**
+**Step 3: Check dc gain requirement**
+
 Required: $A_0 > 50\,\text{dB} = 316$
 
 $$A_0 = \frac{\gm}{\gds[2] + \gds[4]} = \frac{(\gmgds)}{2}$$ (assuming equal $\gds$)
 
-Need $\gmgds > 632$. From lookup tables at $\gmid = 15$, $L = 1\,\mu\text{m}$: $\gmgds \approx 100$
+Need $\gmgds > 632$. From lookup tables at $\gmid = 15$, $L = 1\,\mu\text{m}$: $\gmgds \approx 38$
 
 **Not sufficient!** Options:
 
-- Increase L to 3--5 µm (increases $\gmgds$ to ~300--500)
+- Increase L to 10 µm (increases $\gmgds$ to ~75, still not sufficient)
 - Use cascode topology
-- Accept lower gain
+- Accept lower gain --- this we will do for this simple design
 
 **Step 4: Size transistors**
-Using lookup tables: $\ID/W$ at $\gmid = 15$, $L = 3\,\mu\text{m}$ ≈ 0.5 µA/µm
 
-$$W_{1,2} = \frac{\ID}{\ID/W} = \frac{21\,\mu\text{A}}{0.5\,\mu\text{A}/\mu\text{m}} = 42\,\mu\text{m}$$
+Using lookup tables: $\ID/W$ at $\gmid = 15$, $L = 10\,\mu\text{m}$ ≈ 0.2 µA/µm
+
+$$W_{1,2} = \frac{\ID}{\ID/W} = \frac{21\,\mu\text{A}}{0.2\,\mu\text{A}/\mu\text{m}} = 105\,\mu\text{m}$$
+
+We assume for this simple design that the current mirror load ($M_3$, $M_4$) is sized to have $\gm[3,4] \approx \gm[1,2]$, so $W_{3,4} = 105\,\mu\text{m}$ as well.
 :::
 
 ::: {.callout-note title="Question 12.2 --- Current Mirror Design" collapse="true"}
-**Question:** Design a cascode current mirror to provide $I_{out} = 50\,\mu\text{A}$ from $I_{ref} = 10\,\mu\text{A}$. Minimize the output compliance voltage while achieving $r_{out} > 10\,\text{M}\Omega$.
+**Question:** Design a cascode current mirror to provide $I_\mathrm{out} = 50\,\mu\text{A}$ from $I_\mathrm{ref} = 10\,\mu\text{A}$. Minimize the output compliance voltage while achieving $r_\mathrm{out} > 5\,\text{M}\Omega$.
 
 **Solution:**
 
-**Current ratio:** $I_{out}/I_{ref} = 5$
+**Current ratio:** $I_\mathrm{out}/I_\mathrm{ref} = 5$
 
-**Step 1: Choose $\gmid$ for minimum $V_{ds,sat}$**
-High $\gmid = 18\,\text{V}^{-1}$: $V_{ds,sat} \approx 2/18 = 111\,\text{mV}$
+**Step 1: Choose $\gmid$ for minimum $V_\mathrm{ds,sat}$**
+
+High $\gmid = 18\,\text{V}^{-1}$: $V_\mathrm{ds,sat} \approx 2/18 = 111\,\text{mV}$
 
 **Step 2: Calculate required $\gmgds$**
-For simple current mirror: $r_{out} = 1/\gds$
-Required: $r_{out} > 10\,\text{M}\Omega$ at $\ID = 50\,\mu\text{A}$
-$\gds < 100\,\text{nS}$, so $\gm > \gds \cdot (\gmgds)$
 
-At $\gmid = 18$: $\gm = 18 \times 50\,\mu\text{A} = 900\,\mu\text{S}$
-Required $\gmgds > 900\,\mu\text{S} / 100\,\text{nS} = 9000$
+For simple current mirror: $r_\mathrm{out} = 1/\gds$
+
+Required: $r_\mathrm{out} > 5\,\text{M}\Omega$ at $\ID = 50\,\mu\text{A}$ → $\gds < 200\,\text{nS}$
+
+At $\gmid = 18$: $\gm = 18 \times 50\,\mu\text{A} = 900\,\mu\text{S}$ → $\gmgds > 900\,\mu\text{S} / 200\,\text{nS} = 4500$
 
 This is too high for a single device → need cascode!
 
 **Step 3: Cascode design**
-With cascode: $r_{out} \approx \gm[,casc] \cdot r_{ds,casc} \cdot r_{ds,main} \approx (\gmgds)^2 / \gm$
-For $\gmgds = 100$ (achievable with L = 1 µm) at $\gm = 900\,\mu\text{S}$:
-$r_{out} = 100^2 / 900\,\mu\text{S} = 10000 / 0.0009\,\text{S} \approx 11\,\text{M}\Omega$
 
-This meets the requirement of $r_{out} > 10\,\text{M}\Omega$ ✓
+With cascode: $r_\mathrm{out} \approx \gm[,casc] \cdot r_\mathrm{ds,casc} \cdot r_\mathrm{ds,main} \approx (\gmgds)^2 / \gm$
 
-**Conclusion:** A standard cascode current mirror with $L \approx 1\,\mu\text{m}$ achieving $\gmgds \approx 100$ is sufficient.
+For $\gmgds = 75$ (achievable with L = 10 µm) at $\gm = 900\,\mu\text{S}$: $r_\mathrm{out} = 75^2 / 900\,\mu\text{S} = 5625 / 0.0009\,\text{S} \approx 6.25\,\text{M}\Omega$
 
-**Step 4: Minimum output voltage (high-swing)**
-$V_{out,min} = 2 \times V_{ds,sat} \approx 2 \times 111\,\text{mV} = 222\,\text{mV}$
+This meets the requirement of $r_\mathrm{out} > 5\,\text{M}\Omega$
+
+**Conclusion:** A standard cascode current mirror with $L \approx 10\,\mu\text{m}$ achieving $\gmgds \approx 75$ is sufficient.
+
+**Step 4: Minimum output voltage (using high-swing current mirror)**
+
+$V_\mathrm{out,min} = 2 \times V_\mathrm{ds,sat} \approx 2 \times 111\,\text{mV} = 222\,\text{mV}$
 :::
 
 ::: {.callout-note title="Question 12.3 --- Common-Source Amplifier" collapse="true"}
-**Question:** Design a common-source amplifier for a 50 Ω measurement system with voltage gain $|A_v| = 10$ (20 dB). The amplifier should be matched to 50 Ω at input and output.
+**Question:** Design a common-source amplifier for a 50 Ω measurement system with voltage gain $|A_\mathrm{v}| = 10$ (20 dB). The amplifier should be matched to 50 Ω at input and output.
 
 **Solution:**
 
 **Matching conditions:**
 
-- Input: $R_{in} = R_1 = 50\,\Omega$ (external resistor)
-- Output: $R_{load,eff} = R_L \| R_{out} = 50\,\Omega \| 50\,\Omega = 25\,\Omega$
+- Input: $R_\mathrm{in} = R_1 = 50\,\Omega$
+- Output: $R_\mathrm{load,eff} = R_\mathrm{L} \parallel R_\mathrm{out} = 50\,\Omega \parallel 50\,\Omega = 25\,\Omega$
 
 **Voltage gain:**
-$$A_v = -\gm \cdot R_{load,eff} = -\gm \times 25\,\Omega$$
+$$A_\mathrm{v} = -\gm \cdot R_\mathrm{load,eff} = -\gm \times 25\,\Omega$$
 
-For $|A_v| = 10$:
+For $|A_\mathrm{v}| = 10$:
 $$\gm = \frac{10}{25\,\Omega} = 400\,\text{mS}$$
 
 **This is very high!** At $\gmid = 10$: $\ID = 40\,\text{mA}$ (excessive)
 
-**Alternative approach:** Use source degeneration
-
-With $R_s$ source degeneration:
-$$A_v = \frac{-\gm R_{load,eff}}{1 + \gm R_s}$$
-
-Choose $\gm = 40\,\text{mS}$, $R_s = 20\,\Omega$:
-$$A_v = \frac{40\,\text{mS} \times 25\,\Omega}{1 + 40\,\text{mS} \times 20\,\Omega} = \frac{1}{1 + 0.8} = \frac{1}{1.8} \approx 0.56$$
-
-The gain is less than unity because source degeneration reduces gain. To achieve $|A_v| = 10$ with 50 Ω matching requires either multiple stages, transformer matching, or a different topology (e.g., shunt-feedback amplifier).
+**Alternative approach:** Use a common-source stage followed by a source follower.
 :::
 
 ---
