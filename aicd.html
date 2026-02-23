@@ -2289,9 +2289,9 @@ I_\mathrm{out} = I_\mathrm{out,p} - I_\mathrm{out,n} = g_\mathrm{m}V_\mathrm{in}
 <section id="common-mode-operation-of-the-diffpair" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="common-mode-operation-of-the-diffpair"><span class="header-section-number">7.2</span> Common-Mode Operation of the Diffpair</h2>
 <p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>. If this is the case, then the output currents are not a function of the common-mode input voltage (<span class="math inline">\(I_\mathrm{tail}\)</span> is set by the tail current source), and <span class="math display">\[
-I_\mathrm{out,p} = I_\mathrm{out,n} = \frac{I_\mathrm{tail}}{2}.
+I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out} = \frac{I_\mathrm{tail}}{2}.
 \]</span></p>
-<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since the circuit operation is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We then arrive at the small-signal equivalent circuit shown in <a href="#fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;30</a> (note that we set <span class="math inline">\(V_\mathrm{in,p} = V_\mathrm{in,n} = V_\mathrm{in}\)</span> and <span class="math inline">\(I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out}\)</span> under symmetry considerations).</p>
+<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since the circuit operation is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We then arrive at the small-signal equivalent circuit shown in <a href="#fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;30</a> (note that we set <span class="math inline">\(V_\mathrm{in,p} = V_\mathrm{in,n} = V_\mathrm{in}\)</span> and <span class="math inline">\(I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out}\)</span> under symmetry considerations). As both transistors inject their drain current into the shared tail node, the half circuit sees an effective tail conductance of <span class="math inline">\(g_\mathrm{tail}/2\)</span>.</p>
 <div id="cell-fig-differential-pair-cm" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div id="fig-differential-pair-cm" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2307,21 +2307,22 @@ Figure&nbsp;30: Small-signal model of the differential pair half-circuit in comm
 </div>
 </div>
 <p>Formulating KVL for the input-side loop we get <span class="math display">\[
-V_\mathrm{in} = V_\mathrm{gs}+ \frac{I_\mathrm{d}}{g_\mathrm{tail}}.
+V_\mathrm{in} = V_\mathrm{gs}+ \frac{2 I_\mathrm{d}}{g_\mathrm{tail}}.
 \]</span></p>
 <p>With <span class="math inline">\(I_\mathrm{out} = I_\mathrm{d}= g_\mathrm{m}V_\mathrm{gs}\)</span> we arrive at <span id="eq-differential-pair-cm"><span class="math display">\[
-I_\mathrm{out} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} V_\mathrm{in}
+I_\mathrm{out} = \frac{g_\mathrm{m}\cdot g_\mathrm{tail}}{2 g_\mathrm{m}+ g_\mathrm{tail}} V_\mathrm{in}
 \tag{13}\]</span></span></p>
 <p>Interpreting <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> we can distinguish the following extreme cases:</p>
 <ol type="1">
 <li>If <span class="math inline">\(g_\mathrm{tail} = 0\)</span> (ideal tail current source) then <span class="math inline">\(I_\mathrm{out} = 0\)</span>, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.</li>
 <li>If <span class="math inline">\(g_\mathrm{tail} \rightarrow \infty\)</span> then <span class="math inline">\(I_\mathrm{out} = g_\mathrm{m}V_\mathrm{in}\)</span>, which means the output current is a function of the MOSFET <span class="math inline">\(g_\mathrm{m}\)</span>. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behavior, this configuration is called a “pseudo-differential pair.”</li>
-<li>For the typical case that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{tail}\)</span> then <span class="math inline">\(I_\mathrm{out} \approx g_\mathrm{tail} V_\mathrm{in}\)</span>.</li>
+<li>For the typical case that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{tail}\)</span> then <span class="math inline">\(I_\mathrm{out} \approx (g_\mathrm{tail}/2) V_\mathrm{in}\)</span>.</li>
 </ol>
-<p>Note that the result of <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> is also valid for the general case of a degenerated common-source transistor stage (see <a href="#fig-common-source-degenerated" class="quarto-xref">Figure&nbsp;31</a>). The effective transconductange <span class="math inline">\(g_\mathrm{m}'\)</span> is given by (<span class="math inline">\(R_\mathrm{degen} = g_\mathrm{tail}^{-1}\)</span>)</p>
+<p>Note that <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> is closely related to the general case of a degenerated common-source transistor stage (see <a href="#fig-common-source-degenerated" class="quarto-xref">Figure&nbsp;31</a>). The effective transconductance <span class="math inline">\(g_\mathrm{m}'\)</span> of a degenerated CS stage is given by</p>
 <p><span class="math display">\[
-g_\mathrm{m}' = \frac{I_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m}g_\mathrm{tail}}{g_\mathrm{m}+ g_\mathrm{tail}} = \frac{1}{g_\mathrm{m}^{-1} + R_\mathrm{degen}}.
+g_\mathrm{m}' = \frac{I_\mathrm{out}}{V_\mathrm{in}} = \frac{1}{g_\mathrm{m}^{-1} + R_\mathrm{degen}}.
 \]</span></p>
+<p>For the differential-pair half circuit in common-mode operation, the effective source degeneration is <span class="math inline">\(R_\mathrm{degen} = 2/g_\mathrm{tail}\)</span>, yielding <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a>.</p>
 <p>When no degeneration resistor is used, then <span class="math inline">\(g_\mathrm{m}' = g_\mathrm{m}\)</span>. If a degeneration of <span class="math inline">\(R_\mathrm{degen} \gg g_\mathrm{m}^{-1}\)</span> is used then <span class="math inline">\(g_\mathrm{m}' = 1 / R_\mathrm{degen}\)</span>. This result is worth memorizing.</p>
 <div id="cell-fig-common-source-degenerated" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
@@ -3649,7 +3650,7 @@ Figure&nbsp;47: A cascoded current mirror using a biasing voltage to set the cas
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
 &lt;&gt;:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
-/tmp/ipykernel_3487/2155856820.py:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+/tmp/ipykernel_3490/2155856820.py:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
   res = elm.Resistor().down().label('$R_\mathrm{bias}$').color('blue')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -5135,15 +5136,15 @@ V_\mathrm{out,cm} = V_\mathrm{GS7,8} + \frac{R_{3,4} I_\mathrm{D11}}{2}.
 \]</span></p>
 <p>We can realize the advantage of using the resistor/MOSFET load in the input as well as the output stage when we calculate the common-mode gain of the OTA. We realize that we can use half-circuits due to the inherent symmetry of the circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;71</a>. The gain of the first stage (the MOSFET-diode loaded differential pair <span class="math inline">\(M_{1,2}\)</span>) is given by (using <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a>)</p>
 <p><span id="eq-diff-ota-cmgain1"><span class="math display">\[
-A_\mathrm{cm,1} \approx -\frac{1}{g_\mathrm{m3,5}} \frac{g_\mathrm{m1,2} g_\mathrm{ds10}}{g_\mathrm{m1,2} + g_\mathrm{ds10}} \approx -\frac{g_\mathrm{ds10}}{g_\mathrm{m3,5}}.
+A_\mathrm{cm,1} \approx -\frac{1}{g_\mathrm{m3,5}} \cdot \frac{g_\mathrm{m1,2} g_\mathrm{ds10}}{2g_\mathrm{m1,2} + g_\mathrm{ds10}} \approx -\frac{g_\mathrm{ds10}}{2g_\mathrm{m3,5}}.
 \tag{57}\]</span></span></p>
 <p>The common-mode gain of the second stage is similarly given by</p>
 <p><span id="eq-diff-ota-cmgain2"><span class="math display">\[
 A_\mathrm{cm,2} \approx -\frac{g_\mathrm{m4,6}}{g_\mathrm{m7,8}}.
 \tag{58}\]</span></span></p>
-<p>Combining <a href="#eq-diff-ota-cmgain1" class="quarto-xref">Equation&nbsp;57</a> and <a href="#eq-diff-ota-cmgain2" class="quarto-xref">Equation&nbsp;58</a> we arrive at (assuming that <span class="math inline">\(g_\mathrm{m3,5} = g_\mathrm{m4,6}\)</span>)</p>
+<p>Combining <a href="#eq-diff-ota-cmgain1" class="quarto-xref">Equation&nbsp;57</a> and <a href="#eq-diff-ota-cmgain2" class="quarto-xref">Equation&nbsp;58</a> we arrive at (assuming that <span class="math inline">\(g_\mathrm{m3,5} \approx g_\mathrm{m4,6}\)</span>)</p>
 <p><span id="eq-diff-ota-cmgain"><span class="math display">\[
-A_\mathrm{cm} = A_\mathrm{cm,1} A_\mathrm{cm,2} = \frac{g_\mathrm{ds10}}{g_\mathrm{m7,8}}
+A_\mathrm{cm} = A_\mathrm{cm,1} \cdot A_\mathrm{cm,2} \approx \frac{g_\mathrm{ds10}}{2g_\mathrm{m7,8}}
 \tag{59}\]</span></span></p>
 <p>which is a low common-mode gain with very likely <span class="math inline">\(A_\mathrm{cm} &lt; 1\)</span>, which is very good news for the common-mode stability!</p>
 <p>Likewise, we can compute the differential gain of the OTA by formulating the voltage gain of the first stage as</p>
@@ -6112,9 +6113,9 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <p><strong>Common mode:</strong> With <span class="math inline">\(v_\mathrm{in,cm}\)</span> applied to both inputs:</p>
 <ul>
 <li>The tail current source presents impedance <span class="math inline">\(r_\mathrm{tail} = 1 / g_\mathrm{ds,tail}\)</span></li>
-<li>Due to source degeneration: <span class="math inline">\(G_\mathrm{m,cm} = \frac{g_\mathrm{m}}{1 + g_\mathrm{m}\cdot r_\mathrm{tail}} \approx \frac{1}{r_\mathrm{tail}}\)</span></li>
+<li>Due to source degeneration: <span class="math inline">\(G_\mathrm{m,cm} = \frac{g_\mathrm{m}}{1 + 2 \cdot g_\mathrm{m}\cdot r_\mathrm{tail}} \approx \frac{1}{2 \cdot r_\mathrm{tail}}\)</span></li>
 </ul>
-<p><strong>Common-mode rejection ratio (CMRR):</strong> <span class="math display">\[\text{CMRR} = \frac{G_\mathrm{m,dm}}{G_\mathrm{m,cm}} = g_\mathrm{m}\cdot r_\mathrm{tail}\]</span></p>
+<p><strong>Common-mode rejection ratio (CMRR):</strong> <span class="math display">\[\text{CMRR} = \frac{G_\mathrm{m,dm}}{G_\mathrm{m,cm}} = 2 \cdot g_\mathrm{m}\cdot r_\mathrm{tail}\]</span></p>
 </div>
 </div>
 </div>
@@ -6422,11 +6423,11 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the total output noise of a 5T-OTA in a unity-gain buffer configuration with load capacitance <span class="math inline">\(C_\mathrm{L}\)</span>.</p>
 <p><strong>Solution:</strong></p>
-<p>The integrated output noise (<span class="math inline">\(kT/C\)</span> noise): <span class="math display">\[V_\mathrm{n,out,rms}^2 = \frac{kT}{C_\mathrm{L}} \left[ 2\gamma_{1,2} + 2\gamma_{3,4} \left(\frac{g_\mathrm{m3,4}}{g_\mathrm{m1,2}}\right)^2 \right]\]</span></p>
+<p>The integrated output noise (<span class="math inline">\(kT/C\)</span> noise): <span class="math display">\[V_\mathrm{n,out,rms}^2 = \frac{kT}{C_\mathrm{L}} \left( 2\gamma_{1,2} + 2\gamma_{3,4} \frac{g_\mathrm{m3,4}}{g_\mathrm{m1,2}} \right)\]</span></p>
 <p><strong>Analysis:</strong></p>
 <ol type="1">
 <li>Input pair (<span class="math inline">\(M_1\)</span>, <span class="math inline">\(M_2\)</span>): Each contributes <span class="math inline">\(\gamma_{1,2}\)</span>, total factor <span class="math inline">\(2 \gamma_{1,2}\)</span></li>
-<li>Load pair (<span class="math inline">\(M_3\)</span>, <span class="math inline">\(M_4\)</span>): Each contributes <span class="math inline">\(\gamma_{3,4} \cdot (g_\mathrm{m3,4}/g_\mathrm{m1,2})^2\)</span> when referred to the input</li>
+<li>Load pair (<span class="math inline">\(M_3\)</span>, <span class="math inline">\(M_4\)</span>): Each contributes <span class="math inline">\(\gamma_{3,4} \cdot g_\mathrm{m3,4}/g_\mathrm{m1,2}\)</span> when referred to the input</li>
 </ol>
 <p><strong>To minimize noise:</strong></p>
 <ul>
