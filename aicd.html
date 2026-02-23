@@ -3650,7 +3650,7 @@ Figure&nbsp;47: A cascoded current mirror using a biasing voltage to set the cas
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
 &lt;&gt;:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
-/tmp/ipykernel_3490/2155856820.py:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+/tmp/ipykernel_3531/2155856820.py:10: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
   res = elm.Resistor().down().label('$R_\mathrm{bias}$').color('blue')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -5411,41 +5411,41 @@ Figure&nbsp;84: 5-transistor OTA small-signal model for output impedance calcula
 </div>
 <section id="open-loop-configuration" class="level2" data-number="18.1">
 <h2 data-number="18.1" class="anchored" data-anchor-id="open-loop-configuration"><span class="header-section-number">18.1</span> Open-Loop Configuration</h2>
-<p>For the open-loop case, the gates of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are tied to ground: <span id="eq-app-vbufzout-vin-ol"><span class="math display">\[
-V_\mathrm{in,p} = V_\mathrm{in,n} = 0 \to V_\mathrm{gs1} = V_\mathrm{gs2}
+<p>For the open-loop case, the gates of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are tied to ground (and since <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are matched <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m1,2}\)</span>), which means that the gate-source voltages of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are identical: <span id="eq-app-vbufzout-vin-ol"><span class="math display">\[
+V_\mathrm{in,p} = V_\mathrm{in,n} = 0 \to V_\mathrm{gs1} = V_\mathrm{gs2} = V_\mathrm{gs1,2}
 \tag{63}\]</span></span></p>
 <p>KCL at the output node:</p>
 <p><span id="eq-app-vbufzout-kcl-vout-ol"><span class="math display">\[
-I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4}V_\mathrm{gs3} - I_{g_\mathrm{ds2}} - g_\mathrm{m2} V_\mathrm{gs2} = 0
+I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - I_{g_\mathrm{ds2}} - g_\mathrm{m1,2} V_\mathrm{gs1,2} = 0
 \tag{64}\]</span></span></p>
 <p>KCL at the tail node: <span class="math display">\[
-g_\mathrm{m1} V_\mathrm{gs1} + g_\mathrm{m2} V_\mathrm{gs2} + I_{g_\mathrm{ds2}} + g_\mathrm{ds5} V_\mathrm{gs2} = 0
+2 g_\mathrm{m1,2} V_\mathrm{gs1,2} + I_{g_\mathrm{ds2}} + g_\mathrm{ds5} V_\mathrm{gs1,2} = 0
 \]</span></p>
-<p>Using <a href="#eq-app-vbufzout-vin-ol" class="quarto-xref">Equation&nbsp;63</a> we can eliminate <span class="math inline">\(V_\mathrm{gs1}\)</span> and solve for <span class="math inline">\(I_{g_\mathrm{ds2}}\)</span>.</p>
+<p>We can solve for <span class="math inline">\(I_{g_\mathrm{ds2}}\)</span>.</p>
 <p><span id="eq-app-vbufzout-igds2"><span class="math display">\[
-I_{g_\mathrm{ds2}} = -\left( g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds5} \right) V_\mathrm{gs2}
+I_{g_\mathrm{ds2}} = -\left( 2 g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2}
 \tag{65}\]</span></span></p>
 <p>Furthermore, we need an expression for <span class="math inline">\(V_\mathrm{gs3}\)</span>. Ohm’s law at the transconductance <span class="math inline">\(g_\mathrm{m34}\)</span> will suffice.</p>
 <p><span id="eq-app-vbufzout-vgs34-ol"><span class="math display">\[
-V_\mathrm{gs3} = -\frac{g_\mathrm{m1}}{g_\mathrm{m3,4}} V_\mathrm{gs1}
+V_\mathrm{gs3} = -\frac{g_\mathrm{m1,2}}{g_\mathrm{m3,4}} V_\mathrm{gs1,2}
 \tag{66}\]</span></span></p>
-<p>KVL from the output node down to ground (traversing <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;65</a> gives us an expression for <span class="math inline">\(V_\mathrm{gs2}\)</span></p>
+<p>KVL from the output node down to ground (traversing <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;65</a> gives us an expression for <span class="math inline">\(V_\mathrm{gs1,2}\)</span></p>
 <p><span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
-V_\mathrm{gs2} = -\frac{g_\mathrm{ds2}}{g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
+V_\mathrm{gs1,2} = -\frac{g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
 \tag{67}\]</span></span></p>
 <p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;64</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;65</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>:</p>
 <p><span class="math display">\[
-I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} + \left( g_\mathrm{m1} + g_\mathrm{ds5} \right) V_\mathrm{gs2} = 0
+I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} + \left( g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2} = 0
 \]</span></p>
-<p>Second, <span class="math inline">\(V_\mathrm{gs3}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;66</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m3,4}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>:</p>
+<p>Second, <span class="math inline">\(V_\mathrm{gs3}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;66</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m3,4}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1,2}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>:</p>
 <p><span class="math display">\[
-I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} + \left( 2g_\mathrm{m1} + g_\mathrm{ds5} \right) V_\mathrm{gs2} = 0
+I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} + \left( 2 g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2} = 0
 \]</span></p>
-<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;67</a> gives us an expression for the last remaining unknown <span class="math inline">\(V_\mathrm{gs2}\)</span>. Thus, the factor in front of <span class="math inline">\(V_\mathrm{out}\)</span> defines the conductance at the output node.</p>
+<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;67</a> gives us an expression for the last remaining unknown <span class="math inline">\(V_\mathrm{gs1,2}\)</span>. Thus, the factor in front of <span class="math inline">\(V_\mathrm{out}\)</span> defines the conductance at the output node.</p>
 <p><span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
-I_\mathrm{out} - \left[ g_\mathrm{ds4} + \left( 2 \cdot g_\mathrm{m1} + g_\mathrm{ds5} \right) \frac{g_\mathrm{ds2}}{g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds2} + g_\mathrm{ds5}} \right] V_\mathrm{out} = 0
+I_\mathrm{out} - \left[ g_\mathrm{ds4} + \left( 2 \cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right) \frac{g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} \right] V_\mathrm{out} = 0
 \tag{68}\]</span></span></p>
-<p>Before we interpret this result, we use the assumption of matched input transistors (<span class="math inline">\(g_\mathrm{m1,2} = g_\mathrm{m1} = g_\mathrm{m2}\)</span>) and slightly rearrange the equation to give us more insight:</p>
+<p>Before we interpret this result, we slightly rearrange the equation to give us more insight:</p>
 <p><span id="eq-app-vbufzout-zout-ol-2"><span class="math display">\[
 I_\mathrm{out} - \left[ g_\mathrm{ds4} + \frac{g_\mathrm{ds2} \cdot \left( 2\cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right)}{g_\mathrm{ds2} + \left( 2 \cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right)} \right] V_\mathrm{out} = 0
 \tag{69}\]</span></span></p>
@@ -5459,11 +5459,11 @@ I_\mathrm{out} - \left[ g_\mathrm{ds4} + \frac{g_\mathrm{ds2} \cdot \left( 2\cdo
 <h2 data-number="18.2" class="anchored" data-anchor-id="closed-loop-configuration"><span class="header-section-number">18.2</span> Closed-Loop Configuration</h2>
 <p>In contrast to the open-loop case, we keep the gate of <span class="math inline">\(M_1\)</span> connected to ground and tie the input of <span class="math inline">\(M_2\)</span> to the output node <span class="math inline">\(V_\mathrm{out}\)</span>:</p>
 <p><span id="eq-app-vbufzout-vin-cl"><span class="math display">\[
-V_\mathrm{in,n} = V_\mathrm{out}
+V_\mathrm{in,n} = V_\mathrm{out} \quad \text{and} \quad V_\mathrm{in,p} = 0
 \tag{71}\]</span></span></p>
 <p>KCL at the output node:</p>
 <p><span id="eq-app-vbufzout-kcl-vout-cl"><span class="math display">\[
-I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - g_\mathrm{ds2} V_\mathrm{gs2} - g_\mathrm{m2} V_\mathrm{gs2} = 0
+I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - g_\mathrm{ds2} V_\mathrm{gs2} - g_\mathrm{m1,2} V_\mathrm{gs2} = 0
 \tag{72}\]</span></span></p>
 <p>We use KVL from the output node down to ground to find an expression for <span class="math inline">\(V_\mathrm{gs2}\)</span>.</p>
 <p><span id="eq-app-vbufzout-kvl-vout-cl"><span class="math display">\[
@@ -5471,30 +5471,30 @@ V_\mathrm{gs2} =  V_\mathrm{out} + V_\mathrm{gs1}
 \tag{73}\]</span></span></p>
 <p>KCL at the tail node:</p>
 <p><span id="eq-app-vbufzout-kcl-vtail-cl"><span class="math display">\[
-g_\mathrm{m1} V_\mathrm{gs1} + g_\mathrm{m2} V_\mathrm{gs2} + g_\mathrm{ds2} V_\mathrm{gs2} + g_\mathrm{ds5} V_\mathrm{gs2} = 0
+g_\mathrm{m1,2} V_\mathrm{gs1} + g_\mathrm{m1,2} V_\mathrm{gs2} + g_\mathrm{ds2} V_\mathrm{gs2} + g_\mathrm{ds5} V_\mathrm{gs1} = 0
 \tag{74}\]</span></span></p>
 <p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;73</a> to substitute <span class="math inline">\(V_\mathrm{gs2}\)</span> in <a href="#eq-app-vbufzout-kcl-vtail-cl" class="quarto-xref">Equation&nbsp;74</a> we find an equation for <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
 <p><span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
-V_\mathrm{gs1} = -\frac{g_\mathrm{m2} + g_\mathrm{ds2}}{g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
+V_\mathrm{gs1} = -\frac{g_\mathrm{m1,2} + g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
 \tag{75}\]</span></span></p>
 <p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;73</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;66</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;75</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;72</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;73</a> to eliminate <span class="math inline">\(V_\mathrm{gs2}\)</span>:</p>
 <p><span class="math display">\[
-I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2} \right) V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - \left( g_\mathrm{ds2} + g_\mathrm{m2} \right) V_\mathrm{gs1} = 0
+I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - \left( g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{gs1} = 0
 \]</span></p>
 <p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;66</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(V_\mathrm{gs3}\)</span>:</p>
 <p><span class="math display">\[
-I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2} \right) V_\mathrm{out} - \left( g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1} \right) V_\mathrm{gs1} = 0
+I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} - g_\mathrm{ds2} V_\mathrm{gs1} = 0
 \]</span></p>
 <p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;75</a> to eliminate the remaining unknown <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
 <p><span class="math display">\[
 \begin{split}
-&amp; I_\mathrm{out} - \left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m2} \right) V_\mathrm{out} \\
-&amp;+ \left( g_\mathrm{ds2} + g_\mathrm{m2} - g_\mathrm{m1} \right) \frac{g_\mathrm{m2} + g_\mathrm{ds2}}{g_\mathrm{m1} + g_\mathrm{m2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out} = 0
+&amp; I_\mathrm{out} - \left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} \\
+&amp;+ g_\mathrm{ds2} \frac{g_\mathrm{m1,2} + g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out} = 0
 \end{split}
 \]</span></p>
-<p>A simpler result can be obtained, if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;75</a> first (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>) and then plug it into our main equation. Additionally, we use <span class="math inline">\(g_\mathrm{m1,2} = g_\mathrm{m1} =g_\mathrm{m2}\)</span> to further simplify the equation:</p>
+<p>A simpler result can be obtained if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;75</a> (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>):</p>
 <p><span class="math display">\[
-I_\mathrm{out} -\left( g_\mathrm{ds4} + \frac{3}{2} g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} \approx 0
+I_\mathrm{out} -\left( g_\mathrm{ds4} + \frac{1}{2} g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} \approx 0
 \]</span></p>
 <p>If we apply <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span> again we arrive at:</p>
 <p><span class="math display">\[
