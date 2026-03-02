@@ -77,9 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-db8412935377c476a6a34876e811a251.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-d075c25e60777822068c2219745b13b0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-db8412935377c476a6a34876e811a251.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -357,56 +357,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> schemdraw.elements <span class="im">as</span> elm</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sd.svgconfig.svg2 <span class="op">=</span> <span class="va">False</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sd.Drawing() <span class="im">as</span> d:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    d.config(unit<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    d.config(fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    M1 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).drop(<span class="st">'source'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_1$'</span>, ofst<span class="op">=-</span><span class="fl">1.5</span>).reverse()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().length(<span class="fl">0.5</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>).dot()</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().length(<span class="fl">0.5</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    M5 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_5$'</span>, ofst<span class="op">=-</span><span class="fl">1.5</span>).reverse()</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    elm.Ground()</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    elm.Line().left().length(<span class="dv">4</span>).at(M5.gate)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    M6 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'gate'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_6$'</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    elm.Ground()</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().dot().at(M6.drain).length(<span class="fl">0.5</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">1.5</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    Ibias <span class="op">=</span> elm.SourceI().up().label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">I_</span><span class="dv">\m</span><span class="vs">athrm{bias}</span><span class="dv">$</span><span class="vs">'</span>).reverse()</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    elm.Vdd()</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().toy(M6.gate).dot()</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    M2 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'source'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_2$'</span>)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    elm.Line().left().at(M1.gate).length(<span class="fl">0.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{in,p}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'left'</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().at(M2.gate).length(<span class="fl">0.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{in,n}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'right'</span>)</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().at(M1.drain).length(<span class="fl">0.5</span>).dot()</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    M3 <span class="op">=</span> elm.AnalogPFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_3$'</span>)</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().at(M3.source)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().at(M2.drain).length(<span class="fl">0.5</span>).dot()</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{out}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'right'</span>)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    M4 <span class="op">=</span> elm.AnalogPFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_4$'</span>, ofst<span class="op">=-</span><span class="fl">1.5</span>).reverse()</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().at(M4.source)</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    elm.Line().at(M4.gate).tox(M3.gate)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().tox(M5.drain)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().toy(M3.gate).dot()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    d.config(unit<span class="op">=</span><span class="dv">2</span>, fontsize<span class="op">=</span><span class="dv">14</span>, margin<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    M1 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).drop(<span class="st">'source'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_1$'</span>, ofst<span class="op">=-</span><span class="fl">1.5</span>).reverse()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().length(<span class="fl">0.5</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>).dot()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().length(<span class="fl">0.5</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    M5 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_5$'</span>, ofst<span class="op">=-</span><span class="fl">1.5</span>).reverse()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    elm.Ground()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    elm.Line().left().length(<span class="dv">4</span>).at(M5.gate)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    M6 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'gate'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_6$'</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    elm.Ground()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().dot().at(M6.drain).length(<span class="fl">0.5</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">1.5</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    Ibias <span class="op">=</span> elm.SourceI().up().label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">I_</span><span class="dv">\m</span><span class="vs">athrm{bias}</span><span class="dv">$</span><span class="vs">'</span>).reverse()</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    elm.Vdd()</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().toy(M6.gate).dot()</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    M2 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'source'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_2$'</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    elm.Line().left().at(M1.gate).length(<span class="fl">0.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{in,p}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'left'</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().at(M2.gate).length(<span class="fl">0.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{in,n}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'right'</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().at(M1.drain).length(<span class="fl">0.5</span>).dot()</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    M3 <span class="op">=</span> elm.AnalogPFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_3$'</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().at(M3.source)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().at(M2.drain).length(<span class="fl">0.5</span>).dot()</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{out}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'right'</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    M4 <span class="op">=</span> elm.AnalogPFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="st">'$M_4$'</span>, ofst<span class="op">=-</span><span class="fl">1.5</span>).reverse()</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().at(M4.source)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    elm.Line().at(M4.gate).tox(M3.gate)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().tox(M5.drain)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().toy(M3.gate).dot()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -629,56 +628,55 @@ headroom M5 = 0.333 V</code></pre>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> schemdraw.elements <span class="im">as</span> elm</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>sd.svgconfig.svg2 <span class="op">=</span> <span class="va">False</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sd.Drawing() <span class="im">as</span> d:</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    d.config(unit<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    d.config(fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    M1 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).drop(<span class="st">'source'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_12_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_12), ofst<span class="op">=-</span><span class="dv">2</span>).reverse()</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().length(<span class="fl">0.5</span>)</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>).dot()</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().length(<span class="fl">0.5</span>)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    M5 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_5_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_56), ofst<span class="op">=-</span><span class="dv">2</span>).reverse()</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    elm.Ground()</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    elm.Line().left().length(<span class="dv">4</span>).at(M5.gate).label(<span class="bu">str</span>(<span class="bu">round</span>(<span class="bu">float</span>(vgs_m56),<span class="dv">2</span>))<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    M6 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'gate'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_6_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_56))</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    elm.Ground()</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().dot().at(M6.drain).length(<span class="fl">0.5</span>)</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">1.5</span>)</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    Ibias <span class="op">=</span> elm.SourceI().up().label(<span class="bu">str</span>(<span class="bu">round</span>(i_bias_in<span class="op">/</span><span class="fl">1e-6</span>,<span class="dv">0</span>))<span class="op">+</span><span class="st">'µA'</span>).reverse()</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().label(<span class="bu">str</span>(vdd_min)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>)</span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().toy(M6.gate).dot()</span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>)</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    M2 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'source'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_12_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_12))</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    elm.Line().left().at(M1.gate).length(<span class="fl">0.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{in,p}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'left'</span>)</span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().at(M2.gate).length(<span class="fl">0.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{in,n}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'right'</span>)</span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().at(M1.drain).length(<span class="fl">0.5</span>).dot()</span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    M3 <span class="op">=</span> elm.AnalogPFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_34_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_34))</span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().at(M3.source).label(<span class="bu">str</span>(vdd_min)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().at(M2.drain).length(<span class="fl">0.5</span>).dot()</span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{out}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'right'</span>)</span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>    M4 <span class="op">=</span> elm.AnalogPFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_34_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_34), ofst<span class="op">=-</span><span class="dv">2</span>).reverse()</span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().at(M4.source).label(<span class="bu">str</span>(vdd_min)<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>    elm.Line().at(M4.gate).tox(M3.gate).label(<span class="bu">str</span>(<span class="bu">round</span>(vdd_min<span class="op">-</span>vgs_m34,<span class="dv">2</span>))<span class="op">+</span><span class="st">'V'</span>)</span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
-<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().tox(M5.drain)</span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().toy(M3.gate).dot()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    d.config(unit<span class="op">=</span><span class="dv">2</span>, fontsize<span class="op">=</span><span class="dv">14</span>, margin<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    M1 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).drop(<span class="st">'source'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_12_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_12), ofst<span class="op">=-</span><span class="dv">2</span>).reverse()</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().length(<span class="fl">0.5</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>).dot()</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().length(<span class="fl">0.5</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    M5 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_5_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_56), ofst<span class="op">=-</span><span class="dv">2</span>).reverse()</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    elm.Ground()</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    elm.Line().left().length(<span class="dv">4</span>).at(M5.gate).label(<span class="bu">str</span>(<span class="bu">round</span>(<span class="bu">float</span>(vgs_m56),<span class="dv">2</span>))<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    M6 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'gate'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_6_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_56))</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    elm.Ground()</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().dot().at(M6.drain).length(<span class="fl">0.5</span>)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">1.5</span>)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    Ibias <span class="op">=</span> elm.SourceI().up().label(<span class="bu">str</span>(<span class="bu">round</span>(i_bias_in<span class="op">/</span><span class="fl">1e-6</span>,<span class="dv">0</span>))<span class="op">+</span><span class="st">'µA'</span>).reverse()</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().label(<span class="bu">str</span>(vdd_min)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>)</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    elm.Line().down().toy(M6.gate).dot()</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    M2 <span class="op">=</span> elm.AnalogNFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'source'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_12_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_12))</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>    elm.Line().left().at(M1.gate).length(<span class="fl">0.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{in,p}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'left'</span>)</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().at(M2.gate).length(<span class="fl">0.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{in,n}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'right'</span>)</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().at(M1.drain).length(<span class="fl">0.5</span>).dot()</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    M3 <span class="op">=</span> elm.AnalogPFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_34_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_34))</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().at(M3.source).label(<span class="bu">str</span>(vdd_min)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().at(M2.drain).length(<span class="fl">0.5</span>).dot()</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    d.push()</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().length(<span class="fl">1.5</span>).dot(<span class="bu">open</span><span class="op">=</span><span class="va">True</span>).label(<span class="vs">r'</span><span class="dv">$</span><span class="vs">V_</span><span class="dv">\m</span><span class="vs">athrm{out}</span><span class="dv">$</span><span class="vs">'</span>, <span class="st">'right'</span>)</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().length(<span class="fl">0.5</span>)</span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>    M4 <span class="op">=</span> elm.AnalogPFet(offset_gate<span class="op">=</span><span class="va">False</span>).anchor(<span class="st">'drain'</span>).theta(<span class="dv">0</span>).label(<span class="bu">str</span>(w_34_round)<span class="op">+</span><span class="st">'/'</span><span class="op">+</span><span class="bu">str</span>(l_34), ofst<span class="op">=-</span><span class="dv">2</span>).reverse()</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>    elm.Vdd().at(M4.source).label(<span class="bu">str</span>(vdd_min)<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>    elm.Line().at(M4.gate).tox(M3.gate).label(<span class="bu">str</span>(<span class="bu">round</span>(vdd_min<span class="op">-</span>vgs_m34,<span class="dv">2</span>))<span class="op">+</span><span class="st">'V'</span>)</span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>    d.pop()</span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>    elm.Line().right().tox(M5.drain)</span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>    elm.Line().up().toy(M3.gate).dot()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
