@@ -2,17 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-03-05">
+<meta name="dcterms.date" content="2026-03-21">
 
 <title>Analog (Integrated) Circuit Design</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -63,7 +66,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -92,19 +94,18 @@ div.csl-indent {
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-db8412935377c476a6a34876e811a251.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-d075c25e60777822068c2219745b13b0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-db8412935377c476a6a34876e811a251.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8ec1fb2740a17410fc6227cc0b93a09a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-6fba50ad7caf29492cb2a43abebf4864.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8ec1fb2740a17410fc6227cc0b93a09a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -137,7 +138,7 @@ div.csl-indent {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -585,7 +586,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 5, 2026</p>
+      <p class="date">March 21, 2026</p>
     </div>
   </div>
   
@@ -1333,7 +1334,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 \tag{3}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
 <p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
-\tag{4}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.” The latter is sometimes also dubbed the effective gate-source voltage <span class="math inline">\(V_\mathrm{eff}\)</span> <span class="citation" data-cites="Johns_Martin_2nd_ed">(<a href="#ref-Johns_Martin_2nd_ed" role="doc-biblioref">Carusone, Johns, and Martin 2011</a>)</span>.</p>
+\tag{4}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.” The latter is sometimes also dubbed the effective gate-source voltage <span class="math inline">\(V_\mathrm{eff}\)</span> <span class="citation" data-cites="Johns_Martin_2nd_ed">(<a href="#ref-Johns_Martin_2nd_ed" role="doc-biblioref">Carusone et al. 2011</a>)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Why 300 K?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1631,7 +1632,7 @@ Figure&nbsp;13: Overview of key design tradeoffs depending on the channel length
 </section>
 <section id="sec-tradeoffs-triode" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-tradeoffs-triode"><span class="header-section-number">3.6</span> Tradeoffs in Triode</h2>
-<p>Some might think that sizing switches is a straightforward task, but in reality, they also come with several tradeoffs, and depending on the application, they can be incredibly complicated. The essential design parameters in switches are the on-resistance <span class="math inline">\(R_\mathrm{on}\)</span>, the off-capacitance <span class="math inline">\(C_\mathrm{off}\)</span>, the drain-source leakage current <span class="math inline">\(I_\mathrm{leak}\)</span>, and their impact on clock feedthrough and charge injection <span class="citation" data-cites="Johns_Martin_2nd_ed">(<a href="#ref-Johns_Martin_2nd_ed" role="doc-biblioref">Carusone, Johns, and Martin 2011</a>)</span>. In <a href="#fig-tradeoffs-triode" class="quarto-xref">Figure&nbsp;14</a>, an overview of the tradeoffs of these design parameters depending on the channel width <span class="math inline">\(W\)</span> and the channel length <span class="math inline">\(L\)</span> is presented. In conclusion, if <span class="math inline">\(W/L\)</span> increases, <span class="math inline">\(R_\mathrm{on}\)</span> decreases, and the switching speed increases. If <span class="math inline">\(W/L\)</span> decreases, <span class="math inline">\(I_\mathrm{leak}\)</span>, <span class="math inline">\(C_\mathrm{off}\)</span>, and the drain-source overlap capacitance decrease, effectively reducing clock feedthrough and charge injection <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span>. Practically, it does not make sense to make the switch both wide and long.</p>
+<p>Some might think that sizing switches is a straightforward task, but in reality, they also come with several tradeoffs, and depending on the application, they can be incredibly complicated. The essential design parameters in switches are the on-resistance <span class="math inline">\(R_\mathrm{on}\)</span>, the off-capacitance <span class="math inline">\(C_\mathrm{off}\)</span>, the drain-source leakage current <span class="math inline">\(I_\mathrm{leak}\)</span>, and their impact on clock feedthrough and charge injection <span class="citation" data-cites="Johns_Martin_2nd_ed">(<a href="#ref-Johns_Martin_2nd_ed" role="doc-biblioref">Carusone et al. 2011</a>)</span>. In <a href="#fig-tradeoffs-triode" class="quarto-xref">Figure&nbsp;14</a>, an overview of the tradeoffs of these design parameters depending on the channel width <span class="math inline">\(W\)</span> and the channel length <span class="math inline">\(L\)</span> is presented. In conclusion, if <span class="math inline">\(W/L\)</span> increases, <span class="math inline">\(R_\mathrm{on}\)</span> decreases, and the switching speed increases. If <span class="math inline">\(W/L\)</span> decreases, <span class="math inline">\(I_\mathrm{leak}\)</span>, <span class="math inline">\(C_\mathrm{off}\)</span>, and the drain-source overlap capacitance decrease, effectively reducing clock feedthrough and charge injection <span class="citation" data-cites="Gray_Meyer_5th_ed">(<a href="#ref-Gray_Meyer_5th_ed" role="doc-biblioref">Gray et al. 2009</a>)</span>. Practically, it does not make sense to make the switch both wide and long.</p>
 <div id="fig-tradeoffs-triode" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tradeoffs-triode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2028,7 +2029,7 @@ V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
 <p>You will find that the output noise is <span class="math display">\[
 V_\mathrm{n,rms}^2 = \frac{k T}{C}
 \]</span> which is independent of <span class="math inline">\(R\)</span>! This is a surprising result, and is the well-known <span class="math inline">\(kT/C\)</span> noise. Intuitively, we could argue that the noise increases with larger <span class="math inline">\(R\)</span>, but at the same time, the bandwidth decreases and therefore <span class="math inline">\(R\)</span> does not add additional noise. More detailed information and an intuitive explanation of <span class="math inline">\(kT/C\)</span> noise can be found in <span class="citation" data-cites="Sheikholeslami_2025_kTC">(<a href="#ref-Sheikholeslami_2025_kTC" role="doc-biblioref">Sheikholeslami 2025</a>)</span>.</p>
-<p>Side note: The shortest derivation of this formula involves the <a href="https://en.wikipedia.org/wiki/Equipartition_theorem">equipartition theorem</a>: Any system in thermal equilibrium with a reservoir of temperature <span class="math inline">\(T\)</span> has a fluctuation energy of <span class="math inline">\(kT/2\)</span> per degree of freedom. This <span class="math inline">\(RC\)</span> system has one degree of freedom in the voltage on the capacitor, and the stored energy in the capacitor is <span class="math inline">\(CV_\mathrm{rms}^2/2\)</span>. Equating both energies we find that <span class="math inline">\(V_\mathrm{rms}^2 = kT/C\)</span> <span class="citation" data-cites="Sarpeshkar_1993">(<a href="#ref-Sarpeshkar_1993" role="doc-biblioref">Sarpeshkar, Delbruck, and Mead 1993</a>)</span>.</p>
+<p>Side note: The shortest derivation of this formula involves the <a href="https://en.wikipedia.org/wiki/Equipartition_theorem">equipartition theorem</a>: Any system in thermal equilibrium with a reservoir of temperature <span class="math inline">\(T\)</span> has a fluctuation energy of <span class="math inline">\(kT/2\)</span> per degree of freedom. This <span class="math inline">\(RC\)</span> system has one degree of freedom in the voltage on the capacitor, and the stored energy in the capacitor is <span class="math inline">\(CV_\mathrm{rms}^2/2\)</span>. Equating both energies we find that <span class="math inline">\(V_\mathrm{rms}^2 = kT/C\)</span> <span class="citation" data-cites="Sarpeshkar_1993">(<a href="#ref-Sarpeshkar_1993" role="doc-biblioref">Sarpeshkar et al. 1993</a>)</span>.</p>
 <p>To calculate the total output noise of a generalized passive network Bode’s noise theorem is quite practical (see <a href="#sec-bode-noise-theorem" class="quarto-xref">Section&nbsp;17.2</a>).</p>
 </div>
 </div>
@@ -2208,7 +2209,7 @@ Figure&nbsp;27: Simulation schematic of the common-source measurement amplifier.
 </section>
 <section id="sec-current-mirror" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Current Mirror</h1>
-<p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the <strong>current mirror</strong> <span class="citation" data-cites="Widlar_1965">(<a href="#ref-Widlar_1965" role="doc-biblioref">R. Widlar 1965</a>)</span>. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;28</a> with a MOSFET diode converting the incoming bias current into a voltage <span class="math inline">\(V_\mathrm{GS}= f(I_\mathrm{D1}) = f(I_\mathrm{bias})\)</span>, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created at once. Shown in the figure are two output currents <span class="math inline">\(I_\mathrm{out1}\)</span> and <span class="math inline">\(I_\mathrm{out2}\)</span>, but any number of parallel branches can be realized (note that this is true for MOSFETs as no gate current flows; for the case of BJTs, the base current flowing into the various transistors is subtracted from <span class="math inline">\(I_\mathrm{bias}\)</span>, so usually a compensation circuit is added).</p>
+<p>In this section we will look into a fundamental building block which is often used in integrated circuit design, the <strong>current mirror</strong> <span class="citation" data-cites="Widlar_1965">(<a href="#ref-Widlar_1965" role="doc-biblioref">Widlar 1965</a>)</span>. A diagram is shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;28</a> with a MOSFET diode converting the incoming bias current into a voltage <span class="math inline">\(V_\mathrm{GS}= f(I_\mathrm{D1}) = f(I_\mathrm{bias})\)</span>, and two output MOSFETs working as current sources, which are biased from the diode. By properly selecting all <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> the input current can be scaled, and multiple copies can be created at once. Shown in the figure are two output currents <span class="math inline">\(I_\mathrm{out1}\)</span> and <span class="math inline">\(I_\mathrm{out2}\)</span>, but any number of parallel branches can be realized (note that this is true for MOSFETs as no gate current flows; for the case of BJTs, the base current flowing into the various transistors is subtracted from <span class="math inline">\(I_\mathrm{bias}\)</span>, so usually a compensation circuit is added).</p>
 <div id="cell-fig-current-mirror" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div id="fig-current-mirror" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2651,7 +2652,7 @@ s_\mathrm{zd} = -\frac{g_\mathrm{m3,4}}{C_\mathrm{gs3,4}}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Looking at <a href="#eq-basic-ota-doublet-pole" class="quarto-xref">Equation&nbsp;21</a> and <a href="#eq-basic-ota-doublet-zero" class="quarto-xref">Equation&nbsp;22</a> we see that this pair is intimately linked by the same parameters and can only move together. Hence we call it a “doublet”. The effects of pole-zero doublets on the frequency response and settling time of OTAs can be found in <span class="citation" data-cites="Kamath_1974">(<a href="#ref-Kamath_1974" role="doc-biblioref">Kamath, Meyer, and Gray 1974</a>)</span>. This paper shows that doublets may cause severe degradation of settling time while only causing minor changes in the frequency response of the amplifier.</p>
+<p>Looking at <a href="#eq-basic-ota-doublet-pole" class="quarto-xref">Equation&nbsp;21</a> and <a href="#eq-basic-ota-doublet-zero" class="quarto-xref">Equation&nbsp;22</a> we see that this pair is intimately linked by the same parameters and can only move together. Hence we call it a “doublet”. The effects of pole-zero doublets on the frequency response and settling time of OTAs can be found in <span class="citation" data-cites="Kamath_1974">(<a href="#ref-Kamath_1974" role="doc-biblioref">Kamath et al. 1974</a>)</span>. This paper shows that doublets may cause severe degradation of settling time while only causing minor changes in the frequency response of the amplifier.</p>
 </div>
 </div>
 </section>
@@ -3007,7 +3008,7 @@ headroom M5 = 0.333 V</code></pre>
 <section id="sec-mosfet-mismatch" class="level3" data-number="8.6.1">
 <h3 data-number="8.6.1" class="anchored" data-anchor-id="sec-mosfet-mismatch"><span class="header-section-number">8.6.1</span> MOSFET Mismatch</h3>
 <p>So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show <strong>mismatch</strong> due to tiny random fluctuations in manufacturing, and we have to account for this. The mismatch parameters for various components are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>.</p>
-<p>For a typical MOSFET, we usually consider two main mismatch effects <span class="citation" data-cites="Pelgrom_1989">(<a href="#ref-Pelgrom_1989" role="doc-biblioref">Pelgrom, Duinmaijer, and Welbers 1989</a>)</span>:</p>
+<p>For a typical MOSFET, we usually consider two main mismatch effects <span class="citation" data-cites="Pelgrom_1989">(<a href="#ref-Pelgrom_1989" role="doc-biblioref">Pelgrom et al. 1989</a>)</span>:</p>
 <ul>
 <li>A variation of the threshold voltage (mainly due to variations in doping levels).</li>
 <li>A variation of the critical dimensions of the MOSFET (<span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> as well as vertical dimensions).</li>
@@ -3028,7 +3029,7 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Usually, the mismatch in MOSFETs is characterized via two mismatch parameters <span class="citation" data-cites="Pelgrom_1989">(<a href="#ref-Pelgrom_1989" role="doc-biblioref">Pelgrom, Duinmaijer, and Welbers 1989</a>)</span>:</p>
+<p>Usually, the mismatch in MOSFETs is characterized via two mismatch parameters <span class="citation" data-cites="Pelgrom_1989">(<a href="#ref-Pelgrom_1989" role="doc-biblioref">Pelgrom et al. 1989</a>)</span>:</p>
 <ul>
 <li>The threshold voltage mismatch standard deviation</li>
 </ul>
@@ -3651,7 +3652,7 @@ Figure&nbsp;47: A cascoded current mirror using a biasing voltage to set the cas
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:9: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
 &lt;&gt;:9: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
-/tmp/ipykernel_3545/2642429397.py:9: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+/tmp/ipykernel_3740/2642429397.py:9: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
   res = elm.Resistor().down().label('$R_\mathrm{bias}$').color('blue')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -4830,7 +4831,7 @@ V_\mathrm{bias} = R_2 I_\mathrm{bias} = \frac{R_2}{R_1} V_\mathrm{ref}.
 <p>The only option left is to use a material property of the silicon itself for stable reference voltage generation.</p>
 <section id="bandgap-reference" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="bandgap-reference"><span class="header-section-number">12.1</span> Bandgap Reference</h2>
-<p>It has been realized that a bipolar junction transistor (BJT) has the wonderful property, that the base-emitter voltage <span class="math inline">\(V_\mathrm{BE}\)</span> has the following approximate relationship vs.&nbsp;temperature <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">R. J. Widlar 1971</a>)</span></p>
+<p>It has been realized that a bipolar junction transistor (BJT) has the wonderful property, that the base-emitter voltage <span class="math inline">\(V_\mathrm{BE}\)</span> has the following approximate relationship vs.&nbsp;temperature <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">Widlar 1971</a>)</span></p>
 <p><span id="eq-vbe-vs-temp"><span class="math display">\[
 V_\mathrm{BE}\approx V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + V_\mathrm{BE0} \left( \frac{T}{T_0} \right)
 \tag{44}\]</span></span></p>
@@ -4848,7 +4849,7 @@ V_\mathrm{ref} =  V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + V_\mathrm{BE0
 V_\mathrm{ref} =  V_\mathrm{g0}
 \tag{47}\]</span></span></p>
 <p>remains. We thus have created an on-chip reference (called the <a href="https://en.wikipedia.org/wiki/Bandgap_voltage_reference"><em>bandgap voltage reference</em></a>) which is almost independent of manufacturing tolerances with a very small temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of <span class="math inline">\(\pm 1 \ldots 3\%\)</span> without trimming are perfectly possible.</p>
-<p>The original implementation in <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">R. J. Widlar 1971</a>)</span> uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of these available layers are available for free without extra processing cost, they are very slow, show unusually small <span class="math inline">\(\beta &lt; 10\)</span>, and the collector is tied to <span class="math inline">\(V_\mathrm{SS}\)</span> as it is the substrate. Still, for bandgap references, they are very useful.</p>
+<p>The original implementation in <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">Widlar 1971</a>)</span> uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of these available layers are available for free without extra processing cost, they are very slow, show unusually small <span class="math inline">\(\beta &lt; 10\)</span>, and the collector is tied to <span class="math inline">\(V_\mathrm{SS}\)</span> as it is the substrate. Still, for bandgap references, they are very useful.</p>
 <p>A simple implementation of a bandgap reference circuit is shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;47</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
 <div id="cell-fig-bandgap-simple" class="cell" data-execution_count="50">
 <div class="cell-output cell-output-display">
@@ -4921,7 +4922,7 @@ Figure&nbsp;67: Reference voltage from simulated bandgap circuit.
 </div>
 </div>
 </div>
-<p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;66</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist; see <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> or <span class="citation" data-cites="Eberlein_2018">(<a href="#ref-Eberlein_2018" role="doc-biblioref">Eberlein, Panagopoulos, and Pretl 2018</a>)</span>.</p>
+<p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;66</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist; see <span class="citation" data-cites="Banba_1999">(<a href="#ref-Banba_1999" role="doc-biblioref">Banba et al. 1999</a>)</span> or <span class="citation" data-cites="Eberlein_2018">(<a href="#ref-Eberlein_2018" role="doc-biblioref">Eberlein et al. 2018</a>)</span>.</p>
 </section>
 <section id="sec-banba-bandgap" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="sec-banba-bandgap"><span class="header-section-number">12.2</span> Banba Bandgap Reference</h2>
@@ -6794,15 +6795,15 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Baker_compensating_OPAMP" class="csl-entry" role="listitem">
 Baker, R. J. n.d. <span>“Bad Circuit Design 3 - Compensating an Op-Amp.”</span> <a href="https://cmosedu.com/cmos1/bad_design/bad_design3/bad_design_3.htm">https://cmosedu.com/cmos1/bad_design/bad_design3/bad_design_3.htm</a>.
 </div>
 <div id="ref-Banba_1999" class="csl-entry" role="listitem">
-Banba, H., H. Shiga, A. Umezawa, T. Miyaba, T. Tanzawa, S. Atsumi, and K. Sakui. 1999. <span>“A <span>CMOS</span> Bandgap Reference Circuit with <span class="nocase">sub-1-V</span> Operation.”</span> <em>IEEE Journal of Solid-State Circuits</em> 34 (5): 670–74. <a href="https://doi.org/10.1109/4.760378">https://doi.org/10.1109/4.760378</a>.
+Banba, H., H. Shiga, A. Umezawa, et al. 1999. <span>“A <span>CMOS</span> Bandgap Reference Circuit with <span class="nocase">sub-1-V</span> Operation.”</span> <em>IEEE Journal of Solid-State Circuits</em> 34 (5): 670–74. <a href="https://doi.org/10.1109/4.760378">https://doi.org/10.1109/4.760378</a>.
 </div>
 <div id="ref-Blumlein_1937" class="csl-entry" role="listitem">
-Blumlein, A. D. 1937. <span>“Thermionic Valve Amplifying Circuit.”</span> U.S.&nbsp;Patent 2,185,367.
+Blumlein, A. D. 1937. <em>Thermionic Valve Amplifying Circuit</em>. U.S.&nbsp;Patent 2,185,367.
 </div>
 <div id="ref-Brokaw_bandgap" class="csl-entry" role="listitem">
 Brokaw, A. P. 1974. <span>“<span class="nocase">A simple three-terminal IC bandgap reference</span>.”</span> <em>IEEE Journal of Solid-State Circuits</em> 9 (6): 388–93. <a href="https://doi.org/10.1109/JSSC.1974.1050532">https://doi.org/10.1109/JSSC.1974.1050532</a>.
@@ -6811,7 +6812,7 @@ Brokaw, A. P. 1974. <span>“<span class="nocase">A simple three-terminal IC ban
 Carusone, Tony C., David Johns, and Kenneth Martin. 2011. <em><span>Analog Integrated Circuit Design</span></em>. Wiley.
 </div>
 <div id="ref-Dorrer_Master_Thesis" class="csl-entry" role="listitem">
-Dorrer, Simon. 2025. <span>“An Open-Source Adaptive Event-Based ADC for Bio-Signal Acquisition in 130 Nm CMOS.”</span> 2025. <a href="https://epub.jku.at/obvulihs/content/titleinfo/12118473?query=dorrer">https://epub.jku.at/obvulihs/content/titleinfo/12118473?query=dorrer</a>.
+Dorrer, Simon. 2025. <span>“An Open-Source Adaptive Event-Based ADC for Bio-Signal Acquisition in 130 Nm CMOS.”</span> <a href="https://epub.jku.at/obvulihs/content/titleinfo/12118473?query=dorrer">https://epub.jku.at/obvulihs/content/titleinfo/12118473?query=dorrer</a>.
 </div>
 <div id="ref-Eberlein_2018" class="csl-entry" role="listitem">
 Eberlein, Matthias, Georgios Panagopoulos, and Harald Pretl. 2018. <span>“<span class="nocase">A 40nW, Sub-IV Truly <span>‘Digital’</span> Reverse Bandgap Reference Using Bulk-Diodes in 16nm FinFET</span>.”</span> <em>2018 IEEE Asian Solid-State Circuits Conference (A-SSCC)</em> 00 (November): 99–102. <a href="https://doi.org/10.1109/asscc.2018.8579306">https://doi.org/10.1109/asscc.2018.8579306</a>.
@@ -6832,7 +6833,7 @@ Hu, Chenming. 2010. <em>Modern Semiconductor Devices for Integrated Circuits</em
 Ivanov, Vadim V., and Igor M. Filanovsky. 2004. <em><span class="nocase">Operational Amplifier Speed and Accuracy Improvement</span></em>. Kluwer Academic Publishers.
 </div>
 <div id="ref-Jakoby_2022" class="csl-entry" role="listitem">
-Jakoby, Bernhard. 2022. <span>“<span class="nocase">Achieving signal power amplification using energetically passive devices</span>.”</span> <em><span>E</span>&amp;<span>i</span> Elektrotechnik Und Informationstechnik</em> 139 (6): 477–84. <a href="https://doi.org/10.1007/s00502-022-01046-9">https://doi.org/10.1007/s00502-022-01046-9</a>.
+Jakoby, Bernhard. 2022. <span>“<span class="nocase">Achieving signal power amplification using energetically passive devices</span>.”</span> <em><span class="nocase">e</span>&amp;<span>i</span> Elektrotechnik Und Informationstechnik</em> 139 (6): 477–84. <a href="https://doi.org/10.1007/s00502-022-01046-9">https://doi.org/10.1007/s00502-022-01046-9</a>.
 </div>
 <div id="ref-Jespers_Murmann_2017" class="csl-entry" role="listitem">
 Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CMOS Circuits: Using Pre-Computed Lookup Tables</em>. Cambridge University Press.
@@ -6841,7 +6842,7 @@ Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CM
 Kamath, B. Y. T., R. G. Meyer, and P. R. Gray. 1974. <span>“Relationship Between Frequency Response and Settling Time of Operational Amplifiers.”</span> <em>IEEE Journal of Solid-State Circuits</em> 9 (6): 347–52. <a href="https://doi.org/10.1109/JSSC.1974.1050527">https://doi.org/10.1109/JSSC.1974.1050527</a>.
 </div>
 <div id="ref-Kay_2025" class="csl-entry" role="listitem">
-Kay, A., and C. Wells. 2025. <span>“<span class="nocase">Technical White Paper - Operational Amplifier Stability Theory and Compensation Methods</span>.”</span> Texas Instruments. 2025. <a href="https://www.ti.com/lit/wp/sboa626/sboa626.pdf">https://www.ti.com/lit/wp/sboa626/sboa626.pdf</a>.
+Kay, A., and C. Wells. 2025. <span>“<span class="nocase">Technical White Paper - Operational Amplifier Stability Theory and Compensation Methods</span>.”</span> Texas Instruments. <a href="https://www.ti.com/lit/wp/sboa626/sboa626.pdf">https://www.ti.com/lit/wp/sboa626/sboa626.pdf</a>.
 </div>
 <div id="ref-Kuijk_bandgap" class="csl-entry" role="listitem">
 Kuijk, K E. 1973. <span>“<span class="nocase">A precision reference voltage source</span>.”</span> <em>IEEE Journal of Solid-State Circuits</em> 8 (3): 222–26. <a href="https://doi.org/10.1109/JSSC.1973.1050378">https://doi.org/10.1109/JSSC.1973.1050378</a>.
@@ -6850,7 +6851,7 @@ Kuijk, K E. 1973. <span>“<span class="nocase">A precision reference voltage so
 Mangelsdorf, Chris. 2025a. <span>“Miller’s Secret [Shop Talk: What You Didn’t Learn in School].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (1): 21–27. <a href="https://doi.org/10.1109/MSSC.2024.3503792">https://doi.org/10.1109/MSSC.2024.3503792</a>.
 </div>
 <div id="ref-Mangelsdorf_2025_RHPZ" class="csl-entry" role="listitem">
-———. 2025b. <span>“Miller’s Wrong Half-Plane Zero [Shop Talk: What You Didn’t Learn in School].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (2): 19–29. <a href="https://doi.org/10.1109/MSSC.2025.3562109">https://doi.org/10.1109/MSSC.2025.3562109</a>.
+Mangelsdorf, Chris. 2025b. <span>“Miller’s Wrong Half-Plane Zero [Shop Talk: What You Didn’t Learn in School].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (2): 19–29. <a href="https://doi.org/10.1109/MSSC.2025.3562109">https://doi.org/10.1109/MSSC.2025.3562109</a>.
 </div>
 <div id="ref-Maxwell_1873" class="csl-entry" role="listitem">
 Maxwell, James Clerk. 1873. <em>A Treatise on Electricity and Magnetism</em>. Vol. 1. Clarendon Press.
@@ -6862,7 +6863,7 @@ Middlebrook, R. D. 1975. <span>“<span class="nocase">Measurement of loop gain 
 Murmann, Boris. 2013. <em><span class="nocase">Analysis and Design of Elementary MOS Amplifier Stages</span></em>. NTS Press.
 </div>
 <div id="ref-Nagel_1975" class="csl-entry" role="listitem">
-Nagel, Laurence W. 1975. <span>“SPICE2: A Computer Program to Simulate Semiconductor Circuits.”</span> PhD thesis, EECS Department, University of California, Berkeley. <a href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html">http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html</a>.
+Nagel, Laurence W. 1975. <span>“SPICE2: A Computer Program to Simulate Semiconductor Circuits.”</span> PhD Thesis UCB/ERL M520. EECS Department, University of California, Berkeley. <a href="http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html">http://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html</a>.
 </div>
 <div id="ref-Neag_2015" class="csl-entry" role="listitem">
 Neag, Marius, Raul Oneţ, István Kovács, and Paul Mărtari. 2015. <span>“Comparative Analysis of Simulation-Based Methods for Deriving the Phase- and Gain-Margins of Feedback Circuits with Op-Amps.”</span> <em>IEEE Transactions on Circuits and Systems I: Regular Papers</em> 62 (3): 625–34. <a href="https://doi.org/10.1109/TCSI.2014.2370151">https://doi.org/10.1109/TCSI.2014.2370151</a>.
@@ -6880,10 +6881,10 @@ Pretl, Harald, and Matthias Eberlein. 2021. <span>“Fifty Nifty Variations of T
 Razavi, Behzad. 2017. <em><span class="nocase">Design of Analog CMOS Integrated Circuits</span></em>. McGraw-Hill.
 </div>
 <div id="ref-Razavi_2019_ldo" class="csl-entry" role="listitem">
-———. 2019. <span>“<span class="nocase">The Low Dropout Regulator [A Circuit for All Seasons]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 11 (2): 8–13. <a href="https://doi.org/10.1109/mssc.2019.2910952">https://doi.org/10.1109/mssc.2019.2910952</a>.
+Razavi, Behzad. 2019. <span>“<span class="nocase">The Low Dropout Regulator [A Circuit for All Seasons]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 11 (2): 8–13. <a href="https://doi.org/10.1109/mssc.2019.2910952">https://doi.org/10.1109/mssc.2019.2910952</a>.
 </div>
 <div id="ref-Razavi_2021_bandgap" class="csl-entry" role="listitem">
-———. 2021. <span>“<span class="nocase">The Design of a Low-Voltage Bandgap Reference [The Analog Mind]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 13 (3): 6–16. <a href="https://doi.org/10.1109/mssc.2021.3088963">https://doi.org/10.1109/mssc.2021.3088963</a>.
+Razavi, Behzad. 2021. <span>“<span class="nocase">The Design of a Low-Voltage Bandgap Reference [The Analog Mind]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 13 (3): 6–16. <a href="https://doi.org/10.1109/mssc.2021.3088963">https://doi.org/10.1109/mssc.2021.3088963</a>.
 </div>
 <div id="ref-Rosenstark_1984" class="csl-entry" role="listitem">
 Rosenstark, S. 1984. <span>“Loop Gain Measurement in Feedback Amplifiers.”</span> <em>International Journal of Electronics</em> 57 (3): 415–21. <a href="https://doi.org/10.1080/00207218408938921">https://doi.org/10.1080/00207218408938921</a>.
@@ -6898,7 +6899,7 @@ Sarpeshkar, R., T. Delbruck, and C. A. Mead. 1993. <span>“<span class="nocase"
 Sheikholeslami, Ali. 2015. <span>“<span class="nocase">Miller’s Theorem [Circuit Intuitions]</span>.”</span> <em>IEEE Solid-State Circuits Magazine</em> 7 (3): 9–10. <a href="https://doi.org/10.1109/mssc.2015.2446457">https://doi.org/10.1109/mssc.2015.2446457</a>.
 </div>
 <div id="ref-Sheikholeslami_2025_kTC" class="csl-entry" role="listitem">
-———. 2025. <span>“Noise and Distortion, Part IV [Circuit Intuitions].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (3): 29–31. <a href="https://doi.org/10.1109/MSSC.2025.3582840">https://doi.org/10.1109/MSSC.2025.3582840</a>.
+Sheikholeslami, Ali. 2025. <span>“Noise and Distortion, Part IV [Circuit Intuitions].”</span> <em>IEEE Solid-State Circuits Magazine</em> 17 (3): 29–31. <a href="https://doi.org/10.1109/MSSC.2025.3582840">https://doi.org/10.1109/MSSC.2025.3582840</a>.
 </div>
 <div id="ref-Tian_2001" class="csl-entry" role="listitem">
 Tian, M., V. Visvanathan, J. Hantgan, and K. Kundert. 2001. <span>“<span class="nocase">Striving for small-signal stability</span>.”</span> <em>IEEE Circuits and Devices Magazine</em> 17 (1): 31–41.
@@ -6915,14 +6916,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {(Integrated)} {Circuit} {Design}},
-  date = {2026-03-05},
+  date = {2026-03-21},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-(Integrated) Circuit Design.”</span> March 5, 2026. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+(Integrated) Circuit Design.”</span> March 21. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
