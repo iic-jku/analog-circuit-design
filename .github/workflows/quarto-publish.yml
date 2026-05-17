@@ -1,9 +1,13 @@
+name: quarto-publish
+
 on:
   workflow_dispatch:
   push:
-    branches: main
+    branches: [main]
 
-name: quarto-publish
+concurrency:
+  group: quarto-publish-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build-deploy:
@@ -13,25 +17,27 @@ jobs:
     steps:
       - name: Install APT dependencies
         run: |
-          sudo apt update
-          sudo apt -y install librsvg2-bin
-      
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true
 
-      - name: Install Python and Dependencies
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
           cache: 'pip'
-      - run: pip install -r requirements.txt
+          cache-dependency-path: requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
