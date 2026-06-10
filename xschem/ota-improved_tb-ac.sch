@@ -74,11 +74,11 @@ value="
 option sparse
 save all
 op
-write @schname.raw
+write @schname\.raw
 set appendwrite
 
 ac dec 101 1k 1G
-write @schname.raw
+write @schname\.raw
 plot 20*log10(v_out)
 
 meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k

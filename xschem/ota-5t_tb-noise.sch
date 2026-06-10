@@ -71,11 +71,11 @@ set filetype=ascii
 save all
 
 *op
-*write @schname.raw
+*write @schname\.raw
 *set appendwrite
 
 ac dec 101 1k 1G
-*write @schname.raw
+*write @schname\.raw
 plot 20*log10(v_out)
 
 noise v(v_out) Vin lin 1000 1MEG 1000MEG 1
@@ -87,7 +87,7 @@ plot inoise_spectrum linplot
 plot onoise_spectrum linplot
 
 setplot noise2
-write @schname.raw
+write @schname\.raw
 
 .endc
 "}

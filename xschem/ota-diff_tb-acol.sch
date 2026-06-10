@@ -128,11 +128,11 @@ set filetype=ascii
 save all
 
 op
-write @schname.raw
+write @schname\.raw
 set appendwrite
 
 ac dec 101 1k 10G
-write @schname.raw
+write @schname\.raw
 plot 20*log10(vout)
 plot cph(vout)*180/pi
 plot 20*log10(voutcm)
