@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-05-17">
+<meta name="dcterms.date" content="2026-06-10">
 
 <title>Analog (Integrated) Circuit Design</title>
 <style>
@@ -98,14 +98,14 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8972a4b08918be08a88b3e2a59def418.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9571ef2f724cf1554e0ac39ede2d41c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-8972a4b08918be08a88b3e2a59def418.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7b46239bed692545bb4e7594965a6668.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-aeaae182288943887056fe2671ceaf91.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-7b46239bed692545bb4e7594965a6668.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -586,7 +586,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 17, 2026</p>
+      <p class="date">June 10, 2026</p>
     </div>
   </div>
   
@@ -3652,7 +3652,7 @@ Figure&nbsp;47: A cascoded current mirror using a biasing voltage to set the cas
 <div class="cell-output cell-output-stderr">
 <pre><code>&lt;&gt;:9: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
 &lt;&gt;:9: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
-/tmp/ipykernel_3287/2642429397.py:9: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+/tmp/ipykernel_3447/2642429397.py:9: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
   res = elm.Resistor().down().label('$R_\mathrm{bias}$').color('blue')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -5529,54 +5529,108 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </section>
 <section id="sec-xschem-cheatsheet" class="level1" data-number="20">
 <h1 data-number="20"><span class="header-section-number">20</span> Appendix: Xschem Cheatsheet</h1>
-<p>When opening Xschem, using <code>Help -&gt; Keys</code> a pop-up window comes up with many useful shortcuts. The most useful are:</p>
-<section id="moving-around-in-a-schematic" class="level4" data-number="20.0.0.1">
-<h4 data-number="20.0.0.1" class="anchored" data-anchor-id="moving-around-in-a-schematic"><span class="header-section-number">20.0.0.1</span> Moving around in a schematic:</h4>
+<p>When opening Xschem, using <code>Help -&gt; Keys</code> a pop-up window comes up with many useful shortcuts. The most useful are listed below. A complete reference is available in the <a href="http://repo.hu/projects/xschem/xschem_man/commands.html">Xschem command manual</a>.</p>
+<section id="file-operations" class="level4" data-number="20.0.0.1">
+<h4 data-number="20.0.0.1" class="anchored" data-anchor-id="file-operations"><span class="header-section-number">20.0.0.1</span> File operations:</h4>
 <ul>
-<li><code>Cursor keys</code> to move around</li>
-<li><code>Ctrl-e</code> to go back to parent schematic</li>
-<li><code>e</code> to descend into schematic of selected symbol</li>
-<li><code>i</code> to descend into symbol of selected symbol</li>
+<li><code>Ctrl-o</code> to open (load) a schematic or symbol</li>
+<li><code>Ctrl-Shift-o</code> to reload the most recent schematic</li>
+<li><code>Ctrl-s</code> to save the current schematic</li>
+<li><code>Ctrl-Shift-s</code> to save the schematic under a new name (save-as)</li>
+<li><code>Ctrl-Shift-Alt-s</code> to save the current view as a symbol</li>
+<li><code>Ctrl-n</code> to clear the schematic (start a new one)</li>
+<li><code>Ctrl-Shift-n</code> to clear the symbol (start a new one)</li>
+<li><code>Ctrl-w</code> to close the current schematic/tab</li>
+<li><code>b</code> to merge another schematic file into the current one</li>
+<li><code>Ctrl-q</code> to exit Xschem</li>
+</ul>
+</section>
+<section id="moving-around-in-a-schematic" class="level4" data-number="20.0.0.2">
+<h4 data-number="20.0.0.2" class="anchored" data-anchor-id="moving-around-in-a-schematic"><span class="header-section-number">20.0.0.2</span> Moving around in a schematic:</h4>
+<ul>
+<li><code>Cursor keys</code> to pan the view (move around)</li>
+<li><code>Space</code> (drag) or <code>Ctrl-p</code> to pan the schematic with the mouse</li>
 <li><code>f</code> full zoom on schematic</li>
-<li><code>Shift-z</code> to zoom in</li>
-<li><code>Ctrl-z</code> to zoom out</li>
+<li><code>Shift-z</code> or scroll-wheel up to zoom in</li>
+<li><code>Ctrl-z</code> or scroll-wheel down to zoom out</li>
+<li><code>z</code> to zoom into a box (rubber-band selection)</li>
+<li><code>Ctrl-Shift-f</code> to zoom-fit the selected elements</li>
+<li><code>e</code> to descend into the schematic of the selected symbol</li>
+<li><code>i</code> to descend into the symbol view of the selected symbol</li>
+<li><code>Ctrl-e</code> or <code>Backspace</code> to go back to the parent schematic</li>
+<li><code>Alt-e</code> / <code>Alt-i</code> to open the selected schematic/symbol in a new window</li>
+<li><code>Ctrl-Left</code> / <code>Ctrl-Right</code> to switch between tabs (tabbed interface)</li>
+<li><code>\</code> (backslash) to toggle fullscreen mode</li>
+<li><code>%</code> to toggle the drawing grid on/off</li>
 </ul>
 </section>
-<section id="editing-schematics" class="level4" data-number="20.0.0.2">
-<h4 data-number="20.0.0.2" class="anchored" data-anchor-id="editing-schematics"><span class="header-section-number">20.0.0.2</span> Editing schematics:</h4>
+<section id="editing-schematics" class="level4" data-number="20.0.0.3">
+<h4 data-number="20.0.0.3" class="anchored" data-anchor-id="editing-schematics"><span class="header-section-number">20.0.0.3</span> Editing schematics:</h4>
 <ul>
-<li><code>Del</code> to delete elements</li>
-<li><code>Ins</code> to insert elements from library</li>
-<li><code>Escape</code> to abort an operation</li>
-<li><code>Ctrl-#</code> to rename components with duplicate names</li>
-<li><code>c</code> to copy elements</li>
-<li><code>Alt-Shift-l</code> to add wire label</li>
-<li><code>Alt-l</code> to add label pin</li>
-<li><code>m</code> to move selected objects</li>
-<li><code>Shift-R</code> to rotate selected objects</li>
-<li><code>Shift-F</code> to mirror / flip selected objects</li>
-<li><code>q</code> to edit properties</li>
-<li><code>Ctrl-s</code> to save schematic</li>
-<li><code>t</code> to place a text</li>
-<li><code>Shift-T</code> to toggle the <code>ignore</code> flag on an instance</li>
-<li><code>u</code> to undo an operation</li>
-<li><code>w</code> to draw a wire</li>
-<li><code>Shift-W</code> draw wire and snap to close pin or net point</li>
-<li><code>&amp;</code> to join, break, and collapse wires</li>
-<li><code>A</code> to make symbol from schematic</li>
-<li><code>Alt-s</code> to reload the circuit if changes in a subcircuit were made</li>
+<li><code>Del</code> to delete selected elements</li>
+<li><code>Ins</code> to insert an element from the component library</li>
+<li><code>Escape</code> to abort an operation / unselect / redraw</li>
+<li><code>u</code> to undo, <code>Shift-U</code> to redo</li>
+<li><code>Ctrl-a</code> to select all</li>
+<li><code>Ctrl-c</code> / <code>Ctrl-x</code> / <code>Ctrl-v</code> to copy / cut / paste via the clipboard</li>
+<li><code>c</code> to copy the selected objects (in-place duplicate)</li>
+<li><code>m</code> to move the selected objects</li>
+<li><code>Shift-M</code> to move and insert wires between separated pins</li>
+<li><code>h</code> / <code>v</code> to constrain a move/copy to horizontal / vertical</li>
+<li><code>Shift-R</code> to rotate the selected objects (90° CCW)</li>
+<li><code>Shift-F</code> to mirror / flip horizontally</li>
+<li><code>Shift-V</code> to mirror / flip vertically</li>
+<li><code>q</code> to edit the properties of the selected object</li>
+<li><code>Shift-Q</code> to edit properties in <code>vim</code> (or external editor)</li>
+<li><code>Ctrl-Shift-q</code> to view properties (read-only)</li>
+<li><code>t</code> to place a text label</li>
+<li><code>Shift-T</code> to toggle the <code>ignore</code> flag on an instance (excluded from netlist)</li>
+<li><code>Ctrl-f</code> to find/select objects by substring or regular expression</li>
+<li><code>Ctrl-#</code> to rename components with duplicate names (refdes)</li>
+<li><code>#</code> to highlight components with duplicate names</li>
+<li><code>Alt-u</code> to align selected objects to the current grid</li>
+<li><code>g</code> / <code>Shift-G</code> to halve / double the snap (grid) factor</li>
 </ul>
 </section>
-<section id="viewingsimulating-schematics" class="level4" data-number="20.0.0.3">
-<h4 data-number="20.0.0.3" class="anchored" data-anchor-id="viewingsimulating-schematics"><span class="header-section-number">20.0.0.3</span> Viewing/Simulating Schematics</h4>
+<section id="wires-nets-and-labels" class="level4" data-number="20.0.0.4">
+<h4 data-number="20.0.0.4" class="anchored" data-anchor-id="wires-nets-and-labels"><span class="header-section-number">20.0.0.4</span> Wires, nets, and labels:</h4>
+<ul>
+<li><code>w</code> to draw a wire</li>
+<li><code>Shift-W</code> to draw a wire and snap to the closest pin or net endpoint</li>
+<li><code>l</code> to draw a line, <code>r</code> to draw a rectangle, <code>p</code> to draw a polygon</li>
+<li><code>&amp;</code> to join, break, and collapse wires</li>
+<li><code>!</code> to break selected wires at any pin or junction</li>
+<li><code>Alt-Shift-l</code> to add a wire label (<code>lab_wire.sym</code>)</li>
+<li><code>Alt-l</code> to add a label pin (<code>lab_pin.sym</code>)</li>
+<li><code>k</code> to highlight the selected net</li>
+<li><code>Ctrl-k</code> to unhighlight the selected net</li>
+<li><code>Shift-K</code> to unhighlight all nets</li>
+<li><code>Alt-k</code> to select all nets attached to the selected wire/label/pin</li>
+<li><code>j</code> to print the list of highlighted nets/pins</li>
+<li><code>A</code> to make a symbol from the current schematic (auto-generate symbol)</li>
+<li><code>Alt-p</code> to add a symbol pin</li>
+<li><code>Alt-h</code> to create symbol pins from the schematic pins</li>
+</ul>
+</section>
+<section id="viewing-and-simulating-schematics" class="level4" data-number="20.0.0.5">
+<h4 data-number="20.0.0.5" class="anchored" data-anchor-id="viewing-and-simulating-schematics"><span class="header-section-number">20.0.0.5</span> Viewing and simulating schematics:</h4>
 <ul>
 <li><code>5</code> to only view probes</li>
-<li><code>k</code> to highlight selected net</li>
-<li><code>Shift-K</code> to unhighlight all nets</li>
-<li><code>Shift-o</code> to toggle light/dark color scheme</li>
-<li><code>s</code> to run a simulation</li>
-<li><code>a &amp; b</code> to add cursors to an in-circuit simulation graph</li>
-<li><code>f</code> full zoom on y- or x-axis in in-circuit simulation graph</li>
+<li><code>Shift-o</code> to toggle the light/dark color scheme</li>
+<li><code>Ctrl-b</code> to toggle showing text inside symbols</li>
+<li><code>Alt-b</code> to toggle showing symbol details vs.&nbsp;only bounding boxes</li>
+<li><code>Shift-A</code> to toggle netlist display</li>
+<li><code>n</code> to generate a hierarchical netlist</li>
+<li><code>Shift-N</code> to generate a top-level-only netlist</li>
+<li><code>Ctrl-Shift-v</code> to toggle the netlist format (SPICE / VHDL / Verilog)</li>
+<li><code>Alt-s</code> to reload the circuit (e.g.&nbsp;after changes in a subcircuit)</li>
+<li><code>s</code> to run a simulation (asks for confirmation)</li>
+<li><code>Alt-g</code> to send the highlighted nets to the <code>gaw</code> waveform viewer</li>
+<li><code>a</code> and <code>b</code> to add cursors to an in-circuit simulation graph</li>
+<li><code>f</code> full zoom on the y- or x-axis in an in-circuit simulation graph</li>
+<li><code>Shift-*</code> to print the schematic to PostScript / PDF</li>
+<li><code>Ctrl-Shift-*</code> to export the schematic as XPM / PNG</li>
+<li><code>Alt-Shift-*</code> to export the schematic as SVG</li>
 </ul>
 </section>
 </section>
@@ -6916,14 +6970,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {(Integrated)} {Circuit} {Design}},
-  date = {2026-05-17},
+  date = {2026-06-10},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-(Integrated) Circuit Design.”</span> May 17. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+(Integrated) Circuit Design.”</span> June 10. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
