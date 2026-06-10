@@ -121,7 +121,7 @@ value="
 C {devices/code_shown.sym} 0 -900 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include @schname.save
+.include @schname\.save
 .control
 option sparse
 set filetype=ascii
