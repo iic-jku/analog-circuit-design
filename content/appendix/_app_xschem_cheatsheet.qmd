@@ -16,47 +16,97 @@ limitations under the License.
 
 # Appendix: Xschem Cheatsheet {#sec-xschem-cheatsheet}
 
-When opening Xschem, using `Help -> Keys` a pop-up window comes up with many useful shortcuts. The most useful are:
+When opening Xschem, using `Help -> Keys` a pop-up window comes up with many useful shortcuts. The most useful are listed below. A complete reference is available in the [Xschem command manual](http://repo.hu/projects/xschem/xschem_man/commands.html).
+
+#### File operations:
+
+- `Ctrl-o` to open (load) a schematic or symbol
+- `Ctrl-Shift-o` to reload the most recent schematic
+- `Ctrl-s` to save the current schematic
+- `Ctrl-Shift-s` to save the schematic under a new name (save-as)
+- `Ctrl-Shift-Alt-s` to save the current view as a symbol
+- `Ctrl-n` to clear the schematic (start a new one)
+- `Ctrl-Shift-n` to clear the symbol (start a new one)
+- `Ctrl-w` to close the current schematic/tab
+- `b` to merge another schematic file into the current one
+- `Ctrl-q` to exit Xschem
 
 #### Moving around in a schematic:
 
-- `Cursor keys` to move around
-- `Ctrl-e` to go back to parent schematic
-- `e` to descend into schematic of selected symbol
-- `i` to descend into symbol of selected symbol
+- `Cursor keys` to pan the view (move around)
+- `Space` (drag) or `Ctrl-p` to pan the schematic with the mouse
 - `f` full zoom on schematic
-- `Shift-z` to zoom in
-- `Ctrl-z` to zoom out
+- `Shift-z` or scroll-wheel up to zoom in
+- `Ctrl-z` or scroll-wheel down to zoom out
+- `z` to zoom into a box (rubber-band selection)
+- `Ctrl-Shift-f` to zoom-fit the selected elements
+- `e` to descend into the schematic of the selected symbol
+- `i` to descend into the symbol view of the selected symbol
+- `Ctrl-e` or `Backspace` to go back to the parent schematic
+- `Alt-e` / `Alt-i` to open the selected schematic/symbol in a new window
+- `Ctrl-Left` / `Ctrl-Right` to switch between tabs (tabbed interface)
+- `\` (backslash) to toggle fullscreen mode
+- `%` to toggle the drawing grid on/off
 
 #### Editing schematics:
 
-- `Del` to delete elements
-- `Ins` to insert elements from library
-- `Escape` to abort an operation
-- `Ctrl-#` to rename components with duplicate names
-- `c` to copy elements
-- `Alt-Shift-l` to add wire label
-- `Alt-l` to add label pin
-- `m` to move selected objects
-- `Shift-R` to rotate selected objects
-- `Shift-F` to mirror / flip selected objects
-- `q` to edit properties
-- `Ctrl-s` to save schematic
-- `t` to place a text
-- `Shift-T` to toggle the `ignore` flag on an instance
-- `u` to undo an operation
-- `w` to draw a wire
-- `Shift-W` draw wire and snap to close pin or net point
-- `&` to join, break, and collapse wires
-- `A` to make symbol from schematic
-- `Alt-s` to reload the circuit if changes in a subcircuit were made
+- `Del` to delete selected elements
+- `Ins` to insert an element from the component library
+- `Escape` to abort an operation / unselect / redraw
+- `u` to undo, `Shift-U` to redo
+- `Ctrl-a` to select all
+- `Ctrl-c` / `Ctrl-x` / `Ctrl-v` to copy / cut / paste via the clipboard
+- `c` to copy the selected objects (in-place duplicate)
+- `m` to move the selected objects
+- `Shift-M` to move and insert wires between separated pins
+- `h` / `v` to constrain a move/copy to horizontal / vertical
+- `Shift-R` to rotate the selected objects (90° CCW)
+- `Shift-F` to mirror / flip horizontally
+- `Shift-V` to mirror / flip vertically
+- `q` to edit the properties of the selected object
+- `Shift-Q` to edit properties in `vim` (or external editor)
+- `Ctrl-Shift-q` to view properties (read-only)
+- `t` to place a text label
+- `Shift-T` to toggle the `ignore` flag on an instance (excluded from netlist)
+- `Ctrl-f` to find/select objects by substring or regular expression
+- `Ctrl-#` to rename components with duplicate names (refdes)
+- `#` to highlight components with duplicate names
+- `Alt-u` to align selected objects to the current grid
+- `g` / `Shift-G` to halve / double the snap (grid) factor
 
-#### Viewing/Simulating Schematics
+#### Wires, nets, and labels:
+
+- `w` to draw a wire
+- `Shift-W` to draw a wire and snap to the closest pin or net endpoint
+- `l` to draw a line, `r` to draw a rectangle, `p` to draw a polygon
+- `&` to join, break, and collapse wires
+- `!` to break selected wires at any pin or junction
+- `Alt-Shift-l` to add a wire label (`lab_wire.sym`)
+- `Alt-l` to add a label pin (`lab_pin.sym`)
+- `k` to highlight the selected net
+- `Ctrl-k` to unhighlight the selected net
+- `Shift-K` to unhighlight all nets
+- `Alt-k` to select all nets attached to the selected wire/label/pin
+- `j` to print the list of highlighted nets/pins
+- `A` to make a symbol from the current schematic (auto-generate symbol)
+- `Alt-p` to add a symbol pin
+- `Alt-h` to create symbol pins from the schematic pins
+
+#### Viewing and simulating schematics:
 
 - `5` to only view probes
-- `k` to highlight selected net
-- `Shift-K` to unhighlight all nets
-- `Shift-o` to toggle light/dark color scheme
-- `s` to run a simulation
-- `a & b` to add cursors to an in-circuit simulation graph
-- `f` full zoom on y- or x-axis in in-circuit simulation graph
+- `Shift-o` to toggle the light/dark color scheme
+- `Ctrl-b` to toggle showing text inside symbols
+- `Alt-b` to toggle showing symbol details vs. only bounding boxes
+- `Shift-A` to toggle netlist display
+- `n` to generate a hierarchical netlist
+- `Shift-N` to generate a top-level-only netlist
+- `Ctrl-Shift-v` to toggle the netlist format (SPICE / VHDL / Verilog)
+- `Alt-s` to reload the circuit (e.g. after changes in a subcircuit)
+- `s` to run a simulation (asks for confirmation)
+- `Alt-g` to send the highlighted nets to the `gaw` waveform viewer
+- `a` and `b` to add cursors to an in-circuit simulation graph
+- `f` full zoom on the y- or x-axis in an in-circuit simulation graph
+- `Shift-*` to print the schematic to PostScript / PDF
+- `Ctrl-Shift-*` to export the schematic as XPM / PNG
+- `Alt-Shift-*` to export the schematic as SVG
