@@ -144,12 +144,12 @@ save all
 * Operating Point Analysis
 op
 remzerovec
-write transmission_gate_tb_dc_Ileak.raw
+write @schname\\.raw
 set appendwrite
 
 * DC Sweep Analysis with Dummy
 dc vin 0 1.5 10m vout_w_dummy 0 1.5 0.75
-write transmission_gate_tb_dc_Ileak.raw
+write @schname\\.raw
 set appendwrite
 
 * Off-Leakage Current
@@ -158,7 +158,7 @@ plot Ileak_w_dummy
 
 * DC Sweep Analysis without Dummy
 dc vin 0 1.5 10m vout_wo_dummy 0 1.5 0.75
-write transmission_gate_tb_dc_Ileak.raw
+write @schname\\.raw
 
 * Off-Leakage Current
 let Ileak_wo_dummy = i(vout_wo_dummy)
@@ -172,7 +172,7 @@ tclcommand="xschem save; xschem netlist; xschem simulate"
 }
 C {devices/launcher.sym} 1580 -1330 0 0 {name=h1
 descr="Load waves" 
-tclcommand="xschem raw_read $netlist_dir/transmission_gate_tb_dc_Ileak.raw dc"
+tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw dc"
 }
 C {devices/launcher.sym} 1580 -1390 0 0 {name=h3
 descr="Annotate OP" 

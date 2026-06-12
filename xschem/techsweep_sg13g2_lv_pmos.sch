@@ -155,6 +155,6 @@ reset
 op
 *showmod
 show
-write techsweep_sg13g2_lv_pmos.raw
+write @schname\\.raw
 .endc
 "}

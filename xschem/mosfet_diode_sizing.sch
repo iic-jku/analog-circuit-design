@@ -36,11 +36,11 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -520 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include mosfet_diode_sizing.save
+.include @schname\\.save
 .control
 save all
 op
-write mosfet_diode_sizing.raw
+write @schname\\.raw
 dc Ibias -100u 500u 1u
 plot v(v_gs)
 wrdata mosfet_diode.txt v(v_gs)

@@ -68,18 +68,18 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -650 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include measurement_amplifier.save
+.include @schname\\.save
 .control
 option sparse
 save all
 op
-write measurement_amplifier.raw
+write @schname\\.raw
 set appendwrite
 ac dec 101 1k 1G
 let vout_db=20*log10(mag(vout))
 meas ac vout_db_max max vout_db
 print vout_db_max
-write measurement_amplifier.raw
+write @schname\\.raw
 .endc
 "}
 C {devices/vsource.sym} 340 -370 0 0 {name=Vdd value=1.5}
@@ -120,6 +120,6 @@ device=resistor
 m=1}
 C {devices/launcher.sym} 880 -160 0 0 {name=h5
 descr="load waves" 
-tclcommand="xschem raw_read $netlist_dir/measurement_amplifier.raw ac"
+tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw ac"
 }
 C {sg13g2_pr/annotate_fet_params.sym} 780 -640 0 0 {name=annot1 ref=M1}

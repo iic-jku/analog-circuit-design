@@ -92,7 +92,7 @@ setplot noise1
 let sth = sqrt(onoise_n.xm1.nsg13_lv_nmos^2 - onoise_n.xm1.nsg13_lv_nmos_flicker^2)
 let sfl = onoise_n.xm1.nsg13_lv_nmos_flicker
 let stot = onoise_n.xm1.nsg13_lv_nmos
-write noisetest_sg13g2_lv_nmos.raw noise1.all
+write @schname\\.raw noise1.all
 
 setplot noise3
 print sqrt(@n.xm1.nsg13_lv_nmos[sfl])
@@ -134,7 +134,7 @@ op
 noise v(n) vg dec 10 1 1e11 1
 noise v(n) vg lin  1 1 1 1
 echo $plots
-write noisetest_sg13g2_lv_nmos.raw noise1.all
+write @schname\\.raw noise1.all
 
 setplot noise3
 print onoise_spectrum

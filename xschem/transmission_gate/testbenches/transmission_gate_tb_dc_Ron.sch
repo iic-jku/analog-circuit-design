@@ -155,7 +155,7 @@ tclcommand="xschem save; xschem netlist; xschem simulate"
 }
 C {devices/launcher.sym} 1620 -1290 0 0 {name=h1
 descr="Load waves" 
-tclcommand="xschem raw_read $netlist_dir/transmission_gate_tb_dc_Ron.raw dc"
+tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw dc"
 }
 C {devices/launcher.sym} 1620 -1350 0 0 {name=h3
 descr="Annotate OP" 
@@ -172,12 +172,12 @@ save all
 * Operating Point Analysis
 op
 remzerovec
-write transmission_gate_tb_dc_Ron.raw
+write @schname\\.raw
 set appendwrite
 
 * DC Sweep Analysis
 dc vin 0 1.5 0.01
-write transmission_gate_tb_dc_Ron.raw
+write @schname\\.raw
 
 * On-Resistance
 let r_w_dummy_on = (v(vout_tg_w_dummy_on)-v(vin_tg))/I(vds_x2)

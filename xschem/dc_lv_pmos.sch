@@ -67,14 +67,14 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -890 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include dc_lv_pmos.save
+.include @schname\\.save
 .control
 save all
 op
-write dc_lv_pmos.raw
+write @schname\\.raw
 set appendwrite
 dc Vds 0 1.5 0.01 Vgs 0 1.5 0.1
-write dc_lv_pmos.raw
+write @schname\\.raw
 quit
 .endc
 "}
@@ -84,7 +84,7 @@ C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2023-2025 Harald Pretl, A
 C {devices/ammeter.sym} 310 -210 0 0 {name=Vd}
 C {devices/launcher.sym} 710 -300 0 0 {name=h1
 descr="load waves" 
-tclcommand="xschem raw_read $netlist_dir/dc_lv_pmos.raw dc"
+tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw dc"
 }
 C {devices/launcher.sym} 710 -340 0 0 {name=h2
 descr="simulate" 
