@@ -76,7 +76,7 @@ For the classical square-law model of the MOSFET in strong inversion, $\gmid$ is
 $$
 \frac{\gm}{I_\mathrm{D}} = \frac{2}{\VGS - \Vth} = \frac{2}{V_\mathrm{od}} 
 $$ {#eq-mosfet-gmid-stronginversion}
-with $\Vth$ the threshold voltage and $V_\mathrm{od}$ the so-called "overdrive voltage." The latter is sometimes also dubbed the effective gate-source voltage $V_\mathrm{eff}$ [@Johns_Martin_2nd_ed].
+with $\Vth$ the threshold voltage and $V_\mathrm{od}$ the so-called "overdrive voltage." The latter is sometimes also dubbed the effective gate-source voltage $V_\mathrm{eff}$ [@Carusone_Johns_Martin_2011].
 
 ::: {.callout-note title="Why 300 K?"}
 Why are we so often using a temperature of $300\,\text{K}$ for a typical condition? As this corresponds to roughly $27^{\circ}\text{C}$, this accounts for some self heating compared to otherwise cooler usual room temperatures. Further, engineers like round numbers which are easy to remember, so $300\,\text{K}$ is used as a proxy for room temperature.
@@ -203,6 +203,6 @@ As the switch on-resistance gets lower when increasing $W$, the off-capacitance 
 
 ## Tradeoffs in Triode {#sec-tradeoffs-triode}
 
-Some might think that sizing switches is a straightforward task, but in reality, they also come with several tradeoffs, and depending on the application, they can be incredibly complicated. The essential design parameters in switches are the on-resistance $R_\mathrm{on}$, the off-capacitance $C_\mathrm{off}$, the drain-source leakage current $I_\mathrm{leak}$, and their impact on clock feedthrough and charge injection [@Johns_Martin_2nd_ed]. In @fig-tradeoffs-triode, an overview of the tradeoffs of these design parameters depending on the channel width $W$ and the channel length $L$ is presented. In conclusion, if $W/L$ increases, $R_\mathrm{on}$ decreases, and the switching speed increases. If $W/L$ decreases, $I_\mathrm{leak}$, $C_\mathrm{off}$, and the drain-source overlap capacitance decrease, effectively reducing clock feedthrough and charge injection [@Gray_Meyer_5th_ed]. Practically, it does not make sense to make the switch both wide and long.
+Some might think that sizing switches is a straightforward task, but in reality, they also come with several tradeoffs, and depending on the application, they can be incredibly complicated. The essential design parameters in switches are the on-resistance $R_\mathrm{on}$, the off-capacitance $C_\mathrm{off}$, the drain-source leakage current $I_\mathrm{leak}$, and their impact on clock feedthrough and charge injection [@Carusone_Johns_Martin_2011]. In @fig-tradeoffs-triode, an overview of the tradeoffs of these design parameters depending on the channel width $W$ and the channel length $L$ is presented. In conclusion, if $W/L$ increases, $R_\mathrm{on}$ decreases, and the switching speed increases. If $W/L$ decreases, $I_\mathrm{leak}$, $C_\mathrm{off}$, and the drain-source overlap capacitance decrease, effectively reducing clock feedthrough and charge injection [@Gray_Meyer_2009]. Practically, it does not make sense to make the switch both wide and long.
 
 ![Overview of key design tradeoffs in switches depending on the channel width $W$ and the channel length $L$ [@Dorrer_Master_Thesis].](/content/sizing/_fig_tradeoffs_switches.svg){#fig-tradeoffs-triode}
