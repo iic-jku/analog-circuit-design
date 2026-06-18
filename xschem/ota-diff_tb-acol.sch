@@ -121,18 +121,18 @@ value="
 C {devices/code_shown.sym} 0 -900 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include ota-diff_tb-acol.save
+.include @schname\\.save
 .control
 option sparse
 set filetype=ascii
 save all
 
 op
-write ota-diff_tb-acol.raw
+write @schname\\.raw
 set appendwrite
 
 ac dec 101 1k 10G
-write ota-diff_tb-acol.raw
+write @schname\\.raw
 plot 20*log10(vout)
 plot cph(vout)*180/pi
 plot 20*log10(voutcm)

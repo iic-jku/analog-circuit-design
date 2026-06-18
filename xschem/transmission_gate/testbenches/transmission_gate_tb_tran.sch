@@ -128,7 +128,7 @@ tclcommand="xschem save; xschem netlist; xschem simulate"
 }
 C {devices/launcher.sym} 1580 -990 0 0 {name=h1
 descr="Load waves" 
-tclcommand="xschem raw_read $netlist_dir/transmission_gate_tb_tran.raw tran"
+tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw tran"
 }
 C {devices/launcher.sym} 1580 -1050 0 0 {name=h3
 descr="Annotate OP" 
@@ -145,12 +145,12 @@ save all
 * Operating Point Analysis
 op
 remzerovec
-write transmission_gate_tb_tran.raw
+write @schname\\.raw
 set appendwrite
 
 * Transient Analysis
 tran 10u 4ms
-write transmission_gate_tb_tran.raw
+write @schname\\.raw
 
 plot vin_tg vout_tg_on vout_tg_off
 

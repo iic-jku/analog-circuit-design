@@ -74,11 +74,11 @@ value="
 option sparse
 save all
 op
-write ota-improved_tb-ac.raw
+write @schname\\.raw
 set appendwrite
 
 ac dec 101 1k 1G
-write ota-improved_tb-ac.raw
+write @schname\\.raw
 plot 20*log10(v_out)
 
 meas ac dcgain MAX vmag(v_out) FROM=10 TO=10k
@@ -123,5 +123,5 @@ C {devices/spice_probe.sym} 1090 -470 0 0 {name=p7 attrs=""}
 C {devices/lab_wire.sym} 1090 -530 0 0 {name=p8 sig_type=std_logic lab=v_ena}
 C {devices/code_shown.sym} 0 -240 0 0 {name=SAVE only_toplevel=true
 format="tcleval( @value )"
-value=".include [file rootname [xschem get schname]].save
+value=".include @schname\\.save
 "}

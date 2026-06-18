@@ -34,7 +34,7 @@ value="
 "}
 C {devices/code_shown.sym} 0 -710 0 0 {name=NGSPICE only_toplevel=true 
 value="
-.include bandgap_banba_tb.save
+.include @schname\\.save
 .control
 option klu
 option method=gear

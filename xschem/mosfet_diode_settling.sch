@@ -85,7 +85,7 @@ value="
 option sparse
 save all
 tran 0.1p 300p
-write mosfet_diode_settling.raw
+write @schname\\.raw
 .endc
 "}
 C {devices/gnd.sym} 570 -280 0 0 {name=l1 lab=GND}
@@ -110,7 +110,7 @@ C {devices/lab_pin.sym} 500 -370 0 0 {name=p1 sig_type=std_logic lab=v_gs}
 C {devices/lab_pin.sym} 340 -680 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {devices/launcher.sym} 620 -160 0 0 {name=h1
 descr="load waves" 
-tclcommand="xschem raw_read $netlist_dir/mosfet_diode_settling.raw"
+tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw"
 }
 C {devices/spice_probe.sym} 500 -500 0 0 {name=p3 attrs=""}
 C {devices/ammeter.sym} 570 -450 0 0 {name=Vid savecurrent=true spice_ignore=0}
