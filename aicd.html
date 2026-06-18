@@ -907,6 +907,21 @@ Figure&nbsp;3: Circuit symbol of p-channel MOSFET. As for n-channel MOSFETs, we 
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled" title="MOSFET Symbol">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>MOSFET Symbol
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Looking at the MOSFET symbols in <a href="#fig-nmos-symbol" class="quarto-xref">Figure&nbsp;2</a> and <a href="#fig-pmos-symbol" class="quarto-xref">Figure&nbsp;3</a>, you might have noticed that the left and the right symbols are symmetric for the drain and source terminals, while the middle symbol shows an arrow in the source connection.</p>
+<p>This is a common “error” in many important textbooks and online resources <span class="citation" data-cites="Razavi_Analog_CMOS Gray_Meyer_2009 Sansen_Essentials">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>; <a href="#ref-Gray_Meyer_2009" role="doc-biblioref">Gray et al. 2009</a>; <a href="#ref-Sansen_Essentials" role="doc-biblioref">Sansen 2006</a>)</span>, and it is important to be aware of this. The drain and source of a MOSFET are (usually) symmetric, and the current flow can be reversed by changing the applied voltages (and then also drain and source swap; generally, for an NMOS, the connection with the higher potential is the drain, the one with the lower potential is the source. For a PMOS, the situation is inverted).</p>
+<p>The symbol in the middle of <a href="#fig-nmos-symbol" class="quarto-xref">Figure&nbsp;2</a> and <a href="#fig-pmos-symbol" class="quarto-xref">Figure&nbsp;3</a> is thus misleading, because is suggests that the source is special and that the current can only flow in one direction. This is not the case, and it is important to be aware of this when designing circuits, especially when using MOSFETs as switches. As many symbols are drawn this way, we will also use this symbol in this course (and the resemblance to a bipolar junction transistor is intentional), but please be aware of the fact that the drain and source are symmetric, and the current can flow in both directions depending on the bias voltages!</p>
+</div>
+</div>
 <p>For hand calculations and theoretical discussions we will use the following simplified large-signal model, shown in <a href="#fig-mosfet-large-signal-model" class="quarto-xref">Figure&nbsp;4</a>. A current source <span class="math inline">\(I_\mathrm{D}\)</span> models the current flow between drain and source, and it is controlled by the three control voltages <span class="math inline">\(V_\mathrm{GS}\)</span>, <span class="math inline">\(V_\mathrm{DS}\)</span>, and <span class="math inline">\(V_\mathrm{SB}\)</span>. Note that in this way (since <span class="math inline">\(I_\mathrm{D}= f(V_\mathrm{DS})\)</span>) also a resistive behavior between D and S can be modelled. In case that B and S are shorted then simply <span class="math inline">\(V_\mathrm{SB} = 0\)</span> and <span class="math inline">\(C_\mathrm{SB}\)</span> is shorted.</p>
 <div id="cell-fig-mosfet-large-signal-model" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
@@ -1729,7 +1744,7 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 </div>
 <p>Before continuing, please finish the previous exercise. Once you are done, compare with the below provided solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: MOSFET Diode Sizing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1738,7 +1753,7 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
@@ -2756,7 +2771,7 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-56-contents" aria-controls="callout-56" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2765,7 +2780,7 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-55" class="callout-55-contents callout-collapse collapse">
+<div id="callout-56" class="callout-56-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -3125,7 +3140,7 @@ V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 
 </div>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-60-contents" aria-controls="callout-60" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-61-contents" aria-controls="callout-61" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3134,7 +3149,7 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-60" class="callout-60-contents callout-collapse collapse">
+<div id="callout-61" class="callout-61-contents callout-collapse collapse">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -4048,7 +4063,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> we again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5,6}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we now stack twice as many MOSFETs at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-67-contents" aria-controls="callout-67" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-68-contents" aria-controls="callout-68" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4057,7 +4072,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-67" class="callout-67-contents callout-collapse collapse">
+<div id="callout-68" class="callout-68-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -4451,7 +4466,7 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 <h2 data-number="11.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">11.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-71-contents" aria-controls="callout-71" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-72-contents" aria-controls="callout-72" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4460,7 +4475,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-71" class="callout-71-contents callout-collapse collapse">
+<div id="callout-72" class="callout-72-contents callout-collapse collapse">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -5823,7 +5838,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="mosfet-fundamentals" class="level2" data-number="23.1">
 <h2 data-number="23.1" class="anchored" data-anchor-id="mosfet-fundamentals"><span class="header-section-number">23.1</span> MOSFET Fundamentals</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 1.1 --- Small-Signal Parameters">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-79-contents" aria-controls="callout-79" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-80-contents" aria-controls="callout-80" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5832,7 +5847,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-79" class="callout-79-contents callout-collapse collapse">
+<div id="callout-80" class="callout-80-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Define the two main small-signal parameters of a MOSFET (<span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span>) and explain their physical meaning.</p>
 <p><strong>Solution:</strong></p>
@@ -5844,7 +5859,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 1.2 --- Operating Regions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-80-contents" aria-controls="callout-80" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-81-contents" aria-controls="callout-81" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5853,7 +5868,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-80" class="callout-80-contents callout-collapse collapse">
+<div id="callout-81" class="callout-81-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> State the conditions for a MOSFET to operate in the triode region versus the saturation region. Why is saturation preferred for analog amplifier design?</p>
 <p><strong>Solution:</strong></p>
@@ -5873,7 +5888,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 1.3 --- Transit Frequency">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-81-contents" aria-controls="callout-81" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-82-contents" aria-controls="callout-82" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5882,7 +5897,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-81" class="callout-81-contents callout-collapse collapse">
+<div id="callout-82" class="callout-82-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Define the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span> of a MOSFET. How does it relate to the transistor’s speed capability?</p>
 <p><strong>Solution:</strong></p>
@@ -5902,7 +5917,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="gmid-sizing-methodology" class="level2" data-number="23.2">
 <h2 data-number="23.2" class="anchored" data-anchor-id="gmid-sizing-methodology"><span class="header-section-number">23.2</span> gm/ID Sizing Methodology</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 2.1 --- gm/ID in Different Inversion Regions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-82-contents" aria-controls="callout-82" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-83-contents" aria-controls="callout-83" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5911,7 +5926,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-82" class="callout-82-contents callout-collapse collapse">
+<div id="callout-83" class="callout-83-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the theoretical limits of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> in weak inversion (<span class="math inline">\(V_\mathrm{GS}\)</span> small) and strong inversion (<span class="math inline">\(V_\mathrm{GS}\)</span> large). What is the typical range of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> used in practical analog design?</p>
 <p><strong>Solution:</strong></p>
@@ -5929,7 +5944,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 2.2 --- Design Trade-offs">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-83-contents" aria-controls="callout-83" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-84-contents" aria-controls="callout-84" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5938,7 +5953,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-83" class="callout-83-contents callout-collapse collapse">
+<div id="callout-84" class="callout-84-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain the trade-offs involved when choosing a high versus low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> target in transistor sizing.</p>
 <p><strong>Solution:</strong></p>
@@ -5988,7 +6003,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 2.3 --- Saturation Voltage">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-84-contents" aria-controls="callout-84" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-85-contents" aria-controls="callout-85" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5997,7 +6012,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-84" class="callout-84-contents callout-collapse collapse">
+<div id="callout-85" class="callout-85-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> A transistor is sized for <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 15\,\text{V}^{-1}\)</span>. Estimate the minimum <span class="math inline">\(V_\mathrm{DS}\)</span> required to keep it in saturation.</p>
 <p><strong>Solution:</strong></p>
@@ -6012,7 +6027,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="mosfet-diode" class="level2" data-number="23.3">
 <h2 data-number="23.3" class="anchored" data-anchor-id="mosfet-diode"><span class="header-section-number">23.3</span> MOSFET Diode</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 3.1 --- Small-Signal Impedance">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-85-contents" aria-controls="callout-85" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-86-contents" aria-controls="callout-86" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6021,7 +6036,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-85" class="callout-85-contents callout-collapse collapse">
+<div id="callout-86" class="callout-86-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the small-signal impedance of a MOSFET diode (gate connected to drain) and identify its frequency behavior.</p>
 <p><strong>Solution:</strong></p>
@@ -6035,7 +6050,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 3.2 --- Noise Consideration">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-86-contents" aria-controls="callout-86" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-87-contents" aria-controls="callout-87" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6044,7 +6059,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-86" class="callout-86-contents callout-collapse collapse">
+<div id="callout-87" class="callout-87-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What is the output noise voltage (RMS) of a MOSFET diode, and how does it relate to <span class="math inline">\(kT/C\)</span> noise?</p>
 <p><strong>Solution:</strong></p>
@@ -6063,7 +6078,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="current-mirror" class="level2" data-number="23.4">
 <h2 data-number="23.4" class="anchored" data-anchor-id="current-mirror"><span class="header-section-number">23.4</span> Current Mirror</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 4.1 --- Basic Current Mirror">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-87-contents" aria-controls="callout-87" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-88-contents" aria-controls="callout-88" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6072,7 +6087,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-87" class="callout-87-contents callout-collapse collapse">
+<div id="callout-88" class="callout-88-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> For a basic NMOS current mirror with input transistor <span class="math inline">\(M_1\)</span> and output transistor <span class="math inline">\(M_2\)</span>, derive the output current ratio. What are the main sources of error in a practical current mirror?</p>
 <p><strong>Solution:</strong></p>
@@ -6089,7 +6104,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 4.2 --- Output Resistance">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-88-contents" aria-controls="callout-88" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-89-contents" aria-controls="callout-89" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6098,7 +6113,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-88" class="callout-88-contents callout-collapse collapse">
+<div id="callout-89" class="callout-89-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Calculate the output resistance of a simple current mirror. How can it be improved?</p>
 <p><strong>Solution:</strong></p>
@@ -6114,7 +6129,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 4.3 --- High-Swing Cascode">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-89-contents" aria-controls="callout-89" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-90-contents" aria-controls="callout-90" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6123,7 +6138,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-89" class="callout-89-contents callout-collapse collapse">
+<div id="callout-90" class="callout-90-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain the principle of a high-swing (low-voltage) cascode current mirror. What is the minimum output voltage for proper operation?</p>
 <p><strong>Solution:</strong></p>
@@ -6140,7 +6155,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="differential-pair" class="level2" data-number="23.5">
 <h2 data-number="23.5" class="anchored" data-anchor-id="differential-pair"><span class="header-section-number">23.5</span> Differential Pair</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 5.1 --- Differential vs. Common-Mode">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-90-contents" aria-controls="callout-90" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-91-contents" aria-controls="callout-91" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6149,7 +6164,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-90" class="callout-90-contents callout-collapse collapse">
+<div id="callout-91" class="callout-91-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> For an ideal differential pair with tail current source <span class="math inline">\(I_\mathrm{tail}\)</span>, derive the differential-mode and common-mode transconductance.</p>
 <p><strong>Solution:</strong></p>
@@ -6170,7 +6185,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 5.2 --- Input-Referred Offset">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-91-contents" aria-controls="callout-91" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-92-contents" aria-controls="callout-92" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6179,7 +6194,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-91" class="callout-91-contents callout-collapse collapse">
+<div id="callout-92" class="callout-92-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the input-referred offset voltage of a differential pair due to threshold voltage mismatch <span class="math inline">\(\Delta V_\mathrm{th}\)</span> and transconductance mismatch <span class="math inline">\(\Delta g_\mathrm{m}/g_\mathrm{m}\)</span>.</p>
 <p><strong>Solution:</strong></p>
@@ -6200,7 +6215,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="basic-5-transistor-ota" class="level2" data-number="23.6">
 <h2 data-number="23.6" class="anchored" data-anchor-id="basic-5-transistor-ota"><span class="header-section-number">23.6</span> Basic 5-Transistor OTA</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 6.1 --- DC Gain Derivation">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-92-contents" aria-controls="callout-92" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-93-contents" aria-controls="callout-93" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6209,7 +6224,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-92" class="callout-92-contents callout-collapse collapse">
+<div id="callout-93" class="callout-93-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the dc voltage gain of an unloaded basic 5-transistor OTA with differential pair (<span class="math inline">\(M_1\)</span>, <span class="math inline">\(M_2\)</span>), current mirror load (<span class="math inline">\(M_3\)</span>, <span class="math inline">\(M_4\)</span>), and tail current source (<span class="math inline">\(M_5\)</span>).</p>
 <p><strong>Solution:</strong></p>
@@ -6227,7 +6242,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 6.2 --- Bandwidth and GBW">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-93-contents" aria-controls="callout-93" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-94-contents" aria-controls="callout-94" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6236,7 +6251,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-93" class="callout-93-contents callout-collapse collapse">
+<div id="callout-94" class="callout-94-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> For a 5T-OTA driving a load capacitance <span class="math inline">\(C_\mathrm{L}\)</span>, derive the dominant pole frequency and the gain-bandwidth product (GBW).</p>
 <p><strong>Solution:</strong></p>
@@ -6249,7 +6264,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 6.3 --- Unity-Gain Buffer Accuracy">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-94-contents" aria-controls="callout-94" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-95-contents" aria-controls="callout-95" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6258,7 +6273,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-94" class="callout-94-contents callout-collapse collapse">
+<div id="callout-95" class="callout-95-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> A 5T-OTA with dc gain <span class="math inline">\(A_0 = 50\,\text{dB}\)</span> is configured as a unity-gain buffer. Calculate the closed-loop gain error.</p>
 <p><strong>Solution:</strong></p>
@@ -6274,7 +6289,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="improved-telescopic-ota" class="level2" data-number="23.7">
 <h2 data-number="23.7" class="anchored" data-anchor-id="improved-telescopic-ota"><span class="header-section-number">23.7</span> Improved (Telescopic) OTA</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 7.1 --- Gain Enhancement with Cascodes">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-95-contents" aria-controls="callout-95" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-96-contents" aria-controls="callout-96" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6283,7 +6298,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-95" class="callout-95-contents callout-collapse collapse">
+<div id="callout-96" class="callout-96-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> How does adding cascode transistors to a 5T-OTA improve the dc gain? Derive the new gain expression.</p>
 <p><strong>Solution:</strong></p>
@@ -6297,7 +6312,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 7.2 --- Output Swing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-96-contents" aria-controls="callout-96" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-97-contents" aria-controls="callout-97" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6306,7 +6321,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-96" class="callout-96-contents callout-collapse collapse">
+<div id="callout-97" class="callout-97-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What is the output voltage swing limitation of a telescopic OTA? Compare with a folded-cascode topology.</p>
 <p><strong>Solution:</strong></p>
@@ -6323,7 +6338,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="cascode-stage" class="level2" data-number="23.8">
 <h2 data-number="23.8" class="anchored" data-anchor-id="cascode-stage"><span class="header-section-number">23.8</span> Cascode Stage</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 8.1 --- Output Impedance">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-97-contents" aria-controls="callout-97" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-98-contents" aria-controls="callout-98" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6332,7 +6347,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-97" class="callout-97-contents callout-collapse collapse">
+<div id="callout-98" class="callout-98-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the output impedance looking into the drain of a cascode transistor, assuming the source is connected to a current source with output resistance <span class="math inline">\(r_\mathrm{ds,CS}\)</span>.</p>
 <p><strong>Solution:</strong></p>
@@ -6346,7 +6361,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 8.2 --- Input Impedance">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-98-contents" aria-controls="callout-98" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-99-contents" aria-controls="callout-99" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6355,7 +6370,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-98" class="callout-98-contents callout-collapse collapse">
+<div id="callout-99" class="callout-99-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Calculate the input impedance looking into the source of a cascode transistor when its drain is connected to a low-impedance load.</p>
 <p><strong>Solution:</strong></p>
@@ -6371,7 +6386,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="biasing-and-bandgap-reference" class="level2" data-number="23.9">
 <h2 data-number="23.9" class="anchored" data-anchor-id="biasing-and-bandgap-reference"><span class="header-section-number">23.9</span> Biasing and Bandgap Reference</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 9.1 --- Bandgap Principle">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-99-contents" aria-controls="callout-99" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-100-contents" aria-controls="callout-100" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6380,7 +6395,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-99" class="callout-99-contents callout-collapse collapse">
+<div id="callout-100" class="callout-100-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain the principle of a bandgap voltage reference. Why does the output voltage equal approximately 1.2 V?</p>
 <p><strong>Solution:</strong></p>
@@ -6396,7 +6411,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 9.2 --- PTAT Current">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-100-contents" aria-controls="callout-100" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-101-contents" aria-controls="callout-101" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6405,7 +6420,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-100" class="callout-100-contents callout-collapse collapse">
+<div id="callout-101" class="callout-101-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Design a PTAT (Proportional To Absolute Temperature) current source. What determines the temperature coefficient?</p>
 <p><strong>Solution:</strong></p>
@@ -6428,7 +6443,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="noise-analysis" class="level2" data-number="23.10">
 <h2 data-number="23.10" class="anchored" data-anchor-id="noise-analysis"><span class="header-section-number">23.10</span> Noise Analysis</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 10.1 --- MOSFET Thermal Noise">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-101-contents" aria-controls="callout-101" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-102-contents" aria-controls="callout-102" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6437,7 +6452,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-101" class="callout-101-contents callout-collapse collapse">
+<div id="callout-102" class="callout-102-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Write the expression for the thermal noise current of a MOSFET in saturation. What is the noise excess factor <span class="math inline">\(\gamma\)</span>?</p>
 <p><strong>Solution:</strong></p>
@@ -6460,7 +6475,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 10.2 --- OTA Output Noise">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-102-contents" aria-controls="callout-102" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-103-contents" aria-controls="callout-103" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6469,7 +6484,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-102" class="callout-102-contents callout-collapse collapse">
+<div id="callout-103" class="callout-103-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the total output noise of a 5T-OTA in a unity-gain buffer configuration with load capacitance <span class="math inline">\(C_\mathrm{L}\)</span>.</p>
 <p><strong>Solution:</strong></p>
@@ -6493,7 +6508,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="mismatch-and-variability" class="level2" data-number="23.11">
 <h2 data-number="23.11" class="anchored" data-anchor-id="mismatch-and-variability"><span class="header-section-number">23.11</span> Mismatch and Variability</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 11.1 --- Pelgrom's Law">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-103-contents" aria-controls="callout-103" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-104-contents" aria-controls="callout-104" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6502,7 +6517,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-103" class="callout-103-contents callout-collapse collapse">
+<div id="callout-104" class="callout-104-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> State Pelgrom’s law for MOSFET threshold voltage mismatch. How should transistors be sized to achieve 1 mV offset in a differential pair (assuming <span class="math inline">\(A_\mathrm{vth} = 5\,\text{mV} \cdot \mu\text{m}\)</span>)?</p>
 <p><strong>Solution:</strong></p>
@@ -6517,7 +6532,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 11.2 --- Monte Carlo Analysis">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-104-contents" aria-controls="callout-104" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-105-contents" aria-controls="callout-105" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6526,7 +6541,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-104" class="callout-104-contents callout-collapse collapse">
+<div id="callout-105" class="callout-105-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain the difference between process corners (SS, TT, FF, etc.) and Monte Carlo mismatch simulation. When should each be used?</p>
 <p><strong>Solution:</strong></p>
@@ -6600,7 +6615,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="design-problems" class="level2" data-number="23.12">
 <h2 data-number="23.12" class="anchored" data-anchor-id="design-problems"><span class="header-section-number">23.12</span> Design Problems</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 12.1 --- OTA Design">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-105-contents" aria-controls="callout-105" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-106-contents" aria-controls="callout-106" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6609,7 +6624,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-105" class="callout-105-contents callout-collapse collapse">
+<div id="callout-106" class="callout-106-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Design a 5T-OTA to meet the following specifications using gm/ID methodology:</p>
 <ul>
@@ -6642,7 +6657,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 12.2 --- Current Mirror Design">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-106-contents" aria-controls="callout-106" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-107-contents" aria-controls="callout-107" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6651,7 +6666,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-106" class="callout-106-contents callout-collapse collapse">
+<div id="callout-107" class="callout-107-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Design a cascode current mirror to provide <span class="math inline">\(I_\mathrm{out} = 50\,\mu\text{A}\)</span> from <span class="math inline">\(I_\mathrm{ref} = 10\,\mu\text{A}\)</span>. Minimize the output compliance voltage while achieving <span class="math inline">\(r_\mathrm{out} &gt; 5\,\text{M}\Omega\)</span>.</p>
 <p><strong>Solution:</strong></p>
@@ -6674,7 +6689,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 12.3 --- Common-Source Amplifier">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-107-contents" aria-controls="callout-107" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-108-contents" aria-controls="callout-108" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6683,7 +6698,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-107" class="callout-107-contents callout-collapse collapse">
+<div id="callout-108" class="callout-108-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Design a common-source amplifier for a 50 Ω measurement system with voltage gain <span class="math inline">\(|A_\mathrm{v}| = 10\)</span> (20 dB). The amplifier should be matched to 50 Ω at input and output.</p>
 <p><strong>Solution:</strong></p>
@@ -6704,7 +6719,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="short-conceptual-questions" class="level2" data-number="23.13">
 <h2 data-number="23.13" class="anchored" data-anchor-id="short-conceptual-questions"><span class="header-section-number">23.13</span> Short Conceptual Questions</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.1">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-108-contents" aria-controls="callout-108" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-109-contents" aria-controls="callout-109" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6713,7 +6728,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-108" class="callout-108-contents callout-collapse collapse">
+<div id="callout-109" class="callout-109-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Why is it important to use “unit elements” when designing matched current mirrors?</p>
 <p><strong>Solution:</strong> Unit elements ensure:</p>
@@ -6728,7 +6743,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.2">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-109-contents" aria-controls="callout-109" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-110-contents" aria-controls="callout-110" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6737,7 +6752,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-109" class="callout-109-contents callout-collapse collapse">
+<div id="callout-110" class="callout-110-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What is the purpose of a tail current source in a differential pair?</p>
 <p><strong>Solution:</strong> The tail current source:</p>
@@ -6751,7 +6766,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.3">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-110-contents" aria-controls="callout-110" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-111-contents" aria-controls="callout-111" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6760,7 +6775,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-110" class="callout-110-contents callout-collapse collapse">
+<div id="callout-111" class="callout-111-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Why does the GBW of an OTA depend only on <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(C_\mathrm{L}\)</span>, not on the output resistance?</p>
 <p><strong>Solution:</strong> <span class="math display">\[\text{GBW} = A_0 \cdot f_\mathrm{p} = \frac{g_\mathrm{m}}{g_\mathrm{out}} \cdot \frac{g_\mathrm{out}}{2\pi C_\mathrm{L}} = \frac{g_\mathrm{m}}{2\pi C_\mathrm{L}}\]</span></p>
@@ -6769,7 +6784,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.4">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-111-contents" aria-controls="callout-111" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-112-contents" aria-controls="callout-112" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6778,7 +6793,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-111" class="callout-111-contents callout-collapse collapse">
+<div id="callout-112" class="callout-112-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What is the advantage of a folded-cascode over a telescopic OTA?</p>
 <p><strong>Solution:</strong></p>
@@ -6792,7 +6807,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.5">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-112-contents" aria-controls="callout-112" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-113-contents" aria-controls="callout-113" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6801,7 +6816,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-112" class="callout-112-contents callout-collapse collapse">
+<div id="callout-113" class="callout-113-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Why is flicker noise more important in the input stage of an OTA than in the load stage?</p>
 <p><strong>Solution:</strong></p>
@@ -6815,7 +6830,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.6">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-113-contents" aria-controls="callout-113" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-114-contents" aria-controls="callout-114" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6824,7 +6839,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-113" class="callout-113-contents callout-collapse collapse">
+<div id="callout-114" class="callout-114-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain why the regulated cascode achieves higher output impedance than a simple cascode.</p>
 <p><strong>Solution:</strong></p>
