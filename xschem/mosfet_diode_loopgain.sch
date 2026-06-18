@@ -119,7 +119,7 @@ C {devices/code_shown.sym} 60 -1090 0 0 {name=NGSPICE
 only_toplevel=true
 value="
 .param temp=27
-.include mosfet_diode_loopgain.save
+.include @schname\\.save
 .options savecurrents reltol=1e-3 abstol=1e-12 gmin=1e-15
 .control
 save all
@@ -127,13 +127,13 @@ save all
 * Operating Point Analysis
 op
 remzerovec
-write mosfet_diode_loopgain.raw
+write @schname\\.raw
 set appendwrite
 
 * AC Analysis
 ac dec 1001 10k 100G
 remzerovec
-write mosfet_diode_loopgain.raw
+write @schname\\.raw
 set appendwrite
 
 * Middlebrook's Method
@@ -161,7 +161,7 @@ plot 180/pi*cphase(ttian) ylabel 'Phase - Tian'
 plot db(tmb) db(ttian) ylabel 'Magnitude'
 plot 180/pi*cphase(tmb) 180/pi*cphase(ttian) ylabel 'Phase'
 
-write mosfet_diode_loopgain.raw
+write @schname\\.raw
 
 *quit
 .endc

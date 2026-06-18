@@ -36,7 +36,7 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -540 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include mosfet_diode_noise.save
+.include @schname\\.save
 .control
 option sparse
 save all
@@ -46,7 +46,7 @@ setplot noise1
 plot loglog onoise_spectrum
 setplot noise2
 print onoise_total
-write mosfet_diode_noise.raw
+write @schname\\.raw
 .endc
 "}
 C {devices/gnd.sym} 750 -280 0 0 {name=l1 lab=GND}
