@@ -1,4 +1,4 @@
-name: regression-test
+name: simulation-test
 
 on:
   workflow_dispatch:
@@ -6,18 +6,18 @@ on:
     branches: [main]
     paths:
       - 'xschem/**'
-      - '.github/workflows/regression-test.yml'
+      - '.github/workflows/simulation-test.yml'
   pull_request:
     branches: [main]
     paths:
       - 'xschem/**'
-      - '.github/workflows/regression-test.yml'
+      - '.github/workflows/simulation-test.yml'
 
 permissions:
   contents: read
 
 concurrency:
-  group: regression-test-${{ github.ref }}
+  group: simulation-test-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -69,13 +69,13 @@ jobs:
           ngspice --version 2>&1 | head -n 1 || true
           ls "$PDK_ROOT" || true
 
-      - name: Run testbench regression
-        run: ./xschem/run_regression.sh
+      - name: Run testbench simulations
+        run: ./xschem/run_simulation_tests.sh
 
       - name: Upload simulation logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: regression-logs
-          path: xschem/simulations/regression_logs/
+          name: simulation-logs
+          path: xschem/simulations/simulation_logs/
           if-no-files-found: ignore

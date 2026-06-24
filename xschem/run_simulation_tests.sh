@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# Regression test for all Xschem schematic testbenches
+# Simulation test for all Xschem schematic testbenches
 # ---------------------------------------------------------------------------
 # For every top-level testbench (a *.sch containing an ngspice `.control`
 # block) this script:
@@ -19,10 +19,10 @@
 # from that container.
 #
 # Usage:
-#   xschem/run_regression.sh                 # test all auto-detected testbenches
-#   xschem/run_regression.sh a.sch b.sch     # test only the given schematics
-#   JOBS=4 xschem/run_regression.sh          # cap concurrency at 4 jobs
-#   JOBS=4 SPICE_THREADS=2 ... run_regression.sh   # 4 jobs, 2 ngspice threads each
+#   xschem/run_simulation_tests.sh                 # test all auto-detected testbenches
+#   xschem/run_simulation_tests.sh a.sch b.sch     # test only the given schematics
+#   JOBS=4 xschem/run_simulation_tests.sh          # cap concurrency at 4 jobs
+#   JOBS=4 SPICE_THREADS=2 ... run_simulation_tests.sh   # 4 jobs, 2 ngspice threads each
 #
 # Exit status is non-zero if any testbench fails to netlist or simulate.
 #
@@ -37,7 +37,7 @@ set -u
 XSCHEM_DIR="$(cd "$(dirname "$0")" && pwd)"
 RCFILE="${XSCHEM_DIR}/xschemrc"
 SIM_DIR="${XSCHEM_DIR}/simulations"
-LOG_DIR="${SIM_DIR}/regression_logs"
+LOG_DIR="${SIM_DIR}/simulation_logs"
 
 # --- number of parallel jobs -----------------------------------------------
 NPROC="$(nproc 2>/dev/null || echo 4)"
@@ -131,7 +131,7 @@ mkdir -p "$SIM_DIR" "$LOG_DIR"
 rm -f "$LOG_DIR"/*.status 2>/dev/null
 
 echo "============================================================"
-echo " Xschem testbench regression"
+echo " Xschem testbench simulation"
 echo "   PDK         : $PDK"
 echo "   PDK_ROOT    : ${PDK_ROOT:-<unset>}"
 echo "   testbenches : ${#TESTBENCHES[@]}"
