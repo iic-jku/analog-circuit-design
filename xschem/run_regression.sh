@@ -107,7 +107,9 @@ fi
 # "Error:", "ERROR,", "fatal error" but NOT measurement variables that merely
 # end in "error" (e.g. `gainerror = ...`, a legitimate result line).
 ERR_PATTERN='\berror|fatal|aborted|there aren.t any circuits|no such file|could not find|unable to find|cannot find|premature end of file'
-ERR_ALLOW='warning|tolerance|gmin step|source step|trying gmin|note:'
+# `cannot remove`: benign `rm`/`shell rm` cleanup of files that do not exist
+# (testbenches tidy up Monte-Carlo output between runs).
+ERR_ALLOW='warning|tolerance|gmin step|source step|trying gmin|note:|cannot remove'
 
 # --- collect the list of testbenches ---------------------------------------
 declare -a TESTBENCHES
