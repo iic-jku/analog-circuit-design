@@ -55,14 +55,14 @@ value=".lib cornerMOShv.lib mos_tt
 C {devices/code_shown.sym} 0 -930 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include @schname\\.save
+.include @schname\\\\.save
 .control
 save all
 op
-write @schname\\.raw
+write @schname\\\\.raw
 set appendwrite
 dc Vds 0 3.3 0.01 Vgs 0 3.2 0.2
-write @schname\\.raw
+write @schname\\\\.raw
 quit
 .endc
 "}

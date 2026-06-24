@@ -145,12 +145,12 @@ save all
 * Operating Point Analysis
 op
 remzerovec
-write @schname\\.raw
+write @schname\\\\.raw
 set appendwrite
 
 * Transient Analysis
 tran 10u 4ms
-write @schname\\.raw
+write @schname\\\\.raw
 
 plot vin_tg vout_tg_on vout_tg_off
 

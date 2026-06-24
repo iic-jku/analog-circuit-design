@@ -203,7 +203,7 @@ save @n.x2.xm2.nsg13_lv_pmos[rg]
 * Operating Point Analysis
 op
 remzerovec
-write @schname\\.raw
+write @schname\\\\.raw
 
 quit
 .endc"}

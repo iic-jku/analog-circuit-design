@@ -85,7 +85,7 @@ value="
 option sparse
 save all
 tran 0.1p 300p
-write @schname\\.raw
+write @schname\\\\.raw
 .endc
 "}
 C {devices/gnd.sym} 570 -280 0 0 {name=l1 lab=GND}

@@ -134,13 +134,13 @@ save all
 * Operating Point Analysis
 op
 remzerovec
-write @schname\\.raw
+write @schname\\\\.raw
 set appendwrite
 
 * AC Analysis
 ac dec 101 1 100G
 remzerovec
-write @schname\\.raw
+write @schname\\\\.raw
 set appendwrite
 
 * Middlebrook's Method
@@ -168,7 +168,7 @@ plot 180/pi*cphase(ttian) ylabel 'Phase - Tian'
 plot db(tmb) db(ttian) ylabel 'Magnitude'
 plot 180/pi*cphase(tmb) 180/pi*cphase(ttian) ylabel 'Phase'
 
-write @schname\\.raw
+write @schname\\\\.raw
 
 *quit
 .endc

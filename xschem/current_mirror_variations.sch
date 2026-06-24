@@ -6,9 +6,9 @@ S {}
 F {}
 E {}
 T {Basic current mirror} 270 -630 0 0 0.4 0.4 {}
-T {Cascoded current mirror} 650 -1320 0 0 0.4 0.4 {}
+T {Cascoded current mirror} 240 -1340 0 0 0.4 0.4 {}
 T {Degenerated current mirror} 920 -730 0 0 0.4 0.4 {}
-T {Regulated current mirror} 1460 -1340 0 0 0.4 0.4 {}
+T {Regulated current mirror} 1090 -1340 0 0 0.4 0.4 {}
 N 60 -330 60 -310 {
 lab=GND}
 N 220 -400 290 -400 {
@@ -200,7 +200,7 @@ value="
 C {devices/code_shown.sym} 1640 -1040 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include @schname\\.save
+.include @schname\\\\.save
 .control
 option noacct noinit seed=1
 save all
@@ -212,7 +212,7 @@ let runs = 0
 * Simulate dc output characteristics
 *
 op
-write @schname\\.raw
+write @schname\\\\.raw
 dc Vout1 0 1.5 10m
 plot i(Viout1) i(viout2) i(viout3) i(viout4)
 wrdata curmir_variations.txt i(viout1) i(viout2) i(viout3) i(viout4) 
