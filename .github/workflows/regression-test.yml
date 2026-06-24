@@ -38,13 +38,26 @@ jobs:
 
       - name: Restore IIC-OSIC-TOOLS PATH
         # GitHub Actions overrides $PATH for container jobs with the runner
-        # host's PATH, dropping the image's tool directories. Re-add every bin
-        # dir the image ships so xschem/ngspice are found again.
+        # host's PATH, dropping the image's tool directories. Re-add them so
+        # xschem/ngspice are found again.
         run: |
+          # Baseline: every bin/ dir the image ships (covers binary tools).
           find /foss -maxdepth 6 \( -path /foss/pdks -o -path /foss/designs \) -prune \
             -o -type d -name bin -print 2>/dev/null | sort -u >> "$GITHUB_PATH"
           for d in /foss/bin /usr/local/bin; do
             [ -d "$d" ] && echo "$d" >> "$GITHUB_PATH"
+          done
+          # Also locate the exact tools we need by name, in case any live
+          # outside a bin/ dir, and add their directories.
+          for tool in xschem ngspice; do
+            p="$(find /foss \( -path /foss/pdks -o -path /foss/designs \) -prune \
+                  -o -name "$tool" -print 2>/dev/null | head -n1)"
+            if [ -n "$p" ]; then
+              dirname "$p" >> "$GITHUB_PATH"
+              echo "located $tool in $(dirname "$p")"
+            else
+              echo "WARNING: $tool not found under /foss" >&2
+            fi
           done
 
       - name: Show tool environment
