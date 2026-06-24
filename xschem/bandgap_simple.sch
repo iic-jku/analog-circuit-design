@@ -144,17 +144,17 @@ value="
 C {devices/code_shown.sym} 0 -550 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include @schname\\.save
+.include @schname\\\\.save
 .control
 save all
 set filetype=ascii
 
 op
-write @schname\\.raw
+write @schname\\\\.raw
 
 dc temp -30 125 1
 set appendwrite
-write @schname\\.raw
+write @schname\\\\.raw
 plot vref
 
 wrdata bandgap_simple.txt vref

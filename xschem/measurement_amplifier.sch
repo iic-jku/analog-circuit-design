@@ -68,18 +68,18 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -650 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include @schname\\.save
+.include @schname\\\\.save
 .control
 option sparse
 save all
 op
-write @schname\\.raw
+write @schname\\\\.raw
 set appendwrite
 ac dec 101 1k 1G
 let vout_db=20*log10(mag(vout))
 meas ac vout_db_max max vout_db
 print vout_db_max
-write @schname\\.raw
+write @schname\\\\.raw
 .endc
 "}
 C {devices/vsource.sym} 340 -370 0 0 {name=Vdd value=1.5}

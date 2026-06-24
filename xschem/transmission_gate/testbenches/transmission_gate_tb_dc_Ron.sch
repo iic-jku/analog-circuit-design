@@ -172,12 +172,12 @@ save all
 * Operating Point Analysis
 op
 remzerovec
-write @schname\\.raw
+write @schname\\\\.raw
 set appendwrite
 
 * DC Sweep Analysis
 dc vin 0 1.5 0.01
-write @schname\\.raw
+write @schname\\\\.raw
 
 * On-Resistance
 let r_w_dummy_on = (v(vout_tg_w_dummy_on)-v(vin_tg))/I(vds_x2)

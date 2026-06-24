@@ -79,7 +79,7 @@ reset
 op
 *showmod
 show
-write @schname\\.raw
+write @schname\\\\.raw
 .endc
 "}
 C {devices/gnd.sym} 650 -110 0 0 {name=l1 lab=GND}

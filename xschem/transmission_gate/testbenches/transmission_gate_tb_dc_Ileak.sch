@@ -144,12 +144,12 @@ save all
 * Operating Point Analysis
 op
 remzerovec
-write @schname\\.raw
+write @schname\\\\.raw
 set appendwrite
 
 * DC Sweep Analysis with Dummy
 dc vin 0 1.5 10m vout_w_dummy 0 1.5 0.75
-write @schname\\.raw
+write @schname\\\\.raw
 set appendwrite
 
 * Off-Leakage Current
@@ -158,7 +158,7 @@ plot Ileak_w_dummy
 
 * DC Sweep Analysis without Dummy
 dc vin 0 1.5 10m vout_wo_dummy 0 1.5 0.75
-write @schname\\.raw
+write @schname\\\\.raw
 
 * Off-Leakage Current
 let Ileak_wo_dummy = i(vout_wo_dummy)
