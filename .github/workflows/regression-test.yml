@@ -1,0 +1,55 @@
+name: regression-test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'xschem/**'
+      - '.github/workflows/regression-test.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'xschem/**'
+      - '.github/workflows/regression-test.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regression-test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  testbenches:
+    name: Simulate Xschem testbenches
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    container:
+      # IIC-OSIC-TOOLS ships xschem, ngspice and the IHP SG13G2 PDK.
+      image: hpretl/iic-osic-tools:latest
+      options: --user root
+    env:
+      PDK: ihp-sg13g2
+      PDK_ROOT: /foss/pdks
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Show tool environment
+        run: |
+          echo "PDK=$PDK  PDK_ROOT=$PDK_ROOT"
+          xschem --version 2>&1 | head -n 1 || true
+          ngspice --version 2>&1 | head -n 1 || true
+          ls "$PDK_ROOT" || true
+
+      - name: Run testbench regression
+        run: ./xschem/run_regression.sh
+
+      - name: Upload simulation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-logs
+          path: xschem/simulations/regression_logs/
+          if-no-files-found: ignore
