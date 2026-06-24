@@ -1,0 +1,45 @@
+name: shellcheck
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '**.sh'
+      - '.github/workflows/shellcheck.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.sh'
+      - '.github/workflows/shellcheck.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shellcheck-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  shellcheck:
+    name: Lint shell scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Install shellcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends shellcheck
+
+      - name: Run shellcheck
+        run: |
+          mapfile -t scripts < <(git ls-files '*.sh')
+          if [ "${#scripts[@]}" -eq 0 ]; then
+            echo "No shell scripts found."; exit 0
+          fi
+          printf 'Linting %d script(s):\n' "${#scripts[@]}"
+          printf '  %s\n' "${scripts[@]}"
+          shellcheck --severity=warning "${scripts[@]}"
