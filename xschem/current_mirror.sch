@@ -126,12 +126,12 @@ value=".lib cornerMOSlv.lib mos_tt
 C {devices/code_shown.sym} 0 -550 0 0 {name=NGSPICE only_toplevel=true 
 value="
 .temp 27
-.include @schname\\.save
+.include @schname\\\\.save
 .control
 save all
 
 op
-write @schname\\.raw
+write @schname\\\\.raw
 dc Vout1 0 1.5 10m
 plot i(viout1) vs v(out1)
 dc Vout2 0 1.5 10m
