@@ -36,9 +36,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v5
 
+      - name: Restore IIC-OSIC-TOOLS PATH
+        # GitHub Actions overrides $PATH for container jobs with the runner
+        # host's PATH, dropping the image's tool directories. Re-add every bin
+        # dir the image ships so xschem/ngspice are found again.
+        run: |
+          find /foss -maxdepth 6 \( -path /foss/pdks -o -path /foss/designs \) -prune \
+            -o -type d -name bin -print 2>/dev/null | sort -u >> "$GITHUB_PATH"
+          for d in /foss/bin /usr/local/bin; do
+            [ -d "$d" ] && echo "$d" >> "$GITHUB_PATH"
+          done
+
       - name: Show tool environment
         run: |
           echo "PDK=$PDK  PDK_ROOT=$PDK_ROOT"
+          echo "xschem  -> $(command -v xschem  || echo NOT FOUND)"
+          echo "ngspice -> $(command -v ngspice || echo NOT FOUND)"
           xschem --version 2>&1 | head -n 1 || true
           ngspice --version 2>&1 | head -n 1 || true
           ls "$PDK_ROOT" || true
