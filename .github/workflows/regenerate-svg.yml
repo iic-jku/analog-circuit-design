@@ -1,0 +1,86 @@
+name: regenerate-svg
+
+# When a schematic (*.sch) is pushed to main, re-render its SVG with the
+# IIC-OSIC-TOOLS image (sak-sch2svg.sh) and commit the refreshed SVG back, so
+# the committed previews never drift from the schematics.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'xschem/**.sch'
+      - '.github/workflows/regenerate-svg.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  # Do not cancel an in-flight run: it may be mid commit/push.
+  group: regenerate-svg
+  cancel-in-progress: false
+
+jobs:
+  regenerate:
+    name: Re-render changed schematic SVGs
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    container:
+      image: hpretl/iic-osic-tools:latest
+      options: --user root
+    env:
+      PDK: ihp-sg13g2
+      PDK_ROOT: /foss/pdks
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          # Need the parent commit to diff which schematics changed.
+          fetch-depth: 2
+
+      - name: Mark workspace as safe for git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Determine changed schematics
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Manual run: regenerate every schematic.
+            git ls-files '*.sch' > changed_sch.txt
+          else
+            base='${{ github.event.before }}'
+            if ! git cat-file -e "${base}^{commit}" 2>/dev/null; then
+              base="$(git rev-parse HEAD~1 2>/dev/null || git rev-parse HEAD)"
+            fi
+            git diff --name-only --diff-filter=ACMR "$base" "${{ github.sha }}" \
+              -- '*.sch' > changed_sch.txt || true
+          fi
+          echo "Changed schematics:"; cat changed_sch.txt || true
+          echo "count=$(wc -l < changed_sch.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Re-render SVGs
+        if: steps.changed.outputs.count != '0'
+        run: |
+          while IFS= read -r sch; do
+            [ -f "$sch" ] || continue
+            echo ">>> rendering $sch"
+            if command -v xvfb-run >/dev/null 2>&1; then
+              xvfb-run -a sak-sch2svg.sh "$sch"
+            else
+              sak-sch2svg.sh "$sch"
+            fi
+          done < changed_sch.txt
+
+      - name: Commit refreshed SVGs
+        if: steps.changed.outputs.count != '0'
+        run: |
+          rm -f changed_sch.txt
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -- '*.svg'
+          if git diff --cached --quiet; then
+            echo "No SVG changes to commit."
+          else
+            git commit -m "Regenerate schematic SVGs for changed schematics [skip ci]"
+            git push
+          fi
