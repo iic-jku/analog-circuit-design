@@ -41,29 +41,35 @@ jobs:
       - name: Mark workspace as safe for git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-      - name: Restore IIC-OSIC-TOOLS PATH
-        # GitHub Actions overrides $PATH for container jobs with the runner
-        # host's PATH, dropping the image's tool directories. Re-add them so
-        # xschem / sak-sch2svg.sh are found again.
+      - name: Set up IIC-OSIC-TOOLS environment
+        # GitHub Actions bypasses the container entrypoint, so the image's tool
+        # environment is never initialised: $PATH is overridden with the runner
+        # host's PATH and LD_LIBRARY_PATH/PYTHONPATH/KLAYOUT_PATH/... are unset.
+        # Tools and helper scripts (e.g. klayout in /foss/tools/klayout, or the
+        # sak-* scripts in /foss/tools/sak, none of which sit in a bin/ dir) are
+        # then "not found". Replicate the entrypoint by sourcing the image's
+        # single source of truth for the environment and persist the result so
+        # every subsequent step sees the full toolchain.
+        shell: bash
         run: |
-          # Baseline: every bin/ dir the image ships (covers binary tools).
-          find /foss -maxdepth 6 \( -path /foss/pdks -o -path /foss/designs \) -prune \
-            -o -type d -name bin -print 2>/dev/null | sort -u >> "$GITHUB_PATH"
-          for d in /foss/bin /usr/local/bin; do
-            [ -d "$d" ] && echo "$d" >> "$GITHUB_PATH"
-          done
-          # The iic-*/sak-* helper scripts may live outside a bin/ dir, so
-          # locate the exact tools we need by name and add their directories.
-          for tool in xschem sak-sch2svg.sh; do
-            p="$(find /foss \( -path /foss/pdks -o -path /foss/designs \) -prune \
-                  -o -name "$tool" -print 2>/dev/null | head -n1)"
-            if [ -n "$p" ]; then
-              dirname "$p" >> "$GITHUB_PATH"
-              echo "located $tool in $(dirname "$p")"
-            else
-              echo "WARNING: $tool not found under /foss" >&2
-            fi
-          done
+          set -a
+          source /etc/profile.d/iic-osic-tools-setup.sh
+          set +a
+          {
+            echo "PATH=$PATH"
+            echo "PYTHONPATH=$PYTHONPATH"
+            echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+            echo "LIBRARY_PATH=$LIBRARY_PATH"
+            echo "CPATH=$CPATH"
+            echo "SAK=$SAK"
+            echo "KLAYOUT_HOME=$KLAYOUT_HOME"
+            echo "KLAYOUT_PATH=$KLAYOUT_PATH"
+            echo "PDK=$PDK"
+            echo "PDKPATH=$PDKPATH"
+            echo "PDK_ROOT=$PDK_ROOT"
+            echo "STD_CELL_LIBRARY=$STD_CELL_LIBRARY"
+            echo "SPICE_USERINIT_DIR=$SPICE_USERINIT_DIR"
+          } >> "$GITHUB_ENV"
 
       - name: Show tool environment
         run: |
