@@ -36,6 +36,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v5
 
+      - name: Mark workspace as safe for git
+        # The container runs as root while the checkout is owned by a different
+        # UID, so git refuses to operate ("detected dubious ownership"). Some
+        # tools/scripts shell out to git, so whitelist all paths up front.
+        run: git config --global --add safe.directory '*'
+
       - name: Set up IIC-OSIC-TOOLS environment
         # GitHub Actions bypasses the container entrypoint, so the image's tool
         # environment is never initialised: $PATH is overridden with the runner

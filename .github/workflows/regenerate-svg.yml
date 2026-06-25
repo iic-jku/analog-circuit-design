@@ -39,7 +39,10 @@ jobs:
           fetch-depth: 2
 
       - name: Mark workspace as safe for git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        # The container runs as root while the checkout is owned by a different
+        # UID, so git refuses to operate ("detected dubious ownership"). This
+        # workflow diffs and commits, so whitelist all paths up front.
+        run: git config --global --add safe.directory '*'
 
       - name: Set up IIC-OSIC-TOOLS environment
         # GitHub Actions bypasses the container entrypoint, so the image's tool
