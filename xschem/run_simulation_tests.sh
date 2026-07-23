@@ -93,11 +93,64 @@ fi
 
 # --- headless wrapper ------------------------------------------------------
 # A virtual X server lets xschem initialise Tk and lets ngspice `plot`
-# commands run without a real display. Fall back to running directly.
-if command -v xvfb-run >/dev/null 2>&1; then
+# commands run without a real display.
+#
+# We deliberately do NOT wrap every testbench in `xvfb-run -a`. `xvfb-run -a`
+# auto-picks a display by scanning /tmp/.X*-lock, which is a TOCTOU race: with
+# JOBS testbenches each launching two `xvfb-run -a` calls (netlist + simulate),
+# and possibly several of these runners in parallel, two invocations grab the
+# same display number. The loser aborts with "Server is already active for
+# display N", its xschem/ngspice exits non-zero, and a perfectly good testbench
+# is reported as a spurious FAIL that passes on the next run.
+#
+# Instead we start ONE shared Xvfb for the whole run, hold it open, and point
+# every job at it via $DISPLAY. A single X server happily serves all parallel
+# xschem/ngspice clients, so there is no per-job display allocation to race on.
+# If a usable $DISPLAY is already set we reuse it; if Xvfb is unavailable we
+# fall back to the old per-call xvfb-run, and failing that run directly.
+XVFB=()
+_XVFB_PID=""
+
+# Try to bind a free display and keep the server running. On success prints
+# "<display> <pid>" (e.g. "42 12345") and returns 0; returns non-zero if no
+# display could be bound. Note: this runs inside a command substitution, so it
+# must communicate the pid via stdout (a variable set here would not survive the
+# subshell). The Xvfb it leaves running is reparented to init and is killed by
+# the caller via the returned pid.
+_start_xvfb() {
+	local n pid _
+	for n in $(seq 99 -1 10); do
+		[ -e "/tmp/.X${n}-lock" ] && continue
+		Xvfb ":${n}" -screen 0 1280x1024x24 -nolisten tcp >/dev/null 2>&1 &
+		pid=$!
+		# Give Xvfb a moment to either grab the lock or die (lost the race).
+		for _ in $(seq 1 30); do
+			kill -0 "$pid" 2>/dev/null || break
+			if [ -e "/tmp/.X${n}-lock" ]; then
+				echo "$n $pid"
+				return 0
+			fi
+			sleep 0.1
+		done
+		kill "$pid" 2>/dev/null
+		wait "$pid" 2>/dev/null
+	done
+	return 1
+}
+
+if [ -n "${DISPLAY:-}" ]; then
+	: # a display is already provided, use it as-is
+elif command -v Xvfb >/dev/null 2>&1 && _xvfb_out="$(_start_xvfb)"; then
+	DISPLAY=":${_xvfb_out%% *}"
+	_XVFB_PID="${_xvfb_out##* }"
+	export DISPLAY
+	# Tear the shared server down on any exit (normal, error, or signal). The
+	# server is not a child of this shell (started in a subshell), so kill by
+	# pid rather than `wait`.
+	trap '[ -n "$_XVFB_PID" ] && kill "$_XVFB_PID" 2>/dev/null' EXIT
+elif command -v xvfb-run >/dev/null 2>&1; then
+	# Last resort: the racy per-call wrapper (better than no display at all).
 	XVFB=(xvfb-run -a)
-else
-	XVFB=()
 fi
 
 # Patterns that mark a genuinely broken netlist or simulation. The allow-list
