@@ -9,10 +9,11 @@
 #   3. scans the netlist and simulation logs for errors.
 #
 # Testbenches are run in parallel. The number of concurrent jobs defaults to
-# the CPU count (JOBS env var). To avoid overcommitting the CPU, each ngspice
-# instance is told how many threads to use via a per-testbench .spiceinit
-# (SPICE_THREADS env var, default = cores / JOBS). Each testbench gets its own
-# working sub-directory so parallel runs never clobber each other's files.
+# the CPU count (JOBS env var). Each ngspice runs single-threaded (SPICE_THREADS
+# env var, default 1), because these testbenches are too small to profit from
+# ngspice's OpenMP parallelism and several of them are slowed down badly by it.
+# Each testbench gets its own working sub-directory so parallel runs never
+# clobber each other's files.
 #
 # It is meant to run inside the IIC-OSIC-TOOLS Docker image (tag `latest`),
 # which provides xschem, ngspice and the IHP SG13G2 PDK. It also runs locally
@@ -44,10 +45,24 @@ NPROC="$(nproc 2>/dev/null || echo 4)"
 JOBS="${JOBS:-$NPROC}"
 
 # --- threads per ngspice instance ------------------------------------------
-# We already parallelise across testbenches, so each ngspice must stay
-# single-/few-threaded to avoid overcommitting the CPU (JOBS * threads cores).
-# Default: split the cores evenly over the running jobs (>=1).
-SPICE_THREADS="${SPICE_THREADS:-$(( NPROC / JOBS > 0 ? NPROC / JOBS : 1 ))}"
+# One thread per ngspice. Parallelism here comes from running testbenches
+# concurrently (JOBS), not from threading a single simulation: ngspice's OpenMP
+# parallelism speeds up the device model evaluation of *large* circuits, while
+# the testbenches in this repository are small (often a single transistor) and
+# some of them sweep parameters with tens of thousands of short `run` commands,
+# where per-run thread fork/join overhead is all the extra threads add.
+#
+# Measured in the IIC-OSIC-TOOLS container (nproc=9, JOBS=1, one testbench):
+#
+#   testbench                    1 thread   9 threads
+#   techsweep_sg13g2_lv_nmos        23 s      164 s
+#   bandgap_banba_tb                23 s       43 s
+#   current_mirror_variations        9 s       15 s
+#
+# The old default (cores / JOBS) therefore made a serial run several times
+# slower than a single-threaded one. Set SPICE_THREADS=<n> explicitly if a
+# testbench ever grows large enough to profit from threading.
+SPICE_THREADS="${SPICE_THREADS:-1}"
 export OMP_NUM_THREADS="$SPICE_THREADS"
 
 # --- PDK selection ---------------------------------------------------------
