@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-07-27">
+<meta name="dcterms.date" content="2026-08-11">
 
 <title>Analog (Integrated) Circuit Design</title>
 <style>
@@ -589,7 +589,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 27, 2026</p>
+      <p class="date">August 11, 2026</p>
     </div>
   </div>
   
@@ -813,7 +813,7 @@ Table&nbsp;1: IHP SG13G2 devices
 <li><strong>Create a backup!</strong></li>
 <li>Go to directory: e.g.&nbsp;<code>cd /foss/designs/analog-circuit-design</code></li>
 <li>Fetch newest changes from the origin: <code>git fetch origin</code></li>
-<li>Merge changes from the origin into local branch ‘master’: <code>git merge origin/main</code></li>
+<li>Merge changes from the origin into your local branch <code>main</code>: <code>git merge origin/main</code></li>
 </ul>
 <div class="callout callout-style-default callout-warning callout-titled" title="Git Merge Conflicts">
 <div class="callout-header d-flex align-content-center">
@@ -2222,7 +2222,7 @@ Figure&nbsp;27: Simulation schematic of the common-source measurement amplifier.
 </div>
 </div>
 </div>
-<p>By now we have designed a measurement amplifier based on a common-source stage. One problem with this stage is the relatively large input capacitance <span class="math inline">\(C_\mathrm{GG}\)</span> of approx. 0.3pF, which loads the input source. Another even more severe issue is that the bias point in this circuit is set by the dc voltage level at the input. In general, we want a setup where the bias points of the circuit are largely independent of the dc input voltages. This is why in integrated circuit design we often design <strong>differential circuits</strong> where the input and output signals are given by the differential voltages, and are largely independent from the common-mode voltages. This is usually an advantage.</p>
+<p>By now we have designed a measurement amplifier based on a common-source stage. One problem with this stage is the relatively large input capacitance <span class="math inline">\(C_\mathrm{GG}\)</span> of approx. 0.35pF, which loads the input source. Another even more severe issue is that the bias point in this circuit is set by the dc voltage level at the input. In general, we want a setup where the bias points of the circuit are largely independent of the dc input voltages. This is why in integrated circuit design we often design <strong>differential circuits</strong> where the input and output signals are given by the differential voltages, and are largely independent from the common-mode voltages. This is usually an advantage.</p>
 </section>
 </section>
 <section id="sec-current-mirror" class="level1" data-number="6">
@@ -2248,7 +2248,7 @@ I_\mathrm{out1} \approx I_\mathrm{bias} \frac{W_2}{L_2} \frac{L_1}{W_1}
 I_\mathrm{out2} \approx I_\mathrm{bias} \frac{W_3}{L_3} \frac{L_1}{W_1}.
 \]</span></p>
 <p>For good matching, care has to be taken that the MOSFET widths and lengths are constructed out of <strong>unit elements</strong> of identical size, where an appropriate number of these single units are then arranged in series or parallel configuration to arrive at the target <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> (remember MOSFET parameters <code>ng</code> and <code>m</code>, see <a href="#imp-mosfet-params-ng-m" class="quarto-xref">Important&nbsp;1</a>).</p>
-<p>As we know from earlier investigations of the MOSFET performance in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> the drain current of a MOSFET is a function of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>. As long as the MOSFET stays in saturation (i.e., <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{ds,dsat}\)</span>) the drain current is just a mild function of <span class="math inline">\(V_\mathrm{DS}\)</span> (essentially the effect of <span class="math inline">\(g_\mathrm{ds}\)</span>, which is the output conductance of the MOSFET). A fundamental flaw/limitation of the basic current mirror shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;28</a> is the mismatch of the <span class="math inline">\(V_\mathrm{DS}\)</span> of the MOSFETs. The input-side diode has <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{DS1}\)</span>, whereas the output current sources have a <span class="math inline">\(V_\mathrm{DS2,3}\)</span> depending on the connected circuitry. Improved current mirrors exist (fixing this flaw); however, when a current mirror is required with mediocre performance requirements, this structure can be used for its simplicity.</p>
+<p>As we know from earlier investigations of the MOSFET performance in <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> the drain current of a MOSFET is a function of <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>. As long as the MOSFET stays in saturation (i.e., <span class="math inline">\(V_\mathrm{DS}&gt; V_\mathrm{ds,sat}\)</span>) the drain current is just a mild function of <span class="math inline">\(V_\mathrm{DS}\)</span> (essentially the effect of <span class="math inline">\(g_\mathrm{ds}\)</span>, which is the output conductance of the MOSFET). A fundamental flaw/limitation of the basic current mirror shown in <a href="#fig-current-mirror" class="quarto-xref">Figure&nbsp;28</a> is the mismatch of the <span class="math inline">\(V_\mathrm{DS}\)</span> of the MOSFETs. The input-side diode has <span class="math inline">\(V_\mathrm{GS}= V_\mathrm{DS1}\)</span>, whereas the output current sources have a <span class="math inline">\(V_\mathrm{DS2,3}\)</span> depending on the connected circuitry. Improved current mirrors exist (fixing this flaw); however, when a current mirror is required with mediocre performance requirements, this structure can be used for its simplicity.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Current Mirror">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2291,10 +2291,10 @@ Figure&nbsp;29: A differential pair.
 <p>and see what the impact on the output currents is.</p>
 <section id="differential-operation-of-the-diffpair" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="differential-operation-of-the-diffpair"><span class="header-section-number">7.1</span> Differential Operation of the Diffpair</h2>
-<p>For a differential mode of operation we assume that the input common-mode voltage is constant, i.e., <span class="math inline">\((V_\mathrm{in,p} + V_\mathrm{in,n})/2 = V_\mathrm{CM}\)</span>. The differential input voltage <span class="math inline">\(v_\mathrm{in} = V_\mathrm{in,p} - V_\mathrm{in,n}\)</span>, so that <span class="math display">\[
-V_\mathrm{in,p} = V_\mathrm{CM} + \frac{v_\mathrm{in}}{2}
+<p>For a differential mode of operation we assume that the input common-mode voltage is constant, i.e., <span class="math inline">\((V_\mathrm{in,p} + V_\mathrm{in,n})/2 = V_\mathrm{CM}\)</span>. The differential input voltage <span class="math inline">\(V_\mathrm{in} = V_\mathrm{in,p} - V_\mathrm{in,n}\)</span>, so that <span class="math display">\[
+V_\mathrm{in,p} = V_\mathrm{CM} + \frac{V_\mathrm{in}}{2}
 \]</span> and <span class="math display">\[
-V_\mathrm{in,n} = V_\mathrm{CM} - \frac{v_\mathrm{in}}{2}.
+V_\mathrm{in,n} = V_\mathrm{CM} - \frac{V_\mathrm{in}}{2}.
 \]</span></p>
 <p>For a small-signal differential drive the potential at the tail point stays constant and we can treat it as a virtual ground. The output current on each side is then given by (neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and <span class="math inline">\(g_\mathrm{mb}\)</span> of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>) <span class="math display">\[
 I_\mathrm{out,p} = g_\mathrm{m1} \left( \frac{V_\mathrm{in}}{2} \right)
@@ -3539,7 +3539,7 @@ Figure&nbsp;43: The MOSFET cascode small-signal model.
 </div>
 </div>
 </div>
-<p>Since the gate is assumed at a fixed potential, we can put <span class="math inline">\(C_\mathrm{gs}\)</span> in parallel with <span class="math inline">\(G_\mathrm{S}\)</span> as <span class="math inline">\(G_\mathrm{S}^{*} = G_\mathrm{S} + s C_\mathrm{gs}\)</span>, and we can put <span class="math inline">\(C_\mathrm{gd}\)</span> in parallel with <span class="math inline">\(G_\mathrm{D}\)</span> as <span class="math inline">\(G_\mathrm{D}^{*} = G_\mathrm{D} + s C_\mathrm{gd}\)</span>. As a result, we will disregard these capacitors for now, and just consider <span class="math inline">\(G_\mathrm{S}\)</span> and <span class="math inline">\(G_\mathrm{D}\)</span>.</p>
+<p>Since the gate is assumed at a fixed potential, we can put <span class="math inline">\(C_\mathrm{gs}\)</span> in parallel with <span class="math inline">\(G_\mathrm{S}\)</span> as <span class="math inline">\(G_\mathrm{S}^{*} = G_\mathrm{S} + s C_\mathrm{gs}\)</span>, and we can put <span class="math inline">\(C_\mathrm{gd}\)</span> in parallel with <span class="math inline">\(G_\mathrm{D}\)</span> as <span class="math inline">\(G_\mathrm{D}^{*} = G_\mathrm{D} + s C_\mathrm{gd}\)</span>. As a result, we will disregard these capacitors for now, and just consider <span class="math inline">\(G_\mathrm{S}\)</span> and <span class="math inline">\(G_\mathrm{D}\)</span>, which leads to the simplified small-signal circuit shown in <a href="#fig-cascode-small-signal-simplified" class="quarto-xref">Figure&nbsp;44</a>.</p>
 <div id="cell-fig-cascode-small-signal-simplified" class="cell" data-execution_count="34">
 <div class="cell-output cell-output-display">
 <div id="fig-cascode-small-signal-simplified" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4752,7 +4752,8 @@ Note&nbsp;3: CACE Summary for Improved OTA
 </section>
 </div>
 </div>
-<p>The improved performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. We have intentionally increased the power consumption a little bit, but we negotiated with the chip lead designer a changed bias current level, so overall the situation is even slightly improved. The new situation with the improved design is summarized in <a href="#tbl-voltage-buffer-spec-improved" class="quarto-xref">Table&nbsp;4</a> (unchanged entries are not shown).</p>
+<p>The increased performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. The new situation with the improved design is summarized in <a href="#tbl-voltage-buffer-spec-improved" class="quarto-xref">Table&nbsp;4</a> (unchanged entries are not shown).</p>
+<p>The supply current budget in that table deserves a comment, since at first glance it looks like a step backwards from <span class="math inline">\(10\,\mu\text{A}\)</span> to <span class="math inline">\(20\,\mu\text{A}\)</span>. The point is that we negotiated with the chip lead designer a reduction of the externally provided bias current from <span class="math inline">\(20\,\mu\text{A}\)</span> to <span class="math inline">\(5\,\mu\text{A}\)</span> at the same time. That bias current has to be generated somewhere on the chip as well, so what counts at system level is the sum: previously <span class="math inline">\(10 + 20 = 30\,\mu\text{A}\)</span>, now at most <span class="math inline">\(20 + 5 = 25\,\mu\text{A}\)</span>. Overall the situation is thus slightly improved, while we have bought ourselves headroom in the OTA budget to spend on gain and settling.</p>
 <div id="tbl-voltage-buffer-spec-improved" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-voltage-buffer-spec-improved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -5858,7 +5859,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <p><strong>Solution:</strong></p>
 <ul>
 <li><p><strong>Transconductance</strong> <span class="math inline">\(g_\mathrm{m}= {\partial I_\mathrm{D}}/{\partial V_\mathrm{GS}}\)</span>: Describes how the drain current changes with gate-source voltage. It represents the amplification capability of the transistor.</p></li>
-<li><p><strong>Output conductance</strong> <span class="math inline">\(g_\mathrm{ds}= {\partial I_\mathrm{D}}/{\partial V_\mathrm{DS}} = r_\mathrm{out}^{-1}\)</span>: Describes how the drain current varies with drain-source voltage (ideally zero in saturation, but finite due to channel-length modulation). It limits the maximum achievable voltage gain. In the triode region, <span class="math inline">\(g_\mathrm{ds}\)</span> is the resistance of the channel, which can be electrically controlled by <span class="math inline">\(V_\mathrm{GS}\)</span>.</p></li>
+<li><p><strong>Output conductance</strong> <span class="math inline">\(g_\mathrm{ds}= {\partial I_\mathrm{D}}/{\partial V_\mathrm{DS}} = r_\mathrm{out}^{-1}\)</span>: Describes how the drain current varies with drain-source voltage (ideally zero in saturation, but finite due to channel-length modulation). It limits the maximum achievable voltage gain. In the triode region, <span class="math inline">\(g_\mathrm{ds}\)</span> is the conductance of the channel (i.e., the channel resistance is <span class="math inline">\(R_\mathrm{on} = 1/g_\mathrm{ds}\)</span>), which can be electrically controlled by <span class="math inline">\(V_\mathrm{GS}\)</span>.</p></li>
 </ul>
 </div>
 </div>
@@ -5936,7 +5937,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <p><strong>Question:</strong> Derive the theoretical limits of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> in weak inversion (<span class="math inline">\(V_\mathrm{GS}\)</span> small) and strong inversion (<span class="math inline">\(V_\mathrm{GS}\)</span> large). What is the typical range of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> used in practical analog design?</p>
 <p><strong>Solution:</strong></p>
 <p><strong>Weak inversion (subthreshold):</strong> <span class="math display">\[g_\mathrm{m}/I_\mathrm{D}= \frac{1}{n V_\mathrm{T}}\]</span> where <span class="math inline">\(n \approx 1.2-1.5\)</span> is the subthreshold slope factor and <span class="math inline">\(V_\mathrm{T} = kT/q \approx 25.8\,\text{mV}\)</span> at room temperature.</p>
-<p>This gives <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\approx 25-30\,\text{V}^{-1}\)</span> as the maximum.</p>
+<p>This gives <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\approx 26-32\,\text{V}^{-1}\)</span> as the maximum (for the LV NMOS of SG13G2 the tables yield about <span class="math inline">\(28\,\text{V}^{-1}\)</span>, i.e.&nbsp;<span class="math inline">\(n \approx 1.38\)</span>).</p>
 <p><strong>Strong inversion (square-law approximation):</strong> <span class="math display">\[g_\mathrm{m}/I_\mathrm{D}= \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}\]</span></p>
 <p>For typical overdrive voltages of 100—300 mV, this gives <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\approx 7-20\,\text{V}^{-1}\)</span>.</p>
 <p><strong>Practical range:</strong> <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> between 5 and 25 V<span class="math inline">\(^{-1}\)</span> is commonly used, with:</p>
@@ -6204,8 +6205,9 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <p><strong>Question:</strong> Derive the input-referred offset voltage of a differential pair due to threshold voltage mismatch <span class="math inline">\(\Delta V_\mathrm{th}\)</span> and transconductance mismatch <span class="math inline">\(\Delta g_\mathrm{m}/g_\mathrm{m}\)</span>.</p>
 <p><strong>Solution:</strong></p>
 <p>The input-referred offset voltage has two components:</p>
-<p><span class="math display">\[V_\mathrm{os} = \sqrt{\sigma^2\{\Delta V_\mathrm{th}\} + \left(\frac{V_\mathrm{GS}- V_\mathrm{th}}{2}\right)^2 \cdot \sigma^2\left\{\frac{\Delta g_\mathrm{m}}{g_\mathrm{m}}\right\}}\]</span></p>
-<p>Or equivalently: <span class="math display">\[V_\mathrm{os} = \sqrt{\sigma^2\{\Delta V_\mathrm{th}\} + \left(\frac{V_{od}}{2}\right)^2 \cdot \sigma^2\left\{\frac{\Delta(W/L)}{(W/L)}\right\}}\]</span></p>
+<p><span class="math display">\[\sigma\{V_\mathrm{os}\} = \sqrt{\sigma^2\{\Delta V_\mathrm{th}\} + \left(\frac{V_\mathrm{GS}- V_\mathrm{th}}{2}\right)^2 \cdot \sigma^2\left\{\frac{\Delta g_\mathrm{m}}{g_\mathrm{m}}\right\}}\]</span></p>
+<p>Or equivalently: <span class="math display">\[\sigma\{V_\mathrm{os}\} = \sqrt{\sigma^2\{\Delta V_\mathrm{th}\} + \left(\frac{V_{od}}{2}\right)^2 \cdot \sigma^2\left\{\frac{\Delta(W/L)}{(W/L)}\right\}}\]</span></p>
+<p>Note that the offset is a <em>random</em> quantity, so what these expressions give is its standard deviation, not a single deterministic value.</p>
 <p><strong>To minimize offset:</strong></p>
 <ul>
 <li>Use large device area (mismatch <span class="math inline">\(\propto 1 / \sqrt{WL}\)</span>)</li>
@@ -6709,10 +6711,10 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <p><strong>Solution:</strong></p>
 <p><strong>Matching conditions:</strong></p>
 <ul>
-<li>Input: <span class="math inline">\(R_\mathrm{in} = R_1 = 50\,\Omega\)</span></li>
-<li>Output: <span class="math inline">\(R_\mathrm{load,eff} = R_\mathrm{L} \parallel R_\mathrm{out} = 50\,\Omega \parallel 50\,\Omega = 25\,\Omega\)</span></li>
+<li>Input: the gate of the MOSFET is essentially capacitive, so the <span class="math inline">\(50\,\Omega\)</span> input match has to be provided by a shunt resistor <span class="math inline">\(R_\mathrm{sh} = 50\,\Omega\)</span> from the gate to ground</li>
+<li>Output: the drain load resistor is set to <span class="math inline">\(R_\mathrm{D} = 50\,\Omega\)</span> so that the amplifier presents a matched source impedance; together with the <span class="math inline">\(50\,\Omega\)</span> load this gives <span class="math inline">\(R_\mathrm{load,eff} = R_\mathrm{D} \parallel R_\mathrm{L} = 25\,\Omega\)</span></li>
 </ul>
-<p><strong>Voltage gain:</strong> <span class="math display">\[A_\mathrm{v} = -g_\mathrm{m}\cdot R_\mathrm{load,eff} = -g_\mathrm{m}\times 25\,\Omega\]</span></p>
+<p><strong>Voltage gain</strong> (from the gate to the load): <span class="math display">\[A_\mathrm{v} = -g_\mathrm{m}\cdot R_\mathrm{load,eff} = -g_\mathrm{m}\times 25\,\Omega\]</span></p>
 <p>For <span class="math inline">\(|A_\mathrm{v}| = 10\)</span>: <span class="math display">\[g_\mathrm{m}= \frac{10}{25\,\Omega} = 400\,\text{mS}\]</span></p>
 <p><strong>This is very high!</strong> At <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span>: <span class="math inline">\(I_\mathrm{D}= 40\,\text{mA}\)</span> (excessive)</p>
 <p><strong>Alternative approach:</strong> Use a common-source stage followed by a source follower.</p>
@@ -6826,10 +6828,10 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <p><strong>Question:</strong> Why is flicker noise more important in the input stage of an OTA than in the load stage?</p>
 <p><strong>Solution:</strong></p>
 <ol type="1">
-<li>Input stage noise is multiplied by the full gain to the output</li>
-<li>Load stage noise appears directly at output without gain multiplication</li>
-<li>The input-referred noise from load devices is divided by the input stage gain</li>
-<li>For good noise performance: Large input devices (more area → less flicker noise), smaller load devices acceptable</li>
+<li>Input stage noise is amplified by the full gain of the stage, so it appears at the output essentially undiminished when referred back to the input</li>
+<li>The noise of the load devices, referred back to the input, is scaled by the ratio of transconductances <span class="math inline">\(g_\mathrm{m3,4}/g_\mathrm{m1,2}\)</span> — see <a href="#eq-basic-ota-output-noise" class="quarto-xref">Equation&nbsp;23</a></li>
+<li>Since we design for <span class="math inline">\(g_\mathrm{m3,4} &lt; g_\mathrm{m1,2}\)</span> anyway (to minimize thermal noise), the load contribution is suppressed by that same ratio</li>
+<li>For good noise performance: Large input devices (more area → less flicker noise); the load devices can be smaller, but only within the limits set by the <span class="math inline">\(g_\mathrm{m3,4}/g_\mathrm{m1,2}\)</span> ratio</li>
 </ol>
 </div>
 </div>
@@ -6990,14 +6992,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {(Integrated)} {Circuit} {Design}},
-  date = {2026-07-27},
+  date = {2026-08-11},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-(Integrated) Circuit Design.”</span> July 27. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+(Integrated) Circuit Design.”</span> August 11. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
