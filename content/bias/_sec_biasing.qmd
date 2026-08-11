@@ -48,7 +48,7 @@ $$
 \VBE \approx V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + \VBE[0] \left( \frac{T}{T_0} \right)
 $$ {#eq-vbe-vs-temp}
 
-where $V_\mathrm{g0} = 1.205\,\text{V}$ is the bandgap voltage of silicon at $0\,\text{K}$ and $\VBE[0]$ is the base-emitter voltage of a BJT at reference temperature $T_0$. Further, the difference in $\VBE$ of two BJT operated at different emitter current densities $J_1$ and $J_2$ is given as
+where $V_\mathrm{g0} = 1.205\,\text{V}$ is the bandgap voltage of silicon *extrapolated* to $0\,\text{K}$ and $\VBE[0]$ is the base-emitter voltage of a BJT at reference temperature $T_0$. (Note that this is not the physical bandgap of silicon at $0\,\text{K}$, which is about $1.17\,\text{eV}$; $V_\mathrm{g0}$ is the value obtained by extrapolating the nearly linear $\VBE(T)$ characteristic back to $T = 0\,\text{K}$.) Further, the difference in $\VBE$ of two BJT operated at different emitter current densities $J_1$ and $J_2$ is given as
 
 $$
 \Delta \VBE = \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
@@ -56,13 +56,19 @@ $$ {#eq-delta-vbe-vs-temp}
 
 with $k$ the Boltzmann constant, and $q$ the elementary charge.
 
-Adding @eq-vbe-vs-temp and @eq-delta-vbe-vs-temp results in a reference voltage of value
+Adding @eq-vbe-vs-temp and a scaled version of @eq-delta-vbe-vs-temp results in a reference voltage of value
 
 $$
-V_\mathrm{ref} =  V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + \VBE[0] \left( \frac{T}{T_0} \right) +  \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
+V_\mathrm{ref} =  V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + \VBE[0] \left( \frac{T}{T_0} \right) +  K \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
 $$ {#eq-bandgap-voltage-with-temp}
 
-which can be made temperature-insensitive when the terms, which are a function of $T$, cancel each other, and only
+where $K$ is a scaling factor that we are free to choose in the circuit implementation (we will see below that it is realized as a resistor ratio). Demanding zero temperature coefficient, $\partial V_\mathrm{ref} / \partial T = 0$, fixes it to
+
+$$
+K \frac{k}{q} \ln \left( \frac{J_1}{J_2} \right) = \frac{V_\mathrm{g0} - \VBE[0]}{T_0}.
+$$ {#eq-bandgap-zero-tc}
+
+Substituting @eq-bandgap-zero-tc back into @eq-bandgap-voltage-with-temp makes every term proportional to $T$ cancel, and only
 
 $$
 V_\mathrm{ref} =  V_\mathrm{g0}
@@ -76,7 +82,7 @@ A simple implementation of a bandgap reference circuit is shown in @fig-bandgap-
 
 {{< include /content/bias/_fig_bandgap_reference_simple.qmd >}}
 
-$M_1$ to $M_4$ are scaled in a way that in both branches the same bias current is flowing. Further, $M_1$ and $M_2$ ensure that there is the same potential at their sources. Since the PNP are scaled by the factor $m$ (thus the current density is different) so that the following voltage develops across $R_1$:
+$M_1$ to $M_4$ are scaled in a way that in both branches the same bias current is flowing. Further, $M_1$ and $M_2$ ensure that there is the same potential at their sources. Since the two PNP are scaled by the factor $m$, they are operated at different current densities despite carrying the same current, and consequently the following voltage develops across $R_1$:
 
 $$
 \Delta \VBE = \frac{k T}{q} \ln m
@@ -88,13 +94,13 @@ $$
 I_\mathrm{bias} = \frac{\Delta \VBE}{R_1} = \frac{1}{R_1} \frac{k T}{q} \ln m. 
 $$ {#eq-bandgap-bias-current}
 
-Inspecting @eq-bandgap-bias-current we see that $I_\mathrm{bias} = k_1 T$ is a linear function of temperature $T$, a property that is very useful and called **PTAT** (proportional to absolute temperature). With $M_5$ we mirror this bias current into the output branch, and the output voltage $V_\mathrm{ref}$ is then given by
+Inspecting @eq-bandgap-bias-current we see that $I_\mathrm{bias} = k_1 T$ is a linear function of temperature $T$, a property that is very useful and called **PTAT** (proportional to absolute temperature). Strictly, this holds only insofar as $R_1$ itself is temperature-independent; a real resistor has a noticeable temperature coefficient (see @tbl-sg13g2-devices), which is one reason why the resistor type matters in a bandgap design. With $M_5$ we mirror this bias current into the output branch, and the output voltage $V_\mathrm{ref}$ is then given by
 
 $$
 V_\mathrm{ref} = \VBE + \frac{R_2}{R_1} \frac{k T}{q} \ln m.  
 $$
 
-By proper selection of $R_1$, $R_2$ and $m$ we can satisfy @eq-bandgap-voltage-with-temp to result in @eq-bandgap-voltage.
+Comparing with @eq-bandgap-voltage-with-temp we see that the scaling factor $K$ is realized here as the resistor ratio $R_2 / R_1$. By proper selection of $R_1$, $R_2$ and $m$ we can thus satisfy @eq-bandgap-zero-tc and arrive at @eq-bandgap-voltage.
 
 ::: {.callout-note title="Improved Bandgap Reference"}
 For an improved implementation of @fig-bandgap-simple, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, @eq-vbe-vs-temp and @eq-delta-vbe-vs-temp build on the relationship $I_\mathrm{C} = f(\VBE)$, while we control $I_\mathrm{E}$ in this circuit. If $\beta$ is large then $I_\mathrm{C} \approx I_\mathrm{E}$, but this is not the case for the used PNPs.
@@ -114,7 +120,7 @@ The resistors $R_{1-4}$ have been implemented out of unit elements of ca. $5\,\t
 
 ![Simple bandgap reference circuit in Xschem.](./xschem/bandgap_simple.svg){#fig-bandgap-schematic}
 
-The Xschem schematic is available [here](./xschem/bandgap_simple.sch) and the simulated reference voltage vs. temperature is shown in @fig-bandgap-sim-result. For a typical process we achieve a TC of $\pm 0.2\%$.
+The Xschem schematic is available [here](./xschem/bandgap_simple.sch) and the simulated reference voltage vs. temperature is shown in @fig-bandgap-sim-result. For a typical process we achieve a spread of the reference voltage of about $\pm 0.16\%$ over the simulated temperature range of $-30\,\text{degC}$ to $125\,\text{degC}$, which corresponds to an average temperature coefficient of ca. $20\,\text{ppm/K}$ (the ppm/K figure is the one you will usually find in a datasheet).
 
 ```{python}
 #| label: fig-bandgap-sim-result
