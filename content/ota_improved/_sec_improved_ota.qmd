@@ -116,7 +116,9 @@ Just like for the basic OTA we use the CACE system to check the performance of t
 {{< include ./cace/_docs/ota-improved_schematic.md >}}
 :::
 
-The improved performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. We have intentionally increased the power consumption a little bit, but we negotiated with the chip lead designer a changed bias current level, so overall the situation is even slightly improved. The new situation with the improved design is summarized in @tbl-voltage-buffer-spec-improved (unchanged entries are not shown).
+The increased performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. The new situation with the improved design is summarized in @tbl-voltage-buffer-spec-improved (unchanged entries are not shown).
+
+The supply current budget in that table deserves a comment, since at first glance it looks like a step backwards from $10\,\mu\text{A}$ to $20\,\mu\text{A}$. The point is that we negotiated with the chip lead designer a reduction of the externally provided bias current from $20\,\mu\text{A}$ to $5\,\mu\text{A}$ at the same time. That bias current has to be generated somewhere on the chip as well, so what counts at system level is the sum: previously $10 + 20 = 30\,\mu\text{A}$, now at most $20 + 5 = 25\,\mu\text{A}$. Overall the situation is thus slightly improved, while we have bought ourselves headroom in the OTA budget to spend on gain and settling.
 
 | Specification                              | Basic 5T-OTA | Improved OTA | Unit    |
 |:-------------------------------------------|:------------:|:------------:|:-------:|
