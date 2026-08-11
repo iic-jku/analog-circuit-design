@@ -15,4 +15,10 @@ Tools and PDK are integrated in the [**IIC-OSIC-TOOLS**](https://github.com/iic-
 
 All course material is made publicly available and shared under the Apache-2.0 license.
 
+## Building locally
+
+Render the material with `quarto render`.
+
+This produces the HTML site in `_site/` and the PDF (via Typst) in about half a minute, executing all embedded Python cells and notebooks from scratch.
+
 **We happily accept [pull requests](https://github.com/iic-jku/analog-circuit-design/pulls) to fix typos or add content! If you want to discuss something that is not clear, please [open an issue](https://github.com/iic-jku/analog-circuit-design/issues/new)!**

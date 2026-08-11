@@ -29,8 +29,12 @@ website:
       Website built with [Quarto](https://quarto.org/){.external target="_blank"}
     left: |
       [Source code]({{< meta var.url-repo >}}){.external target="_blank"}
-execute:
-  freeze: auto
+
+# Note: `freeze` is deliberately NOT enabled here. Since all content is pulled
+# in via `{{< include >}}`, Quarto's freeze cache does not invalidate when a
+# chapter is edited (it only tracks the rendering document, aicd.qmd), so it
+# silently serves stale prose and can break the Typst/PDF build with errors
+# pointing at text that was already fixed.
 
 format:
   html:
