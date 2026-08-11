@@ -106,9 +106,9 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fc3c552f25792c921d4f0ccbfb37919.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-3662ac67e9cd501dca117474e4771e7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-8fc3c552f25792c921d4f0ccbfb37919.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-88ddd8fe8f2e149ce738a858b302aa08.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-faf7545d7cd7f7fe51aac140dbe160a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-88ddd8fe8f2e149ce738a858b302aa08.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -1367,7 +1367,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 </div>
 <p>As we can also see from the plot below, the peak transit frequency of the LV NMOS is about <span class="math inline">\(75\,\text{GHz}\)</span>, which allows building radio-frequency circuits up to ca. <span class="math inline">\(f_\mathrm{T} / 10 = 7.5\,\text{GHz}\)</span>, which is a respectable number. It is no coincidence that the transition for RF design in the GHz-range switched from BJT-based technologies to CMOS roughly in the time frame when 130nm CMOS became available (ca. 2000).</p>
-<p>Note that <span class="math inline">\(f_\mathrm{T}\)</span> saturates and even decreases again at around <span class="math inline">\(V_\mathrm{GS}= 1.2\,\text{V}\)</span> due to second-order effects of the transistor like <a href="https://en.wikipedia.org/wiki/Saturation_velocity">velocity saturation</a> and <a href="https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering">DIBL</a>. Velocity saturation describes the saturation of the velocity of the electrons (or holes) at a certain <span class="math inline">\(V_\mathrm{GS}\)</span>. As a consequence, also <span class="math inline">\(g_\mathrm{m}\)</span> saturates. Since <span class="math inline">\(f_\mathrm{T} \propto g_\mathrm{m}/ C_\mathrm{gs}\)</span>, <span class="math inline">\(f_\mathrm{T}\)</span> can not further increase. DIBL describes the effect where a high <span class="math inline">\(V_\mathrm{DS}\)</span> lowers the potential barrier at the source, effectively reducing the threshold voltage. Additionally, at high <span class="math inline">\(V_\mathrm{GS}\)</span> the channel is confined to a narrow region at the surface, leading to more carrier scattering and thus lower mobility (vertical-field mobility degradation).</p>
+<p>Note that <span class="math inline">\(f_\mathrm{T}\)</span> saturates and even decreases again at around <span class="math inline">\(V_\mathrm{GS}= 1.2\,\text{V}\)</span> due to second-order effects of the transistor like <a href="https://en.wikipedia.org/wiki/Saturation_velocity">velocity saturation</a> and <a href="https://en.wikipedia.org/wiki/Drain-induced_barrier_lowering">DIBL</a>. Velocity saturation describes the effect that the drift velocity of the electrons (or holes) no longer increases once the <strong>lateral</strong> electric field along the channel becomes large, which in a short channel already happens at moderate <span class="math inline">\(V_\mathrm{DS}\)</span>. As a consequence, also <span class="math inline">\(g_\mathrm{m}\)</span> saturates. Since <span class="math inline">\(f_\mathrm{T} \propto g_\mathrm{m}/ C_\mathrm{gg}\)</span>, <span class="math inline">\(f_\mathrm{T}\)</span> can not further increase. DIBL describes the effect where a high <span class="math inline">\(V_\mathrm{DS}\)</span> lowers the potential barrier at the source, effectively reducing the threshold voltage. Additionally, at high <span class="math inline">\(V_\mathrm{GS}\)</span> the channel is confined to a narrow region at the surface, leading to more carrier scattering and thus lower mobility (vertical-field mobility degradation).</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}}" data-tags="[&quot;fig-nmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
 <div class="cell-output cell-output-display">
@@ -1441,7 +1441,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <div class="callout-body-container callout-body">
 <p>We usually leave the <span class="math inline">\(\Delta f\)</span> away for a shorter notation, so we write <span class="math inline">\(\overline{V_\mathrm{n}^2}\)</span> when we actually mean <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f\)</span>. In case of doubt look at the unit of a quantity, whether it shows <span class="math inline">\(\text{V}^2\)</span> or <span class="math inline">\(\text{V}^2/\text{Hz}\)</span> or <span class="math inline">\(\text{V}/\sqrt{\text{Hz}}\)</span> (or <span class="math inline">\(\text{A}^2\)</span> or <span class="math inline">\(\text{A}^2/\text{Hz}\)</span> or <span class="math inline">\(\text{A}/\sqrt{\text{Hz}}\)</span>).</p>
 <p>Please also note that the pair of <span class="math inline">\(k T\)</span> pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation. Boltzmann’s constant <span class="math inline">\(k = 1.38 \cdot 10^{-23}\,\text{J/K}\)</span> is just a scaling factor from thermal energy expressed as a temperature <span class="math inline">\(T\)</span> to energy <span class="math inline">\(E = k T\)</span> expressed in Joule.</p>
-<p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(0 \ge f &lt; \infty\)</span>) or two-sided power spectral density (PSD) (<span class="math inline">\(-\infty &lt; f &lt; \infty\)</span>). The default in this lecture is the usage of the <strong>one-sided PSD</strong>.</p>
+<p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(0 \le f &lt; \infty\)</span>) or two-sided power spectral density (PSD) (<span class="math inline">\(-\infty &lt; f &lt; \infty\)</span>). The default in this lecture is the usage of the <strong>one-sided PSD</strong>.</p>
 </div>
 </div>
 <p>In this lecture the only MOSFET noise we consider is the drain noise (as discussed in <a href="#sec-mosfet-smallsignal-model" class="quarto-xref">Section&nbsp;2.1.2</a>), showing up as a current noise between drain and source. For a realistic MOSFET noise model, also a (correlated) gate noise component and the thermal noise of the gate resistance needs to be considered.</p>
@@ -2819,10 +2819,14 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 <div id="cell-3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we get the required gm of M1/2 from the -3dB bandwidth requirement of the voltage buffer specification</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note that the -3dB bandwidth of the voltage buffer with gain Av=1 is equal to the unity gain bandwidth</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the ota, hence we wet them equal here</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we add a factor of 3 to allow for PVT variation plus additional MOSFET parasitic loading</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>gm_m12 <span class="op">=</span> f_bw <span class="op">*</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>c_load</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the ota, hence we set them equal here</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the unity-gain frequency of the 5T-OTA is f_ug = gm12 / (2*pi*C_load)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on top of the bare specification we apply a design margin of:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   3x for PVT variation plus the additional MOSFET parasitic loading</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   2x of reserve on dc gain and settling (the power budget allows for it)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>bw_margin <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>gm_m12 <span class="op">=</span> bw_margin <span class="op">*</span> <span class="dv">2</span><span class="op">*</span>np.pi <span class="op">*</span> f_bw <span class="op">*</span> c_load</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gm12 = 0.0188 mS</code></pre>
 </div>
@@ -2871,7 +2875,7 @@ i_total (rounded) = 4.0 µA
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>c_load_parasitic <span class="op">=</span> <span class="bu">abs</span>(gm_m12<span class="op">/</span>gm_cgs_m12) <span class="op">+</span> <span class="bu">abs</span>(gm_m12<span class="op">/</span>gm_cdd_m12) <span class="op">+</span> <span class="bu">abs</span>(gm_m34<span class="op">/</span>gm_cdd_m34)</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'additional load capacitance ='</span>, <span class="bu">round</span>(c_load_parasitic<span class="op">/</span><span class="fl">1e-15</span>, <span class="dv">1</span>), <span class="st">'fF'</span>)</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>f_bw <span class="op">=</span> gm_m12 <span class="op">/</span> (<span class="dv">4</span><span class="op">*</span>np.pi <span class="op">*</span> (c_load <span class="op">+</span> c_load_parasitic))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>f_bw <span class="op">=</span> gm_m12 <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi <span class="op">*</span> (c_load <span class="op">+</span> c_load_parasitic))</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'unity gain bandwidth incl. parasitics ='</span>, <span class="bu">round</span>(f_bw<span class="op">/</span><span class="fl">1e6</span>, <span class="dv">2</span>), <span class="st">'MHz'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>additional load capacitance = 54.9 fF
@@ -4116,11 +4120,15 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <div id="cell-3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we get the required gm of M1/2 from the -3dB bandwidth requirement of the voltage buffer specification</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note that the -3dB bandwidth of the voltage buffer with gain Av=1 is equal to the unity gain bandwidth</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the ota, hence we wet them equal here</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we add a factor of 3 to allow for PVT variation plus additional MOSFET parasitic loading</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># we also add an additional factor of 2 to get more dc gain (and there is power still in the budget)</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>gm_m12 <span class="op">=</span> f_bw <span class="op">*</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>c_load <span class="op">*</span> <span class="dv">3</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the ota, hence we set them equal here</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the unity-gain frequency of the OTA is f_ug = gm12 / (2*pi*C_load)</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on top of the bare specification we apply a design margin of:</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   3x for PVT variation plus the additional MOSFET parasitic loading</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   3x to buy more dc gain (there is still power left in the budget)</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   2x of reserve on settling</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>bw_margin <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>gm_m12 <span class="op">=</span> bw_margin <span class="op">*</span> <span class="dv">2</span><span class="op">*</span>np.pi <span class="op">*</span> f_bw <span class="op">*</span> c_load</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gm12 = 0.0565 mS</code></pre>
 </div>
@@ -4185,7 +4193,7 @@ a0 = 43.4 dB</code></pre>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>c_load_parasitic <span class="op">=</span> <span class="bu">abs</span>(gm_m12<span class="op">/</span>gm_cgs_m12) <span class="op">+</span> <span class="bu">abs</span>(gm_m12<span class="op">/</span>gm_cdd_m12c) <span class="op">+</span> <span class="bu">abs</span>(gm_m34<span class="op">/</span>gm_cdd_m34c)</span>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'additional load capacitance ='</span>, <span class="bu">round</span>(c_load_parasitic<span class="op">/</span><span class="fl">1e-15</span>, <span class="dv">1</span>), <span class="st">'fF'</span>)</span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>f_bw <span class="op">=</span> gm_m12 <span class="op">/</span> (<span class="dv">4</span><span class="op">*</span>np.pi <span class="op">*</span> (c_load <span class="op">+</span> c_load_parasitic))</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>f_bw <span class="op">=</span> gm_m12 <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi <span class="op">*</span> (c_load <span class="op">+</span> c_load_parasitic))</span>
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'unity gain bandwidth incl. parasitics ='</span>, <span class="bu">round</span>(f_bw<span class="op">/</span><span class="fl">1e6</span>, <span class="dv">2</span>), <span class="st">'MHz'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>additional load capacitance = 5.5 fF
@@ -4848,22 +4856,26 @@ V_\mathrm{bias} = R_2 I_\mathrm{bias} = \frac{R_2}{R_1} V_\mathrm{ref}.
 <p><span id="eq-vbe-vs-temp"><span class="math display">\[
 V_\mathrm{BE}\approx V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + V_\mathrm{BE0} \left( \frac{T}{T_0} \right)
 \tag{44}\]</span></span></p>
-<p>where <span class="math inline">\(V_\mathrm{g0} = 1.205\,\text{V}\)</span> is the bandgap voltage of silicon at <span class="math inline">\(0\,\text{K}\)</span> and <span class="math inline">\(V_\mathrm{BE0}\)</span> is the base-emitter voltage of a BJT at reference temperature <span class="math inline">\(T_0\)</span>. Further, the difference in <span class="math inline">\(V_\mathrm{BE}\)</span> of two BJT operated at different emitter current densities <span class="math inline">\(J_1\)</span> and <span class="math inline">\(J_2\)</span> is given as</p>
+<p>where <span class="math inline">\(V_\mathrm{g0} = 1.205\,\text{V}\)</span> is the bandgap voltage of silicon <em>extrapolated</em> to <span class="math inline">\(0\,\text{K}\)</span> and <span class="math inline">\(V_\mathrm{BE0}\)</span> is the base-emitter voltage of a BJT at reference temperature <span class="math inline">\(T_0\)</span>. (Note that this is not the physical bandgap of silicon at <span class="math inline">\(0\,\text{K}\)</span>, which is about <span class="math inline">\(1.17\,\text{eV}\)</span>; <span class="math inline">\(V_\mathrm{g0}\)</span> is the value obtained by extrapolating the nearly linear <span class="math inline">\(V_\mathrm{BE}(T)\)</span> characteristic back to <span class="math inline">\(T = 0\,\text{K}\)</span>.) Further, the difference in <span class="math inline">\(V_\mathrm{BE}\)</span> of two BJT operated at different emitter current densities <span class="math inline">\(J_1\)</span> and <span class="math inline">\(J_2\)</span> is given as</p>
 <p><span id="eq-delta-vbe-vs-temp"><span class="math display">\[
 \Delta V_\mathrm{BE}= \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
 \tag{45}\]</span></span></p>
 <p>with <span class="math inline">\(k\)</span> the Boltzmann constant, and <span class="math inline">\(q\)</span> the elementary charge.</p>
-<p>Adding <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;44</a> and <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;45</a> results in a reference voltage of value</p>
+<p>Adding <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;44</a> and a scaled version of <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;45</a> results in a reference voltage of value</p>
 <p><span id="eq-bandgap-voltage-with-temp"><span class="math display">\[
-V_\mathrm{ref} =  V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + V_\mathrm{BE0} \left( \frac{T}{T_0} \right) +  \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
+V_\mathrm{ref} =  V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + V_\mathrm{BE0} \left( \frac{T}{T_0} \right) +  K \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
 \tag{46}\]</span></span></p>
-<p>which can be made temperature-insensitive when the terms, which are a function of <span class="math inline">\(T\)</span>, cancel each other, and only</p>
+<p>where <span class="math inline">\(K\)</span> is a scaling factor that we are free to choose in the circuit implementation (we will see below that it is realized as a resistor ratio). Demanding zero temperature coefficient, <span class="math inline">\(\partial V_\mathrm{ref} / \partial T = 0\)</span>, fixes it to</p>
+<p><span id="eq-bandgap-zero-tc"><span class="math display">\[
+K \frac{k}{q} \ln \left( \frac{J_1}{J_2} \right) = \frac{V_\mathrm{g0} - V_\mathrm{BE0}}{T_0}.
+\tag{47}\]</span></span></p>
+<p>Substituting <a href="#eq-bandgap-zero-tc" class="quarto-xref">Equation&nbsp;47</a> back into <a href="#eq-bandgap-voltage-with-temp" class="quarto-xref">Equation&nbsp;46</a> makes every term proportional to <span class="math inline">\(T\)</span> cancel, and only</p>
 <p><span id="eq-bandgap-voltage"><span class="math display">\[
 V_\mathrm{ref} =  V_\mathrm{g0}
-\tag{47}\]</span></span></p>
+\tag{48}\]</span></span></p>
 <p>remains. We thus have created an on-chip reference (called the <a href="https://en.wikipedia.org/wiki/Bandgap_voltage_reference"><em>bandgap voltage reference</em></a>) which is almost independent of manufacturing tolerances with a very small temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of <span class="math inline">\(\pm 1 \ldots 3\%\)</span> without trimming are perfectly possible.</p>
 <p>The original implementation in <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">Widlar 1971</a>)</span> uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of these available layers are available for free without extra processing cost, they are very slow, show unusually small <span class="math inline">\(\beta &lt; 10\)</span>, and the collector is tied to <span class="math inline">\(V_\mathrm{SS}\)</span> as it is the substrate. Still, for bandgap references, they are very useful.</p>
-<p>A simple implementation of a bandgap reference circuit is shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;47</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
+<p>A simple implementation of a bandgap reference circuit is shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;48</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
 <div id="cell-fig-bandgap-simple" class="cell" data-execution_count="50">
 <div class="cell-output cell-output-display">
 <div id="fig-bandgap-simple" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4878,19 +4890,19 @@ Figure&nbsp;65: A simple bandgap reference.
 </div>
 </div>
 </div>
-<p><span class="math inline">\(M_1\)</span> to <span class="math inline">\(M_4\)</span> are scaled in a way that in both branches the same bias current is flowing. Further, <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> ensure that there is the same potential at their sources. Since the PNP are scaled by the factor <span class="math inline">\(m\)</span> (thus the current density is different) so that the following voltage develops across <span class="math inline">\(R_1\)</span>:</p>
+<p><span class="math inline">\(M_1\)</span> to <span class="math inline">\(M_4\)</span> are scaled in a way that in both branches the same bias current is flowing. Further, <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> ensure that there is the same potential at their sources. Since the two PNP are scaled by the factor <span class="math inline">\(m\)</span>, they are operated at different current densities despite carrying the same current, and consequently the following voltage develops across <span class="math inline">\(R_1\)</span>:</p>
 <p><span class="math display">\[
 \Delta V_\mathrm{BE}= \frac{k T}{q} \ln m
 \]</span></p>
 <p>Hence, the bias current in all the branches is given by</p>
 <p><span id="eq-bandgap-bias-current"><span class="math display">\[
 I_\mathrm{bias} = \frac{\Delta V_\mathrm{BE}}{R_1} = \frac{1}{R_1} \frac{k T}{q} \ln m.
-\tag{48}\]</span></span></p>
-<p>Inspecting <a href="#eq-bandgap-bias-current" class="quarto-xref">Equation&nbsp;48</a> we see that <span class="math inline">\(I_\mathrm{bias} = k_1 T\)</span> is a linear function of temperature <span class="math inline">\(T\)</span>, a property that is very useful and called <strong>PTAT</strong> (proportional to absolute temperature). With <span class="math inline">\(M_5\)</span> we mirror this bias current into the output branch, and the output voltage <span class="math inline">\(V_\mathrm{ref}\)</span> is then given by</p>
+\tag{49}\]</span></span></p>
+<p>Inspecting <a href="#eq-bandgap-bias-current" class="quarto-xref">Equation&nbsp;49</a> we see that <span class="math inline">\(I_\mathrm{bias} = k_1 T\)</span> is a linear function of temperature <span class="math inline">\(T\)</span>, a property that is very useful and called <strong>PTAT</strong> (proportional to absolute temperature). Strictly, this holds only insofar as <span class="math inline">\(R_1\)</span> itself is temperature-independent; a real resistor has a noticeable temperature coefficient (see <a href="#tbl-sg13g2-devices" class="quarto-xref">Table&nbsp;1</a>), which is one reason why the resistor type matters in a bandgap design. With <span class="math inline">\(M_5\)</span> we mirror this bias current into the output branch, and the output voltage <span class="math inline">\(V_\mathrm{ref}\)</span> is then given by</p>
 <p><span class="math display">\[
 V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.  
 \]</span></p>
-<p>By proper selection of <span class="math inline">\(R_1\)</span>, <span class="math inline">\(R_2\)</span> and <span class="math inline">\(m\)</span> we can satisfy <a href="#eq-bandgap-voltage-with-temp" class="quarto-xref">Equation&nbsp;46</a> to result in <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;47</a>.</p>
+<p>Comparing with <a href="#eq-bandgap-voltage-with-temp" class="quarto-xref">Equation&nbsp;46</a> we see that the scaling factor <span class="math inline">\(K\)</span> is realized here as the resistor ratio <span class="math inline">\(R_2 / R_1\)</span>. By proper selection of <span class="math inline">\(R_1\)</span>, <span class="math inline">\(R_2\)</span> and <span class="math inline">\(m\)</span> we can thus satisfy <a href="#eq-bandgap-zero-tc" class="quarto-xref">Equation&nbsp;47</a> and arrive at <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;48</a>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved Bandgap Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4920,7 +4932,7 @@ Figure&nbsp;66: Simple bandgap reference circuit in Xschem.
 </figcaption>
 </figure>
 </div>
-<p>The Xschem schematic is available <a href="./xschem/bandgap_simple.sch">here</a> and the simulated reference voltage vs.&nbsp;temperature is shown in <a href="#fig-bandgap-sim-result" class="quarto-xref">Figure&nbsp;67</a>. For a typical process we achieve a TC of <span class="math inline">\(\pm 0.2\%\)</span>.</p>
+<p>The Xschem schematic is available <a href="./xschem/bandgap_simple.sch">here</a> and the simulated reference voltage vs.&nbsp;temperature is shown in <a href="#fig-bandgap-sim-result" class="quarto-xref">Figure&nbsp;67</a>. For a typical process we achieve a spread of the reference voltage of about <span class="math inline">\(\pm 0.16\%\)</span> over the simulated temperature range of <span class="math inline">\(-30\,\text{degC}\)</span> to <span class="math inline">\(125\,\text{degC}\)</span>, which corresponds to an average temperature coefficient of ca. <span class="math inline">\(20\,\text{ppm/K}\)</span> (the ppm/K figure is the one you will usually find in a datasheet).</p>
 <div id="cell-fig-bandgap-sim-result" class="cell" data-execution_count="51">
 <div class="cell-output cell-output-display">
 <div id="fig-bandgap-sim-result" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5059,24 +5071,24 @@ Figure&nbsp;73: Small-signal model of common-source stage with Miller compensati
 <p>In order to analyze the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through <span class="math inline">\(C_\mathrm{m}\)</span> (we set <span class="math inline">\(R_\mathrm{m}=0\)</span> for now):</p>
 <p><span id="eq-miller-comp-kcl1"><span class="math display">\[
 I_\mathrm{in} + I_\mathrm{m} - V_\mathrm{gs} (s C_\mathrm{in} + g_\mathrm{in}) = 0
-\tag{49}\]</span></span></p>
+\tag{50}\]</span></span></p>
 <p><span id="eq-miller-comp-kcl2"><span class="math display">\[
 -I_\mathrm{m} - g_\mathrm{m}V_\mathrm{gs} - V_\mathrm{out} (s C_\mathrm{L} + g_\mathrm{out}) = 0
-\tag{50}\]</span></span></p>
+\tag{51}\]</span></span></p>
 <p><span id="eq-miller-comp-kcl3"><span class="math display">\[
 I_\mathrm{m} = s C_\mathrm{m} (V_\mathrm{out} - V_\mathrm{gs})
-\tag{51}\]</span></span></p>
-<p>Using <a href="#eq-miller-comp-kcl3" class="quarto-xref">Equation&nbsp;51</a> in <a href="#eq-miller-comp-kcl1" class="quarto-xref">Equation&nbsp;49</a> and <a href="#eq-miller-comp-kcl2" class="quarto-xref">Equation&nbsp;50</a> and then calculating the transfer function we arrive at</p>
+\tag{52}\]</span></span></p>
+<p>Using <a href="#eq-miller-comp-kcl3" class="quarto-xref">Equation&nbsp;52</a> in <a href="#eq-miller-comp-kcl1" class="quarto-xref">Equation&nbsp;50</a> and <a href="#eq-miller-comp-kcl2" class="quarto-xref">Equation&nbsp;51</a> and then calculating the transfer function we arrive at</p>
 <p><span id="eq-miller-comp-kcl4"><span class="math display">\[
 \frac{V_\mathrm{out}}{I_\mathrm{in}} = \frac{s C_\mathrm{m} - g_\mathrm{m}}{(s C_\mathrm{m} + s C_\mathrm{L} + g_\mathrm{out})(s C_\mathrm{m} + s C_\mathrm{in} + g_\mathrm{in}) - (s C_\mathrm{m} - g_\mathrm{m}) s C_\mathrm{m}}.
-\tag{52}\]</span></span></p>
-<p>In order to check <a href="#eq-miller-comp-kcl4" class="quarto-xref">Equation&nbsp;52</a> we can set <span class="math inline">\(s C_\mathrm{m} = 0\)</span> and see whether we can interpret the result:</p>
+\tag{53}\]</span></span></p>
+<p>In order to check <a href="#eq-miller-comp-kcl4" class="quarto-xref">Equation&nbsp;53</a> we can set <span class="math inline">\(s C_\mathrm{m} = 0\)</span> and see whether we can interpret the result:</p>
 <p><span id="eq-miller-comp-kcl5"><span class="math display">\[
 \frac{V_\mathrm{out}}{I_\mathrm{in}} = -\frac{g_\mathrm{m}}{(s C_\mathrm{L} + g_\mathrm{out})(s C_\mathrm{in} + g_\mathrm{in})} = -\frac{g_\mathrm{m}}{g_\mathrm{out} g_\mathrm{in}}
 \frac{1}{\left( 1 + \frac{s C_\mathrm{L}}{g_\mathrm{out}} \right)}
 \frac{1}{\left( 1 + \frac{s C_\mathrm{in}}{g_\mathrm{in}} \right)}
-\tag{53}\]</span></span></p>
-<p>We find that <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;53</a> looks reasonable, as we have the correct dc gain of <span class="math inline">\(-g_\mathrm{m}/(g_\mathrm{out} g_\mathrm{in})\)</span> and two poles, one at the input and one at the output.</p>
+\tag{54}\]</span></span></p>
+<p>We find that <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;54</a> looks reasonable, as we have the correct dc gain of <span class="math inline">\(-g_\mathrm{m}/(g_\mathrm{out} g_\mathrm{in})\)</span> and two poles, one at the input and one at the output.</p>
 <p>We now return to the more interesting case of <span class="math inline">\(s C_\mathrm{m} \neq 0\)</span>. We use the reasonable assumption that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{in,out}\)</span> to simplify the algebra and result in an interpretable result. After quite a few pages of algebraic manipulations (please try for yourself!) we arrive at</p>
 <p><span id="eq-miller-comp-pz"><span class="math display">\[
 \frac{V_\mathrm{out}}{I_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{out} g_\mathrm{in}}
@@ -5085,8 +5097,8 @@ I_\mathrm{m} = s C_\mathrm{m} (V_\mathrm{out} - V_\mathrm{gs})
 \left( 1 + s \frac{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mathrm{in} C_\mathrm{L}}{C_\mathrm{m}}}{g_\mathrm{m}} \right)
 \left( 1 + s \frac{C_\mathrm{m} \frac{g_\mathrm{m}}{g_\mathrm{out}}}{g_\mathrm{in}} \right)
 }.
-\tag{54}\]</span></span></p>
-<p>Looking at <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;54</a> we can identify important changes compared to <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;53</a>. We have the intended low-frequency pole <span class="math inline">\(s_\mathrm{p1}\)</span> at the input where the capacitor <span class="math inline">\(C_\mathrm{m}\)</span> is increased by the dc gain of the common-source stage <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{out}\)</span>:</p>
+\tag{55}\]</span></span></p>
+<p>Looking at <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;55</a> we can identify important changes compared to <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;54</a>. We have the intended low-frequency pole <span class="math inline">\(s_\mathrm{p1}\)</span> at the input where the capacitor <span class="math inline">\(C_\mathrm{m}\)</span> is increased by the dc gain of the common-source stage <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{out}\)</span>:</p>
 <p><span class="math display">\[
 s_\mathrm{p1} = -\frac{g_\mathrm{in}}{C_\mathrm{m} \frac{g_\mathrm{m}}{g_\mathrm{out}}}
 \]</span></p>
@@ -5094,18 +5106,18 @@ s_\mathrm{p1} = -\frac{g_\mathrm{in}}{C_\mathrm{m} \frac{g_\mathrm{m}}{g_\mathrm
 <p><span class="math display">\[
 s_\mathrm{p2} = -\frac{g_\mathrm{m}}{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mathrm{in} C_\mathrm{L}}{C_\mathrm{m}}}
 \]</span></p>
-<p>Together, the movement of poles <span class="math inline">\(s_\mathrm{p1}\)</span> and <span class="math inline">\(s_\mathrm{p2}\)</span> is a great deal in terms of stability. However, not all is rosy, as we have to also look at the numerator of <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;54</a>. Here we see that a zero <span class="math inline">\(s_\mathrm{z}\)</span> has been formed, unfortunately a quite bad one. Calculating its location as</p>
+<p>Together, the movement of poles <span class="math inline">\(s_\mathrm{p1}\)</span> and <span class="math inline">\(s_\mathrm{p2}\)</span> is a great deal in terms of stability. However, not all is rosy, as we have to also look at the numerator of <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;55</a>. Here we see that a zero <span class="math inline">\(s_\mathrm{z}\)</span> has been formed, unfortunately a quite bad one. Calculating its location as</p>
 <p><span id="eq-miller-zero"><span class="math display">\[
 s_\mathrm{z} = +\frac{g_\mathrm{m}}{C_\mathrm{m}}
-\tag{55}\]</span></span></p>
+\tag{56}\]</span></span></p>
 <p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero, abbreviated as RHPZ, leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are losing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
 <p>A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift. A more detailed analysis of this RHPZ can be found in <span class="citation" data-cites="Mangelsdorf_2025_RHPZ">(<a href="#ref-Mangelsdorf_2025_RHPZ" role="doc-biblioref">Mangelsdorf 2025b</a>)</span>.</p>
 <p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;72</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;73</a>). By doing this, we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
 <p>Repeating the calculation of the transfer function <span class="math inline">\(V_\mathrm{out} / I_\mathrm{in}\)</span> including <span class="math inline">\(R_\mathrm{m}\)</span> we see that the zero location is changed and can be calculated as (the pole locations are also slightly changed due to the addition of <span class="math inline">\(R_\mathrm{m}\)</span>, but we will not discuss the resulting equations here)</p>
 <p><span id="eq-miller-zero-comp"><span class="math display">\[
 s_\mathrm{z} = \frac{g_\mathrm{m}}{C_\mathrm{m} (1 - g_\mathrm{m}R_\mathrm{m})}
-\tag{56}\]</span></span></p>
-<p>If we do not use the resistor (i.e., <span class="math inline">\(R_\mathrm{m}=0\)</span>) then <a href="#eq-miller-zero-comp" class="quarto-xref">Equation&nbsp;56</a> collapses to <a href="#eq-miller-zero" class="quarto-xref">Equation&nbsp;55</a>. If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &lt; 1\)</span> then the zero stays in the right half-plane; if <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &gt; 1\)</span> then the zero moves into the left half-plane (this is what we want). If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} = 1\)</span> then we have compensated (i.e., removed) the zero; however, in practice exact compensation is not easy to establish across conditions, so we want to move the zero into the left half-plane. Adding a bit of margin want to size</p>
+\tag{57}\]</span></span></p>
+<p>If we do not use the resistor (i.e., <span class="math inline">\(R_\mathrm{m}=0\)</span>) then <a href="#eq-miller-zero-comp" class="quarto-xref">Equation&nbsp;57</a> collapses to <a href="#eq-miller-zero" class="quarto-xref">Equation&nbsp;56</a>. If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &lt; 1\)</span> then the zero stays in the right half-plane; if <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &gt; 1\)</span> then the zero moves into the left half-plane (this is what we want). If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} = 1\)</span> then we have compensated (i.e., removed) the zero; however, in practice exact compensation is not easy to establish across conditions, so we want to move the zero into the left half-plane. Adding a bit of margin want to size</p>
 <p><span class="math display">\[
 R_\mathrm{m} &gt; \frac{2}{g_\mathrm{m}}.
 \]</span></p>
@@ -5152,28 +5164,28 @@ V_\mathrm{out,cm} = V_\mathrm{GS7,8} + \frac{R_{3,4} I_\mathrm{D11}}{2}.
 <p>We can realize the advantage of using the resistor/MOSFET load in the input as well as the output stage when we calculate the common-mode gain of the OTA. We realize that we can use half-circuits due to the inherent symmetry of the circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;71</a>. The gain of the first stage (the MOSFET-diode loaded differential pair <span class="math inline">\(M_{1,2}\)</span>) is given by (using <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a>)</p>
 <p><span id="eq-diff-ota-cmgain1"><span class="math display">\[
 A_\mathrm{cm,1} \approx -\frac{1}{g_\mathrm{m3,5}} \cdot \frac{g_\mathrm{m1,2} g_\mathrm{ds10}}{2g_\mathrm{m1,2} + g_\mathrm{ds10}} \approx -\frac{g_\mathrm{ds10}}{2g_\mathrm{m3,5}}.
-\tag{57}\]</span></span></p>
+\tag{58}\]</span></span></p>
 <p>The common-mode gain of the second stage is similarly given by</p>
 <p><span id="eq-diff-ota-cmgain2"><span class="math display">\[
 A_\mathrm{cm,2} \approx -\frac{g_\mathrm{m4,6}}{g_\mathrm{m7,8}}.
-\tag{58}\]</span></span></p>
-<p>Combining <a href="#eq-diff-ota-cmgain1" class="quarto-xref">Equation&nbsp;57</a> and <a href="#eq-diff-ota-cmgain2" class="quarto-xref">Equation&nbsp;58</a> we arrive at (assuming that <span class="math inline">\(g_\mathrm{m3,5} \approx g_\mathrm{m4,6}\)</span>)</p>
+\tag{59}\]</span></span></p>
+<p>Combining <a href="#eq-diff-ota-cmgain1" class="quarto-xref">Equation&nbsp;58</a> and <a href="#eq-diff-ota-cmgain2" class="quarto-xref">Equation&nbsp;59</a> we arrive at (assuming that <span class="math inline">\(g_\mathrm{m3,5} \approx g_\mathrm{m4,6}\)</span>)</p>
 <p><span id="eq-diff-ota-cmgain"><span class="math display">\[
 A_\mathrm{cm} = A_\mathrm{cm,1} \cdot A_\mathrm{cm,2} \approx \frac{g_\mathrm{ds10}}{2g_\mathrm{m7,8}}
-\tag{59}\]</span></span></p>
+\tag{60}\]</span></span></p>
 <p>which is a low common-mode gain with very likely <span class="math inline">\(A_\mathrm{cm} &lt; 1\)</span>, which is very good news for the common-mode stability!</p>
 <p>Likewise, we can compute the differential gain of the OTA by formulating the voltage gain of the first stage as</p>
 <p><span id="eq-diff-ota-dmgain1"><span class="math display">\[
 A_\mathrm{d,1} \approx \frac{g_\mathrm{m1,2}}{R_{1,2}^{-1} + g_\mathrm{ds3,5} + g_\mathrm{ds1,2}}
-\tag{60}\]</span></span></p>
+\tag{61}\]</span></span></p>
 <p>and the differential voltage gain of the second stage as</p>
 <p><span id="eq-diff-ota-dmgain2"><span class="math display">\[
 A_\mathrm{d,2} = \frac{g_\mathrm{m4,6}}{R_{3,4}^{-1} + g_\mathrm{ds7,8} + g_\mathrm{ds4,6}}.
-\tag{61}\]</span></span></p>
-<p>Combining <a href="#eq-diff-ota-dmgain1" class="quarto-xref">Equation&nbsp;60</a> and <a href="#eq-diff-ota-dmgain2" class="quarto-xref">Equation&nbsp;61</a>, we arrive at the total differential voltage gain (of an <strong>unloaded</strong> OTA) of</p>
+\tag{62}\]</span></span></p>
+<p>Combining <a href="#eq-diff-ota-dmgain1" class="quarto-xref">Equation&nbsp;61</a> and <a href="#eq-diff-ota-dmgain2" class="quarto-xref">Equation&nbsp;62</a>, we arrive at the total differential voltage gain (of an <strong>unloaded</strong> OTA) of</p>
 <p><span id="eq-diff-ota-dmgain"><span class="math display">\[
 A_\mathrm{d} = A_\mathrm{d,1} A_\mathrm{d,2} = \frac{g_\mathrm{m1,2} g_\mathrm{m4,6}}{(R_{1,2}^{-1} + g_\mathrm{ds3,5} + g_\mathrm{ds1,2})(R_{3,4}^{-1} + g_\mathrm{ds7,8} + g_\mathrm{ds4,6})}
-\tag{62}\]</span></span></p>
+\tag{63}\]</span></span></p>
 <p>which can lead to significant differential voltage gain, ultimately limited by the <span class="math inline">\(g_\mathrm{ds}\)</span> of the MOSFETs <span class="math inline">\(M_{1-8}\)</span>.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Modify Bias Points with Currents">
 <div class="callout-header d-flex align-content-center">
@@ -5192,7 +5204,7 @@ A_\mathrm{d} = A_\mathrm{d,1} A_\mathrm{d,2} = \frac{g_\mathrm{m1,2} g_\mathrm{m
 <section id="final-differential-ota" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="final-differential-ota"><span class="header-section-number">13.3</span> Final Differential OTA</h2>
 <p>When designing the OTA with the above-mentioned techniques like Miller compensation and the common-mode setting, we find that we have issues with common-mode stability. There is one issue not obvious at first sight with the MOSFET-R load of the first stage: At the node <span class="math inline">\(X\)</span> there is significant capacitance due to the gates of <span class="math inline">\(M_{3,5}\)</span>. This capacitance forms a low-pass response with the resistance of <span class="math inline">\(R_{1,2}\)</span> and thus creates a low-frequency pole. This pole is in the common-mode path, and leads to a zero for the common-mode gain.</p>
-<p>In other words: At low frequencies, the common-mode gain is given by <a href="#eq-diff-ota-cmgain" class="quarto-xref">Equation&nbsp;59</a>, but at higher frequencies (above the pole at node <span class="math inline">\(X\)</span>), the common-mode gain increases significantly as the load resistance of the first stage increases from <span class="math inline">\(g_\mathrm{m3}^{-1} \parallel g_\mathrm{m5}^{-1}\)</span> to <span class="math inline">\(g_\mathrm{ds3}^{-1} \parallel g_\mathrm{ds5}^{-1}\)</span>. We need to counteract this effect by adding a capacitor in parallel to <span class="math inline">\(R_{1,2}\)</span>, as shown in <a href="#fig-diff-ota-final" class="quarto-xref">Figure&nbsp;75</a>. We use the opportunity to also add a series resistor to this capacitor to introduce an additional zero to improve phase margin.</p>
+<p>In other words: At low frequencies, the common-mode gain is given by <a href="#eq-diff-ota-cmgain" class="quarto-xref">Equation&nbsp;60</a>, but at higher frequencies (above the pole at node <span class="math inline">\(X\)</span>), the common-mode gain increases significantly as the load resistance of the first stage increases from <span class="math inline">\(g_\mathrm{m3}^{-1} \parallel g_\mathrm{m5}^{-1}\)</span> to <span class="math inline">\(g_\mathrm{ds3}^{-1} \parallel g_\mathrm{ds5}^{-1}\)</span>. We need to counteract this effect by adding a capacitor in parallel to <span class="math inline">\(R_{1,2}\)</span>, as shown in <a href="#fig-diff-ota-final" class="quarto-xref">Figure&nbsp;75</a>. We use the opportunity to also add a series resistor to this capacitor to introduce an additional zero to improve phase margin.</p>
 <div id="cell-fig-diff-ota-final" class="cell" data-execution_count="57">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-final" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5428,86 +5440,86 @@ Figure&nbsp;84: 5-transistor OTA small-signal model for output impedance calcula
 <h2 data-number="18.1" class="anchored" data-anchor-id="open-loop-configuration"><span class="header-section-number">18.1</span> Open-Loop Configuration</h2>
 <p>For the open-loop case, the gates of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are tied to ground (and since <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are matched <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m1,2}\)</span>), which means that the gate-source voltages of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are identical: <span id="eq-app-vbufzout-vin-ol"><span class="math display">\[
 V_\mathrm{in,p} = V_\mathrm{in,n} = 0 \to V_\mathrm{gs1} = V_\mathrm{gs2} = V_\mathrm{gs1,2}
-\tag{63}\]</span></span></p>
+\tag{64}\]</span></span></p>
 <p>KCL at the output node:</p>
 <p><span id="eq-app-vbufzout-kcl-vout-ol"><span class="math display">\[
 I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - I_{g_\mathrm{ds2}} - g_\mathrm{m1,2} V_\mathrm{gs1,2} = 0
-\tag{64}\]</span></span></p>
+\tag{65}\]</span></span></p>
 <p>KCL at the tail node: <span class="math display">\[
 2 g_\mathrm{m1,2} V_\mathrm{gs1,2} + I_{g_\mathrm{ds2}} + g_\mathrm{ds5} V_\mathrm{gs1,2} = 0
 \]</span></p>
 <p>We can solve for <span class="math inline">\(I_{g_\mathrm{ds2}}\)</span>.</p>
 <p><span id="eq-app-vbufzout-igds2"><span class="math display">\[
 I_{g_\mathrm{ds2}} = -\left( 2 g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2}
-\tag{65}\]</span></span></p>
+\tag{66}\]</span></span></p>
 <p>Furthermore, we need an expression for <span class="math inline">\(V_\mathrm{gs3}\)</span>. Ohm’s law at the transconductance <span class="math inline">\(g_\mathrm{m34}\)</span> will suffice.</p>
 <p><span id="eq-app-vbufzout-vgs34-ol"><span class="math display">\[
 V_\mathrm{gs3} = -\frac{g_\mathrm{m1,2}}{g_\mathrm{m3,4}} V_\mathrm{gs1,2}
-\tag{66}\]</span></span></p>
-<p>KVL from the output node down to ground (traversing <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;65</a> gives us an expression for <span class="math inline">\(V_\mathrm{gs1,2}\)</span></p>
+\tag{67}\]</span></span></p>
+<p>KVL from the output node down to ground (traversing <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;66</a> gives us an expression for <span class="math inline">\(V_\mathrm{gs1,2}\)</span></p>
 <p><span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
 V_\mathrm{gs1,2} = -\frac{g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
-\tag{67}\]</span></span></p>
-<p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;64</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;65</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>:</p>
+\tag{68}\]</span></span></p>
+<p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;65</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;66</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>:</p>
 <p><span class="math display">\[
 I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} + \left( g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2} = 0
 \]</span></p>
-<p>Second, <span class="math inline">\(V_\mathrm{gs3}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;66</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m3,4}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1,2}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>:</p>
+<p>Second, <span class="math inline">\(V_\mathrm{gs3}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;67</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m3,4}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1,2}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>:</p>
 <p><span class="math display">\[
 I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} + \left( 2 g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2} = 0
 \]</span></p>
-<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;67</a> gives us an expression for the last remaining unknown <span class="math inline">\(V_\mathrm{gs1,2}\)</span>. Thus, the factor in front of <span class="math inline">\(V_\mathrm{out}\)</span> defines the conductance at the output node.</p>
+<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;68</a> gives us an expression for the last remaining unknown <span class="math inline">\(V_\mathrm{gs1,2}\)</span>. Thus, the factor in front of <span class="math inline">\(V_\mathrm{out}\)</span> defines the conductance at the output node.</p>
 <p><span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
 I_\mathrm{out} - \left[ g_\mathrm{ds4} + \left( 2 \cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right) \frac{g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} \right] V_\mathrm{out} = 0
-\tag{68}\]</span></span></p>
+\tag{69}\]</span></span></p>
 <p>Before we interpret this result, we slightly rearrange the equation to give us more insight:</p>
 <p><span id="eq-app-vbufzout-zout-ol-2"><span class="math display">\[
 I_\mathrm{out} - \left[ g_\mathrm{ds4} + \frac{g_\mathrm{ds2} \cdot \left( 2\cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right)}{g_\mathrm{ds2} + \left( 2 \cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right)} \right] V_\mathrm{out} = 0
-\tag{69}\]</span></span></p>
+\tag{70}\]</span></span></p>
 <p>Now, we can identify the common equation of the total resistance of two parallel resistors. However, we are dealing with conductances here, so the same equation describes the total conductance of two conductances in series, while parallel conductances are simply summed. In parallel to <span class="math inline">\(g_\mathrm{ds4}\)</span>, there is effectively the series connection of <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(2 \cdot g_\mathrm{m1,2} + g_\mathrm{ds5}\)</span> at work.</p>
 <p>If we apply the general assumption of <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, only the parallel connection of <span class="math inline">\(g_\mathrm{ds4}\)</span> and <span class="math inline">\(g_\mathrm{ds2}\)</span> remains:</p>
 <p><span id="eq-app-vbufzout-zout-ol-3"><span class="math display">\[
 \frac{I_\mathrm{out}}{V_\mathrm{out}} \approx g_\mathrm{ds4} + g_\mathrm{ds2}
-\tag{70}\]</span></span></p>
+\tag{71}\]</span></span></p>
 </section>
 <section id="closed-loop-configuration" class="level2" data-number="18.2">
 <h2 data-number="18.2" class="anchored" data-anchor-id="closed-loop-configuration"><span class="header-section-number">18.2</span> Closed-Loop Configuration</h2>
 <p>In contrast to the open-loop case, we keep the gate of <span class="math inline">\(M_1\)</span> connected to ground and tie the input of <span class="math inline">\(M_2\)</span> to the output node <span class="math inline">\(V_\mathrm{out}\)</span>:</p>
 <p><span id="eq-app-vbufzout-vin-cl"><span class="math display">\[
 V_\mathrm{in,n} = V_\mathrm{out} \quad \text{and} \quad V_\mathrm{in,p} = 0
-\tag{71}\]</span></span></p>
+\tag{72}\]</span></span></p>
 <p>KCL at the output node:</p>
 <p><span id="eq-app-vbufzout-kcl-vout-cl"><span class="math display">\[
 I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - g_\mathrm{ds2} V_\mathrm{gs2} - g_\mathrm{m1,2} V_\mathrm{gs2} = 0
-\tag{72}\]</span></span></p>
+\tag{73}\]</span></span></p>
 <p>We use KVL from the output node down to ground to find an expression for <span class="math inline">\(V_\mathrm{gs2}\)</span>.</p>
 <p><span id="eq-app-vbufzout-kvl-vout-cl"><span class="math display">\[
 V_\mathrm{gs2} =  V_\mathrm{out} + V_\mathrm{gs1}
-\tag{73}\]</span></span></p>
+\tag{74}\]</span></span></p>
 <p>KCL at the tail node:</p>
 <p><span id="eq-app-vbufzout-kcl-vtail-cl"><span class="math display">\[
 g_\mathrm{m1,2} V_\mathrm{gs1} + g_\mathrm{m1,2} V_\mathrm{gs2} + g_\mathrm{ds2} V_\mathrm{gs2} + g_\mathrm{ds5} V_\mathrm{gs1} = 0
-\tag{74}\]</span></span></p>
-<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;73</a> to substitute <span class="math inline">\(V_\mathrm{gs2}\)</span> in <a href="#eq-app-vbufzout-kcl-vtail-cl" class="quarto-xref">Equation&nbsp;74</a> we find an equation for <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
+\tag{75}\]</span></span></p>
+<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;74</a> to substitute <span class="math inline">\(V_\mathrm{gs2}\)</span> in <a href="#eq-app-vbufzout-kcl-vtail-cl" class="quarto-xref">Equation&nbsp;75</a> we find an equation for <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
 <p><span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
 V_\mathrm{gs1} = -\frac{g_\mathrm{m1,2} + g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
-\tag{75}\]</span></span></p>
-<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;73</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;66</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;75</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;72</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;73</a> to eliminate <span class="math inline">\(V_\mathrm{gs2}\)</span>:</p>
+\tag{76}\]</span></span></p>
+<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;74</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;67</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;76</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;73</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;74</a> to eliminate <span class="math inline">\(V_\mathrm{gs2}\)</span>:</p>
 <p><span class="math display">\[
 I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - \left( g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{gs1} = 0
 \]</span></p>
-<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;66</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(V_\mathrm{gs3}\)</span>:</p>
+<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;67</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(V_\mathrm{gs3}\)</span>:</p>
 <p><span class="math display">\[
 I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} - g_\mathrm{ds2} V_\mathrm{gs1} = 0
 \]</span></p>
-<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;75</a> to eliminate the remaining unknown <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
+<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;76</a> to eliminate the remaining unknown <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
 <p><span class="math display">\[
 \begin{split}
 &amp; I_\mathrm{out} - \left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} \\
 &amp;+ g_\mathrm{ds2} \frac{g_\mathrm{m1,2} + g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out} = 0
 \end{split}
 \]</span></p>
-<p>A simpler result can be obtained if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;75</a> (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>):</p>
+<p>A simpler result can be obtained if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;76</a> (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>):</p>
 <p><span class="math display">\[
 I_\mathrm{out} -\left( g_\mathrm{ds4} + \frac{1}{2} g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} \approx 0
 \]</span></p>
