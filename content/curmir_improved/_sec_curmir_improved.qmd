@@ -310,10 +310,10 @@ $$ {#eq-curmir-matching-alt}
 The standard deviation of the transconductance parameter mismatch $\sdev[\Delta K / K]$ can be calculated similarly as (which is an alternative form to @eq-mosfet-mismatch-kp)
 
 $$
-\var[\frac{\Delta K}{K}] = \var[\Delta W] \cdot \frac{1}{W^2} + \var[\Delta L] \cdot \frac{1}{L^2} + \var[\frac{\Delta \mu}{\mu}] \cdot \frac{1}{W L},
+\var[\frac{\Delta K}{K}] = \var[\Delta W] \cdot \frac{1}{W^2} + \var[\Delta L] \cdot \frac{1}{L^2} + A_\mu^2 \cdot \frac{1}{W L},
 $$ {#eq-mosfet-mismatch-kp-alt}
 
-where $\sdev[\Delta W]$ and $\sdev[\Delta L]$ are the process-dependent mismatch parameters for the width $W$ and length $L$, respectively, and $\sdev[\Delta \mu / \mu]$ is the mobility mismatch parameter.
+where $\sdev[\Delta W]$ and $\sdev[\Delta L]$ are the process-dependent absolute mismatch parameters for the width $W$ and length $L$, respectively. The mobility mismatch follows Pelgrom's law like the threshold voltage, so it is described by an area-scaled constant $A_\mu = \sdev[\Delta \mu / \mu] \cdot \sqrt{W L}$, which is the quantity listed in @tbl-sg13g2-mismatch.
 
 The standard deviations of the components of the SG13G2 process are summarized in @tbl-sg13g2-mismatch. For mismatch calculations we can assume them to be uncorrelated.
 
