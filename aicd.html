@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-08-11">
+<meta name="dcterms.date" content="2026-08-12">
 
 <title>Analog (Integrated) Circuit Design</title>
 <style>
@@ -106,9 +106,9 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-88ddd8fe8f2e149ce738a858b302aa08.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-faf7545d7cd7f7fe51aac140dbe160a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-88ddd8fe8f2e149ce738a858b302aa08.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8fc3c552f25792c921d4f0ccbfb37919.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-3662ac67e9cd501dca117474e4771e7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8fc3c552f25792c921d4f0ccbfb37919.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -589,7 +589,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 11, 2026</p>
+      <p class="date">August 12, 2026</p>
     </div>
   </div>
   
@@ -667,7 +667,7 @@ Important
 <section id="ihps-sg13g2-130nm-cmos-technology" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="ihps-sg13g2-130nm-cmos-technology"><span class="header-section-number">1.1</span> IHP’s SG13G2 130nm CMOS Technology</h2>
 <p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from <a href="https://www.ihp-microelectronics.com">IHP Microelectronics</a>. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminum metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
-<p>For our circuit design, the most important parameters of the available devices are summarized in the following table. Matching properties are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>.</p>
+<p>For our circuit design, the most important parameters of the available devices are summarized in the following table. Matching properties are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>.</p>
 <div id="tbl-sg13g2-devices" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sg13g2-devices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3029,7 +3029,7 @@ headroom M5 = 0.333 V</code></pre>
 <h2 data-number="8.6" class="anchored" data-anchor-id="sec-mismatch"><span class="header-section-number">8.6</span> Component Mismatch</h2>
 <section id="sec-mosfet-mismatch" class="level3" data-number="8.6.1">
 <h3 data-number="8.6.1" class="anchored" data-anchor-id="sec-mosfet-mismatch"><span class="header-section-number">8.6.1</span> MOSFET Mismatch</h3>
-<p>So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show <strong>mismatch</strong> due to tiny random fluctuations in manufacturing, and we have to account for this. The mismatch parameters for various components are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>.</p>
+<p>So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show <strong>mismatch</strong> due to tiny random fluctuations in manufacturing, and we have to account for this. The mismatch parameters for various components are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>.</p>
 <p>For a typical MOSFET, we usually consider two main mismatch effects <span class="citation" data-cites="Pelgrom_1989">(<a href="#ref-Pelgrom_1989" role="doc-biblioref">Pelgrom et al. 1989</a>)</span>:</p>
 <ul>
 <li>A variation of the threshold voltage (mainly due to variations in doping levels).</li>
@@ -3743,7 +3743,60 @@ Figure&nbsp;51: Simulation schematic of the improved current mirrors.
 </figcaption>
 </figure>
 </div>
-<p>The output characteristics from the dc sweep simulation are shown in <a href="#fig-curmir-output" class="quarto-xref">Figure&nbsp;52</a>, and a zoom-in in <a href="#fig-curmir-output-zoom" class="quarto-xref">Figure&nbsp;53</a>. We can see that all improved current mirror structures achieve a significantly higher output resistance compared to the basic current mirror. The regulated cascode structure achieves the highest output resistance, as expected.</p>
+<p>The output characteristics from the dc sweep simulation are shown in <a href="#fig-curmir-output" class="quarto-xref">Figure&nbsp;52</a>, and a zoom-in in <a href="#fig-curmir-output-zoom" class="quarto-xref">Figure&nbsp;53</a>. Since the output resistance is nothing but the reciprocal slope of these curves, <span class="math inline">\(r_\mathrm{out} = \mathrm{d}V_\mathrm{out}/\mathrm{d}I_\mathrm{out}\)</span>, the lower panel of <a href="#fig-curmir-output-zoom" class="quarto-xref">Figure&nbsp;53</a> plots it directly: a flat output characteristic and a high output resistance are two views of the same data.</p>
+<p>The first thing to take away from that panel is that <span class="math inline">\(r_\mathrm{out}\)</span> is <strong>not a single number</strong>: it collapses steeply below the compliance voltage, where the output devices enter triode, and it keeps growing with <span class="math inline">\(V_\mathrm{out}\)</span> throughout the useful range. Any value we quote is therefore only meaningful together with the bias point at which it was taken:</p>
+<div id="tbl-curmir-rout" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-curmir-rout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Simulated small-signal output resistance versus output voltage
+</figcaption>
+<div aria-describedby="tbl-curmir-rout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 60%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Structure</th>
+<th style="text-align: right;"><span class="math inline">\(r_\mathrm{out}\)</span> at <span class="math inline">\(V_\mathrm{out} = 0.5\,\text{V}\)</span></th>
+<th style="text-align: right;">at <span class="math inline">\(1.0\,\text{V}\)</span></th>
+<th style="text-align: right;">at <span class="math inline">\(1.5\,\text{V}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Basic current mirror</td>
+<td style="text-align: right;"><span class="math inline">\(150\,\text{k}\Omega\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(260\,\text{k}\Omega\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(360\,\text{k}\Omega\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High-swing cascode</td>
+<td style="text-align: right;"><span class="math inline">\(720\,\text{k}\Omega\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(1.5\,\text{M}\Omega\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(2.4\,\text{M}\Omega\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Source degeneration</td>
+<td style="text-align: right;"><span class="math inline">\(200\,\text{k}\Omega\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(350\,\text{k}\Omega\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(490\,\text{k}\Omega\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Regulated cascode</td>
+<td style="text-align: right;"><span class="math inline">\(710\,\text{k}\Omega\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(2.8\,\text{M}\Omega\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(3.7\,\text{M}\Omega\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The ordering is what the theory predicts: the two cascoded structures gain roughly an order of magnitude over the basic mirror, and the regulated cascode ends up highest, as <a href="#eq-curmir-regcasc-rout" class="quarto-xref">Equation&nbsp;37</a> suggests. Note, though, that the regulated cascode only pulls ahead of the high-swing cascode once its auxiliary amplifier has enough headroom to gain; at <span class="math inline">\(0.5\,\text{V}\)</span> the two are still on par. The source-degenerated mirror, in contrast, improves the output resistance only mildly (by about a factor of <span class="math inline">\(1.4\)</span>), since the degeneration factor <span class="math inline">\(1 + g_\mathrm{m}R_\mathrm{deg}\)</span> of <a href="#eq-curmir-degeneration-rout" class="quarto-xref">Equation&nbsp;36</a> stays modest for a practical voltage drop across <span class="math inline">\(R_\mathrm{deg}\)</span>. Its strength lies elsewhere, as we will see next.</p>
 <div id="cell-fig-curmir-output" class="cell" data-execution_count="41">
 <div class="cell-output cell-output-display">
 <div id="fig-curmir-output" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3763,16 +3816,17 @@ Figure&nbsp;52: Output characteristics of the four current mirror structures.
 <div id="fig-curmir-output-zoom" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-curmir-output-zoom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="aicd_files/figure-html/fig-curmir-output-zoom-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-87" title="Figure&nbsp;53: Output characteristics of the four current mirror structures (zoom in). The high-swing cascode and the regulated cascode achieve significantly higher output resistance compared to the basic and degenerated current mirror."><img src="aicd_files/figure-html/fig-curmir-output-zoom-output-1.png" width="759" height="566" class="figure-img"></a>
+<a href="aicd_files/figure-html/fig-curmir-output-zoom-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-87" title="Figure&nbsp;53: Output characteristics of the four current mirror structures (zoom in, upper panel) and the resulting small-signal output resistance r_\mathrm{out} = \mathrm{d}V_\mathrm{out}/\mathrm{d}I_\mathrm{out} obtained as the reciprocal slope of these curves (lower panel, logarithmic). The high-swing cascode and the regulated cascode achieve significantly higher output resistance compared to the basic and degenerated current mirror. Note the steep collapse of r_\mathrm{out} below the compliance voltage, where the output transistors leave saturation, and that r_\mathrm{out} keeps rising with V_\mathrm{out} well inside the useful range."><img src="aicd_files/figure-html/fig-curmir-output-zoom-output-1.png" width="666" height="578" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-curmir-output-zoom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;53: Output characteristics of the four current mirror structures (zoom in). The high-swing cascode and the regulated cascode achieve significantly higher output resistance compared to the basic and degenerated current mirror.
+Figure&nbsp;53: Output characteristics of the four current mirror structures (zoom in, upper panel) and the resulting small-signal output resistance <span class="math inline">\(r_\mathrm{out} = \mathrm{d}V_\mathrm{out}/\mathrm{d}I_\mathrm{out}\)</span> obtained as the reciprocal slope of these curves (lower panel, logarithmic). The high-swing cascode and the regulated cascode achieve significantly higher output resistance compared to the basic and degenerated current mirror. Note the steep collapse of <span class="math inline">\(r_\mathrm{out}\)</span> below the compliance voltage, where the output transistors leave saturation, and that <span class="math inline">\(r_\mathrm{out}\)</span> keeps rising with <span class="math inline">\(V_\mathrm{out}\)</span> well inside the useful range.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>We now look into the results of the Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch using 500 runs and a compliance voltage of 0.4 V. The results are summarized in <a href="#fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a>. We can see that the high-swing cascode and the regulated cascode achieve a very precise nominal current accuracy of almost 50 µA. However, the source-degenerated current mirror shows a significantly reduced spread of the output current, indicating a reduced mismatch of the poly-silicon resistors compared to the MOSFETs.</p>
+<p>It is instructive to also look at the reverse side of the coin. The relative spread comes out as <span class="math inline">\(0.42\,\%\)</span> for the basic mirror, <span class="math inline">\(0.24\,\%\)</span> for the source-degenerated one, but <span class="math inline">\(0.83\,\%\)</span> for the high-swing cascode and <span class="math inline">\(1.79\,\%\)</span> for the regulated cascode. The two cascoded structures thus match <strong>worse</strong> than the plain current mirror, because the cascode devices (and, in the regulated case, the auxiliary amplifier with its own bias current sources) contribute their own mismatch on top of that of the bottom transistor pair. Output resistance and current accuracy are therefore not improved by the same measure: a cascode buys you the former and can cost you the latter. This is a good example of why a structure should never be selected on a single figure of merit.</p>
 <div id="cell-fig-curmir-mc" class="cell" data-execution_count="43">
 <div class="cell-output cell-output-display">
 <div id="fig-curmir-mc" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3825,9 +3879,9 @@ Figure&nbsp;56: A low-voltage regulated-cascode current mirror. The differential
 <p>In summary, we can classify the usage of the different current mirror structures as follows:</p>
 <ul>
 <li>For general applications where output resistance and current accuracy are not critical, the <strong>basic current mirror</strong> can be used. It also has the lowest compliance voltage since only one transistor is stacked.</li>
-<li>The <strong>high-swing cascode current mirror</strong> is a good choice when higher output resistance is needed, while still keeping the circuit relatively simple.</li>
-<li>The <strong>source-degenerated current mirror</strong> is a good choice when the best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used.</li>
-<li>The <strong>regulated cascode current mirror</strong> is the best choice when the highest output resistance is required, and the additional complexity and output noise are acceptable.</li>
+<li>The <strong>high-swing cascode current mirror</strong> is a good choice when higher output resistance is needed, while still keeping the circuit relatively simple. Be aware that the added cascode devices roughly double the current spread under mismatch compared to the basic mirror.</li>
+<li>The <strong>source-degenerated current mirror</strong> is a good choice when the best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used. Note that its output resistance is only mildly improved.</li>
+<li>The <strong>regulated cascode current mirror</strong> is the best choice when the highest output resistance is required, and the additional complexity, output noise, and a roughly four-fold larger current spread under mismatch are acceptable.</li>
 <li>The <strong>low-voltage regulated cascode current mirror</strong> is a good alternative to the regulated cascode when a low compliance voltage is required.</li>
 </ul>
 <p>Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are sized for similar chip area and a fair comparison.</p>
@@ -3870,14 +3924,14 @@ Figure&nbsp;57: A current mirror pair with resistive degeneration.
 \tag{39}\]</span></span></p>
 <p>The standard deviation of the transconductance parameter mismatch <span class="math inline">\(\sigma\left\{\Delta K / K\right\}\)</span> can be calculated similarly as (which is an alternative form to <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a>)</p>
 <p><span id="eq-mosfet-mismatch-kp-alt"><span class="math display">\[
-\sigma^2\left\{\frac{\Delta K}{K}\right\} = \sigma^2\left\{\Delta W\right\} \cdot \frac{1}{W^2} + \sigma^2\left\{\Delta L\right\} \cdot \frac{1}{L^2} + \sigma^2\left\{\frac{\Delta \mu}{\mu}\right\} \cdot \frac{1}{W L},
+\sigma^2\left\{\frac{\Delta K}{K}\right\} = \sigma^2\left\{\Delta W\right\} \cdot \frac{1}{W^2} + \sigma^2\left\{\Delta L\right\} \cdot \frac{1}{L^2} + A_\mu^2 \cdot \frac{1}{W L},
 \tag{40}\]</span></span></p>
-<p>where <span class="math inline">\(\sigma\left\{\Delta W\right\}\)</span> and <span class="math inline">\(\sigma\left\{\Delta L\right\}\)</span> are the process-dependent mismatch parameters for the width <span class="math inline">\(W\)</span> and length <span class="math inline">\(L\)</span>, respectively, and <span class="math inline">\(\sigma\left\{\Delta \mu / \mu\right\}\)</span> is the mobility mismatch parameter.</p>
-<p>The standard deviations of the components of the SG13G2 process are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>. For mismatch calculations we can assume them to be uncorrelated.</p>
+<p>where <span class="math inline">\(\sigma\left\{\Delta W\right\}\)</span> and <span class="math inline">\(\sigma\left\{\Delta L\right\}\)</span> are the process-dependent absolute mismatch parameters for the width <span class="math inline">\(W\)</span> and length <span class="math inline">\(L\)</span>, respectively. The mobility mismatch follows Pelgrom’s law like the threshold voltage, so it is described by an area-scaled constant <span class="math inline">\(A_\mu = \sigma\left\{\Delta \mu / \mu\right\} \cdot \sqrt{W L}\)</span>, which is the quantity listed in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>.</p>
+<p>The standard deviations of the components of the SG13G2 process are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>. For mismatch calculations we can assume them to be uncorrelated.</p>
 <div id="tbl-sg13g2-mismatch" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sg13g2-mismatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: IHP SG13G2 device mismatch
+Table&nbsp;4: IHP SG13G2 device mismatch
 </figcaption>
 <div aria-describedby="tbl-sg13g2-mismatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -3968,7 +4022,7 @@ Table&nbsp;3: IHP SG13G2 device mismatch
 <p><span id="eq-curmir-matching-strongdeg"><span class="math display">\[
 \sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sigma^2\left\{\frac{\Delta R}{R}\right\}
 \tag{42}\]</span></span></p>
-<p>indicating that now the current matching of the degenerated current mirror is defined by the resistor matching only. Since resistors typically have a significantly better matching than MOSFETs, this can lead to a significant improvement in current mirror accuracy.</p>
+<p>indicating that now the current matching of the degenerated current mirror is defined by the resistor matching only. Since resistors can be matched considerably better than MOSFETs, this can lead to a significant improvement in current mirror accuracy, but only if the resistor is given enough area, as the worked example below will show.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Current Mirror Matching Calculation">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -3979,10 +4033,10 @@ Table&nbsp;3: IHP SG13G2 device mismatch
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Let us now calculate the current mirror matching of the simple current mirror. Using <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a>, and using the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 5\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 10\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 5\,\mu\text{m}\)</span>, we can calculate the standard deviation of the transconductance parameter mismatch using <a href="#eq-mosfet-mismatch-kp-alt" class="quarto-xref">Equation&nbsp;40</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>: <span class="math display">\[
+<p>Let us now calculate the current mirror matching of the simple current mirror. Using <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a>, and using the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 5\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 10\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 5\,\mu\text{m}\)</span>, we can calculate the standard deviation of the transconductance parameter mismatch using <a href="#eq-mosfet-mismatch-kp-alt" class="quarto-xref">Equation&nbsp;40</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
 \]</span></p>
-<p>The standard deviation of the threshold voltage mismatch can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>: <span class="math display">\[
+<p>The standard deviation of the threshold voltage mismatch can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.55\,\text{mV}.
 \]</span></p>
 <p>Bringing both results into <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a>, we get <span class="math display">\[
@@ -3990,24 +4044,25 @@ Table&nbsp;3: IHP SG13G2 device mismatch
 \]</span> Comparing with the simulation results in <a href="#fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a> for the basic current mirror, we can see that this gives a reasonable estimate compared to the standard deviation of about <span class="math inline">\(0.21\,\mu\text{A}/48.9\,\mu\text{A} = 0.43\,\%\)</span> obtained from the Monte-Carlo simulation. The remaining discrepancy is due to simplifications in the analytical model (e.g., the square-law approximation).</p>
 <p>Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;39</a> to analyze this configuration. We use the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 10\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 20\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 3\,\mu\text{m}\)</span>, for the MOSFET, and <span class="math inline">\(V_\mathrm{deg} = 0.2\,\text{V}\)</span>, <span class="math inline">\(L = 15\,\mu\text{m}\)</span> / <span class="math inline">\(W = 1\,\mu\text{m}\)</span> for the used <code>rppd</code> resistor.</p>
 <p>The standard deviation of the transconductance parameter mismatch can be calculated as <span class="math display">\[
-\sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.10\,\%.
+\sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
 \]</span></p>
 <p>The standard deviation of the threshold voltage mismatch can be calculated as <span class="math display">\[
 \sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.50\,\text{mV}.
 \]</span></p>
-<p>The standard deviation of the resistor mismatch can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;3</a>: <span class="math display">\[
+<p>The standard deviation of the resistor mismatch can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\frac{\Delta R}{R}\right\} = \frac{1.5\,\%\mu\text{m}}{\sqrt{15\,\mu\text{m} \cdot 1\,\mu\text{m}}} = 0.39\,\%.
 \]</span></p>
 <p>Plugging these results into <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;39</a>, we get <span class="math display">\[
 \begin{split}
 \sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} =&amp;
-\left( \frac{0.50\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2 +
-\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.10\,\% \right)^2 \\
-&amp; + \left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.39\,\%\right)^2 \\
-=&amp; (0.29\,\%)^2.
+\underbrace{\left( \frac{0.50\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2}_{(0.17\,\%)^2} +
+\underbrace{\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.09\,\% \right)^2}_{(0.03\,\%)^2} \\
+&amp; + \underbrace{\left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.39\,\%\right)^2}_{(0.26\,\%)^2} \\
+=&amp; (0.31\,\%)^2.
 \end{split}
 \]</span></p>
-<p>We see that compared to the basic current mirror, the resistively-degenerated current mirror achieves a significantly improved current matching. This matches quite well with the simulation results in <a href="#fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a> for the resistively-degenerated current mirror, where we obtained a standard deviation of about <span class="math inline">\(0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.25\,\%\)</span> from the Monte-Carlo simulation.</p>
+<p>The three terms are worth reading individually. The degeneration has done its job on the MOSFET: the threshold-voltage term is down to <span class="math inline">\(0.17\,\%\)</span> and the transconductance-parameter term to a negligible <span class="math inline">\(0.03\,\%\)</span>. But the resistor mismatch now <strong>dominates</strong> at <span class="math inline">\(0.26\,\%\)</span>, because the chosen <code>rppd</code> resistor is only <span class="math inline">\(W = 1\,\mu\text{m}\)</span> wide. The net result of <span class="math inline">\(0.31\,\%\)</span> is therefore no better than the <span class="math inline">\(0.29\,\%\)</span> of the basic current mirror.</p>
+<p>This is the essential lesson of source degeneration: it does not remove mismatch, it <em>trades</em> MOSFET mismatch for resistor mismatch. The trade only pays off if the resistor is given enough area. Widening it to <span class="math inline">\(W = 4\,\mu\text{m}\)</span> (with <span class="math inline">\(L\)</span> scaled to <span class="math inline">\(60\,\mu\text{m}\)</span> to keep the same resistance) would drop the resistor term to <span class="math inline">\(0.09\,\%\)</span> and the total to about <span class="math inline">\(0.20\,\%\)</span>. Note that the Monte-Carlo simulation in <a href="#fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a> gives a standard deviation of about <span class="math inline">\(0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.25\,\%\)</span>, i.e.&nbsp;somewhat better than the hand calculation predicts; as before, the remaining discrepancy comes from the simplifications in the analytical model.</p>
 </div>
 </div>
 </section>
@@ -4760,12 +4815,12 @@ Note&nbsp;3: CACE Summary for Improved OTA
 </section>
 </div>
 </div>
-<p>The increased performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. The new situation with the improved design is summarized in <a href="#tbl-voltage-buffer-spec-improved" class="quarto-xref">Table&nbsp;4</a> (unchanged entries are not shown).</p>
+<p>The increased performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. The new situation with the improved design is summarized in <a href="#tbl-voltage-buffer-spec-improved" class="quarto-xref">Table&nbsp;5</a> (unchanged entries are not shown).</p>
 <p>The supply current budget in that table deserves a comment, since at first glance it looks like a step backwards from <span class="math inline">\(10\,\mu\text{A}\)</span> to <span class="math inline">\(20\,\mu\text{A}\)</span>. The point is that we negotiated with the chip lead designer a reduction of the externally provided bias current from <span class="math inline">\(20\,\mu\text{A}\)</span> to <span class="math inline">\(5\,\mu\text{A}\)</span> at the same time. That bias current has to be generated somewhere on the chip as well, so what counts at system level is the sum: previously <span class="math inline">\(10 + 20 = 30\,\mu\text{A}\)</span>, now at most <span class="math inline">\(20 + 5 = 25\,\mu\text{A}\)</span>. Overall the situation is thus slightly improved, while we have bought ourselves headroom in the OTA budget to spend on gain and settling.</p>
 <div id="tbl-voltage-buffer-spec-improved" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-voltage-buffer-spec-improved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4: Voltage buffer specification
+Table&nbsp;5: Voltage buffer specification
 </figcaption>
 <div aria-describedby="tbl-voltage-buffer-spec-improved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -7004,14 +7059,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {(Integrated)} {Circuit} {Design}},
-  date = {2026-08-11},
+  date = {2026-08-12},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-(Integrated) Circuit Design.”</span> August 11. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+(Integrated) Circuit Design.”</span> August 12. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
