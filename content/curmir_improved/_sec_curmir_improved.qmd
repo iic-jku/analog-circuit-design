@@ -70,7 +70,20 @@ The resulting circuits are drawn in @fig-curmir-variations-tb. The testbench sim
 
 ![Simulation schematic of the improved current mirrors.](./xschem/current_mirror_variations.svg){#fig-curmir-variations-tb}
 
-The output characteristics from the dc sweep simulation are shown in @fig-curmir-output, and a zoom-in in @fig-curmir-output-zoom. We can see that all improved current mirror structures achieve a significantly higher output resistance compared to the basic current mirror. The regulated cascode structure achieves the highest output resistance, as expected.
+The output characteristics from the dc sweep simulation are shown in @fig-curmir-output, and a zoom-in in @fig-curmir-output-zoom. Since the output resistance is nothing but the reciprocal slope of these curves, $r_\mathrm{out} = \mathrm{d}V_\mathrm{out}/\mathrm{d}I_\mathrm{out}$, the lower panel of @fig-curmir-output-zoom plots it directly: a flat output characteristic and a high output resistance are two views of the same data.
+
+The first thing to take away from that panel is that $r_\mathrm{out}$ is **not a single number**: it collapses steeply below the compliance voltage, where the output devices enter triode, and it keeps growing with $V_\mathrm{out}$ throughout the useful range. Any value we quote is therefore only meaningful together with the bias point at which it was taken:
+
+| Structure | $r_\mathrm{out}$ at $V_\mathrm{out} = 0.5\,\text{V}$ | at $1.0\,\text{V}$ | at $1.5\,\text{V}$ |
+|:--------------------------|-----:|-----:|-----:|
+| Basic current mirror      | $150\,\text{k}\Omega$ | $260\,\text{k}\Omega$ | $360\,\text{k}\Omega$ |
+| High-swing cascode        | $720\,\text{k}\Omega$ | $1.5\,\text{M}\Omega$ | $2.4\,\text{M}\Omega$ |
+| Source degeneration       | $200\,\text{k}\Omega$ | $350\,\text{k}\Omega$ | $490\,\text{k}\Omega$ |
+| Regulated cascode         | $710\,\text{k}\Omega$ | $2.8\,\text{M}\Omega$ | $3.7\,\text{M}\Omega$ |
+
+: Simulated small-signal output resistance versus output voltage {#tbl-curmir-rout}
+
+The ordering is what the theory predicts: the two cascoded structures gain roughly an order of magnitude over the basic mirror, and the regulated cascode ends up highest, as @eq-curmir-regcasc-rout suggests. Note, though, that the regulated cascode only pulls ahead of the high-swing cascode once its auxiliary amplifier has enough headroom to gain; at $0.5\,\text{V}$ the two are still on par. The source-degenerated mirror, in contrast, improves the output resistance only mildly (by about a factor of $1.4$), since the degeneration factor $1 + \gm R_\mathrm{deg}$ of @eq-curmir-degeneration-rout stays modest for a practical voltage drop across $R_\mathrm{deg}$. Its strength lies elsewhere, as we will see next.
 
 ```{python}
 #| label: fig-curmir-output
@@ -106,32 +119,42 @@ plt.tight_layout()
 ```{python}
 #| label: fig-curmir-output-zoom
 #| echo: false
-#| fig-cap: "Output characteristics of the four current mirror structures (zoom in). The high-swing cascode and the regulated cascode achieve significantly higher output resistance compared to the basic and degenerated current mirror."
+#| fig-cap: "Output characteristics of the four current mirror structures (zoom in, upper panel) and the resulting small-signal output resistance $r_\\mathrm{out} = \\mathrm{d}V_\\mathrm{out}/\\mathrm{d}I_\\mathrm{out}$ obtained as the reciprocal slope of these curves (lower panel, logarithmic). The high-swing cascode and the regulated cascode achieve significantly higher output resistance compared to the basic and degenerated current mirror. Note the steep collapse of $r_\\mathrm{out}$ below the compliance voltage, where the output transistors leave saturation, and that $r_\\mathrm{out}$ keeps rising with $V_\\mathrm{out}$ well inside the useful range."
 import numpy as np
 import matplotlib.pyplot as plt
 
 filename = "xschem/curmir_variations.txt"
 data = np.loadtxt(filename)
 
-# Extract data for all four current mirror variations
-x1, y1 = data[:, 0], data[:, 1]  # Basic current mirror
-x2, y2 = data[:, 2], data[:, 3]  # High-swing cascode
-x3, y3 = data[:, 4], data[:, 5]  # Source degeneration
-x4, y4 = data[:, 6], data[:, 7]  # Regulated cascode
+labels = ['Basic current mirror', 'High-swing cascode',
+          'Source degeneration', 'Regulated cascode']
+colors = ['b', 'r', 'g', 'm']
 
-plt.figure(figsize=(8, 6))
-plt.plot(x1, y1*1e6, linestyle='-', color='b', linewidth=2, label='Basic current mirror')
-plt.plot(x2, y2*1e6, linestyle='-', color='r', linewidth=2, label='High-swing cascode')
-plt.plot(x3, y3*1e6, linestyle='-', color='g', linewidth=2, label='Source degeneration')
-plt.plot(x4, y4*1e6, linestyle='-', color='m', linewidth=2, label='Regulated cascode')
+# two stacked panels sharing the output-voltage axis: the current on top,
+# its reciprocal slope (the output resistance) below
+fig, (ax_i, ax_r) = plt.subplots(2, 1, figsize=(8, 7), sharex=True,
+                                 gridspec_kw={'hspace': 0.08})
 
-plt.xlabel("Output voltage (V)")
-plt.ylabel("Output current (µA)")
-plt.ylim(45, 55)
-plt.xlim(0, 1.5)
-plt.legend(loc='best')
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
+for i, (label, color) in enumerate(zip(labels, colors)):
+    v_out, i_out = data[:, 2*i], data[:, 2*i+1]
+    ax_i.plot(v_out, i_out*1e6, linestyle='-', color=color,
+              linewidth=2, label=label)
+    # np.gradient gives a centered difference on the (uniform) sweep grid
+    ax_r.plot(v_out, 1/np.gradient(i_out, v_out),
+              linestyle='-', color=color, linewidth=2)
+
+ax_i.set_ylabel("Output current (µA)")
+ax_i.set_ylim(45, 55)
+ax_i.grid(True, alpha=0.3)
+ax_i.legend(loc='lower right')
+
+ax_r.set_yscale('log')
+ax_r.set_ylim(5e4, 1e7)
+ax_r.set_ylabel(r"Output resistance $r_\mathrm{out}$ ($\Omega$)")
+ax_r.set_xlabel("Output voltage (V)")
+ax_r.set_xlim(0, 1.5)
+ax_r.grid(True, alpha=0.3, which='major')
+ax_r.grid(True, alpha=0.15, which='minor')
 ```
 
 We now look into the results of the Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch using 500 runs and a compliance voltage of 0.4 V. The results are summarized in @fig-curmir-mc. We can see that the high-swing cascode and the regulated cascode achieve a very precise nominal current accuracy of almost 50 µA. However, the source-degenerated current mirror shows a significantly reduced spread of the output current, indicating a reduced mismatch of the poly-silicon resistors compared to the MOSFETs.
