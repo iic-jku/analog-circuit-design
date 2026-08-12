@@ -1071,7 +1071,7 @@ g_\mathrm{m}= \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathr
 <p><span class="math display">\[
 g_\mathrm{ds}= \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{DS}}
 \]</span></p>
-<p>The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(i_\mathrm{d}= g_\mathrm{mb} v_\mathrm{sb}\)</span>:</p>
+<p>The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(g_\mathrm{mb}V_\mathrm{sb}\)</span>:</p>
 <p><span class="math display">\[
 g_\mathrm{mb}= \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{SB}}
 \]</span></p>
@@ -1932,8 +1932,8 @@ T(s) = (-1) \cdot \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m}}{g_\
 \tag{7}\]</span></span></p>
 <p>Inspecting <a href="#eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;7</a> we realize that:</p>
 <ol type="1">
-<li>The dc gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the self-gain of the MOSFET, so <span class="math inline">\(20 \log_{10}(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}\)</span>.</li>
-<li>There is a pole at <span class="math inline">\(\omega_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\)</span>, which is at <span class="math inline">\(9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\)</span>.</li>
+<li>The dc gain <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> is the self-gain of the MOSFET, so <span class="math inline">\(20 \log_{10}(0.2 \cdot 10^{-3} / 9.5 \cdot 10 ^{-6}) = 26.5\,\text{dB}\)</span>.</li>
+<li>There is a pole at <span class="math inline">\(s_\mathrm{p} = -g_\mathrm{ds}/ C_\mathrm{gs}\)</span>, i.e.&nbsp;at a frequency of <span class="math inline">\(f_\mathrm{p} = 9.5 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}\)</span>.</li>
 </ol>
 <p>With this single pole location in <span class="math inline">\(T(s)\)</span> this loop is perfectly stable under all conditions (remember that a single pole results in a maximum phase shift of –90<span class="math inline">\(^\circ\)</span>).</p>
 <p>The question is now how to simulate this loop gain, i.e., how to break the loop open in simulation? In general there are various methods, as we can use artificially large (ideal) inductors and capacitors to break loops open and still establish the correct dc operating points for the ac loop analysis. This is called <strong>Rosenstark’s method</strong> <span class="citation" data-cites="Rosenstark_1984">(<a href="#ref-Rosenstark_1984" role="doc-biblioref">Rosenstark 1984</a>)</span>. However, mimicking the correct loading can be an issue, and requires a lot of careful consideration.</p>
@@ -1964,7 +1964,7 @@ Figure&nbsp;22: Testbench for MOSFET diode stability analysis.
 </div>
 </div>
 </div>
-<p>From simulation we see that the open-loop gain is <span class="math inline">\(24.9\,\text{dB}\)</span> at low frequencies, which matches quite well our prediction of <span class="math inline">\(26.4\,\text{dB}\)</span>. In the Bode plot we see a low-pass with a <span class="math inline">\(-3\,\text{dB}\)</span> corner frequency of <span class="math inline">\(1.4\,\text{GHz}\)</span>, which again is fairly close to our prediction of <span class="math inline">\(1.1\,\text{GHz}\)</span>.</p>
+<p>From simulation we see that the open-loop gain is <span class="math inline">\(24.9\,\text{dB}\)</span> at low frequencies, which matches quite well our prediction of <span class="math inline">\(26.5\,\text{dB}\)</span>. In the Bode plot we see a low-pass with a <span class="math inline">\(-3\,\text{dB}\)</span> corner frequency of <span class="math inline">\(1.4\,\text{GHz}\)</span>, which again is fairly close to our prediction of <span class="math inline">\(1.1\,\text{GHz}\)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="What About Large-Signal Stability?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2052,7 +2052,7 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 </div>
 <p>Calculating the rms noise voltage for our MOSFET diode we get <span class="math display">\[
-\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV},
+\sqrt{V_\mathrm{n,rms}^2} = \sqrt{\frac{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84}{1.4 \cdot 10^{-15}}} = 1.58\,\text{mV},
 \]</span> which is a sizeable value! Think about it, can this rms noise voltage be measured with an oscilloscope? If not, why? We run circuits in this technology at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\mathrm{V}\)</span>, which leaves us with a signal swing of ca. <span class="math inline">\(1.1\,\mathrm{V_{pp}}\)</span> (single-ended), resulting in a dynamic range in this case of <span class="math inline">\(20 \log_{10} (0.39 / 1.58 \cdot 10^{-3}) \approx 48\,\text{dB}\)</span> assuming a sinusoidal signal. In order to get a feeling which dynamic range is “good”, we can calculate the required dynamic range of a 16-bit audio ADC to be <span class="math inline">\(6.02 \cdot 16 + 1.76\,\text{dB} = 98.08\,\text{dB} \approx 100\,\text{dB}\)</span>. This calculation should make clear that, for example, the correct sizing of the sample&amp;hold capacitor is crucial for low rms noise voltage.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Be Careful with Parasitic Capacitances in IC Design">
 <div class="callout-header d-flex align-content-center">
@@ -2388,7 +2388,7 @@ Figure&nbsp;32: The 5-transistor OTA.
 </div>
 <div class="callout-body-container callout-body">
 <p>While we repeat the basics of elementary MOSFET amplifier stages (like common-source stage, common-gate stage, and current mirror) in this course material, the following compendium <span class="citation" data-cites="Murmann_MOS_stages_2013">(<a href="#ref-Murmann_MOS_stages_2013" role="doc-biblioref">Murmann 2013</a>)</span> is recommended for review. It is freely available at <a href="https://github.com/bmurmann/Book-on-MOS-stages" class="uri">https://github.com/bmurmann/Book-on-MOS-stages</a>.</p>
-<p>In addition, we can highly recommend these references <span class="citation" data-cites="Gray_Meyer_2009">Razavi (<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">2017</a>)</span> for further study.</p>
+<p>In addition, we can highly recommend these references <span class="citation" data-cites="Gray_Meyer_2009 Razavi_Analog_CMOS">(<a href="#ref-Gray_Meyer_2009" role="doc-biblioref">Gray et al. 2009</a>; <a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span> for further study.</p>
 </div>
 </div>
 <p>The operation is as follows: <span class="math inline">\(M_{1,2}\)</span> form a differential pair which is biased by the current source <span class="math inline">\(M_5\)</span>. <span class="math inline">\(M_{5,6}\)</span> form a current mirror, thus the input bias current <span class="math inline">\(I_\mathrm{bias}\)</span> sets the bias current in the OTA. The differential pair <span class="math inline">\(M_{1,2}\)</span> is loaded by the current mirror <span class="math inline">\(M_{3,4}\)</span> which mirrors the drain current of <span class="math inline">\(M_1\)</span> to the right side. Here, the currents from <span class="math inline">\(M_4\)</span> and <span class="math inline">\(M_2\)</span> are summed, and together with the conductance effective at the output node, a voltage builds up.</p>
@@ -5172,7 +5172,7 @@ s_\mathrm{z} = +\frac{g_\mathrm{m}}{C_\mathrm{m}}
 <p><span id="eq-miller-zero-comp"><span class="math display">\[
 s_\mathrm{z} = \frac{g_\mathrm{m}}{C_\mathrm{m} (1 - g_\mathrm{m}R_\mathrm{m})}
 \tag{57}\]</span></span></p>
-<p>If we do not use the resistor (i.e., <span class="math inline">\(R_\mathrm{m}=0\)</span>) then <a href="#eq-miller-zero-comp" class="quarto-xref">Equation&nbsp;57</a> collapses to <a href="#eq-miller-zero" class="quarto-xref">Equation&nbsp;56</a>. If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &lt; 1\)</span> then the zero stays in the right half-plane; if <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &gt; 1\)</span> then the zero moves into the left half-plane (this is what we want). If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} = 1\)</span> then we have compensated (i.e., removed) the zero; however, in practice exact compensation is not easy to establish across conditions, so we want to move the zero into the left half-plane. Adding a bit of margin want to size</p>
+<p>If we do not use the resistor (i.e., <span class="math inline">\(R_\mathrm{m}=0\)</span>) then <a href="#eq-miller-zero-comp" class="quarto-xref">Equation&nbsp;57</a> collapses to <a href="#eq-miller-zero" class="quarto-xref">Equation&nbsp;56</a>. If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &lt; 1\)</span> then the zero stays in the right half-plane; if <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &gt; 1\)</span> then the zero moves into the left half-plane (this is what we want). If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} = 1\)</span> then we have compensated (i.e., removed) the zero; however, in practice exact compensation is not easy to establish across conditions, so we want to move the zero into the left half-plane. Adding a bit of margin, we want to size</p>
 <p><span class="math display">\[
 R_\mathrm{m} &gt; \frac{2}{g_\mathrm{m}}.
 \]</span></p>
