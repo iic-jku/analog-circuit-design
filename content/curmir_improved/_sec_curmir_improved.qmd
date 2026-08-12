@@ -370,7 +370,7 @@ $$
  
 The standard deviation of the transconductance parameter mismatch can be calculated as
 $$
-\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.10\,\%.
+\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
 $$
 
 The standard deviation of the threshold voltage mismatch can be calculated as
@@ -387,12 +387,14 @@ Plugging these results into @eq-curmir-matching-alt, we get
 $$
 \begin{split}
 \var[\frac{\Delta \ID}{\ID}] =&
-\left( \frac{0.50\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2 +
-\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.10\,\% \right)^2 \\
-& + \left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.39\,\%\right)^2 \\
-=& (0.29\,\%)^2.
+\underbrace{\left( \frac{0.50\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2}_{(0.17\,\%)^2} +
+\underbrace{\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.09\,\% \right)^2}_{(0.03\,\%)^2} \\
+& + \underbrace{\left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.39\,\%\right)^2}_{(0.26\,\%)^2} \\
+=& (0.31\,\%)^2.
 \end{split}
 $$
 
-We see that compared to the basic current mirror, the resistively-degenerated current mirror achieves a significantly improved current matching. This matches quite well with the simulation results in @fig-curmir-mc for the resistively-degenerated current mirror, where we obtained a standard deviation of about $0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.25\,\%$ from the Monte-Carlo simulation.
+The three terms are worth reading individually. The degeneration has done its job on the MOSFET: the threshold-voltage term is down to $0.17\,\%$ and the transconductance-parameter term to a negligible $0.03\,\%$. But the resistor mismatch now **dominates** at $0.26\,\%$, because the chosen `rppd` resistor is only $W = 1\,\mu\text{m}$ wide. The net result of $0.31\,\%$ is therefore no better than the $0.29\,\%$ of the basic current mirror.
+
+This is the essential lesson of source degeneration: it does not remove mismatch, it *trades* MOSFET mismatch for resistor mismatch. The trade only pays off if the resistor is given enough area. Widening it to $W = 4\,\mu\text{m}$ (with $L$ scaled to $60\,\mu\text{m}$ to keep the same resistance) would drop the resistor term to $0.09\,\%$ and the total to about $0.20\,\%$. Note that the Monte-Carlo simulation in @fig-curmir-mc gives a standard deviation of about $0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.25\,\%$, i.e. somewhat better than the hand calculation predicts; as before, the remaining discrepancy comes from the simplifications in the analytical model.
 :::
