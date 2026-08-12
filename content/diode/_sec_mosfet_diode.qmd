@@ -192,8 +192,8 @@ $$ {#eq-mosfet-diode-openloop-gain}
 
 Inspecting @eq-mosfet-diode-openloop-gain we realize that:
 
-1. The dc gain $\gm / \gds$ is the self-gain of the MOSFET, so $20 \log_{10}(0.2 \cdot 10^{-3} / 9.6 \cdot 10 ^{-6}) = 26.4\,\text{dB}$.
-2. There is a pole at $\omega_\mathrm{p} = -\gds / \Cgs$, which is at $9.6 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}$.
+1. The dc gain $\gm / \gds$ is the self-gain of the MOSFET, so $20 \log_{10}(0.2 \cdot 10^{-3} / 9.5 \cdot 10 ^{-6}) = 26.5\,\text{dB}$.
+2. There is a pole at $s_\mathrm{p} = -\gds / \Cgs$, i.e. at a frequency of $f_\mathrm{p} = 9.5 \cdot 10 ^{-6} / (2 \pi \cdot 1.4 \cdot 10^{-15}) = 1.1\,\text{GHz}$.
 
 With this single pole location in $T(s)$ this loop is perfectly stable under all conditions (remember that a single pole results in a maximum phase shift of --90$^\circ$).
 
@@ -213,7 +213,7 @@ If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet
 ![Testbench for MOSFET diode stability analysis.](/xschem/mosfet_diode_loopgain.svg){#fig-mosfet-diode-loopgain-tb}
 :::
 
-From simulation we see that the open-loop gain is $24.9\,\text{dB}$ at low frequencies, which matches quite well our prediction of $26.4\,\text{dB}$. In the Bode plot we see a low-pass with a $-3\,\text{dB}$ corner frequency of $1.4\,\text{GHz}$, which again is fairly close to our prediction of $1.1\,\text{GHz}$. 
+From simulation we see that the open-loop gain is $24.9\,\text{dB}$ at low frequencies, which matches quite well our prediction of $26.5\,\text{dB}$. In the Bode plot we see a low-pass with a $-3\,\text{dB}$ corner frequency of $1.4\,\text{GHz}$, which again is fairly close to our prediction of $1.1\,\text{GHz}$. 
 
 ::: {.callout-important title="What About Large-Signal Stability?"}
 Keep in mind that the above simulation only verifies the small-signal stability in one certain operating point. If we later look at the stability of an OTA it might be a good idea to verify the small-signal stability in different operating points.
@@ -289,7 +289,7 @@ To calculate the total output noise of a generalized passive network Bode's nois
 
 Calculating the rms noise voltage for our MOSFET diode we get
 $$
-\sqrt{V_\mathrm{n,rms}^2} = \sqrt{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84 / 1.4 \cdot 10^{-15}} = 1.58\,\text{mV},
+\sqrt{V_\mathrm{n,rms}^2} = \sqrt{\frac{1.38 \cdot 10^{-23} \cdot 300 \cdot 0.84}{1.4 \cdot 10^{-15}}} = 1.58\,\text{mV},
 $$
 which is a sizeable value! Think about it, can this rms noise voltage be measured with an oscilloscope? If not, why? We run circuits in this technology at $\VDD = 1.5\,\mathrm{V}$, which leaves us with a signal swing of ca. $1.1\,\mathrm{V_{pp}}$ (single-ended), resulting in a dynamic range in this case of $20 \log_{10} (0.39 / 1.58 \cdot 10^{-3}) \approx 48\,\text{dB}$ assuming a sinusoidal signal. In order to get a feeling which dynamic range is "good", we can calculate the required dynamic range of a 16-bit audio ADC to be $6.02 \cdot 16 + 1.76\,\text{dB} = 98.08\,\text{dB} \approx 100\,\text{dB}$. This calculation should make clear that, for example, the correct sizing of the sample&hold capacitor is crucial for low rms noise voltage.
 
@@ -308,7 +308,7 @@ Please build a simulation testbench in Xschem to simulate the noise performance 
 
 If you are getting stuck you can look at this Xschem [testbench](./xschem/mosfet_diode_noise.sch), shown in @fig-mosfet-diode-noise-tb.
 
-![Testbench for MOSFET diode noise analysis.](./xschem/mosfet_diode_noise.svg){#fig-mosfet-diode-noise-tb}
+![Testbench for MOSFET diode noise analysis.](/xschem/mosfet_diode_noise.svg){#fig-mosfet-diode-noise-tb}
 :::
 
 ## Conclusion
