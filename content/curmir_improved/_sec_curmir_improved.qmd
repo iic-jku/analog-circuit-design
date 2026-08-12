@@ -159,6 +159,8 @@ ax_r.grid(True, alpha=0.15, which='minor')
 
 We now look into the results of the Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch using 500 runs and a compliance voltage of 0.4 V. The results are summarized in @fig-curmir-mc. We can see that the high-swing cascode and the regulated cascode achieve a very precise nominal current accuracy of almost 50 µA. However, the source-degenerated current mirror shows a significantly reduced spread of the output current, indicating a reduced mismatch of the poly-silicon resistors compared to the MOSFETs.
 
+It is instructive to also look at the reverse side of the coin. The relative spread comes out as $0.42\,\%$ for the basic mirror, $0.24\,\%$ for the source-degenerated one, but $0.83\,\%$ for the high-swing cascode and $1.79\,\%$ for the regulated cascode. The two cascoded structures thus match **worse** than the plain current mirror, because the cascode devices (and, in the regulated case, the auxiliary amplifier with its own bias current sources) contribute their own mismatch on top of that of the bottom transistor pair. Output resistance and current accuracy are therefore not improved by the same measure: a cascode buys you the former and can cost you the latter. This is a good example of why a structure should never be selected on a single figure of merit.
+
 ```{python}
 #| label: fig-curmir-mc
 #| echo: false
@@ -266,9 +268,9 @@ The one drawback of the regulated cascode current mirror shown in @fig-current-m
 In summary, we can classify the usage of the different current mirror structures as follows:
 
 - For general applications where output resistance and current accuracy are not critical, the **basic current mirror** can be used. It also has the lowest compliance voltage since only one transistor is stacked.
-- The **high-swing cascode current mirror** is a good choice when higher output resistance is needed, while still keeping the circuit relatively simple.
-- The **source-degenerated current mirror** is a good choice when the best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used. 
-- The **regulated cascode current mirror** is the best choice when the highest output resistance is required, and the additional complexity and output noise are acceptable.
+- The **high-swing cascode current mirror** is a good choice when higher output resistance is needed, while still keeping the circuit relatively simple. Be aware that the added cascode devices roughly double the current spread under mismatch compared to the basic mirror.
+- The **source-degenerated current mirror** is a good choice when the best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used. Note that its output resistance is only mildly improved.
+- The **regulated cascode current mirror** is the best choice when the highest output resistance is required, and the additional complexity, output noise, and a roughly four-fold larger current spread under mismatch are acceptable.
 - The **low-voltage regulated cascode current mirror** is a good alternative to the regulated cascode when a low compliance voltage is required.
 
 Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are sized for similar chip area and a fair comparison.
