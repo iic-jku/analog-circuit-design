@@ -75,6 +75,8 @@ Throughout this material, we will largely stick to the following notation standa
 * An **ac (small-signal) quantity** (incremental quantity) has a lower-case variable name with a lower-case subscript, like $\gm$.
 * A **total quantity** (dc plus ac) is shown as a lowercase variable name with upper-case subscript, like $i_\mathrm{DS}$.
 * An upper-case variable name with a lower-case subscript is used to denote **RMS quantities**, like $I_\mathrm{ds}$.
+
+One deviation from this scheme is worth pointing out up front, as it is used throughout this material: in the small-signal derivations we write the signal *amplitudes* (phasors) as $\Vgs$, $\Vds$, $\Id$, i.e. with an upper-case variable name. Wherever an RMS value is meant, this is stated explicitly in the variable name, as in $V_\mathrm{n,rms}$.
 :::
 
 ::: {.callout-note title="A Comment on Active and Passive Devices and Linear vs. Nonlinear"}
@@ -137,8 +139,10 @@ $$
 The drain current dependency on the source-bulk voltage (the so-called "body effect") is introduced by the current source $\gmb \Vsb$:
 
 $$
-\gmb = \frac{\partial \ID(\VGS, \VDS, \VSB)}{\partial \VSB}
+\gmb = -\frac{\partial \ID(\VGS, \VDS, \VSB)}{\partial \VSB} = \frac{\partial \ID(\VGS, \VDS, V_\mathrm{BS})}{\partial V_\mathrm{BS}}
 $$
+
+Note the minus sign: raising the source potential above the bulk increases $\Vth$ and thus *lowers* $\ID$. By referencing $\gmb$ to $V_\mathrm{BS} = -\VSB$ it comes out **positive**, just like $\gm$, which is the common convention; typically $\gmb / \gm \approx 0.1 \ldots 0.3$. This is why the $\gmb \Vsb$ source in @fig-mosfet-small-signal-model is drawn with its arrow pointing *opposite* to the $\gm \Vgs$ source.
 
 
 {{< include /content/first_steps/_fig_mosfet_small_signal_model.qmd >}}
@@ -197,7 +201,7 @@ Please try to execute the following steps and answer the following questions:
    1. What is the difference in $\gm$, $\gds$, and other parameters between the NMOS and the PMOS? Why could they be different?
 :::
 
-::: {.callout-note title="Maxwell Capacitance Matrix" #nte-maxwell-cap-matrix}
+::: {#nte-maxwell-cap-matrix .callout-note title="Maxwell Capacitance Matrix"}
 A Maxwell capacitance matrix [@Maxwell_1873] provides the relation between voltages on a set of conductors and the charges on these conductors. For a given conductor set with $N$ conductors (and thus $N$ terminals) the relation is
 $$
 \mathbf{Q} = \mathbf{C} \cdot \mathbf{V}
@@ -207,10 +211,10 @@ $$
 \mathbf{C} =
 \begin{pmatrix}
 C_{11} + C_{12} & -C_{12} \\
--C_{21} & C_{21} + C_{22} \\
+-C_{12} & C_{12} + C_{22} \\
 \end{pmatrix}
 $$
-where $C_{xx} = \partial Q_x / \partial V_x$ is the auto capacitance from a conductor $x$ towards infinity (ground), and $C_{xy} = \partial Q_x / \partial V_y$ is the mutual capacitance from node/conductor $x$ to node/conductor $y$. For a physical capacitor $C_{xy} = C_{yx}$.
+where $C_{11}$ and $C_{22}$ are the **auto capacitances** of the conductors towards infinity (ground), and $C_{12} = C_{21}$ is the **mutual capacitance** between the two conductors. Note that these are the *physical* capacitances, and that they are therefore **not** identical to the entries of $\mathbf{C}$: a diagonal entry of $\mathbf{C}$ is the sum of all capacitances touching a node ($\partial Q_1 / \partial V_1 = C_{11} + C_{12}$), whereas an off-diagonal entry is *negative* ($\partial Q_1 / \partial V_2 = -C_{12}$).
 
 Using the above equation to calculate $Q_1$ (the charge on conductor $1$) results in
 $$
@@ -227,7 +231,9 @@ or
 $$
 \CGG = \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{G}}
 $$
-with $Q_\mathrm{G}$ the charge at terminal G in response to either $V_\mathrm{D}$ or $V_\mathrm{G}$. Note that in a MOSFET, generally $C_{xy} \ne C_{yx}$! 
+with $Q_\mathrm{G}$ the charge at terminal G in response to either $V_\mathrm{D}$ or $V_\mathrm{G}$. Note that in a MOSFET, generally $C_{xy} \ne C_{yx}$!
+
+This also explains the negative capacitance values that a simulator sometimes reports (see the exercise above): the off-diagonal entries of a Maxwell capacitance matrix carry a negative sign by construction, so a reported $\CGD$ of, e.g., $-1\,\text{fF}$ simply means a physical coupling capacitance of $1\,\text{fF}$ between gate and drain.
 :::
 
 ## Conclusion
