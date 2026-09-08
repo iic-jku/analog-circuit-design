@@ -92,6 +92,8 @@ $$
 T_\mathrm{slew} \approx \frac{C_\mathrm{load} \cdot V_\mathrm{out,max}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 0.9}{10 \cdot 10^{-6}} = 4.5\,\text{ns}.
 $$
 
+Note that we have optimistically inserted the *total* supply current budget of $10\,\mu\text{A}$ for $I_\mathrm{tail}$ here; the actual tail current will be smaller, since the bias branch $M_6$ also draws current. This is fine for a first sanity check, as it tells us the slewing contribution is negligible even if the real value turns out several times larger.
+
 This leaves plenty of margin for additional small-signal settling due to the limited bandwidth, as well as for reducing the supply current.
 
 The small-signal settling (assuming one pole at the bandwidth corner frequency) leads to an approximate settling time (1% error corresponds to $\approx 5 \tau$) of
@@ -128,7 +130,7 @@ In order to derive the governing small-signal equations for the OTA we will make
 - We will set $\gmb = 0$ for all MOSFETs.
 - We will further set $\Cgd = 0$ for all MOSFETs except for $M_4$ where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of $M_{3,4}$ (for background please see @sec-miller-theorem). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see @eq-simple-ota-gain). Thus, only $2\Cgs[3,4]$ is considered at the gate node of the current mirror load.
 - We assume $\gm \gg \gds$, so we set $\gds[1] = \gds[3] = 0$ as this node is dominated by $\gm[3]^{-1}$.
-- The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$, we could add to the load capacitance $C_\mathrm{load}$ (see @fig-basic-ota-dcop).
+- The drain capacitance of $M_2$ and $M_4$, as well as the gate capacitance of $M_2$, we could add to the load capacitance $C_\mathrm{load}$ (see @fig-basic-ota-dcop). Do not dismiss this as a second-order correction: with the small $C_\mathrm{load} = 50\,\text{fF}$ specified here, the sizing procedure will show that these device parasitics contribute roughly as much again as the specified load itself, so they effectively halve the achievable bandwidth if ignored.
 
 The resulting small-signal equivalent circuit is shown in @fig-basic-ota-small-signal.
 
@@ -165,17 +167,31 @@ $$
 A(s \to 0) = A_0 = \frac{\gm[1,2]}{\gds[2] + \gds[4]}
 $$ {#eq-simple-ota-gain-dc}
 
-which is plausible, and confirms the requirement of a high impedance at the output node. For very large frequencies we get
+which is plausible, and confirms the requirement of a high impedance at the output node.
+
+Above the dominant pole, but still well below the current-mirror doublet, the numerator of @eq-simple-ota-gain is still dominated by the term $2 \gm[3,4]$, and the gain becomes
 
 $$
-A (s \gg) = \frac{\gm[1,2]}{2 \cdot s C_\mathrm{load}}
+A(s) \approx \frac{\gm[1,2]}{2} \frac{2 \gm[3,4]}{\gm[3,4] \cdot s C_\mathrm{load}} = \frac{\gm[1,2]}{s C_\mathrm{load}}
+$$ {#eq-simple-ota-midband}
+
+which is essentially the behavior of an integrator. This is the frequency range in which the amplifier is actually operated, so we use @eq-simple-ota-midband to calculate the frequency where the gain drops to $|A(s_\mathrm{ug})| = 1 = \gm[1,2] / | j \omega_\mathrm{ug} C_\mathrm{load}|$:
+
+$$
+f_\mathrm{ug} = \frac{\gm[1,2]}{2 \pi C_\mathrm{load}}
+$$ {#eq-simple-ota-ug}
+
+Note that this is exactly the dc gain @eq-simple-ota-gain-dc multiplied by the dominant-pole frequency @eq-basic-ota-dominant-pole, i.e. the gain-bandwidth product, as it has to be for a system that behaves like a single-pole system up to $f_\mathrm{ug}$. The output conductances cancel, so the achievable GBW is set by $\gm[1,2]$ and $C_\mathrm{load}$ alone.
+
+::: {.callout-note title="Watch the Asymptote You Use"}
+It is tempting to obtain $f_\mathrm{ug}$ from the asymptote of @eq-simple-ota-gain for $s \to \infty$, where both numerator and denominator are dominated by their $s \Cgs[3,4]$ terms:
+
+$$
+A(s \to \infty) = \frac{\gm[1,2]}{2 \cdot s C_\mathrm{load}}
 $$ {#eq-simple-ota-highf}
 
-which is essentially the behavior of an integrator, and we can use @eq-simple-ota-highf to calculate the frequency where the gain drops to $|A(s_\mathrm{ug})| = 1 = \gm[1,2]/|2 j \omega_\mathrm{ug} C_\mathrm{load}|$:
-
-$$
-f_\mathrm{ug} = \frac{\gm[1,2]}{4 \pi C_\mathrm{load}}
-$$
+This differs from @eq-simple-ota-midband by a factor of two, and would predict a unity-gain frequency only half as large. The reason for the discrepancy is physical: @eq-simple-ota-highf describes the behavior *above* the doublet, where $\Cgs[3,4]$ shorts out the current mirror so that the signal path through $M_{3,4}$ is lost and only the direct path through $M_2$ remains --- hence half the transconductance. In a sensible design the doublet sits far above $f_\mathrm{ug}$, so @eq-simple-ota-midband is the asymptote to use.
+:::
 
 Looking at @eq-simple-ota-gain, we see that we have a dominant pole at $s_\mathrm{p}$ and a pole-zero doublet with $s_\mathrm{pd}$/$s_\mathrm{zd}$:
 $$
@@ -308,7 +324,7 @@ $$ {#eq-mosfet-mismatch-kp}
 
 The resulting standard deviation of the input offset voltage $V_\mathrm{offs}$ of a differential pair with small $\gmid$ is then given by [@Razavi_Analog_CMOS]
 $$
-V_\mathrm{offs} = \sqrt{\left( \frac{\VGS - \Vth}{2} \right)^2 \cdot \var[\frac{\Delta (W/L)}{{(W/L)}}] + \var[\Delta \Vth]}.
+\sdev[V_\mathrm{offs}] = \sqrt{\left( \frac{\VGS - \Vth}{2} \right)^2 \cdot \var[\frac{\Delta (W/L)}{{(W/L)}}] + \var[\Delta \Vth]}.
 $$ {#eq-diffpair-offset}
 
 The mismatch in the drain current of two current-mirror transistors, characterized as the standard deviation and for small $\gmid$, is given by [@Razavi_Analog_CMOS]
@@ -317,7 +333,7 @@ $$
 \var[\frac{\Delta \ID}{\ID}] = \var[\frac{\Delta (W/L)}{(W/L)}] + 4 \cdot \var[\frac{\Delta \Vth}{\VGS - \Vth}].
 $$ {#eq-currentmirror-offset}
 
-To minimize the input offset voltage in a differential pair we should strive to minimize $\VGS$ (i.e., to maximize $\gmid$, see @eq-diffpair-offset) and to minimize the mismatch in current mirrors we should target a large $\VGS$ (i.e., to minimize $\gmid$, see @eq-currentmirror-offset). In both cases the MOSFET area $W \cdot L$ needs to be large enough (see @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp).
+To minimize the input offset voltage in a differential pair we should strive to minimize the overdrive voltage $\VGS - \Vth$ (i.e., to maximize $\gmid$, see @eq-diffpair-offset) and to minimize the mismatch in current mirrors we should target a large overdrive voltage (i.e., to minimize $\gmid$, see @eq-currentmirror-offset). In both cases the MOSFET area $W \cdot L$ needs to be large enough (see @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp).
 :::
 
 How can we now cope with mismatch in design and simulation? We can account for the transistor mismatch according to @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.
@@ -399,11 +415,11 @@ After a successful run, a documentation is automatically generated. The result o
 
 ### PVT Simulation Analysis
 
-Looking at the CACE report in @nte-basic-ota-cace-result, we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners and that is ready for layout. Once we have the layout ready, we can extract the wiring parasitics ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist, we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points, then our design is finished.
+Looking at the CACE report in @nte-basic-ota-cace-result, we see that (luckily) the specification is met across all **PVT corners**. This is great news! We now have a design that we carefully simulated across PVT and other corners and that is ready for layout. Once we have the layout ready, we can extract the wiring parasitics ($R$ and $C$) as well as other layout-dependent effects like [well proximity](https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf). Using this augmented netlist, we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points, then our design is finished.
 
 ### Monte Carlo Simulation Analysis
 
-Looking at the CACE report in @nte-basic-ota-cace-result, we see that the output voltage specification is not met due to MOSFET mismatch! We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions prove to be too small. We should now go back and change the transistor sizing (increasing $L$ significantly while keeping the $\gmid$ values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.
+The **Monte Carlo** run in the same CACE report in @nte-basic-ota-cace-result tells a different story: here the output voltage specification is not met, due to MOSFET mismatch! Note that this is not a contradiction to the PVT result above --- PVT corners shift all devices together, whereas mismatch makes nominally identical devices differ, and it is exactly this asymmetry that the voltage buffer is sensitive to. We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions prove to be too small. We should now go back and change the transistor sizing (increasing $L$ significantly while keeping the $\gmid$ values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.
 
 It is not unusual that the power consumption now increases, as we have to increase the size of the MOSFETs for matching, and these larger MOSFETs increase the parasitic capacitances which in turn lead to larger power consumption to keep the required bandwidth by increasing the $\gm$.
 
@@ -421,7 +437,7 @@ Being a single-stage amplifier stability is usually not an issue, as only the ou
 
 {{< include /content/ota_basic/_fig_ota_se_r2r.qmd >}}
 
-Another popular version is shown in @fig-ota-se-twostage. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. @fig-ota-se-twostage shows a very simplistic Miller-compensation (see @sec-miller-compensation) using $C_\mathrm{M}$. Often, we would want to implement a more advanced scheme. Some examples can be found in [@Baker_compensating_OPAMP]. An interesting technique is the indirect compensation with cascoded input differential pairs (see @fig-improved-ota) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from $\VDD$ of one $\VGS$ ($\VGS[3]$ on the left side and $\VGS[5]$ on the right side).
+Another popular version is shown in @fig-ota-se-twostage. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. @fig-ota-se-twostage shows a very simplistic Miller-compensation (see @sec-miller-compensation) using $C_\mathrm{M}$. Often, we would want to implement a more advanced scheme. Some examples can be found in [@Baker_compensating_OPAMP]. An interesting technique is the indirect compensation with cascoded input differential pairs (see @fig-improved-ota) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is that both output nodes of the input stage are dc-balanced: each of them sits one $\VGS$ below $\VDD$ --- on the left set by the diode-connected $\VGS[3]$, on the right set by the gate of the second-stage device $M_5$, i.e. by $\VGS[5]$. In the plain 5T-OTA the right-hand node is instead the output node, whose dc level is imposed by the external feedback, so the two sides of the differential pair are generally *not* balanced.
 
 {{< include /content/ota_basic/_fig_ota_se_twostage.qmd >}}
 

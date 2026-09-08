@@ -162,16 +162,21 @@ $$
 \text{GBWP} = f_\mathrm{T,ol} = H_\mathrm{ol,dc} f_\mathrm{c,ol}
 $$
 
-If a frequency-independent negative feedback $G$ (e.g., a resistive divider) is applied to this open-loop system, the transit frequency changes to
+If a frequency-independent negative feedback $G$ (e.g., a resistive divider) is applied to this open-loop system, the closed-loop $-3\,\text{dB}$ cut-off frequency $f_\mathrm{c,cl}$ follows from the open-loop transit frequency and the feedback gain as
+$$
+f_\mathrm{c,cl} = H_\mathrm{ol,dc} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
+$$
+i.e. the bandwidth is extended by exactly the factor by which the gain is reduced. The **gain-bandwidth product is therefore preserved** by the feedback,
+$$
+H_\mathrm{cl,dc} f_\mathrm{c,cl} \approx \frac{1}{G} f_\mathrm{T,ol} G = f_\mathrm{T,ol},
+$$
+which is the reason the GBWP is such a useful figure of merit.
+
+What *does* change is the frequency at which the closed-loop gain itself crosses unity:
 $$
 f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
 $$
-Hence, the closed-loop transit frequency is slightly lower than the open-loop transit frequency $f_\mathrm{T,cl} < f_\mathrm{T,ol}$.
-
-The closed-loop $-3\,\text{dB}$ cut-off frequency $f_\mathrm{c,cl}$ can then be calculated from the open-loop transit frequency and the feedback gain.
-$$
-f_\mathrm{c,cl} = H_\mathrm{ol,DC} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
-$$
+Note that this is **not** the same quantity as the GBWP, even though the two coincide in the open-loop case --- this distinction is a common source of confusion. For weak feedback ($G \ll 1$) the closed-loop unity-gain frequency is only slightly lower than $f_\mathrm{T,ol}$, but for strong feedback it drops sharply, and for the unity-gain case $G = 1$ it vanishes altogether, simply because the closed-loop gain $H_\mathrm{cl} = H_\mathrm{ol}/(1+H_\mathrm{ol}) < 1$ never reaches unity in the first place. Keep this in mind for the MOSFET diode, where exactly this case $G = 1$ applies.
 
 This theory might be interesting when Middlebrook's and Tian's methods for loop gain analysis are later compared in the MOSFET diode testbench (see @fig-mosfet-diode-loopgain-tb).
 :::
