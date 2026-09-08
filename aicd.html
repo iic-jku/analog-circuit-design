@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-08-12">
+<meta name="dcterms.date" content="2026-09-08">
 
 <title>Analog (Integrated) Circuit Design</title>
 <style>
@@ -106,9 +106,9 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fc3c552f25792c921d4f0ccbfb37919.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-3662ac67e9cd501dca117474e4771e7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-8fc3c552f25792c921d4f0ccbfb37919.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3f686e3780fb05a2389bee263982c3c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-04ba2179d13fc1125eaa5c7782862b67.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-3f686e3780fb05a2389bee263982c3c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -589,7 +589,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 12, 2026</p>
+      <p class="date">September 8, 2026</p>
     </div>
   </div>
   
@@ -974,7 +974,7 @@ Figure&nbsp;4: The MOSFET large-signal model. In general, all capacitors are non
 <li>Double-subscripts denote <strong>dc sources</strong>, like <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>.</li>
 <li>An <strong>ac (small-signal) quantity</strong> (incremental quantity) has a lower-case variable name with a lower-case subscript, like <span class="math inline">\(g_\mathrm{m}\)</span>.</li>
 <li>A <strong>total quantity</strong> (dc plus ac) is shown as a lowercase variable name with upper-case subscript, like <span class="math inline">\(i_\mathrm{DS}\)</span>.</li>
-<li>An upper-case variable name with a lower-case subscript is used to denote <strong>RMS quantities</strong>, like <span class="math inline">\(I_\mathrm{ds}\)</span>.</li>
+<li>An upper-case variable name with a lower-case subscript is used to denote signal <em>amplitudes</em> (phasors), like <span class="math inline">\(V_\mathrm{gs}\)</span>, <span class="math inline">\(V_\mathrm{ds}\)</span>, <span class="math inline">\(I_\mathrm{d}\)</span>.</li>
 </ul>
 </div>
 </div>
@@ -1073,8 +1073,9 @@ g_\mathrm{ds}= \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\math
 \]</span></p>
 <p>The drain current dependency on the source-bulk voltage (the so-called “body effect”) is introduced by the current source <span class="math inline">\(g_\mathrm{mb}V_\mathrm{sb}\)</span>:</p>
 <p><span class="math display">\[
-g_\mathrm{mb}= \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{SB}}
+g_\mathrm{mb}= -\frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{SB})}{\partial V_\mathrm{SB}} = \frac{\partial I_\mathrm{D}(V_\mathrm{GS}, V_\mathrm{DS}, V_\mathrm{BS})}{\partial V_\mathrm{BS}}
 \]</span></p>
+<p>Note the minus sign: raising the source potential above the bulk increases <span class="math inline">\(V_\mathrm{th}\)</span> and thus <em>lowers</em> <span class="math inline">\(I_\mathrm{D}\)</span>. By referencing <span class="math inline">\(g_\mathrm{mb}\)</span> to <span class="math inline">\(V_\mathrm{BS} = -V_\mathrm{SB}\)</span> it comes out <strong>positive</strong>, just like <span class="math inline">\(g_\mathrm{m}\)</span>, which is the common convention; typically <span class="math inline">\(g_\mathrm{mb}/ g_\mathrm{m}\approx 0.1 \ldots 0.3\)</span>. This is why the <span class="math inline">\(g_\mathrm{mb}V_\mathrm{sb}\)</span> source in <a href="#fig-mosfet-small-signal-model" class="quarto-xref">Figure&nbsp;6</a> is drawn with its arrow pointing <em>opposite</em> to the <span class="math inline">\(g_\mathrm{m}V_\mathrm{gs}\)</span> source.</p>
 <div id="cell-fig-mosfet-small-signal-model" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div id="fig-mosfet-small-signal-model" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1226,9 +1227,9 @@ Note&nbsp;1: Maxwell Capacitance Matrix
 \mathbf{C} =
 \begin{pmatrix}
 C_{11} + C_{12} &amp; -C_{12} \\
--C_{21} &amp; C_{21} + C_{22} \\
+-C_{12} &amp; C_{12} + C_{22} \\
 \end{pmatrix}
-\]</span> where <span class="math inline">\(C_{xx} = \partial Q_x / \partial V_x\)</span> is the auto capacitance from a conductor <span class="math inline">\(x\)</span> towards infinity (ground), and <span class="math inline">\(C_{xy} = \partial Q_x / \partial V_y\)</span> is the mutual capacitance from node/conductor <span class="math inline">\(x\)</span> to node/conductor <span class="math inline">\(y\)</span>. For a physical capacitor <span class="math inline">\(C_{xy} = C_{yx}\)</span>.</p>
+\]</span> where <span class="math inline">\(C_{11}\)</span> and <span class="math inline">\(C_{22}\)</span> are the <strong>auto capacitances</strong> of the conductors towards infinity (ground), and <span class="math inline">\(C_{12} = C_{21}\)</span> is the <strong>mutual capacitance</strong> between the two conductors. Note that these are the <em>physical</em> capacitances, and that they are therefore <strong>not</strong> identical to the entries of <span class="math inline">\(\mathbf{C}\)</span>: a diagonal entry of <span class="math inline">\(\mathbf{C}\)</span> is the sum of all capacitances touching a node (<span class="math inline">\(\partial Q_1 / \partial V_1 = C_{11} + C_{12}\)</span>), whereas an off-diagonal entry is <em>negative</em> (<span class="math inline">\(\partial Q_1 / \partial V_2 = -C_{12}\)</span>).</p>
 <p>Using the above equation to calculate <span class="math inline">\(Q_1\)</span> (the charge on conductor <span class="math inline">\(1\)</span>) results in <span class="math display">\[
 Q_1 = ( C_{11} + C_{12} ) V_1 - C_{12} V_2 = C_{11} (V_1 - 0) + C_{12} (V_1 - V_2)
 \]</span> which is the expected result.</p>
@@ -1237,6 +1238,7 @@ C_\mathrm{GD}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{D}}
 \]</span> or <span class="math display">\[
 C_\mathrm{GG}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{G}}
 \]</span> with <span class="math inline">\(Q_\mathrm{G}\)</span> the charge at terminal G in response to either <span class="math inline">\(V_\mathrm{D}\)</span> or <span class="math inline">\(V_\mathrm{G}\)</span>. Note that in a MOSFET, generally <span class="math inline">\(C_{xy} \ne C_{yx}\)</span>!</p>
+<p>This also explains the negative capacitance values that a simulator sometimes reports (see the exercise above): the off-diagonal entries of a Maxwell capacitance matrix carry a negative sign by construction, so a reported <span class="math inline">\(C_\mathrm{GD}\)</span> of, e.g., <span class="math inline">\(-1\,\text{fF}\)</span> simply means a physical coupling capacitance of <span class="math inline">\(1\,\text{fF}\)</span> between gate and drain.</p>
 </div>
 </div>
 </section>
@@ -1900,12 +1902,14 @@ Figure&nbsp;20: The block diagram of a negative feedback system.
 <p>The gain-bandwidth product (GBP or GBWP) or transit frequency <span class="math inline">\(f_\mathrm{T}\)</span> of a first-order open-loop system is the product of the open-loop dc gain <span class="math inline">\(H_\mathrm{ol,dc} = H_\mathrm{ol}(f = 0\,\text{Hz})\)</span> and the open-loop <span class="math inline">\(-3\,\text{dB}\)</span> cut-off frequency <span class="math inline">\(f_\mathrm{c,ol}\)</span> of <span class="math inline">\(H_\mathrm{ol}(s)\)</span>. <span class="math display">\[
 \text{GBWP} = f_\mathrm{T,ol} = H_\mathrm{ol,dc} f_\mathrm{c,ol}
 \]</span></p>
-<p>If a frequency-independent negative feedback <span class="math inline">\(G\)</span> (e.g., a resistive divider) is applied to this open-loop system, the transit frequency changes to <span class="math display">\[
+<p>If a frequency-independent negative feedback <span class="math inline">\(G\)</span> (e.g., a resistive divider) is applied to this open-loop system, the closed-loop <span class="math inline">\(-3\,\text{dB}\)</span> cut-off frequency <span class="math inline">\(f_\mathrm{c,cl}\)</span> follows from the open-loop transit frequency and the feedback gain as <span class="math display">\[
+f_\mathrm{c,cl} = H_\mathrm{ol,dc} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
+\]</span> i.e.&nbsp;the bandwidth is extended by exactly the factor by which the gain is reduced. The <strong>gain-bandwidth product is therefore preserved</strong> by the feedback, <span class="math display">\[
+H_\mathrm{cl,dc} f_\mathrm{c,cl} \approx \frac{1}{G} f_\mathrm{T,ol} G = f_\mathrm{T,ol},
+\]</span> which is the reason the GBWP is such a useful figure of merit.</p>
+<p>What <em>does</em> change is the frequency at which the closed-loop gain itself crosses unity: <span class="math display">\[
 f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
-\]</span> Hence, the closed-loop transit frequency is slightly lower than the open-loop transit frequency <span class="math inline">\(f_\mathrm{T,cl} &lt; f_\mathrm{T,ol}\)</span>.</p>
-<p>The closed-loop <span class="math inline">\(-3\,\text{dB}\)</span> cut-off frequency <span class="math inline">\(f_\mathrm{c,cl}\)</span> can then be calculated from the open-loop transit frequency and the feedback gain. <span class="math display">\[
-f_\mathrm{c,cl} = H_\mathrm{ol,DC} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
-\]</span></p>
+\]</span> Note that this is <strong>not</strong> the same quantity as the GBWP, even though the two coincide in the open-loop case — this distinction is a common source of confusion. For weak feedback (<span class="math inline">\(G \ll 1\)</span>) the closed-loop unity-gain frequency is only slightly lower than <span class="math inline">\(f_\mathrm{T,ol}\)</span>, but for strong feedback it drops sharply, and for the unity-gain case <span class="math inline">\(G = 1\)</span> it vanishes altogether, simply because the closed-loop gain <span class="math inline">\(H_\mathrm{cl} = H_\mathrm{ol}/(1+H_\mathrm{ol}) &lt; 1\)</span> never reaches unity in the first place. Keep this in mind for the MOSFET diode, where exactly this case <span class="math inline">\(G = 1\)</span> applies.</p>
 <p>This theory might be interesting when Middlebrook’s and Tian’s methods for loop gain analysis are later compared in the MOSFET diode testbench (see <a href="#fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;22</a>).</p>
 </div>
 </div>
@@ -2546,6 +2550,7 @@ Figure&nbsp;34: The 5-transistor OTA with external connections and load capacito
 <p><span class="math display">\[
 T_\mathrm{slew} \approx \frac{C_\mathrm{load} \cdot V_\mathrm{out,max}}{I_\mathrm{tail}} = \frac{50 \cdot 10^{-15} \cdot 0.9}{10 \cdot 10^{-6}} = 4.5\,\text{ns}.
 \]</span></p>
+<p>Note that we have optimistically inserted the <em>total</em> supply current budget of <span class="math inline">\(10\,\mu\text{A}\)</span> for <span class="math inline">\(I_\mathrm{tail}\)</span> here; the actual tail current will be smaller, since the bias branch <span class="math inline">\(M_6\)</span> also draws current. This is fine for a first sanity check, as it tells us the slewing contribution is negligible even if the real value turns out several times larger.</p>
 <p>This leaves plenty of margin for additional small-signal settling due to the limited bandwidth, as well as for reducing the supply current.</p>
 <p>The small-signal settling (assuming one pole at the bandwidth corner frequency) leads to an approximate settling time (1% error corresponds to <span class="math inline">\(\approx 5 \tau\)</span>) of <span class="math display">\[
 T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10 \times 10^{6}} = 0.08\,\mu\text{s}.
@@ -2585,7 +2590,7 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 <li>We will set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> for all MOSFETs.</li>
 <li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="#sec-miller-theorem" class="quarto-xref">Section&nbsp;17.1</a>). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;17</a>). Thus, only <span class="math inline">\(2C_\mathrm{gs3,4}\)</span> is considered at the gate node of the current mirror load.</li>
 <li>We assume <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, so we set <span class="math inline">\(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\)</span> as this node is dominated by <span class="math inline">\(g_\mathrm{m3}^{-1}\)</span>.</li>
-<li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span>, we could add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span> (see <a href="#fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;34</a>).</li>
+<li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span>, we could add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span> (see <a href="#fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;34</a>). Do not dismiss this as a second-order correction: with the small <span class="math inline">\(C_\mathrm{load} = 50\,\text{fF}\)</span> specified here, the sizing procedure will show that these device parasitics contribute roughly as much again as the specified load itself, so they effectively halve the achievable bandwidth if ignored.</li>
 </ul>
 <p>The resulting small-signal equivalent circuit is shown in <a href="#fig-basic-ota-small-signal" class="quarto-xref">Figure&nbsp;35</a>.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Refresh MOSFET Small-Signal Model">
@@ -2645,21 +2650,40 @@ A(s) = \frac{V_\mathrm{out}(s)}{V_\mathrm{in}(s)} = \frac{g_\mathrm{m1,2}}{2} \f
 <p><span id="eq-simple-ota-gain-dc"><span class="math display">\[
 A(s \to 0) = A_0 = \frac{g_\mathrm{m1,2}}{g_\mathrm{ds2} + g_\mathrm{ds4}}
 \tag{18}\]</span></span></p>
-<p>which is plausible, and confirms the requirement of a high impedance at the output node. For very large frequencies we get</p>
-<p><span id="eq-simple-ota-highf"><span class="math display">\[
-A (s \gg) = \frac{g_\mathrm{m1,2}}{2 \cdot s C_\mathrm{load}}
+<p>which is plausible, and confirms the requirement of a high impedance at the output node.</p>
+<p>Above the dominant pole, but still well below the current-mirror doublet, the numerator of <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;17</a> is still dominated by the term <span class="math inline">\(2 g_\mathrm{m3,4}\)</span>, and the gain becomes</p>
+<p><span id="eq-simple-ota-midband"><span class="math display">\[
+A(s) \approx \frac{g_\mathrm{m1,2}}{2} \frac{2 g_\mathrm{m3,4}}{g_\mathrm{m3,4} \cdot s C_\mathrm{load}} = \frac{g_\mathrm{m1,2}}{s C_\mathrm{load}}
 \tag{19}\]</span></span></p>
-<p>which is essentially the behavior of an integrator, and we can use <a href="#eq-simple-ota-highf" class="quarto-xref">Equation&nbsp;19</a> to calculate the frequency where the gain drops to <span class="math inline">\(|A(s_\mathrm{ug})| = 1 = g_\mathrm{m1,2}/|2 j \omega_\mathrm{ug} C_\mathrm{load}|\)</span>:</p>
-<p><span class="math display">\[
-f_\mathrm{ug} = \frac{g_\mathrm{m1,2}}{4 \pi C_\mathrm{load}}
-\]</span></p>
+<p>which is essentially the behavior of an integrator. This is the frequency range in which the amplifier is actually operated, so we use <a href="#eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> to calculate the frequency where the gain drops to <span class="math inline">\(|A(s_\mathrm{ug})| = 1 = g_\mathrm{m1,2} / | j \omega_\mathrm{ug} C_\mathrm{load}|\)</span>:</p>
+<p><span id="eq-simple-ota-ug"><span class="math display">\[
+f_\mathrm{ug} = \frac{g_\mathrm{m1,2}}{2 \pi C_\mathrm{load}}
+\tag{20}\]</span></span></p>
+<p>Note that this is exactly the dc gain <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;18</a> multiplied by the dominant-pole frequency <a href="#eq-basic-ota-dominant-pole" class="quarto-xref">Equation&nbsp;22</a>, i.e.&nbsp;the gain-bandwidth product, as it has to be for a system that behaves like a single-pole system up to <span class="math inline">\(f_\mathrm{ug}\)</span>. The output conductances cancel, so the achievable GBW is set by <span class="math inline">\(g_\mathrm{m1,2}\)</span> and <span class="math inline">\(C_\mathrm{load}\)</span> alone.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Watch the Asymptote You Use">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Watch the Asymptote You Use
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is tempting to obtain <span class="math inline">\(f_\mathrm{ug}\)</span> from the asymptote of <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;17</a> for <span class="math inline">\(s \to \infty\)</span>, where both numerator and denominator are dominated by their <span class="math inline">\(s C_\mathrm{gs3,4}\)</span> terms:</p>
+<p><span id="eq-simple-ota-highf"><span class="math display">\[
+A(s \to \infty) = \frac{g_\mathrm{m1,2}}{2 \cdot s C_\mathrm{load}}
+\tag{21}\]</span></span></p>
+<p>This differs from <a href="#eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> by a factor of two, and would predict a unity-gain frequency only half as large. The reason for the discrepancy is physical: <a href="#eq-simple-ota-highf" class="quarto-xref">Equation&nbsp;21</a> describes the behavior <em>above</em> the doublet, where <span class="math inline">\(C_\mathrm{gs3,4}\)</span> shorts out the current mirror so that the signal path through <span class="math inline">\(M_{3,4}\)</span> is lost and only the direct path through <span class="math inline">\(M_2\)</span> remains — hence half the transconductance. In a sensible design the doublet sits far above <span class="math inline">\(f_\mathrm{ug}\)</span>, so <a href="#eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> is the asymptote to use.</p>
+</div>
+</div>
 <p>Looking at <a href="#eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;17</a>, we see that we have a dominant pole at <span class="math inline">\(s_\mathrm{p}\)</span> and a pole-zero doublet with <span class="math inline">\(s_\mathrm{pd}\)</span>/<span class="math inline">\(s_\mathrm{zd}\)</span>: <span id="eq-basic-ota-dominant-pole"><span class="math display">\[
 s_\mathrm{p} = -\frac{g_\mathrm{ds2} + g_\mathrm{ds4}}{C_\mathrm{load}}
-\tag{20}\]</span></span> <span id="eq-basic-ota-doublet-pole"><span class="math display">\[
+\tag{22}\]</span></span> <span id="eq-basic-ota-doublet-pole"><span class="math display">\[
 s_\mathrm{pd} = -\frac{g_\mathrm{m3,4}}{2 \cdot C_\mathrm{gs3,4}}
-\tag{21}\]</span></span> <span id="eq-basic-ota-doublet-zero"><span class="math display">\[
+\tag{23}\]</span></span> <span id="eq-basic-ota-doublet-zero"><span class="math display">\[
 s_\mathrm{zd} = -\frac{g_\mathrm{m3,4}}{C_\mathrm{gs3,4}}
-\tag{22}\]</span></span></p>
+\tag{24}\]</span></span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Why a Pole-Zero Doublet?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2670,13 +2694,13 @@ s_\mathrm{zd} = -\frac{g_\mathrm{m3,4}}{C_\mathrm{gs3,4}}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Looking at <a href="#eq-basic-ota-doublet-pole" class="quarto-xref">Equation&nbsp;21</a> and <a href="#eq-basic-ota-doublet-zero" class="quarto-xref">Equation&nbsp;22</a> we see that this pair is intimately linked by the same parameters and can only move together. Hence we call it a “doublet”. The effects of pole-zero doublets on the frequency response and settling time of OTAs can be found in <span class="citation" data-cites="Kamath_1974">(<a href="#ref-Kamath_1974" role="doc-biblioref">Kamath et al. 1974</a>)</span>. This paper shows that doublets may cause severe degradation of settling time while only causing minor changes in the frequency response of the amplifier.</p>
+<p>Looking at <a href="#eq-basic-ota-doublet-pole" class="quarto-xref">Equation&nbsp;23</a> and <a href="#eq-basic-ota-doublet-zero" class="quarto-xref">Equation&nbsp;24</a> we see that this pair is intimately linked by the same parameters and can only move together. Hence we call it a “doublet”. The effects of pole-zero doublets on the frequency response and settling time of OTAs can be found in <span class="citation" data-cites="Kamath_1974">(<a href="#ref-Kamath_1974" role="doc-biblioref">Kamath et al. 1974</a>)</span>. This paper shows that doublets may cause severe degradation of settling time while only causing minor changes in the frequency response of the amplifier.</p>
 </div>
 </div>
 </section>
 <section id="ota-noise" class="level3" data-number="8.3.2">
 <h3 data-number="8.3.2" class="anchored" data-anchor-id="ota-noise"><span class="header-section-number">8.3.2</span> OTA Noise</h3>
-<p>For the noise analysis we ignore the pole-zero doublet due to <span class="math inline">\(C_\mathrm{gs3,4}\)</span> (we assume minor impact due to this, hence we set <span class="math inline">\(C_\mathrm{gs3,4} = 0\)</span>) and just consider the dominant pole given by <a href="#eq-basic-ota-dominant-pole" class="quarto-xref">Equation&nbsp;20</a> due to the load capacitance. For the noise analysis at the output we set the positive input signal to ground and connect the output to the negative input, and thus starting from <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;36</a> we arrive at the adapted small-signal circuit shown in <a href="#fig-basic-ota-small-signal-noise" class="quarto-xref">Figure&nbsp;37</a>.</p>
+<p>For the noise analysis we ignore the pole-zero doublet due to <span class="math inline">\(C_\mathrm{gs3,4}\)</span> (we assume minor impact due to this, hence we set <span class="math inline">\(C_\mathrm{gs3,4} = 0\)</span>) and just consider the dominant pole given by <a href="#eq-basic-ota-dominant-pole" class="quarto-xref">Equation&nbsp;22</a> due to the load capacitance. For the noise analysis at the output we set the positive input signal to ground and connect the output to the negative input, and thus starting from <a href="#fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;36</a> we arrive at the adapted small-signal circuit shown in <a href="#fig-basic-ota-small-signal-noise" class="quarto-xref">Figure&nbsp;37</a>.</p>
 <div id="cell-fig-basic-ota-small-signal-noise" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-display">
 <div id="fig-basic-ota-small-signal-noise" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2735,8 +2759,8 @@ Figure&nbsp;38: 5-transistor OTA simplified small-signal model for noise calcula
 <p>We can use the identity <a href="#eq-integral-identity" class="quarto-xref">Equation&nbsp;9</a> to calculate the rms output noise to</p>
 <p><span id="eq-basic-ota-output-noise"><span class="math display">\[
 V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) \cdot df = \frac{k T}{C_\mathrm{load}} \left( 2 \gamma_{1,2} + 2 \gamma_{3,4} \frac{g_\mathrm{m3,4}}{g_\mathrm{m1,2}} \right).
-\tag{23}\]</span></span></p>
-<p>Inspecting <a href="#eq-basic-ota-output-noise" class="quarto-xref">Equation&nbsp;23</a> we can see that the integrated output noise is the <span class="math inline">\(k T / C\)</span> noise of the output load capacitor, enhanced by the <span class="math inline">\(\gamma_{12}\)</span> of the input differential pair, plus a (smaller) contribution of the current mirror load <span class="math inline">\(M_{3,4}\)</span>. Intuitively, this result makes sense. We learn that to reduce the output noise we should set <span class="math inline">\(g_\mathrm{m3,4} &lt; g_\mathrm{m1,2}\)</span>.</p>
+\tag{25}\]</span></span></p>
+<p>Inspecting <a href="#eq-basic-ota-output-noise" class="quarto-xref">Equation&nbsp;25</a> we can see that the integrated output noise is the <span class="math inline">\(k T / C\)</span> noise of the output load capacitor, enhanced by the <span class="math inline">\(\gamma_{12}\)</span> of the input differential pair, plus a (smaller) contribution of the current mirror load <span class="math inline">\(M_{3,4}\)</span>. Intuitively, this result makes sense. We learn that to reduce the output noise we should set <span class="math inline">\(g_\mathrm{m3,4} &lt; g_\mathrm{m1,2}\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Derivation of 5T-OTA Performance">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2758,7 +2782,7 @@ V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) \cdot df
 <p>First, we need to select a proper <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> for the MOSFET. Remembering <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a>, we see that for the input differential pair we should go for a large <span class="math inline">\(g_\mathrm{m}\)</span>, thus we select a <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span>. As <span class="math inline">\(g_\mathrm{ds}\)</span> of <span class="math inline">\(M_2\)</span> could limit the dc gain (<a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;18</a>), we go with a rather long <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. For current sources, a small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is a good idea, so we start with <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}=5\)</span> (because we cannot go too low because of <span class="math inline">\(V_\mathrm{ds,sat}\)</span>) and also an <span class="math inline">\(L = 5\,\mu\text{m}\)</span>. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the <span class="math inline">\(g_\mathrm{ds}\)</span> small) with this approximate relationship:</p>
 <p><span id="eq-gmid-saturation"><span class="math display">\[
 V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
-\tag{24}\]</span></span></p>
+\tag{26}\]</span></span></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: 5T-OTA Sizing">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2774,7 +2798,7 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 </div>
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution: 5T-OTA Sizing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-56-contents" aria-controls="callout-56" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-57-contents" aria-controls="callout-57" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2783,7 +2807,7 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-56" class="callout-56-contents callout-collapse collapse">
+<div id="callout-57" class="callout-57-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-5t-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic 5T-OTA</h1>
@@ -3039,7 +3063,7 @@ headroom M5 = 0.333 V</code></pre>
 <p>If we formulate the drain current mismatch standard deviation <span class="math inline">\(\sigma\left\{\Delta I_\mathrm{D}/ I_\mathrm{D}\right\}\)</span> of two nominally identical MOSFET we get</p>
 <p><span id="eq-mosfet-mismatch"><span class="math display">\[
 \sigma\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \frac{A_\mathrm{mosfet}}{\sqrt{W L}}
-\tag{25}\]</span></span></p>
+\tag{27}\]</span></span></p>
 <p>with <span class="math inline">\(A_\mathrm{mosfet}\)</span> being a mismatch parameter for a given CMOS technology and <span class="math inline">\(\sigma\left\{\cdot\right\}\)</span> being the standard deviation of the parameter in parentheses.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="MOSFET Mismatch">
 <div class="callout-header d-flex align-content-center">
@@ -3057,24 +3081,24 @@ headroom M5 = 0.333 V</code></pre>
 </ul>
 <p><span id="eq-mosfet-mismatch-vth"><span class="math display">\[
 \sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{A_\mathrm{vth}}{\sqrt{W L}}
-\tag{26}\]</span></span></p>
+\tag{28}\]</span></span></p>
 <ul>
 <li>and standard deviation of the size mismatch</li>
 </ul>
 <p><span id="eq-mosfet-mismatch-kp"><span class="math display">\[
 \sigma\left\{\frac{\Delta (W/L)}{(W/L)}\right\} = \frac{A_\mathrm{k}}{\sqrt{W L}}.
-\tag{27}\]</span></span></p>
+\tag{29}\]</span></span></p>
 <p>The resulting standard deviation of the input offset voltage <span class="math inline">\(V_\mathrm{offs}\)</span> of a differential pair with small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is then given by <span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span> <span id="eq-diffpair-offset"><span class="math display">\[
-V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 \cdot \sigma^2\left\{\frac{\Delta (W/L)}{{(W/L)}}\right\} + \sigma^2\left\{\Delta V_\mathrm{th}\right\}}.
-\tag{28}\]</span></span></p>
+\sigma\left\{V_\mathrm{offs}\right\} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 \cdot \sigma^2\left\{\frac{\Delta (W/L)}{{(W/L)}}\right\} + \sigma^2\left\{\Delta V_\mathrm{th}\right\}}.
+\tag{30}\]</span></span></p>
 <p>The mismatch in the drain current of two current-mirror transistors, characterized as the standard deviation and for small <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, is given by <span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#ref-Razavi_Analog_CMOS" role="doc-biblioref">Razavi 2017</a>)</span></p>
 <p><span id="eq-currentmirror-offset"><span class="math display">\[
 \sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sigma^2\left\{\frac{\Delta (W/L)}{(W/L)}\right\} + 4 \cdot \sigma^2\left\{\frac{\Delta V_\mathrm{th}}{V_\mathrm{GS}- V_\mathrm{th}}\right\}.
-\tag{29}\]</span></span></p>
-<p>To minimize the input offset voltage in a differential pair we should strive to minimize <span class="math inline">\(V_\mathrm{GS}\)</span> (i.e., to maximize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#eq-diffpair-offset" class="quarto-xref">Equation&nbsp;28</a>) and to minimize the mismatch in current mirrors we should target a large <span class="math inline">\(V_\mathrm{GS}\)</span> (i.e., to minimize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;29</a>). In both cases the MOSFET area <span class="math inline">\(W \cdot L\)</span> needs to be large enough (see <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a>).</p>
+\tag{31}\]</span></span></p>
+<p>To minimize the input offset voltage in a differential pair we should strive to minimize the overdrive voltage <span class="math inline">\(V_\mathrm{GS}- V_\mathrm{th}\)</span> (i.e., to maximize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#eq-diffpair-offset" class="quarto-xref">Equation&nbsp;30</a>) and to minimize the mismatch in current mirrors we should target a large overdrive voltage (i.e., to minimize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;31</a>). In both cases the MOSFET area <span class="math inline">\(W \cdot L\)</span> needs to be large enough (see <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;29</a>).</p>
 </div>
 </div>
-<p>How can we now cope with mismatch in design and simulation? We can account for the transistor mismatch according to <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a> in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.</p>
+<p>How can we now cope with mismatch in design and simulation? We can account for the transistor mismatch according to <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a> and <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;29</a> in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.</p>
 <p>We can also simulate the effects of MOSFET mismatch on circuit performance by doing a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"><strong>Monte Carlo</strong></a> simulation. Here, a random realization of the variations of all circuit components (where mismatch is modelled) is taken and the circuit is simulated. Then, another random realization is simulated, and so on. In summary, we run the same simulation for different realizations <span class="math inline">\(N\)</span> times and evaluate the resulting variations of the circuit parameters. If <span class="math inline">\(N\)</span> is large enough, then the distributions should approach a <a href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian distribution</a>, and we can then estimate the variances of the circuit parameters. Using statistical analysis we can then assess the <a href="https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Device_yield"><strong>yield</strong></a> of a circuit, i.e., how many circuit realizations will meet the specification.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Number of Monte Carlo Simulation Runs">
 <div class="callout-header d-flex align-content-center">
@@ -3093,12 +3117,12 @@ V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 
 </section>
 <section id="sec-resistor-mismatch" class="level3" data-number="8.6.2">
 <h3 data-number="8.6.2" class="anchored" data-anchor-id="sec-resistor-mismatch"><span class="header-section-number">8.6.2</span> Resistor Mismatch</h3>
-<p>Similar to the MOSFET mismatch discussed in <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6.1</a>, resistors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;25</a> the standard deviation of the resistor mismatch <span class="math inline">\(\sigma\left\{\Delta R / R\right\}\)</span> can be characterized by</p>
+<p>Similar to the MOSFET mismatch discussed in <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6.1</a>, resistors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;27</a> the standard deviation of the resistor mismatch <span class="math inline">\(\sigma\left\{\Delta R / R\right\}\)</span> can be characterized by</p>
 <p><span id="eq-resistor-mismatch"><span class="math display">\[
 \sigma\left\{\frac{\Delta R}{R}\right\} = \frac{A_\mathrm{res}}{\sqrt{W L}}
-\tag{30}\]</span></span></p>
+\tag{32}\]</span></span></p>
 <p>with <span class="math inline">\(A_\mathrm{res}\)</span> being a mismatch parameter for a given CMOS technology.</p>
-<p>With <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a> we now have two criteria for how to select the width <span class="math inline">\(W\)</span> of a specific resistor (the length <span class="math inline">\(L\)</span> is then derived from the required resistance value with <span class="math inline">\(R = R_\square \cdot L / W\)</span>):</p>
+<p>With <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;32</a> we now have two criteria for how to select the width <span class="math inline">\(W\)</span> of a specific resistor (the length <span class="math inline">\(L\)</span> is then derived from the required resistance value with <span class="math inline">\(R = R_\square \cdot L / W\)</span>):</p>
 <ol type="1">
 <li>The current handling capability (the larger the <span class="math inline">\(W\)</span>, the more dc current a resistor can carry), and</li>
 <li>the resistor mismatch (the larger the <span class="math inline">\(W\)</span>, the larger the <span class="math inline">\(W L\)</span> for a given <span class="math inline">\(L/W\)</span>).</li>
@@ -3107,10 +3131,10 @@ V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 
 </section>
 <section id="sec-capacitor-mismatch" class="level3" data-number="8.6.3">
 <h3 data-number="8.6.3" class="anchored" data-anchor-id="sec-capacitor-mismatch"><span class="header-section-number">8.6.3</span> Capacitor Mismatch</h3>
-<p>Similar to the resistor matching discussed in <a href="#sec-resistor-mismatch" class="quarto-xref">Section&nbsp;8.6.2</a>, capacitors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;25</a> the standard deviation of the capacitor mismatch <span class="math inline">\(\sigma\left\{\Delta C / C\right\}\)</span> can be characterized by</p>
+<p>Similar to the resistor matching discussed in <a href="#sec-resistor-mismatch" class="quarto-xref">Section&nbsp;8.6.2</a>, capacitors will also show mismatch. Equivalently to <a href="#eq-mosfet-mismatch" class="quarto-xref">Equation&nbsp;27</a> the standard deviation of the capacitor mismatch <span class="math inline">\(\sigma\left\{\Delta C / C\right\}\)</span> can be characterized by</p>
 <p><span id="eq-capacitor-mismatch"><span class="math display">\[
 \sigma\left\{\frac{\Delta C}{C}\right\} = \frac{A_\mathrm{cap}}{\sqrt{W L}}
-\tag{31}\]</span></span></p>
+\tag{33}\]</span></span></p>
 </section>
 </section>
 <section id="sec-basic-ota-simulation-pvt" class="level2" data-number="8.7">
@@ -3147,7 +3171,7 @@ V_\mathrm{offs} = \sqrt{\left( \frac{V_\mathrm{GS}- V_\mathrm{th}}{2} \right)^2 
 </div>
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="./xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <div id="nte-basic-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for 5T-OTA">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-61-contents" aria-controls="callout-61" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-62-contents" aria-controls="callout-62" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3156,7 +3180,7 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-61" class="callout-61-contents callout-collapse collapse">
+<div id="callout-62" class="callout-62-contents callout-collapse collapse">
 <section id="cace-summary-for-ota-5t" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-5t</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -3432,11 +3456,11 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 <section id="pvt-simulation-analysis" class="level3" data-number="8.7.1">
 <h3 data-number="8.7.1" class="anchored" data-anchor-id="pvt-simulation-analysis"><span class="header-section-number">8.7.1</span> PVT Simulation Analysis</h3>
-<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a>, we see that (luckily) the specification is met for all parameters. This is great news! We now have a design that we carefully simulated across PVT and other corners and that is ready for layout. Once we have the layout ready, we can extract the wiring parasitics (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist, we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points, then our design is finished.</p>
+<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a>, we see that (luckily) the specification is met across all <strong>PVT corners</strong>. This is great news! We now have a design that we carefully simulated across PVT and other corners and that is ready for layout. Once we have the layout ready, we can extract the wiring parasitics (<span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span>) as well as other layout-dependent effects like <a href="https://global.oup.com/us/companion.websites/9780195170153/pdf/proximityeffectmodels.pdf">well proximity</a>. Using this augmented netlist, we can then again use CACE to check performance across conditions and parameter variations, and if we still pass all specification points, then our design is finished.</p>
 </section>
 <section id="monte-carlo-simulation-analysis" class="level3" data-number="8.7.2">
 <h3 data-number="8.7.2" class="anchored" data-anchor-id="monte-carlo-simulation-analysis"><span class="header-section-number">8.7.2</span> Monte Carlo Simulation Analysis</h3>
-<p>Looking at the CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a>, we see that the output voltage specification is not met due to MOSFET mismatch! We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions prove to be too small. We should now go back and change the transistor sizing (increasing <span class="math inline">\(L\)</span> significantly while keeping the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.</p>
+<p>The <strong>Monte Carlo</strong> run in the same CACE report in <a href="#nte-basic-ota-cace-result" class="quarto-xref">Note&nbsp;2</a> tells a different story: here the output voltage specification is not met, due to MOSFET mismatch! Note that this is not a contradiction to the PVT result above — PVT corners shift all devices together, whereas mismatch makes nominally identical devices differ, and it is exactly this asymmetry that the voltage buffer is sensitive to. We have not considered transistor mismatch in the circuit sizing procedure, and as a result the selected MOSFET dimensions prove to be too small. We should now go back and change the transistor sizing (increasing <span class="math inline">\(L\)</span> significantly while keeping the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> values). Likely we will find that some performance parameters are now deteriorating due to the increased MOSFET dimensions, and we need to iterate until all performance metrics are met in the presence of transistor mismatch.</p>
 <p>It is not unusual that the power consumption now increases, as we have to increase the size of the MOSFETs for matching, and these larger MOSFETs increase the parasitic capacitances which in turn lead to larger power consumption to keep the required bandwidth by increasing the <span class="math inline">\(g_\mathrm{m}\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Exercise: Re-Sizing of 5T-OTA for Mismatch">
 <div class="callout-header d-flex align-content-center">
@@ -3448,7 +3472,7 @@ Note&nbsp;2: CACE Summary for 5T-OTA
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Go back to <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> and repeat the sizing procedure of the 5T-OTA by increasing the <span class="math inline">\(L\)</span> of the MOSFETs significantly. Focus first on the differential pair as it will likely have the biggest impact (see <a href="#eq-diffpair-offset" class="quarto-xref">Equation&nbsp;28</a>). Then, tune the size of the output current mirror if necessary (see <a href="#eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;29</a>).</p>
+<p>Go back to <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> and repeat the sizing procedure of the 5T-OTA by increasing the <span class="math inline">\(L\)</span> of the MOSFETs significantly. Focus first on the differential pair as it will likely have the biggest impact (see <a href="#eq-diffpair-offset" class="quarto-xref">Equation&nbsp;30</a>). Then, tune the size of the output current mirror if necessary (see <a href="#eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;31</a>).</p>
 <p>Once you are happy with the sizing result, repeat the PVT simulations in CACE to confirm the performance of the voltage buffer including mismatch.</p>
 </div>
 </div>
@@ -3472,7 +3496,7 @@ Figure&nbsp;39: Single-ended OTA with rail-to-rail output stage.
 </div>
 </div>
 </div>
-<p>Another popular version is shown in <a href="#fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a>. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. <a href="#fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a> shows a very simplistic Miller-compensation (see <a href="#sec-miller-compensation" class="quarto-xref">Section&nbsp;13.1</a>) using <span class="math inline">\(C_\mathrm{M}\)</span>. Often, we would want to implement a more advanced scheme. Some examples can be found in <span class="citation" data-cites="Baker_compensating_OPAMP">(<a href="#ref-Baker_compensating_OPAMP" role="doc-biblioref">Baker, n.d.</a>)</span>. An interesting technique is the indirect compensation with cascoded input differential pairs (see <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is the dc-balanced load on top of the differential pair, as each side sees a voltage drop from <span class="math inline">\(V_\mathrm{DD}\)</span> of one <span class="math inline">\(V_\mathrm{GS}\)</span> (<span class="math inline">\(V_\mathrm{GS3}\)</span> on the left side and <span class="math inline">\(V_\mathrm{GS5}\)</span> on the right side).</p>
+<p>Another popular version is shown in <a href="#fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a>. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. <a href="#fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a> shows a very simplistic Miller-compensation (see <a href="#sec-miller-compensation" class="quarto-xref">Section&nbsp;13.1</a>) using <span class="math inline">\(C_\mathrm{M}\)</span>. Often, we would want to implement a more advanced scheme. Some examples can be found in <span class="citation" data-cites="Baker_compensating_OPAMP">(<a href="#ref-Baker_compensating_OPAMP" role="doc-biblioref">Baker, n.d.</a>)</span>. An interesting technique is the indirect compensation with cascoded input differential pairs (see <a href="#fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is that both output nodes of the input stage are dc-balanced: each of them sits one <span class="math inline">\(V_\mathrm{GS}\)</span> below <span class="math inline">\(V_\mathrm{DD}\)</span> — on the left set by the diode-connected <span class="math inline">\(V_\mathrm{GS3}\)</span>, on the right set by the gate of the second-stage device <span class="math inline">\(M_5\)</span>, i.e.&nbsp;by <span class="math inline">\(V_\mathrm{GS5}\)</span>. In the plain 5T-OTA the right-hand node is instead the output node, whose dc level is imposed by the external feedback, so the two sides of the differential pair are generally <em>not</em> balanced.</p>
 <div id="cell-fig-ota-se-twostage" class="cell" data-execution_count="30">
 <div class="cell-output cell-output-display">
 <div id="fig-ota-se-twostage" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3583,11 +3607,11 @@ I_\mathrm{out} - g_\mathrm{m}V_\mathrm{gs}- g_\mathrm{ds}V_\mathrm{ds}= 0.
 \]</span></p>
 <p>Using the previously found identities, and after a bit of algebraic manipulations we arrive at <span id="eq-cascode-output"><span class="math display">\[
 g_\mathrm{out} = \frac{I_\mathrm{out}}{V_\mathrm{out}} = \frac{g_\mathrm{ds}}{1 + \frac{g_\mathrm{m}+ g_\mathrm{ds}}{G_\mathrm{S}}} = \frac{g_\mathrm{ds}\cdot G_\mathrm{S}}{G_\mathrm{S} + g_\mathrm{m}+ g_\mathrm{ds}}
-\tag{32}\]</span></span></p>
+\tag{34}\]</span></span></p>
 <p>We find that if <span class="math inline">\(G_\mathrm{S} = 0\)</span> (<span class="math inline">\(R_\mathrm{S} \to \infty\)</span>) then <span class="math inline">\(g_\mathrm{out} = 0\)</span> (<span class="math inline">\(r_\mathrm{out} \to \infty\)</span>), and if <span class="math inline">\(G_\mathrm{S} \to \infty\)</span> (<span class="math inline">\(R_\mathrm{S} = 0\)</span>) then <span class="math inline">\(g_\mathrm{out} = g_\mathrm{ds}\)</span>.</p>
 <p>We can further calculate the benefits of a cascode if we assume we put a cascode on top of a common-source transistor stage (thus <span class="math inline">\(G_\mathrm{S} = g_\mathrm{ds}'\)</span>) and get <span id="eq-cs-cascode-output-impedance"><span class="math display">\[
 g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\mathrm{m}+ g_\mathrm{ds}} \approx g_\mathrm{ds}' \frac{g_\mathrm{ds}}{g_\mathrm{m}}
-\tag{33}\]</span></span></p>
+\tag{35}\]</span></span></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Benefit of Cascode (Output)">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -3624,7 +3648,7 @@ I_\mathrm{in} + g_\mathrm{ds}V_\mathrm{ds}+ g_\mathrm{m}V_\mathrm{gs}= 0.
 \]</span></p>
 <p>After some manipulation we find that <span id="eq-cascode-input"><span class="math display">\[
 g_\mathrm{in} = \frac{I_\mathrm{in}}{V_\mathrm{in}} = \frac{(g_\mathrm{m}+ g_\mathrm{ds}) \cdot G_\mathrm{D}}{g_\mathrm{ds}+ G_\mathrm{D}}.
-\tag{34}\]</span></span></p>
+\tag{36}\]</span></span></p>
 <p>Setting <span class="math inline">\(G_\mathrm{D} = 0\)</span> (<span class="math inline">\(R_\mathrm{D} \to \infty\)</span>) results in <span class="math inline">\(g_\mathrm{in} = 0\)</span> (<span class="math inline">\(r_\mathrm{in} \to \infty\)</span>) as well, so the input impedance of the cascode becomes very large when the drain impedance is large.</p>
 <p>However, setting <span class="math inline">\(G_\mathrm{D} = \infty\)</span> (<span class="math inline">\(R_\mathrm{D} = 0\)</span>) results in the well-known result of</p>
 <p><span class="math display">\[
@@ -3666,7 +3690,7 @@ Figure&nbsp;47: A cascoded current mirror using a biasing voltage to set the cas
 </div>
 <p>We can see that by introducing the cascode transistors we achieve the following benefits:</p>
 <ol type="1">
-<li>Increased output resistance, as we have seen in <a href="#eq-cascode-output" class="quarto-xref">Equation&nbsp;32</a>.</li>
+<li>Increased output resistance, as we have seen in <a href="#eq-cascode-output" class="quarto-xref">Equation&nbsp;34</a>.</li>
 <li>Improved current mirroring accuracy, since the cascode transistors help to keep the drain-source voltage of the output transistor nearly constant and equal to that of the reference transistor.</li>
 </ol>
 <p>There are several ways to implement the bias voltage <span class="math inline">\(V_\mathrm{bias}\)</span> for setting the cascode transistors’ gate potential. One simple option is to use a biasing resistor <span class="math inline">\(R_\mathrm{bias}\)</span> (highlighted in blue) as shown in <a href="#fig-current-mirror-highswing" class="quarto-xref">Figure&nbsp;48</a>, which is called a “high-swing” cascode structure.</p>
@@ -3684,10 +3708,10 @@ Figure&nbsp;48: A high-swing cascoded current mirror. The voltage drop across th
 </div>
 </div>
 </div>
-<p>The output impedance according to <a href="#eq-cs-cascode-output-impedance" class="quarto-xref">Equation&nbsp;33</a> of the improved current mirror is approximately given by (<span class="math inline">\(r_\mathrm{ds,casc} = g_\mathrm{ds,casc}^{-1}\)</span> and <span class="math inline">\(g_\mathrm{m,casc}\)</span> are the parameters of the cascode transistor, and <span class="math inline">\(r_\mathrm{ds} = g_\mathrm{ds}^{-1}\)</span> is the parameter of the bottom transistor):</p>
+<p>The output impedance according to <a href="#eq-cs-cascode-output-impedance" class="quarto-xref">Equation&nbsp;35</a> of the improved current mirror is approximately given by (<span class="math inline">\(r_\mathrm{ds,casc} = g_\mathrm{ds,casc}^{-1}\)</span> and <span class="math inline">\(g_\mathrm{m,casc}\)</span> are the parameters of the cascode transistor, and <span class="math inline">\(r_\mathrm{ds} = g_\mathrm{ds}^{-1}\)</span> is the parameter of the bottom transistor):</p>
 <p><span id="eq-curmir-cascoded-rout"><span class="math display">\[
 r_\mathrm{out} = r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot (1 + g_\mathrm{m,casc} \cdot r_\mathrm{ds,casc}).
-\tag{35}\]</span></span></p>
+\tag{37}\]</span></span></p>
 <p>We can bias the gate voltages of the cascode transistors with any suitable bias circuit, but a simple way is to use a resistor <span class="math inline">\(R_\mathrm{bias}\)</span> as shown in the figure. The voltage drop across this resistor sets the drain-source voltage of the lower transistors (together with the sizing of the MOSFETs). By choosing a sufficiently large value for <span class="math inline">\(R_\mathrm{bias}\)</span>, we can ensure that both transistors remain in saturation for the desired range of output currents. The cascode transistors make sure that the drain-source voltage of the output transistor remains nearly constant and equal to the drain-source voltage of the reference transistor, thus improving the current mirroring accuracy.</p>
 <p>Another option for an improved current mirror is to use source degeneration with a resistor. This configuration is shown in <a href="#fig-current-mirror-degeneration" class="quarto-xref">Figure&nbsp;49</a>. Here, the source degeneration resistors <span class="math inline">\(R_\mathrm{deg}\)</span> help to stabilize the operating point of the current mirror using series feedback.</p>
 <div id="cell-fig-current-mirror-degeneration" class="cell" data-execution_count="39">
@@ -3704,10 +3728,10 @@ Figure&nbsp;49: A current mirror with resistive degeneration.
 </div>
 </div>
 </div>
-<p>Here, similar to <a href="#eq-curmir-cascoded-rout" class="quarto-xref">Equation&nbsp;35</a>, the output resistance can be approximated by</p>
+<p>Here, similar to <a href="#eq-curmir-cascoded-rout" class="quarto-xref">Equation&nbsp;37</a>, the output resistance can be approximated by</p>
 <p><span id="eq-curmir-degeneration-rout"><span class="math display">\[
 r_\mathrm{out} = r_\mathrm{ds} + R_\mathrm{deg} \cdot (1 + g_\mathrm{m}\cdot r_\mathrm{ds}).
-\tag{36}\]</span></span></p>
+\tag{38}\]</span></span></p>
 <p>A third popular option to implement an improved current mirror is to use the so-called regulated current mirror, which uses an additional amplifier to sense the drain potential of the bottom transistor and keep it constant <span class="citation" data-cites="Hosticka_1979">(<a href="#ref-Hosticka_1979" role="doc-biblioref">Hosticka 1979</a>)</span>. Note that the output current will not change if the <span class="math inline">\(V_\mathrm{DS}\)</span> of the bottom transistor is kept constant. We can use any suitable amplifier for this purpose, e.g., a simple OTA as introduced in <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;8</a>. In the most basic form, we use a common-source stage with a current mirror load as shown in blue in <a href="#fig-current-mirror-reg-casc" class="quarto-xref">Figure&nbsp;50</a>.</p>
 <div id="cell-fig-current-mirror-reg-casc" class="cell" data-execution_count="40">
 <div class="cell-output cell-output-display">
@@ -3729,8 +3753,8 @@ Figure&nbsp;50: A regulated-cascode current mirror. The simple common-source amp
 r_\mathrm{out} &amp;= r_\mathrm{ds,casc} + r_\mathrm{ds} \cdot [1 + g_\mathrm{m,casc} \cdot r_\mathrm{ds,casc} \cdot (1 + g_\mathrm{maux} / g_\mathrm{dsaux})] \\
 &amp; \approx r_\mathrm{ds} \cdot g_\mathrm{m,casc} \cdot r_\mathrm{ds,casc} \cdot g_\mathrm{m,aux} \cdot r_\mathrm{ds,aux}
 \end{split}
-\tag{37}\]</span></span></p>
-<p>which, compared to <a href="#eq-curmir-cascoded-rout" class="quarto-xref">Equation&nbsp;35</a>, is further improved by the gain of the auxiliary amplifier.</p>
+\tag{39}\]</span></span></p>
+<p>which, compared to <a href="#eq-curmir-cascoded-rout" class="quarto-xref">Equation&nbsp;37</a>, is further improved by the gain of the auxiliary amplifier.</p>
 <p>We now want to size all these current mirror structures and simulate their performance. We try to size them for similar chip area in order to get a fair comparison. We assume a reference current of <span class="math inline">\(I_\mathrm{bias} = 50\,\mu\text{A}\)</span> and a mirror ratio of 1:1. We size for a minimum voltage headroom for the current sources of <span class="math inline">\(V_\mathrm{DS,min} = 0.4\,\text{V}\)</span>. The calculations are summarized in this <a href="./gmid/sizing_improved_current_mirror.html">sizing notebook</a>.</p>
 <p>The resulting circuits are drawn in <a href="#fig-curmir-variations-tb" class="quarto-xref">Figure&nbsp;51</a>. The testbench simulates the dc output characteristics of all four current mirror variations (the three improved ones and the basic one for reference). The testbench also runs a Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch (see <a href="#sec-mosfet-mismatch" class="quarto-xref">Section&nbsp;8.6.1</a>).</p>
 <div id="fig-curmir-variations-tb" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3796,7 +3820,7 @@ Table&nbsp;3: Simulated small-signal output resistance versus output voltage
 </div>
 </figure>
 </div>
-<p>The ordering is what the theory predicts: the two cascoded structures gain roughly an order of magnitude over the basic mirror, and the regulated cascode ends up highest, as <a href="#eq-curmir-regcasc-rout" class="quarto-xref">Equation&nbsp;37</a> suggests. Note, though, that the regulated cascode only pulls ahead of the high-swing cascode once its auxiliary amplifier has enough headroom to gain; at <span class="math inline">\(0.5\,\text{V}\)</span> the two are still on par. The source-degenerated mirror, in contrast, improves the output resistance only mildly (by about a factor of <span class="math inline">\(1.4\)</span>), since the degeneration factor <span class="math inline">\(1 + g_\mathrm{m}R_\mathrm{deg}\)</span> of <a href="#eq-curmir-degeneration-rout" class="quarto-xref">Equation&nbsp;36</a> stays modest for a practical voltage drop across <span class="math inline">\(R_\mathrm{deg}\)</span>. Its strength lies elsewhere, as we will see next.</p>
+<p>The ordering is what the theory predicts: the two cascoded structures gain roughly an order of magnitude over the basic mirror, and the regulated cascode ends up highest, as <a href="#eq-curmir-regcasc-rout" class="quarto-xref">Equation&nbsp;39</a> suggests. Note, though, that the regulated cascode only pulls ahead of the high-swing cascode once its auxiliary amplifier has enough headroom to gain; at <span class="math inline">\(0.5\,\text{V}\)</span> the two are still on par. The source-degenerated mirror, in contrast, improves the output resistance only mildly (by about a factor of <span class="math inline">\(1.4\)</span>), since the degeneration factor <span class="math inline">\(1 + g_\mathrm{m}R_\mathrm{deg}\)</span> of <a href="#eq-curmir-degeneration-rout" class="quarto-xref">Equation&nbsp;38</a> stays modest for a practical voltage drop across <span class="math inline">\(R_\mathrm{deg}\)</span>. Its strength lies elsewhere, as we will see next.</p>
 <div id="cell-fig-curmir-output" class="cell" data-execution_count="41">
 <div class="cell-output cell-output-display">
 <div id="fig-curmir-output" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3911,21 +3935,21 @@ Figure&nbsp;57: A current mirror pair with resistive degeneration.
 + \left( \frac{V_\mathrm{drv}}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 \cdot \sigma^2\left\{\frac{\Delta K}{K}\right\} \\
 &amp; + \left( \frac{V_\mathrm{deg}}{V_\mathrm{drv} + V_\mathrm{deg}} \right)^2 \cdot \sigma^2\left\{\frac{\Delta R}{R}\right\}.
 \end{split}
-\tag{38}\]</span></span></p>
+\tag{40}\]</span></span></p>
 <p>The definition of <span class="math inline">\(V_\mathrm{drv}\)</span> is adapted here and understood as half of the <span class="math inline">\(V_\mathrm{DS}\)</span> saturation voltage, i.e., <span class="math inline">\(V_\mathrm{drv} = V_\mathrm{DS,sat} / 2 \approx I_\mathrm{D}/ g_\mathrm{m}\)</span>. The degeneration voltage is the voltage drop across the degeneration resistors and given by <span class="math inline">\(V_\mathrm{deg} = I_\mathrm{D}\cdot R\)</span>.</p>
-<p>The standard deviation of the resistor <span class="math inline">\(\sigma\left\{\Delta R / R\right\}\)</span> can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a>. Further, the threshold voltage mismatch <span class="math inline">\(\sigma\left\{\Delta V_\mathrm{th}\right\}\)</span> can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a>.</p>
-<p>By using the approximation of <a href="#eq-mosfet-gmid-stronginversion" class="quarto-xref">Equation&nbsp;4</a>, we can express <a href="#eq-curmir-matching" class="quarto-xref">Equation&nbsp;38</a> in terms of our preferred sizing parameter <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}\)</span>:</p>
+<p>The standard deviation of the resistor <span class="math inline">\(\sigma\left\{\Delta R / R\right\}\)</span> can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;32</a>. Further, the threshold voltage mismatch <span class="math inline">\(\sigma\left\{\Delta V_\mathrm{th}\right\}\)</span> can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a>.</p>
+<p>By using the approximation of <a href="#eq-mosfet-gmid-stronginversion" class="quarto-xref">Equation&nbsp;4</a>, we can express <a href="#eq-curmir-matching" class="quarto-xref">Equation&nbsp;40</a> in terms of our preferred sizing parameter <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}\)</span>:</p>
 <p><span id="eq-curmir-matching-alt"><span class="math display">\[
 \begin{split}
 \sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} &amp; = \frac{\sigma^2\left\{\Delta V_\mathrm{th}\right\}}{[(g_\mathrm{m}/I_\mathrm{D})^{-1} + V_\mathrm{deg}]^2}
 + \left( \frac{1}{1 + V_\mathrm{deg}\cdot g_\mathrm{m}/I_\mathrm{D}} \right)^2 \cdot \sigma^2\left\{\frac{\Delta K}{K}\right\} \\
 &amp; + \left( \frac{V_\mathrm{deg} \cdot g_\mathrm{m}/I_\mathrm{D}}{1 + V_\mathrm{deg} \cdot g_\mathrm{m}/I_\mathrm{D}} \right)^2 \cdot \sigma^2\left\{\frac{\Delta R}{R}\right\}.
 \end{split}
-\tag{39}\]</span></span></p>
-<p>The standard deviation of the transconductance parameter mismatch <span class="math inline">\(\sigma\left\{\Delta K / K\right\}\)</span> can be calculated similarly as (which is an alternative form to <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;27</a>)</p>
+\tag{41}\]</span></span></p>
+<p>The standard deviation of the transconductance parameter mismatch <span class="math inline">\(\sigma\left\{\Delta K / K\right\}\)</span> can be calculated similarly as (which is an alternative form to <a href="#eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;29</a>)</p>
 <p><span id="eq-mosfet-mismatch-kp-alt"><span class="math display">\[
 \sigma^2\left\{\frac{\Delta K}{K}\right\} = \sigma^2\left\{\Delta W\right\} \cdot \frac{1}{W^2} + \sigma^2\left\{\Delta L\right\} \cdot \frac{1}{L^2} + A_\mu^2 \cdot \frac{1}{W L},
-\tag{40}\]</span></span></p>
+\tag{42}\]</span></span></p>
 <p>where <span class="math inline">\(\sigma\left\{\Delta W\right\}\)</span> and <span class="math inline">\(\sigma\left\{\Delta L\right\}\)</span> are the process-dependent absolute mismatch parameters for the width <span class="math inline">\(W\)</span> and length <span class="math inline">\(L\)</span>, respectively. The mobility mismatch follows Pelgrom’s law like the threshold voltage, so it is described by an area-scaled constant <span class="math inline">\(A_\mu = \sigma\left\{\Delta \mu / \mu\right\} \cdot \sqrt{W L}\)</span>, which is the quantity listed in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>.</p>
 <p>The standard deviations of the components of the SG13G2 process are summarized in <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>. For mismatch calculations we can assume them to be uncorrelated.</p>
 <div id="tbl-sg13g2-mismatch" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4013,15 +4037,15 @@ Table&nbsp;4: IHP SG13G2 device mismatch
 </div>
 </figure>
 </div>
-<p>Inspecting <a href="#eq-curmir-matching" class="quarto-xref">Equation&nbsp;38</a> we can see that by implementing a common-source transistor without source degeneration (i.e., <span class="math inline">\(V_\mathrm{deg} = 0\)</span>), the current mirror matching is dominated by the threshold voltage mismatch and the transconductance parameter mismatch of the MOSFETs:</p>
+<p>Inspecting <a href="#eq-curmir-matching" class="quarto-xref">Equation&nbsp;40</a> we can see that by implementing a common-source transistor without source degeneration (i.e., <span class="math inline">\(V_\mathrm{deg} = 0\)</span>), the current mirror matching is dominated by the threshold voltage mismatch and the transconductance parameter mismatch of the MOSFETs:</p>
 <p><span id="eq-curmir-matching-nodeg"><span class="math display">\[
 \sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sigma^2\left\{\Delta V_\mathrm{th}\right\} \left( \frac{g_\mathrm{m}}{I_\mathrm{D}} \right)^2 + \sigma^2\left\{\frac{\Delta K}{K}\right\}
-\tag{41}\]</span></span></p>
-<p>The first term in <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a> can be minimized by choosing a low <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}\)</span> ratio, while the latter term is minimized by increasing the device area (i.e., increasing <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>).</p>
-<p>Looking at the resistively-degenerated current mirror, and using a large degeneration voltage <span class="math inline">\(V_\mathrm{deg}\)</span>, we can simplify <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;39</a> to</p>
+\tag{43}\]</span></span></p>
+<p>The first term in <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;43</a> can be minimized by choosing a low <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}\)</span> ratio, while the latter term is minimized by increasing the device area (i.e., increasing <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>).</p>
+<p>Looking at the resistively-degenerated current mirror, and using a large degeneration voltage <span class="math inline">\(V_\mathrm{deg}\)</span>, we can simplify <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;41</a> to</p>
 <p><span id="eq-curmir-matching-strongdeg"><span class="math display">\[
 \sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sigma^2\left\{\frac{\Delta R}{R}\right\}
-\tag{42}\]</span></span></p>
+\tag{44}\]</span></span></p>
 <p>indicating that now the current matching of the degenerated current mirror is defined by the resistor matching only. Since resistors can be matched considerably better than MOSFETs, this can lead to a significant improvement in current mirror accuracy, but only if the resistor is given enough area, as the worked example below will show.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Current Mirror Matching Calculation">
 <div class="callout-header d-flex align-content-center">
@@ -4033,26 +4057,26 @@ Table&nbsp;4: IHP SG13G2 device mismatch
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Let us now calculate the current mirror matching of the simple current mirror. Using <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a>, and using the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 5\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 10\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 5\,\mu\text{m}\)</span>, we can calculate the standard deviation of the transconductance parameter mismatch using <a href="#eq-mosfet-mismatch-kp-alt" class="quarto-xref">Equation&nbsp;40</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
+<p>Let us now calculate the current mirror matching of the simple current mirror. Using <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;43</a>, and using the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 5\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 10\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 5\,\mu\text{m}\)</span>, we can calculate the standard deviation of the transconductance parameter mismatch using <a href="#eq-mosfet-mismatch-kp-alt" class="quarto-xref">Equation&nbsp;42</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
 \]</span></p>
-<p>The standard deviation of the threshold voltage mismatch can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;26</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
+<p>The standard deviation of the threshold voltage mismatch can be calculated using <a href="#eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.55\,\text{mV}.
 \]</span></p>
-<p>Bringing both results into <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;41</a>, we get <span class="math display">\[
+<p>Bringing both results into <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;43</a>, we get <span class="math display">\[
 \sigma\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sqrt{ (0.55\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (0.09\,\%)^2} \approx 0.29\,\%.
 \]</span> Comparing with the simulation results in <a href="#fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a> for the basic current mirror, we can see that this gives a reasonable estimate compared to the standard deviation of about <span class="math inline">\(0.21\,\mu\text{A}/48.9\,\mu\text{A} = 0.43\,\%\)</span> obtained from the Monte-Carlo simulation. The remaining discrepancy is due to simplifications in the analytical model (e.g., the square-law approximation).</p>
-<p>Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;39</a> to analyze this configuration. We use the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 10\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 20\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 3\,\mu\text{m}\)</span>, for the MOSFET, and <span class="math inline">\(V_\mathrm{deg} = 0.2\,\text{V}\)</span>, <span class="math inline">\(L = 15\,\mu\text{m}\)</span> / <span class="math inline">\(W = 1\,\mu\text{m}\)</span> for the used <code>rppd</code> resistor.</p>
+<p>Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;41</a> to analyze this configuration. We use the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 10\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 20\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 3\,\mu\text{m}\)</span>, for the MOSFET, and <span class="math inline">\(V_\mathrm{deg} = 0.2\,\text{V}\)</span>, <span class="math inline">\(L = 15\,\mu\text{m}\)</span> / <span class="math inline">\(W = 1\,\mu\text{m}\)</span> for the used <code>rppd</code> resistor.</p>
 <p>The standard deviation of the transconductance parameter mismatch can be calculated as <span class="math display">\[
 \sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
 \]</span></p>
 <p>The standard deviation of the threshold voltage mismatch can be calculated as <span class="math display">\[
 \sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.50\,\text{mV}.
 \]</span></p>
-<p>The standard deviation of the resistor mismatch can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;30</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
+<p>The standard deviation of the resistor mismatch can be calculated using <a href="#eq-resistor-mismatch" class="quarto-xref">Equation&nbsp;32</a> and <a href="#tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\frac{\Delta R}{R}\right\} = \frac{1.5\,\%\mu\text{m}}{\sqrt{15\,\mu\text{m} \cdot 1\,\mu\text{m}}} = 0.39\,\%.
 \]</span></p>
-<p>Plugging these results into <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;39</a>, we get <span class="math display">\[
+<p>Plugging these results into <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;41</a>, we get <span class="math display">\[
 \begin{split}
 \sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} =&amp;
 \underbrace{\left( \frac{0.50\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2}_{(0.17\,\%)^2} +
@@ -4113,9 +4137,9 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 </div>
 </div>
 <p>Further, by properly selecting the bias voltages of the cascode a low-voltage operation is achieved as <span class="math inline">\(V_\mathrm{DS}\)</span> can be minimized, allowing even triode operation of the current-mirror MOSFETs (as, noted above, a large <span class="math inline">\(g_\mathrm{ds}\)</span> is not a big issue).</p>
-<p>A simplified small-signal gain calculation of this improved OTA uses the result of <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;18</a> and <a href="#eq-cs-cascode-output-impedance" class="quarto-xref">Equation&nbsp;33</a> to arrive at the approximate dc gain of <span id="eq-improved-ota-gain-dc"><span class="math display">\[
+<p>A simplified small-signal gain calculation of this improved OTA uses the result of <a href="#eq-simple-ota-gain-dc" class="quarto-xref">Equation&nbsp;18</a> and <a href="#eq-cs-cascode-output-impedance" class="quarto-xref">Equation&nbsp;35</a> to arrive at the approximate dc gain of <span id="eq-improved-ota-gain-dc"><span class="math display">\[
 A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathrm{m2C}} + g_\mathrm{ds4} \frac{g_\mathrm{ds4C}}{g_\mathrm{m4C}}}
-\tag{43}\]</span></span> leading to a significant boost in dc gain due to cascoding. We use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
+\tag{45}\]</span></span> leading to a significant boost in dc gain due to cascoding. We use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
 <ol type="1">
 <li>save area (a smaller <span class="math inline">\(L\)</span> will lead to a smaller <span class="math inline">\(W\)</span> for a given <span class="math inline">\(W/L\)</span> ratio) and</li>
 <li>push the additional poles and zeros at the inner nodes of the cascode transistors (e.g., the connection of the drain of <span class="math inline">\(M_4\)</span> to the source of <span class="math inline">\(M_\mathrm{4C}\)</span>) to higher frequencies to result in stable behavior and a reasonable gain transfer function (too many poles and zeros in the pass band of the amplifier create many issues with stability margin).</li>
@@ -4125,7 +4149,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 <p>Like the sizing of the 5T-OTA in <a href="#sec-basic-ota-sizing" class="quarto-xref">Section&nbsp;8.4</a> we again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5,6}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we now stack twice as many MOSFETs at the same supply voltage). Please look at <a href="#sec-gmid-method" class="quarto-xref">Section&nbsp;3</a> to confirm this choice.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved OTA Sizing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-68-contents" aria-controls="callout-68" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-69-contents" aria-controls="callout-69" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4134,7 +4158,7 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-68" class="callout-68-contents callout-collapse collapse">
+<div id="callout-69" class="callout-69-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="sizing-for-basic-improved-ota" class="level1 unnumbered unlisted quarto-embed-nb-cell">
 <h1 class="unnumbered unlisted">Sizing for Basic (Improved) OTA</h1>
@@ -4532,7 +4556,7 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 <h2 data-number="11.4" class="anchored" data-anchor-id="corner-simulation-of-improved-ota"><span class="header-section-number">11.4</span> Corner Simulation of Improved OTA</h2>
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a>.</p>
 <div id="nte-improved-ota-cace-result" class="callout callout-style-default callout-note callout-titled" title="CACE Summary for Improved OTA">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-72-contents" aria-controls="callout-72" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-73-contents" aria-controls="callout-73" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4541,7 +4565,7 @@ Note&nbsp;3: CACE Summary for Improved OTA
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-72" class="callout-72-contents callout-collapse collapse">
+<div id="callout-73" class="callout-73-contents callout-collapse collapse">
 <section id="cace-summary-for-ota-improved" class="level1 unnumbered unlisted callout-body-container callout-body">
 <h1 class="unnumbered unlisted">CACE Summary for ota-improved</h1>
 <p><strong>netlist source</strong>: schematic</p>
@@ -4910,27 +4934,27 @@ V_\mathrm{bias} = R_2 I_\mathrm{bias} = \frac{R_2}{R_1} V_\mathrm{ref}.
 <p>It has been realized that a bipolar junction transistor (BJT) has the wonderful property, that the base-emitter voltage <span class="math inline">\(V_\mathrm{BE}\)</span> has the following approximate relationship vs.&nbsp;temperature <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">Widlar 1971</a>)</span></p>
 <p><span id="eq-vbe-vs-temp"><span class="math display">\[
 V_\mathrm{BE}\approx V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + V_\mathrm{BE0} \left( \frac{T}{T_0} \right)
-\tag{44}\]</span></span></p>
+\tag{46}\]</span></span></p>
 <p>where <span class="math inline">\(V_\mathrm{g0} = 1.205\,\text{V}\)</span> is the bandgap voltage of silicon <em>extrapolated</em> to <span class="math inline">\(0\,\text{K}\)</span> and <span class="math inline">\(V_\mathrm{BE0}\)</span> is the base-emitter voltage of a BJT at reference temperature <span class="math inline">\(T_0\)</span>. (Note that this is not the physical bandgap of silicon at <span class="math inline">\(0\,\text{K}\)</span>, which is about <span class="math inline">\(1.17\,\text{eV}\)</span>; <span class="math inline">\(V_\mathrm{g0}\)</span> is the value obtained by extrapolating the nearly linear <span class="math inline">\(V_\mathrm{BE}(T)\)</span> characteristic back to <span class="math inline">\(T = 0\,\text{K}\)</span>.) Further, the difference in <span class="math inline">\(V_\mathrm{BE}\)</span> of two BJT operated at different emitter current densities <span class="math inline">\(J_1\)</span> and <span class="math inline">\(J_2\)</span> is given as</p>
 <p><span id="eq-delta-vbe-vs-temp"><span class="math display">\[
 \Delta V_\mathrm{BE}= \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
-\tag{45}\]</span></span></p>
+\tag{47}\]</span></span></p>
 <p>with <span class="math inline">\(k\)</span> the Boltzmann constant, and <span class="math inline">\(q\)</span> the elementary charge.</p>
-<p>Adding <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;44</a> and a scaled version of <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;45</a> results in a reference voltage of value</p>
+<p>Adding <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;46</a> and a scaled version of <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;47</a> results in a reference voltage of value</p>
 <p><span id="eq-bandgap-voltage-with-temp"><span class="math display">\[
 V_\mathrm{ref} =  V_\mathrm{g0} \left( 1 - \frac{T}{T_0} \right) + V_\mathrm{BE0} \left( \frac{T}{T_0} \right) +  K \frac{k T}{q} \ln \left( \frac{J_1}{J_2} \right)
-\tag{46}\]</span></span></p>
+\tag{48}\]</span></span></p>
 <p>where <span class="math inline">\(K\)</span> is a scaling factor that we are free to choose in the circuit implementation (we will see below that it is realized as a resistor ratio). Demanding zero temperature coefficient, <span class="math inline">\(\partial V_\mathrm{ref} / \partial T = 0\)</span>, fixes it to</p>
 <p><span id="eq-bandgap-zero-tc"><span class="math display">\[
 K \frac{k}{q} \ln \left( \frac{J_1}{J_2} \right) = \frac{V_\mathrm{g0} - V_\mathrm{BE0}}{T_0}.
-\tag{47}\]</span></span></p>
-<p>Substituting <a href="#eq-bandgap-zero-tc" class="quarto-xref">Equation&nbsp;47</a> back into <a href="#eq-bandgap-voltage-with-temp" class="quarto-xref">Equation&nbsp;46</a> makes every term proportional to <span class="math inline">\(T\)</span> cancel, and only</p>
+\tag{49}\]</span></span></p>
+<p>Substituting <a href="#eq-bandgap-zero-tc" class="quarto-xref">Equation&nbsp;49</a> back into <a href="#eq-bandgap-voltage-with-temp" class="quarto-xref">Equation&nbsp;48</a> makes every term proportional to <span class="math inline">\(T\)</span> cancel, and only</p>
 <p><span id="eq-bandgap-voltage"><span class="math display">\[
 V_\mathrm{ref} =  V_\mathrm{g0}
-\tag{48}\]</span></span></p>
+\tag{50}\]</span></span></p>
 <p>remains. We thus have created an on-chip reference (called the <a href="https://en.wikipedia.org/wiki/Bandgap_voltage_reference"><em>bandgap voltage reference</em></a>) which is almost independent of manufacturing tolerances with a very small temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of <span class="math inline">\(\pm 1 \ldots 3\%\)</span> without trimming are perfectly possible.</p>
 <p>The original implementation in <span class="citation" data-cites="Widlar_1971">(<a href="#ref-Widlar_1971" role="doc-biblioref">Widlar 1971</a>)</span> uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of these available layers are available for free without extra processing cost, they are very slow, show unusually small <span class="math inline">\(\beta &lt; 10\)</span>, and the collector is tied to <span class="math inline">\(V_\mathrm{SS}\)</span> as it is the substrate. Still, for bandgap references, they are very useful.</p>
-<p>A simple implementation of a bandgap reference circuit is shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;48</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
+<p>A simple implementation of a bandgap reference circuit is shown in <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;50</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
 <div id="cell-fig-bandgap-simple" class="cell" data-execution_count="50">
 <div class="cell-output cell-output-display">
 <div id="fig-bandgap-simple" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -4952,12 +4976,12 @@ Figure&nbsp;65: A simple bandgap reference.
 <p>Hence, the bias current in all the branches is given by</p>
 <p><span id="eq-bandgap-bias-current"><span class="math display">\[
 I_\mathrm{bias} = \frac{\Delta V_\mathrm{BE}}{R_1} = \frac{1}{R_1} \frac{k T}{q} \ln m.
-\tag{49}\]</span></span></p>
-<p>Inspecting <a href="#eq-bandgap-bias-current" class="quarto-xref">Equation&nbsp;49</a> we see that <span class="math inline">\(I_\mathrm{bias} = k_1 T\)</span> is a linear function of temperature <span class="math inline">\(T\)</span>, a property that is very useful and called <strong>PTAT</strong> (proportional to absolute temperature). Strictly, this holds only insofar as <span class="math inline">\(R_1\)</span> itself is temperature-independent; a real resistor has a noticeable temperature coefficient (see <a href="#tbl-sg13g2-devices" class="quarto-xref">Table&nbsp;1</a>), which is one reason why the resistor type matters in a bandgap design. With <span class="math inline">\(M_5\)</span> we mirror this bias current into the output branch, and the output voltage <span class="math inline">\(V_\mathrm{ref}\)</span> is then given by</p>
+\tag{51}\]</span></span></p>
+<p>Inspecting <a href="#eq-bandgap-bias-current" class="quarto-xref">Equation&nbsp;51</a> we see that <span class="math inline">\(I_\mathrm{bias} = k_1 T\)</span> is a linear function of temperature <span class="math inline">\(T\)</span>, a property that is very useful and called <strong>PTAT</strong> (proportional to absolute temperature). Strictly, this holds only insofar as <span class="math inline">\(R_1\)</span> itself is temperature-independent; a real resistor has a noticeable temperature coefficient (see <a href="#tbl-sg13g2-devices" class="quarto-xref">Table&nbsp;1</a>), which is one reason why the resistor type matters in a bandgap design. With <span class="math inline">\(M_5\)</span> we mirror this bias current into the output branch, and the output voltage <span class="math inline">\(V_\mathrm{ref}\)</span> is then given by</p>
 <p><span class="math display">\[
 V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.  
 \]</span></p>
-<p>Comparing with <a href="#eq-bandgap-voltage-with-temp" class="quarto-xref">Equation&nbsp;46</a> we see that the scaling factor <span class="math inline">\(K\)</span> is realized here as the resistor ratio <span class="math inline">\(R_2 / R_1\)</span>. By proper selection of <span class="math inline">\(R_1\)</span>, <span class="math inline">\(R_2\)</span> and <span class="math inline">\(m\)</span> we can thus satisfy <a href="#eq-bandgap-zero-tc" class="quarto-xref">Equation&nbsp;47</a> and arrive at <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;48</a>.</p>
+<p>Comparing with <a href="#eq-bandgap-voltage-with-temp" class="quarto-xref">Equation&nbsp;48</a> we see that the scaling factor <span class="math inline">\(K\)</span> is realized here as the resistor ratio <span class="math inline">\(R_2 / R_1\)</span>. By proper selection of <span class="math inline">\(R_1\)</span>, <span class="math inline">\(R_2\)</span> and <span class="math inline">\(m\)</span> we can thus satisfy <a href="#eq-bandgap-zero-tc" class="quarto-xref">Equation&nbsp;49</a> and arrive at <a href="#eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;50</a>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Improved Bandgap Reference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4968,7 +4992,7 @@ V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For an improved implementation of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;44</a> and <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;45</a> build on the relationship <span class="math inline">\(I_\mathrm{C} = f(V_\mathrm{BE})\)</span>, while we control <span class="math inline">\(I_\mathrm{E}\)</span> in this circuit. If <span class="math inline">\(\beta\)</span> is large then <span class="math inline">\(I_\mathrm{C} \approx I_\mathrm{E}\)</span>, but this is not the case for the used PNPs.</p>
+<p>For an improved implementation of <a href="#fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, <a href="#eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;46</a> and <a href="#eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;47</a> build on the relationship <span class="math inline">\(I_\mathrm{C} = f(V_\mathrm{BE})\)</span>, while we control <span class="math inline">\(I_\mathrm{E}\)</span> in this circuit. If <span class="math inline">\(\beta\)</span> is large then <span class="math inline">\(I_\mathrm{C} \approx I_\mathrm{E}\)</span>, but this is not the case for the used PNPs.</p>
 <p>Many more different bandgap architectures exist, with the Kuijk <span class="citation" data-cites="Kuijk_bandgap">(<a href="#ref-Kuijk_bandgap" role="doc-biblioref">Kuijk 1973</a>)</span> or the Brokaw <span class="citation" data-cites="Brokaw_bandgap">(<a href="#ref-Brokaw_bandgap" role="doc-biblioref">Brokaw 1974</a>)</span> types being popular choices.</p>
 </div>
 </div>
@@ -5082,12 +5106,12 @@ Figure&nbsp;71: Differential two-stage OTA with resistive load.
 </div>
 </div>
 <p>This OTA shows a load on top of the differential pair that we have not yet studied. It is instructive to analyze this structure in terms of differential and common-mode operation.</p>
-<p>For common-mode operation (i.e., injecting the same current into the drain of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>) we have the same voltage at the drains of <span class="math inline">\(M_{3,5}\)</span>, thus <span class="math inline">\(V_\mathrm{DS3}=V_\mathrm{DS5}\)</span>. We have thus no current flowing through <span class="math inline">\(R_{1,2}\)</span> and as a result <span class="math inline">\(V_\mathrm{DS3}=V_\mathrm{DS5} = V_\mathrm{X} = V_\mathrm{GS3} = V_\mathrm{GS5} = V_\mathrm{GS3,5}\)</span>. We realize that <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_5\)</span> are diode-connected for common-mode operation. We thus have well-defined dc operating points, and also low common-mode gain, since the common-mode load is <span class="math inline">\(g_\mathrm{m3}^{-1} \parallel g_\mathrm{m5}^{-1}\)</span>.</p>
+<p>For common-mode operation (i.e., injecting the same current into the drain of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>) we have the same voltage at the drains of <span class="math inline">\(M_{3,5}\)</span>, thus <span class="math inline">\(V_\mathrm{DS3}=V_\mathrm{DS5}\)</span>. We have thus no current flowing through <span class="math inline">\(R_{1,2}\)</span> and as a result <span class="math inline">\(V_\mathrm{DS3}=V_\mathrm{DS5} = V_\mathrm{X} = V_\mathrm{GS3} = V_\mathrm{GS5} = V_\mathrm{GS3,5}\)</span>. We realize that <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_5\)</span> are diode-connected for common-mode operation. We thus have well-defined dc operating points, and also low common-mode gain, since each side of the circuit is then loaded by its own diode-connected transistor, i.e.&nbsp;the common-mode load per half circuit is <span class="math inline">\(g_\mathrm{m3,5}^{-1}\)</span> (no current flows through <span class="math inline">\(R_{1,2}\)</span>, so the resistors play no role here).</p>
 <p>For pure differential operation, the mid-point <span class="math inline">\(X\)</span> of <span class="math inline">\(R_{1,2}\)</span> acts as a virtual ground. The bias voltage <span class="math inline">\(V_\mathrm{GS3,5}\)</span> is thus not changed (it is set only by the common-mode operation) and thus <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_5\)</span> operate as current sources. The differential load impedance is high and is given by <span class="math inline">\(R_\mathrm{load} = (R_1 + R_2) \parallel (g_\mathrm{ds3}^{-1} + g_\mathrm{ds5}^{-1})\)</span>.</p>
 <p>In addition, we realize that <span class="math inline">\(V_\mathrm{GS4} = V_\mathrm{GS3} = V_\mathrm{GS5} = V_\mathrm{GS6}\)</span> for common-mode operation, hence the quiescent current of <span class="math inline">\(M_{4,6}\)</span> is set in a current-mirror-like fashion by the diode-connected <span class="math inline">\(M_{3,5}\)</span>.</p>
 <p>For differential operation, the differential pair of <span class="math inline">\(M_{1,2}\)</span> is loaded by <span class="math inline">\(R_\mathrm{load}\)</span> and provides fairly high gain. The second gain stage is formed by current-source-loaded common-source stages <span class="math inline">\(M_{4,6}\)</span> and provides additional gain (of course, this is a function of the load impedance).</p>
 <p>As soon as we implement a two-stage amplifier we need to look into stability. We likely have more than two poles, and in the case of the amplifier in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;71</a> we have a low-frequency pole at the drains of <span class="math inline">\(M_{1,3}\)</span> and <span class="math inline">\(M_{2,5}\)</span> and a further low-frequency pole at the output. Any additional pole will add further phase shift making stability critical. We now need a method to stabilize this amplifier and thus we will look into <em>Miller compensation</em>.</p>
-<p>Of course, loop gain analysis of differential OTAs can and should be carried out. An exemplary testbench where the loop gain is simulated with Rosenstark’s, Middlebrook’s, and Tian’s method can be found <a href="xschem/ota-differential_tb-loopgain.sch">here</a>. Note that there is no underlying circuit right now and it should only show how it could be done.</p>
+<p>Of course, loop gain analysis of differential OTAs can and should be carried out. Exemplary testbenches where the loop gain is simulated with Middlebrook’s and Tian’s method can be found for the <a href="./xschem/ota-5t_tb-loopgain.sch">5T-OTA</a> and for the <a href="./xschem/ota-improved_tb-loopgain.sch">improved OTA</a>; the same approach carries over to the differential case, where the loop has to be broken in both the differential and the common-mode path.</p>
 <section id="sec-miller-compensation" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="sec-miller-compensation"><span class="header-section-number">13.1</span> Miller Compensation</h2>
 <p>A popular way to stabilize a multi-pole feedback-system is to make one pole dominant, and try to shift the other poles to sufficiently high frequencies <span class="citation" data-cites="Mangelsdorf_2025_miller">(<a href="#ref-Mangelsdorf_2025_miller" role="doc-biblioref">Mangelsdorf 2025a</a>)</span>, that we have enough <a href="https://en.wikipedia.org/wiki/Phase_margin">phase margin</a> in the closed-loop system. We may strive for <span class="math inline">\(60^\circ\)</span> as this will only cause a minor peaking in the frequency response <span class="citation" data-cites="Gray_Meyer_2009">(<a href="#ref-Gray_Meyer_2009" role="doc-biblioref">Gray et al. 2009</a>)</span>.</p>
@@ -5126,24 +5150,24 @@ Figure&nbsp;73: Small-signal model of common-source stage with Miller compensati
 <p>In order to analyze the transfer function and thus the poles and zeros of this configuration we formulate KCL at the input and output node and the current through <span class="math inline">\(C_\mathrm{m}\)</span> (we set <span class="math inline">\(R_\mathrm{m}=0\)</span> for now):</p>
 <p><span id="eq-miller-comp-kcl1"><span class="math display">\[
 I_\mathrm{in} + I_\mathrm{m} - V_\mathrm{gs} (s C_\mathrm{in} + g_\mathrm{in}) = 0
-\tag{50}\]</span></span></p>
+\tag{52}\]</span></span></p>
 <p><span id="eq-miller-comp-kcl2"><span class="math display">\[
 -I_\mathrm{m} - g_\mathrm{m}V_\mathrm{gs} - V_\mathrm{out} (s C_\mathrm{L} + g_\mathrm{out}) = 0
-\tag{51}\]</span></span></p>
+\tag{53}\]</span></span></p>
 <p><span id="eq-miller-comp-kcl3"><span class="math display">\[
 I_\mathrm{m} = s C_\mathrm{m} (V_\mathrm{out} - V_\mathrm{gs})
-\tag{52}\]</span></span></p>
-<p>Using <a href="#eq-miller-comp-kcl3" class="quarto-xref">Equation&nbsp;52</a> in <a href="#eq-miller-comp-kcl1" class="quarto-xref">Equation&nbsp;50</a> and <a href="#eq-miller-comp-kcl2" class="quarto-xref">Equation&nbsp;51</a> and then calculating the transfer function we arrive at</p>
+\tag{54}\]</span></span></p>
+<p>Using <a href="#eq-miller-comp-kcl3" class="quarto-xref">Equation&nbsp;54</a> in <a href="#eq-miller-comp-kcl1" class="quarto-xref">Equation&nbsp;52</a> and <a href="#eq-miller-comp-kcl2" class="quarto-xref">Equation&nbsp;53</a> and then calculating the transfer function we arrive at</p>
 <p><span id="eq-miller-comp-kcl4"><span class="math display">\[
 \frac{V_\mathrm{out}}{I_\mathrm{in}} = \frac{s C_\mathrm{m} - g_\mathrm{m}}{(s C_\mathrm{m} + s C_\mathrm{L} + g_\mathrm{out})(s C_\mathrm{m} + s C_\mathrm{in} + g_\mathrm{in}) - (s C_\mathrm{m} - g_\mathrm{m}) s C_\mathrm{m}}.
-\tag{53}\]</span></span></p>
-<p>In order to check <a href="#eq-miller-comp-kcl4" class="quarto-xref">Equation&nbsp;53</a> we can set <span class="math inline">\(s C_\mathrm{m} = 0\)</span> and see whether we can interpret the result:</p>
+\tag{55}\]</span></span></p>
+<p>In order to check <a href="#eq-miller-comp-kcl4" class="quarto-xref">Equation&nbsp;55</a> we can set <span class="math inline">\(s C_\mathrm{m} = 0\)</span> and see whether we can interpret the result:</p>
 <p><span id="eq-miller-comp-kcl5"><span class="math display">\[
 \frac{V_\mathrm{out}}{I_\mathrm{in}} = -\frac{g_\mathrm{m}}{(s C_\mathrm{L} + g_\mathrm{out})(s C_\mathrm{in} + g_\mathrm{in})} = -\frac{g_\mathrm{m}}{g_\mathrm{out} g_\mathrm{in}}
 \frac{1}{\left( 1 + \frac{s C_\mathrm{L}}{g_\mathrm{out}} \right)}
 \frac{1}{\left( 1 + \frac{s C_\mathrm{in}}{g_\mathrm{in}} \right)}
-\tag{54}\]</span></span></p>
-<p>We find that <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;54</a> looks reasonable, as we have the correct dc gain of <span class="math inline">\(-g_\mathrm{m}/(g_\mathrm{out} g_\mathrm{in})\)</span> and two poles, one at the input and one at the output.</p>
+\tag{56}\]</span></span></p>
+<p>We find that <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;56</a> looks reasonable, as we have the correct dc gain of <span class="math inline">\(-g_\mathrm{m}/(g_\mathrm{out} g_\mathrm{in})\)</span> and two poles, one at the input and one at the output.</p>
 <p>We now return to the more interesting case of <span class="math inline">\(s C_\mathrm{m} \neq 0\)</span>. We use the reasonable assumption that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{in,out}\)</span> to simplify the algebra and result in an interpretable result. After quite a few pages of algebraic manipulations (please try for yourself!) we arrive at</p>
 <p><span id="eq-miller-comp-pz"><span class="math display">\[
 \frac{V_\mathrm{out}}{I_\mathrm{in}} = -\frac{g_\mathrm{m}}{g_\mathrm{out} g_\mathrm{in}}
@@ -5152,8 +5176,8 @@ I_\mathrm{m} = s C_\mathrm{m} (V_\mathrm{out} - V_\mathrm{gs})
 \left( 1 + s \frac{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mathrm{in} C_\mathrm{L}}{C_\mathrm{m}}}{g_\mathrm{m}} \right)
 \left( 1 + s \frac{C_\mathrm{m} \frac{g_\mathrm{m}}{g_\mathrm{out}}}{g_\mathrm{in}} \right)
 }.
-\tag{55}\]</span></span></p>
-<p>Looking at <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;55</a> we can identify important changes compared to <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;54</a>. We have the intended low-frequency pole <span class="math inline">\(s_\mathrm{p1}\)</span> at the input where the capacitor <span class="math inline">\(C_\mathrm{m}\)</span> is increased by the dc gain of the common-source stage <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{out}\)</span>:</p>
+\tag{57}\]</span></span></p>
+<p>Looking at <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;57</a> we can identify important changes compared to <a href="#eq-miller-comp-kcl5" class="quarto-xref">Equation&nbsp;56</a>. We have the intended low-frequency pole <span class="math inline">\(s_\mathrm{p1}\)</span> at the input where the capacitor <span class="math inline">\(C_\mathrm{m}\)</span> is increased by the dc gain of the common-source stage <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{out}\)</span>:</p>
 <p><span class="math display">\[
 s_\mathrm{p1} = -\frac{g_\mathrm{in}}{C_\mathrm{m} \frac{g_\mathrm{m}}{g_\mathrm{out}}}
 \]</span></p>
@@ -5161,18 +5185,18 @@ s_\mathrm{p1} = -\frac{g_\mathrm{in}}{C_\mathrm{m} \frac{g_\mathrm{m}}{g_\mathrm
 <p><span class="math display">\[
 s_\mathrm{p2} = -\frac{g_\mathrm{m}}{C_\mathrm{L} + C_\mathrm{in} + \frac{C_\mathrm{in} C_\mathrm{L}}{C_\mathrm{m}}}
 \]</span></p>
-<p>Together, the movement of poles <span class="math inline">\(s_\mathrm{p1}\)</span> and <span class="math inline">\(s_\mathrm{p2}\)</span> is a great deal in terms of stability. However, not all is rosy, as we have to also look at the numerator of <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;55</a>. Here we see that a zero <span class="math inline">\(s_\mathrm{z}\)</span> has been formed, unfortunately a quite bad one. Calculating its location as</p>
+<p>Together, the movement of poles <span class="math inline">\(s_\mathrm{p1}\)</span> and <span class="math inline">\(s_\mathrm{p2}\)</span> is a great deal in terms of stability. However, not all is rosy, as we have to also look at the numerator of <a href="#eq-miller-comp-pz" class="quarto-xref">Equation&nbsp;57</a>. Here we see that a zero <span class="math inline">\(s_\mathrm{z}\)</span> has been formed, unfortunately a quite bad one. Calculating its location as</p>
 <p><span id="eq-miller-zero"><span class="math display">\[
 s_\mathrm{z} = +\frac{g_\mathrm{m}}{C_\mathrm{m}}
-\tag{56}\]</span></span></p>
+\tag{58}\]</span></span></p>
 <p>we see that it is located in the <em>right half-plane</em> of the s-domain. Such a zero, abbreviated as RHPZ, leads to a rise of the magnitude of the transfer function (this is generally not a bad thing), but the phase contribution of this zero is negative. This means that we are losing phase margin, yet we push available gain to higher frequencies; in other words, we are degrading phase- and gain-margin!</p>
 <p>A circuit-level interpretation of this effect is that while the Miller capacitor is wanted at the input of the amplifier (i.e., the feedback path), it also allows the input signal to pass to the output (i.e., the forward path). Since in normal operation the signal is inverted and in feed-forward mode it is not we have this unwanted effect of phase shift. A more detailed analysis of this RHPZ can be found in <span class="citation" data-cites="Mangelsdorf_2025_RHPZ">(<a href="#ref-Mangelsdorf_2025_RHPZ" role="doc-biblioref">Mangelsdorf 2025b</a>)</span>.</p>
 <p>Luckily, there are several techniques to break the feed-forward path while keeping the feedback path (e.g., using a source follower to drive the output side of the Miller capacitor). For our purposes, we use a slightly simpler technique of adding a resistor in series to the Miller capacitor (see <a href="#fig-diff-ota-resload-miller" class="quarto-xref">Figure&nbsp;72</a> and <a href="#fig-miller-comp-model" class="quarto-xref">Figure&nbsp;73</a>). By doing this, we can modify the location of this zero, and even push it into the left-half-plane. This is excellent news for stability, as now this zero helps to improve gain- and phase-margin!</p>
 <p>Repeating the calculation of the transfer function <span class="math inline">\(V_\mathrm{out} / I_\mathrm{in}\)</span> including <span class="math inline">\(R_\mathrm{m}\)</span> we see that the zero location is changed and can be calculated as (the pole locations are also slightly changed due to the addition of <span class="math inline">\(R_\mathrm{m}\)</span>, but we will not discuss the resulting equations here)</p>
 <p><span id="eq-miller-zero-comp"><span class="math display">\[
 s_\mathrm{z} = \frac{g_\mathrm{m}}{C_\mathrm{m} (1 - g_\mathrm{m}R_\mathrm{m})}
-\tag{57}\]</span></span></p>
-<p>If we do not use the resistor (i.e., <span class="math inline">\(R_\mathrm{m}=0\)</span>) then <a href="#eq-miller-zero-comp" class="quarto-xref">Equation&nbsp;57</a> collapses to <a href="#eq-miller-zero" class="quarto-xref">Equation&nbsp;56</a>. If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &lt; 1\)</span> then the zero stays in the right half-plane; if <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &gt; 1\)</span> then the zero moves into the left half-plane (this is what we want). If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} = 1\)</span> then we have compensated (i.e., removed) the zero; however, in practice exact compensation is not easy to establish across conditions, so we want to move the zero into the left half-plane. Adding a bit of margin, we want to size</p>
+\tag{59}\]</span></span></p>
+<p>If we do not use the resistor (i.e., <span class="math inline">\(R_\mathrm{m}=0\)</span>) then <a href="#eq-miller-zero-comp" class="quarto-xref">Equation&nbsp;59</a> collapses to <a href="#eq-miller-zero" class="quarto-xref">Equation&nbsp;58</a>. If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &lt; 1\)</span> then the zero stays in the right half-plane; if <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} &gt; 1\)</span> then the zero moves into the left half-plane (this is what we want). If <span class="math inline">\(g_\mathrm{m}R_\mathrm{m} = 1\)</span> then we have compensated (i.e., removed) the zero; however, in practice exact compensation is not easy to establish across conditions, so we want to move the zero into the left half-plane. Adding a bit of margin, we want to size</p>
 <p><span class="math display">\[
 R_\mathrm{m} &gt; \frac{2}{g_\mathrm{m}}.
 \]</span></p>
@@ -5219,28 +5243,28 @@ V_\mathrm{out,cm} = V_\mathrm{GS7,8} + \frac{R_{3,4} I_\mathrm{D11}}{2}.
 <p>We can realize the advantage of using the resistor/MOSFET load in the input as well as the output stage when we calculate the common-mode gain of the OTA. We realize that we can use half-circuits due to the inherent symmetry of the circuit in <a href="#fig-diff-ota-resload" class="quarto-xref">Figure&nbsp;71</a>. The gain of the first stage (the MOSFET-diode loaded differential pair <span class="math inline">\(M_{1,2}\)</span>) is given by (using <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a>)</p>
 <p><span id="eq-diff-ota-cmgain1"><span class="math display">\[
 A_\mathrm{cm,1} \approx -\frac{1}{g_\mathrm{m3,5}} \cdot \frac{g_\mathrm{m1,2} g_\mathrm{ds10}}{2g_\mathrm{m1,2} + g_\mathrm{ds10}} \approx -\frac{g_\mathrm{ds10}}{2g_\mathrm{m3,5}}.
-\tag{58}\]</span></span></p>
+\tag{60}\]</span></span></p>
 <p>The common-mode gain of the second stage is similarly given by</p>
 <p><span id="eq-diff-ota-cmgain2"><span class="math display">\[
 A_\mathrm{cm,2} \approx -\frac{g_\mathrm{m4,6}}{g_\mathrm{m7,8}}.
-\tag{59}\]</span></span></p>
-<p>Combining <a href="#eq-diff-ota-cmgain1" class="quarto-xref">Equation&nbsp;58</a> and <a href="#eq-diff-ota-cmgain2" class="quarto-xref">Equation&nbsp;59</a> we arrive at (assuming that <span class="math inline">\(g_\mathrm{m3,5} \approx g_\mathrm{m4,6}\)</span>)</p>
+\tag{61}\]</span></span></p>
+<p>Combining <a href="#eq-diff-ota-cmgain1" class="quarto-xref">Equation&nbsp;60</a> and <a href="#eq-diff-ota-cmgain2" class="quarto-xref">Equation&nbsp;61</a> we arrive at (assuming that <span class="math inline">\(g_\mathrm{m3,5} \approx g_\mathrm{m4,6}\)</span>)</p>
 <p><span id="eq-diff-ota-cmgain"><span class="math display">\[
 A_\mathrm{cm} = A_\mathrm{cm,1} \cdot A_\mathrm{cm,2} \approx \frac{g_\mathrm{ds10}}{2g_\mathrm{m7,8}}
-\tag{60}\]</span></span></p>
+\tag{62}\]</span></span></p>
 <p>which is a low common-mode gain with very likely <span class="math inline">\(A_\mathrm{cm} &lt; 1\)</span>, which is very good news for the common-mode stability!</p>
 <p>Likewise, we can compute the differential gain of the OTA by formulating the voltage gain of the first stage as</p>
 <p><span id="eq-diff-ota-dmgain1"><span class="math display">\[
 A_\mathrm{d,1} \approx \frac{g_\mathrm{m1,2}}{R_{1,2}^{-1} + g_\mathrm{ds3,5} + g_\mathrm{ds1,2}}
-\tag{61}\]</span></span></p>
+\tag{63}\]</span></span></p>
 <p>and the differential voltage gain of the second stage as</p>
 <p><span id="eq-diff-ota-dmgain2"><span class="math display">\[
 A_\mathrm{d,2} = \frac{g_\mathrm{m4,6}}{R_{3,4}^{-1} + g_\mathrm{ds7,8} + g_\mathrm{ds4,6}}.
-\tag{62}\]</span></span></p>
-<p>Combining <a href="#eq-diff-ota-dmgain1" class="quarto-xref">Equation&nbsp;61</a> and <a href="#eq-diff-ota-dmgain2" class="quarto-xref">Equation&nbsp;62</a>, we arrive at the total differential voltage gain (of an <strong>unloaded</strong> OTA) of</p>
+\tag{64}\]</span></span></p>
+<p>Combining <a href="#eq-diff-ota-dmgain1" class="quarto-xref">Equation&nbsp;63</a> and <a href="#eq-diff-ota-dmgain2" class="quarto-xref">Equation&nbsp;64</a>, we arrive at the total differential voltage gain (of an <strong>unloaded</strong> OTA) of</p>
 <p><span id="eq-diff-ota-dmgain"><span class="math display">\[
 A_\mathrm{d} = A_\mathrm{d,1} A_\mathrm{d,2} = \frac{g_\mathrm{m1,2} g_\mathrm{m4,6}}{(R_{1,2}^{-1} + g_\mathrm{ds3,5} + g_\mathrm{ds1,2})(R_{3,4}^{-1} + g_\mathrm{ds7,8} + g_\mathrm{ds4,6})}
-\tag{63}\]</span></span></p>
+\tag{65}\]</span></span></p>
 <p>which can lead to significant differential voltage gain, ultimately limited by the <span class="math inline">\(g_\mathrm{ds}\)</span> of the MOSFETs <span class="math inline">\(M_{1-8}\)</span>.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Modify Bias Points with Currents">
 <div class="callout-header d-flex align-content-center">
@@ -5259,7 +5283,7 @@ A_\mathrm{d} = A_\mathrm{d,1} A_\mathrm{d,2} = \frac{g_\mathrm{m1,2} g_\mathrm{m
 <section id="final-differential-ota" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="final-differential-ota"><span class="header-section-number">13.3</span> Final Differential OTA</h2>
 <p>When designing the OTA with the above-mentioned techniques like Miller compensation and the common-mode setting, we find that we have issues with common-mode stability. There is one issue not obvious at first sight with the MOSFET-R load of the first stage: At the node <span class="math inline">\(X\)</span> there is significant capacitance due to the gates of <span class="math inline">\(M_{3,5}\)</span>. This capacitance forms a low-pass response with the resistance of <span class="math inline">\(R_{1,2}\)</span> and thus creates a low-frequency pole. This pole is in the common-mode path, and leads to a zero for the common-mode gain.</p>
-<p>In other words: At low frequencies, the common-mode gain is given by <a href="#eq-diff-ota-cmgain" class="quarto-xref">Equation&nbsp;60</a>, but at higher frequencies (above the pole at node <span class="math inline">\(X\)</span>), the common-mode gain increases significantly as the load resistance of the first stage increases from <span class="math inline">\(g_\mathrm{m3}^{-1} \parallel g_\mathrm{m5}^{-1}\)</span> to <span class="math inline">\(g_\mathrm{ds3}^{-1} \parallel g_\mathrm{ds5}^{-1}\)</span>. We need to counteract this effect by adding a capacitor in parallel to <span class="math inline">\(R_{1,2}\)</span>, as shown in <a href="#fig-diff-ota-final" class="quarto-xref">Figure&nbsp;75</a>. We use the opportunity to also add a series resistor to this capacitor to introduce an additional zero to improve phase margin.</p>
+<p>In other words: At low frequencies, the common-mode gain is given by <a href="#eq-diff-ota-cmgain" class="quarto-xref">Equation&nbsp;62</a>, but at higher frequencies (above the pole at node <span class="math inline">\(X\)</span>) the gates of <span class="math inline">\(M_{3,5}\)</span> can no longer follow the drains, so these transistors stop acting as diodes and behave as current sources instead. The common-mode load of a half circuit consequently increases from <span class="math inline">\(g_\mathrm{m3,5}^{-1}\)</span> to <span class="math inline">\(R_{1,2} \parallel g_\mathrm{ds3,5}^{-1}\)</span>, and the common-mode gain increases significantly. We need to counteract this effect by adding a capacitor in parallel to <span class="math inline">\(R_{1,2}\)</span>, as shown in <a href="#fig-diff-ota-final" class="quarto-xref">Figure&nbsp;75</a>. We use the opportunity to also add a series resistor to this capacitor to introduce an additional zero to improve phase margin.</p>
 <div id="cell-fig-diff-ota-final" class="cell" data-execution_count="57">
 <div class="cell-output cell-output-display">
 <div id="fig-diff-ota-final" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -5274,7 +5298,7 @@ Figure&nbsp;75: Differential two-stage OTA with adapted MOSFET-R load of first s
 </div>
 </div>
 </div>
-<p>You can find the sizing script for the differential OTA <a href="./gmid/sizing_diff_ota.html">here</a>, as well as the circuit-level design in Xschem <a href="./xschem/ota-diff.sch">here</a>. The testbench for differential and common-mode gain analysis can be found <a href="./xschem/ota-diff_tb-acol.sch">here</a>.</p>
+<p>This OTA is sized for a considerably more demanding target than the voltage buffer of <a href="#sec-basic-ota" class="quarto-xref">Section&nbsp;8</a>, namely a gain-bandwidth product of <span class="math inline">\(\text{GBW} = 1\,\text{GHz}\)</span>. You can find the sizing script for the differential OTA <a href="./gmid/sizing_diff_ota.html">here</a>, as well as the circuit-level design in Xschem <a href="./xschem/ota-diff.sch">here</a>. The testbench for differential and common-mode gain analysis can be found <a href="./xschem/ota-diff_tb-acol.sch">here</a>.</p>
 <p>The final Xschem schematics of the differential OTA and the testbench are also shown in the figures below.</p>
 <div id="fig-diff-ota-design" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -5495,86 +5519,86 @@ Figure&nbsp;84: 5-transistor OTA small-signal model for output impedance calcula
 <h2 data-number="18.1" class="anchored" data-anchor-id="open-loop-configuration"><span class="header-section-number">18.1</span> Open-Loop Configuration</h2>
 <p>For the open-loop case, the gates of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are tied to ground (and since <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are matched <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m1,2}\)</span>), which means that the gate-source voltages of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are identical: <span id="eq-app-vbufzout-vin-ol"><span class="math display">\[
 V_\mathrm{in,p} = V_\mathrm{in,n} = 0 \to V_\mathrm{gs1} = V_\mathrm{gs2} = V_\mathrm{gs1,2}
-\tag{64}\]</span></span></p>
+\tag{66}\]</span></span></p>
 <p>KCL at the output node:</p>
 <p><span id="eq-app-vbufzout-kcl-vout-ol"><span class="math display">\[
 I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - I_{g_\mathrm{ds2}} - g_\mathrm{m1,2} V_\mathrm{gs1,2} = 0
-\tag{65}\]</span></span></p>
+\tag{67}\]</span></span></p>
 <p>KCL at the tail node: <span class="math display">\[
 2 g_\mathrm{m1,2} V_\mathrm{gs1,2} + I_{g_\mathrm{ds2}} + g_\mathrm{ds5} V_\mathrm{gs1,2} = 0
 \]</span></p>
 <p>We can solve for <span class="math inline">\(I_{g_\mathrm{ds2}}\)</span>.</p>
 <p><span id="eq-app-vbufzout-igds2"><span class="math display">\[
 I_{g_\mathrm{ds2}} = -\left( 2 g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2}
-\tag{66}\]</span></span></p>
+\tag{68}\]</span></span></p>
 <p>Furthermore, we need an expression for <span class="math inline">\(V_\mathrm{gs3}\)</span>. Ohm’s law at the transconductance <span class="math inline">\(g_\mathrm{m34}\)</span> will suffice.</p>
 <p><span id="eq-app-vbufzout-vgs34-ol"><span class="math display">\[
 V_\mathrm{gs3} = -\frac{g_\mathrm{m1,2}}{g_\mathrm{m3,4}} V_\mathrm{gs1,2}
-\tag{67}\]</span></span></p>
-<p>KVL from the output node down to ground (traversing <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;66</a> gives us an expression for <span class="math inline">\(V_\mathrm{gs1,2}\)</span></p>
+\tag{69}\]</span></span></p>
+<p>KVL from the output node down to ground (traversing <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span>) in combination with <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;68</a> gives us an expression for <span class="math inline">\(V_\mathrm{gs1,2}\)</span></p>
 <p><span id="eq-app-vbufzout-vgs2-ol"><span class="math display">\[
 V_\mathrm{gs1,2} = -\frac{g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
-\tag{68}\]</span></span></p>
-<p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;65</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;66</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>:</p>
+\tag{70}\]</span></span></p>
+<p>Now, we can plug in all quantities into <a href="#eq-app-vbufzout-kcl-vout-ol" class="quarto-xref">Equation&nbsp;67</a>. First, <a href="#eq-app-vbufzout-igds2" class="quarto-xref">Equation&nbsp;68</a> is inserted, which provides an expression for the current through the output conductance <span class="math inline">\(g_\mathrm{ds2}\)</span> of <span class="math inline">\(M_2\)</span>:</p>
 <p><span class="math display">\[
 I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} + \left( g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2} = 0
 \]</span></p>
-<p>Second, <span class="math inline">\(V_\mathrm{gs3}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;67</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m3,4}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1,2}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>:</p>
+<p>Second, <span class="math inline">\(V_\mathrm{gs3}\)</span> is substituted by <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;69</a>. Since we have assumed a matched pair of transistors for the current mirror comprised of <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>, <span class="math inline">\(g_\mathrm{m3,4}\)</span> perfectly cancels out of the equation, and is effectively replaced by the transconductance <span class="math inline">\(g_\mathrm{m1,2}\)</span> of the input transistor <span class="math inline">\(M_1\)</span>:</p>
 <p><span class="math display">\[
 I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} + \left( 2 g_\mathrm{m1,2} + g_\mathrm{ds5} \right) V_\mathrm{gs1,2} = 0
 \]</span></p>
-<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;68</a> gives us an expression for the last remaining unknown <span class="math inline">\(V_\mathrm{gs1,2}\)</span>. Thus, the factor in front of <span class="math inline">\(V_\mathrm{out}\)</span> defines the conductance at the output node.</p>
+<p>Third, <a href="#eq-app-vbufzout-vgs2-ol" class="quarto-xref">Equation&nbsp;70</a> gives us an expression for the last remaining unknown <span class="math inline">\(V_\mathrm{gs1,2}\)</span>. Thus, the factor in front of <span class="math inline">\(V_\mathrm{out}\)</span> defines the conductance at the output node.</p>
 <p><span id="eq-app-vbufzout-zout-ol-1"><span class="math display">\[
 I_\mathrm{out} - \left[ g_\mathrm{ds4} + \left( 2 \cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right) \frac{g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} \right] V_\mathrm{out} = 0
-\tag{69}\]</span></span></p>
+\tag{71}\]</span></span></p>
 <p>Before we interpret this result, we slightly rearrange the equation to give us more insight:</p>
 <p><span id="eq-app-vbufzout-zout-ol-2"><span class="math display">\[
 I_\mathrm{out} - \left[ g_\mathrm{ds4} + \frac{g_\mathrm{ds2} \cdot \left( 2\cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right)}{g_\mathrm{ds2} + \left( 2 \cdot g_\mathrm{m1,2} + g_\mathrm{ds5} \right)} \right] V_\mathrm{out} = 0
-\tag{70}\]</span></span></p>
+\tag{72}\]</span></span></p>
 <p>Now, we can identify the common equation of the total resistance of two parallel resistors. However, we are dealing with conductances here, so the same equation describes the total conductance of two conductances in series, while parallel conductances are simply summed. In parallel to <span class="math inline">\(g_\mathrm{ds4}\)</span>, there is effectively the series connection of <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(2 \cdot g_\mathrm{m1,2} + g_\mathrm{ds5}\)</span> at work.</p>
 <p>If we apply the general assumption of <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, only the parallel connection of <span class="math inline">\(g_\mathrm{ds4}\)</span> and <span class="math inline">\(g_\mathrm{ds2}\)</span> remains:</p>
 <p><span id="eq-app-vbufzout-zout-ol-3"><span class="math display">\[
 \frac{I_\mathrm{out}}{V_\mathrm{out}} \approx g_\mathrm{ds4} + g_\mathrm{ds2}
-\tag{71}\]</span></span></p>
+\tag{73}\]</span></span></p>
 </section>
 <section id="closed-loop-configuration" class="level2" data-number="18.2">
 <h2 data-number="18.2" class="anchored" data-anchor-id="closed-loop-configuration"><span class="header-section-number">18.2</span> Closed-Loop Configuration</h2>
 <p>In contrast to the open-loop case, we keep the gate of <span class="math inline">\(M_1\)</span> connected to ground and tie the input of <span class="math inline">\(M_2\)</span> to the output node <span class="math inline">\(V_\mathrm{out}\)</span>:</p>
 <p><span id="eq-app-vbufzout-vin-cl"><span class="math display">\[
 V_\mathrm{in,n} = V_\mathrm{out} \quad \text{and} \quad V_\mathrm{in,p} = 0
-\tag{72}\]</span></span></p>
+\tag{74}\]</span></span></p>
 <p>KCL at the output node:</p>
 <p><span id="eq-app-vbufzout-kcl-vout-cl"><span class="math display">\[
 I_\mathrm{out} - g_\mathrm{ds4} V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - g_\mathrm{ds2} V_\mathrm{gs2} - g_\mathrm{m1,2} V_\mathrm{gs2} = 0
-\tag{73}\]</span></span></p>
+\tag{75}\]</span></span></p>
 <p>We use KVL from the output node down to ground to find an expression for <span class="math inline">\(V_\mathrm{gs2}\)</span>.</p>
 <p><span id="eq-app-vbufzout-kvl-vout-cl"><span class="math display">\[
 V_\mathrm{gs2} =  V_\mathrm{out} + V_\mathrm{gs1}
-\tag{74}\]</span></span></p>
+\tag{76}\]</span></span></p>
 <p>KCL at the tail node:</p>
 <p><span id="eq-app-vbufzout-kcl-vtail-cl"><span class="math display">\[
 g_\mathrm{m1,2} V_\mathrm{gs1} + g_\mathrm{m1,2} V_\mathrm{gs2} + g_\mathrm{ds2} V_\mathrm{gs2} + g_\mathrm{ds5} V_\mathrm{gs1} = 0
-\tag{75}\]</span></span></p>
-<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;74</a> to substitute <span class="math inline">\(V_\mathrm{gs2}\)</span> in <a href="#eq-app-vbufzout-kcl-vtail-cl" class="quarto-xref">Equation&nbsp;75</a> we find an equation for <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
+\tag{77}\]</span></span></p>
+<p>Using <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;76</a> to substitute <span class="math inline">\(V_\mathrm{gs2}\)</span> in <a href="#eq-app-vbufzout-kcl-vtail-cl" class="quarto-xref">Equation&nbsp;77</a> we find an equation for <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
 <p><span id="eq-app-vbufzout-vgs1-cl"><span class="math display">\[
 V_\mathrm{gs1} = -\frac{g_\mathrm{m1,2} + g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out}
-\tag{76}\]</span></span></p>
-<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;74</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;67</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;76</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;73</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;74</a> to eliminate <span class="math inline">\(V_\mathrm{gs2}\)</span>:</p>
+\tag{78}\]</span></span></p>
+<p>Again, we derive the output conductance by plugging <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;76</a>, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;69</a> and <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;78</a> step by step into <a href="#eq-app-vbufzout-kcl-vout-cl" class="quarto-xref">Equation&nbsp;75</a>. First, we use <a href="#eq-app-vbufzout-kvl-vout-cl" class="quarto-xref">Equation&nbsp;76</a> to eliminate <span class="math inline">\(V_\mathrm{gs2}\)</span>:</p>
 <p><span class="math display">\[
 I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} - g_\mathrm{m3,4} V_\mathrm{gs3} - \left( g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{gs1} = 0
 \]</span></p>
-<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;67</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(V_\mathrm{gs3}\)</span>:</p>
+<p>Second, <a href="#eq-app-vbufzout-vgs34-ol" class="quarto-xref">Equation&nbsp;69</a> also holds for the closed-loop case and lets us eliminate <span class="math inline">\(V_\mathrm{gs3}\)</span>:</p>
 <p><span class="math display">\[
 I_\mathrm{out} -\left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} - g_\mathrm{ds2} V_\mathrm{gs1} = 0
 \]</span></p>
-<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;76</a> to eliminate the remaining unknown <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
+<p>Third, we use <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;78</a> to eliminate the remaining unknown <span class="math inline">\(V_\mathrm{gs1}\)</span>:</p>
 <p><span class="math display">\[
 \begin{split}
 &amp; I_\mathrm{out} - \left( g_\mathrm{ds4} + g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} \\
 &amp;+ g_\mathrm{ds2} \frac{g_\mathrm{m1,2} + g_\mathrm{ds2}}{2 g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds5}} V_\mathrm{out} = 0
 \end{split}
 \]</span></p>
-<p>A simpler result can be obtained if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;76</a> (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>):</p>
+<p>A simpler result can be obtained if we neglect <span class="math inline">\(g_\mathrm{ds2}\)</span> and <span class="math inline">\(g_\mathrm{ds5}\)</span> in <a href="#eq-app-vbufzout-vgs1-cl" class="quarto-xref">Equation&nbsp;78</a> (<span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>):</p>
 <p><span class="math display">\[
 I_\mathrm{out} -\left( g_\mathrm{ds4} + \frac{1}{2} g_\mathrm{ds2} + g_\mathrm{m1,2} \right) V_\mathrm{out} \approx 0
 \]</span></p>
@@ -5911,7 +5935,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="mosfet-fundamentals" class="level2" data-number="23.1">
 <h2 data-number="23.1" class="anchored" data-anchor-id="mosfet-fundamentals"><span class="header-section-number">23.1</span> MOSFET Fundamentals</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 1.1 --- Small-Signal Parameters">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-80-contents" aria-controls="callout-80" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-81-contents" aria-controls="callout-81" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5920,7 +5944,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-80" class="callout-80-contents callout-collapse collapse">
+<div id="callout-81" class="callout-81-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Define the two main small-signal parameters of a MOSFET (<span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span>) and explain their physical meaning.</p>
 <p><strong>Solution:</strong></p>
@@ -5932,7 +5956,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 1.2 --- Operating Regions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-81-contents" aria-controls="callout-81" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-82-contents" aria-controls="callout-82" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5941,7 +5965,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-81" class="callout-81-contents callout-collapse collapse">
+<div id="callout-82" class="callout-82-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> State the conditions for a MOSFET to operate in the triode region versus the saturation region. Why is saturation preferred for analog amplifier design?</p>
 <p><strong>Solution:</strong></p>
@@ -5961,7 +5985,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 1.3 --- Transit Frequency">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-82-contents" aria-controls="callout-82" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-83-contents" aria-controls="callout-83" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5970,7 +5994,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-82" class="callout-82-contents callout-collapse collapse">
+<div id="callout-83" class="callout-83-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Define the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span> of a MOSFET. How does it relate to the transistor’s speed capability?</p>
 <p><strong>Solution:</strong></p>
@@ -5990,7 +6014,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="gmid-sizing-methodology" class="level2" data-number="23.2">
 <h2 data-number="23.2" class="anchored" data-anchor-id="gmid-sizing-methodology"><span class="header-section-number">23.2</span> gm/ID Sizing Methodology</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 2.1 --- gm/ID in Different Inversion Regions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-83-contents" aria-controls="callout-83" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-84-contents" aria-controls="callout-84" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5999,7 +6023,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-83" class="callout-83-contents callout-collapse collapse">
+<div id="callout-84" class="callout-84-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the theoretical limits of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> in weak inversion (<span class="math inline">\(V_\mathrm{GS}\)</span> small) and strong inversion (<span class="math inline">\(V_\mathrm{GS}\)</span> large). What is the typical range of <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> used in practical analog design?</p>
 <p><strong>Solution:</strong></p>
@@ -6017,7 +6041,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 2.2 --- Design Trade-offs">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-84-contents" aria-controls="callout-84" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-85-contents" aria-controls="callout-85" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6026,7 +6050,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-84" class="callout-84-contents callout-collapse collapse">
+<div id="callout-85" class="callout-85-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain the trade-offs involved when choosing a high versus low <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> target in transistor sizing.</p>
 <p><strong>Solution:</strong></p>
@@ -6076,7 +6100,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 2.3 --- Saturation Voltage">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-85-contents" aria-controls="callout-85" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-86-contents" aria-controls="callout-86" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6085,7 +6109,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-85" class="callout-85-contents callout-collapse collapse">
+<div id="callout-86" class="callout-86-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> A transistor is sized for <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 15\,\text{V}^{-1}\)</span>. Estimate the minimum <span class="math inline">\(V_\mathrm{DS}\)</span> required to keep it in saturation.</p>
 <p><strong>Solution:</strong></p>
@@ -6100,7 +6124,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="mosfet-diode" class="level2" data-number="23.3">
 <h2 data-number="23.3" class="anchored" data-anchor-id="mosfet-diode"><span class="header-section-number">23.3</span> MOSFET Diode</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 3.1 --- Small-Signal Impedance">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-86-contents" aria-controls="callout-86" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-87-contents" aria-controls="callout-87" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6109,7 +6133,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-86" class="callout-86-contents callout-collapse collapse">
+<div id="callout-87" class="callout-87-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the small-signal impedance of a MOSFET diode (gate connected to drain) and identify its frequency behavior.</p>
 <p><strong>Solution:</strong></p>
@@ -6123,7 +6147,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 3.2 --- Noise Consideration">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-87-contents" aria-controls="callout-87" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-88-contents" aria-controls="callout-88" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6132,7 +6156,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-87" class="callout-87-contents callout-collapse collapse">
+<div id="callout-88" class="callout-88-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What is the output noise voltage (RMS) of a MOSFET diode, and how does it relate to <span class="math inline">\(kT/C\)</span> noise?</p>
 <p><strong>Solution:</strong></p>
@@ -6151,7 +6175,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="current-mirror" class="level2" data-number="23.4">
 <h2 data-number="23.4" class="anchored" data-anchor-id="current-mirror"><span class="header-section-number">23.4</span> Current Mirror</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 4.1 --- Basic Current Mirror">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-88-contents" aria-controls="callout-88" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-89-contents" aria-controls="callout-89" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6160,7 +6184,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-88" class="callout-88-contents callout-collapse collapse">
+<div id="callout-89" class="callout-89-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> For a basic NMOS current mirror with input transistor <span class="math inline">\(M_1\)</span> and output transistor <span class="math inline">\(M_2\)</span>, derive the output current ratio. What are the main sources of error in a practical current mirror?</p>
 <p><strong>Solution:</strong></p>
@@ -6177,7 +6201,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 4.2 --- Output Resistance">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-89-contents" aria-controls="callout-89" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-90-contents" aria-controls="callout-90" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6186,7 +6210,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-89" class="callout-89-contents callout-collapse collapse">
+<div id="callout-90" class="callout-90-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Calculate the output resistance of a simple current mirror. How can it be improved?</p>
 <p><strong>Solution:</strong></p>
@@ -6202,7 +6226,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 4.3 --- High-Swing Cascode">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-90-contents" aria-controls="callout-90" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-91-contents" aria-controls="callout-91" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6211,7 +6235,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-90" class="callout-90-contents callout-collapse collapse">
+<div id="callout-91" class="callout-91-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain the principle of a high-swing (low-voltage) cascode current mirror. What is the minimum output voltage for proper operation?</p>
 <p><strong>Solution:</strong></p>
@@ -6228,7 +6252,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="differential-pair" class="level2" data-number="23.5">
 <h2 data-number="23.5" class="anchored" data-anchor-id="differential-pair"><span class="header-section-number">23.5</span> Differential Pair</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 5.1 --- Differential vs. Common-Mode">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-91-contents" aria-controls="callout-91" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-92-contents" aria-controls="callout-92" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6237,7 +6261,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-91" class="callout-91-contents callout-collapse collapse">
+<div id="callout-92" class="callout-92-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> For an ideal differential pair with tail current source <span class="math inline">\(I_\mathrm{tail}\)</span>, derive the differential-mode and common-mode transconductance.</p>
 <p><strong>Solution:</strong></p>
@@ -6258,7 +6282,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 5.2 --- Input-Referred Offset">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-92-contents" aria-controls="callout-92" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-93-contents" aria-controls="callout-93" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6267,7 +6291,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-92" class="callout-92-contents callout-collapse collapse">
+<div id="callout-93" class="callout-93-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the input-referred offset voltage of a differential pair due to threshold voltage mismatch <span class="math inline">\(\Delta V_\mathrm{th}\)</span> and transconductance mismatch <span class="math inline">\(\Delta g_\mathrm{m}/g_\mathrm{m}\)</span>.</p>
 <p><strong>Solution:</strong></p>
@@ -6289,7 +6313,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="basic-5-transistor-ota" class="level2" data-number="23.6">
 <h2 data-number="23.6" class="anchored" data-anchor-id="basic-5-transistor-ota"><span class="header-section-number">23.6</span> Basic 5-Transistor OTA</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 6.1 --- DC Gain Derivation">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-93-contents" aria-controls="callout-93" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-94-contents" aria-controls="callout-94" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6298,7 +6322,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-93" class="callout-93-contents callout-collapse collapse">
+<div id="callout-94" class="callout-94-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the dc voltage gain of an unloaded basic 5-transistor OTA with differential pair (<span class="math inline">\(M_1\)</span>, <span class="math inline">\(M_2\)</span>), current mirror load (<span class="math inline">\(M_3\)</span>, <span class="math inline">\(M_4\)</span>), and tail current source (<span class="math inline">\(M_5\)</span>).</p>
 <p><strong>Solution:</strong></p>
@@ -6316,7 +6340,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 6.2 --- Bandwidth and GBW">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-94-contents" aria-controls="callout-94" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-95-contents" aria-controls="callout-95" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6325,7 +6349,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-94" class="callout-94-contents callout-collapse collapse">
+<div id="callout-95" class="callout-95-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> For a 5T-OTA driving a load capacitance <span class="math inline">\(C_\mathrm{L}\)</span>, derive the dominant pole frequency and the gain-bandwidth product (GBW).</p>
 <p><strong>Solution:</strong></p>
@@ -6338,7 +6362,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 6.3 --- Unity-Gain Buffer Accuracy">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-95-contents" aria-controls="callout-95" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-96-contents" aria-controls="callout-96" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6347,7 +6371,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-95" class="callout-95-contents callout-collapse collapse">
+<div id="callout-96" class="callout-96-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> A 5T-OTA with dc gain <span class="math inline">\(A_0 = 50\,\text{dB}\)</span> is configured as a unity-gain buffer. Calculate the closed-loop gain error.</p>
 <p><strong>Solution:</strong></p>
@@ -6363,7 +6387,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="improved-telescopic-ota" class="level2" data-number="23.7">
 <h2 data-number="23.7" class="anchored" data-anchor-id="improved-telescopic-ota"><span class="header-section-number">23.7</span> Improved (Telescopic) OTA</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 7.1 --- Gain Enhancement with Cascodes">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-96-contents" aria-controls="callout-96" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-97-contents" aria-controls="callout-97" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6372,7 +6396,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-96" class="callout-96-contents callout-collapse collapse">
+<div id="callout-97" class="callout-97-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> How does adding cascode transistors to a 5T-OTA improve the dc gain? Derive the new gain expression.</p>
 <p><strong>Solution:</strong></p>
@@ -6386,7 +6410,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 7.2 --- Output Swing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-97-contents" aria-controls="callout-97" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-98-contents" aria-controls="callout-98" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6395,7 +6419,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-97" class="callout-97-contents callout-collapse collapse">
+<div id="callout-98" class="callout-98-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What is the output voltage swing limitation of a telescopic OTA? Compare with a folded-cascode topology.</p>
 <p><strong>Solution:</strong></p>
@@ -6412,7 +6436,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="cascode-stage" class="level2" data-number="23.8">
 <h2 data-number="23.8" class="anchored" data-anchor-id="cascode-stage"><span class="header-section-number">23.8</span> Cascode Stage</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 8.1 --- Output Impedance">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-98-contents" aria-controls="callout-98" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-99-contents" aria-controls="callout-99" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6421,7 +6445,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-98" class="callout-98-contents callout-collapse collapse">
+<div id="callout-99" class="callout-99-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the output impedance looking into the drain of a cascode transistor, assuming the source is connected to a current source with output resistance <span class="math inline">\(r_\mathrm{ds,CS}\)</span>.</p>
 <p><strong>Solution:</strong></p>
@@ -6435,7 +6459,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 8.2 --- Input Impedance">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-99-contents" aria-controls="callout-99" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-100-contents" aria-controls="callout-100" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6444,7 +6468,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-99" class="callout-99-contents callout-collapse collapse">
+<div id="callout-100" class="callout-100-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Calculate the input impedance looking into the source of a cascode transistor when its drain is connected to a low-impedance load.</p>
 <p><strong>Solution:</strong></p>
@@ -6460,7 +6484,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="biasing-and-bandgap-reference" class="level2" data-number="23.9">
 <h2 data-number="23.9" class="anchored" data-anchor-id="biasing-and-bandgap-reference"><span class="header-section-number">23.9</span> Biasing and Bandgap Reference</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 9.1 --- Bandgap Principle">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-100-contents" aria-controls="callout-100" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-101-contents" aria-controls="callout-101" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6469,7 +6493,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-100" class="callout-100-contents callout-collapse collapse">
+<div id="callout-101" class="callout-101-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain the principle of a bandgap voltage reference. Why does the output voltage equal approximately 1.2 V?</p>
 <p><strong>Solution:</strong></p>
@@ -6485,7 +6509,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 9.2 --- PTAT Current">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-101-contents" aria-controls="callout-101" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-102-contents" aria-controls="callout-102" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6494,7 +6518,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-101" class="callout-101-contents callout-collapse collapse">
+<div id="callout-102" class="callout-102-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Design a PTAT (Proportional To Absolute Temperature) current source. What determines the temperature coefficient?</p>
 <p><strong>Solution:</strong></p>
@@ -6517,7 +6541,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="noise-analysis" class="level2" data-number="23.10">
 <h2 data-number="23.10" class="anchored" data-anchor-id="noise-analysis"><span class="header-section-number">23.10</span> Noise Analysis</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 10.1 --- MOSFET Thermal Noise">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-102-contents" aria-controls="callout-102" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-103-contents" aria-controls="callout-103" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6526,7 +6550,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-102" class="callout-102-contents callout-collapse collapse">
+<div id="callout-103" class="callout-103-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Write the expression for the thermal noise current of a MOSFET in saturation. What is the noise excess factor <span class="math inline">\(\gamma\)</span>?</p>
 <p><strong>Solution:</strong></p>
@@ -6549,7 +6573,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 10.2 --- OTA Output Noise">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-103-contents" aria-controls="callout-103" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-104-contents" aria-controls="callout-104" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6558,7 +6582,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-103" class="callout-103-contents callout-collapse collapse">
+<div id="callout-104" class="callout-104-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Derive the total output noise of a 5T-OTA in a unity-gain buffer configuration with load capacitance <span class="math inline">\(C_\mathrm{L}\)</span>.</p>
 <p><strong>Solution:</strong></p>
@@ -6582,7 +6606,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="mismatch-and-variability" class="level2" data-number="23.11">
 <h2 data-number="23.11" class="anchored" data-anchor-id="mismatch-and-variability"><span class="header-section-number">23.11</span> Mismatch and Variability</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 11.1 --- Pelgrom's Law">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-104-contents" aria-controls="callout-104" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-105-contents" aria-controls="callout-105" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6591,7 +6615,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-104" class="callout-104-contents callout-collapse collapse">
+<div id="callout-105" class="callout-105-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> State Pelgrom’s law for MOSFET threshold voltage mismatch. How should transistors be sized to achieve 1 mV offset in a differential pair (assuming <span class="math inline">\(A_\mathrm{vth} = 5\,\text{mV} \cdot \mu\text{m}\)</span>)?</p>
 <p><strong>Solution:</strong></p>
@@ -6606,7 +6630,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 11.2 --- Monte Carlo Analysis">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-105-contents" aria-controls="callout-105" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-106-contents" aria-controls="callout-106" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6615,7 +6639,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-105" class="callout-105-contents callout-collapse collapse">
+<div id="callout-106" class="callout-106-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain the difference between process corners (SS, TT, FF, etc.) and Monte Carlo mismatch simulation. When should each be used?</p>
 <p><strong>Solution:</strong></p>
@@ -6689,7 +6713,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="design-problems" class="level2" data-number="23.12">
 <h2 data-number="23.12" class="anchored" data-anchor-id="design-problems"><span class="header-section-number">23.12</span> Design Problems</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 12.1 --- OTA Design">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-106-contents" aria-controls="callout-106" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-107-contents" aria-controls="callout-107" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6698,7 +6722,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-106" class="callout-106-contents callout-collapse collapse">
+<div id="callout-107" class="callout-107-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Design a 5T-OTA to meet the following specifications using gm/ID methodology:</p>
 <ul>
@@ -6731,7 +6755,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 12.2 --- Current Mirror Design">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-107-contents" aria-controls="callout-107" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-108-contents" aria-controls="callout-108" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6740,7 +6764,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-107" class="callout-107-contents callout-collapse collapse">
+<div id="callout-108" class="callout-108-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Design a cascode current mirror to provide <span class="math inline">\(I_\mathrm{out} = 50\,\mu\text{A}\)</span> from <span class="math inline">\(I_\mathrm{ref} = 10\,\mu\text{A}\)</span>. Minimize the output compliance voltage while achieving <span class="math inline">\(r_\mathrm{out} &gt; 5\,\text{M}\Omega\)</span>.</p>
 <p><strong>Solution:</strong></p>
@@ -6763,7 +6787,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 12.3 --- Common-Source Amplifier">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-108-contents" aria-controls="callout-108" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-109-contents" aria-controls="callout-109" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6772,7 +6796,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-108" class="callout-108-contents callout-collapse collapse">
+<div id="callout-109" class="callout-109-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Design a common-source amplifier for a 50 Ω measurement system with voltage gain <span class="math inline">\(|A_\mathrm{v}| = 10\)</span> (20 dB). The amplifier should be matched to 50 Ω at input and output.</p>
 <p><strong>Solution:</strong></p>
@@ -6793,7 +6817,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 <section id="short-conceptual-questions" class="level2" data-number="23.13">
 <h2 data-number="23.13" class="anchored" data-anchor-id="short-conceptual-questions"><span class="header-section-number">23.13</span> Short Conceptual Questions</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.1">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-109-contents" aria-controls="callout-109" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-110-contents" aria-controls="callout-110" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6802,7 +6826,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-109" class="callout-109-contents callout-collapse collapse">
+<div id="callout-110" class="callout-110-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Why is it important to use “unit elements” when designing matched current mirrors?</p>
 <p><strong>Solution:</strong> Unit elements ensure:</p>
@@ -6817,7 +6841,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.2">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-110-contents" aria-controls="callout-110" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-111-contents" aria-controls="callout-111" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6826,7 +6850,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-110" class="callout-110-contents callout-collapse collapse">
+<div id="callout-111" class="callout-111-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What is the purpose of a tail current source in a differential pair?</p>
 <p><strong>Solution:</strong> The tail current source:</p>
@@ -6840,7 +6864,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.3">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-111-contents" aria-controls="callout-111" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-112-contents" aria-controls="callout-112" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6849,7 +6873,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-111" class="callout-111-contents callout-collapse collapse">
+<div id="callout-112" class="callout-112-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Why does the GBW of an OTA depend only on <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(C_\mathrm{L}\)</span>, not on the output resistance?</p>
 <p><strong>Solution:</strong> <span class="math display">\[\text{GBW} = A_0 \cdot f_\mathrm{p} = \frac{g_\mathrm{m}}{g_\mathrm{out}} \cdot \frac{g_\mathrm{out}}{2\pi C_\mathrm{L}} = \frac{g_\mathrm{m}}{2\pi C_\mathrm{L}}\]</span></p>
@@ -6858,7 +6882,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.4">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-112-contents" aria-controls="callout-112" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-113-contents" aria-controls="callout-113" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6867,7 +6891,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-112" class="callout-112-contents callout-collapse collapse">
+<div id="callout-113" class="callout-113-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What is the advantage of a folded-cascode over a telescopic OTA?</p>
 <p><strong>Solution:</strong></p>
@@ -6881,7 +6905,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.5">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-113-contents" aria-controls="callout-113" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-114-contents" aria-controls="callout-114" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6890,13 +6914,13 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-113" class="callout-113-contents callout-collapse collapse">
+<div id="callout-114" class="callout-114-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Why is flicker noise more important in the input stage of an OTA than in the load stage?</p>
 <p><strong>Solution:</strong></p>
 <ol type="1">
 <li>Input stage noise is amplified by the full gain of the stage, so it appears at the output essentially undiminished when referred back to the input</li>
-<li>The noise of the load devices, referred back to the input, is scaled by the ratio of transconductances <span class="math inline">\(g_\mathrm{m3,4}/g_\mathrm{m1,2}\)</span> — see <a href="#eq-basic-ota-output-noise" class="quarto-xref">Equation&nbsp;23</a></li>
+<li>The noise of the load devices, referred back to the input, is scaled by the ratio of transconductances <span class="math inline">\(g_\mathrm{m3,4}/g_\mathrm{m1,2}\)</span> — see <a href="#eq-basic-ota-output-noise" class="quarto-xref">Equation&nbsp;25</a></li>
 <li>Since we design for <span class="math inline">\(g_\mathrm{m3,4} &lt; g_\mathrm{m1,2}\)</span> anyway (to minimize thermal noise), the load contribution is suppressed by that same ratio</li>
 <li>For good noise performance: Large input devices (more area → less flicker noise); the load devices can be smaller, but only within the limits set by the <span class="math inline">\(g_\mathrm{m3,4}/g_\mathrm{m1,2}\)</span> ratio</li>
 </ol>
@@ -6904,7 +6928,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Question 13.6">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-114-contents" aria-controls="callout-114" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-115-contents" aria-controls="callout-115" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -6913,7 +6937,7 @@ I_\mathrm{out} - g_\mathrm{m1,2} V_\mathrm{out} \approx 0 \to \frac{I_\mathrm{ou
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-114" class="callout-114-contents callout-collapse collapse">
+<div id="callout-115" class="callout-115-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Question:</strong> Explain why the regulated cascode achieves higher output impedance than a simple cascode.</p>
 <p><strong>Solution:</strong></p>
@@ -7059,14 +7083,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {(Integrated)} {Circuit} {Design}},
-  date = {2026-08-12},
+  date = {2026-09-08},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-(Integrated) Circuit Design.”</span> August 12. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+(Integrated) Circuit Design.”</span> September 8. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
