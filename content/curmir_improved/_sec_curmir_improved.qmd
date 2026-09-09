@@ -66,6 +66,8 @@ which, compared to @eq-curmir-cascoded-rout, is further improved by the gain of 
 
 We now want to size all these current mirror structures and simulate their performance. We try to size them for similar chip area in order to get a fair comparison. We assume a reference current of $I_\mathrm{bias} = 50\,\mu\text{A}$ and a mirror ratio of 1:1. We size for a minimum voltage headroom for the current sources of $V_\mathrm{DS,min} = 0.4\,\text{V}$. The calculations are summarized in this [sizing notebook](./gmid/sizing_improved_current_mirror.ipynb).
 
+One structure cannot honor that number, and it is worth seeing why before we look at the simulation results. In the regulated cascode the auxiliary amplifier holds the drain of the bottom device at its own gate-source voltage, so $\VDS[1] = \VGS[aux] \approx 0.37\,\text{V}$, and the cascode transistor stacked on top still needs its own $V_\mathrm{ds,sat} \approx 0.2\,\text{V}$. Its compliance voltage is therefore about $0.57\,\text{V}$, not $0.4\,\text{V}$ --- forcing it to $0.4\,\text{V}$ would simply leave the cascode device in triode, where it does no cascoding at all. This is the drawback we will address in @sec-low-voltage-regulated-curmir, and it is clearly visible in the simulated output resistance below.
+
 The resulting circuits are drawn in @fig-curmir-variations-tb. The testbench simulates the dc output characteristics of all four current mirror variations (the three improved ones and the basic one for reference). The testbench also runs a Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch (see @sec-mosfet-mismatch).
 
 ![Simulation schematic of the improved current mirrors.](./xschem/current_mirror_variations.svg){#fig-curmir-variations-tb}
@@ -366,7 +368,7 @@ $$
 $$
  Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this gives a reasonable estimate compared to the standard deviation of about $0.21\,\mu\text{A}/48.9\,\mu\text{A} = 0.43\,\%$ obtained from the Monte-Carlo simulation. The remaining discrepancy is due to simplifications in the analytical model (e.g., the square-law approximation).
 
- Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use @eq-curmir-matching-alt to analyze this configuration. We use the sizing values of $\gm / \ID = 10\,\text{V}^{-1}$, $W = 20\,\mu\text{m}$, and $L = 3\,\mu\text{m}$, for the MOSFET, and $V_\mathrm{deg} = 0.2\,\text{V}$, $L = 15\,\mu\text{m}$ / $W = 1\,\mu\text{m}$ for the used `rppd` resistor.
+ Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use @eq-curmir-matching-alt to analyze this configuration. We use the sizing values of $\gm / \ID = 10\,\text{V}^{-1}$, $W = 20\,\mu\text{m}$, and $L = 3\,\mu\text{m}$, for the MOSFET, and $V_\mathrm{deg} = 0.2\,\text{V}$, and $W = 3\,\mu\text{m}$ / $L = 45\,\mu\text{m}$ for the used `rppd` resistor (which at $R_\square = 260\,\Omega$ gives the required $R_\mathrm{deg} \approx 3.9\,\text{k}\Omega$).
  
 The standard deviation of the transconductance parameter mismatch can be calculated as
 $$
@@ -380,7 +382,7 @@ $$
 
 The standard deviation of the resistor mismatch can be calculated using @eq-resistor-mismatch and @tbl-sg13g2-mismatch:
 $$
-\sdev[\frac{\Delta R}{R}] = \frac{1.5\,\%\mu\text{m}}{\sqrt{15\,\mu\text{m} \cdot 1\,\mu\text{m}}} = 0.39\,\%.
+\sdev[\frac{\Delta R}{R}] = \frac{1.5\,\%\mu\text{m}}{\sqrt{3\,\mu\text{m} \cdot 45\,\mu\text{m}}} = 0.13\,\%.
 $$
 
 Plugging these results into @eq-curmir-matching-alt, we get
@@ -389,12 +391,12 @@ $$
 \var[\frac{\Delta \ID}{\ID}] =&
 \underbrace{\left( \frac{0.50\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2}_{(0.17\,\%)^2} +
 \underbrace{\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.09\,\% \right)^2}_{(0.03\,\%)^2} \\
-& + \underbrace{\left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.39\,\%\right)^2}_{(0.26\,\%)^2} \\
-=& (0.31\,\%)^2.
+& + \underbrace{\left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.13\,\%\right)^2}_{(0.09\,\%)^2} \\
+=& (0.19\,\%)^2.
 \end{split}
 $$
 
-The three terms are worth reading individually. The degeneration has done its job on the MOSFET: the threshold-voltage term is down to $0.17\,\%$ and the transconductance-parameter term to a negligible $0.03\,\%$. But the resistor mismatch now **dominates** at $0.26\,\%$, because the chosen `rppd` resistor is only $W = 1\,\mu\text{m}$ wide. The net result of $0.31\,\%$ is therefore no better than the $0.29\,\%$ of the basic current mirror.
+The three terms are worth reading individually. The degeneration has done its job on the MOSFET: the dominant threshold-voltage term is down to $0.17\,\%$ and the transconductance-parameter term to a negligible $0.03\,\%$, while the resistor contributes only $0.09\,\%$. The total of $0.19\,\%$ is a clear improvement over the $0.29\,\%$ of the basic current mirror, and it matches the Monte-Carlo result in @fig-curmir-mc of about $0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.24\,\%$ reasonably well.
 
-This is the essential lesson of source degeneration: it does not remove mismatch, it *trades* MOSFET mismatch for resistor mismatch. The trade only pays off if the resistor is given enough area. Widening it to $W = 4\,\mu\text{m}$ (with $L$ scaled to $60\,\mu\text{m}$ to keep the same resistance) would drop the resistor term to $0.09\,\%$ and the total to about $0.20\,\%$. Note that the Monte-Carlo simulation in @fig-curmir-mc gives a standard deviation of about $0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.25\,\%$, i.e. somewhat better than the hand calculation predicts; as before, the remaining discrepancy comes from the simplifications in the analytical model.
+The essential lesson of source degeneration is that it does not remove mismatch, it *trades* MOSFET mismatch for resistor mismatch --- so the trade only pays off if the resistor is given enough area. That is exactly why $R_\mathrm{deg}$ is laid out here as a long, comparatively wide device ($3 \times 45\,\mu\text{m}^2$) instead of the minimum-width strip that would deliver the same $3.9\,\text{k}\Omega$: a $W = 1\,\mu\text{m}$ / $L = 15\,\mu\text{m}$ resistor has the same resistance but nine times less area, which would raise its mismatch contribution from $0.09\,\%$ to $0.26\,\%$ and push the total back to $0.31\,\%$ --- no better than the basic mirror. Resistor **area**, not resistor value, is what buys the matching here.
 :::
