@@ -416,7 +416,7 @@ W = 13.22 um, rounded W = 13.0 um
 Total gds = 2.179 uS, rout = 458.96 kOhm</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="5">
+<div id="cell-7" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># current mirror 3: resistively degenerated current mirror</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gm_id_spec3 <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>l_spec3 <span class="op">=</span> <span class="dv">3</span></span>
@@ -434,68 +434,76 @@ Total gds = 2.179 uS, rout = 458.96 kOhm</code></pre>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>r_deg <span class="op">=</span> (vsat_spec<span class="op">/</span><span class="dv">2</span>) <span class="op">/</span> id_spec</span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Rdeg ='</span>, <span class="bu">round</span>(r_deg<span class="op">/</span><span class="fl">1e3</span>,<span class="dv">2</span>), <span class="st">'kOhm'</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>gds_total3 <span class="op">=</span> gds3 <span class="op">*</span> (<span class="dv">1</span><span class="op">/</span>r_deg) <span class="op">/</span> (gds2 <span class="op">+</span> gm2 <span class="op">+</span> (<span class="dv">1</span><span class="op">/</span>r_deg))</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total gds ='</span>, <span class="bu">round</span>(gds_total3<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS, rout ='</span>, rout2<span class="op">:=</span><span class="bu">round</span>(<span class="dv">1</span><span class="op">/</span>gds_total3<span class="op">/</span><span class="fl">1e3</span>,<span class="dv">2</span>), <span class="st">'kOhm'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Vgs = 395.5 mV
-gds = 33.332 uS
-W = 18.4 um, rounded W = 18.5 um
-Rdeg = 4.0 kOhm
-Total gds = 10.612 uS, rout = 94.24 kOhm</code></pre>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>gds_total3 <span class="op">=</span> gds3 <span class="op">*</span> (<span class="dv">1</span><span class="op">/</span>r_deg) <span class="op">/</span> (gds3 <span class="op">+</span> gm3 <span class="op">+</span> (<span class="dv">1</span><span class="op">/</span>r_deg))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total gds ='</span>, <span class="bu">round</span>(gds_total3<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS, rout ='</span>, rout3<span class="op">:=</span><span class="bu">round</span>(<span class="dv">1</span><span class="op">/</span>gds_total3<span class="op">/</span><span class="fl">1e3</span>,<span class="dv">2</span>), <span class="st">'kOhm'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div id="cell-8" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># current mirror 4: regulated current mirror</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gm_id_spec4 <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>l_spec4 <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>vgs4 <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_spec4, L<span class="op">=</span>l_spec4, VDS<span class="op">=</span>vsat_spec<span class="op">*</span><span class="dv">3</span><span class="op">/</span><span class="dv">4</span>, VSB<span class="op">=</span><span class="fl">0.0</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Vgs (bottom) ='</span>, <span class="bu">round</span>(vgs4<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">1</span>), <span class="st">'mV'</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>gm4 <span class="op">=</span> gm_id_spec4 <span class="op">*</span> id_spec</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>gm_gds4 <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_spec4, L<span class="op">=</span>l_spec4, VDS<span class="op">=</span>vsat_spec<span class="op">*</span><span class="dv">3</span><span class="op">/</span><span class="dv">4</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>gds4 <span class="op">=</span> gm4 <span class="op">/</span> gm_gds4</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gds (bottom) ='</span>, <span class="bu">round</span>(gds4<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS'</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>id_w4 <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_spec4, L<span class="op">=</span>l_spec4, VDS<span class="op">=</span>vsat_spec<span class="op">*</span><span class="dv">3</span><span class="op">/</span><span class="dv">4</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>w4 <span class="op">=</span> id_spec <span class="op">/</span> id_w4</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'W ='</span>, <span class="bu">round</span>(w4, <span class="dv">2</span>), <span class="st">'um, rounded W ='</span>, <span class="bu">round</span>(w4<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="st">'um'</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>gm_gds4_top <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_spec4, L<span class="op">=</span>l_spec4, VDS<span class="op">=</span>vsat_spec<span class="op">*</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>gds4_top <span class="op">=</span> gm4 <span class="op">/</span> gm_gds4_top</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gds (top) ='</span>, <span class="bu">round</span>(gds4_top<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS'</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># additional stage</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>gm_id_spec4_aux <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>id_aux <span class="op">=</span> <span class="fl">5e-6</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>l_spec4_aux <span class="op">=</span> <span class="fl">0.13</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>vgs4_aux <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_spec4_aux, L<span class="op">=</span>l_spec4_aux, VDS<span class="op">=</span><span class="fl">0.5</span>, VSB<span class="op">=</span><span class="fl">0.0</span>)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Vgs (amp) ='</span>, <span class="bu">round</span>(vgs4_aux<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">1</span>), <span class="st">'mV'</span>)</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>gm4_aux <span class="op">=</span> gm_id_spec4_aux <span class="op">*</span> id_aux</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm (amp) ='</span>, <span class="bu">round</span>(gm4_aux<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS'</span>)</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>gm_gds4_aux <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_spec4_aux, L<span class="op">=</span>l_spec4_aux, VDS<span class="op">=</span><span class="fl">0.5</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>gds4_aux <span class="op">=</span> gm4_aux <span class="op">/</span> gm_gds4_aux</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gds (amp) ='</span>, <span class="bu">round</span>(gds4_aux<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS'</span>)</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>id_w4_aux <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_spec4_aux, L<span class="op">=</span>l_spec4_aux, VDS<span class="op">=</span><span class="fl">0.5</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>w4_aux <span class="op">=</span> id_aux <span class="op">/</span> id_w4_aux</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'W (amp) ='</span>, <span class="bu">round</span>(w4_aux, <span class="dv">2</span>), <span class="st">'um, rounded W ='</span>, <span class="bu">round</span>(w4_aux<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="st">'um'</span>)</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate total output conductance</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>rout4 <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>gds4 <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>gds4_top <span class="op">+</span> gm4<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>gm4_aux<span class="op">/</span>gds4_aux)<span class="op">/</span>(gds4_top<span class="op">*</span>gds4)</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>gds_total4 <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>rout4</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total gds ='</span>, <span class="bu">round</span>(gds_total4<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS, rout ='</span>, <span class="bu">round</span>(rout4<span class="op">/</span><span class="fl">1e3</span>,<span class="dv">2</span>), <span class="st">'kOhm'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Vgs (bottom) = 414.4 mV
-gds (bottom) = 22.418 uS
-W = 9.45 um, rounded W = 9.5 um
-gds (top) = 237.572 uS
-Vgs (amp) = 368.6 mV
-gm (amp) = 125.0 uS
-gds (amp) = 7.349 uS
-W (amp) = 8.5 um, rounded W = 8.5 um
-Total gds = 0.575 uS, rout = 1739.43 kOhm</code></pre>
-</div>
+<div id="cell-8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># current mirror 4: regulated current mirror</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gm_id_spec4 <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>l_spec4 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The auxiliary amplifier has to be sized first, because it is what sets the</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># operating point of the whole structure: the amplifier holds the drain of the</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># bottom device at its own gate-source voltage, so Vds(bottom) = Vgs(aux).</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>gm_id_spec4_aux <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>id_aux <span class="op">=</span> <span class="fl">5e-6</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>l_spec4_aux <span class="op">=</span> <span class="fl">0.13</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>vgs4_aux <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_spec4_aux, L<span class="op">=</span>l_spec4_aux, VDS<span class="op">=</span><span class="fl">0.5</span>, VSB<span class="op">=</span><span class="fl">0.0</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Vgs (amp) ='</span>, <span class="bu">round</span>(vgs4_aux<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">1</span>), <span class="st">'mV'</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>gm4_aux <span class="op">=</span> gm_id_spec4_aux <span class="op">*</span> id_aux</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm (amp) ='</span>, <span class="bu">round</span>(gm4_aux<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS'</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>gm_gds4_aux <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_spec4_aux, L<span class="op">=</span>l_spec4_aux, VDS<span class="op">=</span><span class="fl">0.5</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>gds4_aux <span class="op">=</span> gm4_aux <span class="op">/</span> gm_gds4_aux</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gds (amp) ='</span>, <span class="bu">round</span>(gds4_aux<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS'</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>id_w4_aux <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_spec4_aux, L<span class="op">=</span>l_spec4_aux, VDS<span class="op">=</span><span class="fl">0.5</span>, VSB<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>w4_aux <span class="op">=</span> id_aux <span class="op">/</span> id_w4_aux</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'W (amp) ='</span>, <span class="bu">round</span>(w4_aux, <span class="dv">2</span>), <span class="st">'um, rounded W ='</span>, <span class="bu">round</span>(w4_aux<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="st">'um'</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># The bottom device sits at Vds = Vgs(aux); the cascode on top of it still needs</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># its own saturation voltage of roughly 2/(gm/Id). Their sum is the compliance</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># voltage this topology can actually reach -- note that it is well above the</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co"># vsat_spec = 0.4 V that the other three structures are sized for. This is the</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># price of the regulated cascode, and sizing it for 0.4 V would simply leave the</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># cascode device in triode, where it provides no cascoding at all.</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>vds4_bottom <span class="op">=</span> vgs4_aux</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>vds4_casc <span class="op">=</span> <span class="dv">2</span> <span class="op">/</span> gm_id_spec4</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>v_compliance4 <span class="op">=</span> vds4_bottom <span class="op">+</span> vds4_casc</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Vds (bottom) ='</span>, <span class="bu">round</span>(vds4_bottom<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">1</span>), <span class="st">'mV, Vds (cascode) ='</span>,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>      <span class="bu">round</span>(vds4_casc<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">1</span>), <span class="st">'mV'</span>)</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'=&gt; compliance voltage ='</span>, <span class="bu">round</span>(v_compliance4, <span class="dv">3</span>), <span class="st">'V (vs.'</span>, vsat_spec,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">'V for the other structures)'</span>)</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>vgs4 <span class="op">=</span> lv_nmos.look_upVGS(GM_ID<span class="op">=</span>gm_id_spec4, L<span class="op">=</span>l_spec4, VDS<span class="op">=</span>vds4_bottom, VSB<span class="op">=</span><span class="fl">0.0</span>)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Vgs (bottom) ='</span>, <span class="bu">round</span>(vgs4<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">1</span>), <span class="st">'mV'</span>)</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>gm4 <span class="op">=</span> gm_id_spec4 <span class="op">*</span> id_spec</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>gm_gds4 <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_spec4, L<span class="op">=</span>l_spec4, VDS<span class="op">=</span>vds4_bottom, VSB<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>gds4 <span class="op">=</span> gm4 <span class="op">/</span> gm_gds4</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gds (bottom) ='</span>, <span class="bu">round</span>(gds4<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS'</span>)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>id_w4 <span class="op">=</span> lv_nmos.lookup(<span class="st">'ID_W'</span>, GM_ID<span class="op">=</span>gm_id_spec4, L<span class="op">=</span>l_spec4, VDS<span class="op">=</span>vds4_bottom, VSB<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>w4 <span class="op">=</span> id_spec <span class="op">/</span> id_w4</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'W ='</span>, <span class="bu">round</span>(w4, <span class="dv">2</span>), <span class="st">'um, rounded W ='</span>, <span class="bu">round</span>(w4<span class="op">*</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>, <span class="st">'um'</span>)</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>gm_gds4_top <span class="op">=</span> lv_nmos.lookup(<span class="st">'GM_GDS'</span>, GM_ID<span class="op">=</span>gm_id_spec4, L<span class="op">=</span>l_spec4, VDS<span class="op">=</span>vds4_casc, VSB<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>gds4_top <span class="op">=</span> gm4 <span class="op">/</span> gm_gds4_top</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gds (top) ='</span>, <span class="bu">round</span>(gds4_top<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS'</span>)</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate total output conductance</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>rout4 <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>gds4 <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>gds4_top <span class="op">+</span> gm4<span class="op">*</span>(<span class="dv">1</span><span class="op">+</span>gm4_aux<span class="op">/</span>gds4_aux)<span class="op">/</span>(gds4_top<span class="op">*</span>gds4)</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>gds_total4 <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>rout4</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total gds ='</span>, <span class="bu">round</span>(gds_total4<span class="op">/</span><span class="fl">1e-6</span>, <span class="dv">3</span>), <span class="st">'uS, rout ='</span>, <span class="bu">round</span>(rout4<span class="op">/</span><span class="fl">1e3</span>,<span class="dv">2</span>), <span class="st">'kOhm'</span>)</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Treat this last number as an optimistic upper bound rather than a prediction.</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="co"># The expression multiplies three separate gains, so any optimism in them</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="co"># compounds; the simulation gives about 1.7 MOhm at the compliance voltage and</span></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.7 MOhm at Vout = 1.5 V. Neither the body effect on the cascode nor the</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="co"># loading of the auxiliary amplifier explains the gap (both are worth well under</span></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="co"># 20%), it is inherent to the idealised cascade-of-gains formula. For the other</span></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="co"># three structures above the same style of estimate lands within ~10..40% of the</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="co"># simulated value.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
