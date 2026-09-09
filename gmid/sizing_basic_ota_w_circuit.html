@@ -450,10 +450,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="cell-5" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we get the required gm of M1/2 from the -3dB bandwidth requirement of the voltage buffer specification</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note that the -3dB bandwidth of the voltage buffer with gain Av=1 is equal to the unity gain bandwidth</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the ota, hence we wet them equal here</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we add a factor of 3 to allow for PVT variation plus additional MOSFET parasitic loading</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>gm_m12 <span class="op">=</span> f_bw <span class="op">*</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span><span class="op">*</span>np.pi<span class="op">*</span>c_load</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of the ota, hence we set them equal here</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the unity-gain frequency of the 5T-OTA is f_ug = gm12 / (2*pi*C_load)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on top of the bare specification we apply a design margin of:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   3x for PVT variation plus the additional MOSFET parasitic loading</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   2x of reserve on dc gain and settling (the power budget allows for it)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>bw_margin <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>gm_m12 <span class="op">=</span> bw_margin <span class="op">*</span> <span class="dv">2</span><span class="op">*</span>np.pi <span class="op">*</span> f_bw <span class="op">*</span> c_load</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'gm12 ='</span>, <span class="bu">round</span>(gm_m12<span class="op">/</span><span class="fl">1e-3</span>, <span class="dv">4</span>), <span class="st">'mS'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>gm12 = 0.0188 mS</code></pre>
 </div>
@@ -502,7 +506,7 @@ i_total (rounded) = 4.0 µA
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>c_load_parasitic <span class="op">=</span> <span class="bu">abs</span>(gm_m12<span class="op">/</span>gm_cgs_m12) <span class="op">+</span> <span class="bu">abs</span>(gm_m12<span class="op">/</span>gm_cdd_m12) <span class="op">+</span> <span class="bu">abs</span>(gm_m34<span class="op">/</span>gm_cdd_m34)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'additional load capacitance ='</span>, <span class="bu">round</span>(c_load_parasitic<span class="op">/</span><span class="fl">1e-15</span>, <span class="dv">1</span>), <span class="st">'fF'</span>)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>f_bw <span class="op">=</span> gm_m12 <span class="op">/</span> (<span class="dv">4</span><span class="op">*</span>np.pi <span class="op">*</span> (c_load <span class="op">+</span> c_load_parasitic))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>f_bw <span class="op">=</span> gm_m12 <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi <span class="op">*</span> (c_load <span class="op">+</span> c_load_parasitic))</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'unity gain bandwidth incl. parasitics ='</span>, <span class="bu">round</span>(f_bw<span class="op">/</span><span class="fl">1e6</span>, <span class="dv">2</span>), <span class="st">'MHz'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>additional load capacitance = 54.9 fF
