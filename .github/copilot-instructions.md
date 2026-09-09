@@ -14,7 +14,9 @@ Educational material for intermediate-level MOSFET analog circuit design course 
 - `cace/*.yaml` - CACE characterization specs for circuit validation
 
 ### Technology Stack
-- **Documentation**: Quarto (HTML + Typst PDF), using `freeze: auto` for caching
+- **Documentation**: Quarto (HTML + Typst PDF). The `freeze` cache is deliberately
+  not enabled: all content is pulled in via `{{< include >}}`, which `freeze: auto`
+  does not track, so it would serve stale prose. A full render takes well under a minute.
 - **Sizing/Analysis**: Python with `pygmid` (gm/ID lookup tables), `schemdraw` (circuit diagrams), `numpy`, `pandas`, `matplotlib`
 - **Simulation**: Xschem (schematic entry) + ngspice (SPICE simulation)
 - **PDK**: IHP SG13G2 130nm - devices: `sg13_lv_nmos`, `sg13_lv_pmos`, `sg13_hv_nmos`, `sg13_hv_pmos`
