@@ -28,9 +28,9 @@ subtitle: "Analog (Integrated) Circuit Design"
 format:
   revealjs:
     theme: [default, _tools/slides.scss]
-    # 16:9 at the default height of 700, so text keeps its size
-    width: 1244
-    height: 700
+    # 16:9, same as the radio-frequency-integrated-circuits slides
+    width: 1280
+    height: 720
     slide-level: 2
     slide-number: true
     scrollable: true

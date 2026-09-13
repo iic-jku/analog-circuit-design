@@ -65,7 +65,7 @@ class Rendering(unittest.TestCase):
         deck = gen_decks.render_deck("Circuit Designer's Etiquette", "/content/x/_sec_x.qmd", True)
         self.assertTrue(deck.startswith('---\ntitle: "Circuit Designer\'s Etiquette"\n'))
         self.assertIn("    theme: [default, _tools/slides.scss]\n", deck)
-        self.assertIn("    width: 1244\n    height: 700\n", deck)
+        self.assertIn("    width: 1280\n    height: 720\n", deck)
         self.assertIn('    footer: "[Lecture notes](../aicd.html)"\n', deck)
         self.assertIn("bibliography: ../references.bib\n", deck)
         self.assertIn("    path: _tools/slides.lua\n", deck)
