@@ -17,5 +17,5 @@ rm -rf figures/*.html
 rm -rf index_files
 rm -rf sizing/*_files
 rm -rf sizing/*.html
-rm -rf slides_*_files
+rm -rf slides/*_files
 

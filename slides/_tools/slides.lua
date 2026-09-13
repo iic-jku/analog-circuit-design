@@ -21,7 +21,9 @@
 
 local MAX_EQ = 2
 local MAX_WORDS = 80
-local BOOK = "aicd.html"
+-- decks live in slides/, one level below the project root
+local ROOT = "../"
+local BOOK = ROOT .. "aicd.html"
 
 local XREF_TEXT = {
   sec = "Section", fig = "Figure", eq = "Equation", tbl = "Table",
@@ -148,6 +150,36 @@ local function external_refs_filter(ids)
     end,
   }
 end
+
+-- document-relative paths in the chapters (`./xschem/x.svg`, `gmid/x.ipynb`)
+-- are written for the book in the project root; rebase those that do not exist
+-- next to the deck but do exist in the project root (pandoc runs in the
+-- deck's directory, so render outputs like `deck_files/...` stay untouched)
+local function exists(path)
+  local f = io.open(path, "r")
+  if f then f:close() return true end
+  return false
+end
+
+local function rebase(target)
+  if target == "" or target:match("^%a[%w+.-]*:") or target:match("^[/#]") then
+    return nil -- URL, project-absolute, anchor
+  end
+  local path = target:gsub("[?#].*$", "")
+  if exists(path) or not exists(ROOT .. path) then return nil end
+  return ROOT .. target:gsub("^%./", "")
+end
+
+local rebase_paths = {
+  Image = function(el)
+    local t = rebase(el.src)
+    if t then el.src = t; return el end
+  end,
+  Link = function(el)
+    local t = rebase(el.target)
+    if t then el.target = t; return el end
+  end,
+}
 
 -- slide assembly -------------------------------------------------------------
 
@@ -289,5 +321,5 @@ function Pandoc(doc)
   end
 
   doc.blocks = blocks
-  return doc:walk(external_refs_filter(ids))
+  return doc:walk(rebase_paths):walk(external_refs_filter(ids))
 end

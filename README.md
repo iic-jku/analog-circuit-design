@@ -23,9 +23,9 @@ This produces the HTML site in `_site/` and the PDF (via Typst) in about half a 
 
 ## Lecture slides
 
-Slide decks for classroom use are generated from the lecture notes, one deck per chapter (`slides_<chapter>.qmd`, overview in `slides.qmd`). After adding, removing, or renaming a chapter in `aicd.qmd`, regenerate them with `python3 slides/gen_decks.py` (CI fails if they are out of date). Never edit `slides_*.qmd` by hand.
+Slide decks for classroom use are generated from the lecture notes, one deck per chapter in `slides/` (overview in `slides/index.qmd`). After adding, removing, or renaming a chapter in `aicd.qmd`, regenerate them with `python3 slides/_tools/gen_decks.py` (CI fails if they are out of date). Never edit the generated decks by hand.
 
-The filter `slides/slides.lua` builds the slides automatically: every `##` section gets a divider slide; figures, tables, callouts, and display equations get their own slides; solutions are revealed step by step; all other text goes into the speaker notes (press `S`). References to other chapters link to the book.
+The filter `slides/_tools/slides.lua` builds the slides automatically: every `##` section gets a divider slide; figures, tables, callouts, and display equations get their own slides; solutions are revealed step by step; all other text goes into the speaker notes (press `S`). References to other chapters link to the book, and relative links and images in the chapters are adjusted for the `slides/` folder. Use project-absolute paths (`/gmid/...`) for `{{< include >}}` and `{{< embed >}}`, as they are resolved before the filter runs.
 
 To improve a chapter's slides, edit the chapter source:
 

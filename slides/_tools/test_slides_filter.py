@@ -1,9 +1,10 @@
 # SPDX-FileCopyrightText: 2026 Harald Pretl
 # Johannes Kepler University, Institute for Integrated Circuits
 # SPDX-License-Identifier: Apache-2.0
-"""Unit tests for slides/slides.lua, run through `quarto pandoc`."""
+"""Unit tests for slides/_tools/slides.lua, run through `quarto pandoc`."""
 
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -13,10 +14,18 @@ FIXTURE = HERE / "fixtures" / "chapter.md"
 
 
 def run_pandoc(to):
-    proc = subprocess.run(
-        ["quarto", "pandoc", str(FIXTURE), "-t", to, "--slide-level=2", "--lua-filter", str(FILTER)],
-        capture_output=True, text=True, check=True,
-    )
+    """Run the filter from a deck directory `slides/` inside a fake project."""
+    with tempfile.TemporaryDirectory() as tmp:
+        project = Path(tmp)
+        (project / "xschem").mkdir()
+        (project / "xschem" / "foo.sch").write_text("")
+        (project / "slides").mkdir()
+        (project / "slides" / "local.txt").write_text("")
+        proc = subprocess.run(
+            ["quarto", "pandoc", str(FIXTURE), "-t", to, "--slide-level=2", "--wrap=none",
+             "--lua-filter", str(FILTER)],
+            capture_output=True, text=True, check=True, cwd=project / "slides",
+        )
     return proc.stdout, proc.stderr
 
 
@@ -50,8 +59,14 @@ class RevealjsOutput(unittest.TestCase):
         self.assertIn("<h2>Key points</h2>\n<ul>\n<li>bullet</li>", self.html)
 
     def test_external_ref_links_to_book_local_ref_untouched(self):
-        self.assertIn('<a href="aicd.html#sec-elsewhere">Section (book)</a>', self.html)
+        self.assertIn('<a href="../aicd.html#sec-elsewhere">Section (book)</a>', self.html)
         self.assertIn('data-cites="sec-part"', self.html)
+
+    def test_project_relative_paths_are_rebased(self):
+        self.assertIn('href="../xschem/foo.sch"', self.html)
+        self.assertIn('href="local.txt"', self.html)
+        self.assertIn('href="https://example.com"', self.html)
+        self.assertIn('href="nowhere/x.txt"', self.html)
 
     def test_section_without_atoms_keeps_prose_as_divider_notes(self):
         self.assertIn('<h1>Wrap-Up</h1>\n<aside class="notes">\n<p>Only prose here.</p>', self.html)

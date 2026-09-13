@@ -42,5 +42,7 @@ word word word word word word word word word word word word word word word word 
 
 Only prose here.
 
+See [schematic](./xschem/foo.sch), [local](local.txt), [web](https://example.com), and [missing](nowhere/x.txt).
+
 ::: {#refs}
 :::

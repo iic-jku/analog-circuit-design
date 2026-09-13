@@ -49,12 +49,14 @@ jobs:
 
       - name: Test slide generation
         run: |
-          python -m unittest discover -s slides -v
-          python slides/gen_decks.py --check
+          python -m unittest discover -s slides/_tools -v
+          python slides/_tools/gen_decks.py --check
 
       - name: Render (pull request validation)
         if: github.event_name == 'pull_request'
-        run: quarto render
+        run: |
+          quarto render
+          python slides/_tools/check_links.py _site
 
       - name: Render and Publish
         if: github.event_name != 'pull_request'

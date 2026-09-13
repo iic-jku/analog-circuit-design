@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Harald Pretl
 # Johannes Kepler University, Institute for Integrated Circuits
 # SPDX-License-Identifier: Apache-2.0
-"""Unit tests for slides/gen_decks.py."""
+"""Unit tests for slides/_tools/gen_decks.py."""
 
 import sys
 import tempfile
@@ -64,14 +64,17 @@ class Rendering(unittest.TestCase):
     def test_render_deck(self):
         deck = gen_decks.render_deck("Circuit Designer's Etiquette", "/content/x/_sec_x.qmd", True)
         self.assertTrue(deck.startswith('---\ntitle: "Circuit Designer\'s Etiquette"\n'))
-        self.assertIn("    path: slides/slides.lua\n", deck)
+        self.assertIn("    theme: [default, _tools/slides.scss]\n", deck)
+        self.assertIn('    footer: "[Lecture notes](../aicd.html)"\n', deck)
+        self.assertIn("bibliography: ../references.bib\n", deck)
+        self.assertIn("    path: _tools/slides.lua\n", deck)
         self.assertIn("{{< include /content/_abbrv.qmd >}}\n{{< include /content/x/_sec_x.qmd >}}\n", deck)
         self.assertIn("::: {#refs}\n:::\n", deck)
         self.assertNotIn("#refs", gen_decks.render_deck("T", "/content/x/_sec_x.qmd", False))
 
     def test_render_index(self):
         index = gen_decks.render_index([("current_mirror", "Current Mirror")])
-        self.assertIn("1. [Current Mirror](slides_current_mirror.html)\n", index)
+        self.assertIn("1. [Current Mirror](current_mirror.html)\n", index)
 
 
 class EndToEnd(unittest.TestCase):
@@ -89,21 +92,30 @@ class EndToEnd(unittest.TestCase):
     def test_write_then_check_is_clean_and_drift_is_detected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = self.make_project(tmp)
+            slides = root / "slides"
             self.assertEqual(gen_decks.main(["--root", str(root)]), 0)
-            self.assertTrue((root / "slides_current_mirror.qmd").exists())
-            self.assertIn("#refs", (root / "slides_current_mirror.qmd").read_text())
-            self.assertNotIn("#refs", (root / "slides_app_linux_cheatsheet.qmd").read_text())
-            self.assertTrue((root / "slides.qmd").exists())
+            self.assertTrue((slides / "current_mirror.qmd").exists())
+            self.assertIn("#refs", (slides / "current_mirror.qmd").read_text())
+            self.assertNotIn("#refs", (slides / "app_linux_cheatsheet.qmd").read_text())
+            self.assertTrue((slides / "index.qmd").exists())
             self.assertEqual(gen_decks.main(["--root", str(root), "--check"]), 0)
 
-            (root / "slides_current_mirror.qmd").write_text("edited")
-            (root / "slides_stale.qmd").write_text("old")
+            (slides / "current_mirror.qmd").write_text("edited")
+            (slides / "stale.qmd").write_text(gen_decks.GENERATED + "\n")
             self.assertEqual(gen_decks.main(["--root", str(root), "--check"]), 1)
 
             self.assertEqual(gen_decks.main(["--root", str(root)]), 0)
-            self.assertFalse((root / "slides_stale.qmd").exists())
+            self.assertFalse((slides / "stale.qmd").exists())
             self.assertEqual(gen_decks.main(["--root", str(root), "--check"]), 0)
 
+    def test_hand_written_decks_are_left_alone(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self.make_project(tmp)
+            self.assertEqual(gen_decks.main(["--root", str(root)]), 0)
+            (root / "slides" / "extra.qmd").write_text("---\ntitle: Extra\n---\n")
+            self.assertEqual(gen_decks.main(["--root", str(root), "--check"]), 0)
+            self.assertEqual(gen_decks.main(["--root", str(root)]), 0)
+            self.assertTrue((root / "slides" / "extra.qmd").exists())
 
 if __name__ == "__main__":
     unittest.main()
