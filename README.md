@@ -2,7 +2,7 @@
 
 [![Quarto Publish](https://github.com/iic-jku/analog-circuit-design/actions/workflows/quarto-publish.yml/badge.svg?branch=main)](https://github.com/iic-jku/analog-circuit-design/actions/workflows/quarto-publish.yml)
 [![Simulation Test](https://github.com/iic-jku/analog-circuit-design/actions/workflows/simulation-test.yml/badge.svg?branch=main)](https://github.com/iic-jku/analog-circuit-design/actions/workflows/simulation-test.yml)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14387481.svg)](https://doi.org/10.5281/zenodo.14387481)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.14387481-blue)](https://doi.org/10.5281/zenodo.14387481)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-brightgreen?logo=github)](https://iic-jku.github.io/analog-circuit-design/aicd.html)
 
 **(c) 2024-2026 Harald Pretl and co-authors, Department for Integrated Circuits (ICD), Johannes Kepler University, Linz (JKU)**
@@ -20,5 +20,24 @@ All course material is made publicly available and shared under the Apache-2.0 l
 Render the material with `quarto render`.
 
 This produces the HTML site in `_site/` and the PDF (via Typst) in about half a minute, executing all embedded Python cells and notebooks from scratch.
+
+## Lecture slides
+
+Slide decks for classroom use are generated from the lecture notes, one deck per chapter in `slides/` (overview in `slides/index.qmd`). After adding, removing, or renaming a chapter in `aicd.qmd`, regenerate them with `python3 slides/_tools/gen_decks.py` (CI fails if they are out of date). Never edit the generated decks by hand.
+
+The filter `slides/_tools/slides.lua` builds the slides automatically: every `##` section gets a divider slide; figures, tables, callouts, and display equations get their own slides; solutions are revealed step by step; all other text goes into the speaker notes (press `S`). References to other chapters link to the book, and relative links and images in the chapters are adjusted for the `slides/` folder. Use project-absolute paths (`/gmid/...`) for `{{< include >}}` and `{{< embed >}}`, as they are resolved before the filter runs.
+
+To improve a chapter's slides, edit the chapter source:
+
+```markdown
+::: {.content-visible when-format="revealjs"}
+### Slide Title
+- bullet shown only on slides
+:::
+```
+
+- `::: {.content-hidden when-format="revealjs"}` keeps content out of the slides.
+- Add `.no-slide` to a figure or callout to keep it off the slides (callout text goes to the notes).
+- Rendering prints `dense slide ...` warnings for slides with more than 80 words or more than one figure — good candidates for a hand-written slide.
 
 **We happily accept [pull requests](https://github.com/iic-jku/analog-circuit-design/pulls) to fix typos or add content! If you want to discuss something that is not clear, please [open an issue](https://github.com/iic-jku/analog-circuit-design/issues/new)!**

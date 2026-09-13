@@ -1,5 +1,8 @@
 project:
    type: website
+   # run code cells from the project root, so that decks in slides/ find the
+   # same data files (e.g. xschem/*.txt) as the book in the root
+   execute-dir: project
 
 var:
   url-repo: https://github.com/iic-jku/analog-circuit-design   # to call this value : {{< meta var.url-repo >}}
@@ -16,6 +19,9 @@ website:
         text: "About"
       - href: aicd.qmd
         text: "Course Material"
+      - icon: easel
+        href: slides/index.qmd
+        text: "Slides"
       - icon: bi-filetype-pdf
         text: PDF
         href: aicd.pdf
