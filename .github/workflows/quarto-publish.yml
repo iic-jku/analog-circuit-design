@@ -47,6 +47,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Test slide generation
+        run: |
+          python -m unittest discover -s slides -v
+          python slides/gen_decks.py --check
+
       - name: Render (pull request validation)
         if: github.event_name == 'pull_request'
         run: quarto render

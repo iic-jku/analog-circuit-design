@@ -28,7 +28,7 @@ In addition, we can highly recommend these references [@Gray_Meyer_2009; @Razavi
 
 The operation is as follows: $M_{1,2}$ form a differential pair which is biased by the current source $M_5$. $M_{5,6}$ form a current mirror, thus the input bias current $I_\mathrm{bias}$ sets the bias current in the OTA. The differential pair $M_{1,2}$ is loaded by the current mirror $M_{3,4}$ which mirrors the drain current of $M_1$ to the right side. Here, the currents from $M_4$ and $M_2$ are summed, and together with the conductance effective at the output node, a voltage builds up.
 
-::: {.callout-note title="Operational Amplifier (op-amp, OPA) vs. Operational Transconductance Amplifier (OTA)"}
+::: {.callout-note .no-slide title="Operational Amplifier (op-amp, OPA) vs. Operational Transconductance Amplifier (OTA)"}
 An [operational amplifier](https://en.wikipedia.org/wiki/Operational_amplifier) is a universal electronic building block characterized by (in the ideal case):
 
 * infinite input impedance at the input ports ($R_\mathrm{in} \rightarrow \infty$)
@@ -44,6 +44,19 @@ An [operational transconductance amplifier](https://en.wikipedia.org/wiki/Operat
 In integrated circuits, we very often load an OPA/OTA high-ohmic, i.e., with a capacitive load. Hence, an OTA can be used to create a voltage-mode amplifier with high gain, approaching the properties of the OPA. If an OTA is used to drive a low-ohmic load, the voltage gain will be low, and we have to use this block as a transconductance amplifier. Since the output changes behavior depending on high- or low-ohmic loading, we label the output in @fig-basic-ota accordingly.
 
 Why then implement an OTA instead of an OPA? Usually, an OTA is a simpler structure than an OPA. As a general rule, the simplest circuit that can do a job is usually the best choice.
+:::
+
+::: {.content-visible when-format="revealjs"}
+### OPA vs. OTA
+
+|                   | OPA                               | OTA                       |
+|-------------------|-----------------------------------|---------------------------|
+| Input impedance   | $\infty$                          | $\infty$                  |
+| Output resistance | $0$ (voltage output)              | $\infty$ (current output) |
+| Ideal gain        | $A_\mathrm{v} \rightarrow \infty$ | $G \rightarrow \infty$    |
+
+- With a capacitive (high-ohmic) load, an OTA acts as a high-gain voltage amplifier
+- An OTA is simpler — the simplest circuit that does the job is usually best
 :::
 
 We note that $M_{1,2}$ and $M_{3,4}$ need to be symmetric, thus will have the same $W$ and $L$ dimensioning. $M_{5,6}$ we scale accordingly to set the correct bias current in the OTA.
@@ -334,6 +347,14 @@ $$
 $$ {#eq-currentmirror-offset}
 
 To minimize the input offset voltage in a differential pair we should strive to minimize the overdrive voltage $\VGS - \Vth$ (i.e., to maximize $\gmid$, see @eq-diffpair-offset) and to minimize the mismatch in current mirrors we should target a large overdrive voltage (i.e., to minimize $\gmid$, see @eq-currentmirror-offset). In both cases the MOSFET area $W \cdot L$ needs to be large enough (see @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp).
+:::
+
+::: {.content-visible when-format="revealjs"}
+### Mismatch: Design Rules
+- Mismatch shrinks with gate area: $\sdev[\Delta \Vth] = A_\mathrm{vth}/\sqrt{W L}$
+- Differential pair: small overdrive (high $\gmid$) for low offset
+- Current mirror: large overdrive (low $\gmid$) for accurate currents
+- Verify with Monte Carlo simulation ($N \approx 250$ runs)
 :::
 
 How can we now cope with mismatch in design and simulation? We can account for the transistor mismatch according to @eq-mosfet-mismatch-vth and @eq-mosfet-mismatch-kp in circuit analysis and quantify its effect. We can then take this into account when performing the circuit sizing procedure.
