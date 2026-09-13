@@ -47,15 +47,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Test slide generation
+      - name: Check generated slide decks are up to date
         run: |
-          python -m unittest discover -s slides/_tools -v
+          python -m unittest discover -s slides/_tools
           python slides/_tools/gen_decks.py --check
 
       - name: Render (pull request validation)
         if: github.event_name == 'pull_request'
+        run: quarto render
+
+      - name: Check book numbering in slide decks (pull request validation)
+        if: github.event_name == 'pull_request'
         run: |
-          quarto render
+          python slides/_tools/check_numbers.py _site/aicd.html _site/slides/*.html
           python slides/_tools/check_links.py _site
 
       - name: Render and Publish

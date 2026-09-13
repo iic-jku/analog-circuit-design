@@ -21,23 +21,25 @@ Render the material with `quarto render`.
 
 This produces the HTML site in `_site/` and the PDF (via Typst) in about half a minute, executing all embedded Python cells and notebooks from scratch.
 
-## Lecture slides
+## Lecture Slides
 
-Slide decks for classroom use are generated from the lecture notes, one deck per chapter in `slides/` (overview in `slides/index.qmd`). After adding, removing, or renaming a chapter in `aicd.qmd`, regenerate them with `python3 slides/_tools/gen_decks.py` (CI fails if they are out of date). Never edit the generated decks by hand.
+One reveal.js deck per chapter is generated from the lecture notes (`slides/<topic>.qmd`, listed on `slides/index.qmd`; tooling in `slides/_tools/`). Figures, display equations, callouts, lists and tables go on slides; prose becomes speaker notes (press `S`). Figure, equation, table and section numbers match the notes.
 
-The filter `slides/_tools/slides.lua` builds the slides automatically: every `##` section gets a divider slide; figures, tables, callouts, and display equations get their own slides; solutions are revealed step by step; all other text goes into the speaker notes (press `S`). References to other chapters link to the book, and relative links and images in the chapters are adjusted for the `slides/` folder. Use project-absolute paths (`/gmid/...`) for `{{< include >}}` and `{{< embed >}}`, as they are resolved before the filter runs.
+After adding, removing or renaming a chapter, or adding/removing labels (`#fig-`, `#eq-`, `#tbl-`, `#nte-`, `#imp-`, `#sec-`), regenerate and check:
 
-To improve a chapter's slides, edit the chapter source:
-
-```markdown
-::: {.content-visible when-format="revealjs"}
-### Slide Title
-- bullet shown only on slides
-:::
+```bash
+python3 slides/_tools/gen_decks.py
+python3 -m unittest discover -s slides/_tools
 ```
 
-- `::: {.content-hidden when-format="revealjs"}` keeps content out of the slides.
-- Add `.no-slide` to a figure or callout to keep it off the slides (callout text goes to the notes).
-- Rendering prints `dense slide ...` warnings for slides with more than 80 words or more than one figure — good candidates for a hand-written slide.
+Optional markup in the chapter files to improve slides (ignored by the HTML and PDF notes):
+
+- `::: {.content-visible when-format="revealjs"}` — slide-only content (e.g. key bullet points); a leading `###` heading becomes the slide title.
+- `::: {.content-hidden when-format="revealjs"}` — keep content in the notes only.
+- `{.no-slide}` on a div (callout, figure cell), a figure (`![](x.png){#fig-foo .no-slide}`) or in an equation label (`{#eq-foo .no-slide}`) — skip it on slides.
+
+"Solution: …" callouts are revealed step by step. Use project-absolute paths (`/gmid/...`) for `{{< include >}}` and `{{< embed >}}`, as they are resolved before the slide filter can adjust paths for `slides/`.
+
+The render log lists `SLIDES: crowded slide …` warnings for slides that are good candidates for slide-only bullets.
 
 **We happily accept [pull requests](https://github.com/iic-jku/analog-circuit-design/pulls) to fix typos or add content! If you want to discuss something that is not clear, please [open an issue](https://github.com/iic-jku/analog-circuit-design/issues/new)!**
