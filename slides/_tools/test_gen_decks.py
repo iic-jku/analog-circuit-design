@@ -127,9 +127,14 @@ EXAM = """\
 """
 
 
+COURSE = {"book": "notes.qmd", "short": "TEST", "title": "Test Lecture",
+          "exclude": ["exam_questions"]}
+
+
 def make_tree(root):
     files = {
-        "aicd.qmd": BOOK,
+        "slides/_course.json": json.dumps(COURSE),
+        "notes.qmd": BOOK,
         "references.bib": "@article{Widlar_1965,\n title={x}}\n",
         "content/_abbrv.qmd": "::: {.hidden}\n\\newcommand{\\x}{x}\n:::\n",
         "content/intro/_sec_intro.qmd": INTRO,
@@ -164,7 +169,7 @@ class NumberLabelsTest(unittest.TestCase):
         self.assertEqual(self.num("sec-lna"), "2")
 
     def test_inline_book_chapter_counts(self):
-        # "# Inline Chapter" in aicd.qmd itself is chapter 3
+        # "# Inline Chapter" in the book itself is chapter 3
         self.assertEqual(self.num("sec-miller"), "4.1")
         self.assertEqual(self.num("sec-exam-questions"), "5")
 
@@ -227,10 +232,11 @@ class RenderFilesTest(unittest.TestCase):
     def test_deck_front_matter(self):
         deck = self.files["slides/lna.qmd"]
         self.assertIn('title: "Low Noise Amplifiers"', deck)
-        self.assertIn("aicd-chapter: 2", deck)
+        self.assertIn("lecture-chapter: 2", deck)
+        self.assertIn('subtitle: "Test Lecture"', deck)
         self.assertIn("number-offset: [1]", deck)
         self.assertIn("{{< include /content/lna/_sec_lna.qmd >}}", deck)
-        self.assertIn("(../aicd.html#sec-lna)", deck)
+        self.assertIn("(../notes.html#sec-lna)", deck)
         self.assertIn("path: _tools/structure.lua", deck)
         self.assertIn("bibliography: ../references.bib", deck)
         # 16:9 slides for widescreen projectors
@@ -239,9 +245,9 @@ class RenderFilesTest(unittest.TestCase):
     def test_appendix_deck_after_inline_chapter(self):
         deck = self.files["slides/theorems.qmd"]
         self.assertIn('title: "Appendix: Useful Theorems"', deck)
-        self.assertIn("aicd-chapter: 4", deck)
+        self.assertIn("lecture-chapter: 4", deck)
         self.assertIn("number-offset: [3]", deck)
-        self.assertIn('footer: "[AICD lecture notes](../aicd.html)"', deck)
+        self.assertIn('footer: "[TEST lecture notes](../notes.html)"', deck)
 
     def test_references_slide_only_when_citing(self):
         self.assertIn("::: {#refs}", self.files["slides/intro.qmd"])
@@ -259,10 +265,10 @@ class RenderFilesTest(unittest.TestCase):
         # chapter 3 has no deck; a new list keeps the number 4
         self.assertIn("2. [Low Noise Amplifiers](lna.html)\n\n<!-- -->\n\n"
                       "4. [Appendix: Useful Theorems](theorems.html)", index)
-        self.assertIn("(../aicd.html)", index)
+        self.assertIn("(../notes.html)", index)
 
     def test_numbers_map_links_from_slides_dir(self):
-        self.assertIn('"book": "../aicd.html"',
+        self.assertIn('"book": "../notes.html"',
                       self.files["slides/_tools/numbers.json"])
         self.assertIn('"imp": "Important"',
                       self.files["slides/_tools/numbers.json"])
@@ -282,7 +288,7 @@ class RenderFilesTest(unittest.TestCase):
         try:
             self.assertEqual(gen_decks.main([]), 0)
             (self.root / "slides" / "old.qmd").write_text(
-                "---\n" + gen_decks.MARKER + "\n---\n")
+                "---\n" + gen_decks.MARKER + " from old.qmd -- do not edit.\n---\n")
             (self.root / "slides" / "extra.qmd").write_text("---\ntitle: X\n---\n")
             self.assertEqual(gen_decks.main(["--check"]), 1)
             self.assertEqual(gen_decks.main([]), 0)

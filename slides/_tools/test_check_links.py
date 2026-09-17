@@ -19,11 +19,11 @@ class MissingTargets(unittest.TestCase):
             (site / "slides").mkdir()
             (site / "xschem").mkdir()
             (site / "xschem" / "a.svg").write_text("")
-            (site / "aicd.html").write_text("")
+            (site / "notes.html").write_text("")
             deck = site / "slides" / "deck.html"
             deck.write_text(
                 '<img data-src="../xschem/a.svg">'
-                '<a href="../aicd.html#sec-x">book</a>'
+                '<a href="../notes.html#sec-x">book</a>'
                 '<a href="https://example.com/x">web</a>'
                 '<a href="#/references">anchor</a>'
                 '<a href="mailto:a@b.c">mail</a>'

@@ -7,7 +7,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # Usage:
-#   python3 slides/_tools/check_numbers.py _site/aicd.html           # the book
+#   python3 slides/_tools/check_numbers.py _site/<book>.html         # the book
 #   python3 slides/_tools/check_numbers.py _site/slides/*.html       # the decks
 #
 # For every label found in an HTML file, the number Quarto printed must equal
