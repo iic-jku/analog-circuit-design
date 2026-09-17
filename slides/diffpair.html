@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -215,23 +215,38 @@ Figure&nbsp;29: A differential pair.
 </section>
 <section class="slide level3 unnumbered">
 <h3>Differential Operation of the Diffpair</h3>
-<p>For a differential mode of operation we assume that the input common-mode voltage is constant, i.e., <span class="math inline">\((V_\mathrm{in,p} + V_\mathrm{in,n})/2 = V_\mathrm{CM}\)</span>. The differential input voltage <span class="math inline">\(V_\mathrm{in} = V_\mathrm{in,p} - V_\mathrm{in,n}\)</span>, so that <span class="math display">\[
+<p>The differential input voltage <span class="math inline">\(V_\mathrm{in} = V_\mathrm{in,p} - V_\mathrm{in,n}\)</span>, so that <span class="math display">\[
 V_\mathrm{in,p} = V_\mathrm{CM} + \frac{V_\mathrm{in}}{2}
 \]</span> and <span class="math display">\[
 V_\mathrm{in,n} = V_\mathrm{CM} - \frac{V_\mathrm{in}}{2}.
 \]</span></p>
-<p>For a small-signal differential drive the potential at the tail point stays constant and we can treat it as a virtual ground. The output current on each side is then given by (neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and <span class="math inline">\(g_\mathrm{mb}\)</span> of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>) <span class="math display">\[
+<p>The output current on each side is then given by (neglecting <span class="math inline">\(g_\mathrm{ds}\)</span> and <span class="math inline">\(g_\mathrm{mb}\)</span> of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>) <span class="math display">\[
 I_\mathrm{out,p} = g_\mathrm{m1} \left( \frac{V_\mathrm{in}}{2} \right)
 \]</span> and <span class="math display">\[
 I_\mathrm{out,n} = g_\mathrm{m2} \left( -\frac{V_\mathrm{in}}{2} \right).
 \]</span></p>
+<aside class="notes">
+<p>For a differential mode of operation we assume that the input common-mode voltage is constant, i.e., <span class="math inline">\((V_\mathrm{in,p} + V_\mathrm{in,n})/2 = V_\mathrm{CM}\)</span>.</p>
+<p>For a small-signal differential drive the potential at the tail point stays constant and we can treat it as a virtual ground.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Differential Operation of the Diffpair</h3>
-<p>Usually we assume symmetry in the differential pair, so <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m}\)</span>. The differential output current <span class="math inline">\(I_\mathrm{out}\)</span> is then given by <span id="eq-differential-pair-dm"><span class="math display">\[
+<p>The differential output current <span class="math inline">\(I_\mathrm{out}\)</span> is then given by <span id="eq-differential-pair-dm"><span class="math display">\[
 I_\mathrm{out} = I_\mathrm{out,p} - I_\mathrm{out,n} = g_\mathrm{m}V_\mathrm{in}
 \tag{12}\]</span></span></p>
 <aside class="notes">
+<p>Usually we assume symmetry in the differential pair, so <span class="math inline">\(g_\mathrm{m1} = g_\mathrm{m2} = g_\mathrm{m}\)</span>.</p>
 <p>We see in <a href="#/eq-differential-pair-dm" class="quarto-xref">Equation&nbsp;12</a> that the differential output current is simply the differential input voltage multiplied by the <span class="math inline">\(g_\mathrm{m}\)</span> of the individual transistor. We also note that the bottom conductance <span class="math inline">\(g_\mathrm{tail}\)</span> plays no role for the small-signal differential operation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -252,10 +267,11 @@ I_\mathrm{out} = I_\mathrm{out,p} - I_\mathrm{out,n} = g_\mathrm{m}V_\mathrm{in}
 </section>
 <section class="slide level3 unnumbered">
 <h3>Common-Mode Operation of the Diffpair</h3>
-<p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>. If this is the case, then the output currents are not a function of the common-mode input voltage (<span class="math inline">\(I_\mathrm{tail}\)</span> is set by the tail current source), and <span class="math display">\[
+<p>If this is the case, then the output currents are not a function of the common-mode input voltage (<span class="math inline">\(I_\mathrm{tail}\)</span> is set by the tail current source), and <span class="math display">\[
 I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out} = \frac{I_\mathrm{tail}}{2}.
 \]</span></p>
 <aside class="notes">
+<p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>.</p>
 <p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since the circuit operation is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We then arrive at the small-signal equivalent circuit shown in <a href="#/fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;30</a> (note that we set <span class="math inline">\(V_\mathrm{in,p} = V_\mathrm{in,n} = V_\mathrm{in}\)</span> and <span class="math inline">\(I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out}\)</span> under symmetry considerations). As both transistors inject their drain current into the shared tail node, the half circuit sees an effective tail conductance of <span class="math inline">\(g_\mathrm{tail}/2\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -301,6 +317,11 @@ I_\mathrm{out} = \frac{g_\mathrm{m}\cdot g_\mathrm{tail}}{2 g_\mathrm{m}+ g_\mat
 <h3>Common-Mode Operation of the Diffpair</h3>
 <ol type="1">
 <li>If <span class="math inline">\(g_\mathrm{tail} = 0\)</span> (ideal tail current source) then <span class="math inline">\(I_\mathrm{out} = 0\)</span>, the common-mode voltage variation from the input is suppressed and does not show up at the common-mode output current (which is constant due to the ideal tail current source). This is usually the case that we want to achieve.</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Common-Mode Operation of the Diffpair</h3>
+<ol start="2" type="1">
 <li>If <span class="math inline">\(g_\mathrm{tail} \rightarrow \infty\)</span> then <span class="math inline">\(I_\mathrm{out} = g_\mathrm{m}V_\mathrm{in}\)</span>, which means the output current is a function of the MOSFET <span class="math inline">\(g_\mathrm{m}\)</span>. If everything is perfectly matched, then the differential output current is zero, but the common-mode output current changes according to the common-mode input voltage. In special cases this can be a wanted behavior, this configuration is called a “pseudo-differential pair.”</li>
 <li>For the typical case that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{tail}\)</span> then <span class="math inline">\(I_\mathrm{out} \approx (g_\mathrm{tail}/2) V_\mathrm{in}\)</span>.</li>
 </ol>

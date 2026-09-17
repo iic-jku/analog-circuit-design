@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -538,12 +538,34 @@ A low-voltage regulated-cascode current mirror. The differential common-gate err
 <ul>
 <li>For general applications where output resistance and current accuracy are not critical, the <strong>basic current mirror</strong> can be used. It also has the lowest compliance voltage since only one transistor is stacked.</li>
 <li>The <strong>high-swing cascode current mirror</strong> is a good choice when higher output resistance is needed, while still keeping the circuit relatively simple. Be aware that the added cascode devices roughly double the current spread under mismatch compared to the basic mirror.</li>
+</ul>
+<aside class="notes">
+<p>In summary, we can classify the usage of the different current mirror structures as follows:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Source Variations Summary</h3>
+<ul>
 <li>The <strong>source-degenerated current mirror</strong> is a good choice when the best current matching and low output noise are required. The additional voltage headroom that is dropped across the source degeneration can be adapted (higher is better), but a minimum value of 0.1 V should be used. Note that its output resistance is only mildly improved.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Source Variations Summary</h3>
+<ul>
 <li>The <strong>regulated cascode current mirror</strong> is the best choice when the highest output resistance is required, and the additional complexity, output noise, and a roughly four-fold larger current spread under mismatch are acceptable.</li>
 <li>The <strong>low-voltage regulated cascode current mirror</strong> is a good alternative to the regulated cascode when a low compliance voltage is required.</li>
 </ul>
 <aside class="notes">
-<p>In summary, we can classify the usage of the different current mirror structures as follows:</p>
 <p>Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are sized for similar chip area and a fair comparison.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -796,29 +818,72 @@ Table&nbsp;4: IHP SG13G2 device mismatch
 \sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.55\,\text{mV}.
 \]</span></p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Mirror Matching</h3>
+<div title="Current Mirror Matching Calculation">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Current Mirror Matching Calculation</strong></p>
+</div>
+<div class="callout-content">
 <p>Bringing both results into <a href="#/eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;43</a>, we get <span class="math display">\[
 \sigma\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sqrt{ (0.55\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (0.09\,\%)^2} \approx 0.29\,\%.
 \]</span> Comparing with the simulation results in <a href="#/fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a> for the basic current mirror, we can see that this gives a reasonable estimate compared to the standard deviation of about <span class="math inline">\(0.21\,\mu\text{A}/48.9\,\mu\text{A} = 0.43\,\%\)</span> obtained from the Monte-Carlo simulation. The remaining discrepancy is due to simplifications in the analytical model (e.g., the square-law approximation).</p>
 </div>
-<div class="fragment">
-<p>Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use <a href="#/eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;41</a> to analyze this configuration. We use the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 10\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 20\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 3\,\mu\text{m}\)</span>, for the MOSFET, and <span class="math inline">\(V_\mathrm{deg} = 0.2\,\text{V}\)</span>, and <span class="math inline">\(W = 3\,\mu\text{m}\)</span> / <span class="math inline">\(L = 45\,\mu\text{m}\)</span> for the used <code>rppd</code> resistor (which at <span class="math inline">\(R_\square = 260\,\Omega\)</span> gives the required <span class="math inline">\(R_\mathrm{deg} \approx 3.9\,\text{k}\Omega\)</span>).</p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Mirror Matching</h3>
+<div title="Current Mirror Matching Calculation">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Current Mirror Matching Calculation</strong></p>
+</div>
+<div class="callout-content">
+<p>Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use <a href="#/eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;41</a> to analyze this configuration. We use the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 10\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 20\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 3\,\mu\text{m}\)</span>, for the MOSFET, and <span class="math inline">\(V_\mathrm{deg} = 0.2\,\text{V}\)</span>, and <span class="math inline">\(W = 3\,\mu\text{m}\)</span> / <span class="math inline">\(L = 45\,\mu\text{m}\)</span> for the used <code>rppd</code> resistor (which at <span class="math inline">\(R_\square = 260\,\Omega\)</span> gives the required <span class="math inline">\(R_\mathrm{deg} \approx 3.9\,\text{k}\Omega\)</span>).</p>
 <p>The standard deviation of the transconductance parameter mismatch can be calculated as <span class="math display">\[
 \sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
 \]</span></p>
-</div>
 <div class="fragment">
 <p>The standard deviation of the threshold voltage mismatch can be calculated as <span class="math display">\[
 \sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.50\,\text{mV}.
 \]</span></p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Mirror Matching</h3>
+<div title="Current Mirror Matching Calculation">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Current Mirror Matching Calculation</strong></p>
+</div>
+<div class="callout-content">
 <p>The standard deviation of the resistor mismatch can be calculated using <a href="../aicd.html#eq-resistor-mismatch">Equation&nbsp;32</a> and <a href="#/tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\frac{\Delta R}{R}\right\} = \frac{1.5\,\%\mu\text{m}}{\sqrt{3\,\mu\text{m} \cdot 45\,\mu\text{m}}} = 0.13\,\%.
 \]</span></p>
-</div>
 <div class="fragment">
 <p>Plugging these results into <a href="#/eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;41</a>, we get <span class="math display">\[
 \begin{split}
@@ -830,12 +895,60 @@ Table&nbsp;4: IHP SG13G2 device mismatch
 \end{split}
 \]</span></p>
 </div>
-<div class="fragment">
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Mirror Matching</h3>
+<div title="Current Mirror Matching Calculation">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Current Mirror Matching Calculation</strong></p>
+</div>
+<div class="callout-content">
 <p>The three terms are worth reading individually. The degeneration has done its job on the MOSFET: the dominant threshold-voltage term is down to <span class="math inline">\(0.17\,\%\)</span> and the transconductance-parameter term to a negligible <span class="math inline">\(0.03\,\%\)</span>, while the resistor contributes only <span class="math inline">\(0.09\,\%\)</span>. The total of <span class="math inline">\(0.19\,\%\)</span> is a clear improvement over the <span class="math inline">\(0.29\,\%\)</span> of the basic current mirror, and it matches the Monte-Carlo result in <a href="#/fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a> of about <span class="math inline">\(0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.24\,\%\)</span> reasonably well.</p>
 </div>
-<div class="fragment">
-<p>The essential lesson of source degeneration is that it does not remove mismatch, it <em>trades</em> MOSFET mismatch for resistor mismatch — so the trade only pays off if the resistor is given enough area. That is exactly why <span class="math inline">\(R_\mathrm{deg}\)</span> is laid out here as a long, comparatively wide device (<span class="math inline">\(3 \times 45\,\mu\text{m}^2\)</span>) instead of the minimum-width strip that would deliver the same <span class="math inline">\(3.9\,\text{k}\Omega\)</span>: a <span class="math inline">\(W = 1\,\mu\text{m}\)</span> / <span class="math inline">\(L = 15\,\mu\text{m}\)</span> resistor has the same resistance but nine times less area, which would raise its mismatch contribution from <span class="math inline">\(0.09\,\%\)</span> to <span class="math inline">\(0.26\,\%\)</span> and push the total back to <span class="math inline">\(0.31\,\%\)</span> — no better than the basic mirror. Resistor <strong>area</strong>, not resistor value, is what buys the matching here.</p>
 </div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Mirror Matching</h3>
+<div title="Current Mirror Matching Calculation">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Current Mirror Matching Calculation</strong></p>
+</div>
+<div class="callout-content">
+<p>The essential lesson of source degeneration is that it does not remove mismatch, it <em>trades</em> MOSFET mismatch for resistor mismatch — so the trade only pays off if the resistor is given enough area.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Mirror Matching</h3>
+<div title="Current Mirror Matching Calculation">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Current Mirror Matching Calculation</strong></p>
+</div>
+<div class="callout-content">
+<p>That is exactly why <span class="math inline">\(R_\mathrm{deg}\)</span> is laid out here as a long, comparatively wide device (<span class="math inline">\(3 \times 45\,\mu\text{m}^2\)</span>) instead of the minimum-width strip that would deliver the same <span class="math inline">\(3.9\,\text{k}\Omega\)</span>: a <span class="math inline">\(W = 1\,\mu\text{m}\)</span> / <span class="math inline">\(L = 15\,\mu\text{m}\)</span> resistor has the same resistance but nine times less area, which would raise its mismatch contribution from <span class="math inline">\(0.09\,\%\)</span> to <span class="math inline">\(0.26\,\%\)</span> and push the total back to <span class="math inline">\(0.31\,\%\)</span> — no better than the basic mirror. Resistor <strong>area</strong>, not resistor value, is what buys the matching here.</p>
 </div>
 </div>
 </div>

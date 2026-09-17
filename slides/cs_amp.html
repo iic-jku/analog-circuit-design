@@ -35,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -266,10 +266,6 @@ Figure&nbsp;26: A MOSFET common-source amplifier with 50 Ohm load.
 </div>
 <div class="callout-content">
 <p>When sizing the MOSFET for this example we found that we need a fairly large <span class="math inline">\(W\)</span>, resulting in a MOSFET aspect ratio of <span class="math inline">\(W/L \gg 1000\)</span>. When constructing an integrated circuit out of individual MOSFETs, we strive for an overall IC dimension that is roughly square. For MOSFET with large aspect ratios we need to get them into a comfortable shape.</p>
-<p>In order to achieve this, we construct the MOSFET out of smaller pieces, and the size of these pieces (called “gate fingers”) is controlled by the parameter <code>ng</code>. These MOSFET gate fingers all have the same <span class="math inline">\(L\)</span>, but their width is <span class="math inline">\(W_\mathrm{finger} = W / \text{ng}\)</span>. All these individual smaller MOSFETs are connected in parallel.</p>
-<p>In order to increase the MOSFET model accuracy, often the maximum value of <span class="math inline">\(W_\mathrm{finger}\)</span> is limited. In the case of SG13G2 <span class="math inline">\(W_\mathrm{finger} \le 10\,\mu\text{m}\)</span>.</p>
-<p>In order to construct even larger MOSFETs, we can connect multiple MOSFETs in parallel. We can do this in the circuit editor by placing and connecting these MOSFETs; but since this is often used there is a more convenient way: By using the parameter <code>m</code> (“multiplier” or “multiplicity”) we instantiate <span class="math inline">\(m\)</span> MOSFETs connected in parallel.</p>
-<p>When to use <code>ng</code> and when to use <code>m</code>? The use of <code>ng</code> results in a more compact IC layout, and is thus generally preferable. Only in certain instances (e.g., when using a really large <span class="math inline">\(W\)</span>) <code>m</code> should be used. Further, the thoughtful use of <code>ng</code> <strong>allows one to construct all the NMOS and PMOS of a circuit out of the same gate finger elements</strong>. This will result in a very compact layout!</p>
 </div>
 </div>
 </div>
@@ -291,6 +287,61 @@ Figure&nbsp;26: A MOSFET common-source amplifier with 50 Ohm load.
 </section>
 <section class="slide level3 unnumbered">
 <h3>Sense Amplifier Driving 50 Ohm Matched Load</h3>
+<div title="MOSFET Parameters NG and M">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Parameters NG and M</strong></p>
+</div>
+<div class="callout-content">
+<p>In order to achieve this, we construct the MOSFET out of smaller pieces, and the size of these pieces (called “gate fingers”) is controlled by the parameter <code>ng</code>. These MOSFET gate fingers all have the same <span class="math inline">\(L\)</span>, but their width is <span class="math inline">\(W_\mathrm{finger} = W / \text{ng}\)</span>. All these individual smaller MOSFETs are connected in parallel.</p>
+<p>In order to increase the MOSFET model accuracy, often the maximum value of <span class="math inline">\(W_\mathrm{finger}\)</span> is limited. In the case of SG13G2 <span class="math inline">\(W_\mathrm{finger} \le 10\,\mu\text{m}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Sense Amplifier Driving 50 Ohm Matched Load</h3>
+<div title="MOSFET Parameters NG and M">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Parameters NG and M</strong></p>
+</div>
+<div class="callout-content">
+<p>In order to construct even larger MOSFETs, we can connect multiple MOSFETs in parallel. We can do this in the circuit editor by placing and connecting these MOSFETs; but since this is often used there is a more convenient way: By using the parameter <code>m</code> (“multiplier” or “multiplicity”) we instantiate <span class="math inline">\(m\)</span> MOSFETs connected in parallel.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Sense Amplifier Driving 50 Ohm Matched Load</h3>
+<div title="MOSFET Parameters NG and M">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Parameters NG and M</strong></p>
+</div>
+<div class="callout-content">
+<p>When to use <code>ng</code> and when to use <code>m</code>? The use of <code>ng</code> results in a more compact IC layout, and is thus generally preferable. Only in certain instances (e.g., when using a really large <span class="math inline">\(W\)</span>) <code>m</code> should be used. Further, the thoughtful use of <code>ng</code> <strong>allows one to construct all the NMOS and PMOS of a circuit out of the same gate finger elements</strong>. This will result in a very compact layout!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Sense Amplifier Driving 50 Ohm Matched Load</h3>
 <div title="Exercise: Measurement Amplifier Simulation">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -303,13 +354,64 @@ Figure&nbsp;26: A MOSFET common-source amplifier with 50 Ohm load.
 <div class="callout-content">
 <p>Please go through the <a href="../gmid/sizing_measurement_amplifier.html">sizing notebook</a> of the measurement amplifier and double-check the calculations. Do you agree that the calculations are correct?</p>
 <p>Once you agree with the circuit sizing please build an Xschem simulation testbench where you simulate the small-signal voltage gain <span class="math inline">\(A_\mathrm{v}\)</span> of this measurement amplifier if it is driven with an ideal voltage source. Keep in mind that the maximum MOSFET finger width is 10µm in this technology, so you need to set the parameter <code>ng</code> accordingly (see <a href="#/imp-mosfet-params-ng-m" class="quarto-xref">Important&nbsp;1</a>).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Sense Amplifier Driving 50 Ohm Matched Load</h3>
+<div title="Exercise: Measurement Amplifier Simulation">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: Measurement Amplifier Simulation</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li>What is the dc gain of this amplifier when loaded with 50<span class="math inline">\(\Omega\)</span>?</li>
 <li>The dc gain is likely not exactly 0 dB. Why is this so?</li>
 <li>Increase the width <span class="math inline">\(W\)</span> of the PMOS until the gain is correct. What is the <span class="math inline">\(W\)</span> that you had to set, and how much is <span class="math inline">\(I_\mathrm{D}\)</span> now?</li>
 <li>What is the bandwidth (i.e., the -3 dB corner frequency) of the output voltage, when the voltage source has a source resistance of 1k<span class="math inline">\(\Omega\)</span>?</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Sense Amplifier Driving 50 Ohm Matched Load</h3>
+<div title="Exercise: Measurement Amplifier Simulation">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: Measurement Amplifier Simulation</strong></p>
+</div>
+<div class="callout-content">
 <p>If you get stuck, <a href="../xschem/measurement_amplifier.sch">here</a> is the solution to this exercise, and it is also shown in <a href="#/fig-meas-amp-tb" class="quarto-xref">Figure&nbsp;27</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Sense Amplifier Driving 50 Ohm Matched Load</h3>
+<div title="Exercise: Measurement Amplifier Simulation">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: Measurement Amplifier Simulation</strong></p>
+</div>
+<div class="callout-content">
 <div id="fig-meas-amp-tb" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-meas-amp-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

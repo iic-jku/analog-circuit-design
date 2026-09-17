@@ -120,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -320,9 +320,10 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 <h3>Improved (Telescopic) OTA</h3>
 <p>A simplified small-signal gain calculation of this improved OTA uses the result of <a href="../aicd.html#eq-simple-ota-gain-dc">Equation&nbsp;18</a> and <a href="../aicd.html#eq-cs-cascode-output-impedance">Equation&nbsp;35</a> to arrive at the approximate dc gain of <span id="eq-improved-ota-gain-dc"><span class="math display">\[
 A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathrm{m2C}} + g_\mathrm{ds4} \frac{g_\mathrm{ds4C}}{g_\mathrm{m4C}}}
-\tag{45}\]</span></span> leading to a significant boost in dc gain due to cascoding. We use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
+\tag{45}\]</span></span> leading to a significant boost in dc gain due to cascoding.</p>
 <aside class="notes">
 <p>Further, by properly selecting the bias voltages of the cascode a low-voltage operation is achieved as <span class="math inline">\(V_\mathrm{DS}\)</span> can be minimized, allowing even triode operation of the current-mirror MOSFETs (as, noted above, a large <span class="math inline">\(g_\mathrm{ds}\)</span> is not a big issue).</p>
+<p>We use this increased gain to reduce the <span class="math inline">\(L\)</span> of all MOSFET to</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -721,13 +722,6 @@ Figure&nbsp;60: Improved OTA design in Xschem.
 <h3><span class="header-section-number">11.2.1</span> Discussion of the OTA Design</h3>
 <ol type="1">
 <li>For easier navigation, the device identifiers are consistent with the circuit sketch in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>.</li>
-<li>Some MOSFET dimensions are rounded to make a better fit in the IC layout. Please also look carefully at <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(\mathrm{ng}\)</span>. The parameter <span class="math inline">\(\mathrm{ng}\)</span> defines how the total <span class="math inline">\(W\)</span> of a MOSFET should be split into individual MOSFET fingers with <span class="math inline">\(W_\mathrm{f} = W / \mathrm{ng}\)</span>. This is done to arrive at a suitably sized MOSFET physical implementation. As we will not deal with IC layout in this lecture we will leave it at that.</li>
-<li>In order to allow good matching in the IC layout, MOSFETs (and other components) have to be constructed from equal pieces. To that end, <span class="math inline">\(W/L\)</span> scaling is done using unit elements (see finger width <span class="math inline">\(W_\mathrm{f}\)</span>). Sometimes, besides <span class="math inline">\(W\)</span> the length <span class="math inline">\(L\)</span> has to be scaled, and this leads to the odd-looking series stacking of some MOSFETs (easily recognizable by the connected gates). In order to increase circuit readability, a subcircuit could be constructed hiding this series stacking of MOSFET, but it is sometimes easier to avoid subcircuits. There is a fine line in this trade-off, sometimes a depth of 4 is the decision point between subcircuit use/no-use.</li>
-<li>As you can (hopefully) see the circuit is carefully drawn to ease readability. Important nets are named, text comments state certain properties like nominal voltage levels, bias currents, etc. Current sensing elements are added to directly see the dc currents in the circuit simulation.</li>
-<li>The bias voltage generation for the cascodes is included as well. The voltage drop for the bottom transistors is developed by properly scaling the MOSFETs in the reference branch. We reduce the <span class="math inline">\(W/L\)</span> ratio to increase the <span class="math inline">\(V_\mathrm{GS}\)</span> to create a voltage headroom for the bottom MOSFET. We are using a dummy branch for bias generation (constructed with <span class="math inline">\(M_\mathrm{7-10}\)</span>).</li>
-<li>The floating bias voltage <span class="math inline">\(V_\mathrm{bias1}\)</span> is created by implementing a current source from <span class="math inline">\(V_\mathrm{DD}\)</span> (<span class="math inline">\(M_\mathrm{9}\)</span>), then a MOSFET diode <span class="math inline">\(M_{10}\)</span>, and an increased current towards <span class="math inline">\(V_\mathrm{SS}\)</span> through <span class="math inline">\(M_\mathrm{5}\)</span>.</li>
-<li>Power-down transistors <span class="math inline">\(M_{\mathrm{pd,}x}\)</span> are added to allow a proper shutdown of the circuit with a digital enable input. It is generally a good idea to clamp floating nodes in off-mode so that no issues during power-down (like increased leakage currents) or delayed startup or shutdown are occurring. It is further a good design principle to buffer all incoming digital signals with inverters (<span class="math inline">\(M_\mathrm{pd,1-4}\)</span>) connected to the local supply. This lowers the risk of unwanted noise coupling or excessive slew rates on the incoming digital signals.</li>
-<li>Sensitive bias nodes are buffered with decoupling capacitors. We are using MOSFETs as nonlinear capacitors, which is not an issue in this application, but we value the increased capacitive density. Please note how the MOSFET are connected (some are tied to <span class="math inline">\(V_\mathrm{DD}\)</span> while others are tied to <span class="math inline">\(V_\mathrm{SS}\)</span>).</li>
 </ol>
 <aside class="notes">
 <p>We now do an analysis of the circuit design of the OTA including all the complications which make this design practical.</p>
@@ -742,6 +736,55 @@ Figure&nbsp;60: Improved OTA design in Xschem.
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Discussion of the OTA Design</h3>
+<ol start="2" type="1">
+<li>Some MOSFET dimensions are rounded to make a better fit in the IC layout. Please also look carefully at <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(\mathrm{ng}\)</span>. The parameter <span class="math inline">\(\mathrm{ng}\)</span> defines how the total <span class="math inline">\(W\)</span> of a MOSFET should be split into individual MOSFET fingers with <span class="math inline">\(W_\mathrm{f} = W / \mathrm{ng}\)</span>. This is done to arrive at a suitably sized MOSFET physical implementation. As we will not deal with IC layout in this lecture we will leave it at that.</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Discussion of the OTA Design</h3>
+<ol start="3" type="1">
+<li>In order to allow good matching in the IC layout, MOSFETs (and other components) have to be constructed from equal pieces. To that end, <span class="math inline">\(W/L\)</span> scaling is done using unit elements (see finger width <span class="math inline">\(W_\mathrm{f}\)</span>). Sometimes, besides <span class="math inline">\(W\)</span> the length <span class="math inline">\(L\)</span> has to be scaled, and this leads to the odd-looking series stacking of some MOSFETs (easily recognizable by the connected gates).</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Discussion of the OTA Design</h3>
+<ol start="3" type="1">
+<li>In order to increase circuit readability, a subcircuit could be constructed hiding this series stacking of MOSFET, but it is sometimes easier to avoid subcircuits. There is a fine line in this trade-off, sometimes a depth of 4 is the decision point between subcircuit use/no-use.</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Discussion of the OTA Design</h3>
+<ol start="4" type="1">
+<li>As you can (hopefully) see the circuit is carefully drawn to ease readability. Important nets are named, text comments state certain properties like nominal voltage levels, bias currents, etc. Current sensing elements are added to directly see the dc currents in the circuit simulation.</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Discussion of the OTA Design</h3>
+<ol start="5" type="1">
+<li>The bias voltage generation for the cascodes is included as well. The voltage drop for the bottom transistors is developed by properly scaling the MOSFETs in the reference branch. We reduce the <span class="math inline">\(W/L\)</span> ratio to increase the <span class="math inline">\(V_\mathrm{GS}\)</span> to create a voltage headroom for the bottom MOSFET. We are using a dummy branch for bias generation (constructed with <span class="math inline">\(M_\mathrm{7-10}\)</span>).</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Discussion of the OTA Design</h3>
+<ol start="6" type="1">
+<li>The floating bias voltage <span class="math inline">\(V_\mathrm{bias1}\)</span> is created by implementing a current source from <span class="math inline">\(V_\mathrm{DD}\)</span> (<span class="math inline">\(M_\mathrm{9}\)</span>), then a MOSFET diode <span class="math inline">\(M_{10}\)</span>, and an increased current towards <span class="math inline">\(V_\mathrm{SS}\)</span> through <span class="math inline">\(M_\mathrm{5}\)</span>.</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Discussion of the OTA Design</h3>
+<ol start="7" type="1">
+<li>Power-down transistors <span class="math inline">\(M_{\mathrm{pd,}x}\)</span> are added to allow a proper shutdown of the circuit with a digital enable input. It is generally a good idea to clamp floating nodes in off-mode so that no issues during power-down (like increased leakage currents) or delayed startup or shutdown are occurring. It is further a good design principle to buffer all incoming digital signals with inverters (<span class="math inline">\(M_\mathrm{pd,1-4}\)</span>) connected to the local supply.</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Discussion of the OTA Design</h3>
+<ol start="7" type="1">
+<li>This lowers the risk of unwanted noise coupling or excessive slew rates on the incoming digital signals.</li>
+<li>Sensitive bias nodes are buffered with decoupling capacitors. We are using MOSFETs as nonlinear capacitors, which is not an issue in this application, but we value the increased capacitive density. Please note how the MOSFET are connected (some are tied to <span class="math inline">\(V_\mathrm{DD}\)</span> while others are tied to <span class="math inline">\(V_\mathrm{SS}\)</span>).</li>
+</ol>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Discussion of the OTA Design</h3>
@@ -814,6 +857,25 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 <li>Check the dc bias points. Are they good? How stable are they across PVT variations?</li>
 <li>What are the small-signal parameters like gain, noise and bandwidth? Are they fitting the specification?</li>
 <li>What is large-signal performance? Is the settling fast enough? Is the settling well behaved, i.e., are there overshoots or other strange ringing indicating potential stability issues?</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Simulation of Improved OTA</h3>
+<div title="Exercise: Improved OTA Initial Simulation">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: Improved OTA Initial Simulation</strong></p>
+</div>
+<div class="callout-content">
+<ol start="4" type="1">
 <li>Try to improve the design. Change various device parameters and see what happens. Whenever you change something, check the dc operating point first. If the dc operating point is not good no further simulations make sense.</li>
 </ol>
 </div>
@@ -837,8 +899,8 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 <p><strong>Note&nbsp;3: CACE Summary for Improved OTA</strong></p>
 </div>
-<section id="cace-summary-for-ota-improved" class="title-slide slide level1 unnumbered unlisted callout-content center">
-<h1>CACE Summary for ota-improved</h1>
+<div class="callout-content">
+<p><strong>CACE Summary for ota-improved</strong></p>
 <p><strong>netlist source</strong>: schematic</p>
 <table class="caption-top">
 <colgroup>
@@ -942,103 +1004,15 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </tr>
 </tbody>
 </table>
-</section>
-<section id="plots" class="title-slide slide level2 unnumbered unlisted center">
-<h2>Plots</h2>
-
-</section>
-
-<section id="gain_vs_temp" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_vs_temp</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/gain_vs_temp.png" class="r-stretch quarto-figure-center"><p class="caption">gain_vs_temp</p></section>
-
-<section id="gain_vs_vin" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_vs_vin</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/gain_vs_vin.png" class="r-stretch quarto-figure-center"><p class="caption">gain_vs_vin</p></section>
-
-<section id="gain_vs_vdd" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_vs_vdd</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/gain_vs_vdd.png" class="r-stretch quarto-figure-center"><p class="caption">gain_vs_vdd</p></section>
-
-<section id="gain_vs_corner" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_vs_corner</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/gain_vs_corner.png" class="r-stretch quarto-figure-center"><p class="caption">gain_vs_corner</p></section>
-
-<section id="bw_vs_temp" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_vs_temp</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/bw_vs_temp.png" class="r-stretch quarto-figure-center"><p class="caption">bw_vs_temp</p></section>
-
-<section id="bw_vs_vin" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_vs_vin</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/bw_vs_vin.png" class="r-stretch quarto-figure-center"><p class="caption">bw_vs_vin</p></section>
-
-<section id="bw_vs_vdd" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_vs_vdd</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/bw_vs_vdd.png" class="r-stretch quarto-figure-center"><p class="caption">bw_vs_vdd</p></section>
-
-<section id="bw_vs_corner" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_vs_corner</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/bw_vs_corner.png" class="r-stretch quarto-figure-center"><p class="caption">bw_vs_corner</p></section>
-
-<section id="gain_mc" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_mc</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/gain_mc.png" class="r-stretch quarto-figure-center"><p class="caption">gain_mc</p></section>
-
-<section id="bw_mc" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_mc</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/bw_mc.png" class="r-stretch quarto-figure-center"><p class="caption">bw_mc</p></section>
-
-<section id="noise_vs_temp" class="title-slide slide level2 unnumbered unlisted center">
-<h2>noise_vs_temp</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/noise_vs_temp.png" class="r-stretch quarto-figure-center"><p class="caption">noise_vs_temp</p></section>
-
-<section id="noise_vs_vin" class="title-slide slide level2 unnumbered unlisted center">
-<h2>noise_vs_vin</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/noise_vs_vin.png" class="r-stretch quarto-figure-center"><p class="caption">noise_vs_vin</p></section>
-
-<section id="noise_vs_vdd" class="title-slide slide level2 unnumbered unlisted center">
-<h2>noise_vs_vdd</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/noise_vs_vdd.png" class="r-stretch quarto-figure-center"><p class="caption">noise_vs_vdd</p></section>
-
-<section id="noise_vs_corner" class="title-slide slide level2 unnumbered unlisted center">
-<h2>noise_vs_corner</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/noise_vs_corner.png" class="r-stretch quarto-figure-center"><p class="caption">noise_vs_corner</p></section>
-
-<section id="settling_vs_temp" class="title-slide slide level2 unnumbered unlisted center">
-<h2>settling_vs_temp</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/settling_vs_temp.png" class="r-stretch quarto-figure-center"><p class="caption">settling_vs_temp</p></section>
-
-<section id="settling_vs_vin" class="title-slide slide level2 unnumbered unlisted center">
-<h2>settling_vs_vin</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/settling_vs_vin.png" class="r-stretch quarto-figure-center"><p class="caption">settling_vs_vin</p></section>
-
-<section id="settling_vs_vdd" class="title-slide slide level2 unnumbered unlisted center">
-<h2>settling_vs_vdd</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/settling_vs_vdd.png" class="r-stretch quarto-figure-center"><p class="caption">settling_vs_vdd</p></section>
-
-<section id="settling_vs_corner" class="title-slide slide level2 unnumbered unlisted center">
-<h2>settling_vs_corner</h2>
-
-<img data-src="../cace/_docs/ota-improved/schematic/settling_vs_corner.png" class="r-stretch quarto-figure-center"><p class="caption">settling_vs_corner</p></section>
-
-
+<p><strong>Plots</strong></p>
+<p><strong>gain_vs_temp</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/gain_vs_temp.png"></p>
+<figcaption>gain_vs_temp</figcaption>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1055,6 +1029,414 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>gain_vs_vin</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/gain_vs_vin.png"></p>
+<figcaption>gain_vs_vin</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>gain_vs_vdd</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/gain_vs_vdd.png"></p>
+<figcaption>gain_vs_vdd</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>gain_vs_corner</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/gain_vs_corner.png"></p>
+<figcaption>gain_vs_corner</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_vs_temp</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/bw_vs_temp.png"></p>
+<figcaption>bw_vs_temp</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_vs_vin</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/bw_vs_vin.png"></p>
+<figcaption>bw_vs_vin</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_vs_vdd</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/bw_vs_vdd.png"></p>
+<figcaption>bw_vs_vdd</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_vs_corner</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/bw_vs_corner.png"></p>
+<figcaption>bw_vs_corner</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>gain_mc</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/gain_mc.png"></p>
+<figcaption>gain_mc</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_mc</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/bw_mc.png"></p>
+<figcaption>bw_mc</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>noise_vs_temp</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/noise_vs_temp.png"></p>
+<figcaption>noise_vs_temp</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>noise_vs_vin</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/noise_vs_vin.png"></p>
+<figcaption>noise_vs_vin</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>noise_vs_vdd</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/noise_vs_vdd.png"></p>
+<figcaption>noise_vs_vdd</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>noise_vs_corner</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/noise_vs_corner.png"></p>
+<figcaption>noise_vs_corner</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>settling_vs_temp</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/settling_vs_temp.png"></p>
+<figcaption>settling_vs_temp</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>settling_vs_vin</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/settling_vs_vin.png"></p>
+<figcaption>settling_vs_vin</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>settling_vs_vdd</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/settling_vs_vdd.png"></p>
+<figcaption>settling_vs_vdd</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="CACE Summary for Improved OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for Improved OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>settling_vs_corner</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-improved/schematic/settling_vs_corner.png"></p>
+<figcaption>settling_vs_corner</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>

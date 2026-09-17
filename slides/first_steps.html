@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -217,8 +217,6 @@ Figure&nbsp;1: Circuit symbols for different voltage-controlled amplifiers (from
 </div>
 <div class="callout-content">
 <p>Strictly speaking, the drain-source current of a MOSFET is controlled by the voltage between gate and bulk (<span class="math inline">\(V_\mathrm{GB}\)</span>) and the voltage between drain and source (<span class="math inline">\(V_\mathrm{DS}\)</span>). Since bulk is often connected to source anyway, and many circuit designers historically were already familiar with the operation of the bipolar junction transistor (BJT), it is common to consider the gate-source voltage (besides the drain-source voltage) as the controlling voltage.</p>
-<p>This focus on gate-source suggests that the source is special compared to the drain. In a typical physical MOSFET, however, the drain and source are constructed exactly the same (i.e., the MOSFET is a symmetric device), and which terminal is drain, and which terminal is source, is only determined by the applied voltage potentials, and can change dynamically during operation (think of a MOSFET operating as a switch… which side is the drain, which side is the source?).</p>
-<p>Unfortunately, this focus on a “special” source has made its way into some MOSFET compact models. The model that is used in SG13G2 luckily uses the PSP model, which is formulated symmetrically with regards to drain and source, and is thus very well suited for analog and RF circuit design. For a detailed understanding of the PSP model please refer to the <a href="https://www.cea.fr/cea-tech/leti/pspsupport/Documents/psp103p6_summary.pdf">model documentation</a>.</p>
 </div>
 </div>
 </div>
@@ -238,6 +236,42 @@ Figure&nbsp;1: Circuit symbols for different voltage-controlled amplifiers (from
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<div title="MOSFET Background">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Background</strong></p>
+</div>
+<div class="callout-content">
+<p>This focus on gate-source suggests that the source is special compared to the drain. In a typical physical MOSFET, however, the drain and source are constructed exactly the same (i.e., the MOSFET is a symmetric device), and which terminal is drain, and which terminal is source, is only determined by the applied voltage potentials, and can change dynamically during operation (think of a MOSFET operating as a switch… which side is the drain, which side is the source?).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<div title="MOSFET Background">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Background</strong></p>
+</div>
+<div class="callout-content">
+<p>Unfortunately, this focus on a “special” source has made its way into some MOSFET compact models. The model that is used in SG13G2 luckily uses the PSP model, which is formulated symmetrically with regards to drain and source, and is thus very well suited for analog and RF circuit design. For a detailed understanding of the PSP model please refer to the <a href="https://www.cea.fr/cea-tech/leti/pspsupport/Documents/psp103p6_summary.pdf">model documentation</a>.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
@@ -290,8 +324,61 @@ Circuit symbol of p-channel MOSFET. As for n-channel MOSFETs, we will mostly use
 </div>
 <div class="callout-content">
 <p>Looking at the MOSFET symbols in <a href="#/fig-nmos-symbol" class="quarto-xref">Figure&nbsp;2</a> and <a href="#/fig-pmos-symbol" class="quarto-xref">Figure&nbsp;3</a>, you might have noticed that the left and the right symbols are symmetric for the drain and source terminals, while the middle symbol shows an arrow in the source connection.</p>
-<p>This is a common “error” in many important textbooks and online resources <span class="citation" data-cites="Razavi_Analog_CMOS Gray_Meyer_2009 Sansen_Essentials">(<a href="#/references" role="doc-biblioref" onclick="">Razavi 2017</a>; <a href="#/references" role="doc-biblioref" onclick="">Gray et al. 2009</a>; <a href="#/references" role="doc-biblioref" onclick="">Sansen 2006</a>)</span>, and it is important to be aware of this. The drain and source of a MOSFET are (usually) symmetric, and the current flow can be reversed by changing the applied voltages (and then also drain and source swap; generally, for an NMOS, the connection with the higher potential is the drain, the one with the lower potential is the source. For a PMOS, the situation is inverted).</p>
-<p>The symbol in the middle of <a href="#/fig-nmos-symbol" class="quarto-xref">Figure&nbsp;2</a> and <a href="#/fig-pmos-symbol" class="quarto-xref">Figure&nbsp;3</a> is thus misleading, because is suggests that the source is special and that the current can only flow in one direction. This is not the case, and it is important to be aware of this when designing circuits, especially when using MOSFETs as switches. As many symbols are drawn this way, we will also use this symbol in this course (and the resemblance to a bipolar junction transistor is intentional), but please be aware of the fact that the drain and source are symmetric, and the current can flow in both directions depending on the bias voltages!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<div title="MOSFET Symbol">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Symbol</strong></p>
+</div>
+<div class="callout-content">
+<p>This is a common “error” in many important textbooks and online resources <span class="citation" data-cites="Razavi_Analog_CMOS Gray_Meyer_2009 Sansen_Essentials">(<a href="#/references" role="doc-biblioref" onclick="">Razavi 2017</a>; <a href="#/references" role="doc-biblioref" onclick="">Gray et al. 2009</a>; <a href="#/references" role="doc-biblioref" onclick="">Sansen 2006</a>)</span>, and it is important to be aware of this. The drain and source of a MOSFET are (usually) symmetric, and the current flow can be reversed by changing the applied voltages (and then also drain and source swap; generally, for an NMOS, the connection with the higher potential is the drain, the one with the lower potential is the source.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<div title="MOSFET Symbol">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Symbol</strong></p>
+</div>
+<div class="callout-content">
+<p>For a PMOS, the situation is inverted).</p>
+<p>The symbol in the middle of <a href="#/fig-nmos-symbol" class="quarto-xref">Figure&nbsp;2</a> and <a href="#/fig-pmos-symbol" class="quarto-xref">Figure&nbsp;3</a> is thus misleading, because is suggests that the source is special and that the current can only flow in one direction. This is not the case, and it is important to be aware of this when designing circuits, especially when using MOSFETs as switches.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<div title="MOSFET Symbol">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Symbol</strong></p>
+</div>
+<div class="callout-content">
+<p>As many symbols are drawn this way, we will also use this symbol in this course (and the resemblance to a bipolar junction transistor is intentional), but please be aware of the fact that the drain and source are symmetric, and the current can flow in both directions depending on the bias voltages!</p>
 </div>
 </div>
 </div>
@@ -362,13 +449,6 @@ The MOSFET large-signal model. In general, all capacitors are nonlinear, i.e., t
 </div>
 <div class="callout-content">
 <p>Throughout this material, we will largely stick to the following notation standardized by IEEE:</p>
-<ul>
-<li>A <strong>dc quantity</strong> is shown with an upper-case variable name with upper-case subscripts, like <span class="math inline">\(V_\mathrm{GS}\)</span>.</li>
-<li>Double-subscripts denote <strong>dc sources</strong>, like <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>.</li>
-<li>An <strong>ac (small-signal) quantity</strong> (incremental quantity) has a lower-case variable name with a lower-case subscript, like <span class="math inline">\(g_\mathrm{m}\)</span>.</li>
-<li>A <strong>total quantity</strong> (dc plus ac) is shown as a lowercase variable name with upper-case subscript, like <span class="math inline">\(i_\mathrm{DS}\)</span>.</li>
-<li>An upper-case variable name with a lower-case subscript is used to denote signal <em>amplitudes</em> (phasors), like <span class="math inline">\(V_\mathrm{gs}\)</span>, <span class="math inline">\(V_\mathrm{ds}\)</span>, <span class="math inline">\(I_\mathrm{d}\)</span>.</li>
-</ul>
 </div>
 </div>
 </div>
@@ -391,6 +471,30 @@ The MOSFET large-signal model. In general, all capacitors are nonlinear, i.e., t
 </section>
 <section class="slide level3 unnumbered">
 <h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<div title="Mathematical Notation">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Mathematical Notation</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>A <strong>dc quantity</strong> is shown with an upper-case variable name with upper-case subscripts, like <span class="math inline">\(V_\mathrm{GS}\)</span>.</li>
+<li>Double-subscripts denote <strong>dc sources</strong>, like <span class="math inline">\(V_\mathrm{DD}\)</span> and <span class="math inline">\(V_\mathrm{SS}\)</span>.</li>
+<li>An <strong>ac (small-signal) quantity</strong> (incremental quantity) has a lower-case variable name with a lower-case subscript, like <span class="math inline">\(g_\mathrm{m}\)</span>.</li>
+<li>A <strong>total quantity</strong> (dc plus ac) is shown as a lowercase variable name with upper-case subscript, like <span class="math inline">\(i_\mathrm{DS}\)</span>.</li>
+<li>An upper-case variable name with a lower-case subscript is used to denote signal <em>amplitudes</em> (phasors), like <span class="math inline">\(V_\mathrm{gs}\)</span>, <span class="math inline">\(V_\mathrm{ds}\)</span>, <span class="math inline">\(I_\mathrm{d}\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
 <div title="A Comment on Active and Passive Devices and Linear vs. Nonlinear">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -401,7 +505,25 @@ The MOSFET large-signal model. In general, all capacitors are nonlinear, i.e., t
 <p><strong>A Comment on Active and Passive Devices and Linear vs.&nbsp;Nonlinear</strong></p>
 </div>
 <div class="callout-content">
-<p>In contrast to the <strong>passive</strong> devices resistor <span class="math inline">\(R\)</span>, inductor <span class="math inline">\(L\)</span>, and capacitor <span class="math inline">\(C\)</span>, which can only dissipate energy (and are often treated in a linearized fashion), transistors (like the MOSFET) are called “<strong>active</strong>”, since they can provide signal power amplification. However, transistors can not create energy out of thin air, but merely convert <strong>dc</strong> energy (supplied by the power supply) into <strong>ac</strong> energy <span class="citation" data-cites="Manley-Rowe_1956">(<a href="#/references" role="doc-biblioref" onclick="">Manley and Rowe 1956</a>)</span>. They have to have nonlinear transfer characteristics to do this, but it has been shown that a piecewise-linear characteristic is sufficient <span class="citation" data-cites="Jakoby_2022">(<a href="#/references" role="doc-biblioref" onclick="">Jakoby 2022</a>)</span>. This is very good news for circuit design, as usually we strive for linear behaviour!</p>
+<p>In contrast to the <strong>passive</strong> devices resistor <span class="math inline">\(R\)</span>, inductor <span class="math inline">\(L\)</span>, and capacitor <span class="math inline">\(C\)</span>, which can only dissipate energy (and are often treated in a linearized fashion), transistors (like the MOSFET) are called “<strong>active</strong>”, since they can provide signal power amplification. However, transistors can not create energy out of thin air, but merely convert <strong>dc</strong> energy (supplied by the power supply) into <strong>ac</strong> energy <span class="citation" data-cites="Manley-Rowe_1956">(<a href="#/references" role="doc-biblioref" onclick="">Manley and Rowe 1956</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET)</h3>
+<div title="A Comment on Active and Passive Devices and Linear vs. Nonlinear">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>A Comment on Active and Passive Devices and Linear vs.&nbsp;Nonlinear</strong></p>
+</div>
+<div class="callout-content">
+<p>They have to have nonlinear transfer characteristics to do this, but it has been shown that a piecewise-linear characteristic is sufficient <span class="citation" data-cites="Jakoby_2022">(<a href="#/references" role="doc-biblioref" onclick="">Jakoby 2022</a>)</span>. This is very good news for circuit design, as usually we strive for linear behaviour!</p>
 </div>
 </div>
 </div>
@@ -442,6 +564,23 @@ Figure&nbsp;5: Testbench for NMOS dc sweeps.
 </div>
 <div class="callout-content">
 <p>For modelling the MOSFET behavior in a circuit simulator like ngspice different models are available. Some of these models have been widely adopted, like the <a href="https://en.wikipedia.org/wiki/BSIM">BSIM</a> (Berkeley Short-channel IGFET Model) or PSP (Philips Penn State) model. The PSP model version 103.6 is used in the IHP SG13G2 PDK for the LV and HV MOSFET. This model has several advantages:</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Large-Signal MOSFET Model</h3>
+<div title="MOSFET Simulation Model">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Simulation Model</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li>Physics-based surface-potential model</li>
 <li>Symmetric formulation with respect to drain and source</li>
@@ -470,17 +609,99 @@ Figure&nbsp;5: Testbench for NMOS dc sweeps.
 <li>Get the LV NMOS testbench (available at <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch" class="uri">https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch</a>) working in your IIC-OSIC-TOOLS environment.</li>
 <li>Make yourself familiar with Xschem (change the schematic in various ways, run a simulation, graph the result).</li>
 <li>Make yourself familiar with ngspice (run various simulations, save nets and parameters, use the embedded Xschem graphing, explore the interactive ngspice shell to look at MOSFET model parameters).</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Large-Signal MOSFET Model</h3>
+<div title="Exercise: MOSFET Investigation">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: MOSFET Investigation</strong></p>
+</div>
+<div class="callout-content">
+<ol start="4" type="1">
 <li>Explore the LV NMOS <code>sg13_lv_nmos</code>:
 <ol type="1">
 <li>How is <span class="math inline">\(I_\mathrm{D}\)</span> affected by <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>?</li>
 <li>Change <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> of the MOSFET. What is the impact on the above parameters? Can you explain the variations?</li>
 <li>Look at the capacitance values for <span class="math inline">\(C_\mathrm{GS}\)</span>, <span class="math inline">\(C_\mathrm{GB}\)</span>, <span class="math inline">\(C_\mathrm{GD}\)</span>, and <span class="math inline">\(C_\mathrm{DB}\)</span>. How are they affected by <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> and by changing the bias conditions (play with <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span>)?</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Large-Signal MOSFET Model</h3>
+<div title="Exercise: MOSFET Investigation">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: MOSFET Investigation</strong></p>
+</div>
+<div class="callout-content">
+<ol start="4" type="1">
+<li>Explore the LV NMOS <code>sg13_lv_nmos</code>:
+<ol start="4" type="1">
 <li>When looking at the model parameters in ngspice, you see that there is a <span class="math inline">\(C_\mathrm{GD}\)</span> and a <span class="math inline">\(C_\mathrm{DG}\)</span>. Why is this, what could be the difference? Sometimes these capacitors show a negative value, why? (Hint: Study <a href="#/nte-maxwell-cap-matrix" class="quarto-xref">Note&nbsp;1</a>)</li>
 </ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Large-Signal MOSFET Model</h3>
+<div title="Exercise: MOSFET Investigation">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: MOSFET Investigation</strong></p>
+</div>
+<div class="callout-content">
+<ol start="5" type="1">
 <li>Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
 <ol type="1">
 <li>For a given <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>, which device provides more drain current? How are the capacitances related?</li>
 <li>If you would have to size an inverter, what would be the ideal ratio of <span class="math inline">\(W_p/W_n\)</span>? Will you exactly design this ratio, or are the reasons to deviate?</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Large-Signal MOSFET Model</h3>
+<div title="Exercise: MOSFET Investigation">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: MOSFET Investigation</strong></p>
+</div>
+<div class="callout-content">
+<ol start="5" type="1">
+<li>Build testbenches in Xschem for the LV PMOS, the HV NMOS, and the HV PMOS. Explore the different results.
+<ol start="3" type="1">
 <li>There are LV and HV MOSFETs, and you investigated the difference in performance. What is the rationale when designing circuits for selection either an LV type, and when to choose an HV type?</li>
 </ol></li>
 <li>Build a test bench to explore the body effect, start with LV NMOS.
@@ -596,7 +817,41 @@ Figure&nbsp;7: The MOSFET small-signal model when source and bulk are shorted.
 </div>
 <div class="callout-content">
 <p>Sometimes we will refer to different operating modes of the MOSFET like “saturation” or “triode.” Generally speaking, when the drain-source voltage is small, then the MOSFET acts as a voltage-controlled resistor (since the impact of both <span class="math inline">\(V_\mathrm{GS}\)</span> and <span class="math inline">\(V_\mathrm{DS}\)</span> on <span class="math inline">\(I_\mathrm{D}\)</span> is large), and this mode of operation we call “<strong>triode</strong>” mode.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Small-Signal MOSFET Model</h3>
+<div title="MOSFET Triode and Saturation Region">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Triode and Saturation Region</strong></p>
+</div>
+<div class="callout-content">
 <p>When the drain-source voltage <span class="math inline">\(V_\mathrm{DS}\)</span> is increased, at some point the drain-source current saturates and is only a weak function of the drain-source voltage, while still being well controlled by <span class="math inline">\(V_\mathrm{GS}\)</span>. This mode is called “<strong>saturation</strong>” mode.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Small-Signal MOSFET Model</h3>
+<div title="MOSFET Triode and Saturation Region">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Triode and Saturation Region</strong></p>
+</div>
+<div class="callout-content">
 <p>As you can see in the large-signal investigations, these transitions happen gradually, and it is difficult to define a precise point where one operating mode switches to the other one. In this sense we use terms like “triode” and “saturation” only in an approximate sense.</p>
 </div>
 </div>
@@ -648,9 +903,26 @@ Figure&nbsp;9: The MOSFET small-signal basic T-model.
 </section>
 <section class="slide level3 unnumbered">
 <h3>Small-Signal MOSFET Model</h3>
-<p>A metric which is useful to assess the speed of a MOSFET is the so-called <strong>transit frequency</strong> <span class="math inline">\(f_\mathrm{T}\)</span>. It is defined as the frequency where the small-signal current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output drops to unity (reaches one). It can easily be derived using the simplified MOSFET small-signal model of <a href="#/fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;7</a> by driving it with a voltage source and shorting the output to ground (neglecting the feed-forward current introduced by <span class="math inline">\(C_\mathrm{gd}\)</span>): <span id="eq-mosfet-transit-frequency"><span class="math display">\[
+<p>It can easily be derived using the simplified MOSFET small-signal model of <a href="#/fig-mosfet-small-signal-model-simplified" class="quarto-xref">Figure&nbsp;7</a> by driving it with a voltage source and shorting the output to ground (neglecting the feed-forward current introduced by <span class="math inline">\(C_\mathrm{gd}\)</span>): <span id="eq-mosfet-transit-frequency"><span class="math display">\[
 \omega_\mathrm{T} = 2 \pi f_\mathrm{T} \approx \frac{g_\mathrm{m}}{C_\mathrm{gg}} = \frac{g_\mathrm{m}}{C_\mathrm{gs}+ C_\mathrm{gd}+ C_\mathrm{gb}}.
-\tag{2}\]</span></span> This frequency is an extrapolated frequency where the MOSFET operation is dominated by several second-order effects (hence <a href="#/eq-mosfet-transit-frequency" class="quarto-xref">Equation&nbsp;2</a> is not valid any longer). A rule-of-thumb is to use a MOSFET up to approximately <span class="math inline">\(f_\mathrm{T} / 10\)</span>. In any case, <span class="math inline">\(f_\mathrm{T}\)</span> is a proxy of the speed of a MOSFET; in other words, how much input capacitance <span class="math inline">\(C_\mathrm{gg}\)</span> is incurred when creating a certain <span class="math inline">\(g_\mathrm{m}\)</span>.</p>
+\tag{2}\]</span></span></p>
+<aside class="notes">
+<p>A metric which is useful to assess the speed of a MOSFET is the so-called <strong>transit frequency</strong> <span class="math inline">\(f_\mathrm{T}\)</span>.</p>
+<p>It is defined as the frequency where the small-signal current gain (output current divided by the input current) of a MOSFET driven by a voltage-source at the input and loaded by a voltage source at the output drops to unity (reaches one).</p>
+<p>This frequency is an extrapolated frequency where the MOSFET operation is dominated by several second-order effects (hence <a href="#/eq-mosfet-transit-frequency" class="quarto-xref">Equation&nbsp;2</a> is not valid any longer).</p>
+<p>A rule-of-thumb is to use a MOSFET up to approximately <span class="math inline">\(f_\mathrm{T} / 10\)</span>.</p>
+<p>In any case, <span class="math inline">\(f_\mathrm{T}\)</span> is a proxy of the speed of a MOSFET; in other words, how much input capacitance <span class="math inline">\(C_\mathrm{gg}\)</span> is incurred when creating a certain <span class="math inline">\(g_\mathrm{m}\)</span>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Small-Signal MOSFET Model</h3>
@@ -670,7 +942,7 @@ Figure&nbsp;9: The MOSFET small-signal basic T-model.
 </div>
 </div>
 </section>
-<section class="slide level3 unnumbered scrollable">
+<section class="slide level3 unnumbered">
 <h3>Small-Signal MOSFET Model</h3>
 <div title="Exercise: MOSFET Small-Signal Parameters">
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -683,20 +955,6 @@ Figure&nbsp;9: The MOSFET small-signal basic T-model.
 </div>
 <div class="callout-content">
 <p>Please try to execute the following steps and answer the following questions:</p>
-<ol type="1">
-<li>Reuse the LV NMOS testbench (available at <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch" class="uri">https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch</a>).</li>
-<li>Explore the LV NMOS <code>sg13_lv_nmos</code>:
-<ol type="1">
-<li>How are <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span> changing when you change the dc node voltages?</li>
-<li>What is the ratio of <span class="math inline">\(g_\mathrm{m}\)</span> to <span class="math inline">\(g_\mathrm{mb}\)</span>? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?</li>
-<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{gs}\)</span>, <span class="math inline">\(C_\mathrm{gd}\)</span>, and <span class="math inline">\(C_\mathrm{gb}\)</span>. Why are they important? What is the <span class="math inline">\(f_\mathrm{T}\)</span> of the MOSFET?</li>
-<li>Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
-</ol></li>
-<li>Go back to your testbench for the LV PMOS <code>sg13_lv_pmos</code>:
-<ol type="1">
-<li>What is the difference in <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(g_\mathrm{ds}\)</span>, and other parameters between the NMOS and the PMOS? Why could they be different?</li>
-</ol></li>
-</ol>
 </div>
 </div>
 </div>
@@ -715,6 +973,78 @@ Figure&nbsp;9: The MOSFET small-signal basic T-model.
           display:block!important;
       }</style></aside>
 </section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Small-Signal MOSFET Model</h3>
+<div title="Exercise: MOSFET Small-Signal Parameters">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: MOSFET Small-Signal Parameters</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li>Reuse the LV NMOS testbench (available at <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch" class="uri">https://github.com/iic-jku/analog-circuit-design/blob/main/xschem/dc_lv_nmos.sch</a>).</li>
+<li>Explore the LV NMOS <code>sg13_lv_nmos</code>:
+<ol type="1">
+<li>How are <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span> changing when you change the dc node voltages?</li>
+<li>What is the ratio of <span class="math inline">\(g_\mathrm{m}\)</span> to <span class="math inline">\(g_\mathrm{mb}\)</span>? What is the physical reason behind this ratio (you might want to revisit MOSFET device physics at this point)?</li>
+<li>Take a look at the device capacitances <span class="math inline">\(C_\mathrm{gs}\)</span>, <span class="math inline">\(C_\mathrm{gd}\)</span>, and <span class="math inline">\(C_\mathrm{gb}\)</span>. Why are they important? What is the <span class="math inline">\(f_\mathrm{T}\)</span> of the MOSFET?</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Small-Signal MOSFET Model</h3>
+<div title="Exercise: MOSFET Small-Signal Parameters">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: MOSFET Small-Signal Parameters</strong></p>
+</div>
+<div class="callout-content">
+<ol start="2" type="1">
+<li>Explore the LV NMOS <code>sg13_lv_nmos</code>:
+<ol start="4" type="1">
+<li>Look at the drain noise current according to the MOSFET model and compare with a hand calculation of the noise. In the noise equation there is the factor <span class="math inline">\(\gamma\)</span>, which in triode is <span class="math inline">\(\gamma=1\)</span> and in saturation is <span class="math inline">\(\gamma=2/3\)</span> according to basic text books. Which value of <span class="math inline">\(\gamma\)</span> are you calculating? Why might it be different?</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>Small-Signal MOSFET Model</h3>
+<div title="Exercise: MOSFET Small-Signal Parameters">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: MOSFET Small-Signal Parameters</strong></p>
+</div>
+<div class="callout-content">
+<ol start="3" type="1">
+<li>Go back to your testbench for the LV PMOS <code>sg13_lv_pmos</code>:
+<ol type="1">
+<li>What is the difference in <span class="math inline">\(g_\mathrm{m}\)</span>, <span class="math inline">\(g_\mathrm{ds}\)</span>, and other parameters between the NMOS and the PMOS? Why could they be different?</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section class="slide level3 unnumbered">
 <h3>Small-Signal MOSFET Model</h3>
 <div id="nte-maxwell-cap-matrix" title="Maxwell Capacitance Matrix">
@@ -729,18 +1059,51 @@ Figure&nbsp;9: The MOSFET small-signal basic T-model.
 <div class="callout-content">
 <p>A Maxwell capacitance matrix <span class="citation" data-cites="Maxwell_1873">(<a href="#/references" role="doc-biblioref" onclick="">Maxwell 1873</a>)</span> provides the relation between voltages on a set of conductors and the charges on these conductors. For a given conductor set with <span class="math inline">\(N\)</span> conductors (and thus <span class="math inline">\(N\)</span> terminals) the relation is <span class="math display">\[
 \mathbf{Q} = \mathbf{C} \cdot \mathbf{V}
-\]</span> where <span class="math inline">\(\mathbf{Q}\)</span> is a vector of the charges on the <span class="math inline">\(N\)</span> conductors, <span class="math inline">\(\mathbf{C}\)</span> is a <span class="math inline">\(N \times N\)</span> capacitance matrix, and <span class="math inline">\(\mathbf{V}\)</span> is the potential vector. In the case of two conductors and physical capacitances between them, <span class="math inline">\(\mathbf{C}\)</span> is given by <span class="math display">\[
+\]</span> where <span class="math inline">\(\mathbf{Q}\)</span> is a vector of the charges on the <span class="math inline">\(N\)</span> conductors, <span class="math inline">\(\mathbf{C}\)</span> is a <span class="math inline">\(N \times N\)</span> capacitance matrix, and <span class="math inline">\(\mathbf{V}\)</span> is the potential vector.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Small-Signal MOSFET Model</h3>
+<div title="Maxwell Capacitance Matrix">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Maxwell Capacitance Matrix</strong></p>
+</div>
+<div class="callout-content">
+<p>In the case of two conductors and physical capacitances between them, <span class="math inline">\(\mathbf{C}\)</span> is given by <span class="math display">\[
 \mathbf{C} =
 \begin{pmatrix}
 C_{11} + C_{12} &amp; -C_{12} \\
 -C_{12} &amp; C_{12} + C_{22} \\
 \end{pmatrix}
 \]</span> where <span class="math inline">\(C_{11}\)</span> and <span class="math inline">\(C_{22}\)</span> are the <strong>auto capacitances</strong> of the conductors towards infinity (ground), and <span class="math inline">\(C_{12} = C_{21}\)</span> is the <strong>mutual capacitance</strong> between the two conductors. Note that these are the <em>physical</em> capacitances, and that they are therefore <strong>not</strong> identical to the entries of <span class="math inline">\(\mathbf{C}\)</span>: a diagonal entry of <span class="math inline">\(\mathbf{C}\)</span> is the sum of all capacitances touching a node (<span class="math inline">\(\partial Q_1 / \partial V_1 = C_{11} + C_{12}\)</span>), whereas an off-diagonal entry is <em>negative</em> (<span class="math inline">\(\partial Q_1 / \partial V_2 = -C_{12}\)</span>).</p>
-<div class="fragment">
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Small-Signal MOSFET Model</h3>
+<div title="Maxwell Capacitance Matrix">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Maxwell Capacitance Matrix</strong></p>
+</div>
+<div class="callout-content">
 <p>Using the above equation to calculate <span class="math inline">\(Q_1\)</span> (the charge on conductor <span class="math inline">\(1\)</span>) results in <span class="math display">\[
 Q_1 = ( C_{11} + C_{12} ) V_1 - C_{12} V_2 = C_{11} (V_1 - 0) + C_{12} (V_1 - V_2)
 \]</span> which is the expected result.</p>
-</div>
 <div class="fragment">
 <p>Such a Maxwell capacitance formulation is also used in the MOSFET model to describe the charge at a terminal as a function of potential at another terminal. So, <span class="math display">\[
 C_\mathrm{GD}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{D}}
@@ -748,9 +1111,24 @@ C_\mathrm{GD}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{D}}
 C_\mathrm{GG}= \frac{\partial Q_\mathrm{G}}{\partial V_\mathrm{G}}
 \]</span> with <span class="math inline">\(Q_\mathrm{G}\)</span> the charge at terminal G in response to either <span class="math inline">\(V_\mathrm{D}\)</span> or <span class="math inline">\(V_\mathrm{G}\)</span>. Note that in a MOSFET, generally <span class="math inline">\(C_{xy} \ne C_{yx}\)</span>!</p>
 </div>
-<div class="fragment">
-<p>This also explains the negative capacitance values that a simulator sometimes reports (see the exercise above): the off-diagonal entries of a Maxwell capacitance matrix carry a negative sign by construction, so a reported <span class="math inline">\(C_\mathrm{GD}\)</span> of, e.g., <span class="math inline">\(-1\,\text{fF}\)</span> simply means a physical coupling capacitance of <span class="math inline">\(1\,\text{fF}\)</span> between gate and drain.</p>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Small-Signal MOSFET Model</h3>
+<div title="Maxwell Capacitance Matrix">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Maxwell Capacitance Matrix</strong></p>
+</div>
+<div class="callout-content">
+<p>This also explains the negative capacitance values that a simulator sometimes reports (see the exercise above): the off-diagonal entries of a Maxwell capacitance matrix carry a negative sign by construction, so a reported <span class="math inline">\(C_\mathrm{GD}\)</span> of, e.g., <span class="math inline">\(-1\,\text{fF}\)</span> simply means a physical coupling capacitance of <span class="math inline">\(1\,\text{fF}\)</span> between gate and drain.</p>
 </div>
 </div>
 </div>

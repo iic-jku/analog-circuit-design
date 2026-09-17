@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -182,7 +182,6 @@
 <div class="callout-content">
 <p>All course material (source code of this document, Jupyter notebooks for calculations, Xschem circuits, etc.) is made publicly available on GitHub (<a href="https://github.com/iic-jku/analog-circuit-design">follow this link</a>) and shared under the Apache-2.0 license.</p>
 <p>Please feel free to submit pull requests on GitHub to fix errors and omissions!</p>
-<p>The production of this document would be impossible without these (and many more) great open-source software products: <code>VS Code</code>, <code>Quarto</code>, <code>Pandoc</code>, <code>TexLive</code>, <code>Jupyter Notebook</code>, <code>Python</code>, <code>Xschem</code>, <code>ngspice</code>, <code>CACE</code>, <code>pygmid</code>, <code>schemdraw</code>, <code>Numpy</code>, <code>Scipy</code>, <code>Matplotlib</code>, <code>Pandas</code>, <code>Git</code>, <code>Docker</code>, <code>Ubuntu</code>, <code>Linux</code>, …</p>
 </div>
 </div>
 </div>
@@ -213,6 +212,22 @@
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
+<p>The production of this document would be impossible without these (and many more) great open-source software products: <code>VS Code</code>, <code>Quarto</code>, <code>Pandoc</code>, <code>TexLive</code>, <code>Jupyter Notebook</code>, <code>Python</code>, <code>Xschem</code>, <code>ngspice</code>, <code>CACE</code>, <code>pygmid</code>, <code>schemdraw</code>, <code>Numpy</code>, <code>Scipy</code>, <code>Matplotlib</code>, <code>Pandas</code>, <code>Git</code>, <code>Docker</code>, <code>Ubuntu</code>, <code>Linux</code>, …</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Introduction</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
 <p>Please use the IIC-OSIC-TOOLS image with tag <code>2026.06</code> or later!</p>
 </div>
 </div>
@@ -231,6 +246,23 @@
 </div>
 <div class="callout-content">
 <p>These notes are considered to be self-contained, although some explanations are kept short and probably lack depth. To dive into details, there are many excellent textbooks on analog circuit design available. Among them, we can recommend the following ones:</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Introduction</h3>
+<div title="Further Reading">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Further Reading</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><span class="citation" data-cites="Gray_Meyer_2009">(<a href="#/references" role="doc-biblioref" onclick="">Gray et al. 2009</a>)</span> is a classic book and a definitive read.</li>
 <li><span class="citation" data-cites="Razavi_Analog_CMOS">(<a href="#/references" role="doc-biblioref" onclick="">Razavi 2017</a>)</span> is an excellent introduction into CMOS analog circuit design.</li>
@@ -239,6 +271,23 @@
 <li><span class="citation" data-cites="Tsividis_McAndrew_2011">(<a href="#/references" role="doc-biblioref" onclick="">Tsividis and McAndrew 2011</a>)</span> is the in-depth reference for MOSFET device operation.</li>
 </ul>
 <p>Additionally, there are several noteworthy IEEE paper series that we recommend:</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Introduction</h3>
+<div title="Further Reading">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Further Reading</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><em>Shop Talk: What you didn’t Learn in School</em> by Chris Mangelsdorf</li>
 <li><em>The Analog Mind</em> by Behzad Razavi</li>
@@ -459,6 +508,11 @@ Table&nbsp;1: IHP SG13G2 devices
 <li>Clone the git repository into the current directory: <code>git clone https://github.com/iic-jku/analog-circuit-design.git</code></li>
 <li>This GitHub repository includes a file called <code>.designinit</code>, which sets the PDK and certain paths. However, this must be located in <code>/foss/designs/</code></li>
 <li>Therefore, we first need to copy it there: <code>cp analog-circuit-design/.designinit .</code></li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Setting up the Design Directory</h3>
+<ul>
 <li>Then we adjust the variable <code>XSCHEM_USER_LIBRARY_PATH</code> by opening the file in an editor e.g.&nbsp;<code>nano .designinit</code>
 <ul>
 <li>Change the last line from <code>export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem</code> to <code>export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem</code></li>

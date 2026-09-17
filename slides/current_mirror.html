@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -220,8 +220,6 @@ I_\mathrm{out2} \approx I_\mathrm{bias} \frac{W_3}{L_3} \frac{L_1}{W_1}.
 <div class="callout-content">
 <p>Please construct a current mirror based on the MOSFET-diode which we sized in <a href="../aicd.html#sec-mosfet-diode">Section&nbsp;4</a>. The input current <span class="math inline">\(I_\mathrm{bias} = 20\,\mu\text{A}\)</span>, and we want three output currents of size <span class="math inline">\(10\,\mu\text{A}\)</span>, <span class="math inline">\(20\,\mu\text{A}\)</span>, and <span class="math inline">\(40\,\mu\text{A}\)</span>.</p>
 <p>Sweep the output voltage of all three current branches and see over which voltage range an acceptable current is created. For which output voltage range is the current departing from its ideal value, and why?</p>
-<p>You see that the slope of the output current is poor, as <span class="math inline">\(g_\mathrm{ds}\)</span> is too large. We can improve this by changing the length to <span class="math inline">\(L = 5\,\mu\text{m}\)</span> (for motivation, please look at the graphs in <a href="../aicd.html#sec-gmid-method">Section&nbsp;3</a>). In addition, for a current mirror we are not interested in a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> value, so we can use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 5\)</span> in this case. Please size the current mirror MOSFETs accordingly (please round the <span class="math inline">\(W\)</span> to half micron, to keep sizes a bit more practical). Compare this result to the previous one. What changed?</p>
-<p>In case you get stuck, here are Xschem schematics for the <a href="../xschem/current_mirror.sch">original</a> and the <a href="../xschem/current_mirror_improved.sch">improved</a> current mirrors.</p>
 </div>
 </div>
 </div>
@@ -240,6 +238,43 @@ I_\mathrm{out2} \approx I_\mathrm{bias} \frac{W_3}{L_3} \frac{L_1}{W_1}.
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Mirror</h3>
+<div title="Exercise: Current Mirror">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: Current Mirror</strong></p>
+</div>
+<div class="callout-content">
+<p>You see that the slope of the output current is poor, as <span class="math inline">\(g_\mathrm{ds}\)</span> is too large. We can improve this by changing the length to <span class="math inline">\(L = 5\,\mu\text{m}\)</span> (for motivation, please look at the graphs in <a href="../aicd.html#sec-gmid-method">Section&nbsp;3</a>). In addition, for a current mirror we are not interested in a high <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> value, so we can use <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 5\)</span> in this case. Please size the current mirror MOSFETs accordingly (please round the <span class="math inline">\(W\)</span> to half micron, to keep sizes a bit more practical).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Current Mirror</h3>
+<div title="Exercise: Current Mirror">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: Current Mirror</strong></p>
+</div>
+<div class="callout-content">
+<p>Compare this result to the previous one. What changed?</p>
+<p>In case you get stuck, here are Xschem schematics for the <a href="../xschem/current_mirror.sch">original</a> and the <a href="../xschem/current_mirror_improved.sch">improved</a> current mirrors.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="references" class="slide level3 unnumbered smaller scrollable">
 <h3>References</h3>

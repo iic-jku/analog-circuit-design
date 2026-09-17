@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -354,12 +354,14 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 <h3>NMOS Characterization in Saturation</h3>
 <p>Note that <span id="eq-mosfet-gmid-weakinversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{1}{n V_\mathrm{T}}
-\tag{3}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage). <span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>. We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
+\tag{3}\]</span></span> for a MOSFET in weak inversion (i.e., small gate-source voltage).</p>
 <p>For the classical square-law model of the MOSFET in strong inversion, <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> is given as <span id="eq-mosfet-gmid-stronginversion"><span class="math display">\[
 \frac{g_\mathrm{m}}{I_\mathrm{D}} = \frac{2}{V_\mathrm{GS}- V_\mathrm{th}} = \frac{2}{V_\mathrm{od}}
 \tag{4}\]</span></span> with <span class="math inline">\(V_\mathrm{th}\)</span> the threshold voltage and <span class="math inline">\(V_\mathrm{od}\)</span> the so-called “overdrive voltage.” The latter is sometimes also dubbed the effective gate-source voltage <span class="math inline">\(V_\mathrm{eff}\)</span> <span class="citation" data-cites="Carusone_Johns_Martin_2011">(<a href="#/references" role="doc-biblioref" onclick="">Carusone et al. 2011</a>)</span>.</p>
 <aside class="notes">
 <p>However, as can be seen in the below plot, there exists a strong and unfortunate trade-off with device speed, characterized here by the transit frequency <span class="math inline">\(f_\mathrm{T}\)</span>. It would be ideal if there exists a design point where we get high transconductance per bias current concurrently to having the fastest operation, but unfortunately, this is clearly not the case. The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> peaks for <span class="math inline">\(V_\mathrm{GS}&lt; 0.3\,\text{V}\)</span>, and the highest speed we get at <span class="math inline">\(V_\mathrm{GS}\approx 1.2\,\text{V}\)</span>. The dashed vertical line plots the nominal threshold voltage, as you can see in this continuum of parameter space, it marks not a particularly special point.</p>
+<p><span class="math inline">\(n\)</span> is the subthreshold slope, and <span class="math inline">\(V_\mathrm{T} = k T / q\)</span> which is <span class="math inline">\(25.8\,\text{mV}\)</span> at <span class="math inline">\(300\,\text{K}\)</span>.</p>
+<p>We thus have <span class="math inline">\(n \approx 1.38\)</span> for this LV NMOS, which falls nicely into the usual range for <span class="math inline">\(n\)</span> of <span class="math inline">\(1.3\)</span> to <span class="math inline">\(1.5\)</span> for bulk CMOS (FinFET have <span class="math inline">\(n\)</span> very close to <span class="math inline">\(1\)</span>).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -541,7 +543,41 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <div class="callout-content">
 <p>We usually leave the <span class="math inline">\(\Delta f\)</span> away for a shorter notation, so we write <span class="math inline">\(\overline{V_\mathrm{n}^2}\)</span> when we actually mean <span class="math inline">\(\overline{V_\mathrm{n}^2}/\Delta f\)</span>. In case of doubt look at the unit of a quantity, whether it shows <span class="math inline">\(\text{V}^2\)</span> or <span class="math inline">\(\text{V}^2/\text{Hz}\)</span> or <span class="math inline">\(\text{V}/\sqrt{\text{Hz}}\)</span> (or <span class="math inline">\(\text{A}^2\)</span> or <span class="math inline">\(\text{A}^2/\text{Hz}\)</span> or <span class="math inline">\(\text{A}/\sqrt{\text{Hz}}\)</span>).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>NMOS Characterization in Saturation</h3>
+<div title="Noise Notation">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Noise Notation</strong></p>
+</div>
+<div class="callout-content">
 <p>Please also note that the pair of <span class="math inline">\(k T\)</span> pretty much always shows up together, so when you do a calculation and you miss the one or the other, that is often a sign for miscalculation. Boltzmann’s constant <span class="math inline">\(k = 1.38 \cdot 10^{-23}\,\text{J/K}\)</span> is just a scaling factor from thermal energy expressed as a temperature <span class="math inline">\(T\)</span> to energy <span class="math inline">\(E = k T\)</span> expressed in Joule.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>NMOS Characterization in Saturation</h3>
+<div title="Noise Notation">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Noise Notation</strong></p>
+</div>
+<div class="callout-content">
 <p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(0 \le f &lt; \infty\)</span>) or two-sided power spectral density (PSD) (<span class="math inline">\(-\infty &lt; f &lt; \infty\)</span>). The default in this lecture is the usage of the <strong>one-sided PSD</strong>.</p>
 </div>
 </div>

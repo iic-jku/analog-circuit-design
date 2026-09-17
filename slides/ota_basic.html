@@ -120,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-a975c94262742d03914c7a56aca0ba09.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03e017e5ca202a610282a31b74f9273c.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -555,10 +555,11 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 </section>
 <section class="slide level3 unnumbered">
 <h3>Small-Signal Analysis of the OTA</h3>
-<p>The specification for GBW is directly given in <a href="#/tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>, while the dc gain we have to calculate from the voltage accuracy specification. For a voltage follower in the configuration shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a> the voltage gain is given by (see <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a>) <span id="eq-voltage-buffer-tolerance"><span class="math display">\[
+<p>For a voltage follower in the configuration shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a> the voltage gain is given by (see <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a>) <span id="eq-voltage-buffer-tolerance"><span class="math display">\[
 (V_\mathrm{in} - V_\mathrm{out}) \cdot A_0 = V_\mathrm{out} \to \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
 \tag{14}\]</span></span></p>
 <aside class="notes">
+<p>The specification for GBW is directly given in <a href="#/tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>, while the dc gain we have to calculate from the voltage accuracy specification.</p>
 <p>So in order to reach an output voltage accuracy of at least 3% we need a dc gain of <span class="math inline">\(A_0 &gt; 30.2\,\text{dB}\)</span>. To allow for process and temperature variation we need to add a bit of extra gain as margin.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -595,12 +596,34 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 <ul>
 <li>We assume that <span class="math inline">\(g_\mathrm{m1,2} = g_\mathrm{m1} = g_\mathrm{m2}\)</span>, <span class="math inline">\(g_\mathrm{m3,4} = g_\mathrm{m3} = g_\mathrm{m4}\)</span>, and <span class="math inline">\(C_\mathrm{gs3,4} = C_\mathrm{gs3} = C_\mathrm{gs4}\)</span> for symmetry reasons (as <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> will have to be equally sized, as well as <span class="math inline">\(M_3\)</span> and <span class="math inline">\(M_4\)</span>).</li>
 <li>We will set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> for all MOSFETs.</li>
+</ul>
+<aside class="notes">
+<p>In order to derive the governing small-signal equations for the OTA we will make a few simplifications:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>OTA Small-Signal Transfer Function</h3>
+<ul>
 <li>We will further set <span class="math inline">\(C_\mathrm{gd}= 0\)</span> for all MOSFETs except for <span class="math inline">\(M_4\)</span> where we expect a Miller effect on this capacitor, and we could add its effect by increasing the capacitance at the gate node of <span class="math inline">\(M_{3,4}\)</span> (for background please see <a href="../aicd.html#sec-miller-theorem">Section&nbsp;17.1</a>). However, as this does not create a dominant pole in this circuit, we consider this a minor effect (see <a href="#/eq-simple-ota-gain" class="quarto-xref">Equation&nbsp;17</a>). Thus, only <span class="math inline">\(2C_\mathrm{gs3,4}\)</span> is considered at the gate node of the current mirror load.</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>OTA Small-Signal Transfer Function</h3>
+<ul>
 <li>We assume <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, so we set <span class="math inline">\(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\)</span> as this node is dominated by <span class="math inline">\(g_\mathrm{m3}^{-1}\)</span>.</li>
 <li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span>, we could add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span> (see <a href="#/fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;34</a>). Do not dismiss this as a second-order correction: with the small <span class="math inline">\(C_\mathrm{load} = 50\,\text{fF}\)</span> specified here, the sizing procedure will show that these device parasitics contribute roughly as much again as the specified load itself, so they effectively halve the achievable bandwidth if ignored.</li>
 </ul>
 <aside class="notes">
-<p>In order to derive the governing small-signal equations for the OTA we will make a few simplifications:</p>
 <p>The resulting small-signal equivalent circuit is shown in <a href="#/fig-basic-ota-small-signal" class="quarto-xref">Figure&nbsp;35</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -672,13 +695,14 @@ Figure&nbsp;36: 5-transistor OTA small-signal model with further simplifications
 </section>
 <section class="slide level3 unnumbered">
 <h3>OTA Small-Signal Transfer Function</h3>
-<p>In the simplified circuit model in <a href="#/fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;36</a>, we can see that we have two poles in the circuit, one at the gate node of <span class="math inline">\(M_{3,4}\)</span> and one at the output. Realizing that <span class="math inline">\(V_\mathrm{gs1} = V_\mathrm{in,p} = V_\mathrm{in}/2\)</span> and <span class="math inline">\(V_\mathrm{gs2} = V_\mathrm{in,n} = - V_\mathrm{in}/2\)</span> we can formulate KCL at the output node to <span id="eq-simple-ota-eq1"><span class="math display">\[
+<p>Realizing that <span class="math inline">\(V_\mathrm{gs1} = V_\mathrm{in,p} = V_\mathrm{in}/2\)</span> and <span class="math inline">\(V_\mathrm{gs2} = V_\mathrm{in,n} = - V_\mathrm{in}/2\)</span> we can formulate KCL at the output node to <span id="eq-simple-ota-eq1"><span class="math display">\[
 -g_\mathrm{m3,4} V_\mathrm{gs3} - g_\mathrm{m1,2} \left( - \frac{V_\mathrm{in}}{2} \right) - V_\mathrm{out} (g_\mathrm{ds2} + g_\mathrm{ds4} + s C_\mathrm{load}) = 0.
 \tag{15}\]</span></span></p>
 <p><span id="eq-simple-ota-eq2"><span class="math display">\[
 V_\mathrm{gs3} = -g_\mathrm{m1,2} \frac{V_\mathrm{in}}{2} \frac{1}{g_\mathrm{m3,4} + 2 \cdot s C_\mathrm{gs3,4}}.
   \tag{16}\]</span></span></p>
 <aside class="notes">
+<p>In the simplified circuit model in <a href="#/fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;36</a>, we can see that we have two poles in the circuit, one at the gate node of <span class="math inline">\(M_{3,4}\)</span> and one at the output.</p>
 <p>We further realize that</p>
 <p>By combining <a href="#/eq-simple-ota-eq1" class="quarto-xref">Equation&nbsp;15</a> and <a href="#/eq-simple-ota-eq2" class="quarto-xref">Equation&nbsp;16</a> and after a bit of algebraic manipulation we arrive at</p>
 <style type="text/css">
@@ -756,9 +780,24 @@ f_\mathrm{ug} = \frac{g_\mathrm{m1,2}}{2 \pi C_\mathrm{load}}
 <p><span id="eq-simple-ota-highf"><span class="math display">\[
 A(s \to \infty) = \frac{g_\mathrm{m1,2}}{2 \cdot s C_\mathrm{load}}
 \tag{21}\]</span></span></p>
-<div class="fragment">
-<p>This differs from <a href="#/eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> by a factor of two, and would predict a unity-gain frequency only half as large. The reason for the discrepancy is physical: <a href="#/eq-simple-ota-highf" class="quarto-xref">Equation&nbsp;21</a> describes the behavior <em>above</em> the doublet, where <span class="math inline">\(C_\mathrm{gs3,4}\)</span> shorts out the current mirror so that the signal path through <span class="math inline">\(M_{3,4}\)</span> is lost and only the direct path through <span class="math inline">\(M_2\)</span> remains — hence half the transconductance. In a sensible design the doublet sits far above <span class="math inline">\(f_\mathrm{ug}\)</span>, so <a href="#/eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> is the asymptote to use.</p>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>OTA Small-Signal Transfer Function</h3>
+<div title="Watch the Asymptote You Use">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Watch the Asymptote You Use</strong></p>
+</div>
+<div class="callout-content">
+<p>This differs from <a href="#/eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> by a factor of two, and would predict a unity-gain frequency only half as large. The reason for the discrepancy is physical: <a href="#/eq-simple-ota-highf" class="quarto-xref">Equation&nbsp;21</a> describes the behavior <em>above</em> the doublet, where <span class="math inline">\(C_\mathrm{gs3,4}\)</span> shorts out the current mirror so that the signal path through <span class="math inline">\(M_{3,4}\)</span> is lost and only the direct path through <span class="math inline">\(M_2\)</span> remains — hence half the transconductance. In a sensible design the doublet sits far above <span class="math inline">\(f_\mathrm{ug}\)</span>, so <a href="#/eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> is the asymptote to use.</p>
 </div>
 </div>
 </div>
@@ -1247,7 +1286,6 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 <div class="callout-content">
 <p>Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a>. Use typical conditions for the simulation and check how well the specification in <a href="#/tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a> is met and how well the derivations in <a href="#/sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;8.2</a> and <a href="#/sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a> fit to the simulation results.</p>
-<p>If you get stuck, you can find the testbench and 5T-OTA schematic <a href="../xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="../xschem/ota-5t_tb-tran.svg">here</a> (for the large-signal settling simulation). For interested students, the loop gain analysis with Middlebrook’s and Tian’s method of the 5T-OTA can be found <a href="../xschem/ota-5t_tb-loopgain.svg">here</a>. A comprehensive technical white paper by Texas Instruments about operational amplifier stability theory and compensation methods can be found in <span class="citation" data-cites="Kay_2025">(<a href="#/references" role="doc-biblioref" onclick="">Kay and Wells 2025</a>)</span>.</p>
 </div>
 </div>
 </div>
@@ -1265,6 +1303,24 @@ headroom M5 = 0.333 V</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation</h3>
+<div title="Exercise: 5T-OTA Design and Testbench">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: 5T-OTA Design and Testbench</strong></p>
+</div>
+<div class="callout-content">
+<p>If you get stuck, you can find the testbench and 5T-OTA schematic <a href="../xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="../xschem/ota-5t_tb-tran.svg">here</a> (for the large-signal settling simulation). For interested students, the loop gain analysis with Middlebrook’s and Tian’s method of the 5T-OTA can be found <a href="../xschem/ota-5t_tb-loopgain.svg">here</a>. A comprehensive technical white paper by Texas Instruments about operational amplifier stability theory and compensation methods can be found in <span class="citation" data-cites="Kay_2025">(<a href="#/references" role="doc-biblioref" onclick="">Kay and Wells 2025</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
 <section id="sec-mismatch" class="title-slide slide level2 center" data-number="8.6">
@@ -1355,9 +1411,24 @@ headroom M5 = 0.333 V</code></pre>
 \sigma^2\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sigma^2\left\{\frac{\Delta (W/L)}{(W/L)}\right\} + 4 \cdot \sigma^2\left\{\frac{\Delta V_\mathrm{th}}{V_\mathrm{GS}- V_\mathrm{th}}\right\}.
 \tag{31}\]</span></span></p>
 </div>
-<div class="fragment">
-<p>To minimize the input offset voltage in a differential pair we should strive to minimize the overdrive voltage <span class="math inline">\(V_\mathrm{GS}- V_\mathrm{th}\)</span> (i.e., to maximize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#/eq-diffpair-offset" class="quarto-xref">Equation&nbsp;30</a>) and to minimize the mismatch in current mirrors we should target a large overdrive voltage (i.e., to minimize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#/eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;31</a>). In both cases the MOSFET area <span class="math inline">\(W \cdot L\)</span> needs to be large enough (see <a href="#/eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a> and <a href="#/eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;29</a>).</p>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Mismatch</h3>
+<div title="MOSFET Mismatch">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>MOSFET Mismatch</strong></p>
+</div>
+<div class="callout-content">
+<p>To minimize the input offset voltage in a differential pair we should strive to minimize the overdrive voltage <span class="math inline">\(V_\mathrm{GS}- V_\mathrm{th}\)</span> (i.e., to maximize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#/eq-diffpair-offset" class="quarto-xref">Equation&nbsp;30</a>) and to minimize the mismatch in current mirrors we should target a large overdrive voltage (i.e., to minimize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#/eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;31</a>). In both cases the MOSFET area <span class="math inline">\(W \cdot L\)</span> needs to be large enough (see <a href="#/eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a> and <a href="#/eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;29</a>).</p>
 </div>
 </div>
 </div>
@@ -1475,10 +1546,33 @@ headroom M5 = 0.333 V</code></pre>
 <ol type="1">
 <li>The supply voltage of the circuit has tolerances, and thus we need to check the performance against this variation.</li>
 <li>The temperature at which the circuit is operated is likely changing. Also the performance against this has to be verified.</li>
-<li>When manufacturing the wafers random variations in various process parameters lead to changed parameters of the integrated circuit components. In order to check for this effect, wafer foundries provide model files which shall cover these manufacturing excursions. Simplified, this leads to a slower or faster MOSFET, and usually NMOS and PMOS are not correlated, so we have the process corners <strong>SS</strong>, <strong>SF</strong>, <strong>TT</strong>, <strong>FS</strong>, and <strong>FF</strong>. So far, we have only used the <strong>TT</strong> models in our simulations.</li>
 </ol>
 <aside class="notes">
 <p>As you have seen in <a href="#/sec-basic-ota-simulation" class="quarto-xref">Section&nbsp;8.5</a> running simulations by hand is tedious. When we want to check the overall performance, we have to run many simulations over various conditions:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<ol start="3" type="1">
+<li>When manufacturing the wafers random variations in various process parameters lead to changed parameters of the integrated circuit components. In order to check for this effect, wafer foundries provide model files which shall cover these manufacturing excursions. Simplified, this leads to a slower or faster MOSFET, and usually NMOS and PMOS are not correlated, so we have the process corners <strong>SS</strong>, <strong>SF</strong>, <strong>TT</strong>, <strong>FS</strong>, and <strong>FF</strong>.</li>
+</ol>
+</section>
+<section class="slide level3 unnumbered scrollable">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<ol start="3" type="1">
+<li>So far, we have only used the <strong>TT</strong> models in our simulations.</li>
+</ol>
+<aside class="notes">
 <p>The variations listed in the previous list are abbreviated as <strong>PVT</strong> (process, voltage, temperature) variations. In order to finalize a circuit all combinations of these (plus the variations in operating conditions like input voltage) have to be simulated. As you can imagine, this leads to a huge number of simulations and simulation results that have to be evaluated for pass/fail.</p>
 <p>There are two options how to tackle this efficiently:</p>
 <style type="text/css">
@@ -1546,8 +1640,8 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 <p><strong>Note&nbsp;2: CACE Summary for 5T-OTA</strong></p>
 </div>
-<section id="cace-summary-for-ota-5t" class="title-slide slide level1 unnumbered unlisted callout-content center">
-<h1>CACE Summary for ota-5t</h1>
+<div class="callout-content">
+<p><strong>CACE Summary for ota-5t</strong></p>
 <p><strong>netlist source</strong>: schematic</p>
 <table class="caption-top">
 <colgroup>
@@ -1651,103 +1745,15 @@ headroom M5 = 0.333 V</code></pre>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="plots" class="title-slide slide level2 unnumbered unlisted center">
-<h2>Plots</h2>
-
-</section>
-
-<section id="gain_vs_temp" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_vs_temp</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/gain_vs_temp.png" class="r-stretch quarto-figure-center"><p class="caption">gain_vs_temp</p></section>
-
-<section id="gain_vs_vin" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_vs_vin</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/gain_vs_vin.png" class="r-stretch quarto-figure-center"><p class="caption">gain_vs_vin</p></section>
-
-<section id="gain_vs_vdd" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_vs_vdd</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/gain_vs_vdd.png" class="r-stretch quarto-figure-center"><p class="caption">gain_vs_vdd</p></section>
-
-<section id="gain_vs_corner" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_vs_corner</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/gain_vs_corner.png" class="r-stretch quarto-figure-center"><p class="caption">gain_vs_corner</p></section>
-
-<section id="bw_vs_temp" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_vs_temp</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/bw_vs_temp.png" class="r-stretch quarto-figure-center"><p class="caption">bw_vs_temp</p></section>
-
-<section id="bw_vs_vin" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_vs_vin</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/bw_vs_vin.png" class="r-stretch quarto-figure-center"><p class="caption">bw_vs_vin</p></section>
-
-<section id="bw_vs_vdd" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_vs_vdd</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/bw_vs_vdd.png" class="r-stretch quarto-figure-center"><p class="caption">bw_vs_vdd</p></section>
-
-<section id="bw_vs_corner" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_vs_corner</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/bw_vs_corner.png" class="r-stretch quarto-figure-center"><p class="caption">bw_vs_corner</p></section>
-
-<section id="gain_mc" class="title-slide slide level2 unnumbered unlisted center">
-<h2>gain_mc</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/gain_mc.png" class="r-stretch quarto-figure-center"><p class="caption">gain_mc</p></section>
-
-<section id="bw_mc" class="title-slide slide level2 unnumbered unlisted center">
-<h2>bw_mc</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/bw_mc.png" class="r-stretch quarto-figure-center"><p class="caption">bw_mc</p></section>
-
-<section id="noise_vs_temp" class="title-slide slide level2 unnumbered unlisted center">
-<h2>noise_vs_temp</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/noise_vs_temp.png" class="r-stretch quarto-figure-center"><p class="caption">noise_vs_temp</p></section>
-
-<section id="noise_vs_vin" class="title-slide slide level2 unnumbered unlisted center">
-<h2>noise_vs_vin</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/noise_vs_vin.png" class="r-stretch quarto-figure-center"><p class="caption">noise_vs_vin</p></section>
-
-<section id="noise_vs_vdd" class="title-slide slide level2 unnumbered unlisted center">
-<h2>noise_vs_vdd</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/noise_vs_vdd.png" class="r-stretch quarto-figure-center"><p class="caption">noise_vs_vdd</p></section>
-
-<section id="noise_vs_corner" class="title-slide slide level2 unnumbered unlisted center">
-<h2>noise_vs_corner</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/noise_vs_corner.png" class="r-stretch quarto-figure-center"><p class="caption">noise_vs_corner</p></section>
-
-<section id="settling_vs_temp" class="title-slide slide level2 unnumbered unlisted center">
-<h2>settling_vs_temp</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/settling_vs_temp.png" class="r-stretch quarto-figure-center"><p class="caption">settling_vs_temp</p></section>
-
-<section id="settling_vs_vin" class="title-slide slide level2 unnumbered unlisted center">
-<h2>settling_vs_vin</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/settling_vs_vin.png" class="r-stretch quarto-figure-center"><p class="caption">settling_vs_vin</p></section>
-
-<section id="settling_vs_vdd" class="title-slide slide level2 unnumbered unlisted center">
-<h2>settling_vs_vdd</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/settling_vs_vdd.png" class="r-stretch quarto-figure-center"><p class="caption">settling_vs_vdd</p></section>
-
-<section id="settling_vs_corner" class="title-slide slide level2 unnumbered unlisted center">
-<h2>settling_vs_corner</h2>
-
-<img data-src="../cace/_docs/ota-5t/schematic/settling_vs_corner.png" class="r-stretch quarto-figure-center"><p class="caption">settling_vs_corner</p></section>
-
-
+<p><strong>Plots</strong></p>
+<p><strong>gain_vs_temp</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/gain_vs_temp.png"></p>
+<figcaption>gain_vs_temp</figcaption>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1764,6 +1770,414 @@ headroom M5 = 0.333 V</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>gain_vs_vin</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/gain_vs_vin.png"></p>
+<figcaption>gain_vs_vin</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>gain_vs_vdd</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/gain_vs_vdd.png"></p>
+<figcaption>gain_vs_vdd</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>gain_vs_corner</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/gain_vs_corner.png"></p>
+<figcaption>gain_vs_corner</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_vs_temp</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/bw_vs_temp.png"></p>
+<figcaption>bw_vs_temp</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_vs_vin</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/bw_vs_vin.png"></p>
+<figcaption>bw_vs_vin</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_vs_vdd</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/bw_vs_vdd.png"></p>
+<figcaption>bw_vs_vdd</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_vs_corner</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/bw_vs_corner.png"></p>
+<figcaption>bw_vs_corner</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>gain_mc</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/gain_mc.png"></p>
+<figcaption>gain_mc</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>bw_mc</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/bw_mc.png"></p>
+<figcaption>bw_mc</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>noise_vs_temp</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/noise_vs_temp.png"></p>
+<figcaption>noise_vs_temp</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>noise_vs_vin</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/noise_vs_vin.png"></p>
+<figcaption>noise_vs_vin</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>noise_vs_vdd</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/noise_vs_vdd.png"></p>
+<figcaption>noise_vs_vdd</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>noise_vs_corner</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/noise_vs_corner.png"></p>
+<figcaption>noise_vs_corner</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>settling_vs_temp</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/settling_vs_temp.png"></p>
+<figcaption>settling_vs_temp</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>settling_vs_vin</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/settling_vs_vin.png"></p>
+<figcaption>settling_vs_vin</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>settling_vs_vdd</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/settling_vs_vdd.png"></p>
+<figcaption>settling_vs_vdd</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>5T-OTA Simulation versus PVT and MC</h3>
+<div title="CACE Summary for 5T-OTA">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CACE Summary for 5T-OTA</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>settling_vs_corner</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../cace/_docs/ota-5t/schematic/settling_vs_corner.png"></p>
+<figcaption>settling_vs_corner</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="pvt-simulation-analysis" class="slide level3" data-number="8.7.1">
 <h3><span class="header-section-number">8.7.1</span> PVT Simulation Analysis</h3>
