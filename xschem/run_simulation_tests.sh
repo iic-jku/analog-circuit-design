@@ -28,7 +28,7 @@
 # Exit status is non-zero if any testbench fails to netlist or simulate.
 #
 # SPDX-FileCopyrightText: 2026 Harald Pretl
-# Johannes Kepler University, Institute for Integrated Circuits
+# Johannes Kepler University, Department for Integrated Circuits
 # SPDX-License-Identifier: Apache-2.0
 # ---------------------------------------------------------------------------
 

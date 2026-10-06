@@ -18,7 +18,7 @@
 #   NB_TIMEOUT=900 gmid/test_notebooks.sh  # per-cell timeout in seconds
 #
 # SPDX-FileCopyrightText: 2026 Harald Pretl
-# Johannes Kepler University, Institute for Integrated Circuits
+# Johannes Kepler University, Department for Integrated Circuits
 # SPDX-License-Identifier: Apache-2.0
 # ---------------------------------------------------------------------------
 
