@@ -320,8 +320,8 @@ def main(argv=None):
     args = ap.parse_args(argv)
     files = render_files(ROOT)
     # decks of removed chapters: generated files that are no longer produced
-    removed = [str(p.relative_to(ROOT)) for p in (ROOT / "slides").glob("*.qmd")
-               if str(p.relative_to(ROOT)) not in files
+    removed = [p.relative_to(ROOT).as_posix() for p in (ROOT / "slides").glob("*.qmd")
+               if p.relative_to(ROOT).as_posix() not in files
                and p.read_text(encoding="utf-8").startswith("---\n" + MARKER)]
     stale = []
     for rel, content in files.items():
