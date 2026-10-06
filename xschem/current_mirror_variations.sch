@@ -294,7 +294,7 @@ C {sg13cmos5l_pr/annotate_fet_params.sym} 490 -300 0 0 {name=annot2 ref=M12}
 C {devices/gnd.sym} 200 -830 0 0 {name=l1 lab=GND}
 C {sg13cmos5l_pr/sg13_lv_nmos.sym} 290 -920 0 1 {name=M21
 l=2u
-w=14u
+w=19u
 ng=2
 m=1
 model=sg13_lv_nmos
@@ -304,7 +304,7 @@ C {devices/isource.sym} 270 -1220 0 0 {name=Ibias2 value="dc 50u ac 1"}
 C {devices/lab_pin.sym} 270 -1270 0 0 {name=p5 sig_type=std_logic lab=v_dd}
 C {sg13cmos5l_pr/sg13_lv_nmos.sym} 460 -920 0 0 {name=M22
 l=2u
-w=14u
+w=19u
 ng=2
 m=1
 model=sg13_lv_nmos
@@ -316,7 +316,7 @@ C {sg13cmos5l_pr/annotate_fet_params.sym} 100 -790 0 0 {name=annot3 ref=M21}
 C {sg13cmos5l_pr/annotate_fet_params.sym} 250 -790 0 0 {name=annot4 ref=M22}
 C {sg13cmos5l_pr/sg13_lv_nmos.sym} 290 -1020 0 1 {name=M23
 l=2u
-w=14u
+w=19u
 ng=2
 m=1
 model=sg13_lv_nmos
@@ -324,7 +324,7 @@ spiceprefix=X
 }
 C {sg13cmos5l_pr/sg13_lv_nmos.sym} 460 -1020 0 0 {name=M24
 l=2u
-w=14u
+w=19u
 ng=2
 m=1
 model=sg13_lv_nmos
@@ -341,7 +341,7 @@ C {sg13cmos5l_pr/annotate_fet_params.sym} 960 -300 0 0 {name=annot7 ref=M31}
 C {sg13cmos5l_pr/annotate_fet_params.sym} 1170 -300 0 0 {name=annot8 ref=M32}
 C {sg13cmos5l_pr/sg13_lv_nmos.sym} 990 -500 0 1 {name=M31
 l=3u
-w=20u
+w=28u
 ng=2
 m=1
 model=sg13_lv_nmos
@@ -349,7 +349,7 @@ spiceprefix=X
 }
 C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1160 -500 0 0 {name=M32
 l=3u
-w=20u
+w=28u
 ng=2
 m=1
 model=sg13_lv_nmos

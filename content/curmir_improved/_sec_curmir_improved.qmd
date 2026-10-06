@@ -64,7 +64,7 @@ $$ {#eq-curmir-regcasc-rout}
 
 which, compared to @eq-curmir-cascoded-rout, is further improved by the gain of the auxiliary amplifier.
 
-We now want to size all these current mirror structures and simulate their performance. We try to size them for similar chip area in order to get a fair comparison. We assume a reference current of $I_\mathrm{bias} = 50\,\mu\text{A}$ and a mirror ratio of 1:1. We size for a minimum voltage headroom for the current sources of $V_\mathrm{DS,min} = 0.4\,\text{V}$. The calculations are summarized in this [sizing notebook](./gmid/sizing_improved_current_mirror.ipynb).
+We now want to size all these current mirror structures and simulate their performance. We assume a reference current of $I_\mathrm{bias} = 50\,\mu\text{A}$ and a mirror ratio of 1:1. We size for a minimum voltage headroom for the current sources of $V_\mathrm{DS,min} = 0.4\,\text{V}$. The calculations are summarized in this [sizing notebook](./gmid/sizing_improved_current_mirror.ipynb). Note that the structures are sized from this common specification (together with the chosen $\gm/\ID$ and $L$ of each), not for equal area: the total gate area comes out as about $100\,\mu\text{m}^2$ for the basic mirror ($2 \times 10\,\mu\text{m} \times 5\,\mu\text{m}$), $150\,\mu\text{m}^2$ for the high-swing cascode ($4 \times 19\,\mu\text{m} \times 2\,\mu\text{m}$), $170\,\mu\text{m}^2$ for the source-degenerated mirror ($2 \times 28\,\mu\text{m} \times 3\,\mu\text{m}$, plus $2 \times 135\,\mu\text{m}^2$ for the degeneration resistors), and only about $40\,\mu\text{m}^2$ for the regulated cascode ($4 \times 10\,\mu\text{m} \times 1\,\mu\text{m}$ plus the small auxiliary amplifier transistor). Keep this in mind when comparing the mismatch results below, since mismatch improves with device area.
 
 One structure cannot honor that number, and it is worth seeing why before we look at the simulation results. In the regulated cascode the auxiliary amplifier holds the drain of the bottom device at its own gate-source voltage, so $\VDS[1] = \VGS[aux] \approx 0.37\,\text{V}$, and the cascode transistor stacked on top still needs its own $V_\mathrm{ds,sat} \approx 0.2\,\text{V}$. Its compliance voltage is therefore about $0.57\,\text{V}$, not $0.4\,\text{V}$ --- forcing it to $0.4\,\text{V}$ would simply leave the cascode device in triode, where it does no cascoding at all. This is the drawback we will address in @sec-low-voltage-regulated-curmir, and it is clearly visible in the simulated output resistance below.
 
@@ -78,14 +78,14 @@ The first thing to take away from that panel is that $r_\mathrm{out}$ is **not a
 
 | Structure | $r_\mathrm{out}$ at $V_\mathrm{out} = 0.5\,\text{V}$ | at $1.0\,\text{V}$ | at $1.5\,\text{V}$ |
 |:--------------------------|-----:|-----:|-----:|
-| Basic current mirror      | $150\,\text{k}\Omega$ | $260\,\text{k}\Omega$ | $360\,\text{k}\Omega$ |
-| High-swing cascode        | $720\,\text{k}\Omega$ | $1.5\,\text{M}\Omega$ | $2.4\,\text{M}\Omega$ |
-| Source degeneration       | $200\,\text{k}\Omega$ | $350\,\text{k}\Omega$ | $490\,\text{k}\Omega$ |
-| Regulated cascode         | $710\,\text{k}\Omega$ | $2.8\,\text{M}\Omega$ | $3.7\,\text{M}\Omega$ |
+| Basic current mirror      | $150\,\text{k}\Omega$ | $260\,\text{k}\Omega$ | $350\,\text{k}\Omega$ |
+| High-swing cascode        | $1.0\,\text{M}\Omega$ | $2.0\,\text{M}\Omega$ | $2.9\,\text{M}\Omega$ |
+| Source degeneration       | $200\,\text{k}\Omega$ | $340\,\text{k}\Omega$ | $470\,\text{k}\Omega$ |
+| Regulated cascode         | $700\,\text{k}\Omega$ | $3.0\,\text{M}\Omega$ | $4.0\,\text{M}\Omega$ |
 
 : Simulated small-signal output resistance versus output voltage {#tbl-curmir-rout}
 
-The ordering is what the theory predicts: the two cascoded structures gain roughly an order of magnitude over the basic mirror, and the regulated cascode ends up highest, as @eq-curmir-regcasc-rout suggests. Note, though, that the regulated cascode only pulls ahead of the high-swing cascode once its auxiliary amplifier has enough headroom to gain; at $0.5\,\text{V}$ the two are still on par. The source-degenerated mirror, in contrast, improves the output resistance only mildly (by about a factor of $1.4$), since the degeneration factor $1 + \gm R_\mathrm{deg}$ of @eq-curmir-degeneration-rout stays modest for a practical voltage drop across $R_\mathrm{deg}$. Its strength lies elsewhere, as we will see next.
+The ordering is what the theory predicts: the two cascoded structures gain a factor of between about 5 and 12 over the basic mirror, and the regulated cascode ends up highest, as @eq-curmir-regcasc-rout suggests. Note, though, that the regulated cascode only pulls ahead of the high-swing cascode once its auxiliary amplifier has enough headroom to gain; at $0.5\,\text{V}$, which is still below its compliance voltage of about $0.57\,\text{V}$, the high-swing cascode is actually ahead. The source-degenerated mirror, in contrast, improves the output resistance only mildly (by about a factor of $1.3$), since the degeneration factor $1 + \gm R_\mathrm{deg}$ of @eq-curmir-degeneration-rout stays modest for a practical voltage drop across $R_\mathrm{deg}$. Its strength lies elsewhere, as we will see next.
 
 ```{python}
 #| label: fig-curmir-output
@@ -161,7 +161,7 @@ ax_r.grid(True, alpha=0.15, which='minor')
 
 We now look into the results of the Monte-Carlo simulation to evaluate the current mirroring accuracy under device mismatch using 500 runs and a compliance voltage of 0.4 V. The results are summarized in @fig-curmir-mc. We can see that the high-swing cascode and the regulated cascode achieve a very precise nominal current accuracy of almost 50 µA. However, the source-degenerated current mirror shows a significantly reduced spread of the output current, indicating a reduced mismatch of the poly-silicon resistors compared to the MOSFETs.
 
-It is instructive to also look at the reverse side of the coin. The relative spread comes out as $0.42\,\%$ for the basic mirror, $0.24\,\%$ for the source-degenerated one, but $0.83\,\%$ for the high-swing cascode and $1.79\,\%$ for the regulated cascode. The two cascoded structures thus match **worse** than the plain current mirror, because the cascode devices (and, in the regulated case, the auxiliary amplifier with its own bias current sources) contribute their own mismatch on top of that of the bottom transistor pair. Output resistance and current accuracy are therefore not improved by the same measure: a cascode buys you the former and can cost you the latter. This is a good example of why a structure should never be selected on a single figure of merit.
+It is instructive to also look at the reverse side of the coin. The relative spread comes out as $0.44\,\%$ for the basic mirror, $0.26\,\%$ for the source-degenerated one, but $0.86\,\%$ for the high-swing cascode and $1.79\,\%$ for the regulated cascode. The two cascoded structures thus match **worse** than the plain current mirror, because the cascode devices (and, in the regulated case, the auxiliary amplifier with its own bias current sources) contribute their own mismatch on top of that of the bottom transistor pair. Output resistance and current accuracy are therefore not improved by the same measure: a cascode buys you the former and can cost you the latter. This is a good example of why a structure should never be selected on a single figure of merit.
 
 ```{python}
 #| label: fig-curmir-mc
@@ -275,7 +275,7 @@ In summary, we can classify the usage of the different current mirror structures
 - The **regulated cascode current mirror** is the best choice when the highest output resistance is required, and the additional complexity, output noise, and a roughly four-fold larger current spread under mismatch are acceptable.
 - The **low-voltage regulated cascode current mirror** is a good alternative to the regulated cascode when a low compliance voltage is required.
 
-Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are sized for similar chip area and a fair comparison.
+Please note that the absolute performance can be tweaked by proper sizing. The examples shown here are all sized from the same specification (bias current and minimum $\VDS$), but not for equal area: their total gate area ranges from about $40\,\mu\text{m}^2$ (regulated cascode) to about $170\,\mu\text{m}^2$ (source-degenerated mirror, not counting its resistors), which matters in particular for the mismatch comparison.
 
 ## Current Mirror Matching {#sec-current-mirror-matching}
 
@@ -366,18 +366,18 @@ Bringing both results into @eq-curmir-matching-nodeg, we get
 $$
 \sdev[\frac{\Delta \ID}{\ID}] = \sqrt{ (0.55\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (0.09\,\%)^2} \approx 0.29\,\%.
 $$
- Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this gives a reasonable estimate compared to the standard deviation of about $0.205\,\mu\text{A}/48.9\,\mu\text{A} = 0.42\,\%$ obtained from the Monte-Carlo simulation. The remaining discrepancy is due to simplifications in the analytical model (e.g., the square-law approximation).
+ Comparing with the simulation results in @fig-curmir-mc for the basic current mirror, we can see that this gives a reasonable estimate compared to the standard deviation of about $0.213\,\mu\text{A}/48.9\,\mu\text{A} = 0.44\,\%$ obtained from the Monte-Carlo simulation. The remaining discrepancy is due to simplifications in the analytical model (e.g., the square-law approximation).
 
- Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use @eq-curmir-matching-alt to analyze this configuration. We use the sizing values of $\gm / \ID = 10\,\text{V}^{-1}$, $W = 20\,\mu\text{m}$, and $L = 3\,\mu\text{m}$, for the MOSFET, and $V_\mathrm{deg} = 0.2\,\text{V}$, and $W = 3\,\mu\text{m}$ / $L = 45\,\mu\text{m}$ for the used `rppd` resistor (which at $R_\square = 260\,\Omega$ gives the required $R_\mathrm{deg} \approx 3.9\,\text{k}\Omega$).
+ Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use @eq-curmir-matching-alt to analyze this configuration. We use the sizing values of $\gm / \ID = 10\,\text{V}^{-1}$, $W = 28\,\mu\text{m}$, and $L = 3\,\mu\text{m}$, for the MOSFET, and $V_\mathrm{deg} = 0.2\,\text{V}$, and $W = 3\,\mu\text{m}$ / $L = 45\,\mu\text{m}$ for the used `rppd` resistor (which at $R_\square = 260\,\Omega$ gives the required $R_\mathrm{deg} \approx 3.9\,\text{k}\Omega$).
  
 The standard deviation of the transconductance parameter mismatch can be calculated as
 $$
-\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
+\sdev[\frac{\Delta K}{K}] = \sqrt{ \left( \frac{4\,\text{nm}}{28\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{28\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
 $$
 
 The standard deviation of the threshold voltage mismatch can be calculated as
 $$
-\sdev[\Delta \Vth] = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.50\,\text{mV}.
+\sdev[\Delta \Vth] = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{28\,\mu\text{m} \cdot 3\,\mu\text{m}}} = 0.43\,\text{mV}.
 $$
 
 The standard deviation of the resistor mismatch can be calculated using @eq-resistor-mismatch and @tbl-sg13cmos5l-mismatch:
@@ -389,14 +389,14 @@ Plugging these results into @eq-curmir-matching-alt, we get
 $$
 \begin{split}
 \var[\frac{\Delta \ID}{\ID}] =&
-\underbrace{\left( \frac{0.50\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2}_{(0.17\,\%)^2} +
+\underbrace{\left( \frac{0.43\,\text{mV}}{0.1\,\text{V} + 0.2\,\text{V}} \right)^2}_{(0.14\,\%)^2} +
 \underbrace{\left( \frac{1}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.09\,\% \right)^2}_{(0.03\,\%)^2} \\
 & + \underbrace{\left( \frac{0.2\,\text{V} \cdot 10\,\text{V}^{-1}}{1 + 0.2\,\text{V} \cdot 10\,\text{V}^{-1}} \cdot 0.13\,\%\right)^2}_{(0.09\,\%)^2} \\
-=& (0.19\,\%)^2.
+=& (0.17\,\%)^2.
 \end{split}
 $$
 
-The three terms are worth reading individually. The degeneration has done its job on the MOSFET: the dominant threshold-voltage term is down to $0.17\,\%$ and the transconductance-parameter term to a negligible $0.03\,\%$, while the resistor contributes only $0.09\,\%$. The total of $0.19\,\%$ is a clear improvement over the $0.29\,\%$ of the basic current mirror, and it matches the Monte-Carlo result in @fig-curmir-mc of about $0.12\,\mu\text{A}/48.8\,\mu\text{A} = 0.24\,\%$ reasonably well.
+The three terms are worth reading individually. The degeneration has done its job on the MOSFET: the dominant threshold-voltage term is down to $0.14\,\%$ and the transconductance-parameter term to a negligible $0.03\,\%$, while the resistor contributes only $0.09\,\%$. The total of $0.17\,\%$ is a clear improvement over the $0.29\,\%$ of the basic current mirror. The Monte-Carlo result in @fig-curmir-mc of about $0.13\,\mu\text{A}/49.1\,\mu\text{A} = 0.26\,\%$ is somewhat higher, i.e., the estimate is optimistic by a similar margin as for the basic mirror (for the same reasons), but the improvement over the basic mirror is confirmed.
 
-The essential lesson of source degeneration is that it does not remove mismatch, it *trades* MOSFET mismatch for resistor mismatch --- so the trade only pays off if the resistor is given enough area. That is exactly why $R_\mathrm{deg}$ is laid out here as a long, comparatively wide device ($3 \times 45\,\mu\text{m}^2$) instead of the minimum-width strip that would deliver the same $3.9\,\text{k}\Omega$: a $W = 1\,\mu\text{m}$ / $L = 15\,\mu\text{m}$ resistor has the same resistance but nine times less area, which would raise its mismatch contribution from $0.09\,\%$ to $0.26\,\%$ and push the total back to $0.31\,\%$ --- no better than the basic mirror. Resistor **area**, not resistor value, is what buys the matching here.
+The essential lesson of source degeneration is that it does not remove mismatch, it *trades* MOSFET mismatch for resistor mismatch --- so the trade only pays off if the resistor is given enough area. That is exactly why $R_\mathrm{deg}$ is laid out here as a long, comparatively wide device ($3 \times 45\,\mu\text{m}^2$) instead of the minimum-width strip that would deliver the same $3.9\,\text{k}\Omega$: a $W = 1\,\mu\text{m}$ / $L = 15\,\mu\text{m}$ resistor has the same resistance but nine times less area, which would raise its mismatch contribution from $0.09\,\%$ to $0.26\,\%$ and push the total back to $0.30\,\%$ --- no better than the basic mirror. Resistor **area**, not resistor value, is what buys the matching here.
 :::
