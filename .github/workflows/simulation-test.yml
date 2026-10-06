@@ -26,11 +26,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     container:
-      # IIC-OSIC-TOOLS ships xschem, ngspice and the IHP SG13G2 PDK.
+      # IIC-OSIC-TOOLS ships xschem, ngspice and the IHP SG13CMOS5L PDK.
       image: hpretl/iic-osic-tools:latest
       options: --user root
     env:
-      PDK: ihp-sg13g2
+      PDK: ihp-sg13cmos5l
       PDK_ROOT: /foss/pdks
     steps:
       - name: Check out repository

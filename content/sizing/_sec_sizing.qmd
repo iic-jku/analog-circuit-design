@@ -24,7 +24,7 @@ Often, transistor sizing in entry-level courses is based on the square-law model
 One of the many simplifications of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existence of a threshold voltage is assumed, but in fact this voltage exists only given a certain definition, and depending on definition, its value changes. In addition, in nm CMOS, the threshold voltage is a function of many things, like $W$ and $L$.
 :::
 
-An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e. for large $\VGS$ where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like $W$, $L$, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.
+An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e. for large $\VGS$ where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13CMOS5L) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like $W$, $L$, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.
 
 Being a well-established approach we select the $\gmid$ methodology introduced by [@Silveira_1996] and extended in [@Jespers_Murmann_2017]. A brief introduction is available [here](https://github.com/iic-jku/analog-circuit-design/blob/main/gmid/Ref_Murmann_gmID.pdf) as well.
 
@@ -38,9 +38,9 @@ In order to get the required tabulated data we use a testbench in Xschem which s
 The testbenches are relatively straightforward, with one exception: The drain current noise is sensed via the drain voltage source `vd` and converted to a noise voltage (node `n`) using a current-controlled voltage source (CCVS). This is necessary as the `.noise` simulation statement works with voltages.
 :::
 
-![Testbench for LV NMOS $\gmid$ characterization.](/xschem/techsweep_sg13g2_lv_nmos.svg){#fig-techsweep-nmos-tb}
+![Testbench for LV NMOS $\gmid$ characterization.](/xschem/techsweep_sg13cmos5l_lv_nmos.svg){#fig-techsweep-nmos-tb}
 
-![Testbench for LV PMOS $\gmid$ characterization.](/xschem/techsweep_sg13g2_lv_pmos.svg){#fig-techsweep-pmos-tb}
+![Testbench for LV PMOS $\gmid$ characterization.](/xschem/techsweep_sg13cmos5l_lv_pmos.svg){#fig-techsweep-pmos-tb}
 
 We will use Jupyter notebooks to inspect the resulting data, and interpret some important graphs. This will greatly help to understand the MOSFET behavior.
 

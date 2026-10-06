@@ -14,7 +14,7 @@ def _():
 def _(mo):
     mo.md(
         r"""
-        # Reactive Python notebook for IHP SG13G2 MOSFET charateristics
+        # Reactive Python notebook for IHP SG13CMOS5L MOSFET charateristics
 
         **Copyright 2024 Simon Dorrer and Harald Pretl**
 

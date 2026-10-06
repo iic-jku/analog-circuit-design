@@ -2,28 +2,22 @@
 # Johannes Kepler University, Department for Integrated Circuits
 # shellcheck shell=bash
 
-# Switch to IHP SG13G2 PDK if not already set
-if [[ "$PDK" != *sg13g2* ]]; then
-    # The PDK name has been changed starting with 2025.01
-    YEAR="${IIC_OSIC_TOOLS_VERSION%%.*}"
-    if [[ -z "$YEAR" || "$YEAR" -ge 2025 ]]; then
-        export PDK=ihp-sg13g2
-    else
-        export PDK=sg13g2
-    fi
-
+# Switch to IHP SG13CMOS5L PDK if not already set
+if [[ "$PDK" != ihp-sg13cmos5l ]]; then
+    export PDK=ihp-sg13cmos5l
     export PDKPATH=$PDK_ROOT/$PDK
-    export STD_CELL_LIBRARY=sg13g2_stdcell
-    export SPICE_USERINIT_DIR=$PDK_ROOT/$PDK/libs.tech/ngspice 
+    export STD_CELL_LIBRARY=sg13cmos5l_stdcell
+    export SPICE_USERINIT_DIR=$PDK_ROOT/$PDK/libs.tech/ngspice
 fi
 
 # Set path for Xschem
 export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem
 
-# The NMOS symbols for the IHP PDK changed with version 2025.03
-YEARMONTH=${IIC_OSIC_TOOLS_VERSION//./} 
-if [[ $YEARMONTH -lt 202503 ]]; then
+# The SG13CMOS5L devices used here (e.g., cap_cmomf, cornerPNP.lib) need
+# IIC-OSIC-TOOLS version 2026.08 or later
+YEARMONTH=${IIC_OSIC_TOOLS_VERSION//./}
+if [[ -n "$YEARMONTH" && $YEARMONTH -lt 202608 ]]; then
     echo
-    echo "[WARNING] The default NMOS symbols changed with version 2025.03!"
-    echo "[WARNING] Please update your image to 2025.03 or later to use the new symbols."
+    echo "[WARNING] This course requires the IHP SG13CMOS5L PDK as shipped with IIC-OSIC-TOOLS 2026.08 or later!"
+    echo "[WARNING] Please update your image."
 fi

@@ -1,7 +1,7 @@
 # Analog Circuit Design - AI Coding Agent Instructions
 
 ## Project Overview
-Educational material for intermediate-level MOSFET analog circuit design course (JKU 336.009). Built with Quarto for multi-format publishing (HTML website + PDF), containing theoretical content, Python-based MOSFET sizing calculations, and Xschem/ngspice circuit simulations using IHP's SG13G2 130nm CMOS PDK.
+Educational material for intermediate-level MOSFET analog circuit design course (JKU 336.009). Built with Quarto for multi-format publishing (HTML website + PDF), containing theoretical content, Python-based MOSFET sizing calculations, and Xschem/ngspice circuit simulations using IHP's SG13CMOS5L 130nm CMOS PDK.
 
 ## Architecture & Structure
 
@@ -19,7 +19,7 @@ Educational material for intermediate-level MOSFET analog circuit design course 
   does not track, so it would serve stale prose. A full render takes well under a minute.
 - **Sizing/Analysis**: Python with `pygmid` (gm/ID lookup tables), `schemdraw` (circuit diagrams), `numpy`, `pandas`, `matplotlib`
 - **Simulation**: Xschem (schematic entry) + ngspice (SPICE simulation)
-- **PDK**: IHP SG13G2 130nm - devices: `sg13_lv_nmos`, `sg13_lv_pmos`, `sg13_hv_nmos`, `sg13_hv_pmos`
+- **PDK**: IHP SG13CMOS5L 130nm - devices: `sg13_lv_nmos`, `sg13_lv_pmos`, `sg13_hv_nmos`, `sg13_hv_pmos`
 
 ## Critical Workflows
 
@@ -45,7 +45,7 @@ See `gmid/sizing_basic_ota.ipynb` pattern:
 4. Derive `ID = gm / (gm/ID)`, then lookup `VGS`, `gm/gds`, parasitic capacitances
 5. Verify design with `GM_GDS`, `GM_CGS`, `GM_CDD` ratios from lookup tables
 
-**Lookup table generation**: Simulate `xschem/techsweep_sg13g2_{lv,hv}_{nmos,pmos}.sch` → `techsweep_sg13_{lv,hv}_{nmos,pmos}.txt`, compress into `gmid/` with `gzip -9 -n` (stored as `.txt.gz`, plain `.txt` is git-ignored there) → `gmid/techsweep_sg13_txt_to_mat.ipynb` converts to `.mat` files
+**Lookup table generation**: Simulate `xschem/techsweep_sg13cmos5l_{lv,hv}_{nmos,pmos}.sch` → `techsweep_sg13_{lv,hv}_{nmos,pmos}.txt`, compress into `gmid/` with `gzip -9 -n` (stored as `.txt.gz`, plain `.txt` is git-ignored there) → `gmid/techsweep_sg13_txt_to_mat.ipynb` converts to `.mat` files
 
 ## Project-Specific Conventions
 
@@ -74,13 +74,13 @@ vgs_m12 = lv_nmos.look_upVGS(GM_ID=gm_id_m12, L=l_12, VDS=0.75, VSB=0.0)
 ```
 
 ### Xschem Integration
-- Schematics reference PDK primitives via `sg13g2_pr` library
+- Schematics reference PDK primitives via `sg13cmos5l_pr` library
 - Simulation commands embedded in `code_shown.sym` component (visible netlist text)
 - SVG exports for web documentation generated via `convertsch2svg.sh`
 
 ## Dependencies & External Integrations
 
-- **IIC-OSIC-TOOLS Docker**: Pre-configured environment with Xschem, ngspice, SG13G2 PDK (tag `2025.09+`)
+- **IIC-OSIC-TOOLS Docker**: Pre-configured environment with Xschem, ngspice, SG13CMOS5L PDK (tag `2026.08+`)
 - **CACE**: Circuit characterization tool, runs testbenches defined in `cace/*.yaml` with PVT sweeps
 - **pygmid**: Critical for gm/ID methodology - relies on `.mat` lookup tables derived from technology sweeps
 - **Quarto freeze**: Expensive computations cached in `_freeze/`, delete to force re-render
