@@ -77,7 +77,7 @@ jobs:
       - name: Show tool environment
         run: |
           echo "xschem        -> $(command -v xschem        || echo NOT FOUND)"
-          echo "sak-sch2svg.sh -> $(command -v sak-sch2svg.sh || echo NOT FOUND)"
+          echo "xvfb-run      -> $(command -v xvfb-run      || echo NOT FOUND)"
 
       - name: Determine changed schematics
         id: changed
@@ -98,16 +98,43 @@ jobs:
 
       - name: Re-render SVGs
         if: steps.changed.outputs.count != '0'
+        shell: bash
         run: |
+          # Render like sak-sch2svg.sh, but with the repository's xschemrc.
+          # sak-sch2svg.sh relies on the per-user xschemrc that the container
+          # entrypoint sets up; GitHub Actions bypasses the entrypoint (and
+          # sets HOME=/github/home), so xschem would find neither the PDK nor
+          # its own devices/ symbols and render every instance as
+          # "MISSING SYMBOL". Rendering from the schematic's directory with
+          # the bare file name also keeps the absolute checkout path out of
+          # the title block.
+          XVFB=()
+          command -v xvfb-run >/dev/null 2>&1 && XVFB=(xvfb-run -a)
+          fail=0
           while IFS= read -r sch; do
             [ -f "$sch" ] || continue
-            echo ">>> rendering $sch"
-            if command -v xvfb-run >/dev/null 2>&1; then
-              xvfb-run -a sak-sch2svg.sh "$sch"
-            else
-              sak-sch2svg.sh "$sch"
+            dir="$(dirname "$sch")"
+            base="$(basename "$sch" .sch)"
+            rc="$GITHUB_WORKSPACE/$dir/xschemrc"
+            [ -f "$rc" ] || rc="$GITHUB_WORKSPACE/xschem/xschemrc"
+            echo ">>> rendering $sch (rcfile ${rc#"$GITHUB_WORKSPACE"/})"
+            # A broken rcfile makes xschem stop at a Tcl error dialog instead
+            # of exiting, hence the timeout.
+            if ! ( cd "$dir" && timeout 300 "${XVFB[@]}" xschem --rcfile "$rc" \
+                --tcl "wm iconify ." \
+                --command "xschem zoom_full; xschem toggle_colorscheme; xschem print svg $base.svg" \
+                --quit "$base.sch" > /dev/null 2>&1 ); then
+              echo "::error file=$sch::xschem failed or timed out"
+              git checkout -- "$dir/$base.svg" 2>/dev/null || rm -f "$dir/$base.svg"
+              fail=1
+            elif grep -q "MISSING SYMBOL" "$dir/$base.svg" 2>/dev/null; then
+              echo "::error file=$sch::rendered SVG contains missing symbols"
+              git checkout -- "$dir/$base.svg" 2>/dev/null || rm -f "$dir/$base.svg"
+              fail=1
             fi
           done < changed_sch.txt
+          # Never commit a broken preview; fail so the problem gets noticed.
+          exit $fail
 
       - name: Commit refreshed SVGs
         if: steps.changed.outputs.count != '0'
