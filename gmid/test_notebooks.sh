@@ -8,7 +8,7 @@
 # render does not cover, because only a few notebooks are `{{< embed >}}`'d.
 #
 # Notebooks are executed in a throw-away copy of the required input data
-# (the .mat / .txt files), so a notebook that *writes* data (such as
+# (the .mat / .txt.gz files), so a notebook that *writes* data (such as
 # techsweep_sg13_txt_to_mat regenerating the .mat files) never touches the
 # working tree.
 #
@@ -46,7 +46,7 @@ fi
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 cp "$GMID_DIR"/*.mat "$work"/ 2>/dev/null || true
-cp "$GMID_DIR"/*.txt "$work"/ 2>/dev/null || true
+cp "$GMID_DIR"/*.txt.gz "$work"/ 2>/dev/null || true
 
 echo "============================================================"
 echo " gm/ID notebook regression"
