@@ -60,19 +60,30 @@ jobs:
           grep -n "^\.LIB mos_tt" "$M/cornerMOSlv.lib" "$M/cornerMOShv.lib" || true
           grep -n "mm_ok" "$PDK_ROOT/$PDK/libs.tech/xschem/sg13g2_pr/sg13_lv_nmos.sym" "$PDK_ROOT/$PDK/libs.tech/xschem/sg13g2_pr/sg13_lv_pmos.sym" || true
 
+      - name: Probe xschem netlisting (debug)
+        shell: bash
+        run: |
+          RC="$PDK_ROOT/$PDK/libs.tech/xschem/xschemrc"
+          mkdir -p /tmp/xprobe
+          echo "--- without display"
+          (unset DISPLAY; xschem -n -s -r -x -q --rcfile "$RC" -o /tmp/xprobe -N a.spice xschem/ota-5t.sch; echo "rc=$?") 2>&1 | tail -n 15
+          ls -la /tmp/xprobe || true
+          echo "--- with xvfb-run"
+          (xvfb-run -a xschem -n -s -r -x -q --rcfile "$RC" -o /tmp/xprobe -N b.spice xschem/ota-5t.sch; echo "rc=$?") 2>&1 | tail -n 15
+          ls -la /tmp/xprobe || true
+          grep -n "sg13_lv" /tmp/xprobe/a.spice || true
+
       - name: Run CACE (ota-5t)
         shell: bash
         run: |
-          RUN=""
-          if command -v xvfb-run >/dev/null 2>&1; then RUN="xvfb-run -a"; fi
-          $RUN cace cace/voltage-buffer-ota.yaml -s schematic --nofail --no-progress-bar 2>&1 | tee cace-ota-5t.log
+          unset DISPLAY
+          cace cace/voltage-buffer-ota.yaml -s schematic --nofail --no-progress-bar 2>&1 | tee cace-ota-5t.log
 
       - name: Run CACE (ota-improved)
         shell: bash
         run: |
-          RUN=""
-          if command -v xvfb-run >/dev/null 2>&1; then RUN="xvfb-run -a"; fi
-          $RUN cace cace/voltage-buffer-ota-improved.yaml -s schematic --nofail --no-progress-bar 2>&1 | tee cace-ota-improved.log
+          unset DISPLAY
+          cace cace/voltage-buffer-ota-improved.yaml -s schematic --nofail --no-progress-bar 2>&1 | tee cace-ota-improved.log
 
       - name: Post-process Markdown reports
         shell: bash
