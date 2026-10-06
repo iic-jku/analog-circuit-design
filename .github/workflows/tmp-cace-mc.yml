@@ -75,14 +75,14 @@ jobs:
         shell: bash
         run: |
           unset DISPLAY
-          cace cace/voltage-buffer-ota.yaml -s schematic --parallel-parameters 1 --nofail --no-progress-bar 2>&1 | tee cace-ota-5t.log
+          cace cace/voltage-buffer-ota.yaml -s schematic --nofail --no-progress-bar 2>&1 | tee cace-ota-5t.log
 
       - name: Run CACE (ota-improved)
         timeout-minutes: 40
         shell: bash
         run: |
           unset DISPLAY
-          cace cace/voltage-buffer-ota-improved.yaml -s schematic --parallel-parameters 1 --nofail --no-progress-bar 2>&1 | tee cace-ota-improved.log
+          cace cace/voltage-buffer-ota-improved.yaml -s schematic --nofail --no-progress-bar 2>&1 | tee cace-ota-improved.log
 
       - name: Post-process Markdown reports
         shell: bash
