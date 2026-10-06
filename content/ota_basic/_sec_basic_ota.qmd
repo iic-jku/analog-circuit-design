@@ -303,7 +303,7 @@ If you get stuck, you can find the testbench and 5T-OTA schematic [here](./xsche
 
 ### MOSFET Mismatch {#sec-mosfet-mismatch}
 
-So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show **mismatch** due to tiny random fluctuations in manufacturing, and we have to account for this. The mismatch parameters for various components are summarized in @tbl-sg13g2-mismatch.
+So far, we have assumed that implemented MOSFETs show no difference from device to device, which means that two transistors behave completely identical, and the resulting differential circuits are fully symmetric. However, due to manufacturing tolerances, this is not the case in reality. MOSFETs will show **mismatch** due to tiny random fluctuations in manufacturing, and we have to account for this. The mismatch parameters for various components are summarized in @tbl-sg13cmos5l-mismatch.
 
 For a typical MOSFET, we usually consider two main mismatch effects [@Pelgrom_1989]:
 
@@ -382,7 +382,7 @@ With @eq-resistor-mismatch we now have two criteria for how to select the width 
 1. The current handling capability (the larger the $W$, the more dc current a resistor can carry), and
 2. the resistor mismatch (the larger the $W$, the larger the $W L$ for a given $L/W$).
 
-If a resistor's dimensions are not limited by the two criteria above then we usually choose the minimum width that is allowed for a given resistor in a specific technology (for SG13G2 it is $W_\mathrm{min} = 0.5\,\mu\text{m}$) to save area and to minimize the parasitic capacitance of the resistor to substrate. 
+If a resistor's dimensions are not limited by the two criteria above then we usually choose the minimum width that is allowed for a given resistor in a specific technology (for SG13CMOS5L it is $W_\mathrm{min} = 0.5\,\mu\text{m}$) to save area and to minimize the parasitic capacitance of the resistor to substrate. 
 
 ### Capacitor Mismatch {#sec-capacitor-mismatch}
 
@@ -440,7 +440,7 @@ Looking at the CACE report in @nte-basic-ota-cace-result, we see that (luckily) 
 
 ### Monte Carlo Simulation Analysis
 
-The **Monte Carlo** run in the same CACE report in @nte-basic-ota-cace-result adds the effect of MOSFET mismatch. In each of the 100 runs, every transistor receives its own random variation of threshold voltage and dimensions (using the mismatch models of SG13G2), so nominally identical devices like $M_1$ and $M_2$, or $M_3$ and $M_4$, now differ. Note that this is a fundamentally different variation than the PVT corners above: PVT corners shift all devices together, whereas mismatch makes nominally identical devices differ, and it is exactly this asymmetry that the voltage buffer is sensitive to, as it shows up as an input offset voltage.
+The **Monte Carlo** run in the same CACE report in @nte-basic-ota-cace-result adds the effect of MOSFET mismatch. In each of the 100 runs, every transistor receives its own random variation of threshold voltage and dimensions (using the mismatch models of SG13CMOS5L), so nominally identical devices like $M_1$ and $M_2$, or $M_3$ and $M_4$, now differ. Note that this is a fundamentally different variation than the PVT corners above: PVT corners shift all devices together, whereas mismatch makes nominally identical devices differ, and it is exactly this asymmetry that the voltage buffer is sensitive to, as it shows up as an input offset voltage.
 
 The output voltage ratio now spreads from 0.994 to 1.005 (compared to 0.987 to 1.007 across all PVT corners), so the output voltage specification of $\pm 3\,\%$ is met in the presence of mismatch as well, while the bandwidth hardly moves (26.6 MHz to 27.3 MHz). We are in the comfortable position that the rather long $L = 5\,\mu\text{m}$ chosen in @sec-basic-ota-sizing (for dc gain reasons) results in large gate areas $W \cdot L$ and thus in small mismatch (see @eq-mosfet-mismatch-vth). Still, the worst-case ratio of 0.994 corresponds to an input offset voltage of about $5\,\text{mV}$ at $V_\mathrm{in} = 0.8\,\text{V}$, so mismatch uses up a noticeable part of the error budget. Also keep in mind that 100 runs are a rather small sample (see the callout on the number of Monte Carlo runs above), so the extreme values of a larger run would be somewhat wider.
 

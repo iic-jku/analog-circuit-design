@@ -18,7 +18,7 @@ limitations under the License.
 
 This is the material for an intermediate-level MOSFET analog circuit design course, held at JKU under course number 336.009 ("KV Analoge Schaltungstechnik").
 
-The course makes heavy use of circuit simulation, using **Xschem** for schematic entry and **ngspice** for simulation. The 130nm CMOS technology **SG13G2** from IHP Microelectronics is used.
+The course makes heavy use of circuit simulation, using **Xschem** for schematic entry and **ngspice** for simulation. The 130nm CMOS technology **SG13CMOS5L** from IHP Microelectronics is used.
 
 Tools and PDK are integrated in the **IIC-OSIC-TOOLS** Docker image, which will be used during the coursework.
 
@@ -54,11 +54,11 @@ Finally, [@Pretl_Fifty_Nifty_Circuits] collects fifty variations of two-transist
 
 :::
 
-## IHP's SG13G2 130nm CMOS Technology
+## IHP's SG13CMOS5L 130nm CMOS Technology
 
-SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from [IHP Microelectronics](https://www.ihp-microelectronics.com). It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminum metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at [SG13G2 process specification](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf). While we will not do layouts in this course, the layout rules can be found at [SG13G2 layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf).
+SG13CMOS5L is the name of a 130nm CMOS technology from [IHP Microelectronics](https://www.ihp-microelectronics.com). It is the CMOS-only variant of IHP's SG13G2 SiGe BiCMOS technology and shares its front-end devices and models. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, a parasitic vertical PNP, and 5 layers of Aluminum metallization (4 thin plus 1 thick metal layer). This PDK is open-source, and the complete process specification can be found at [SG13CMOS5L process specification](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/dev/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_process_spec.pdf). While we will not do layouts in this course, the layout rules can be found at [SG13CMOS5L layout rules](https://github.com/IHP-GmbH/IHP-Open-PDK/blob/dev/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_layout_rules.pdf).
 
-For our circuit design, the most important parameters of the available devices are summarized in the following table. Matching properties are summarized in @tbl-sg13g2-mismatch.
+For our circuit design, the most important parameters of the available devices are summarized in the following table. Matching properties are summarized in @tbl-sg13cmos5l-mismatch.
 
 | Component                    | Device Name    | Specifications                                                   |
 |:-----------------------------|:---------------|:-----------------------------------------------------------------|
@@ -69,10 +69,10 @@ For our circuit design, the most important parameters of the available devices a
 | Silicided poly resistor      | `rsil`         | $R_\square=7\,\Omega \pm 10\%$, $\text{TC}_1=3100\,\text{ppm/K}$ |
 | Poly resistor                | `rppd`         | $R_\square=260\,\Omega \pm 10\%$, $\text{TC}_1=170\,\text{ppm/K}$ |
 | Poly resistor high           | `rhigh`        | $R_\square=1360\,\Omega \pm 15\%$, $\text{TC}_1=-2300\,\text{ppm/K}$ |
-| MIM capacitor                | `cap_cmim`     | $C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%$, $\text{VC}_1=-26\,\text{ppm/V}$, $\text{TC}_1=3.6\,\text{ppm/K}$, breakdown voltage $>15\,\text{V}$ |
-| MOM capacitor                | n/a            | The metal stack is well-suited for MOM capacitors due to 5 thin metal layers, but no primitive capacitor device is available at this point. |
+| MOM capacitor (fringe)       | `cap_cmomf`    | $C' \approx 1.29\,\text{fF}/\mu\text{m}^2$ using Metal1 to Metal4; simulation-derived model, no process or mismatch variation modelled yet |
+| MOM capacitor (interdigitated) | `cap_cmomi`  | $C' \approx 1.09\,\text{fF}/\mu\text{m}^2$ using Metal1 to Metal4; approximate model, no process or mismatch variation modelled yet |
 
-: IHP SG13G2 devices {#tbl-sg13g2-devices}
+: IHP SG13CMOS5L devices {#tbl-sg13cmos5l-devices}
 
 ## Schematic Entry Using Xschem
 
@@ -88,7 +88,7 @@ Important ngspice simulation commands and options (e.g., how to control converge
 
 ## Integrated IC Design Environment (IIC-OSIC-TOOLS)
 
-In order to make it easier to use the various required components (tools like Xschem and ngspice, PDKs like SG13G2), we will use the **IIC-OSIC-TOOLS**. This is a pre-compiled Docker image which enables circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc., please look at [IIC-OSIC-TOOLS GitHub page](https://github.com/iic-jku/IIC-OSIC-TOOLS).
+In order to make it easier to use the various required components (tools like Xschem and ngspice, PDKs like SG13CMOS5L), we will use the **IIC-OSIC-TOOLS**. This is a pre-compiled Docker image which enables circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc., please look at [IIC-OSIC-TOOLS GitHub page](https://github.com/iic-jku/IIC-OSIC-TOOLS).
 
 ::: {.callout-warning title="Preparation"}
 Please make sure to receive information about your personal VM access ahead of the course start.
@@ -113,7 +113,7 @@ A summary of important Linux shell commands is provided in @sec-linux-cheatsheet
     - Change the line `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem` to `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem`
 - To apply the changes, we need to close the current terminal window: `exit`
 - Open again a terminal
-- Test if the correct PDK gets selected: `echo $PDK` (you should get `ihp-sg13g2` as the answer)
+- Test if the correct PDK gets selected: `echo $PDK` (you should get `ihp-sg13cmos5l` as the answer)
 - Change into the GitHub repository: `cd analog-circuit-design`
 - Start xschem using `xschem` or directly open a specific schematic using `xschem xschem/dc_lv_nmos.sch`
 

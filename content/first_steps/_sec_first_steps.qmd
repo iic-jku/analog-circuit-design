@@ -16,7 +16,7 @@ limitations under the License.
 
 # First Steps {#sec-first-steps}
 
-In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourselves familiar with the transistor and other passive components available in the IHP Microelectronics SG13G2 technology. While this is strictly speaking a BiCMOS technology offering MOSFETs as well as SiGe heterojunction bipolar transistors (HBTs), we will use it as a pure CMOS technology, which is available from IHP under the name SG13C.
+In this first chapter we will learn to use Xschem for schematic entry, and how to operate the ngspice SPICE simulator for circuit simulations. Further, we will make ourselves familiar with the transistor and other passive components available in the IHP Microelectronics SG13CMOS5L technology. This is the pure CMOS variant (with 5 metal layers) of IHP's SG13G2 BiCMOS technology, which additionally offers SiGe heterojunction bipolar transistors (HBTs).
 
 ## The Metal-Oxide-Semiconductor Field-Effect-Transistor (MOSFET) {#sec-mosfet}
 
@@ -35,7 +35,7 @@ Strictly speaking, the drain-source current of a MOSFET is controlled by the vol
 
 This focus on gate-source suggests that the source is special compared to the drain. In a typical physical MOSFET, however, the drain and source are constructed exactly the same (i.e., the MOSFET is a symmetric device), and which terminal is drain, and which terminal is source, is only determined by the applied voltage potentials, and can change dynamically during operation (think of a MOSFET operating as a switch... which side is the drain, which side is the source?).
 
-Unfortunately, this focus on a "special" source has made its way into some MOSFET compact models. The model that is used in SG13G2 luckily uses the PSP model, which is formulated symmetrically with regards to drain and source, and is thus very well suited for analog and RF circuit design. For a detailed understanding of the PSP model please refer to the [model documentation](https://www.cea.fr/cea-tech/leti/pspsupport/Documents/psp103p6_summary.pdf).
+Unfortunately, this focus on a "special" source has made its way into some MOSFET compact models. The model that is used in SG13CMOS5L luckily uses the PSP model, which is formulated symmetrically with regards to drain and source, and is thus very well suited for analog and RF circuit design. For a detailed understanding of the PSP model please refer to the [model documentation](https://www.cea.fr/cea-tech/leti/pspsupport/Documents/psp103p6_summary.pdf).
 :::
 
 {{< include /content/first_steps/_fig_nmos_symbol.qmd >}}
@@ -88,7 +88,7 @@ We start with an investigation into the large-signal MOSFET model shown in @fig-
 ![Testbench for NMOS dc sweeps.](/xschem/dc_lv_nmos.svg){#fig-simple-nmos-tb}
 
 ::: {.callout-note title="MOSFET Simulation Model"}
-For modelling the MOSFET behavior in a circuit simulator like ngspice different models are available. Some of these models have been widely adopted, like the [BSIM](https://en.wikipedia.org/wiki/BSIM) (Berkeley Short-channel IGFET Model) or PSP (Philips Penn State) model. The PSP model version 103.6 is used in the IHP SG13G2 PDK for the LV and HV MOSFET. This model has several advantages:
+For modelling the MOSFET behavior in a circuit simulator like ngspice different models are available. Some of these models have been widely adopted, like the [BSIM](https://en.wikipedia.org/wiki/BSIM) (Berkeley Short-channel IGFET Model) or PSP (Philips Penn State) model. The PSP model version 103.6 is used in the IHP SG13CMOS5L PDK for the LV and HV MOSFET. This model has several advantages:
 
 * Physics-based surface-potential model
 * Symmetric formulation with respect to drain and source

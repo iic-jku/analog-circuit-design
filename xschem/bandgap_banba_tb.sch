@@ -29,7 +29,7 @@ C {devices/code_shown.sym} 0 -160 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
 .lib cornerMOSlv.lib mos_tt
-.lib cornerHBT.lib hbt_typ
+.lib cornerPNP.lib typ
 .lib cornerRES.lib res_typ
 "}
 C {devices/code_shown.sym} 0 -710 0 0 {name=NGSPICE only_toplevel=true 

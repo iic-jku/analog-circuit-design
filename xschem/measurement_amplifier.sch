@@ -98,7 +98,7 @@ value=50
 device=resistor
 m=1}
 C {devices/ammeter.sym} 640 -510 0 0 {name=Vmeas savecurrent=true spice_ignore=0}
-C {sg13g2_pr/sg13_lv_pmos.sym} 620 -610 0 0 {name=M1
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 620 -610 0 0 {name=M1
 l=0.13u
 w=260u
 ng=52
@@ -122,4 +122,4 @@ C {devices/launcher.sym} 880 -160 0 0 {name=h5
 descr="load waves" 
 tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw ac"
 }
-C {sg13g2_pr/annotate_fet_params.sym} 780 -640 0 0 {name=annot1 ref=M1}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 780 -640 0 0 {name=annot1 ref=M1}

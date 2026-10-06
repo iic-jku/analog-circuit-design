@@ -16,7 +16,7 @@
 # clobber each other's files.
 #
 # It is meant to run inside the IIC-OSIC-TOOLS Docker image (tag `latest`),
-# which provides xschem, ngspice and the IHP SG13G2 PDK. It also runs locally
+# which provides xschem, ngspice and the IHP SG13CMOS5L PDK. It also runs locally
 # from that container.
 #
 # Usage:
@@ -55,7 +55,7 @@ JOBS="${JOBS:-$NPROC}"
 # Measured in the IIC-OSIC-TOOLS container (nproc=9, JOBS=1, one testbench):
 #
 #   testbench                    1 thread   9 threads
-#   techsweep_sg13g2_lv_nmos        23 s      164 s
+#   techsweep_sg13cmos5l_lv_nmos        23 s      164 s
 #   bandgap_banba_tb                23 s       43 s
 #   current_mirror_variations        9 s       15 s
 #
@@ -68,7 +68,7 @@ export OMP_NUM_THREADS="$SPICE_THREADS"
 # --- PDK selection ---------------------------------------------------------
 # The repository's xschemrc only sets PDK when it is unset, so make sure we
 # select the IHP PDK and do not inherit a different default from the image.
-export PDK="${PDK:-ihp-sg13g2}"
+export PDK="${PDK:-ihp-sg13cmos5l}"
 
 # --- original ngspice init files -------------------------------------------
 # ngspice loads a `.spiceinit` from the current directory *instead of* the one

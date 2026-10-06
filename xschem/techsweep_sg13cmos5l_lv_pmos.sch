@@ -91,7 +91,7 @@ value="
 .save @n.xm1.nsg13_lv_pmos[cjs]
 .save @n.xm1.nsg13_lv_pmos[rg]
 "}
-C {sg13g2_pr/sg13_lv_pmos.sym} 560 -170 0 0 {name=M1
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 560 -170 0 0 {name=M1
 l=\{lx\}
 w=\{wx\}
 ng=1

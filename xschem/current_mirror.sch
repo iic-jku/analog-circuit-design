@@ -144,7 +144,7 @@ plot i(viout3) vs v(out3)
 C {devices/vsource.sym} 380 -370 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 380 -280 0 0 {name=l3 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 630 -370 0 1 {name=M1
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 630 -370 0 1 {name=M1
 l=0.13u
 w=1u
 ng=2
@@ -163,7 +163,7 @@ tclcommand="set show_hidden_texts 1; xschem annotate_op"
 C {devices/isource.sym} 610 -490 0 0 {name=Ibias value=20u}
 C {devices/lab_pin.sym} 680 -370 0 1 {name=p1 sig_type=std_logic lab=v_gs}
 C {devices/lab_pin.sym} 380 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}
-C {sg13g2_pr/sg13_lv_nmos.sym} 800 -370 0 0 {name=M2
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 800 -370 0 0 {name=M2
 l=0.13u
 w=0.5u
 ng=1
@@ -171,7 +171,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1040 -370 0 0 {name=M3
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1040 -370 0 0 {name=M3
 l=0.13u
 w=1u
 ng=2
@@ -179,7 +179,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1300 -370 0 0 {name=M4
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1300 -370 0 0 {name=M4
 l=0.13u
 w=2u
 ng=4
@@ -201,7 +201,7 @@ C {devices/lab_pin.sym} 1440 -520 0 1 {name=p9 sig_type=std_logic lab=out3}
 C {devices/ammeter.sym} 820 -470 0 0 {name=Viout1 savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 1060 -470 0 0 {name=Viout2 savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 1320 -470 0 0 {name=Viout3 savecurrent=true spice_ignore=0}
-C {sg13g2_pr/annotate_fet_params.sym} 600 -270 0 0 {name=annot1 ref=M1}
-C {sg13g2_pr/annotate_fet_params.sym} 810 -270 0 0 {name=annot2 ref=M2}
-C {sg13g2_pr/annotate_fet_params.sym} 1050 -270 0 0 {name=annot3 ref=M3}
-C {sg13g2_pr/annotate_fet_params.sym} 1310 -270 0 0 {name=annot4 ref=M4}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 600 -270 0 0 {name=annot1 ref=M1}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 810 -270 0 0 {name=annot2 ref=M2}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1050 -270 0 0 {name=annot3 ref=M3}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1310 -270 0 0 {name=annot4 ref=M4}

@@ -88,7 +88,7 @@ tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
 C {devices/ngspice_probe.sym} 420 -400 0 0 {name=r1}
 C {devices/ngspice_probe.sym} 180 -290 0 0 {name=r3}
-C {sg13g2_pr/sg13_hv_nmos.sym} 290 -290 0 0 {name=M1
+C {sg13cmos5l_pr/sg13_hv_nmos.sym} 290 -290 0 0 {name=M1
 l=0.45u
 w=4.5u
 ng=1
@@ -96,4 +96,4 @@ m=1
 model=sg13_hv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/annotate_fet_params.sym} 160 -490 0 0 {name=annot1 ref=M1}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 160 -490 0 0 {name=annot1 ref=M1}

@@ -1,7 +1,7 @@
 # ota-5t
 
 - Description: Simple voltage buffer for capacitive load realized with 5T-OTA
-- PDK: ihp-sg13g2
+- PDK: ihp-sg13cmos5l
 
 ## Authorship
 

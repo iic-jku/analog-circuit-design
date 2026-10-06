@@ -73,7 +73,7 @@ C {devices/vsource.sym} 440 -290 0 0 {name=Vds value=1.5}
 C {devices/gnd.sym} 440 -200 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 380 -200 0 0 {name=l4 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2023-2025 Harald Pretl, Apache-2.0 license"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 290 -290 0 0 {name=M1
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 290 -290 0 0 {name=M1
 l=0.13u
 w=1.3u
 ng=1
@@ -96,4 +96,4 @@ tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
 C {devices/ngspice_probe.sym} 420 -400 0 0 {name=r1}
 C {devices/ngspice_probe.sym} 180 -290 0 0 {name=r3}
-C {sg13g2_pr/annotate_fet_params.sym} 180 -490 0 0 {name=annot1 ref=M1}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 180 -490 0 0 {name=annot1 ref=M1}

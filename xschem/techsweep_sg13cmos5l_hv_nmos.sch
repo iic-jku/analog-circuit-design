@@ -34,23 +34,23 @@ N 870 -230 870 -190 {
 lab=n}
 C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
-value=".lib cornerMOSlv.lib mos_tt
+value=".lib cornerMOShv.lib mos_tt
 "}
 C {devices/code_shown.sym} 0 -940 0 0 {name=NGSPICE_CTRL only_toplevel=true 
 value="
 .option sparse
 .temp 27
-.param wx=5u lx=0.13u vbx=0
+.param wx=5u lx=0.45u vbx=0
 .noise v(n) vg lin 1 1 1 1
 .control
 option numdgt=3
 set wr_singlescale
 set wr_vecnames
 
-compose l_vec  values 0.13u 0.2u 0.3u 0.4u 0.5u 1u 1.5u 2u 3u 4u 5u 10u
-compose vg_vec start= 0 stop=1.5  step=25m
-compose vd_vec start= 0 stop=1.5  step=25m
-compose vb_vec values 0 0.4 0.8 1.2
+compose l_vec  values 0.45u 0.5u 1u 1.5u 2u 3u 4u 5u 10u
+compose vg_vec start= 0 stop=3.3  step=50m
+compose vd_vec start= 0 stop=3.3  step=50m
+compose vb_vec values 0 1.1 2.2 3.3
 
 foreach var1 $&l_vec
   alterparam lx=$var1
@@ -62,7 +62,7 @@ foreach var1 $&l_vec
       foreach var4 $&vb_vec
         alter vsb $var4
 	run 
-	wrdata techsweep_sg13_lv_nmos.txt noise1.all
+	wrdata techsweep_sg13_hv_nmos.txt noise1.all
 	destroy all
 	set appendwrite
 	unset set wr_vecnames
@@ -73,7 +73,7 @@ end
 
 set appendwrite=0
 
-alterparam lx=0.13u
+alterparam lx=0.45u
 alterparam vbx=0
 reset
 op
@@ -85,16 +85,16 @@ write @schname\\\\.raw
 C {devices/gnd.sym} 650 -110 0 0 {name=l1 lab=GND}
 C {devices/gnd.sym} 520 -110 0 0 {name=l2 lab=GND}
 C {devices/vsource.sym} 520 -160 0 0 {name=vg value="0.65 AC 1"}
-C {devices/vsource.sym} 780 -240 0 0 {name=vd value=0.75}
+C {devices/vsource.sym} 780 -240 0 0 {name=vd value=1.65}
 C {devices/gnd.sym} 780 -110 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 720 -110 0 0 {name=l4 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 630 -240 0 0 {name=M1
+C {sg13cmos5l_pr/sg13_hv_nmos.sym} 630 -240 0 0 {name=M1
 l=\{lx\}
 w=\{wx\}
 ng=1
 m=1
-model=sg13_lv_nmos
+model=sg13_hv_nmos
 spiceprefix=X
 }
 C {devices/launcher.sym} 430 -370 0 0 {name=h2
@@ -105,23 +105,23 @@ C {devices/launcher.sym} 430 -330 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw; set show_hidden_texts 1; xschem annotate_op"
 }
-C {devices/ngspice_get_value.sym} 1020 -300 0 1 {name=r2 node=@n.xm1.nsg13_lv_nmos[gds]
+C {devices/ngspice_get_value.sym} 1020 -300 0 1 {name=r2 node=@n.xm1.nsg13_hv_nmos[gds]
 descr="gds="}
-C {devices/ngspice_get_value.sym} 1020 -330 0 1 {name=r4 node=@n.xm1.nsg13_lv_nmos[gm]
+C {devices/ngspice_get_value.sym} 1020 -330 0 1 {name=r4 node=@n.xm1.nsg13_hv_nmos[gm]
 descr="gm="}
-C {devices/ngspice_get_value.sym} 1020 -270 0 1 {name=r5 node=v(@n.xm1.nsg13_lv_nmos[vth])
+C {devices/ngspice_get_value.sym} 1020 -270 0 1 {name=r5 node=v(@n.xm1.nsg13_hv_nmos[vth])
 descr="vth="}
-C {devices/ngspice_get_value.sym} 1020 -210 0 1 {name=r6 node=@n.xm1.nsg13_lv_nmos[cgg]
+C {devices/ngspice_get_value.sym} 1020 -210 0 1 {name=r6 node=@n.xm1.nsg13_hv_nmos[cgg]
 descr="cgs="}
-C {devices/ngspice_get_value.sym} 1020 -240 0 1 {name=r7 node=v(@n.xm1.nsg13_lv_nmos[vdss])
+C {devices/ngspice_get_value.sym} 1020 -240 0 1 {name=r7 node=v(@n.xm1.nsg13_hv_nmos[vdss])
 descr="vdss(vds_sat)="}
-C {devices/ngspice_get_value.sym} 1020 -180 0 1 {name=r8 node=v(@n.xm1.nsg13_lv_nmos[fug])
+C {devices/ngspice_get_value.sym} 1020 -180 0 1 {name=r8 node=v(@n.xm1.nsg13_hv_nmos[fug])
 descr="fug(f_t)="}
-C {devices/ngspice_get_value.sym} 1020 -150 0 1 {name=r9 node=@n.xm1.nsg13_lv_nmos[cgd]
+C {devices/ngspice_get_value.sym} 1020 -150 0 1 {name=r9 node=@n.xm1.nsg13_hv_nmos[cgd]
 descr="cdg="}
-C {devices/ngspice_get_value.sym} 1020 -90 0 1 {name=r10 node=v(@n.xm1.nsg13_lv_nmos[sid])
+C {devices/ngspice_get_value.sym} 1020 -90 0 1 {name=r10 node=v(@n.xm1.nsg13_hv_nmos[sid])
 descr="sid="}
-C {devices/ngspice_get_value.sym} 1020 -120 0 1 {name=r11 node=v(@n.xm1.nsg13_lv_nmos[rg])
+C {devices/ngspice_get_value.sym} 1020 -120 0 1 {name=r11 node=v(@n.xm1.nsg13_hv_nmos[rg])
 descr="rg="}
 C {devices/vsource.sym} 720 -160 2 1 {name=vsb value=\{vbx\}}
 C {devices/lab_wire.sym} 520 -240 0 0 {name=p1 sig_type=std_logic lab=g}
@@ -130,30 +130,30 @@ C {devices/lab_wire.sym} 720 -240 0 1 {name=p3 sig_type=std_logic lab=b}
 C {devices/code_shown.sym} 620 -940 0 0 {name=NGSPICE_SAVE only_toplevel=true 
 value="
 .save b d g n
-.save @n.xm1.nsg13_lv_nmos[cgsol]
-.save @n.xm1.nsg13_lv_nmos[cgdol]
-.save @n.xm1.nsg13_lv_nmos[cdd]
-.save @n.xm1.nsg13_lv_nmos[cgb]
-.save @n.xm1.nsg13_lv_nmos[cgd]
-.save @n.xm1.nsg13_lv_nmos[cgg]
-.save @n.xm1.nsg13_lv_nmos[cgs]
-.save @n.xm1.nsg13_lv_nmos[css]
-.save @n.xm1.nsg13_lv_nmos[gds]
-.save @n.xm1.nsg13_lv_nmos[gm]
-.save @n.xm1.nsg13_lv_nmos[gmb]
-.save @n.xm1.nsg13_lv_nmos[ids]
-.save @n.xm1.nsg13_lv_nmos[l]
-.save @n.xm1.nsg13_lv_nmos[vgs]
-.save @n.xm1.nsg13_lv_nmos[vds]
-.save @n.xm1.nsg13_lv_nmos[vsb]
-.save @n.xm1.nsg13_lv_nmos[vth]
-.save @n.xm1.nsg13_lv_nmos[vdss]
-.save @n.xm1.nsg13_lv_nmos[fug]
-.save @n.xm1.nsg13_lv_nmos[sid]
-.save @n.xm1.nsg13_lv_nmos[sfl]
-.save @n.xm1.nsg13_lv_nmos[cjd]
-.save @n.xm1.nsg13_lv_nmos[cjs]
-.save @n.xm1.nsg13_lv_nmos[rg]
+.save @n.xm1.nsg13_hv_nmos[cgsol]
+.save @n.xm1.nsg13_hv_nmos[cgdol]
+.save @n.xm1.nsg13_hv_nmos[cdd]
+.save @n.xm1.nsg13_hv_nmos[cgb]
+.save @n.xm1.nsg13_hv_nmos[cgd]
+.save @n.xm1.nsg13_hv_nmos[cgg]
+.save @n.xm1.nsg13_hv_nmos[cgs]
+.save @n.xm1.nsg13_hv_nmos[css]
+.save @n.xm1.nsg13_hv_nmos[gds]
+.save @n.xm1.nsg13_hv_nmos[gm]
+.save @n.xm1.nsg13_hv_nmos[gmb]
+.save @n.xm1.nsg13_hv_nmos[ids]
+.save @n.xm1.nsg13_hv_nmos[l]
+.save @n.xm1.nsg13_hv_nmos[vgs]
+.save @n.xm1.nsg13_hv_nmos[vds]
+.save @n.xm1.nsg13_hv_nmos[vsb]
+.save @n.xm1.nsg13_hv_nmos[vth]
+.save @n.xm1.nsg13_hv_nmos[vdss]
+.save @n.xm1.nsg13_hv_nmos[fug]
+.save @n.xm1.nsg13_hv_nmos[sid]
+.save @n.xm1.nsg13_hv_nmos[sfl]
+.save @n.xm1.nsg13_hv_nmos[cjd]
+.save @n.xm1.nsg13_hv_nmos[cjs]
+.save @n.xm1.nsg13_hv_nmos[rg]
 "}
 C {devices/ccvs.sym} 870 -160 0 0 {name=H4 vnam=vd value=1}
 C {devices/gnd.sym} 870 -110 0 0 {name=l6 lab=GND}

@@ -113,7 +113,7 @@ lab=v_b}
 C {devices/title-3.sym} 0 0 0 0 {name=l1 author="Simon Dorrer" rev=1.0 lock=true}
 C {devices/iopin.sym} 960 -700 0 1 {name=p2 lab=v_a}
 C {devices/iopin.sym} 1500 -700 0 0 {name=p4 lab=v_b}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1160 -540 1 1 {name=M1
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1160 -540 1 1 {name=M1
 l=L_N
 w=W_N
 ng=1
@@ -121,7 +121,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 1160 -860 1 0 {name=M2
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 1160 -860 1 0 {name=M2
 l=L_P
 w=W_P
 ng=1
@@ -129,7 +129,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 1300 -860 1 0 {name=Mdummy2
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 1300 -860 1 0 {name=Mdummy2
 l=L_P_D
 w=W_P_D
 ng=1
@@ -137,7 +137,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1300 -540 1 1 {name=Mdummy1
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1300 -540 1 1 {name=Mdummy1
 l=L_N_D
 w=W_N_D
 ng=1

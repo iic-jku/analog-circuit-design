@@ -259,7 +259,7 @@ end
 C {devices/vsource.sym} 60 -400 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 60 -310 0 0 {name=l3 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2025 Harald Pretl, Apache-2.0 license"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 310 -400 0 1 {name=M11
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 310 -400 0 1 {name=M11
 l=5u
 w=10u
 ng=1
@@ -277,7 +277,7 @@ tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
 C {devices/isource.sym} 290 -520 0 0 {name=Ibias1 value="dc 50u ac 1"}
 C {devices/lab_pin.sym} 60 -570 0 0 {name=p2 sig_type=std_logic lab=v_dd}
-C {sg13g2_pr/sg13_lv_nmos.sym} 480 -400 0 0 {name=M12
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 480 -400 0 0 {name=M12
 l=5u
 w=10u
 ng=1
@@ -289,10 +289,10 @@ C {devices/vsource.sym} 620 -380 0 0 {name=Vout1 value=0.4
 }
 C {devices/lab_pin.sym} 620 -570 0 1 {name=p7 sig_type=std_logic lab=out}
 C {devices/ammeter.sym} 500 -500 0 0 {name=Viout1 savecurrent=true spice_ignore=0}
-C {sg13g2_pr/annotate_fet_params.sym} 280 -300 0 0 {name=annot1 ref=M11}
-C {sg13g2_pr/annotate_fet_params.sym} 490 -300 0 0 {name=annot2 ref=M12}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 280 -300 0 0 {name=annot1 ref=M11}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 490 -300 0 0 {name=annot2 ref=M12}
 C {devices/gnd.sym} 200 -830 0 0 {name=l1 lab=GND}
-C {sg13g2_pr/sg13_lv_nmos.sym} 290 -920 0 1 {name=M21
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 290 -920 0 1 {name=M21
 l=2u
 w=14u
 ng=2
@@ -302,7 +302,7 @@ spiceprefix=X
 }
 C {devices/isource.sym} 270 -1220 0 0 {name=Ibias2 value="dc 50u ac 1"}
 C {devices/lab_pin.sym} 270 -1270 0 0 {name=p5 sig_type=std_logic lab=v_dd}
-C {sg13g2_pr/sg13_lv_nmos.sym} 460 -920 0 0 {name=M22
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 460 -920 0 0 {name=M22
 l=2u
 w=14u
 ng=2
@@ -312,9 +312,9 @@ spiceprefix=X
 }
 C {devices/lab_pin.sym} 480 -1270 0 1 {name=p10 sig_type=std_logic lab=out}
 C {devices/ammeter.sym} 480 -1220 0 0 {name=Viout2 savecurrent=true spice_ignore=0}
-C {sg13g2_pr/annotate_fet_params.sym} 100 -790 0 0 {name=annot3 ref=M21}
-C {sg13g2_pr/annotate_fet_params.sym} 250 -790 0 0 {name=annot4 ref=M22}
-C {sg13g2_pr/sg13_lv_nmos.sym} 290 -1020 0 1 {name=M23
+C {sg13cmos5l_pr/annotate_fet_params.sym} 100 -790 0 0 {name=annot3 ref=M21}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 250 -790 0 0 {name=annot4 ref=M22}
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 290 -1020 0 1 {name=M23
 l=2u
 w=14u
 ng=2
@@ -322,7 +322,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 460 -1020 0 0 {name=M24
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 460 -1020 0 0 {name=M24
 l=2u
 w=14u
 ng=2
@@ -330,16 +330,16 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/annotate_fet_params.sym} 410 -790 0 0 {name=annot5 ref=M23}
-C {sg13g2_pr/annotate_fet_params.sym} 560 -790 0 0 {name=annot6 ref=M24}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 410 -790 0 0 {name=annot5 ref=M23}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 560 -790 0 0 {name=annot6 ref=M24}
 C {devices/gnd.sym} 900 -310 0 0 {name=l2 lab=GND}
 C {devices/isource.sym} 970 -600 0 0 {name=Ibias3 value="dc 50u ac 1"}
 C {devices/lab_pin.sym} 970 -650 0 0 {name=p1 sig_type=std_logic lab=v_dd}
 C {devices/lab_pin.sym} 1180 -650 0 1 {name=p3 sig_type=std_logic lab=out}
 C {devices/ammeter.sym} 1180 -600 0 0 {name=Viout3 savecurrent=true spice_ignore=0}
-C {sg13g2_pr/annotate_fet_params.sym} 960 -300 0 0 {name=annot7 ref=M31}
-C {sg13g2_pr/annotate_fet_params.sym} 1170 -300 0 0 {name=annot8 ref=M32}
-C {sg13g2_pr/sg13_lv_nmos.sym} 990 -500 0 1 {name=M31
+C {sg13cmos5l_pr/annotate_fet_params.sym} 960 -300 0 0 {name=annot7 ref=M31}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1170 -300 0 0 {name=annot8 ref=M32}
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 990 -500 0 1 {name=M31
 l=3u
 w=20u
 ng=2
@@ -347,7 +347,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1160 -500 0 0 {name=M32
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1160 -500 0 0 {name=M32
 l=3u
 w=20u
 ng=2
@@ -356,7 +356,7 @@ model=sg13_lv_nmos
 spiceprefix=X
 }
 C {devices/gnd.sym} 980 -930 0 0 {name=l4 lab=GND}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1070 -1020 0 1 {name=M41
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1070 -1020 0 1 {name=M41
 l=1u
 w=10u
 ng=1
@@ -366,7 +366,7 @@ spiceprefix=X
 }
 C {devices/isource.sym} 1050 -1240 0 0 {name=Ibias41 value="dc 50u ac 1"}
 C {devices/lab_pin.sym} 1050 -1290 0 0 {name=p4 sig_type=std_logic lab=v_dd}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1360 -1020 0 0 {name=M42
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1360 -1020 0 0 {name=M42
 l=1u
 w=10u
 ng=1
@@ -376,9 +376,9 @@ spiceprefix=X
 }
 C {devices/lab_pin.sym} 1380 -1290 0 1 {name=p6 sig_type=std_logic lab=out}
 C {devices/ammeter.sym} 1380 -1240 0 0 {name=Viout4 savecurrent=true spice_ignore=0}
-C {sg13g2_pr/annotate_fet_params.sym} 860 -890 0 0 {name=annot9 ref=M41}
-C {sg13g2_pr/annotate_fet_params.sym} 990 -890 0 0 {name=annot10 ref=M42}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1070 -1120 0 1 {name=M43
+C {sg13cmos5l_pr/annotate_fet_params.sym} 860 -890 0 0 {name=annot9 ref=M41}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 990 -890 0 0 {name=annot10 ref=M42}
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1070 -1120 0 1 {name=M43
 l=1u
 w=10u
 ng=1
@@ -386,7 +386,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 1360 -1120 0 0 {name=M44
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1360 -1120 0 0 {name=M44
 l=1u
 w=10u
 ng=1
@@ -394,9 +394,9 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/annotate_fet_params.sym} 1130 -890 0 0 {name=annot11 ref=M43}
-C {sg13g2_pr/annotate_fet_params.sym} 1260 -890 0 0 {name=annot12 ref=M44}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1280 -1070 0 1 {name=M45
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1130 -890 0 0 {name=annot11 ref=M43}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1260 -890 0 0 {name=annot12 ref=M44}
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1280 -1070 0 1 {name=M45
 l=0.13u
 w=10u
 ng=1
@@ -405,8 +405,8 @@ model=sg13_lv_nmos
 spiceprefix=X
 }
 C {devices/isource.sym} 1260 -1200 0 0 {name=Ibias42 value=5u}
-C {sg13g2_pr/annotate_fet_params.sym} 1390 -890 0 0 {name=annot13 ref=M45}
-C {sg13g2_pr/rppd.sym} 270 -1120 0 0 {name=R2
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1390 -890 0 0 {name=annot13 ref=M45}
+C {sg13cmos5l_pr/rppd.sym} 270 -1120 0 0 {name=R2
 w=0.5e-6
 l=8e-6
 model=rppd
@@ -415,7 +415,7 @@ spiceprefix=X
 b=0
 m=1
 }
-C {sg13g2_pr/rppd.sym} 970 -400 0 0 {name=R31
+C {sg13cmos5l_pr/rppd.sym} 970 -400 0 0 {name=R31
 w=3e-6
 l=45e-6
 model=rppd
@@ -424,7 +424,7 @@ spiceprefix=X
 b=0
 m=1
 }
-C {sg13g2_pr/rppd.sym} 1180 -400 0 1 {name=R32
+C {sg13cmos5l_pr/rppd.sym} 1180 -400 0 1 {name=R32
 w=3e-6
 l=45e-6
 model=rppd
