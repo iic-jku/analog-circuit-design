@@ -110,10 +110,10 @@ A summary of important Linux shell commands is provided in @sec-linux-cheatsheet
 - This GitHub repository includes a file called `.designinit`, which sets the PDK and certain paths. However, this must be located in `/foss/designs/`
 - Therefore, we first need to copy it there: `cp analog-circuit-design/.designinit .`
 - Then we adjust the variable `XSCHEM_USER_LIBRARY_PATH` by opening the file in an editor e.g. `nano .designinit`
-    - Change the last line from `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem` to `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem`
+    - Change the line `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/xschem` to `export XSCHEM_USER_LIBRARY_PATH=$DESIGNS/analog-circuit-design/xschem`
 - To apply the changes, we need to close the current terminal window: `exit`
 - Open again a terminal
-- Test if the correct PDK gets selected: `echo $PDK` (you should get `sg13g2` as the answer)
+- Test if the correct PDK gets selected: `echo $PDK` (you should get `ihp-sg13g2` as the answer)
 - Change into the GitHub repository: `cd analog-circuit-design`
 - Start xschem using `xschem` or directly open a specific schematic using `xschem xschem/dc_lv_nmos.sch`
 
