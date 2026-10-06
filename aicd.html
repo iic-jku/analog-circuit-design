@@ -488,7 +488,7 @@ window.Quarto = {
   <li><a href="#simulation-of-improved-ota" id="toc-simulation-of-improved-ota" class="nav-link" data-scroll-target="#simulation-of-improved-ota"><span class="header-section-number">11.3</span> Simulation of Improved OTA</a></li>
   <li><a href="#corner-simulation-of-improved-ota" id="toc-corner-simulation-of-improved-ota" class="nav-link" data-scroll-target="#corner-simulation-of-improved-ota"><span class="header-section-number">11.4</span> Corner Simulation of Improved OTA</a></li>
   </ul></li>
-  <li><a href="#biasing" id="toc-biasing" class="nav-link" data-scroll-target="#biasing"><span class="header-section-number">12</span> Biasing</a>
+  <li><a href="#sec-biasing" id="toc-sec-biasing" class="nav-link" data-scroll-target="#sec-biasing"><span class="header-section-number">12</span> Biasing</a>
   <ul class="collapse">
   <li><a href="#bandgap-reference" id="toc-bandgap-reference" class="nav-link" data-scroll-target="#bandgap-reference"><span class="header-section-number">12.1</span> Bandgap Reference</a></li>
   <li><a href="#sec-banba-bandgap" id="toc-sec-banba-bandgap" class="nav-link" data-scroll-target="#sec-banba-bandgap"><span class="header-section-number">12.2</span> Banba Bandgap Reference</a></li>
@@ -501,9 +501,9 @@ window.Quarto = {
   <li><a href="#differential-ota-variants" id="toc-differential-ota-variants" class="nav-link" data-scroll-target="#differential-ota-variants"><span class="header-section-number">13.4</span> Differential OTA Variants</a></li>
   </ul></li>
   <li><a href="#an-rc-opamp-filter" id="toc-an-rc-opamp-filter" class="nav-link" data-scroll-target="#an-rc-opamp-filter"><span class="header-section-number">14</span> An RC-OPAMP Filter</a></li>
-  <li><a href="#summary-conclusion" id="toc-summary-conclusion" class="nav-link" data-scroll-target="#summary-conclusion"><span class="header-section-number">15</span> Summary &amp; Conclusion</a></li>
+  <li><a href="#sec-summary" id="toc-sec-summary" class="nav-link" data-scroll-target="#sec-summary"><span class="header-section-number">15</span> Summary &amp; Conclusion</a></li>
   <li><a href="#sec-middlebrook-method" id="toc-sec-middlebrook-method" class="nav-link" data-scroll-target="#sec-middlebrook-method"><span class="header-section-number">16</span> Appendix: Middlebrook’s Method</a></li>
-  <li><a href="#appendix-useful-circuit-theorems" id="toc-appendix-useful-circuit-theorems" class="nav-link" data-scroll-target="#appendix-useful-circuit-theorems"><span class="header-section-number">17</span> Appendix: Useful Circuit Theorems</a>
+  <li><a href="#sec-circuit-theorems" id="toc-sec-circuit-theorems" class="nav-link" data-scroll-target="#sec-circuit-theorems"><span class="header-section-number">17</span> Appendix: Useful Circuit Theorems</a>
   <ul class="collapse">
   <li><a href="#sec-miller-theorem" id="toc-sec-miller-theorem" class="nav-link" data-scroll-target="#sec-miller-theorem"><span class="header-section-number">17.1</span> Miller’s Theorem</a></li>
   <li><a href="#sec-bode-noise-theorem" id="toc-sec-bode-noise-theorem" class="nav-link" data-scroll-target="#sec-bode-noise-theorem"><span class="header-section-number">17.2</span> Bode’s Noise Theorem</a></li>
@@ -4072,7 +4072,7 @@ Table&nbsp;4: IHP SG13G2 device mismatch
 \]</span></p>
 <p>Bringing both results into <a href="#eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;43</a>, we get <span class="math display">\[
 \sigma\left\{\frac{\Delta I_\mathrm{D}}{I_\mathrm{D}}\right\} = \sqrt{ (0.55\,\text{mV} \cdot 5\,\text{V}^{-1})^2 + (0.09\,\%)^2} \approx 0.29\,\%.
-\]</span> Comparing with the simulation results in <a href="#fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a> for the basic current mirror, we can see that this gives a reasonable estimate compared to the standard deviation of about <span class="math inline">\(0.21\,\mu\text{A}/48.9\,\mu\text{A} = 0.43\,\%\)</span> obtained from the Monte-Carlo simulation. The remaining discrepancy is due to simplifications in the analytical model (e.g., the square-law approximation).</p>
+\]</span> Comparing with the simulation results in <a href="#fig-curmir-mc" class="quarto-xref">Figure&nbsp;54</a> for the basic current mirror, we can see that this gives a reasonable estimate compared to the standard deviation of about <span class="math inline">\(0.205\,\mu\text{A}/48.9\,\mu\text{A} = 0.42\,\%\)</span> obtained from the Monte-Carlo simulation. The remaining discrepancy is due to simplifications in the analytical model (e.g., the square-law approximation).</p>
 <p>Let us now calculate the current mirror matching of the resistively-degenerated current mirror. We can use <a href="#eq-curmir-matching-alt" class="quarto-xref">Equation&nbsp;41</a> to analyze this configuration. We use the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 10\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 20\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 3\,\mu\text{m}\)</span>, for the MOSFET, and <span class="math inline">\(V_\mathrm{deg} = 0.2\,\text{V}\)</span>, and <span class="math inline">\(W = 3\,\mu\text{m}\)</span> / <span class="math inline">\(L = 45\,\mu\text{m}\)</span> for the used <code>rppd</code> resistor (which at <span class="math inline">\(R_\square = 260\,\Omega\)</span> gives the required <span class="math inline">\(R_\mathrm{deg} \approx 3.9\,\text{k}\Omega\)</span>).</p>
 <p>The standard deviation of the transconductance parameter mismatch can be calculated as <span class="math display">\[
 \sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{20\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{3\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{20\,\mu\text{m} \cdot 3\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
@@ -4907,7 +4907,7 @@ Table&nbsp;5: Voltage buffer specification
 </div>
 </section>
 </section>
-<section id="biasing" class="level1" data-number="12">
+<section id="sec-biasing" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Biasing</h1>
 <p>So far, we have deferred one unresolved issue. We have studied ways to multiply and scale bias currents using current mirrors (see <a href="#sec-current-mirror" class="quarto-xref">Section&nbsp;6</a>) and we have also found ways to buffer (and scale) bias voltages (see <a href="#sec-voltage-buffer-with-ota" class="quarto-xref">Section&nbsp;8.1</a>, scaling can be readily achieved by using a resistive divider in the feedback path). We can generate bias voltages by running a current through a resistor. However, what has not been discussed so far is <strong>how to generate one stable bias current in the first place</strong>.</p>
 <p>If we had a stable reference voltage, then we could use the arrangement shown in <a href="#fig-bias-current-gen" class="quarto-xref">Figure&nbsp;64</a> to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)</p>
@@ -5369,7 +5369,7 @@ Figure&nbsp;79: The folded-cascode differential OTA (output common-mode regulati
 <h1 data-number="14"><span class="header-section-number">14</span> An RC-OPAMP Filter</h1>
 <p>To be added in a future release.</p>
 </section>
-<section id="summary-conclusion" class="level1" data-number="15">
+<section id="sec-summary" class="level1" data-number="15">
 <h1 data-number="15"><span class="header-section-number">15</span> Summary &amp; Conclusion</h1>
 <p>By now, you should be familiar with the use of a schematic entry tool (Xschem) and circuit simulator (ngspice). You have learned the basic performance trade-offs, and the large- and small-signal behavior of the MOSFET. You can use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method to size MOSFETs for class-A operation. You can design simple amplifiers based on OTA structures. In summary, you are well on your way to becoming a skilled analog or mixed-signal circuit designer!</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Feedback">
@@ -5441,7 +5441,7 @@ T(s) = \frac{T_\mathrm{v} T_\mathrm{i} - 1}{T_\mathrm{v} + T_\mathrm{i} + 2} = \
 <p>The four ac quantities <span class="math inline">\(V_\mathrm{f}\)</span>, <span class="math inline">\(V_\mathrm{r}\)</span>, <span class="math inline">\(I_\mathrm{f}\)</span>, and <span class="math inline">\(I_\mathrm{r}\)</span> we can readily find by circuit simulation or calculation.</p>
 <p>Please note that Middlebrook’s method works well for <span class="math inline">\(|T| \gg 1\)</span>, so it will show inaccuracies at the crossover frequency of the open-loop gain at <span class="math inline">\(|T(s)| \approx 1\)</span>. An improved method (slightly more complicated) can be found in <span class="citation" data-cites="Tian_2001">(<a href="#ref-Tian_2001" role="doc-biblioref">Tian et al. 2001</a>)</span>.</p>
 </section>
-<section id="appendix-useful-circuit-theorems" class="level1" data-number="17">
+<section id="sec-circuit-theorems" class="level1" data-number="17">
 <h1 data-number="17"><span class="header-section-number">17</span> Appendix: Useful Circuit Theorems</h1>
 <section id="sec-miller-theorem" class="level2" data-number="17.1">
 <h2 data-number="17.1" class="anchored" data-anchor-id="sec-miller-theorem"><span class="header-section-number">17.1</span> Miller’s Theorem</h2>
