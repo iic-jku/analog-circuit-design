@@ -214,15 +214,12 @@ parameters:
         maximum: 100
         step: linear
         stepsize: 1
-      sigma:
-        # This is actually mc_ok.
-        # If mc_ok = 1: MC with 3 sigma.
-        # If mc_ok = 0: MC is turned off.
-        # https://github.com/IHP-GmbH/IHP-Open-PDK/issues/149
-        #minimum: 0
-        typical: 1
       corner_mos:
-        typical: tt_stat # Monte Carlo corner for TT
+        # Monte Carlo of device mismatch at TT: mos_tt_mismatch draws an
+        # independent random variation for every MOSFET instance with
+        # mm_ok=1 (default of the IHP xschem symbols). Note: mos_tt_stat
+        # would only vary the global process (one draw shared by all devices).
+        typical: tt_mismatch
       corner_res:
         typical: typ
       vdd:
