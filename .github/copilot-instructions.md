@@ -45,7 +45,7 @@ See `gmid/sizing_basic_ota.ipynb` pattern:
 4. Derive `ID = gm / (gm/ID)`, then lookup `VGS`, `gm/gds`, parasitic capacitances
 5. Verify design with `GM_GDS`, `GM_CGS`, `GM_CDD` ratios from lookup tables
 
-**Lookup table generation**: Use `xschem/techsweep_sg13g2_lv_nmos.sch` → outputs `gmid/techsweep_sg13_txt_to_mat.ipynb` converts to `.mat` files
+**Lookup table generation**: Simulate `xschem/techsweep_sg13g2_lv_{nmos,pmos}.sch` → `techsweep_sg13_lv_{nmos,pmos}.txt`, compress into `gmid/` with `gzip -9 -n` (stored as `.txt.gz`, plain `.txt` is git-ignored there) → `gmid/techsweep_sg13_txt_to_mat.ipynb` converts to `.mat` files
 
 ## Project-Specific Conventions
 

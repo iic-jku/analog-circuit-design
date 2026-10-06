@@ -47,7 +47,7 @@ option numdgt=3
 set wr_singlescale
 set wr_vecnames
 
-compose l_vec  values 0.13u 0.2u 0.3u 0.4u 0.5u 1u 5u 10u
+compose l_vec  values 0.13u 0.2u 0.3u 0.4u 0.5u 1u 1.5u 2u 3u 4u 5u 10u
 compose vg_vec start= 0 stop=1.5  step=25m
 compose vd_vec start= 0 stop=1.5  step=25m
 compose vb_vec values 0 0.4 0.8 1.2

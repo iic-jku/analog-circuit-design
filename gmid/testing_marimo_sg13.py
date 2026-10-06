@@ -47,7 +47,7 @@ def _():
 @app.cell(hide_code=True)
 def _(choice, devices, pd):
     # read ngspice data
-    df_raw = pd.read_csv('sizing/techsweep_'+devices[choice]+'.txt', sep=r'\s+')
+    df_raw = pd.read_csv('sizing/techsweep_'+devices[choice]+'.txt.gz', sep=r'\s+')
     par_names = df_raw.columns.to_list()
     par_prefix = par_names[1].split('[')[0]
 
