@@ -187,7 +187,7 @@
 </div>
 <aside class="notes">
 <p>This is the material for an intermediate-level MOSFET analog circuit design course, held at JKU under course number 336.009 (“KV Analoge Schaltungstechnik”).</p>
-<p>The course makes heavy use of circuit simulation, using <strong>Xschem</strong> for schematic entry and <strong>ngspice</strong> for simulation. The 130nm CMOS technology <strong>SG13G2</strong> from IHP Microelectronics is used.</p>
+<p>The course makes heavy use of circuit simulation, using <strong>Xschem</strong> for schematic entry and <strong>ngspice</strong> for simulation. The 130nm CMOS technology <strong>SG13CMOS5L</strong> from IHP Microelectronics is used.</p>
 <p>Tools and PDK are integrated in the <strong>IIC-OSIC-TOOLS</strong> Docker image, which will be used during the coursework.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -300,18 +300,18 @@
 </div>
 </div>
 </section>
-<section id="ihps-sg13g2-130nm-cmos-technology" class="title-slide slide level2 center" data-number="1.1">
-<h2><span class="header-section-number">1.1</span> IHP’s SG13G2 130nm CMOS Technology</h2>
+<section id="ihps-sg13cmos5l-130nm-cmos-technology" class="title-slide slide level2 center" data-number="1.1">
+<h2><span class="header-section-number">1.1</span> IHP’s SG13CMOS5L 130nm CMOS Technology</h2>
 
 </section>
 <section class="slide level3 unnumbered">
-<h3>IHP’s SG13G2 130nm CMOS Technology</h3>
-<div id="tbl-sg13g2-devices" class="quarto-float quarto-figure quarto-figure-center">
+<h3>IHP’s SG13CMOS5L 130nm CMOS Technology</h3>
+<div id="tbl-sg13cmos5l-devices" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sg13g2-devices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: IHP SG13G2 devices
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sg13cmos5l-devices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: IHP SG13CMOS5L devices
 </figcaption>
-<div aria-describedby="tbl-sg13g2-devices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-sg13cmos5l-devices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top">
 <colgroup>
 <col style="width: 26%">
@@ -362,14 +362,14 @@ Table&nbsp;1: IHP SG13G2 devices
 <td style="text-align: left;"><span class="math inline">\(R_\square=1360\,\Omega \pm 15\%\)</span>, <span class="math inline">\(\text{TC}_1=-2300\,\text{ppm/K}\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MIM capacitor</td>
-<td style="text-align: left;"><code>cap_cmim</code></td>
-<td style="text-align: left;"><span class="math inline">\(C'=1.5\,\text{fF}/\mu\text{m}^2 \pm 10\%\)</span>, <span class="math inline">\(\text{VC}_1=-26\,\text{ppm/V}\)</span>, <span class="math inline">\(\text{TC}_1=3.6\,\text{ppm/K}\)</span>, breakdown voltage <span class="math inline">\(&gt;15\,\text{V}\)</span></td>
+<td style="text-align: left;">MOM capacitor (fringe)</td>
+<td style="text-align: left;"><code>cap_cmomf</code></td>
+<td style="text-align: left;"><span class="math inline">\(C' \approx 1.29\,\text{fF}/\mu\text{m}^2\)</span> using Metal1 to Metal4; simulation-derived model, no process or mismatch variation modelled yet</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MOM capacitor</td>
-<td style="text-align: left;">n/a</td>
-<td style="text-align: left;">The metal stack is well-suited for MOM capacitors due to 5 thin metal layers, but no primitive capacitor device is available at this point.</td>
+<td style="text-align: left;">MOM capacitor (interdigitated)</td>
+<td style="text-align: left;"><code>cap_cmomi</code></td>
+<td style="text-align: left;"><span class="math inline">\(C' \approx 1.09\,\text{fF}/\mu\text{m}^2\)</span> using Metal1 to Metal4; approximate model, no process or mismatch variation modelled yet</td>
 </tr>
 </tbody>
 </table>
@@ -377,8 +377,8 @@ Table&nbsp;1: IHP SG13G2 devices
 </figure>
 </div>
 <aside class="notes">
-<p>SG13G2 is the name of a 130nm CMOS technology (strictly speaking BiCMOS) from <a href="https://www.ihp-microelectronics.com">IHP Microelectronics</a>. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, and 7 layers of Aluminum metallization (5 thin plus 2 thick metal layers). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf">SG13G2 process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf">SG13G2 layout rules</a>.</p>
-<p>For our circuit design, the most important parameters of the available devices are summarized in the following table. Matching properties are summarized in <a href="../aicd.html#tbl-sg13g2-mismatch">Table&nbsp;4</a>.</p>
+<p>SG13CMOS5L is the name of a 130nm CMOS technology from <a href="https://www.ihp-microelectronics.com">IHP Microelectronics</a>. It is the CMOS-only variant of IHP’s SG13G2 SiGe BiCMOS technology and shares its front-end devices and models. It features low-voltage (thin-oxide) core MOSFET, high-voltage (thick-oxide) I/O MOSFET, various types of linear resistors, a parasitic vertical PNP, and 5 layers of Aluminum metallization (4 thin plus 1 thick metal layer). This PDK is open-source, and the complete process specification can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/dev/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_process_spec.pdf">SG13CMOS5L process specification</a>. While we will not do layouts in this course, the layout rules can be found at <a href="https://github.com/IHP-GmbH/IHP-Open-PDK/blob/dev/ihp-sg13cmos5l/libs.doc/doc/SG13CMOS5L_os_layout_rules.pdf">SG13CMOS5L layout rules</a>.</p>
+<p>For our circuit design, the most important parameters of the available devices are summarized in the following table. Matching properties are summarized in <a href="../aicd.html#tbl-sg13cmos5l-mismatch">Table&nbsp;4</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -450,7 +450,7 @@ Table&nbsp;1: IHP SG13G2 devices
 </div>
 </div>
 <aside class="notes">
-<p>In order to make it easier to use the various required components (tools like Xschem and ngspice, PDKs like SG13G2), we will use the <strong>IIC-OSIC-TOOLS</strong>. This is a pre-compiled Docker image which enables circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc., please look at <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS">IIC-OSIC-TOOLS GitHub page</a>.</p>
+<p>In order to make it easier to use the various required components (tools like Xschem and ngspice, PDKs like SG13CMOS5L), we will use the <strong>IIC-OSIC-TOOLS</strong>. This is a pre-compiled Docker image which enables circuit design on a virtual machine on virtually any type of computing equipment (personal PC, Raspberry Pi, cloud server) on various operating systems (Windows, macOS, Linux). For further information like installed tools, how to setup a VM, etc., please look at <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS">IIC-OSIC-TOOLS GitHub page</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -519,7 +519,7 @@ Table&nbsp;1: IHP SG13G2 devices
 </ul></li>
 <li>To apply the changes, we need to close the current terminal window: <code>exit</code></li>
 <li>Open again a terminal</li>
-<li>Test if the correct PDK gets selected: <code>echo $PDK</code> (you should get <code>ihp-sg13g2</code> as the answer)</li>
+<li>Test if the correct PDK gets selected: <code>echo $PDK</code> (you should get <code>ihp-sg13cmos5l</code> as the answer)</li>
 <li>Change into the GitHub repository: <code>cd analog-circuit-design</code></li>
 <li>Start xschem using <code>xschem</code> or directly open a specific schematic using <code>xschem xschem/dc_lv_nmos.sch</code></li>
 </ul>

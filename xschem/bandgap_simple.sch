@@ -138,7 +138,7 @@ C {devices/code_shown.sym} 0 -160 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value="
 .lib cornerMOSlv.lib mos_tt
-.lib cornerHBT.lib hbt_typ
+.lib cornerPNP.lib typ
 .lib cornerRES.lib res_typ
 "}
 C {devices/code_shown.sym} 0 -550 0 0 {name=NGSPICE only_toplevel=true 
@@ -172,21 +172,21 @@ descr="annotate OP"
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
 C {devices/lab_pin.sym} 380 -1040 0 0 {name=p2 sig_type=std_logic lab=v_dd}
-C {sg13g2_pr/pnpMPA.sym} 580 -370 0 1 {name=Q1
+C {sg13cmos5l_pr/pnpMPA.sym} 580 -370 0 1 {name=Q1
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
 l=2.0e-6
 m=2
 }
-C {sg13g2_pr/pnpMPA.sym} 980 -370 0 0 {name=Q2
+C {sg13cmos5l_pr/pnpMPA.sym} 980 -370 0 0 {name=Q2
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
 l=2.0e-6
 m=32
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 580 -570 0 1 {name=M1A
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 580 -570 0 1 {name=M1A
 l=1u
 w=15u
 ng=3
@@ -194,7 +194,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/pnpMPA.sym} 1180 -370 0 0 {name=Q3
+C {sg13cmos5l_pr/pnpMPA.sym} 1180 -370 0 0 {name=Q3
 model=pnpMPA
 spiceprefix=X
 w=1.0e-6
@@ -208,7 +208,7 @@ C {devices/lab_pin.sym} 1000 -520 0 0 {name=p3 sig_type=std_logic lab=v2}
 C {devices/lab_pin.sym} 1000 -420 0 0 {name=p4 sig_type=std_logic lab=v3}
 C {devices/lab_pin.sym} 560 -520 0 0 {name=p5 sig_type=std_logic lab=v1}
 C {devices/lab_wire.sym} 680 -970 0 0 {name=p6 sig_type=std_logic lab=vg4}
-C {sg13g2_pr/sg13_lv_pmos.sym} 580 -890 0 1 {name=M4B
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 580 -890 0 1 {name=M4B
 l=1u
 w=50u
 ng=10
@@ -219,7 +219,7 @@ spiceprefix=X
 C {devices/lab_wire.sym} 700 -570 0 0 {name=p7 sig_type=std_logic lab=vg1}
 C {devices/lab_wire.sym} 700 -650 0 0 {name=p8 sig_type=std_logic lab=vg2}
 C {devices/lab_wire.sym} 680 -890 0 0 {name=p9 sig_type=std_logic lab=vg3}
-C {sg13g2_pr/sg13_lv_nmos.sym} 580 -650 0 1 {name=M1B
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 580 -650 0 1 {name=M1B
 l=1u
 w=15u
 ng=3
@@ -227,7 +227,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 980 -570 0 0 {name=M2A
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 980 -570 0 0 {name=M2A
 l=1u
 w=15u
 ng=3
@@ -235,7 +235,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_nmos.sym} 980 -650 0 0 {name=M2B
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 980 -650 0 0 {name=M2B
 l=1u
 w=15u
 ng=3
@@ -243,7 +243,7 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 580 -970 0 1 {name=M4A
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 580 -970 0 1 {name=M4A
 l=1u
 w=50u
 ng=10
@@ -251,7 +251,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 980 -890 0 0 {name=M3B
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 980 -890 0 0 {name=M3B
 l=1u
 w=50u
 ng=10
@@ -259,7 +259,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 980 -970 0 0 {name=M3A
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 980 -970 0 0 {name=M3A
 l=1u
 w=50u
 ng=10
@@ -267,7 +267,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 1180 -840 0 0 {name=M5A
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 1180 -840 0 0 {name=M5A
 l=1u
 w=50u
 ng=10
@@ -275,7 +275,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 1180 -740 0 0 {name=M5B
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 1180 -740 0 0 {name=M5B
 l=1u
 w=50u
 ng=10
@@ -283,7 +283,7 @@ m=1
 model=sg13_lv_pmos
 spiceprefix=X
 }
-C {sg13g2_pr/sg13_lv_pmos.sym} 740 -810 0 0 {name=Mstartup
+C {sg13cmos5l_pr/sg13_lv_pmos.sym} 740 -810 0 0 {name=Mstartup
 l=10u
 w=0.5u
 ng=1
@@ -300,13 +300,13 @@ C {devices/gnd.sym} 600 -750 3 0 {name=l1 lab=GND}
 C {devices/gnd.sym} 1040 -470 3 0 {name=l2 lab=GND}
 C {devices/gnd.sym} 1160 -470 1 1 {name=l4 lab=GND}
 C {devices/gnd.sym} 960 -790 1 1 {name=l6 lab=GND}
-C {sg13g2_pr/annotate_fet_params.sym} 1490 -980 0 0 {name=annot1 ref=M5A}
-C {sg13g2_pr/annotate_fet_params.sym} 1490 -830 0 0 {name=annot2 ref=M5B}
-C {sg13g2_pr/annotate_fet_params.sym} 210 -1020 0 0 {name=annot3 ref=M4A}
-C {sg13g2_pr/annotate_fet_params.sym} 210 -870 0 0 {name=annot4 ref=M4B}
-C {sg13g2_pr/annotate_fet_params.sym} 1320 -360 0 0 {name=annot5 ref=M1B}
-C {sg13g2_pr/annotate_fet_params.sym} 1320 -210 0 0 {name=annot6 ref=M1A}
-C {sg13g2_pr/annotate_fet_params.sym} 1450 -360 0 0 {name=annot7 ref=M2B}
-C {sg13g2_pr/annotate_fet_params.sym} 1450 -210 0 0 {name=annot8 ref=M2A}
-C {sg13g2_pr/annotate_fet_params.sym} 1370 -980 0 0 {name=annot9 ref=M3A}
-C {sg13g2_pr/annotate_fet_params.sym} 1370 -830 0 0 {name=annot10 ref=M3B}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1490 -980 0 0 {name=annot1 ref=M5A}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1490 -830 0 0 {name=annot2 ref=M5B}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 210 -1020 0 0 {name=annot3 ref=M4A}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 210 -870 0 0 {name=annot4 ref=M4B}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1320 -360 0 0 {name=annot5 ref=M1B}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1320 -210 0 0 {name=annot6 ref=M1A}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1450 -360 0 0 {name=annot7 ref=M2B}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1450 -210 0 0 {name=annot8 ref=M2A}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1370 -980 0 0 {name=annot9 ref=M3A}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1370 -830 0 0 {name=annot10 ref=M3B}

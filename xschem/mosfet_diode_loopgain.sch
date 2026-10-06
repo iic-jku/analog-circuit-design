@@ -171,7 +171,7 @@ C {devices/vsource.sym} 880 -250 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 880 -160 0 0 {name=l3 lab=GND}
 C {devices/gnd.sym} 1310 -160 0 0 {name=l4 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 H. Pretl, S. Dorrer, Apache-2.0 license"}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1220 -250 0 0 {name=M1
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1220 -250 0 0 {name=M1
 l=0.13u
 w=1u
 ng=1
@@ -186,7 +186,7 @@ C {devices/lab_wire.sym} 1060 -300 0 0 {name=p1 sig_type=std_logic lab=vf1}
 C {devices/lab_wire.sym} 1210 -300 0 0 {name=p3 sig_type=std_logic lab=vr1}
 C {devices/gnd.sym} 1740 -160 0 0 {name=l2 lab=GND}
 C {devices/gnd.sym} 1810 -160 0 0 {name=l6 lab=GND}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1720 -250 0 0 {name=M2
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1720 -250 0 0 {name=M2
 l=0.13u
 w=1u
 ng=1
@@ -210,7 +210,7 @@ tclcommand="xschem save; xschem netlist; xschem simulate"
 }
 C {devices/gnd.sym} 1240 -620 0 0 {name=l8 lab=GND}
 C {devices/gnd.sym} 1310 -620 0 0 {name=l10 lab=GND}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1220 -710 0 0 {name=M3
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1220 -710 0 0 {name=M3
 l=0.13u
 w=1u
 ng=1
@@ -222,7 +222,7 @@ C {devices/isource.sym} 1240 -810 0 0 {name=Ibias3 value=20u}
 C {devices/lab_pin.sym} 880 -880 0 0 {name=p5 sig_type=std_logic lab=v_dd}
 C {devices/gnd.sym} 1740 -620 0 0 {name=l11 lab=GND}
 C {devices/gnd.sym} 1810 -620 0 0 {name=l12 lab=GND}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1720 -710 0 0 {name=M4
+C {sg13cmos5l_pr/sg13_lv_nmos.sym} 1720 -710 0 0 {name=M4
 l=0.13u
 w=1u
 ng=1
@@ -241,4 +241,4 @@ C {devices/lab_wire.sym} 980 -710 0 0 {name=p6 sig_type=std_logic lab=vmeas1}
 C {devices/lab_wire.sym} 1480 -710 0 0 {name=p7 sig_type=std_logic lab=vmeas2}
 C {devices/ammeter.sym} 1170 -760 1 0 {name=Vimeas1 savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 1670 -760 1 0 {name=Vimeas2 savecurrent=true spice_ignore=0}
-C {sg13g2_pr/annotate_fet_params.sym} 1340 -300 0 0 {name=annot1 ref=M1}
+C {sg13cmos5l_pr/annotate_fet_params.sym} 1340 -300 0 0 {name=annot1 ref=M1}

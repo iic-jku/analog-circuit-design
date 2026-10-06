@@ -659,8 +659,8 @@ Figure&nbsp;57: A current mirror pair with resistive degeneration.
 \sigma^2\left\{\frac{\Delta K}{K}\right\} = \sigma^2\left\{\Delta W\right\} \cdot \frac{1}{W^2} + \sigma^2\left\{\Delta L\right\} \cdot \frac{1}{L^2} + A_\mu^2 \cdot \frac{1}{W L},
 \tag{42}\]</span></span></p>
 <aside class="notes">
-<p>where <span class="math inline">\(\sigma\left\{\Delta W\right\}\)</span> and <span class="math inline">\(\sigma\left\{\Delta L\right\}\)</span> are the process-dependent absolute mismatch parameters for the width <span class="math inline">\(W\)</span> and length <span class="math inline">\(L\)</span>, respectively. The mobility mismatch follows Pelgrom’s law like the threshold voltage, so it is described by an area-scaled constant <span class="math inline">\(A_\mu = \sigma\left\{\Delta \mu / \mu\right\} \cdot \sqrt{W L}\)</span>, which is the quantity listed in <a href="#/tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>.</p>
-<p>The standard deviations of the components of the SG13G2 process are summarized in <a href="#/tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>. For mismatch calculations we can assume them to be uncorrelated.</p>
+<p>where <span class="math inline">\(\sigma\left\{\Delta W\right\}\)</span> and <span class="math inline">\(\sigma\left\{\Delta L\right\}\)</span> are the process-dependent absolute mismatch parameters for the width <span class="math inline">\(W\)</span> and length <span class="math inline">\(L\)</span>, respectively. The mobility mismatch follows Pelgrom’s law like the threshold voltage, so it is described by an area-scaled constant <span class="math inline">\(A_\mu = \sigma\left\{\Delta \mu / \mu\right\} \cdot \sqrt{W L}\)</span>, which is the quantity listed in <a href="#/tbl-sg13cmos5l-mismatch" class="quarto-xref">Table&nbsp;4</a>.</p>
+<p>The standard deviations of the components of the SG13CMOS5L process are summarized in <a href="#/tbl-sg13cmos5l-mismatch" class="quarto-xref">Table&nbsp;4</a>. For mismatch calculations we can assume them to be uncorrelated.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -675,12 +675,12 @@ Figure&nbsp;57: A current mirror pair with resistive degeneration.
 </section>
 <section class="slide level3 unnumbered">
 <h3>Current Mirror Matching</h3>
-<div id="tbl-sg13g2-mismatch" class="quarto-float quarto-figure quarto-figure-center">
+<div id="tbl-sg13cmos5l-mismatch" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sg13g2-mismatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4: IHP SG13G2 device mismatch
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sg13cmos5l-mismatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: IHP SG13CMOS5L device mismatch
 </figcaption>
-<div aria-describedby="tbl-sg13g2-mismatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-sg13cmos5l-mismatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top">
 <colgroup>
 <col style="width: 27%">
@@ -711,9 +711,9 @@ Table&nbsp;4: IHP SG13G2 device mismatch
 <td>5 % µm</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MIM <code>cap_cmim</code></td>
+<td style="text-align: left;">MOM <code>cap_cmomf</code></td>
 <td><span class="math inline">\(\sigma\left\{\Delta C / C\right\} \cdot \sqrt{WL}\)</span></td>
-<td>1 % µm (estimated)</td>
+<td>not yet modelled</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MOSFET <code>sg13_lv_nmos</code></td>
@@ -810,11 +810,11 @@ Table&nbsp;4: IHP SG13G2 device mismatch
 <p><strong>Current Mirror Matching Calculation</strong></p>
 </div>
 <div class="callout-content">
-<p>Let us now calculate the current mirror matching of the simple current mirror. Using <a href="#/eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;43</a>, and using the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 5\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 10\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 5\,\mu\text{m}\)</span>, we can calculate the standard deviation of the transconductance parameter mismatch using <a href="#/eq-mosfet-mismatch-kp-alt" class="quarto-xref">Equation&nbsp;42</a> and <a href="#/tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
+<p>Let us now calculate the current mirror matching of the simple current mirror. Using <a href="#/eq-curmir-matching-nodeg" class="quarto-xref">Equation&nbsp;43</a>, and using the sizing values of <span class="math inline">\(g_\mathrm{m}/ I_\mathrm{D}= 5\,\text{V}^{-1}\)</span>, <span class="math inline">\(W = 10\,\mu\text{m}\)</span>, and <span class="math inline">\(L = 5\,\mu\text{m}\)</span>, we can calculate the standard deviation of the transconductance parameter mismatch using <a href="#/eq-mosfet-mismatch-kp-alt" class="quarto-xref">Equation&nbsp;42</a> and <a href="#/tbl-sg13cmos5l-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\frac{\Delta K}{K}\right\} = \sqrt{ \left( \frac{4\,\text{nm}}{10\,\mu\text{m}} \right)^2 + \left( \frac{2\,\text{nm}}{5\,\mu\text{m}} \right)^2 + \left( \frac{0.5\,\%\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} \right)^2 } = 0.09\,\%.
 \]</span></p>
 <div class="fragment">
-<p>The standard deviation of the threshold voltage mismatch can be calculated using <a href="../aicd.html#eq-mosfet-mismatch-vth">Equation&nbsp;28</a> and <a href="#/tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
+<p>The standard deviation of the threshold voltage mismatch can be calculated using <a href="../aicd.html#eq-mosfet-mismatch-vth">Equation&nbsp;28</a> and <a href="#/tbl-sg13cmos5l-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\Delta V_\mathrm{th}\right\} = \frac{3.9\,\text{mV}\mu\text{m}}{\sqrt{10\,\mu\text{m} \cdot 5\,\mu\text{m}}} = 0.55\,\text{mV}.
 \]</span></p>
 </div>
@@ -881,7 +881,7 @@ Table&nbsp;4: IHP SG13G2 device mismatch
 <p><strong>Current Mirror Matching Calculation</strong></p>
 </div>
 <div class="callout-content">
-<p>The standard deviation of the resistor mismatch can be calculated using <a href="../aicd.html#eq-resistor-mismatch">Equation&nbsp;32</a> and <a href="#/tbl-sg13g2-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
+<p>The standard deviation of the resistor mismatch can be calculated using <a href="../aicd.html#eq-resistor-mismatch">Equation&nbsp;32</a> and <a href="#/tbl-sg13cmos5l-mismatch" class="quarto-xref">Table&nbsp;4</a>: <span class="math display">\[
 \sigma\left\{\frac{\Delta R}{R}\right\} = \frac{1.5\,\%\mu\text{m}}{\sqrt{3\,\mu\text{m} \cdot 45\,\mu\text{m}}} = 0.13\,\%.
 \]</span></p>
 <div class="fragment">

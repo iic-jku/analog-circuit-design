@@ -204,7 +204,7 @@
 <section id="sec-techsweep-testbench" class="title-slide slide level2 center" data-number="3.1">
 <h2><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</h2>
 <aside class="notes">
-<p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13G2) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.</p>
+<p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13CMOS5L) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.</p>
 <p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by <span class="citation" data-cites="Silveira_1996">(<a href="#/references" role="doc-biblioref" onclick="">Silveira et al. 1996</a>)</span> and extended in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#/references" role="doc-biblioref" onclick="">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/gmid/Ref_Murmann_gmID.pdf">here</a> as well.</p>
 <p>The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology has the huge advantage that it catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.</p>
 <style type="text/css">
@@ -253,13 +253,13 @@
 <section class="slide level3 unnumbered">
 <h3>MOSFET Characterization Testbench</h3>
 
-<img data-src="../xschem/techsweep_sg13g2_lv_nmos.svg" class="r-stretch quarto-figure-center" id="fig-techsweep-nmos-tb"><p class="caption">
+<img data-src="../xschem/techsweep_sg13cmos5l_lv_nmos.svg" class="r-stretch quarto-figure-center" id="fig-techsweep-nmos-tb"><p class="caption">
 Figure&nbsp;10: Testbench for LV NMOS <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> characterization.
 </p></section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Characterization Testbench</h3>
 
-<img data-src="../xschem/techsweep_sg13g2_lv_pmos.svg" class="r-stretch quarto-figure-center" id="fig-techsweep-pmos-tb"><p class="caption">
+<img data-src="../xschem/techsweep_sg13cmos5l_lv_pmos.svg" class="r-stretch quarto-figure-center" id="fig-techsweep-pmos-tb"><p class="caption">
 Figure&nbsp;11: Testbench for LV PMOS <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> characterization.
 </p></section>
 <section class="slide level3 unnumbered">
@@ -394,7 +394,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-6">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-6">
 <div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}}" data-tags="[&quot;fig-lvnmos-gmid-ft-vs-vgs&quot;]" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
@@ -424,7 +424,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-9">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-9">
 <div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}}" data-tags="[&quot;fig-lvnmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
@@ -451,7 +451,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-10">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-10">
 <div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}}" data-tags="[&quot;fig-lvnmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
@@ -478,7 +478,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-11">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-11">
 <div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}}" data-tags="[&quot;fig-lvnmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
@@ -505,7 +505,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-12">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-12">
 <div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}}" data-tags="[&quot;fig-lvnmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
@@ -586,7 +586,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-13">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-13">
 <div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}}" data-tags="[&quot;fig-lvnmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
@@ -633,7 +633,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-14">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvnmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-14">
 <div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}}" data-tags="[&quot;fig-lvnmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
@@ -697,7 +697,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-6">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-6">
 <div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}}" data-tags="[&quot;fig-lvpmos-gmid-ft-vs-vgs&quot;]" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
@@ -725,7 +725,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-9">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-9">
 <div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}}" data-tags="[&quot;fig-lvpmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
@@ -770,7 +770,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-10">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-10">
 <div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}}" data-tags="[&quot;fig-lvpmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
@@ -797,7 +797,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-11">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-11">
 <div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}}" data-tags="[&quot;fig-lvpmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
@@ -824,7 +824,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-12">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-12">
 <div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}}" data-tags="[&quot;fig-lvpmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
@@ -851,7 +851,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-13">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-13">
 <div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}}" data-tags="[&quot;fig-lvpmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
@@ -878,7 +878,7 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13G2 NMOS" data-notebook-cellid="cell-14">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_lvpmos.ipynb" data-notebook-title="MOSFET gm/ID Evaluation Script for IHP SG13CMOS5L NMOS" data-notebook-cellid="cell-14">
 <div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}}" data-tags="[&quot;fig-lvpmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
@@ -956,7 +956,7 @@ Figure&nbsp;13: Overview of key design tradeoffs depending on the channel length
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS and PMOS Characterization in Triode</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_triode.ipynb" data-notebook-title="MOSFET gm/ID Lookup for IHP SG13G2 in Triode Region" data-notebook-cellid="cell-3">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_triode.ipynb" data-notebook-title="MOSFET gm/ID Lookup for IHP SG13CMOS5L in Triode Region" data-notebook-cellid="cell-3">
 <div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-11-19T16:09:53.483405Z&quot;,&quot;start_time&quot;:&quot;2024-11-19T16:09:53.204584Z&quot;}}" data-tags="[&quot;fig-triode-ron-vs-vsource-1&quot;]" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
@@ -983,7 +983,7 @@ Figure&nbsp;13: Overview of key design tradeoffs depending on the channel length
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS and PMOS Characterization in Triode</h3>
-<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_triode.ipynb" data-notebook-title="MOSFET gm/ID Lookup for IHP SG13G2 in Triode Region" data-notebook-cellid="cell-6">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/analog-circuit-design/analog-circuit-design/gmid/techsweep_sg13_plots_triode.ipynb" data-notebook-title="MOSFET gm/ID Lookup for IHP SG13CMOS5L in Triode Region" data-notebook-cellid="cell-6">
 <div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-11-19T16:09:53.680720Z&quot;,&quot;start_time&quot;:&quot;2024-11-19T16:09:53.597301Z&quot;}}" data-tags="[&quot;fig-triode-coff-vs-vsource&quot;]" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
