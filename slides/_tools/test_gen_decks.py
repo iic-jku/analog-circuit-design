@@ -13,7 +13,8 @@ import sys
 import tempfile
 import textwrap
 import unittest
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import gen_decks  # noqa: E402
@@ -295,6 +296,24 @@ class RenderFilesTest(unittest.TestCase):
             self.assertFalse((self.root / "slides" / "old.qmd").exists())
             self.assertTrue((self.root / "slides" / "extra.qmd").exists())
             self.assertEqual(gen_decks.main(["--check"]), 0)
+        finally:
+            gen_decks.ROOT = Path(gen_decks.__file__).resolve().parents[2]
+
+    def test_windows_path_separators_keep_generated_decks(self):
+        # native Windows Python: relative paths use backslashes
+        real_relative_to = Path.relative_to
+
+        def windows_relative_to(path, *other):
+            return PureWindowsPath(*real_relative_to(path, *other).parts)
+
+        gen_decks.ROOT = self.root
+        try:
+            self.assertEqual(gen_decks.main([]), 0)
+            with mock.patch.object(Path, "relative_to", windows_relative_to):
+                self.assertEqual(gen_decks.main(["--check"]), 0)
+                self.assertEqual(gen_decks.main([]), 0)
+            self.assertTrue((self.root / "slides" / "lna.qmd").exists())
+            self.assertTrue((self.root / "slides" / "index.qmd").exists())
         finally:
             gen_decks.ROOT = Path(gen_decks.__file__).resolve().parents[2]
 
