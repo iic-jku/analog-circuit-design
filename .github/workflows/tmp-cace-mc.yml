@@ -60,18 +60,15 @@ jobs:
           grep -n "^\.LIB mos_tt" "$M/cornerMOSlv.lib" "$M/cornerMOShv.lib" || true
           grep -n "mm_ok" "$PDK_ROOT/$PDK/libs.tech/xschem/sg13g2_pr/sg13_lv_nmos.sym" "$PDK_ROOT/$PDK/libs.tech/xschem/sg13g2_pr/sg13_lv_pmos.sym" || true
 
-      - name: Probe xschem netlisting (debug)
+      - name: Make xschem recent_files safe for parallel runs
+        # CACE starts many xschem processes in parallel; they all rewrite
+        # ~/.xschem/recent_files, which gets corrupted and then makes every
+        # later xschem call abort in Tcl_AppInit (c_toolbar array error).
         shell: bash
         run: |
-          RC="$PDK_ROOT/$PDK/libs.tech/xschem/xschemrc"
-          mkdir -p /tmp/xprobe
-          echo "--- without display"
-          (unset DISPLAY; xschem -n -s -r -x -q --rcfile "$RC" -o /tmp/xprobe -N a.spice xschem/ota-5t.sch; echo "rc=$?") 2>&1 | tail -n 15
-          ls -la /tmp/xprobe || true
-          echo "--- with xvfb-run"
-          (xvfb-run -a xschem -n -s -r -x -q --rcfile "$RC" -o /tmp/xprobe -N b.spice xschem/ota-5t.sch; echo "rc=$?") 2>&1 | tail -n 15
-          ls -la /tmp/xprobe || true
-          grep -n "sg13_lv" /tmp/xprobe/a.spice || true
+          mkdir -p "$HOME/.xschem"
+          ln -sf /dev/null "$HOME/.xschem/recent_files"
+          ls -la "$HOME/.xschem"
 
       - name: Run CACE (ota-5t)
         shell: bash
