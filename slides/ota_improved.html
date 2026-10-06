@@ -959,11 +959,11 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 <td style="text-align: left;">ngspice</td>
 <td style="text-align: left;">gain_mc</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">1.002 V/V</td>
+<td style="text-align: right;">0.979 V/V</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">1.002 V/V</td>
+<td style="text-align: right;">1.003 V/V</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">1.002 V/V</td>
+<td style="text-align: right;">1.028 V/V</td>
 <td style="text-align: center;">Pass ✅</td>
 </tr>
 <tr class="even">
@@ -971,11 +971,11 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 <td style="text-align: left;">ngspice</td>
 <td style="text-align: left;">bw_mc</td>
 <td style="text-align: right;">10e6 Hz</td>
-<td style="text-align: right;">204156000.000 Hz</td>
+<td style="text-align: right;">195590000.000 Hz</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">207620500.000 Hz</td>
+<td style="text-align: right;">207899000.000 Hz</td>
 <td style="text-align: right;">any</td>
-<td style="text-align: right;">210269000.000 Hz</td>
+<td style="text-align: right;">215893000.000 Hz</td>
 <td style="text-align: center;">Pass ✅</td>
 </tr>
 <tr class="odd">
@@ -1500,6 +1500,7 @@ Table&nbsp;5: Voltage buffer specification
 <aside class="notes">
 <p>The increased performance allows to improve the specifications in a few important points, notably the output voltage tolerance which is an important metric for a reference voltage buffer. The new situation with the improved design is summarized in <a href="#/tbl-voltage-buffer-spec-improved" class="quarto-xref">Table&nbsp;5</a> (unchanged entries are not shown).</p>
 <p>The supply current budget in that table deserves a comment, since at first glance it looks like a step backwards from <span class="math inline">\(10\,\mu\text{A}\)</span> to <span class="math inline">\(20\,\mu\text{A}\)</span>. The point is that we negotiated with the chip lead designer a reduction of the externally provided bias current from <span class="math inline">\(20\,\mu\text{A}\)</span> to <span class="math inline">\(5\,\mu\text{A}\)</span> at the same time. That bias current has to be generated somewhere on the chip as well, so what counts at system level is the sum: previously <span class="math inline">\(10 + 20 = 30\,\mu\text{A}\)</span>, now at most <span class="math inline">\(20 + 5 = 25\,\mu\text{A}\)</span>. Overall the situation is thus slightly improved, while we have bought ourselves headroom in the OTA budget to spend on gain and settling.</p>
+<p>However, the Monte Carlo rows of the CACE report in <a href="#/nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a> reveal a weak spot of this design. Across the PVT corners the output voltage ratio stays between 1.000 and 1.006, but with device mismatch it spreads from 0.979 to 1.028, so the tightened output voltage specification of <span class="math inline">\(\pm 1\,\%\)</span> is violated in about a third of the 100 Monte Carlo runs. The reason is the reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> that we have chosen for speed in <a href="#/sec-improved-ota-sizing" class="quarto-xref">Section&nbsp;11.1</a>: the input pair <span class="math inline">\(M_{1,2}\)</span> has a gate area of only <span class="math inline">\(W \cdot L = 0.5\,\mu\text{m}^2\)</span>, which is 20 times less than in the 5T-OTA. According to <a href="../aicd.html#eq-mosfet-mismatch-vth">Equation&nbsp;28</a> this increases the mismatch by about <span class="math inline">\(\sqrt{20} \approx 4.5\)</span>, which is roughly the factor by which the Monte Carlo spread of the output voltage ratio has grown compared to the 5T-OTA (see <a href="../aicd.html#nte-basic-ota-cace-result">Note&nbsp;2</a>). Before this design can be released, the input pair and the current-mirror load have to be enlarged to meet the specification under mismatch, and the resulting impact on speed and stability has to be checked again.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1511,6 +1512,24 @@ Table&nbsp;5: Voltage buffer specification
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Corner Simulation of Improved OTA</h3>
+<div title="Exercise: Improved OTA and Mismatch">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise: Improved OTA and Mismatch</strong></p>
+</div>
+<div class="callout-content">
+<p>Use <a href="../aicd.html#eq-diffpair-offset">Equation&nbsp;30</a> and <a href="../aicd.html#eq-currentmirror-offset">Equation&nbsp;31</a> to find device sizes of <span class="math inline">\(M_{1-4}\)</span> for which the output voltage error stays within <span class="math inline">\(\pm 1\,\%\)</span> under mismatch. Then, update the improved OTA schematic and repeat the CACE simulations. Which performance parameters suffer from the larger devices, and how can you recover them?</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="references" class="slide level3 unnumbered smaller scrollable">
 <h3>References</h3>

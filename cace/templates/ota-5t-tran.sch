@@ -64,7 +64,6 @@ C {devices/code_shown.sym} 0 -750 0 0 {name=NGSPICE only_toplevel=true
 value="
 .include CACE\{DUT_path\}
 .temp CACE\{temp\}
-.param mc_ok = CACE\{sigma=1\}
 .option SEED=CACE[CACE\{seed=12345\} + CACE\{iterations=0\}]
 
 .ic v(v_out)=0
