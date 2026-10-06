@@ -129,7 +129,8 @@ def run_filter():
         proc = subprocess.run(
             ["quarto", "pandoc", str(src), "-t", "revealjs", "--slide-level=3",
              "--wrap=none", "--lua-filter", str(tools / "structure.lua")],
-            capture_output=True, text=True, check=True, cwd=project / "slides")
+            capture_output=True, text=True, encoding="utf-8", check=True,
+            cwd=project / "slides")
     return proc.stdout
 
 
