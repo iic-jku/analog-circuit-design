@@ -240,7 +240,7 @@
 <section class="slide level3 unnumbered">
 <h3>Schematics</h3>
 <ul>
-<li>Once a schematic is finished, take the time to name component instances properly (you can use speaking names like <code>Rstab</code> or simply use <code>R1</code>, <code>R2</code>, etc.). Use iterated instances to clean up the circuit. Use wire bundles to clean up circuits where useful. A clever technique is to use bundles and iterated instances to efficiently draw large resistor ladders, for example (however, use with care).</li>
+<li>Once a schematic is finished, take the time to name component instances properly (use speaking names like <code>Rstab</code>; plain numbering like <code>R1</code>, <code>R2</code> is acceptable for primitive devices inside a leaf cell, but not for instances of subcircuits, see below). Use iterated instances to clean up the circuit. Use wire bundles to clean up circuits where useful. A clever technique is to use bundles and iterated instances to efficiently draw large resistor ladders, for example (however, use with care).</li>
 </ul>
 </section>
 <section class="slide level3 unnumbered">
@@ -268,7 +268,7 @@
 <h3>Schematics</h3>
 <ul>
 <li>Name internal signals (signals connected to pins are anyway named like the port) in a meaningful way; this makes tracking signals in simulation or layout much easier (automatic net names like <code>net0032</code> are of not much help).</li>
-<li>Properly name instances, not just <code>I1</code> or <code>I2</code>; better is <code>amp1</code>, <code>inv2</code>, etc. (a descriptor in a tool output like <code>I1/I13/I5/net017</code> is not helpful; compare that to <code>adc1/bias/bg/vref_int</code>).</li>
+<li>Properly name instances of subcircuits, not just <code>I1</code> or <code>I2</code>; better is <code>amp1</code>, <code>inv2</code>, etc. (a descriptor in a tool output like <code>I1/I13/I5/net017</code> is not helpful; compare that to <code>adc1/bias/bg/vref_int</code>).</li>
 </ul>
 </section>
 <section class="slide level3 unnumbered">
@@ -380,22 +380,27 @@
 <h3>Rules for Good Mixed-Signal and RF Circuits</h3>
 <ul>
 <li>Separate analog and digital power supply, connect to package pins with multiple bond wires/bumps, and separate noisy and clean <code>vdd</code>/<code>vss</code> from each other!</li>
-<li>Prevent supply loops; keep <code>vdd</code> and <code>vss</code> lines close to each other (incl.&nbsp;bond wires and PCB traces)! This minimizes <code>L</code> and coupling factor <code>k</code>.</li>
-<li>Some prefer a massive (punched) ground plane, which is possible if you have enough metal levels. With a ground plane, the return path of a signal or supply line is just a few microns away.</li>
+<li>Prevent supply loops; keep <code>vdd</code> and <code>vss</code> lines close to each other (incl.&nbsp;bond wires and PCB traces)! Supply and return carry opposite currents, so coupling them tightly minimizes the loop inductance <code>L</code>. What must be kept small is the coupling factor <code>k</code> from these lines into other nets.</li>
 </ul>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Rules for Good Mixed-Signal and RF Circuits</h3>
 <ul>
+<li>Some prefer a massive (punched) ground plane, which is possible if you have enough metal levels. With a ground plane, the return path of a signal or supply line is just a few microns away.</li>
 <li>Use chip-internal decoupling capacitors, and decouple bias voltages to the <strong>correct</strong> potential (<code>vdd</code> or <code>vss</code>, or another node, depending on the circuit)!</li>
+</ul>
+</section>
+<section class="slide level3 unnumbered">
+<h3>Rules for Good Mixed-Signal and RF Circuits</h3>
+<ul>
 <li>Use substrate contacts and guard rings to lower substrate crosstalk but use a quiet potential for connection; use triple-well if available! Connecting a guard-ring/substrate contact to a noisy supply is a prime noise injector (usually unwanted).</li>
 <li>Physically separate quiet and noisy circuits (at least by the epi thickness)!</li>
+<li>Reduce circuit noise generation as much as possible (avoid switching circuits if possible, use constant-current circuits instead, and use series/shunt regulators for supply isolation).</li>
 </ul>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Rules for Good Mixed-Signal and RF Circuits</h3>
 <ul>
-<li>Reduce circuit noise generation as much as possible (avoid switching circuits if possible, use constant-current circuits instead, and use series/shunt regulators for supply isolation).</li>
 <li>Reduce sensitivity of circuits to interference (by using a fully differential design with high PSRR/CMRR, symmetrical layout parasitics, and good matching)!</li>
 </ul>
 </section>
