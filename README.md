@@ -19,7 +19,13 @@ All course material is made publicly available and shared under the Apache-2.0 l
 
 Render the material with `quarto render`.
 
-This produces the HTML site in `_site/` and the PDF (via Typst) in about half a minute, executing all embedded Python cells and notebooks from scratch.
+This produces the HTML site in `_site/` and the PDF (via Typst) in about half a minute, executing all `{python}` cells from scratch.
+
+Notebooks pulled in with `{{< embed >}}` (e.g. the gm/ID sizing notebooks in `gmid/`) are **not** executed by Quarto; their stored outputs are shown. After changing such a notebook (or the data it reads), re-execute it in place and commit the outputs:
+
+```bash
+cd gmid && jupyter nbconvert --to notebook --execute --inplace <notebook>.ipynb
+```
 
 ## Lecture Slides
 
