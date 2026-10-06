@@ -364,11 +364,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Copyright 2024-2025 Boris Murmann and Harald Pretl</strong></p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
 <p>This notebook displays various important metrics for the SG13G2 CMOS technology. The corresponding Xschem testbenches are named <code>techsweep_sg13g2_lv_nmos.sch</code> and <code>techsweep_sg13g2_lv_pmos.sch</code> (to be found in the <code>xschem</code> folder).</p>
-<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:06.633703Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:06.630544Z&quot;}}" data-execution_count="1">
+<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:16.018960Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:16.018730Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:16.023532Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:16.022812Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devices <span class="op">=</span> [<span class="st">'sg13_lv_nmos'</span>, <span class="st">'sg13_lv_pmos'</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>choice <span class="op">=</span> <span class="dv">1</span> <span class="co"># select which device to plot, start from 0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:07.236438Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:06.635041Z&quot;}}" data-execution_count="2">
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:16.025162Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:16.025001Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:16.566806Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:16.566254Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -377,9 +377,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># widths used for characterization</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:07.765889Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.239219Z&quot;}}" data-execution_count="3">
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:16.568363Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:16.568220Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:17.155889Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:17.155181Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read ngspice data</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'./techsweep_'</span><span class="op">+</span>devices[choice]<span class="op">+</span><span class="st">'.txt'</span>, sep<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'./techsweep_'</span><span class="op">+</span>devices[choice]<span class="op">+</span><span class="st">'.txt.gz'</span>, sep<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>par_names <span class="op">=</span> df_raw.columns.to_list()</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>par_prefix <span class="op">=</span> par_names[<span class="dv">1</span>].split(<span class="st">'['</span>)[<span class="dv">0</span>]</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -406,17 +406,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Index(['cdd', 'cgb', 'cgd', 'cgdol', 'cgg', 'cgs', 'cgsol', 'cjd', 'cjs',
        'css', 'fug', 'gds', 'gm', 'gmb', 'ids', 'l', 'rg', 'sfl', 'sid', 'vds',
        'vdss', 'vgs', 'vsb', 'vth'],
-      dtype='object')</code></pre>
+      dtype='str')</code></pre>
 </div>
 </div>
-<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:07.777041Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.766665Z&quot;}}" data-execution_count="4">
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:17.158242Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:17.158081Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:17.169944Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:17.169342Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sweep variable vectors</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'l'</span>]))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>vgs <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vgs'</span>]))</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>vds <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vds'</span>]))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vsb <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vsb <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># one distinct color per L (the default color cycle only has 10 colors)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'axes.prop_cycle'</span>] <span class="op">=</span> plt.cycler(color<span class="op">=</span>plt.cm.viridis(np.linspace(<span class="dv">0</span>, <span class="fl">0.9</span>, <span class="bu">len</span>(l))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.151250Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:07.778457Z&quot;}}" data-tags="[&quot;fig-pmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:17.172326Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:17.172089Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:17.514013Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:17.513361Z&quot;}}" data-tags="[&quot;fig-pmos-gmid-ft-vs-vgs&quot;]" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/ID and fT versus gate bias</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-gmid-ft-vs-vgs</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $g_m/I_D$ and $f_T$ as a function of the gate-source voltage.</span></span>
@@ -454,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.306593Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.153371Z&quot;}}" data-execution_count="6">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:17.516171Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:17.515914Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:17.643429Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:17.642503Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot product of gm/ID and fT versus gm/ID</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.plot(gm_id1, gm_id1<span class="op">*</span>ft1<span class="op">/</span><span class="fl">1e9</span>)</span>
@@ -473,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.495380Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.307983Z&quot;}}" data-tags="[&quot;fig-pmos-ft-vs-gmid&quot;]" data-execution_count="7">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:17.644974Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:17.644855Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:17.707643Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:17.707070Z&quot;}}" data-tags="[&quot;fig-pmos-ft-vs-gmid&quot;]" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-ft-vs-gmid</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $f_T$ vs. $g_m/I_D$.</span></span>
@@ -492,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.636920Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.496476Z&quot;}}" data-tags="[&quot;fig-pmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:17.709431Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:17.709302Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:17.929513Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:17.929001Z&quot;}}" data-tags="[&quot;fig-pmos-ft-vs-gmid-vs-l&quot;]" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fT versus gm/ID for all L</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-ft-vs-gmid-vs-l</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $f_T$ vs. $g_m/I_D$ as a function of $L$.</span></span>
@@ -524,7 +527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.</code></pre>
 </div>
 </div>
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.758497Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.637839Z&quot;}}" data-tags="[&quot;fig-pmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:17.931174Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:17.931050Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:18.104537Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:18.104128Z&quot;}}" data-tags="[&quot;fig-pmos-gmgds-vs-gmid-vs-l&quot;]" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gm/gds versus gm/ID for all L</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-gmgds-vs-gmid-vs-l</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $g_m/g_{ds}$ vs. $g_m/I_D$ as a function of $L$.</span></span>
@@ -553,7 +556,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.</code></pre>
 </div>
 </div>
-<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:08.963903Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.759239Z&quot;}}" data-tags="[&quot;fig-pmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:18.106248Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:18.106134Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:18.382899Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:18.382405Z&quot;}}" data-tags="[&quot;fig-pmos-jd-vs-gmid-vs-l&quot;]" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Id/W (Jd) versus gm/ID for all L</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-jd-vs-gmid-vs-l</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $I_D/W$ vs. $g_m/I_D$ as a function of $L$.</span></span>
@@ -586,7 +589,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.</code></pre>
 </div>
 </div>
-<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.074153Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:08.964633Z&quot;}}" data-tags="[&quot;fig-pmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:18.384870Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:18.384730Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:18.544398Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:18.543903Z&quot;}}" data-tags="[&quot;fig-pmos-vdsat-vs-gmid-vs-l&quot;]" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Vdss versus gm/ID for all L</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-vdsat-vs-gmid-vs-l</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $V_{ds,sat}$ vs. $g_m/I_D$ as a function of $L$.</span></span>
@@ -615,7 +618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.</code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.243573Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.074949Z&quot;}}" data-tags="[&quot;fig-pmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:18.545940Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:18.545846Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:18.707826Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:18.707265Z&quot;}}" data-tags="[&quot;fig-pmos-gamma-vs-gmid-vs-l&quot;]" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot gamma versus gm/ID for all L</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-gamma-vs-gmid-vs-l</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: $\gamma$ vs. $g_m/I_D$ as a function of $L$.</span></span>
@@ -651,7 +654,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>The PostScript backend does not support transparency; partially transparent artists will be rendered opaque.</code></pre>
 </div>
 </div>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2024-08-02T08:03:09.478093Z&quot;,&quot;start_time&quot;:&quot;2024-08-02T08:03:09.244904Z&quot;}}" data-tags="[&quot;fig-pmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:46:18.709191Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:46:18.709097Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:46:19.055338Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:46:19.054857Z&quot;}}" data-tags="[&quot;fig-pmos-fco-vs-gmid-vs-l&quot;]" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fco versus gm/ID for all L</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-pmos-fco-vs-gmid-vs-l</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Flicker-noise corner frequency vs. $g_m/I_D$ as a </span></span>

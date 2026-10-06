@@ -363,30 +363,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><strong>(c) 2024-2025 Boris Murmann and Harald Pretl</strong></p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</p>
-<div id="cell-2" class="cell" data-execution_count="8">
+<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:45:15.549111Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:45:15.549001Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:45:15.922030Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:45:15.921348Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.core.records <span class="im">import</span> fromarrays</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.io <span class="im">import</span> savemat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/2k/8dp4j3f17p3f8263ck8kzmpm0000gt/T/ipykernel_52821/495685066.py:3: DeprecationWarning: numpy.core.records is deprecated and has been renamed to numpy._core.records. The numpy._core namespace contains private NumPy internals and its use is discouraged, as NumPy internals can change without warning in any release. In practice, most real-world usage of numpy.core is to access functionality in the public NumPy API. If that is the case, use the public NumPy API. If not, you are using NumPy internals. If you would still like to access an internal attribute, use numpy._core.records.fromarrays.
+<pre><code>/var/folders/2k/8dp4j3f17p3f8263ck8kzmpm0000gt/T/ipykernel_73851/495685066.py:3: DeprecationWarning: numpy.core.records is deprecated and has been renamed to numpy._core.records. The numpy._core namespace contains private NumPy internals and its use is discouraged, as NumPy internals can change without warning in any release. In practice, most real-world usage of numpy.core is to access functionality in the public NumPy API. If that is the case, use the public NumPy API. If not, you are using NumPy internals. If you would still like to access an internal attribute, use numpy._core.records.fromarrays.
   from numpy.core.records import fromarrays</code></pre>
 </div>
 </div>
-<div id="cell-3" class="cell" data-execution_count="9">
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:45:15.944961Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:45:15.944760Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:45:15.947546Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:45:15.946903Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>choice <span class="op">=</span> <span class="dv">1</span>  <span class="co">#start from 0</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>devices <span class="op">=</span> [<span class="st">'sg13_lv_nmos'</span>, <span class="st">'sg13_lv_pmos'</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># widths used for characterization and fringe cap parameters (fringe caps are not included in ngspice output)</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">5</span>])</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>nfing <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>nfing <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># tool/PDK versions the techsweep .txt files were simulated with (stored in the .mat INFO field);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># update this when the tables are regenerated</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>pdk_info <span class="op">=</span> <span class="st">'IHP-Open-PDK c271a7e97a7bab201c1d0a399215969d2ee19573, IIC-OSIC-TOOLS 2026.09, ngspice-47'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-4" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'techsweep_'</span><span class="op">+</span>devices[choice]<span class="op">+</span><span class="st">'.txt'</span>, sep<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>par_names <span class="op">=</span> df_raw.columns.to_list()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>par_prefix <span class="op">=</span> par_names[<span class="dv">1</span>].split(<span class="st">'['</span>)[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:45:15.949433Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:45:15.949277Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:45:16.246657Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:45:16.246102Z&quot;}}" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the raw ngspice tables are stored gzip-compressed (gzip -9 -n techsweep_*.txt);</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas decompresses them on the fly</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'techsweep_'</span><span class="op">+</span>devices[choice]<span class="op">+</span><span class="st">'.txt.gz'</span>, sep<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>par_names <span class="op">=</span> df_raw.columns.to_list()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>par_prefix <span class="op">=</span> par_names[<span class="dv">1</span>].split(<span class="st">'['</span>)[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-5" class="cell" data-execution_count="11">
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:45:16.248288Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:45:16.248169Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:45:16.463769Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:45:16.463270Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove extra headers in file body and unwanted columns</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_raw.drop([<span class="st">'frequency'</span>, <span class="st">'frequency.1'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.<span class="bu">apply</span>(pd.to_numeric)</span>
@@ -402,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vds'</span>] <span class="op">=</span> df[<span class="st">'vds'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'vsb'</span>] <span class="op">=</span> df[<span class="st">'vsb'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">round</span>(x, <span class="dv">3</span>))</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -579,7 +585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>...</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">119067</th>
+<th data-quarto-table-cell-role="th">178603</th>
 <td>4.366000e-16</td>
 <td>2.898000e-14</td>
 <td>5.149000e-16</td>
@@ -603,7 +609,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.5143</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">119068</th>
+<th data-quarto-table-cell-role="th">178604</th>
 <td>8.774000e-16</td>
 <td>3.190000e-14</td>
 <td>1.003000e-15</td>
@@ -627,7 +633,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.3481</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">119069</th>
+<th data-quarto-table-cell-role="th">178605</th>
 <td>6.609000e-16</td>
 <td>3.085000e-14</td>
 <td>7.657000e-16</td>
@@ -651,7 +657,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.4101</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">119070</th>
+<th data-quarto-table-cell-role="th">178606</th>
 <td>5.076000e-16</td>
 <td>2.985000e-14</td>
 <td>5.940000e-16</td>
@@ -675,7 +681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.4646</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">119071</th>
+<th data-quarto-table-cell-role="th">178607</th>
 <td>3.982000e-16</td>
 <td>2.899000e-14</td>
 <td>4.695000e-16</td>
@@ -701,18 +707,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 
-<p>119072 rows × 24 columns</p>
+<p>178608 rows × 24 columns</p>
 </div>
 </div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="12">
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:45:16.465539Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:45:16.465381Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:45:16.476482Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:45:16.475764Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sweep variable vectors</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'l'</span>]))</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>vgs <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vgs'</span>]))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>vds <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vds'</span>]))</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>vsb <span class="op">=</span> np.unique(<span class="bu">abs</span>(df[<span class="st">'vsb'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="13">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:45:16.478079Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:45:16.477963Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:45:16.483608Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:45:16.482990Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ngspice sweep order is l, vgs, vds, vsb</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dims <span class="op">=</span> [<span class="bu">len</span>(l), <span class="bu">len</span>(vgs), <span class="bu">len</span>(vds), <span class="bu">len</span>(vsb)]</span>
@@ -739,9 +745,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>sth <span class="op">=</span> np.reshape(df[<span class="st">'sid'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>)</span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>sfl <span class="op">=</span> np.reshape(df[<span class="st">'sfl'</span>].values, dims, order<span class="op">=</span><span class="st">'C'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-8" class="cell" data-execution_count="14">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-06T09:45:16.485210Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-06T09:45:16.485097Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-06T09:45:16.496964Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-06T09:45:16.496384Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dic <span class="op">=</span> {</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"INFO"</span>: <span class="st">"IHP SG13G2, 130nm CMOS, PSP"</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"INFO"</span>: <span class="st">"IHP SG13G2, 130nm CMOS, PSP; "</span> <span class="op">+</span> pdk_info,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CORNER"</span>: <span class="st">"NOM"</span>,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TEMP"</span>: <span class="fl">300.0</span>,</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"VGS"</span>: vgs,</span>
