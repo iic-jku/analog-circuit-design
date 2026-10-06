@@ -129,3 +129,9 @@ The supply current budget in that table deserves a comment, since at first glanc
 | Externally provided bias current (nominal) | $20$         | $5$          | µA      |
 
 : Voltage buffer specification {#tbl-voltage-buffer-spec-improved}
+
+However, the Monte Carlo rows of the CACE report in @nte-improved-ota-cace-result reveal a weak spot of this design. Across the PVT corners the output voltage ratio stays between 1.000 and 1.006, but with device mismatch it spreads from 0.979 to 1.028, so the tightened output voltage specification of $\pm 1\,\%$ is violated in about a third of the 100 Monte Carlo runs. The reason is the reduced $L = 0.5\,\mu\text{m}$ that we have chosen for speed in @sec-improved-ota-sizing: the input pair $M_{1,2}$ has a gate area of only $W \cdot L = 0.5\,\mu\text{m}^2$, which is 20 times less than in the 5T-OTA. According to @eq-mosfet-mismatch-vth this increases the mismatch by about $\sqrt{20} \approx 4.5$, which is roughly the factor by which the Monte Carlo spread of the output voltage ratio has grown compared to the 5T-OTA (see @nte-basic-ota-cace-result). Before this design can be released, the input pair and the current-mirror load have to be enlarged to meet the specification under mismatch, and the resulting impact on speed and stability has to be checked again.
+
+::: {.callout-tip title="Exercise: Improved OTA and Mismatch"}
+Use @eq-diffpair-offset and @eq-currentmirror-offset to find device sizes of $M_{1-4}$ for which the output voltage error stays within $\pm 1\,\%$ under mismatch. Then, update the improved OTA schematic and repeat the CACE simulations. Which performance parameters suffer from the larger devices, and how can you recover them?
+:::
