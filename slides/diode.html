@@ -7,13 +7,13 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <title>Analog (Integrated) Circuit Design – First Circuit: MOSFET Diode</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-108d7594e3aa95dbecf5138aa9cd9f30.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3bb3caf0b958c5be0bbd85ee16d9678b.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -251,7 +251,6 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 </section>
 <section class="slide level3 unnumbered">
 <h3>First Circuit: MOSFET Diode</h3>
-<div title="Feedback in the MOSFET Diode">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -265,7 +264,6 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="mosfet-diode-sizing" class="title-slide slide level2 center" data-number="4.1">
 <h2><span class="header-section-number">4.1</span> MOSFET Diode Sizing</h2>
@@ -273,7 +271,6 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 </section>
 <section class="slide level3 unnumbered scrollable">
 <h3>MOSFET Diode Sizing</h3>
-<div title="Exercise: MOSFET Diode Sizing">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -289,7 +286,6 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 <li>What is the <span class="math inline">\(f_\mathrm{T}\)</span> for this MOSFET? What is the value for <span class="math inline">\(g_\mathrm{m}\)</span> and <span class="math inline">\(g_\mathrm{ds}\)</span>?</li>
 <li>Draw the circuit in Xschem, and simulate the operating point. Do the values match to the values found out before during circuit sizing?</li>
 </ol>
-</div>
 </div>
 </div>
 </div>
@@ -309,7 +305,6 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 </section>
 <section class="slide level3 unnumbered scrollable">
 <h3>MOSFET Diode Sizing</h3>
-<div title="Solution: MOSFET Diode Sizing">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -323,7 +318,6 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 <li class="fragment">Using the fact that <span class="math inline">\(I_\mathrm{bias} = I_\mathrm{D} = 20\,\mu\text{A}\)</span> and <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 10\)</span> directly provides <span class="math inline">\(g_\mathrm{m}= 0.2\,\text{mS}\)</span>.</li>
 <li class="fragment">Using the self-gain plot, we see that <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\approx 18.4\)</span>, so <span class="math inline">\(g_\mathrm{ds}\approx 10.9\,\mu\text{S}\)</span>. The <span class="math inline">\(f_\mathrm{T}\)</span> can easily be found in the respective plot to be <span class="math inline">\(f_\mathrm{T} = 23\,\text{GHz}\)</span>. Note that the self-gain has to be read at <span class="math inline">\(V_\mathrm{DS}= V_\mathrm{GS}\approx 0.59\,\text{V}\)</span>, <strong>not</strong> at the <span class="math inline">\(V_\mathrm{DS}= V_\mathrm{DD}/2\)</span> used for the characterization plots in <a href="../aicd.html#sec-techsweep-nmos">Section&nbsp;3.2</a>: in a MOSFET diode the drain is tied to the gate, and <span class="math inline">\(g_\mathrm{ds}\)</span> is a strong function of <span class="math inline">\(V_\mathrm{DS}\)</span>. The linked notebook does this self-consistently.</li>
 </ol>
-</div>
 </div>
 </div>
 </div>
@@ -343,7 +337,6 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 </section>
 <section class="slide level3 unnumbered scrollable">
 <h3>MOSFET Diode Sizing</h3>
-<div title="Solution: MOSFET Diode Sizing">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -360,7 +353,6 @@ Figure&nbsp;17: Drain current of a MOSFET diode with W=1µm and L=0.13µm showin
 </ol>
 <div class="fragment">
 <p>You can find an example Jupyter notebook to accurately extract these values <a href="../gmid/sizing_mosfet_diode.html">here</a>. An Xschem schematic for this exercise is provided <a href="../xschem/mosfet_diode_sizing.sch">as well</a>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -392,7 +384,6 @@ Figure&nbsp;18: Testbench for MOSFET diode transient settling.
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Large-Signal Behavior</h3>
-<div title="Power-Down Switches">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -403,7 +394,6 @@ Figure&nbsp;18: Testbench for MOSFET diode transient settling.
 </div>
 <div class="callout-content">
 <p>It is thus generally a good idea to add power-down switches to the circuits to disable the circuit quickly by pulling floating nodes to a defined potential (usually <span class="math inline">\(V_\mathrm{DD}\)</span> or <span class="math inline">\(V_\mathrm{SS}\)</span>) and to avoid long intermediate states during power down. This will also allow a turn-on from a well-defined off-state.</p>
-</div>
 </div>
 </div>
 </div>
@@ -459,7 +449,6 @@ Figure&nbsp;19: The MOSFET diode small-signal model (drain and gate are shorted,
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Small-Signal Analysis</h3>
-<div title="Ground Node Selection">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -470,7 +459,6 @@ Figure&nbsp;19: The MOSFET diode small-signal model (drain and gate are shorted,
 </div>
 <div class="callout-content">
 <p>For small-signal analysis we would not need to declare one node as the ground potential. However, when doing so, and selecting the ground node strategically, we can simplify the analysis, as we usually do not formulate KCL for the ground node (as we have only <span class="math inline">\(N-1\)</span> independent KCL equations, <span class="math inline">\(N\)</span> being the number of nodes in the circuit), and the potential difference equations are simpler if one node is at <span class="math inline">\(0\,V\)</span>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -499,7 +487,6 @@ Z_\mathrm{diode}(s) = \frac{V_\mathrm{gs}}{I_\mathrm{bias}} = \frac{1}{g_\mathrm
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Small-Signal Analysis</h3>
-<div title="The Admittance is Your Friend">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -510,7 +497,6 @@ Z_\mathrm{diode}(s) = \frac{V_\mathrm{gs}}{I_\mathrm{bias}} = \frac{1}{g_\mathrm
 </div>
 <div class="callout-content">
 <p>In circuit analysis it is often algebraically easier to work with admittance instead of impedance, so please remember that Ohm’s law for a conductance is <span class="math inline">\(I = G \cdot V\)</span>, and for a capacitance is <span class="math inline">\(I = s C \cdot V\)</span>. When writing equations, it is also practical to keep <span class="math inline">\(s C\)</span> together, so we will strive to sort terms accordingly.</p>
-</div>
 </div>
 </div>
 </div>
@@ -541,7 +527,6 @@ Z_\mathrm{diode}(s) = \frac{V_\mathrm{gs}}{I_\mathrm{bias}} = \frac{1}{g_\mathrm
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -557,11 +542,9 @@ H_\mathrm{cl}(s) = \frac{Y(s)}{X(s)} = \frac{H_\mathrm{ol}(s)}{1 + H_\mathrm{ol}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -576,11 +559,9 @@ H_\mathrm{cl}(s) = \frac{Y(s)}{X(s)} = \frac{H_\mathrm{ol}(s)}{1 + H_\mathrm{ol}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -607,11 +588,9 @@ Figure&nbsp;20: The block diagram of a negative feedback system.
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Open-Loop Gain, Closed-Loop Gain, and Loop-Gain---A Short Recap">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -625,11 +604,9 @@ Figure&nbsp;20: The block diagram of a negative feedback system.
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Gain-Bandwidth Product in Feedback Systems">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -645,11 +622,9 @@ Figure&nbsp;20: The block diagram of a negative feedback system.
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Gain-Bandwidth Product in Feedback Systems">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -667,11 +642,9 @@ H_\mathrm{cl,dc} f_\mathrm{c,cl} \approx \frac{1}{G} f_\mathrm{T,ol} G = f_\math
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Gain-Bandwidth Product in Feedback Systems">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -687,11 +660,9 @@ f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Gain-Bandwidth Product in Feedback Systems">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -703,7 +674,6 @@ f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
 <div class="callout-content">
 <p>For weak feedback (<span class="math inline">\(G \ll 1\)</span>) the closed-loop unity-gain frequency is only slightly lower than <span class="math inline">\(f_\mathrm{T,ol}\)</span>, but for strong feedback it drops sharply, and for the unity-gain case <span class="math inline">\(G = 1\)</span> it vanishes altogether, simply because the closed-loop gain <span class="math inline">\(H_\mathrm{cl} = H_\mathrm{ol}/(1+H_\mathrm{ol}) &lt; 1\)</span> never reaches unity in the first place. Keep this in mind for the MOSFET diode, where exactly this case <span class="math inline">\(G = 1\)</span> applies.</p>
 <p>This theory might be interesting when Middlebrook’s and Tian’s methods for loop gain analysis are later compared in the MOSFET diode testbench (see <a href="#/fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;22</a>).</p>
-</div>
 </div>
 </div>
 </div>
@@ -776,7 +746,6 @@ T(s) = (-1) \cdot \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m}}{g_\
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Exercise: MOSFET Diode Loop Analysis">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -791,11 +760,9 @@ T(s) = (-1) \cdot \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m}}{g_\
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="Exercise: MOSFET Diode Loop Analysis">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -818,11 +785,9 @@ Figure&nbsp;22: Testbench for MOSFET diode stability analysis.
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="What About Large-Signal Stability?">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -833,7 +798,6 @@ Figure&nbsp;22: Testbench for MOSFET diode stability analysis.
 </div>
 <div class="callout-content">
 <p>Keep in mind that the above simulation only verifies the small-signal stability in one certain operating point. If we later look at the stability of an OTA it might be a good idea to verify the small-signal stability in different operating points.</p>
-</div>
 </div>
 </div>
 </div>
@@ -853,7 +817,6 @@ Figure&nbsp;22: Testbench for MOSFET diode stability analysis.
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<div title="What About Large-Signal Stability?">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -864,7 +827,6 @@ Figure&nbsp;22: Testbench for MOSFET diode stability analysis.
 </div>
 <div class="callout-content">
 <p>Furthermore, one can apply a step response to the closed-loop system input and estimate the phase margin from the overshoot at the output (see <em>“Automatic Control”</em> lecture). One could also use a step-wise step response to simulate different operating points for a certain time (see <em>“Introduction in Integrated Circuit Design”</em> lecture).</p>
-</div>
 </div>
 </div>
 </div>
@@ -940,7 +902,6 @@ Figure&nbsp;23: The MOSFET diode small-signal model with drain noise source.
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Useful Integral for Noise Calculations">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -953,7 +914,6 @@ Figure&nbsp;23: The MOSFET diode small-signal model with drain noise source.
 <p><span id="eq-integral-identity"><span class="math display">\[
 \int_0^\infty {\frac{a}{b^2 + c^2 f^2} df} = \frac{\pi}{2} \frac{a}{b \cdot c}
 \tag{9}\]</span></span></p>
-</div>
 </div>
 </div>
 </div>
@@ -982,7 +942,6 @@ V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Exercise: Total Output Noise of RC-Lowpass">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -996,11 +955,9 @@ V_\mathrm{n,rms}^2 = \frac{k T \gamma}{C_\mathrm{gs}}.
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Exercise: Total Output Noise of RC-Lowpass">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1016,11 +973,9 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Exercise: Total Output Noise of RC-Lowpass">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1034,11 +989,9 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Exercise: Total Output Noise of RC-Lowpass">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1049,7 +1002,6 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 <div class="callout-content">
 <p>To calculate the total output noise of a generalized passive network Bode’s noise theorem is quite practical (see <a href="../aicd.html#sec-bode-noise-theorem">Section&nbsp;17.2</a>).</p>
-</div>
 </div>
 </div>
 </div>
@@ -1080,7 +1032,6 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Be Careful with Parasitic Capacitances in IC Design">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1094,11 +1045,9 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Large Bandwidth and Noise">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1113,11 +1062,9 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Exercise: MOSFET Diode Noise">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1131,11 +1078,9 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Exercise: MOSFET Diode Noise">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1150,11 +1095,9 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Noise Calculation</h3>
-<div title="Exercise: MOSFET Diode Noise">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1173,7 +1116,6 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 Figure&nbsp;24: Testbench for MOSFET diode noise analysis.
 </figcaption>
 </figure>
-</div>
 </div>
 </div>
 </div>
@@ -1266,7 +1208,7 @@ Tian, M., V. Visvanathan, J. Hantgan, and K. Kundert. 2001. <span>“<span class
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu","numbers":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -1522,7 +1464,8 @@ Tian, M., V. Visvanathan, J. Hantgan, and K. Kundert. 2001. <span>“<span class
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1531,8 +1474,69 @@ Tian, M., V. Visvanathan, J. Hantgan, and K. Kundert. 2001. <span>“<span class
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1546,6 +1550,7 @@ Tian, M., V. Visvanathan, J. Hantgan, and K. Kundert. 2001. <span>“<span class
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

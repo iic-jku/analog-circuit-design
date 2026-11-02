@@ -7,13 +7,13 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <title>Analog (Integrated) Circuit Design – Improved (Telescopic) OTA</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
@@ -120,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-108d7594e3aa95dbecf5138aa9cd9f30.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3bb3caf0b958c5be0bbd85ee16d9678b.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -256,7 +256,6 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 </section>
 <section class="slide level3 unnumbered">
 <h3>Improved (Telescopic) OTA</h3>
-<div title="Cascode Bias Voltage Generation">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -267,7 +266,6 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 </div>
 <div class="callout-content">
 <p>It is critically important for stable performance across PVT that the bias voltages for the cascode gates are created in a manner that tracks variations with process, temperature, and supply voltage!</p>
-</div>
 </div>
 </div>
 </div>
@@ -287,7 +285,6 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 </section>
 <section class="slide level3 unnumbered">
 <h3>Improved (Telescopic) OTA</h3>
-<div title="Exercise: Cascode Current Mirror vs. High-Swing Cascode Current Mirror">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -298,7 +295,6 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 </div>
 <div class="callout-content">
 <p>Try to verify the above statement of equal drain-source voltages by deriving both, an equation for <span class="math inline">\(V_\mathrm{DS4}\)</span> assuming a high-swing cascode current mirror (<a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>) and <span class="math inline">\(V_\mathrm{DS4}\)</span> in case of a simple cascode current mirror, where the reference branch <span class="math inline">\((M_\mathrm{3,3C})\)</span> is comprised of two MOSFET diodes.</p>
-</div>
 </div>
 </div>
 </div>
@@ -349,7 +345,6 @@ A_0 \approx \frac{g_\mathrm{m12}}{g_\mathrm{ds2} \frac{g_\mathrm{ds2C}}{g_\mathr
 </section>
 <section class="slide level3 unnumbered">
 <h3>Sizing the Improved OTA</h3>
-<div title="Improved OTA Sizing">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -627,7 +622,6 @@ headroom M5     = 0.264 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 <aside class="notes">
 <p>Like the sizing of the 5T-OTA in <a href="../aicd.html#sec-basic-ota-sizing">Section&nbsp;8.4</a> we again use the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> method using a Python notebook. Instead of using <span class="math inline">\(L = 5\,\mu\text{m}\)</span> we this time use a reduced <span class="math inline">\(L = 0.5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{1/1C,2/2C,3/3C,4/4C}\)</span> (for speed reasons) and <span class="math inline">\(L = 5\,\mu\text{m}\)</span> for <span class="math inline">\(M_\mathrm{5,6}\)</span> for better common-mode rejection (the tail current mirror is less critical in terms of speed and stability).</p>
 <p>We set <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}= 13\)</span> across the board for a good trade-off between speed, current efficiency, and voltage headroom for the MOSFETs (this is now way more critical than in the basic 5T-OTA as we now stack twice as many MOSFETs at the same supply voltage). Please look at <a href="../aicd.html#sec-gmid-method">Section&nbsp;3</a> to confirm this choice.</p>
@@ -645,7 +639,6 @@ headroom M5     = 0.264 V</code></pre>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Sizing the Improved OTA</h3>
-<div title="Exercise: Improved OTA Sizing">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -656,7 +649,6 @@ headroom M5     = 0.264 V</code></pre>
 </div>
 <div class="callout-content">
 <p>Please take a detailed look at the above sizing notebook and play with the numbers and calculations. Do you find a better trade-off for the input parameters? Can you understand the thinking process behind the choices and calculations?</p>
-</div>
 </div>
 </div>
 </div>
@@ -788,7 +780,6 @@ Figure&nbsp;60: Improved OTA design in Xschem.
 </section>
 <section class="slide level3 unnumbered">
 <h3>Discussion of the OTA Design</h3>
-<div title="Parallel Connection">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -799,7 +790,6 @@ Figure&nbsp;60: Improved OTA design in Xschem.
 </div>
 <div class="callout-content">
 <p>Note that a parallel connection of devices is effectively possible using the multiplier notation of Xschem.</p>
-</div>
 </div>
 </div>
 </div>
@@ -842,7 +832,6 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </p></section>
 <section class="slide level3 unnumbered scrollable">
 <h3>Simulation of Improved OTA</h3>
-<div title="Exercise: Improved OTA Initial Simulation">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -861,11 +850,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered scrollable">
 <h3>Simulation of Improved OTA</h3>
-<div title="Exercise: Improved OTA Initial Simulation">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -881,7 +868,6 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 
 <section id="corner-simulation-of-improved-ota" class="title-slide slide level2 center" data-number="11.4">
@@ -890,7 +876,6 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div id="nte-improved-ota-cace-result" title="CACE Summary for Improved OTA">
 <div id="nte-improved-ota-cace-result" class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1015,7 +1000,6 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 <aside class="notes">
 <p>Just like for the basic OTA we use the CACE system to check the performance of the improved OTA design holistically across variations like PVT and input signal variations. The results of the CACE run are shown below in <a href="#/nte-improved-ota-cace-result" class="quarto-xref">Note&nbsp;3</a>.</p>
 <style type="text/css">
@@ -1032,7 +1016,6 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1052,11 +1035,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1076,11 +1057,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1100,11 +1079,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1124,11 +1101,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1148,11 +1123,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1172,11 +1145,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1196,11 +1167,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1220,11 +1189,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1244,11 +1211,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1268,11 +1233,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1292,11 +1255,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1316,11 +1277,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1340,11 +1299,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1364,11 +1321,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1388,11 +1343,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1412,11 +1365,9 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="CACE Summary for Improved OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1432,7 +1383,6 @@ Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analy
 <p><img data-src="../cace/_docs/ota-improved/schematic/settling_vs_corner.png"></p>
 <figcaption>settling_vs_corner</figcaption>
 </figure>
-</div>
 </div>
 </div>
 </div>
@@ -1515,7 +1465,6 @@ Table&nbsp;5: Voltage buffer specification
 </section>
 <section class="slide level3 unnumbered">
 <h3>Corner Simulation of Improved OTA</h3>
-<div title="Exercise: Improved OTA and Mismatch">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1526,7 +1475,6 @@ Table&nbsp;5: Voltage buffer specification
 </div>
 <div class="callout-content">
 <p>Use <a href="../aicd.html#eq-diffpair-offset">Equation&nbsp;30</a> and <a href="../aicd.html#eq-currentmirror-offset">Equation&nbsp;31</a> to find device sizes of <span class="math inline">\(M_{1-4}\)</span> for which the output voltage error stays within <span class="math inline">\(\pm 1\,\%\)</span> under mismatch. Then, update the improved OTA schematic and repeat the CACE simulations. Which performance parameters suffer from the larger devices, and how can you recover them?</p>
-</div>
 </div>
 </div>
 </div>
@@ -1581,7 +1529,7 @@ Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CM
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu","numbers":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -1837,7 +1785,8 @@ Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CM
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1846,8 +1795,69 @@ Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CM
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1861,6 +1871,7 @@ Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CM
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

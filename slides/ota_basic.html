@@ -7,13 +7,13 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <title>Analog (Integrated) Circuit Design – A Basic 5-Transistor OTA</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
@@ -120,7 +120,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-108d7594e3aa95dbecf5138aa9cd9f30.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3bb3caf0b958c5be0bbd85ee16d9678b.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -256,7 +256,6 @@ Figure&nbsp;32: The 5-transistor OTA.
 </section>
 <section class="slide level3 unnumbered">
 <h3>A Basic 5-Transistor OTA</h3>
-<div title="Refresh MOSFET Basic Circuits">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -268,7 +267,6 @@ Figure&nbsp;32: The 5-transistor OTA.
 <div class="callout-content">
 <p>While we repeat the basics of elementary MOSFET amplifier stages (like common-source stage, common-gate stage, and current mirror) in this course material, the following compendium <span class="citation" data-cites="Murmann_MOS_stages_2013">(<a href="#/references" role="doc-biblioref" onclick="">Murmann 2013</a>)</span> is recommended for review. It is freely available at <a href="https://github.com/bmurmann/Book-on-MOS-stages" class="uri">https://github.com/bmurmann/Book-on-MOS-stages</a>.</p>
 <p>In addition, we can highly recommend these references <span class="citation" data-cites="Gray_Meyer_2009 Razavi_Analog_CMOS">(<a href="#/references" role="doc-biblioref" onclick="">Gray et al. 2009</a>; <a href="#/references" role="doc-biblioref" onclick="">Razavi 2017</a>)</span> for further study.</p>
-</div>
 </div>
 </div>
 </div>
@@ -575,7 +573,6 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 </section>
 <section class="slide level3 unnumbered">
 <h3>Small-Signal Analysis of the OTA</h3>
-<div title="Small-Signal vs. Large-Signal Operation">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -586,7 +583,6 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 </div>
 <div class="callout-content">
 <p>In order to get the correct dc voltage per the specification we require the large-signal gain calculated with <a href="#/eq-voltage-buffer-tolerance" class="quarto-xref">Equation&nbsp;14</a>. However, calculating the large-signal gain of a circuit is quite involved (usually mandating the use of a large-signal nonlinear model for the used components), so we typically resort to do a simpler small-signal calculation instead, like in <a href="#/sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>. We deliberately introduce this error, but we should not get confused about the difference between large- and small-signal operation!</p>
-</div>
 </div>
 </div>
 </div>
@@ -639,7 +635,6 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 </section>
 <section class="slide level3 unnumbered">
 <h3>OTA Small-Signal Transfer Function</h3>
-<div title="Refresh MOSFET Small-Signal Model">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -650,7 +645,6 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 </div>
 <div class="callout-content">
 <p>Please review the MOSFET small-signal equivalent model in <a href="../aicd.html#fig-mosfet-small-signal-model">Figure&nbsp;6</a> at this point. For the PMOS just flip the model upside-down.</p>
-</div>
 </div>
 </div>
 </div>
@@ -766,7 +760,6 @@ f_\mathrm{ug} = \frac{g_\mathrm{m1,2}}{2 \pi C_\mathrm{load}}
 </section>
 <section class="slide level3 unnumbered">
 <h3>OTA Small-Signal Transfer Function</h3>
-<div title="Watch the Asymptote You Use">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -783,11 +776,9 @@ A(s \to \infty) = \frac{g_\mathrm{m1,2}}{2 \cdot s C_\mathrm{load}}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>OTA Small-Signal Transfer Function</h3>
-<div title="Watch the Asymptote You Use">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -798,7 +789,6 @@ A(s \to \infty) = \frac{g_\mathrm{m1,2}}{2 \cdot s C_\mathrm{load}}
 </div>
 <div class="callout-content">
 <p>This differs from <a href="#/eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> by a factor of two, and would predict a unity-gain frequency only half as large. The reason for the discrepancy is physical: <a href="#/eq-simple-ota-highf" class="quarto-xref">Equation&nbsp;21</a> describes the behavior <em>above</em> the doublet, where <span class="math inline">\(C_\mathrm{gs3,4}\)</span> shorts out the current mirror so that the signal path through <span class="math inline">\(M_{3,4}\)</span> is lost and only the direct path through <span class="math inline">\(M_2\)</span> remains — hence half the transconductance. In a sensible design the doublet sits far above <span class="math inline">\(f_\mathrm{ug}\)</span>, so <a href="#/eq-simple-ota-midband" class="quarto-xref">Equation&nbsp;19</a> is the asymptote to use.</p>
-</div>
 </div>
 </div>
 </div>
@@ -815,7 +805,6 @@ s_\mathrm{zd} = -\frac{g_\mathrm{m3,4}}{C_\mathrm{gs3,4}}
 </section>
 <section class="slide level3 unnumbered">
 <h3>OTA Small-Signal Transfer Function</h3>
-<div title="Why a Pole-Zero Doublet?">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -826,7 +815,6 @@ s_\mathrm{zd} = -\frac{g_\mathrm{m3,4}}{C_\mathrm{gs3,4}}
 </div>
 <div class="callout-content">
 <p>Looking at <a href="#/eq-basic-ota-doublet-pole" class="quarto-xref">Equation&nbsp;23</a> and <a href="#/eq-basic-ota-doublet-zero" class="quarto-xref">Equation&nbsp;24</a> we see that this pair is intimately linked by the same parameters and can only move together. Hence we call it a “doublet”. The effects of pole-zero doublets on the frequency response and settling time of OTAs can be found in <span class="citation" data-cites="Kamath_1974">(<a href="#/references" role="doc-biblioref" onclick="">Kamath et al. 1974</a>)</span>. This paper shows that doublets may cause severe degradation of settling time while only causing minor changes in the frequency response of the amplifier.</p>
-</div>
 </div>
 </div>
 </div>
@@ -880,7 +868,6 @@ Figure&nbsp;38: 5-transistor OTA simplified small-signal model for noise calcula
 </section>
 <section class="slide level3 unnumbered">
 <h3>OTA Noise</h3>
-<div title="Noise Addition">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -891,7 +878,6 @@ Figure&nbsp;38: 5-transistor OTA simplified small-signal model for noise calcula
 </div>
 <div class="callout-content">
 <p>Remember that <strong>uncorrelated</strong> noise quantities need to be power-summed (i.e., <span class="math inline">\(I^2 = I_1^2 + I_2^2\)</span>)!</p>
-</div>
 </div>
 </div>
 </div>
@@ -958,7 +944,6 @@ V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) \cdot df
 </section>
 <section class="slide level3 unnumbered">
 <h3>OTA Noise</h3>
-<div title="Exercise: Derivation of 5T-OTA Performance">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -969,7 +954,6 @@ V_\mathrm{n,out,rms}^2 = \int_0^\infty \overline{V_\mathrm{n,out}^2}(f) \cdot df
 </div>
 <div class="callout-content">
 <p>Please take your time and carefully go through the explanations and derivations for the 5-transistor-OTA in <a href="#/sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;8.2</a> and <a href="#/sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a>. Try to do the calculations yourself; if you get stuck, review the previous chapters. There are additional useful derivations in <a href="../aicd.html#sec-5t-ota-zout">Section&nbsp;18</a>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1001,7 +985,6 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Sizing</h3>
-<div title="Exercise: 5T-OTA Sizing">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1015,11 +998,9 @@ V_\mathrm{ds,sat} = \frac{2}{g_\mathrm{m}/I_\mathrm{D}}
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Sizing</h3>
-<div title="Solution: 5T-OTA Sizing">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1253,7 +1234,6 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 <aside class="notes">
 <p>The sizing procedure and its calculation are best performed in a Jupyter notebook, as we can easily look up the exact data from the pre-computed tables:</p>
 <style type="text/css">
@@ -1275,7 +1255,6 @@ headroom M5 = 0.333 V</code></pre>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation</h3>
-<div title="Exercise: 5T-OTA Design and Testbench">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1286,7 +1265,6 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 <div class="callout-content">
 <p>Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a>. Use typical conditions for the simulation and check how well the specification in <a href="#/tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a> is met and how well the derivations in <a href="#/sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;8.2</a> and <a href="#/sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a> fit to the simulation results.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1306,7 +1284,6 @@ headroom M5 = 0.333 V</code></pre>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation</h3>
-<div title="Exercise: 5T-OTA Design and Testbench">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1317,7 +1294,6 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 <div class="callout-content">
 <p>If you get stuck, you can find the testbench and 5T-OTA schematic <a href="../xschem/ota-5t_tb-ac.svg">here</a> (for the small-signal analysis) and <a href="../xschem/ota-5t_tb-tran.svg">here</a> (for the large-signal settling simulation). For interested students, the loop gain analysis with Middlebrook’s and Tian’s method of the 5T-OTA can be found <a href="../xschem/ota-5t_tb-loopgain.svg">here</a>. A comprehensive technical white paper by Texas Instruments about operational amplifier stability theory and compensation methods can be found in <span class="citation" data-cites="Kay_2025">(<a href="#/references" role="doc-biblioref" onclick="">Kay and Wells 2025</a>)</span>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1371,7 +1347,6 @@ headroom M5 = 0.333 V</code></pre>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Mismatch</h3>
-<div title="MOSFET Mismatch">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1414,11 +1389,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Mismatch</h3>
-<div title="MOSFET Mismatch">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1429,7 +1402,6 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 <div class="callout-content">
 <p>To minimize the input offset voltage in a differential pair we should strive to minimize the overdrive voltage <span class="math inline">\(V_\mathrm{GS}- V_\mathrm{th}\)</span> (i.e., to maximize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#/eq-diffpair-offset" class="quarto-xref">Equation&nbsp;30</a>) and to minimize the mismatch in current mirrors we should target a large overdrive voltage (i.e., to minimize <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, see <a href="#/eq-currentmirror-offset" class="quarto-xref">Equation&nbsp;31</a>). In both cases the MOSFET area <span class="math inline">\(W \cdot L\)</span> needs to be large enough (see <a href="#/eq-mosfet-mismatch-vth" class="quarto-xref">Equation&nbsp;28</a> and <a href="#/eq-mosfet-mismatch-kp" class="quarto-xref">Equation&nbsp;29</a>).</p>
-</div>
 </div>
 </div>
 </div>
@@ -1445,7 +1417,6 @@ headroom M5 = 0.333 V</code></pre>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Mismatch</h3>
-<div title="Number of Monte Carlo Simulation Runs">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1456,7 +1427,6 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 <div class="callout-content">
 <p>The number of Monte Carlo simulation runs <span class="math inline">\(N\)</span> has to be large enough to approach Gaussian distributions to allow estimation of the variances. However, this comes at the cost of a large simulation time, so a balance has to be found. Often, <span class="math inline">\(N = 250\)</span> is a good compromise between simulation time and well-behaved parameter distributions.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1610,7 +1580,6 @@ headroom M5 = 0.333 V</code></pre>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="Running CACE Simulation">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1627,11 +1596,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div id="nte-basic-ota-cace-result" title="CACE Summary for 5T-OTA">
 <div id="nte-basic-ota-cace-result" class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1756,7 +1723,6 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 <aside class="notes">
 <p>After a successful run, a documentation is automatically generated. The result of a full run of this <a href="../xschem/ota-5t.svg">OTA design</a> is presented here:</p>
 <style type="text/css">
@@ -1773,7 +1739,6 @@ headroom M5 = 0.333 V</code></pre>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1793,11 +1758,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1817,11 +1780,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1841,11 +1802,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1865,11 +1824,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1889,11 +1846,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1913,11 +1868,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1937,11 +1890,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1961,11 +1912,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1985,11 +1934,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2009,11 +1956,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2033,11 +1978,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2057,11 +2000,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2081,11 +2022,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2105,11 +2044,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2129,11 +2066,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2153,11 +2088,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>5T-OTA Simulation versus PVT and MC</h3>
-<div title="CACE Summary for 5T-OTA">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2173,7 +2106,6 @@ headroom M5 = 0.333 V</code></pre>
 <p><img data-src="../cace/_docs/ota-5t/schematic/settling_vs_corner.png"></p>
 <figcaption>settling_vs_corner</figcaption>
 </figure>
-</div>
 </div>
 </div>
 </div>
@@ -2215,7 +2147,6 @@ headroom M5 = 0.333 V</code></pre>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Monte Carlo Simulation Analysis</h3>
-<div title="Exercise: Mismatch Sensitivity of the 5T-OTA">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2229,11 +2160,9 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>Monte Carlo Simulation Analysis</h3>
-<div title="Exercise: Mismatch Sensitivity of the 5T-OTA">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -2244,7 +2173,6 @@ headroom M5 = 0.333 V</code></pre>
 </div>
 <div class="callout-content">
 <p>Then, update the transistor sizes in the 5T-OTA schematic and repeat the CACE simulations (PVT and Monte Carlo). How does the spread of the output voltage ratio compare to your estimate? How short can <span class="math inline">\(L\)</span> become before the output voltage specification is violated, and what happens to the other performance parameters?</p>
-</div>
 </div>
 </div>
 </div>
@@ -2403,7 +2331,7 @@ Razavi, Behzad. 2019. <span>“<span class="nocase">The Low Dropout Regulator [A
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu","numbers":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -2659,7 +2587,8 @@ Razavi, Behzad. 2019. <span>“<span class="nocase">The Low Dropout Regulator [A
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -2668,8 +2597,69 @@ Razavi, Behzad. 2019. <span>“<span class="nocase">The Low Dropout Regulator [A
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -2683,6 +2673,7 @@ Razavi, Behzad. 2019. <span>“<span class="nocase">The Low Dropout Regulator [A
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

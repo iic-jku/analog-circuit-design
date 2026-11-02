@@ -7,13 +7,13 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <title>Analog (Integrated) Circuit Design – Transistor Sizing Using gm/ID Methodology</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
@@ -54,7 +54,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-108d7594e3aa95dbecf5138aa9cd9f30.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3bb3caf0b958c5be0bbd85ee16d9678b.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -171,7 +171,6 @@
 </section>
 <section class="slide level3 unnumbered">
 <h3>Transistor Sizing Using gm/ID Methodology</h3>
-<div title="MOSFET Square-Law Model">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -182,7 +181,6 @@
 </div>
 <div class="callout-content">
 <p>One of the many simplifications of the square-law model is that the mobility of the charge carriers is assumed constant (it is not). Further, the existence of a threshold voltage is assumed, but in fact this voltage exists only given a certain definition, and depending on definition, its value changes. In addition, in nm CMOS, the threshold voltage is a function of many things, like <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -205,7 +203,7 @@
 <h2><span class="header-section-number">3.1</span> MOSFET Characterization Testbench</h2>
 <aside class="notes">
 <p>An additional shortcoming of the square-law model is that it is only valid in strong inversion, i.e.&nbsp;for large <span class="math inline">\(V_\mathrm{GS}\)</span> where the drain current is dominated by the drift current. As soon as the gate-source voltage gets smaller, the square-law model breaks, as the drain current component based on diffusion currents gets dominant. Modern compact MOSFET models (like the PSP model used in SG13CMOS5L) use hundreds of parameters and fairly complex equations to somewhat properly describe MOSFET behavior over a wide range of parameters like <span class="math inline">\(W\)</span>, <span class="math inline">\(L\)</span>, and temperature. A modern approach to MOSFET sizing is thus based on the thought to use exactly these MOSFET models, characterize them, put the resulting data into tables and charts, and thus learn about the complex MOSFET behavior and use it for MOSFET sizing.</p>
-<p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by <span class="citation" data-cites="Silveira_1996">(<a href="#/references" role="doc-biblioref" onclick="">Silveira et al. 1996</a>)</span> and extended in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#/references" role="doc-biblioref" onclick="">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/gmid/Ref_Murmann_gmID.pdf">here</a> as well.</p>
+<p>Being a well-established approach we select the <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology introduced by <span class="citation" data-cites="Silveira_1996">(<a href="#/references" role="doc-biblioref" onclick="">Silveira et al. 1996</a>)</span> and extended in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#/references" role="doc-biblioref" onclick="">Jespers and Murmann 2017</a>)</span>. A brief introduction is available <a href="https://github.com/iic-jku/analog-circuit-design/blob/main/gmid/Ref_Murmann_gmID.pdf">here</a> as well. Boris Murmann also explains the method in a <a href="https://www.youtube.com/watch?v=oNDmJ2a3tWI">video lecture</a> of the ISSCC 2026 Circuit Insights series <span class="citation" data-cites="Murmann_ISSCC_2026">(<a href="#/references" role="doc-biblioref" onclick="">Murmann 2026</a>)</span>.</p>
 <p>The <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span> methodology has the huge advantage that it catches MOSFET behavior quite accurately over a wide range of operating conditions, and the curves look very similar for pretty much all CMOS technologies, from micrometer bulk CMOS down to nanometer FinFET devices. Of course the absolute values change, but the method applies universally.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -221,7 +219,6 @@
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Characterization Testbench</h3>
-<div title="Note on Characterization Testbench">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -232,7 +229,6 @@
 </div>
 <div class="callout-content">
 <p>The testbenches are relatively straightforward, with one exception: The drain current noise is sensed via the drain voltage source <code>vd</code> and converted to a noise voltage (node <code>n</code>) using a current-controlled voltage source (CCVS). This is necessary as the <code>.noise</code> simulation statement works with voltages.</p>
-</div>
 </div>
 </div>
 </div>
@@ -264,7 +260,6 @@ Figure&nbsp;11: Testbench for LV PMOS <span class="math inline">\(g_\mathrm{m}/I
 </p></section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Characterization Testbench</h3>
-<div title="Note on width $W$">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -275,7 +270,6 @@ Figure&nbsp;11: Testbench for LV PMOS <span class="math inline">\(g_\mathrm{m}/I
 </div>
 <div class="callout-content">
 <p>In general, the device width could be included as a fifth sweep variable. However, this is not necessary since the parameters scale approximately linearly with <span class="math inline">\(W\)</span> across the typical range encountered in analog design. For <span class="math inline">\(W &gt; 2\,\text{µm}\)</span> the error lies within about 1.5% for <span class="math inline">\(g_\mathrm{m}/I_\mathrm{D}\)</span>, <span class="math inline">\(g_\mathrm{m}/g_\mathrm{ds}\)</span> and <span class="math inline">\(g_\mathrm{m}/C_\mathrm{gg}\)</span> as described in <span class="citation" data-cites="Jespers_Murmann_2017">(<a href="#/references" role="doc-biblioref" onclick="">Jespers and Murmann 2017</a>)</span>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -319,7 +313,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div title="Power Consumption">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -330,7 +323,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <div class="callout-content">
 <p>Designing for minimum power consumption is pretty much always mandated. For battery-operated equipment it is a paramount requirement, but also in other equipment electrical energy consumption is a concern, and often severely limited by the cooling capabilities of the electrical system.</p>
-</div>
 </div>
 </div>
 </div>
@@ -376,7 +368,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div title="Why 300 K?">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -387,7 +378,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <div class="callout-content">
 <p>Why are we so often using a temperature of <span class="math inline">\(300\,\text{K}\)</span> for a typical condition? As this corresponds to roughly <span class="math inline">\(27^{\circ}\text{C}\)</span>, this accounts for some self heating compared to otherwise cooler usual room temperatures. Further, engineers like round numbers which are easy to remember, so <span class="math inline">\(300\,\text{K}\)</span> is used as a proxy for room temperature.</p>
-</div>
 </div>
 </div>
 </div>
@@ -532,7 +522,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div title="Noise Notation">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -546,11 +535,9 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div title="Noise Notation">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -564,11 +551,9 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div title="Noise Notation">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -579,7 +564,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <div class="callout-content">
 <p>Further, when working with PSD there is the usage of a one-sided (<span class="math inline">\(0 \le f &lt; \infty\)</span>) or two-sided power spectral density (PSD) (<span class="math inline">\(-\infty &lt; f &lt; \infty\)</span>). The default in this lecture is the usage of the <strong>one-sided PSD</strong>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -615,7 +599,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>NMOS Characterization in Saturation</h3>
-<div title="MOSFET Flicker Noise">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -626,7 +609,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <div class="callout-content">
 <p>The physical origin of flicker noise is the crystal interface between silicon (Si) and the silicon dioxide (SiO<sub>2</sub>). Since these are different materials, there are dangling bonds, which can capture charge carriers traveling in the channel. After a random time, these carriers are released, and flicker noise is the result. The amount of flicker noise is a function of the manufacturing process, and will generally be different between device types and wafer foundries.</p>
-</div>
 </div>
 </div>
 </div>
@@ -666,7 +648,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div title="PMOS Sign Convention">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -677,7 +658,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <div class="callout-content">
 <p>In all PMOS plots we plot positive values for voltages and currents, to have compatible plots to the NMOS. Of course, in a PMOS, voltages and currents have different polarity compared to the NMOS.</p>
-</div>
 </div>
 </div>
 </div>
@@ -752,7 +732,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </section>
 <section class="slide level3 unnumbered">
 <h3>PMOS Characterization in Saturation</h3>
-<div title="Beware of Modelling Issues">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -763,7 +742,6 @@ Figure&nbsp;12: Overview of the <span class="math inline">\(g_\mathrm{m}/I_\math
 </div>
 <div class="callout-content">
 <p>This example shows how important it is to benchmark the device models when starting to use a new technology. Modelling artifacts like the one shown are quite common, as setting up the device compact models and parametrize them according to measurement data is a very complex task. In any case, just be aware that modelling issues could exist in whatever PDK you are going to use!</p>
-</div>
 </div>
 </div>
 </div>
@@ -1048,6 +1026,9 @@ Gray, Paul R., Paul J. Hurst, Stephen H. Lewis, and Robert G. Meyer. 2009. <em><
 <div id="ref-Jespers_Murmann_2017" class="csl-entry" role="listitem">
 Jespers, Paul G. A., and Boris Murmann. 2017. <em>Systematic Design of Analog CMOS Circuits: Using Pre-Computed Lookup Tables</em>. Cambridge University Press.
 </div>
+<div id="ref-Murmann_ISSCC_2026" class="csl-entry" role="listitem">
+Murmann, Boris. 2026. <span>“<span>CMOS Transistor Sizing: <span class="math inline">\(g_m\)</span>/<span class="math inline">\(I_D\)</span> Approach</span>.”</span> IEEE Solid-State Circuits Society. <a href="https://www.youtube.com/watch?v=oNDmJ2a3tWI">https://www.youtube.com/watch?v=oNDmJ2a3tWI</a>.
+</div>
 <div id="ref-Pretl_Fifty_Nifty_Circuits" class="csl-entry" role="listitem">
 Pretl, Harald, and Matthias Eberlein. 2021. <span>“Fifty Nifty Variations of Two-Transistor Circuits: A Tribute to the Versatility of MOSFETs.”</span> <em>IEEE Solid-State Circuits Magazine</em> 13 (3): 38–46. <a href="https://iic-jku.github.io/fifty-nifty-circuits/">https://iic-jku.github.io/fifty-nifty-circuits/</a>.
 </div>
@@ -1097,7 +1078,7 @@ Silveira, F., D. Flandre, and P. G. A. Jespers. 1996. <span>“A <span class="no
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu","numbers":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -1353,7 +1334,8 @@ Silveira, F., D. Flandre, and P. G. A. Jespers. 1996. <span>“A <span class="no
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -1362,8 +1344,69 @@ Silveira, F., D. Flandre, and P. G. A. Jespers. 1996. <span>“A <span class="no
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -1377,6 +1420,7 @@ Silveira, F., D. Flandre, and P. G. A. Jespers. 1996. <span>“A <span class="no
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;
