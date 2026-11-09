@@ -1,0 +1,49 @@
+::: {.content-hidden}
+Copyright (C) 2024-2026 Harald Pretl and co-authors (harald.pretl@jku.at)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+:::
+
+```{python}
+#| label: fig-gbwp-feedback
+#| echo: false
+#| fig-cap: "Magnitude response of a first-order system in open loop and with frequency-independent feedback $G$. Dots mark the $-3\\,\\text{dB}$ cut-off frequencies, crosses the unity-gain frequencies."
+import numpy as np
+import matplotlib.pyplot as plt
+
+A = 1e3       # open-loop dc gain
+fc = 1e5      # open-loop cut-off frequency (Hz)
+fT = A * fc   # open-loop transit frequency = GBWP
+f = np.logspace(3, 10, 1000)
+H_ol = A / (1 + 1j * f / fc)
+
+plt.loglog(f, fT / f, linestyle='--', color='gray', zorder=3, label="GBWP asymptote $f_\\mathrm{T,ol}/f$")
+plt.loglog(f, np.abs(H_ol), color='k', label="open loop")
+for G, col in [(0.01, 'b'), (0.9, 'g'), (1.0, 'r')]:
+    H_cl = H_ol / (1 + H_ol * G)
+    H0 = A / (1 + A * G)
+    fc_cl = fc * (1 + A * G)
+    plt.loglog(f, np.abs(H_cl), color=col, label=f"closed loop, $G = {G:g}$")
+    plt.plot(fc_cl, H0 / np.sqrt(2), 'o', color=col)
+    if H0 > 1:
+        plt.plot(fc_cl * np.sqrt(H0**2 - 1), 1, 'x', color=col, markersize=9, mew=2)
+plt.plot(fc, A / np.sqrt(2), 'o', color='k')
+plt.plot(fT, 1, 'x', color='k', markersize=9, mew=2)
+plt.axhline(1, color='gray', linewidth=0.8)
+plt.ylim(1e-2, 3e3)
+plt.xlim(f[0], f[-1])
+plt.xlabel(r"$f$ (Hz)")
+plt.ylabel(r"$|H(f)|$")
+plt.legend(loc='lower left')
+plt.grid(True, which='both', alpha=0.3)
+```
