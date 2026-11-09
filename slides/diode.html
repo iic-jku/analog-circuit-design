@@ -415,7 +415,7 @@ Figure&nbsp;18: Testbench for MOSFET diode transient settling.
 <section id="mosfet-diode-small-signal-analysis" class="title-slide slide level2 center" data-number="4.3">
 <h2><span class="header-section-number">4.3</span> MOSFET Diode Small-Signal Analysis</h2>
 <aside class="notes">
-<p>Exemplary implementations of power-down switches are shown in the Xschem implementation of the improved OTA in <a href="../aicd.html#fig-improved-ota-design">Figure&nbsp;60</a>. Which <span class="math inline">\(W/L\)</span> ratio should these transistors have? Well, in general, switches often have minimum length to be fast and to have low <span class="math inline">\(R_\mathrm{on}\)</span>. However, if there are no critical specifications (e.g., like power-down time), then these transistors are often used as dummy transistors for other circuit parts and are sized to fit the layout best.</p>
+<p>Exemplary implementations of power-down switches are shown in the Xschem implementation of the improved OTA in <a href="../aicd.html#fig-improved-ota-design">Figure&nbsp;61</a>. Which <span class="math inline">\(W/L\)</span> ratio should these transistors have? Well, in general, switches often have minimum length to be fast and to have low <span class="math inline">\(R_\mathrm{on}\)</span>. However, if there are no critical specifications (e.g., like power-down time), then these transistors are often used as dummy transistors for other circuit parts and are sized to fit the layout best.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -617,7 +617,7 @@ Figure&nbsp;20: The block diagram of a negative feedback system.
 </div>
 <div class="callout-content">
 <p>The gain-bandwidth product (GBP or GBWP) or transit frequency <span class="math inline">\(f_\mathrm{T}\)</span> of a first-order open-loop system is the product of the open-loop dc gain <span class="math inline">\(H_\mathrm{ol,dc} = H_\mathrm{ol}(f = 0\,\text{Hz})\)</span> and the open-loop <span class="math inline">\(-3\,\text{dB}\)</span> cut-off frequency <span class="math inline">\(f_\mathrm{c,ol}\)</span> of <span class="math inline">\(H_\mathrm{ol}(s)\)</span>. <span class="math display">\[
-\text{GBWP} = f_\mathrm{T,ol} = H_\mathrm{ol,dc} f_\mathrm{c,ol}
+\text{GBWP} = f_\mathrm{T,ol} = |H_\mathrm{ol,dc}| \cdot f_\mathrm{c,ol}
 \]</span></p>
 </div>
 </div>
@@ -635,9 +635,9 @@ Figure&nbsp;20: The block diagram of a negative feedback system.
 </div>
 <div class="callout-content">
 <p>If a frequency-independent negative feedback <span class="math inline">\(G\)</span> (e.g., a resistive divider) is applied to this open-loop system, the closed-loop <span class="math inline">\(-3\,\text{dB}\)</span> cut-off frequency <span class="math inline">\(f_\mathrm{c,cl}\)</span> follows from the open-loop transit frequency and the feedback gain as <span class="math display">\[
-f_\mathrm{c,cl} = H_\mathrm{ol,dc} f_\mathrm{c,ol} G = f_\mathrm{T,ol} G
+f_\mathrm{c,cl} = |H_\mathrm{ol,dc}| \cdot f_\mathrm{c,ol} \cdot |G| = f_\mathrm{T,ol} \cdot |G| = \text{GBWP} \cdot |G|
 \]</span> i.e.&nbsp;the bandwidth is extended by exactly the factor by which the gain is reduced. The <strong>gain-bandwidth product is therefore preserved</strong> by the feedback, <span class="math display">\[
-H_\mathrm{cl,dc} f_\mathrm{c,cl} \approx \frac{1}{G} f_\mathrm{T,ol} G = f_\mathrm{T,ol},
+|H_\mathrm{cl,dc}| \cdot f_\mathrm{c,cl} \approx \frac{1}{|G|} \cdot f_\mathrm{T,ol} \cdot |G| = f_\mathrm{T,ol},
 \]</span> which is the reason the GBWP is such a useful figure of merit.</p>
 </div>
 </div>
@@ -655,7 +655,7 @@ H_\mathrm{cl,dc} f_\mathrm{c,cl} \approx \frac{1}{G} f_\mathrm{T,ol} G = f_\math
 </div>
 <div class="callout-content">
 <p>What <em>does</em> change is the frequency at which the closed-loop gain itself crosses unity: <span class="math display">\[
-f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
+f_\mathrm{T,cl} = f_\mathrm{T,ol} \cdot \sqrt{1 - |G|^2}
 \]</span> Note that this is <strong>not</strong> the same quantity as the GBWP, even though the two coincide in the open-loop case — this distinction is a common source of confusion.</p>
 </div>
 </div>
@@ -672,19 +672,57 @@ f_\mathrm{T,cl} = f_\mathrm{T,ol} \sqrt{1 - G^2}
 <p><strong>Gain-Bandwidth Product in Feedback Systems</strong></p>
 </div>
 <div class="callout-content">
-<p>For weak feedback (<span class="math inline">\(G \ll 1\)</span>) the closed-loop unity-gain frequency is only slightly lower than <span class="math inline">\(f_\mathrm{T,ol}\)</span>, but for strong feedback it drops sharply, and for the unity-gain case <span class="math inline">\(G = 1\)</span> it vanishes altogether, simply because the closed-loop gain <span class="math inline">\(H_\mathrm{cl} = H_\mathrm{ol}/(1+H_\mathrm{ol}) &lt; 1\)</span> never reaches unity in the first place. Keep this in mind for the MOSFET diode, where exactly this case <span class="math inline">\(G = 1\)</span> applies.</p>
-<p>This theory might be interesting when Middlebrook’s and Tian’s methods for loop gain analysis are later compared in the MOSFET diode testbench (see <a href="#/fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;22</a>).</p>
+<p>For weak feedback (<span class="math inline">\(|G| \ll 1\)</span>) the closed-loop unity-gain frequency is only slightly lower than <span class="math inline">\(f_\mathrm{T,ol}\)</span>, but for strong feedback it drops sharply, and for the unity-gain case <span class="math inline">\(|G| = 1\)</span> it vanishes altogether, simply because the closed-loop gain <span class="math inline">\(H_\mathrm{cl} = H_\mathrm{ol}/(1+H_\mathrm{ol}) &lt; 1\)</span> never reaches unity in the first place. Keep this in mind for the MOSFET diode, where exactly this case <span class="math inline">\(|G| = 1\)</span> applies.</p>
 </div>
 </div>
 </div>
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-
-<img data-src="diode_files/figure-revealjs/fig-mosfet-diode-openloop-output-1.svg" class="r-stretch quarto-figure-center" id="fig-mosfet-diode-openloop"><p class="caption">
-Figure&nbsp;21: The MOSFET diode small-signal circuit for open-loop analysis.
-</p><aside class="notes">
-<p>The diode-connected MOSFET forms a feedback loop. What is the loop gain? For calculating it, we are breaking the loop, and apply a dummy <span class="math inline">\(C_\mathrm{gs}^{*}\)</span> to keep the impedances correct. A circuit diagram is shown in <a href="#/fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;21</a>, we break the loop at the red crosses. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Gain-Bandwidth Product in Feedback Systems</strong></p>
+</div>
+<div class="callout-content">
+<p>Both effects are visualized in <a href="#/fig-gbwp-feedback" class="quarto-xref">Figure&nbsp;21</a> for an open-loop system with <span class="math inline">\(H_\mathrm{ol,dc} = 1000\)</span> and <span class="math inline">\(f_\mathrm{c,ol} = 100\,\text{kHz}\)</span>, i.e., <span class="math inline">\(f_\mathrm{T,ol} = 100\,\text{MHz}\)</span>. All <span class="math inline">\(-3\,\text{dB}\)</span> cut-off points lie on the same <span class="math inline">\(-20\,\text{dB/dec}\)</span> asymptote (constant GBWP), while the unity-gain crossings move to lower frequencies with increasing <span class="math inline">\(G\)</span> and disappear for <span class="math inline">\(G = 1\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Diode Stability Analysis</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Gain-Bandwidth Product in Feedback Systems</strong></p>
+</div>
+<div class="callout-content">
+<div id="cell-fig-gbwp-feedback" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="fig-gbwp-feedback" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-gbwp-feedback-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="diode_files/figure-revealjs/fig-gbwp-feedback-output-1.png" width="835" height="438">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gbwp-feedback-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21: Magnitude response of a first-order system in open loop and with frequency-independent feedback <span class="math inline">\(G\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+Magnitude response of a first-order system in open loop and with frequency-independent feedback <span class="math inline">\(G\)</span>. Dots mark the <span class="math inline">\(-3\,\text{dB}\)</span> cut-off frequencies, crosses the unity-gain frequencies.
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -699,7 +737,42 @@ Figure&nbsp;21: The MOSFET diode small-signal circuit for open-loop analysis.
 </section>
 <section class="slide level3 unnumbered">
 <h3>MOSFET Diode Stability Analysis</h3>
-<p>By inspecting <a href="#/fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;21</a> we see that <span class="math display">\[
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Gain-Bandwidth Product in Feedback Systems</strong></p>
+</div>
+<div class="callout-content">
+<p>This theory might be interesting when Middlebrook’s and Tian’s methods for loop gain analysis are later compared in the MOSFET diode testbench (see <a href="#/fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;23</a>).</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Diode Stability Analysis</h3>
+
+<img data-src="diode_files/figure-revealjs/fig-mosfet-diode-openloop-output-1.svg" class="r-stretch quarto-figure-center" id="fig-mosfet-diode-openloop"><p class="caption">
+Figure&nbsp;22: The MOSFET diode small-signal circuit for open-loop analysis.
+</p><aside class="notes">
+<p>The diode-connected MOSFET forms a feedback loop. What is the loop gain? For calculating it, we are breaking the loop, and apply a dummy <span class="math inline">\(C_\mathrm{gs}^{*}\)</span> to keep the impedances correct. A circuit diagram is shown in <a href="#/fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;22</a>, we break the loop at the red crosses. As we can see in this example, it is critically important when breaking up a loop for analysis (also for simulation!) to keep the terminal impedances the same. Only in special cases where the load impedance is very high or the driving impedance is very low is it acceptable to disregard loading effects!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3 unnumbered">
+<h3>MOSFET Diode Stability Analysis</h3>
+<p>By inspecting <a href="#/fig-mosfet-diode-openloop" class="quarto-xref">Figure&nbsp;22</a> we see that <span class="math display">\[
 V_\mathrm{out} = - g_\mathrm{m}V_\mathrm{in} \frac{1}{g_\mathrm{ds}+ s C_\mathrm{gs}}.
 \]</span></p>
 <p>The loop gain <span class="math inline">\(T(s)\)</span> is thus <span id="eq-mosfet-diode-openloop-gain"><span class="math display">\[
@@ -756,7 +829,7 @@ T(s) = (-1) \cdot \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m}}{g_\
 </div>
 <div class="callout-content">
 <p>Please build a simulation testbench in Xschem to simulate the open-loop transfer function of the MOSFET diode. Confirm the dc gain and pole location as given by <a href="#/eq-mosfet-diode-openloop-gain" class="quarto-xref">Equation&nbsp;7</a>.</p>
-<p>If you are getting stuck you can look at this Xschem <a href="../xschem/mosfet_diode_loopgain.sch">testbench</a>, shown in <a href="#/fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;22</a>.</p>
+<p>If you are getting stuck you can look at this Xschem <a href="../xschem/mosfet_diode_loopgain.sch">testbench</a>, shown in <a href="#/fig-mosfet-diode-loopgain-tb" class="quarto-xref">Figure&nbsp;23</a>.</p>
 </div>
 </div>
 </div>
@@ -778,7 +851,7 @@ T(s) = (-1) \cdot \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{g_\mathrm{m}}{g_\
 <img data-src="../xschem/mosfet_diode_loopgain.svg">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-loopgain-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;22: Testbench for MOSFET diode stability analysis.
+Figure&nbsp;23: Testbench for MOSFET diode stability analysis.
 </figcaption>
 </figure>
 </div>
@@ -840,10 +913,10 @@ Figure&nbsp;22: Testbench for MOSFET diode stability analysis.
 <h3>MOSFET Diode Noise Calculation</h3>
 
 <img data-src="diode_files/figure-revealjs/fig-mosfet-diode-small-signal-w-noise-output-1.svg" class="r-stretch quarto-figure-center" id="fig-mosfet-diode-small-signal-w-noise"><p class="caption">
-Figure&nbsp;23: The MOSFET diode small-signal model with drain noise source.
+Figure&nbsp;24: The MOSFET diode small-signal model with drain noise source.
 </p><aside class="notes">
 <p>As a final exercise on the MOSFET diode circuit we want to calculate the output noise when we consider <span class="math inline">\(V_\mathrm{GS}\)</span> the output reference voltage which is created when passing a bias current through the MOSFET diode. The bias current we will assume noiseless.</p>
-<p>We are going to use the small-signal circuit shown in <a href="#/fig-mosfet-diode-small-signal-w-noise" class="quarto-xref">Figure&nbsp;23</a>.</p>
+<p>We are going to use the small-signal circuit shown in <a href="#/fig-mosfet-diode-small-signal-w-noise" class="quarto-xref">Figure&nbsp;24</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1091,7 +1164,7 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 </div>
 <div class="callout-content">
 <p>What is the value of <span class="math inline">\(f_\mathrm{co}\)</span>, and does it correspond to the above calculated one?</p>
-<p>If you are getting stuck you can look at this Xschem <a href="../xschem/mosfet_diode_noise.sch">testbench</a>, shown in <a href="#/fig-mosfet-diode-noise-tb" class="quarto-xref">Figure&nbsp;24</a>.</p>
+<p>If you are getting stuck you can look at this Xschem <a href="../xschem/mosfet_diode_noise.sch">testbench</a>, shown in <a href="#/fig-mosfet-diode-noise-tb" class="quarto-xref">Figure&nbsp;25</a>.</p>
 </div>
 </div>
 </div>
@@ -1113,7 +1186,7 @@ V_\mathrm{n,rms}^2 = \frac{k T}{C}
 <img data-src="../xschem/mosfet_diode_noise.svg">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosfet-diode-noise-tb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;24: Testbench for MOSFET diode noise analysis.
+Figure&nbsp;25: Testbench for MOSFET diode noise analysis.
 </figcaption>
 </figure>
 </div>

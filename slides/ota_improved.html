@@ -239,9 +239,9 @@
 <h3>Improved (Telescopic) OTA</h3>
 
 <img data-src="ota_improved_files/figure-revealjs/fig-improved-ota-output-1.svg" class="r-stretch quarto-figure-center" id="fig-improved-ota"><p class="caption">
-Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
+Figure&nbsp;59: The improved OTA based on the 5T-OTA design.
 </p><aside class="notes">
-<p>With the newly learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means adding cascodes to <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="../aicd.html#fig-basic-ota">Figure&nbsp;32</a>. For symmetry reasons we add cascodes to both sides, and the resulting schematic is shown in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>. This configuration is also referred to as <strong>“telescopic OTA”</strong> (likely because of the stacked structure, where all the transistors are stacked in a current path like the tubes of a telescope).</p>
+<p>With the newly learned know-how of the cascode stage we can set out to improve our original basic 5T-OTA design. Essentially this means adding cascodes to <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="../aicd.html#fig-basic-ota">Figure&nbsp;33</a>. For symmetry reasons we add cascodes to both sides, and the resulting schematic is shown in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;59</a>. This configuration is also referred to as <strong>“telescopic OTA”</strong> (likely because of the stacked structure, where all the transistors are stacked in a current path like the tubes of a telescope).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -270,7 +270,7 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 </div>
 </div>
 <aside class="notes">
-<p>The transistor name suffix “C” indicates a cascode device sitting atop its base transistor. The bias voltage <span class="math inline">\(V_\mathrm{bias2}\)</span> is referenced to <span class="math inline">\(V_\mathrm{DD}\)</span> (it is shown differently in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a> to simplify the schematic), and the floating bias voltage <span class="math inline">\(V_\mathrm{bias1}\)</span> creates a voltage bias for <span class="math inline">\(M_\mathrm{1C}\)</span> and <span class="math inline">\(M_\mathrm{2C}\)</span> relative to the tail point, so that the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{1,2}\)</span> stays constant with a changing common-mode input voltage.</p>
+<p>The transistor name suffix “C” indicates a cascode device sitting atop its base transistor. The bias voltage <span class="math inline">\(V_\mathrm{bias2}\)</span> is referenced to <span class="math inline">\(V_\mathrm{DD}\)</span> (it is shown differently in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;59</a> to simplify the schematic), and the floating bias voltage <span class="math inline">\(V_\mathrm{bias1}\)</span> creates a voltage bias for <span class="math inline">\(M_\mathrm{1C}\)</span> and <span class="math inline">\(M_\mathrm{2C}\)</span> relative to the tail point, so that the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{1,2}\)</span> stays constant with a changing common-mode input voltage.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -294,7 +294,7 @@ Figure&nbsp;58: The improved OTA based on the 5T-OTA design.
 <p><strong>Exercise: Cascode Current Mirror vs.&nbsp;High-Swing Cascode Current Mirror</strong></p>
 </div>
 <div class="callout-content">
-<p>Try to verify the above statement of equal drain-source voltages by deriving both, an equation for <span class="math inline">\(V_\mathrm{DS4}\)</span> assuming a high-swing cascode current mirror (<a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>) and <span class="math inline">\(V_\mathrm{DS4}\)</span> in case of a simple cascode current mirror, where the reference branch <span class="math inline">\((M_\mathrm{3,3C})\)</span> is comprised of two MOSFET diodes.</p>
+<p>Try to verify the above statement of equal drain-source voltages by deriving both, an equation for <span class="math inline">\(V_\mathrm{DS4}\)</span> assuming a high-swing cascode current mirror (<a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;59</a>) and <span class="math inline">\(V_\mathrm{DS4}\)</span> in case of a simple cascode current mirror, where the reference branch <span class="math inline">\((M_\mathrm{3,3C})\)</span> is comprised of two MOSFET diodes.</p>
 </div>
 </div>
 </div>
@@ -675,10 +675,10 @@ headroom M5     = 0.264 V</code></pre>
 <h3>Designing the Improved OTA</h3>
 
 <img data-src="ota_improved_files/figure-revealjs/fig-improved-ota-w-bias-output-1.svg" class="r-stretch quarto-figure-center" id="fig-improved-ota-w-bias"><p class="caption">
-Figure&nbsp;59: The improved OTA based on the 5T-OTA design with biasing details shown.
+Figure&nbsp;60: The improved OTA based on the 5T-OTA design with biasing details shown.
 </p><aside class="notes">
-<p>Based on the collected experience in this lecture and the result of the sizing procedure in <a href="#/sec-improved-ota-sizing" class="quarto-xref">Section&nbsp;11.1</a> you should be able to design this OTA. If you want, please go ahead and try an implementation and check its performance with CACE. Looking at the design in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a> we can see that we still have the task to create the bias voltages <span class="math inline">\(V_\mathrm{bias1}\)</span> and <span class="math inline">\(V_\mathrm{bias2}\)</span>, and we have to take care of practical issues like power-down, proper biasing, and so on.</p>
-<p>In <a href="#/fig-improved-ota-w-bias" class="quarto-xref">Figure&nbsp;59</a> you can see a possible implementation of the bias voltage generation which we will then implement in <a href="#/fig-improved-ota-design" class="quarto-xref">Figure&nbsp;60</a>. The additional current mirror transistors <span class="math inline">\(M_\mathrm{8,9}\)</span> create a small current flowing through <span class="math inline">\(M_\mathrm{10}\)</span> to establish <span class="math inline">\(V_\mathrm{bias1} = V_\mathrm{GS10} + V_\mathrm{tail}\)</span>. The <span class="math inline">\(V_\mathrm{GS}\)</span> of <span class="math inline">\(M_8\)</span> is used to create <span class="math inline">\(V_\mathrm{bias2} = V_\mathrm{DD}- V_\mathrm{GS8}\)</span>. Note that it is an important design aspect that <span class="math inline">\(V_\mathrm{bias1}\)</span> tracks variations in <span class="math inline">\(V_\mathrm{tail}\)</span> to keep the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{1,2}\)</span> constant with changing common-mode input voltage. Likewise, <span class="math inline">\(V_\mathrm{bias2}\)</span> has to track variations in <span class="math inline">\(V_\mathrm{DD}\)</span> to keep the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{3,4}\)</span> constant with changing supply voltage.</p>
+<p>Based on the collected experience in this lecture and the result of the sizing procedure in <a href="#/sec-improved-ota-sizing" class="quarto-xref">Section&nbsp;11.1</a> you should be able to design this OTA. If you want, please go ahead and try an implementation and check its performance with CACE. Looking at the design in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;59</a> we can see that we still have the task to create the bias voltages <span class="math inline">\(V_\mathrm{bias1}\)</span> and <span class="math inline">\(V_\mathrm{bias2}\)</span>, and we have to take care of practical issues like power-down, proper biasing, and so on.</p>
+<p>In <a href="#/fig-improved-ota-w-bias" class="quarto-xref">Figure&nbsp;60</a> you can see a possible implementation of the bias voltage generation which we will then implement in <a href="#/fig-improved-ota-design" class="quarto-xref">Figure&nbsp;61</a>. The additional current mirror transistors <span class="math inline">\(M_\mathrm{8,9}\)</span> create a small current flowing through <span class="math inline">\(M_\mathrm{10}\)</span> to establish <span class="math inline">\(V_\mathrm{bias1} = V_\mathrm{GS10} + V_\mathrm{tail}\)</span>. The <span class="math inline">\(V_\mathrm{GS}\)</span> of <span class="math inline">\(M_8\)</span> is used to create <span class="math inline">\(V_\mathrm{bias2} = V_\mathrm{DD}- V_\mathrm{GS8}\)</span>. Note that it is an important design aspect that <span class="math inline">\(V_\mathrm{bias1}\)</span> tracks variations in <span class="math inline">\(V_\mathrm{tail}\)</span> to keep the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{1,2}\)</span> constant with changing common-mode input voltage. Likewise, <span class="math inline">\(V_\mathrm{bias2}\)</span> has to track variations in <span class="math inline">\(V_\mathrm{DD}\)</span> to keep the <span class="math inline">\(V_\mathrm{DS}\)</span> of <span class="math inline">\(M_{3,4}\)</span> constant with changing supply voltage.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -695,9 +695,9 @@ Figure&nbsp;59: The improved OTA based on the 5T-OTA design with biasing details
 <h3>Designing the Improved OTA</h3>
 
 <img data-src="../xschem/ota-improved.svg" class="r-stretch quarto-figure-center" id="fig-improved-ota-design"><p class="caption">
-Figure&nbsp;60: Improved OTA design in Xschem.
+Figure&nbsp;61: Improved OTA design in Xschem.
 </p><aside class="notes">
-<p>The transistor-level implementation is finally shown in <a href="#/fig-improved-ota-design" class="quarto-xref">Figure&nbsp;60</a>, and it also includes practical design aspects like power-down transistors, current sensing elements, and decoupling capacitors on sensitive bias nodes.</p>
+<p>The transistor-level implementation is finally shown in <a href="#/fig-improved-ota-design" class="quarto-xref">Figure&nbsp;61</a>, and it also includes practical design aspects like power-down transistors, current sensing elements, and decoupling capacitors on sensitive bias nodes.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -713,7 +713,7 @@ Figure&nbsp;60: Improved OTA design in Xschem.
 <section id="discussion-of-the-ota-design" class="slide level3 scrollable" data-number="11.2.1">
 <h3><span class="header-section-number">11.2.1</span> Discussion of the OTA Design</h3>
 <ol type="1">
-<li>For easier navigation, the device identifiers are consistent with the circuit sketch in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;58</a>.</li>
+<li>For easier navigation, the device identifiers are consistent with the circuit sketch in <a href="#/fig-improved-ota" class="quarto-xref">Figure&nbsp;59</a>.</li>
 </ol>
 <aside class="notes">
 <p>We now do an analysis of the circuit design of the OTA including all the complications which make this design practical.</p>
@@ -803,9 +803,9 @@ Figure&nbsp;60: Improved OTA design in Xschem.
 <h3>Simulation of Improved OTA</h3>
 
 <img data-src="../xschem/ota-improved_tb-ac.svg" class="r-stretch quarto-figure-center" id="fig-improved-ota-design-tb-ac"><p class="caption">
-Figure&nbsp;61: Simulation testbench of the improved OTA design (small-signal).
+Figure&nbsp;62: Simulation testbench of the improved OTA design (small-signal).
 </p><aside class="notes">
-<p>Now that the circuit design of the improved OTA is done, we can use the same simulation testbenches as for the basic OTA. The testbenches are shown in <a href="#/fig-improved-ota-design-tb-ac" class="quarto-xref">Figure&nbsp;61</a>, <a href="#/fig-improved-ota-design-tb-tran" class="quarto-xref">Figure&nbsp;62</a>, and <a href="#/fig-improved-ota-design-tb-loopgain" class="quarto-xref">Figure&nbsp;63</a>.</p>
+<p>Now that the circuit design of the improved OTA is done, we can use the same simulation testbenches as for the basic OTA. The testbenches are shown in <a href="#/fig-improved-ota-design-tb-ac" class="quarto-xref">Figure&nbsp;62</a>, <a href="#/fig-improved-ota-design-tb-tran" class="quarto-xref">Figure&nbsp;63</a>, and <a href="#/fig-improved-ota-design-tb-loopgain" class="quarto-xref">Figure&nbsp;64</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -822,13 +822,13 @@ Figure&nbsp;61: Simulation testbench of the improved OTA design (small-signal).
 <h3>Simulation of Improved OTA</h3>
 
 <img data-src="../xschem/ota-improved_tb-tran.svg" class="r-stretch quarto-figure-center" id="fig-improved-ota-design-tb-tran"><p class="caption">
-Figure&nbsp;62: Simulation testbench of the improved OTA design (large-signal).
+Figure&nbsp;63: Simulation testbench of the improved OTA design (large-signal).
 </p></section>
 <section class="slide level3 unnumbered">
 <h3>Simulation of Improved OTA</h3>
 
 <img data-src="../xschem/ota-improved_tb-loopgain.svg" class="r-stretch quarto-figure-center" id="fig-improved-ota-design-tb-loopgain"><p class="caption">
-Figure&nbsp;63: Simulation testbench of the improved OTA design (loop gain analysis).
+Figure&nbsp;64: Simulation testbench of the improved OTA design (loop gain analysis).
 </p></section>
 <section class="slide level3 unnumbered scrollable">
 <h3>Simulation of Improved OTA</h3>

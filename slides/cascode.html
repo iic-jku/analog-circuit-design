@@ -154,11 +154,11 @@
 <h3>Cascode Stage</h3>
 
 <img data-src="cascode_files/figure-revealjs/fig-cascode-transistor-output-1.svg" class="r-stretch quarto-figure-center" id="fig-cascode-transistor"><p class="caption">
-Figure&nbsp;42: A MOSFET cascode circuit.
+Figure&nbsp;43: A MOSFET cascode circuit.
 </p><aside class="notes">
-<p>As we have seen in <a href="../aicd.html#sec-basic-ota">Section&nbsp;8</a>, the performance of the OTA is generally quite acceptable (see <a href="../aicd.html#tbl-voltage-buffer-spec">Table&nbsp;2</a>), but we might want to aim for better output voltage accuracy. As our analysis has shown the output voltage tolerance is limited by the open-loop dc gain <span class="math inline">\(A_0\)</span> of the OTA (see <a href="../aicd.html#eq-voltage-buffer-tolerance">Equation&nbsp;14</a>), which in turn is limited by the output conductance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="../aicd.html#fig-basic-ota">Figure&nbsp;32</a>, which is also confirmed by the analytical result in <a href="../aicd.html#eq-simple-ota-gain-dc">Equation&nbsp;18</a>.</p>
+<p>As we have seen in <a href="../aicd.html#sec-basic-ota">Section&nbsp;8</a>, the performance of the OTA is generally quite acceptable (see <a href="../aicd.html#tbl-voltage-buffer-spec">Table&nbsp;2</a>), but we might want to aim for better output voltage accuracy. As our analysis has shown the output voltage tolerance is limited by the open-loop dc gain <span class="math inline">\(A_0\)</span> of the OTA (see <a href="../aicd.html#eq-voltage-buffer-tolerance">Equation&nbsp;14</a>), which in turn is limited by the output conductance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span> in <a href="../aicd.html#fig-basic-ota">Figure&nbsp;33</a>, which is also confirmed by the analytical result in <a href="../aicd.html#eq-simple-ota-gain-dc">Equation&nbsp;18</a>.</p>
 <p>During the sizing procedure, we have seen that the achievable <span class="math inline">\(g_\mathrm{m}/ g_\mathrm{ds}\)</span> ratio of a single MOSFET is limited, even if we increase <span class="math inline">\(L\)</span>. We are thus searching for a better option, and here (local) feedback in form of a <strong>cascode</strong> comes to help.</p>
-<p>For analysis of a cascode, we use the following single-transistor stage shown in <a href="#/fig-cascode-transistor" class="quarto-xref">Figure&nbsp;42</a>.</p>
+<p>For analysis of a cascode, we use the following single-transistor stage shown in <a href="#/fig-cascode-transistor" class="quarto-xref">Figure&nbsp;43</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -175,9 +175,9 @@ Figure&nbsp;42: A MOSFET cascode circuit.
 <h3>Cascode Stage</h3>
 
 <img data-src="cascode_files/figure-revealjs/fig-cascode-small-signal-output-1.svg" class="r-stretch quarto-figure-center" id="fig-cascode-small-signal"><p class="caption">
-Figure&nbsp;43: The MOSFET cascode small-signal model.
+Figure&nbsp;44: The MOSFET cascode small-signal model.
 </p><aside class="notes">
-<p>In order to derive the operation of the cascode analytically, we draw the small-signal equivalent circuit in <a href="#/fig-cascode-small-signal" class="quarto-xref">Figure&nbsp;43</a>. We assume that <span class="math inline">\(V_\mathrm{B}\)</span> is a low-ohmic bias voltage, thus we replace it with ac ground. We further set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> (and ignore a couple of capacitances for now).</p>
+<p>In order to derive the operation of the cascode analytically, we draw the small-signal equivalent circuit in <a href="#/fig-cascode-small-signal" class="quarto-xref">Figure&nbsp;44</a>. We assume that <span class="math inline">\(V_\mathrm{B}\)</span> is a low-ohmic bias voltage, thus we replace it with ac ground. We further set <span class="math inline">\(g_\mathrm{mb}= 0\)</span> (and ignore a couple of capacitances for now).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -194,9 +194,9 @@ Figure&nbsp;43: The MOSFET cascode small-signal model.
 <h3>Cascode Stage</h3>
 
 <img data-src="cascode_files/figure-revealjs/fig-cascode-small-signal-simplified-output-1.svg" class="r-stretch quarto-figure-center" id="fig-cascode-small-signal-simplified"><p class="caption">
-Figure&nbsp;44: The simplified MOSFET cascode small-signal model.
+Figure&nbsp;45: The simplified MOSFET cascode small-signal model.
 </p><aside class="notes">
-<p>Since the gate is assumed at a fixed potential, we can put <span class="math inline">\(C_\mathrm{gs}\)</span> in parallel with <span class="math inline">\(G_\mathrm{S}\)</span> as <span class="math inline">\(G_\mathrm{S}^{*} = G_\mathrm{S} + s C_\mathrm{gs}\)</span>, and we can put <span class="math inline">\(C_\mathrm{gd}\)</span> in parallel with <span class="math inline">\(G_\mathrm{D}\)</span> as <span class="math inline">\(G_\mathrm{D}^{*} = G_\mathrm{D} + s C_\mathrm{gd}\)</span>. As a result, we will disregard these capacitors for now, and just consider <span class="math inline">\(G_\mathrm{S}\)</span> and <span class="math inline">\(G_\mathrm{D}\)</span>, which leads to the simplified small-signal circuit shown in <a href="#/fig-cascode-small-signal-simplified" class="quarto-xref">Figure&nbsp;44</a>.</p>
+<p>Since the gate is assumed at a fixed potential, we can put <span class="math inline">\(C_\mathrm{gs}\)</span> in parallel with <span class="math inline">\(G_\mathrm{S}\)</span> as <span class="math inline">\(G_\mathrm{S}^{*} = G_\mathrm{S} + s C_\mathrm{gs}\)</span>, and we can put <span class="math inline">\(C_\mathrm{gd}\)</span> in parallel with <span class="math inline">\(G_\mathrm{D}\)</span> as <span class="math inline">\(G_\mathrm{D}^{*} = G_\mathrm{D} + s C_\mathrm{gd}\)</span>. As a result, we will disregard these capacitors for now, and just consider <span class="math inline">\(G_\mathrm{S}\)</span> and <span class="math inline">\(G_\mathrm{D}\)</span>, which leads to the simplified small-signal circuit shown in <a href="#/fig-cascode-small-signal-simplified" class="quarto-xref">Figure&nbsp;45</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -217,9 +217,9 @@ Figure&nbsp;44: The simplified MOSFET cascode small-signal model.
 <h3>Cascode Output Impedance</h3>
 
 <img data-src="cascode_files/figure-revealjs/fig-cascode-small-signal-simplified-out-output-1.svg" class="r-stretch quarto-figure-center" id="fig-cascode-small-signal-simplified-out"><p class="caption">
-Figure&nbsp;45: The simplified MOSFET cascode small-signal model for calculation of the output impedance.
+Figure&nbsp;46: The simplified MOSFET cascode small-signal model for calculation of the output impedance.
 </p><aside class="notes">
-<p>As a first step, we want to calculate the output impedance at the drain of the MOSFET (i.e., looking into the drain). For this, we replace <span class="math inline">\(G_\mathrm{D}\)</span> with a current source. The resulting small-signal equivalent circuit is shown in <a href="#/fig-cascode-small-signal-simplified-out" class="quarto-xref">Figure&nbsp;45</a>.</p>
+<p>As a first step, we want to calculate the output impedance at the drain of the MOSFET (i.e., looking into the drain). For this, we replace <span class="math inline">\(G_\mathrm{D}\)</span> with a current source. The resulting small-signal equivalent circuit is shown in <a href="#/fig-cascode-small-signal-simplified-out" class="quarto-xref">Figure&nbsp;46</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -301,9 +301,9 @@ g_\mathrm{out} = \frac{g_\mathrm{ds}\cdot g_\mathrm{ds}'}{g_\mathrm{ds}' + g_\ma
 <h3>Cascode Input Impedance</h3>
 
 <img data-src="cascode_files/figure-revealjs/fig-cascode-small-signal-simplified-in-output-1.svg" class="r-stretch quarto-figure-center" id="fig-cascode-small-signal-simplified-in"><p class="caption">
-Figure&nbsp;46: The simplified MOSFET cascode small-signal model for calculation of the input impedance.
+Figure&nbsp;47: The simplified MOSFET cascode small-signal model for calculation of the input impedance.
 </p><aside class="notes">
-<p>To calculate the input impedance of a cascode (i.e., looking into the source) we replace <span class="math inline">\(G_\mathrm{S}\)</span> with a current source. The resulting small-signal equivalent circuit is shown in <a href="#/fig-cascode-small-signal-simplified-in" class="quarto-xref">Figure&nbsp;46</a>.</p>
+<p>To calculate the input impedance of a cascode (i.e., looking into the source) we replace <span class="math inline">\(G_\mathrm{S}\)</span> with a current source. The resulting small-signal equivalent circuit is shown in <a href="#/fig-cascode-small-signal-simplified-in" class="quarto-xref">Figure&nbsp;47</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

@@ -176,7 +176,7 @@ I_\mathrm{bias} = \frac{V_\mathrm{ref}}{R_1}.
 \]</span></p>
 <aside class="notes">
 <p>So far, we have deferred one unresolved issue. We have studied ways to multiply and scale bias currents using current mirrors (see <a href="../aicd.html#sec-current-mirror">Section&nbsp;6</a>) and we have also found ways to buffer (and scale) bias voltages (see <a href="../aicd.html#sec-voltage-buffer-with-ota">Section&nbsp;8.1</a>, scaling can be readily achieved by using a resistive divider in the feedback path). We can generate bias voltages by running a current through a resistor. However, what has not been discussed so far is <strong>how to generate one stable bias current in the first place</strong>.</p>
-<p>If we had a stable reference voltage, then we could use the arrangement shown in <a href="#/fig-bias-current-gen" class="quarto-xref">Figure&nbsp;64</a> to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)</p>
+<p>If we had a stable reference voltage, then we could use the arrangement shown in <a href="#/fig-bias-current-gen" class="quarto-xref">Figure&nbsp;65</a> to generate a bias current that is given by (note the use of feedback using an error amplifier which could be a simple OTA)</p>
 <p>Using <span class="math inline">\(A_1\)</span> and <span class="math inline">\(M_1\)</span> the voltage <span class="math inline">\(V_\mathrm{ref}\)</span> is regulated across <span class="math inline">\(R_1\)</span> and available at the drain of <span class="math inline">\(M_1\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -194,7 +194,7 @@ I_\mathrm{bias} = \frac{V_\mathrm{ref}}{R_1}.
 <h3>Biasing</h3>
 
 <img data-src="bias_files/figure-revealjs/fig-bias-current-gen-output-1.svg" class="r-stretch quarto-figure-center" id="fig-bias-current-gen"><p class="caption">
-Figure&nbsp;64: A constant-current generator based on OTA.
+Figure&nbsp;65: A constant-current generator based on OTA.
 </p></section>
 <section class="slide level3 unnumbered">
 <h3>Biasing</h3>
@@ -278,7 +278,7 @@ V_\mathrm{ref} =  V_\mathrm{g0}
 <aside class="notes">
 <p>remains. We thus have created an on-chip reference (called the <a href="https://en.wikipedia.org/wiki/Bandgap_voltage_reference"><em>bandgap voltage reference</em></a>) which is almost independent of manufacturing tolerances with a very small temperature coefficient. Of course, this is only true neglecting second-order effects, but nevertheless, reference accuracies of <span class="math inline">\(\pm 1 \ldots 3\%\)</span> without trimming are perfectly possible.</p>
 <p>The original implementation in <span class="citation" data-cites="Widlar_1971">(<a href="#/references" role="doc-biblioref" onclick="">Widlar 1971</a>)</span> uses NPN transistors. The question is, where do we find BJT in a CMOS process? Luckily, when looking at the typical implementations, we find that there is a layer sandwich of P-N-P available. While the PNPs constructed parasitically out of these available layers are available for free without extra processing cost, they are very slow, show unusually small <span class="math inline">\(\beta &lt; 10\)</span>, and the collector is tied to <span class="math inline">\(V_\mathrm{SS}\)</span> as it is the substrate. Still, for bandgap references, they are very useful.</p>
-<p>A simple implementation of a bandgap reference circuit is shown in <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#/eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;50</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
+<p>A simple implementation of a bandgap reference circuit is shown in <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;66</a>. If we scale <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> correctly then we can achieve <a href="#/eq-bandgap-voltage" class="quarto-xref">Equation&nbsp;50</a>. Note that the output voltage is ca. <span class="math inline">\(1.2\,\text{V}\)</span>, so operating this circuit on low supply voltages will be problematic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -295,7 +295,7 @@ V_\mathrm{ref} =  V_\mathrm{g0}
 <h3>Bandgap Reference</h3>
 
 <img data-src="bias_files/figure-revealjs/fig-bandgap-simple-output-1.svg" class="r-stretch quarto-figure-center" id="fig-bandgap-simple"><p class="caption">
-Figure&nbsp;65: A simple bandgap reference.
+Figure&nbsp;66: A simple bandgap reference.
 </p></section>
 <section class="slide level3 unnumbered">
 <h3>Bandgap Reference</h3>
@@ -351,7 +351,7 @@ V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.
 <p><strong>Improved Bandgap Reference</strong></p>
 </div>
 <div class="callout-content">
-<p>For an improved implementation of <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, <a href="#/eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;46</a> and <a href="#/eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;47</a> build on the relationship <span class="math inline">\(I_\mathrm{C} = f(V_\mathrm{BE})\)</span>, while we control <span class="math inline">\(I_\mathrm{E}\)</span> in this circuit. If <span class="math inline">\(\beta\)</span> is large then <span class="math inline">\(I_\mathrm{C} \approx I_\mathrm{E}\)</span>, but this is not the case for the used PNPs.</p>
+<p>For an improved implementation of <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;66</a>, the current mirrors should be cascoded, and a startup circuit should be included to guarantee proper operation after enabling it. Further, <a href="#/eq-vbe-vs-temp" class="quarto-xref">Equation&nbsp;46</a> and <a href="#/eq-delta-vbe-vs-temp" class="quarto-xref">Equation&nbsp;47</a> build on the relationship <span class="math inline">\(I_\mathrm{C} = f(V_\mathrm{BE})\)</span>, while we control <span class="math inline">\(I_\mathrm{E}\)</span> in this circuit. If <span class="math inline">\(\beta\)</span> is large then <span class="math inline">\(I_\mathrm{C} \approx I_\mathrm{E}\)</span>, but this is not the case for the used PNPs.</p>
 <p>Many more different bandgap architectures exist, with the Kuijk <span class="citation" data-cites="Kuijk_bandgap">(<a href="#/references" role="doc-biblioref" onclick="">Kuijk 1973</a>)</span> or the Brokaw <span class="citation" data-cites="Brokaw_bandgap">(<a href="#/references" role="doc-biblioref" onclick="">Brokaw 1974</a>)</span> types being popular choices.</p>
 </div>
 </div>
@@ -361,9 +361,9 @@ V_\mathrm{ref} = V_\mathrm{BE}+ \frac{R_2}{R_1} \frac{k T}{q} \ln m.
 <h3>Bandgap Reference</h3>
 
 <img data-src="../xschem/bandgap_simple.svg" class="r-stretch quarto-figure-center" id="fig-bandgap-schematic"><p class="caption">
-Figure&nbsp;66: Simple bandgap reference circuit in Xschem.
+Figure&nbsp;67: Simple bandgap reference circuit in Xschem.
 </p><aside class="notes">
-<p>The circuit of <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a> has been implemented in Xschem and is shown in <a href="#/fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;66</a>. The current sources have been improved by using cascodes. We are using the low-voltage current mirror type already introduced in <a href="../aicd.html#sec-improved-ota">Section&nbsp;11</a>. The bias voltages for the cascodes are generated via the voltage drops of <span class="math inline">\(R_3\)</span> and <span class="math inline">\(R_4\)</span>, respectively.</p>
+<p>The circuit of <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;66</a> has been implemented in Xschem and is shown in <a href="#/fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;67</a>. The current sources have been improved by using cascodes. We are using the low-voltage current mirror type already introduced in <a href="../aicd.html#sec-improved-ota">Section&nbsp;11</a>. The bias voltages for the cascodes are generated via the voltage drops of <span class="math inline">\(R_3\)</span> and <span class="math inline">\(R_4\)</span>, respectively.</p>
 <p>No base current compensation for the BJTs is implemented, as it is assumed that the <span class="math inline">\(\beta\)</span> of the PNP are similar although they are operated at different emitter current densities.</p>
 <p>Note the addition of a startup branch with <span class="math inline">\(M_\mathrm{startup}\)</span> which is inactive during normal operation but will inject a startup current if no proper bias point has yet been found.</p>
 <p>There is no circuitry added for enabling/disabling the circuit, which would also be needed for a practical implementation. As usual, the MOSFET sizing has been done in this <a href="../gmid/sizing_bandgap_simple.html">notebook</a>.</p>
@@ -390,14 +390,14 @@ Figure&nbsp;66: Simple bandgap reference circuit in Xschem.
 <img data-src="bias_files/figure-revealjs/fig-bandgap-sim-result-output-1.png" width="839" height="431">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;67: Reference voltage from simulated bandgap circuit.
+Figure&nbsp;68: Reference voltage from simulated bandgap circuit.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>The Xschem schematic is available <a href="../xschem/bandgap_simple.sch">here</a> and the simulated reference voltage vs.&nbsp;temperature is shown in <a href="#/fig-bandgap-sim-result" class="quarto-xref">Figure&nbsp;67</a>. For a typical process we achieve a spread of the reference voltage of about <span class="math inline">\(\pm 0.16\%\)</span> over the simulated temperature range of <span class="math inline">\(-30\,\text{degC}\)</span> to <span class="math inline">\(125\,\text{degC}\)</span>, which corresponds to an average temperature coefficient of ca. <span class="math inline">\(20\,\text{ppm/K}\)</span> (the ppm/K figure is the one you will usually find in a datasheet).</p>
+<p>The Xschem schematic is available <a href="../xschem/bandgap_simple.sch">here</a> and the simulated reference voltage vs.&nbsp;temperature is shown in <a href="#/fig-bandgap-sim-result" class="quarto-xref">Figure&nbsp;68</a>. For a typical process we achieve a spread of the reference voltage of about <span class="math inline">\(\pm 0.16\%\)</span> over the simulated temperature range of <span class="math inline">\(-30\,\text{degC}\)</span> to <span class="math inline">\(125\,\text{degC}\)</span>, which corresponds to an average temperature coefficient of ca. <span class="math inline">\(20\,\text{ppm/K}\)</span> (the ppm/K figure is the one you will usually find in a datasheet).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -414,7 +414,7 @@ Figure&nbsp;67: Reference voltage from simulated bandgap circuit.
 <section id="sec-banba-bandgap" class="title-slide slide level2 center" data-number="12.2">
 <h2><span class="header-section-number">12.2</span> Banba Bandgap Reference</h2>
 <aside class="notes">
-<p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#/fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;66</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist; see <span class="citation" data-cites="Banba_1999">(<a href="#/references" role="doc-biblioref" onclick="">Banba et al. 1999</a>)</span> or <span class="citation" data-cites="Eberlein_2018">(<a href="#/references" role="doc-biblioref" onclick="">Eberlein et al. 2018</a>)</span>.</p>
+<p>Please note how tight the dc operating point is in this design to keep all MOSFET saturated. We only use <span class="math inline">\(100\,\text{mV}\)</span> nominally as headroom. The circuit in <a href="#/fig-bandgap-schematic" class="quarto-xref">Figure&nbsp;67</a> works only marginally at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>, but would not work at <span class="math inline">\(1.2\,\text{V}\)</span> or lower. Improved circuit architectures for <span class="math inline">\(&lt;1\,\text{V}\)</span> operation exist; see <span class="citation" data-cites="Banba_1999">(<a href="#/references" role="doc-biblioref" onclick="">Banba et al. 1999</a>)</span> or <span class="citation" data-cites="Eberlein_2018">(<a href="#/references" role="doc-biblioref" onclick="">Eberlein et al. 2018</a>)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -431,10 +431,10 @@ Figure&nbsp;67: Reference voltage from simulated bandgap circuit.
 <h3>Banba Bandgap Reference</h3>
 
 <img data-src="../xschem/bandgap_banba.svg" class="r-stretch quarto-figure-center" id="fig-bandgap-banba-schematic"><p class="caption">
-Figure&nbsp;68: Banba bandgap reference circuit in Xschem.
+Figure&nbsp;69: Banba bandgap reference circuit in Xschem.
 </p><aside class="notes">
-<p>The Banba reference <span class="citation" data-cites="Banba_1999">(<a href="#/references" role="doc-biblioref" onclick="">Banba et al. 1999</a>)</span> is quite a bit trickier to design than the classical bandgap shown in <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a>. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in <a href="../aicd.html#sec-basic-ota">Section&nbsp;8</a>. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.</p>
-<p>A first design has been implemented and is shown in <a href="#/fig-bandgap-banba-schematic" class="quarto-xref">Figure&nbsp;68</a>, and the testbench is shown in <a href="#/fig-bandgap-banba-tb" class="quarto-xref">Figure&nbsp;69</a>. The supply voltage (which could be lower than <span class="math inline">\(1.5\,\text{V}\)</span>) is limited by our OTA design; however, it works well at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>. The simulated reference voltage (which is scaled to roughly <span class="math inline">\(V_\mathrm{bandgap} / 2\)</span>) is shown in <a href="#/fig-bandgap-banba-sim-result" class="quarto-xref">Figure&nbsp;70</a>.</p>
+<p>The Banba reference <span class="citation" data-cites="Banba_1999">(<a href="#/references" role="doc-biblioref" onclick="">Banba et al. 1999</a>)</span> is quite a bit trickier to design than the classical bandgap shown in <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;66</a>. It requires the use of an error amplifier; luckily, we can use the 5T-OTA which we designed in <a href="../aicd.html#sec-basic-ota">Section&nbsp;8</a>. Since a loop is involved the startup of this circuit is not easy and requires the use of a transient simulation and a proper pre-charge of critical nodes. We can use the ngspice scripting language to (a) set the temperature for a sweep, (b) run a transient simulation, and (c) capture the final reference voltage and save it.</p>
+<p>A first design has been implemented and is shown in <a href="#/fig-bandgap-banba-schematic" class="quarto-xref">Figure&nbsp;69</a>, and the testbench is shown in <a href="#/fig-bandgap-banba-tb" class="quarto-xref">Figure&nbsp;70</a>. The supply voltage (which could be lower than <span class="math inline">\(1.5\,\text{V}\)</span>) is limited by our OTA design; however, it works well at <span class="math inline">\(V_\mathrm{DD}= 1.5\,\text{V}\)</span>. The simulated reference voltage (which is scaled to roughly <span class="math inline">\(V_\mathrm{bandgap} / 2\)</span>) is shown in <a href="#/fig-bandgap-banba-sim-result" class="quarto-xref">Figure&nbsp;71</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -451,11 +451,11 @@ Figure&nbsp;68: Banba bandgap reference circuit in Xschem.
 <h3>Banba Bandgap Reference</h3>
 
 <img data-src="../xschem/bandgap_banba_tb.svg" class="r-stretch quarto-figure-center" id="fig-bandgap-banba-tb"><p class="caption">
-Figure&nbsp;69: Banba bandgap testbench Xschem.
+Figure&nbsp;70: Banba bandgap testbench Xschem.
 </p><aside class="notes">
 <p>Note the self-biasing of the OTA with the current generated in the reference branches. The feedback loop needs capacitors for stabilization, and we use area-efficient MOSFET for this task. For a detailed explanation of this circuit please refer to <span class="citation" data-cites="Banba_1999">(<a href="#/references" role="doc-biblioref" onclick="">Banba et al. 1999</a>)</span>, but in brief, the operation is as follows:</p>
 <p>The CTAT and PTAT currents required for compensating each other’s TCs are built using a <span class="math inline">\(\Delta V_\mathrm{BE}\)</span> cell (given the PTAT current) with parallel resistors (providing the CTAT current). Voltages are sensed using an error amplifier and current sources are controlled to achieve matching currents in both branches. This current can then also be mirrored to flow through another resistor which can be scaled to produce the output voltage.</p>
-<p>In comparison to the classical bandgap reference shown in <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;65</a> (where the developed currents in all branches are PTAT) the currents developed in the Banba reference are constant vs.&nbsp;temperature.</p>
+<p>In comparison to the classical bandgap reference shown in <a href="#/fig-bandgap-simple" class="quarto-xref">Figure&nbsp;66</a> (where the developed currents in all branches are PTAT) the currents developed in the Banba reference are constant vs.&nbsp;temperature.</p>
 <p>The minimum supply voltage for the Banba reference is the <span class="math inline">\(V_\mathrm{BE}\)</span> of the PNP plus the saturation voltage of one MOSFET current source, so ca. <span class="math inline">\(V_\mathrm{DDmin} \ge 0.8\,\text{V} + 0.2\,\text{V} \approx 1\,\text{V}\)</span>. Of course we also need to design an OTA which can work at this low supply.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -479,7 +479,7 @@ Figure&nbsp;69: Banba bandgap testbench Xschem.
 <img data-src="bias_files/figure-revealjs/fig-bandgap-banba-sim-result-output-1.png" width="839" height="431">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bandgap-banba-sim-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;70: Reference voltage from simulated Banba bandgap circuit.
+Figure&nbsp;71: Reference voltage from simulated Banba bandgap circuit.
 </figcaption>
 </figure>
 </div>

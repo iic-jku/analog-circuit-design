@@ -239,9 +239,9 @@
 <h3>A Basic 5-Transistor OTA</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-basic-ota-output-1.svg" class="r-stretch quarto-figure-center" id="fig-basic-ota"><p class="caption">
-Figure&nbsp;32: The 5-transistor OTA.
+Figure&nbsp;33: The 5-transistor OTA.
 </p><aside class="notes">
-<p>Armed with the insights of basic transistor operation (<a href="../aicd.html#sec-first-steps">Section&nbsp;2</a> and <a href="../aicd.html#sec-gmid-method">Section&nbsp;3</a>) and the working knowledge of the current mirror (<a href="../aicd.html#sec-mosfet-diode">Section&nbsp;4</a> and <a href="../aicd.html#sec-current-mirror">Section&nbsp;6</a>) as well as the differential pair (<a href="../aicd.html#sec-diff-pair">Section&nbsp;7</a>), we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in <a href="#/fig-basic-ota" class="quarto-xref">Figure&nbsp;32</a>.</p>
+<p>Armed with the insights of basic transistor operation (<a href="../aicd.html#sec-first-steps">Section&nbsp;2</a> and <a href="../aicd.html#sec-gmid-method">Section&nbsp;3</a>) and the working knowledge of the current mirror (<a href="../aicd.html#sec-mosfet-diode">Section&nbsp;4</a> and <a href="../aicd.html#sec-current-mirror">Section&nbsp;6</a>) as well as the differential pair (<a href="../aicd.html#sec-diff-pair">Section&nbsp;7</a>), we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in <a href="#/fig-basic-ota" class="quarto-xref">Figure&nbsp;33</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -342,9 +342,9 @@ Figure&nbsp;32: The 5-transistor OTA.
 <h3>Voltage Buffer with OTA</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-voltage-buffer-ota-output-1.svg" class="r-stretch quarto-figure-center" id="fig-voltage-buffer-ota"><p class="caption">
-Figure&nbsp;33: A voltage buffer (based on OTA) driving a capacitive load.
+Figure&nbsp;34: A voltage buffer (based on OTA) driving a capacitive load.
 </p><aside class="notes">
-<p>In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lightly loads an input voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a>.</p>
+<p>In order to design an OTA we need an application, and from this we need to derive the circuit specifications. We want to use this OTA to realize a voltage buffer which lightly loads an input voltage source and can drive a large capacitive load. Such a configuration is often used to, e.g., buffer a reference voltage that is needed (and thus loaded) by another circuit. The block diagram of this configuration is shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;34</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -440,7 +440,7 @@ Table&nbsp;2: Voltage buffer specification
 </figure>
 </div>
 <aside class="notes">
-<p>If the voltage gain of the OTA in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application, fitting the following specification values (see <a href="#/tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>). These values are rather typical of what could be expected for such a buffer design.</p>
+<p>If the voltage gain of the OTA in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;34</a> is high, then <span class="math inline">\(V_\mathrm{out} \approx V_\mathrm{in}\)</span>. We now want to design an OTA for this application, fitting the following specification values (see <a href="#/tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a>). These values are rather typical of what could be expected for such a buffer design.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -462,10 +462,10 @@ Table&nbsp;2: Voltage buffer specification
 <h3>Large-Signal Analysis of the OTA</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-basic-ota-dcop-output-1.svg" class="r-stretch quarto-figure-center" id="fig-basic-ota-dcop"><p class="caption">
-Figure&nbsp;34: The 5-transistor OTA with external connections and load capacitor.
+Figure&nbsp;35: The 5-transistor OTA with external connections and load capacitor.
 </p><aside class="notes">
 <p>The first step when receiving a design task is to look at the specifications and see whether they make sense. The detailed performance of the design will be the result of the circuit simulation, but before we step into sizing we need to do a few simple calculations to (a) do back-of-the-envelope gauging if the specification makes sense, and (b) use the derived analytical equations as guide for the sizing procedure.</p>
-<p>In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met. Since we do not know yet the resulting <span class="math inline">\(V_\mathrm{GS}\)</span> of the transistors, we use <span class="math inline">\(0.6\,\text{V}\)</span> as an initial guess. If we run into issues with that guess, we know how to later steer the sizing procedure. The follower configuration showing the transistor-level details including estimated operating points is shown in <a href="#/fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;34</a>.</p>
+<p>In terms of large-signal operation, we will now check whether the input and output voltage range, as well as the settling time can be roughly met. Since we do not know yet the resulting <span class="math inline">\(V_\mathrm{GS}\)</span> of the transistors, we use <span class="math inline">\(0.6\,\text{V}\)</span> as an initial guess. If we run into issues with that guess, we know how to later steer the sizing procedure. The follower configuration showing the transistor-level details including estimated operating points is shown in <a href="#/fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;35</a>.</p>
 The 5-transistor OTA with external connections and load capacitor. Estimated dc operating points are shown in blue.
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -487,7 +487,7 @@ The 5-transistor OTA with external connections and load capacitor. Estimated dc 
 <li>For the output voltage, when the output voltage is on the high side, it leaves <span class="math inline">\(|V_\mathrm{DS4}| = V_\mathrm{DD}- V_\mathrm{out} = 1.45 - 0.9 = 0.55\,\text{V}\)</span>, which is enough margin.</li>
 </ul>
 <aside class="notes">
-<p>In summary, we think that we can make an NMOS-input OTA like the one in <a href="#/fig-basic-ota" class="quarto-xref">Figure&nbsp;32</a> (and in <a href="#/fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;34</a>) work for the required supply and input and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA or an NMOS/PMOS-input OTA.</p>
+<p>In summary, we think that we can make an NMOS-input OTA like the one in <a href="#/fig-basic-ota" class="quarto-xref">Figure&nbsp;33</a> (and in <a href="#/fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;35</a>) work for the required supply and input and output voltages. If this would not work out, we need to look for further options, like a PMOS-input OTA or an NMOS/PMOS-input OTA.</p>
 <p>Another large-signal specification item that we can quickly check is the settling time. Under slewing conditions, the complete bias current in the OTA is steered toward the output (try to understand why this is the case), so when the output capacitor is fully discharged and we assume just a linear ramp due to constant-current charging of the output capacitor, the settling time is</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -553,7 +553,7 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 </section>
 <section class="slide level3 unnumbered">
 <h3>Small-Signal Analysis of the OTA</h3>
-<p>For a voltage follower in the configuration shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a> the voltage gain is given by (see <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a>) <span id="eq-voltage-buffer-tolerance"><span class="math display">\[
+<p>For a voltage follower in the configuration shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;34</a> the voltage gain is given by (see <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;34</a>) <span id="eq-voltage-buffer-tolerance"><span class="math display">\[
 (V_\mathrm{in} - V_\mathrm{out}) \cdot A_0 = V_\mathrm{out} \to \frac{V_\mathrm{out}}{V_\mathrm{in}} = \frac{A_0}{1 + A_0}.
 \tag{14}\]</span></span></p>
 <aside class="notes">
@@ -617,10 +617,10 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 <h3>OTA Small-Signal Transfer Function</h3>
 <ul>
 <li>We assume <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{ds}\)</span>, so we set <span class="math inline">\(g_\mathrm{ds1} = g_\mathrm{ds3} = 0\)</span> as this node is dominated by <span class="math inline">\(g_\mathrm{m3}^{-1}\)</span>.</li>
-<li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span>, we could add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span> (see <a href="#/fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;34</a>). Do not dismiss this as a second-order correction: with the small <span class="math inline">\(C_\mathrm{load} = 50\,\text{fF}\)</span> specified here, the sizing procedure will show that these device parasitics contribute roughly as much again as the specified load itself, so they effectively halve the achievable bandwidth if ignored.</li>
+<li>The drain capacitance of <span class="math inline">\(M_2\)</span> and <span class="math inline">\(M_4\)</span>, as well as the gate capacitance of <span class="math inline">\(M_2\)</span>, we could add to the load capacitance <span class="math inline">\(C_\mathrm{load}\)</span> (see <a href="#/fig-basic-ota-dcop" class="quarto-xref">Figure&nbsp;35</a>). Do not dismiss this as a second-order correction: with the small <span class="math inline">\(C_\mathrm{load} = 50\,\text{fF}\)</span> specified here, the sizing procedure will show that these device parasitics contribute roughly as much again as the specified load itself, so they effectively halve the achievable bandwidth if ignored.</li>
 </ul>
 <aside class="notes">
-<p>The resulting small-signal equivalent circuit is shown in <a href="#/fig-basic-ota-small-signal" class="quarto-xref">Figure&nbsp;35</a>.</p>
+<p>The resulting small-signal equivalent circuit is shown in <a href="#/fig-basic-ota-small-signal" class="quarto-xref">Figure&nbsp;36</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -653,7 +653,7 @@ T_\mathrm{settle} \approx \frac{5}{2 \pi f_\mathrm{c}} = \frac{5}{2 \pi \cdot 10
 <h3>OTA Small-Signal Transfer Function</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-basic-ota-small-signal-output-1.svg" class="r-stretch quarto-figure-center" id="fig-basic-ota-small-signal"><p class="caption">
-Figure&nbsp;35: 5-transistor OTA open-loop small-signal model.
+Figure&nbsp;36: 5-transistor OTA open-loop small-signal model.
 </p><aside class="notes">
 5-transistor OTA open-loop small-signal model. For the closed-loop model, the input voltage <span class="math inline">\(V_\mathrm{in,n}\)</span> is connected to the output voltage <span class="math inline">\(V_\mathrm{out}\)</span>. Note that the blue current source can be replaced by a conductance of <span class="math inline">\(g_\mathrm{m3,4}\)</span>.
 <style type="text/css">
@@ -672,9 +672,9 @@ Figure&nbsp;35: 5-transistor OTA open-loop small-signal model.
 <h3>OTA Small-Signal Transfer Function</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-basic-ota-small-signal-simplified-output-1.svg" class="r-stretch quarto-figure-center" id="fig-basic-ota-small-signal-simplified"><p class="caption">
-Figure&nbsp;36: 5-transistor OTA small-signal model with further simplifications.
+Figure&nbsp;37: 5-transistor OTA small-signal model with further simplifications.
 </p><aside class="notes">
-<p>We can further simplify <a href="#/fig-basic-ota-small-signal" class="quarto-xref">Figure&nbsp;35</a> by realizing that we operate the circuit purely differential and thus the tail point of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> can be treated like a virtual ground, we thus short <span class="math inline">\(g_\mathrm{ds5}\)</span>. Therefore, we can move <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span>. The current source <span class="math inline">\(g_\mathrm{m3,4} V_\mathrm{gs3}\)</span> is replaced with the equivalent conductance <span class="math inline">\(g_\mathrm{m3,4}\)</span>. All the previous steps result in the further simplified equivalent circuit shown in <a href="#/fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;36</a>.</p>
+<p>We can further simplify <a href="#/fig-basic-ota-small-signal" class="quarto-xref">Figure&nbsp;36</a> by realizing that we operate the circuit purely differential and thus the tail point of <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> can be treated like a virtual ground, we thus short <span class="math inline">\(g_\mathrm{ds5}\)</span>. Therefore, we can move <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span> in parallel to <span class="math inline">\(C_\mathrm{load}\)</span>. The current source <span class="math inline">\(g_\mathrm{m3,4} V_\mathrm{gs3}\)</span> is replaced with the equivalent conductance <span class="math inline">\(g_\mathrm{m3,4}\)</span>. All the previous steps result in the further simplified equivalent circuit shown in <a href="#/fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;37</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -696,7 +696,7 @@ Figure&nbsp;36: 5-transistor OTA small-signal model with further simplifications
 V_\mathrm{gs3} = -g_\mathrm{m1,2} \frac{V_\mathrm{in}}{2} \frac{1}{g_\mathrm{m3,4} + 2 \cdot s C_\mathrm{gs3,4}}.
   \tag{16}\]</span></span></p>
 <aside class="notes">
-<p>In the simplified circuit model in <a href="#/fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;36</a>, we can see that we have two poles in the circuit, one at the gate node of <span class="math inline">\(M_{3,4}\)</span> and one at the output.</p>
+<p>In the simplified circuit model in <a href="#/fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;37</a>, we can see that we have two poles in the circuit, one at the gate node of <span class="math inline">\(M_{3,4}\)</span> and one at the output.</p>
 <p>We further realize that</p>
 <p>By combining <a href="#/eq-simple-ota-eq1" class="quarto-xref">Equation&nbsp;15</a> and <a href="#/eq-simple-ota-eq2" class="quarto-xref">Equation&nbsp;16</a> and after a bit of algebraic manipulation we arrive at</p>
 <style type="text/css">
@@ -822,7 +822,7 @@ s_\mathrm{zd} = -\frac{g_\mathrm{m3,4}}{C_\mathrm{gs3,4}}
 <section id="ota-noise" class="slide level3" data-number="8.3.2">
 <h3><span class="header-section-number">8.3.2</span> OTA Noise</h3>
 <aside class="notes">
-<p>For the noise analysis we ignore the pole-zero doublet due to <span class="math inline">\(C_\mathrm{gs3,4}\)</span> (we assume minor impact due to this, hence we set <span class="math inline">\(C_\mathrm{gs3,4} = 0\)</span>) and just consider the dominant pole given by <a href="#/eq-basic-ota-dominant-pole" class="quarto-xref">Equation&nbsp;22</a> due to the load capacitance. For the noise analysis at the output we set the positive input signal to ground and connect the output to the negative input, and thus starting from <a href="#/fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;36</a> we arrive at the adapted small-signal circuit shown in <a href="#/fig-basic-ota-small-signal-noise" class="quarto-xref">Figure&nbsp;37</a>.</p>
+<p>For the noise analysis we ignore the pole-zero doublet due to <span class="math inline">\(C_\mathrm{gs3,4}\)</span> (we assume minor impact due to this, hence we set <span class="math inline">\(C_\mathrm{gs3,4} = 0\)</span>) and just consider the dominant pole given by <a href="#/eq-basic-ota-dominant-pole" class="quarto-xref">Equation&nbsp;22</a> due to the load capacitance. For the noise analysis at the output we set the positive input signal to ground and connect the output to the negative input, and thus starting from <a href="#/fig-basic-ota-small-signal-simplified" class="quarto-xref">Figure&nbsp;37</a> we arrive at the adapted small-signal circuit shown in <a href="#/fig-basic-ota-small-signal-noise" class="quarto-xref">Figure&nbsp;38</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -839,15 +839,15 @@ s_\mathrm{zd} = -\frac{g_\mathrm{m3,4}}{C_\mathrm{gs3,4}}
 <h3>OTA Noise</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-basic-ota-small-signal-noise-output-1.svg" class="r-stretch quarto-figure-center" id="fig-basic-ota-small-signal-noise"><p class="caption">
-Figure&nbsp;37: 5-transistor OTA small-signal model for noise calculation (added noise sources shown in blue).
+Figure&nbsp;38: 5-transistor OTA small-signal model for noise calculation (added noise sources shown in blue).
 </p></section>
 <section class="slide level3 unnumbered">
 <h3>OTA Noise</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-basic-ota-small-signal-noise-simplified-output-1.svg" class="r-stretch quarto-figure-center" id="fig-basic-ota-small-signal-noise-simplified"><p class="caption">
-Figure&nbsp;38: 5-transistor OTA simplified small-signal model for noise calculation.
+Figure&nbsp;39: 5-transistor OTA simplified small-signal model for noise calculation.
 </p><aside class="notes">
-<p>For symmetry reasons we can set <span class="math inline">\(\overline{I_\mathrm{n1,2}^2} = \overline{I_\mathrm{n1}^2} = \overline{I_\mathrm{n2}^2}\)</span> and <span class="math inline">\(\overline{I_\mathrm{n3,4}^2} = \overline{I_\mathrm{n3}^2} = \overline{I_\mathrm{n4}^2}\)</span>. We see that we can replace the current source <span class="math inline">\(g_\mathrm{m1,2} V_\mathrm{gs2}\)</span> with its equivalent conductance of <span class="math inline">\(g_\mathrm{m1,2}\)</span>, and this conductance is in parallel to <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span>, hence <span class="math inline">\(g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds4} \approx g_\mathrm{m1,2}\)</span>. The resulting simplified small-signal noise equivalent circuit is shown in <a href="#/fig-basic-ota-small-signal-noise-simplified" class="quarto-xref">Figure&nbsp;38</a>.</p>
+<p>For symmetry reasons we can set <span class="math inline">\(\overline{I_\mathrm{n1,2}^2} = \overline{I_\mathrm{n1}^2} = \overline{I_\mathrm{n2}^2}\)</span> and <span class="math inline">\(\overline{I_\mathrm{n3,4}^2} = \overline{I_\mathrm{n3}^2} = \overline{I_\mathrm{n4}^2}\)</span>. We see that we can replace the current source <span class="math inline">\(g_\mathrm{m1,2} V_\mathrm{gs2}\)</span> with its equivalent conductance of <span class="math inline">\(g_\mathrm{m1,2}\)</span>, and this conductance is in parallel to <span class="math inline">\(g_\mathrm{ds2} + g_\mathrm{ds4}\)</span>, hence <span class="math inline">\(g_\mathrm{m1,2} + g_\mathrm{ds2} + g_\mathrm{ds4} \approx g_\mathrm{m1,2}\)</span>. The resulting simplified small-signal noise equivalent circuit is shown in <a href="#/fig-basic-ota-small-signal-noise-simplified" class="quarto-xref">Figure&nbsp;39</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1264,7 +1264,7 @@ headroom M5 = 0.333 V</code></pre>
 <p><strong>Exercise: 5T-OTA Design and Testbench</strong></p>
 </div>
 <div class="callout-content">
-<p>Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;33</a>. Use typical conditions for the simulation and check how well the specification in <a href="#/tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a> is met and how well the derivations in <a href="#/sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;8.2</a> and <a href="#/sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a> fit to the simulation results.</p>
+<p>Please design the circuit of the 5T-OTA. Put the OTA circuit in a separate schematic, create a symbol for it, and use this symbol in a testbench you create in Xschem for this 5T-OTA used as a voltage buffer as shown in <a href="#/fig-voltage-buffer-ota" class="quarto-xref">Figure&nbsp;34</a>. Use typical conditions for the simulation and check how well the specification in <a href="#/tbl-voltage-buffer-spec" class="quarto-xref">Table&nbsp;2</a> is met and how well the derivations in <a href="#/sec-basic-ota-large-signal" class="quarto-xref">Section&nbsp;8.2</a> and <a href="#/sec-basic-ota-small-signal" class="quarto-xref">Section&nbsp;8.3</a> fit to the simulation results.</p>
 </div>
 </div>
 </div>
@@ -2186,9 +2186,9 @@ headroom M5 = 0.333 V</code></pre>
 <h3>OTA Variants</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-ota-se-rail-to-rail-output-1.svg" class="r-stretch quarto-figure-center" id="fig-ota-se-rail-to-rail"><p class="caption">
-Figure&nbsp;39: Single-ended OTA with rail-to-rail output stage.
+Figure&nbsp;40: Single-ended OTA with rail-to-rail output stage.
 </p><aside class="notes">
-<p>Following, we are going to discuss two popular variants of the simple 5T-OTA. The first version provides an almost rail-to-rail single-ended output and can thus be used for a variety of applications requiring this range. The arrangement is shown in <a href="#/fig-ota-se-rail-to-rail" class="quarto-xref">Figure&nbsp;39</a>. It is a single-stage amplifier, as the only high-impedance point is at the output where significant voltage-gain is produced. The current mirrors can be used to scale up the current generated in the input differential pair to some extent in the output stage (or can be used to lower the current compared to the bias current in the diffpair); i.e., the bias currents of the input stage and the output stage can be set independently.</p>
+<p>Following, we are going to discuss two popular variants of the simple 5T-OTA. The first version provides an almost rail-to-rail single-ended output and can thus be used for a variety of applications requiring this range. The arrangement is shown in <a href="#/fig-ota-se-rail-to-rail" class="quarto-xref">Figure&nbsp;40</a>. It is a single-stage amplifier, as the only high-impedance point is at the output where significant voltage-gain is produced. The current mirrors can be used to scale up the current generated in the input differential pair to some extent in the output stage (or can be used to lower the current compared to the bias current in the diffpair); i.e., the bias currents of the input stage and the output stage can be set independently.</p>
 <p>Being a single-stage amplifier stability is usually not an issue, as only the output node is high-ohmic; all other nodes feature a MOSFET diode so the node impedance is <span class="math inline">\(\approx g_\mathrm{m}^{-1}\)</span> and thus the according poles are located at high frequencies.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2206,9 +2206,9 @@ Figure&nbsp;39: Single-ended OTA with rail-to-rail output stage.
 <h3>OTA Variants</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-ota-se-twostage-output-1.svg" class="r-stretch quarto-figure-center" id="fig-ota-se-twostage"><p class="caption">
-Figure&nbsp;40: Single-ended two-stage OTA with rail-to-rail output.
+Figure&nbsp;41: Single-ended two-stage OTA with rail-to-rail output.
 </p><aside class="notes">
-<p>Another popular version is shown in <a href="#/fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a>. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. <a href="#/fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a> shows a very simplistic Miller-compensation (see <a href="../aicd.html#sec-miller-compensation">Section&nbsp;13.1</a>) using <span class="math inline">\(C_\mathrm{M}\)</span>. Often, we would want to implement a more advanced scheme. Some examples can be found in <span class="citation" data-cites="Baker_compensating_OPAMP">(<a href="#/references" role="doc-biblioref" onclick="">Baker, n.d.</a>)</span>. An interesting technique is the indirect compensation with cascoded input differential pairs (see <a href="../aicd.html#fig-improved-ota">Figure&nbsp;58</a>) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is that both output nodes of the input stage are dc-balanced: each of them sits one <span class="math inline">\(V_\mathrm{GS}\)</span> below <span class="math inline">\(V_\mathrm{DD}\)</span> — on the left set by the diode-connected <span class="math inline">\(V_\mathrm{GS3}\)</span>, on the right set by the gate of the second-stage device <span class="math inline">\(M_5\)</span>, i.e.&nbsp;by <span class="math inline">\(V_\mathrm{GS5}\)</span>. In the plain 5T-OTA the right-hand node is instead the output node, whose dc level is imposed by the external feedback, so the two sides of the differential pair are generally <em>not</em> balanced.</p>
+<p>Another popular version is shown in <a href="#/fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;41</a>. Here, we have a two-stage amplifier able to provide higher voltage gain. The first stage (the diffpair loaded by a current mirror) is followed by a single-stage common-source amplifier with current-source load. Being a two-stage amplifier with two high-ohmic nodes, stability is a concern, so usually we need some form of compensation. <a href="#/fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;41</a> shows a very simplistic Miller-compensation (see <a href="../aicd.html#sec-miller-compensation">Section&nbsp;13.1</a>) using <span class="math inline">\(C_\mathrm{M}\)</span>. Often, we would want to implement a more advanced scheme. Some examples can be found in <span class="citation" data-cites="Baker_compensating_OPAMP">(<a href="#/references" role="doc-biblioref" onclick="">Baker, n.d.</a>)</span>. An interesting technique is the indirect compensation with cascoded input differential pairs (see <a href="../aicd.html#fig-improved-ota">Figure&nbsp;59</a>) for higher power supply rejection. An advantage of this two-stage amplifier (compared with the simple 5T-OTA) is that both output nodes of the input stage are dc-balanced: each of them sits one <span class="math inline">\(V_\mathrm{GS}\)</span> below <span class="math inline">\(V_\mathrm{DD}\)</span> — on the left set by the diode-connected <span class="math inline">\(V_\mathrm{GS3}\)</span>, on the right set by the gate of the second-stage device <span class="math inline">\(M_5\)</span>, i.e.&nbsp;by <span class="math inline">\(V_\mathrm{GS5}\)</span>. In the plain 5T-OTA the right-hand node is instead the output node, whose dc level is imposed by the external feedback, so the two sides of the differential pair are generally <em>not</em> balanced.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2225,9 +2225,9 @@ Figure&nbsp;40: Single-ended two-stage OTA with rail-to-rail output.
 <h3>OTA Variants</h3>
 
 <img data-src="ota_basic_files/figure-revealjs/fig-simple-ldo-output-1.svg" class="r-stretch quarto-figure-center" id="fig-simple-ldo"><p class="caption">
-Figure&nbsp;41: A basic low-dropout voltage regulator (LDO) with Miller compensation.
+Figure&nbsp;42: A basic low-dropout voltage regulator (LDO) with Miller compensation.
 </p><aside class="notes">
-<p>Note that the circuit of <a href="#/fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;40</a> can be easily modified into a low-dropout voltage regulator (LDO). This simple yet often effective circuit is shown in <a href="#/fig-simple-ldo" class="quarto-xref">Figure&nbsp;41</a>. The pass transistor <span class="math inline">\(M_\mathrm{pass}\)</span> has to be sized according to the load current and the dropout voltage.</p>
+<p>Note that the circuit of <a href="#/fig-ota-se-twostage" class="quarto-xref">Figure&nbsp;41</a> can be easily modified into a low-dropout voltage regulator (LDO). This simple yet often effective circuit is shown in <a href="#/fig-simple-ldo" class="quarto-xref">Figure&nbsp;42</a>. The pass transistor <span class="math inline">\(M_\mathrm{pass}\)</span> has to be sized according to the load current and the dropout voltage.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

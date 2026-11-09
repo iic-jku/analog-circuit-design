@@ -173,9 +173,9 @@
 <h3>Differential Pair</h3>
 
 <img data-src="diffpair_files/figure-revealjs/fig-differential-pair-output-1.svg" class="r-stretch quarto-figure-center" id="fig-differential-pair"><p class="caption">
-Figure&nbsp;29: A differential pair.
+Figure&nbsp;30: A differential pair.
 </p><aside class="notes">
-<p>Like the current mirror in <a href="../aicd.html#sec-current-mirror">Section&nbsp;6</a>, the <strong>differential pair</strong> is a ubiquitous building block often used in integrated circuit design <span class="citation" data-cites="Blumlein_1937">(<a href="#/references" role="doc-biblioref" onclick="">Blumlein 1937</a>)</span>. The fundamental structure is given in <a href="#/fig-differential-pair" class="quarto-xref">Figure&nbsp;29</a>.</p>
+<p>Like the current mirror in <a href="../aicd.html#sec-current-mirror">Section&nbsp;6</a>, the <strong>differential pair</strong> is a ubiquitous building block often used in integrated circuit design <span class="citation" data-cites="Blumlein_1937">(<a href="#/references" role="doc-biblioref" onclick="">Blumlein 1937</a>)</span>. The fundamental structure is given in <a href="#/fig-differential-pair" class="quarto-xref">Figure&nbsp;30</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -272,7 +272,7 @@ I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out} = \frac{I_\mathrm{tail}}{2}
 \]</span></p>
 <aside class="notes">
 <p>Usually, the source conductance <span class="math inline">\(g_\mathrm{tail}\)</span> is realized by a current source and ideally should be <span class="math inline">\(g_\mathrm{tail} = 0\)</span>.</p>
-<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since the circuit operation is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We then arrive at the small-signal equivalent circuit shown in <a href="#/fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;30</a> (note that we set <span class="math inline">\(V_\mathrm{in,p} = V_\mathrm{in,n} = V_\mathrm{in}\)</span> and <span class="math inline">\(I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out}\)</span> under symmetry considerations). As both transistors inject their drain current into the shared tail node, the half circuit sees an effective tail conductance of <span class="math inline">\(g_\mathrm{tail}/2\)</span>.</p>
+<p>However, if we assume a realistic tail current source then <span class="math inline">\(g_\mathrm{tail} &gt; 0\)</span>. For analysis we can simply look at a half circuit since the circuit operation is symmetric. In order to simplify the analysis a bit we remove all capacitors from the MOSFET small-signal model and set <span class="math inline">\(g_\mathrm{ds}= g_\mathrm{mb}= 0\)</span>. We then arrive at the small-signal equivalent circuit shown in <a href="#/fig-differential-pair-cm" class="quarto-xref">Figure&nbsp;31</a> (note that we set <span class="math inline">\(V_\mathrm{in,p} = V_\mathrm{in,n} = V_\mathrm{in}\)</span> and <span class="math inline">\(I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out}\)</span> under symmetry considerations). As both transistors inject their drain current into the shared tail node, the half circuit sees an effective tail conductance of <span class="math inline">\(g_\mathrm{tail}/2\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -289,7 +289,7 @@ I_\mathrm{out,p} = I_\mathrm{out,n} = I_\mathrm{out} = \frac{I_\mathrm{tail}}{2}
 <h3>Common-Mode Operation of the Diffpair</h3>
 
 <img data-src="diffpair_files/figure-revealjs/fig-differential-pair-cm-output-1.svg" class="r-stretch quarto-figure-center" id="fig-differential-pair-cm"><p class="caption">
-Figure&nbsp;30: Small-signal model of the differential pair half-circuit in common-mode operation.
+Figure&nbsp;31: Small-signal model of the differential pair half-circuit in common-mode operation.
 </p></section>
 <section class="slide level3 unnumbered">
 <h3>Common-Mode Operation of the Diffpair</h3>
@@ -326,7 +326,7 @@ I_\mathrm{out} = \frac{g_\mathrm{m}\cdot g_\mathrm{tail}}{2 g_\mathrm{m}+ g_\mat
 <li>For the typical case that <span class="math inline">\(g_\mathrm{m}\gg g_\mathrm{tail}\)</span> then <span class="math inline">\(I_\mathrm{out} \approx (g_\mathrm{tail}/2) V_\mathrm{in}\)</span>.</li>
 </ol>
 <aside class="notes">
-<p>Note that <a href="#/eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> is closely related to the general case of a degenerated common-source transistor stage (see <a href="#/fig-common-source-degenerated" class="quarto-xref">Figure&nbsp;31</a>). The effective transconductance <span class="math inline">\(g_\mathrm{m}'\)</span> of a degenerated CS stage is given by</p>
+<p>Note that <a href="#/eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> is closely related to the general case of a degenerated common-source transistor stage (see <a href="#/fig-common-source-degenerated" class="quarto-xref">Figure&nbsp;32</a>). The effective transconductance <span class="math inline">\(g_\mathrm{m}'\)</span> of a degenerated CS stage is given by</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -363,7 +363,7 @@ g_\mathrm{m}' = \frac{I_\mathrm{out}}{V_\mathrm{in}} = \frac{1}{g_\mathrm{m}^{-1
 <h3>Common-Mode Operation of the Diffpair</h3>
 
 <img data-src="diffpair_files/figure-revealjs/fig-common-source-degenerated-output-1.svg" class="r-stretch quarto-figure-center" id="fig-common-source-degenerated"><p class="caption">
-Figure&nbsp;31: A MOSFET common-source amplifier with resistive degeneration.
+Figure&nbsp;32: A MOSFET common-source amplifier with resistive degeneration.
 </p></section>
 <section id="references" class="slide level3 unnumbered smaller scrollable">
 <h3>References</h3>
