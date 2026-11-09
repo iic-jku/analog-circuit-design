@@ -21,29 +21,31 @@ limitations under the License.
 import numpy as np
 import matplotlib.pyplot as plt
 
+db = lambda x: 20 * np.log10(np.abs(x))
+
 A = 1e3       # open-loop dc gain
 fc = 1e5      # open-loop cut-off frequency (Hz)
 fT = A * fc   # open-loop transit frequency = GBWP
 f = np.logspace(3, 10, 1000)
 H_ol = A / (1 + 1j * f / fc)
 
-plt.loglog(f, fT / f, linestyle='--', color='gray', zorder=3, label="GBWP asymptote $f_\\mathrm{T,ol}/f$")
-plt.loglog(f, np.abs(H_ol), color='k', label="open loop")
+plt.semilogx(f, db(fT / f), linestyle='--', color='gray', zorder=3, label="GBWP asymptote $f_\\mathrm{T,ol}/f$")
+plt.semilogx(f, db(H_ol), color='k', label="open loop")
 for G, col in [(0.01, 'b'), (0.9, 'g'), (1.0, 'r')]:
     H_cl = H_ol / (1 + H_ol * G)
     H0 = A / (1 + A * G)
     fc_cl = fc * (1 + A * G)
-    plt.loglog(f, np.abs(H_cl), color=col, label=f"closed loop, $G = {G:g}$")
-    plt.plot(fc_cl, H0 / np.sqrt(2), 'o', color=col)
+    plt.semilogx(f, db(H_cl), color=col, label=f"closed loop, $G = {G:g}$")
+    plt.plot(fc_cl, db(H0 / np.sqrt(2)), 'o', color=col)
     if H0 > 1:
-        plt.plot(fc_cl * np.sqrt(H0**2 - 1), 1, 'x', color=col, markersize=9, mew=2)
-plt.plot(fc, A / np.sqrt(2), 'o', color='k')
-plt.plot(fT, 1, 'x', color='k', markersize=9, mew=2)
-plt.axhline(1, color='gray', linewidth=0.8)
-plt.ylim(1e-2, 3e3)
+        plt.plot(fc_cl * np.sqrt(H0**2 - 1), 0, 'x', color=col, markersize=9, mew=2)
+plt.plot(fc, db(A / np.sqrt(2)), 'o', color='k')
+plt.plot(fT, 0, 'x', color='k', markersize=9, mew=2)
+plt.axhline(0, color='gray', linewidth=0.8)
+plt.ylim(-40, 70)
 plt.xlim(f[0], f[-1])
 plt.xlabel(r"$f$ (Hz)")
-plt.ylabel(r"$|H(f)|$")
+plt.ylabel(r"$|H(f)|$ (dB)")
 plt.legend(loc='lower left')
 plt.grid(True, which='both', alpha=0.3)
 ```
