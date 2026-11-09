@@ -14,7 +14,7 @@ divy=5
 subdivy=1
 unity=1
 x1=0
-x2=3e-10
+x2=3e-09
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -25,10 +25,12 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-color="4 7"
+color="4 7 6"
 node="i(vibias)
-i(vid)"
-linewidth_mult=3}
+i(vid)
+i(vig)"
+linewidth_mult=3
+hilight_wave=-1}
 B 2 860 -420 1700 -120 {flags=graph
 y1=0
 y2=0.61
@@ -38,7 +40,7 @@ divy=5
 subdivy=1
 unity=1
 x1=0
-x2=3e-10
+x2=3e-09
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -66,14 +68,15 @@ lab=v_dd}
 N 500 -370 530 -370 {
 lab=v_gs}
 N 500 -500 570 -500 {
-lab=v_gs}
-N 500 -500 500 -370 {lab=v_gs}
-N 570 -420 570 -400 {lab=#net1}
-N 570 -500 570 -480 {lab=v_gs}
-N 570 -520 570 -500 {lab=v_gs}
-N 570 -600 570 -580 {lab=#net2}
+lab=#net1}
+N 570 -420 570 -400 {lab=#net2}
+N 570 -500 570 -480 {lab=#net1}
+N 570 -520 570 -500 {lab=#net1}
+N 570 -600 570 -580 {lab=#net3}
 N 340 -680 340 -400 {lab=v_dd}
 N 570 -680 570 -660 {lab=v_dd}
+N 500 -500 500 -480 {lab=#net1}
+N 500 -420 500 -370 {lab=v_gs}
 C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib cornerMOSlv.lib mos_tt
@@ -115,3 +118,4 @@ tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get c
 C {devices/spice_probe.sym} 500 -500 0 0 {name=p3 attrs=""}
 C {devices/ammeter.sym} 570 -450 0 0 {name=Vid savecurrent=true spice_ignore=0}
 C {devices/ammeter.sym} 570 -550 0 0 {name=Vibias savecurrent=true spice_ignore=0}
+C {devices/ammeter.sym} 500 -450 0 0 {name=Vig savecurrent=true spice_ignore=0}
