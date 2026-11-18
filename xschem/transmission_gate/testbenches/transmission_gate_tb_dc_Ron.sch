@@ -151,7 +151,7 @@ value="
 "}
 C {devices/launcher.sym} 1620 -1410 0 0 {name=h2
 descr="Simulate" 
-tclcommand="xschem save; xschem netlist; xschem simulate"
+tclcommand="xschem save; xschem netlist; file mkdir $netlist_dir; write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save; xschem simulate"
 }
 C {devices/launcher.sym} 1620 -1290 0 0 {name=h1
 descr="Load waves" 

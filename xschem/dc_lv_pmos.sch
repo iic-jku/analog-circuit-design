@@ -88,7 +88,7 @@ tclcommand="xschem raw_read $netlist_dir/[file tail [file rootname [xschem get c
 }
 C {devices/launcher.sym} 710 -340 0 0 {name=h2
 descr="simulate" 
-tclcommand="xschem save; xschem netlist; xschem simulate"
+tclcommand="xschem save; xschem netlist; file mkdir $netlist_dir; write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save; xschem simulate"
 }
 C {devices/launcher.sym} 710 -260 0 0 {name=h3
 descr="annotate OP" 

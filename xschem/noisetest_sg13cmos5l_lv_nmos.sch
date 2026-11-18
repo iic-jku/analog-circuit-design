@@ -119,7 +119,7 @@ print onoise_n.xm1.nsg13_lv_nmos_rwell
 C {devices/title.sym} 160 -40 0 0 {name=l5 author="(c) 2024 M. Koefinger, Apache-2.0 license (adapted from B. Murmann)"}
 C {devices/launcher.sym} 520 -1020 0 0 {name=h3
 descr="save, netlist & simulate"
-tclcommand="xschem save; xschem netlist; xschem simulate"
+tclcommand="xschem save; xschem netlist; file mkdir $netlist_dir; write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save; xschem simulate"
 value="
 .param wx=5u lx=0.13u vbx=0
 .save all

@@ -13,11 +13,9 @@ N 750 -370 820 -370 {
 lab=GND}
 N 820 -370 820 -280 {
 lab=GND}
-N 750 -540 750 -500 {
+N 750 -620 750 -580 {
 lab=v_dd}
-N 520 -540 520 -400 {
-lab=v_dd}
-N 520 -540 750 -540 {
+N 520 -620 750 -620 {
 lab=v_dd}
 N 750 -420 750 -400 {
 lab=v_gs}
@@ -29,6 +27,8 @@ N 680 -420 750 -420 {
 lab=v_gs}
 N 750 -440 750 -420 {
 lab=v_gs}
+N 750 -520 750 -500 {lab=#net1}
+N 520 -620 520 -400 {lab=v_dd}
 C {devices/code_shown.sym} 0 -100 0 0 {name=MODEL only_toplevel=true
 format="tcleval( @value )"
 value=".lib cornerMOSlv.lib mos_tt
@@ -42,6 +42,8 @@ save all
 op
 write @schname\\\\.raw
 ac dec 100 1k 100G
+let Zdiode = v(v_gs) / i(Vmeas)
+plot Zdiode ylabel 'Zdiode'
 .endc
 "}
 C {devices/gnd.sym} 750 -280 0 0 {name=l1 lab=GND}
@@ -59,13 +61,14 @@ spiceprefix=X
 }
 C {devices/launcher.sym} 500 -160 0 0 {name=h2
 descr="simulate" 
-tclcommand="xschem save; xschem netlist; xschem simulate"
+tclcommand="xschem save; xschem netlist; file mkdir $netlist_dir; write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save; xschem simulate"
 }
 C {devices/launcher.sym} 740 -160 0 0 {name=h3
 descr="annotate OP" 
 tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
-C {devices/isource.sym} 750 -470 0 0 {name=Ibias value="dc 20u ac 1"}
+C {devices/isource.sym} 750 -550 0 0 {name=Ibias value="dc 20u ac 1"}
 C {devices/lab_pin.sym} 680 -420 0 0 {name=p1 sig_type=std_logic lab=v_gs}
-C {devices/lab_pin.sym} 520 -540 0 0 {name=p2 sig_type=std_logic lab=v_dd}
+C {devices/lab_pin.sym} 520 -620 0 0 {name=p2 sig_type=std_logic lab=v_dd}
 C {sg13cmos5l_pr/annotate_fet_params.sym} 900 -430 0 0 {name=annot1 ref=M1}
+C {ammeter.sym} 750 -470 0 1 {name=Vmeas savecurrent=true spice_ignore=0}

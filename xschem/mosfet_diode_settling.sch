@@ -106,7 +106,7 @@ spiceprefix=X
 }
 C {devices/launcher.sym} 380 -160 0 0 {name=h2
 descr="simulate" 
-tclcommand="xschem save; xschem netlist; xschem simulate"
+tclcommand="xschem save; xschem netlist; file mkdir $netlist_dir; write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save; xschem simulate"
 }
 C {devices/isource.sym} 570 -630 0 0 {name=Ibias value="dc 0 pwl(0 0 10p 0 11p 20u 100p 20u 101p 0)"}
 C {devices/lab_pin.sym} 500 -370 0 0 {name=p1 sig_type=std_logic lab=v_gs}
