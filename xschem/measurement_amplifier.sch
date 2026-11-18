@@ -87,7 +87,7 @@ C {devices/gnd.sym} 340 -280 0 0 {name=l3 lab=GND}
 C {devices/title.sym} 160 -30 0 0 {name=l5 author="(c) 2024-2025 Harald Pretl, Apache-2.0 license"}
 C {devices/launcher.sym} 380 -160 0 0 {name=h2
 descr="simulate" 
-tclcommand="xschem save; xschem netlist; xschem simulate"
+tclcommand="xschem save; xschem netlist; file mkdir $netlist_dir; write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save; xschem simulate"
 }
 C {devices/res.sym} 800 -370 0 0 {name=Rload
 value=50

@@ -99,7 +99,7 @@ spiceprefix=X
 }
 C {devices/launcher.sym} 430 -370 0 0 {name=h2
 descr="simulate" 
-tclcommand="xschem save; xschem netlist; xschem simulate"
+tclcommand="xschem save; xschem netlist; file mkdir $netlist_dir; write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save; xschem simulate"
 }
 C {devices/launcher.sym} 430 -330 0 0 {name=h3
 descr="annotate OP" 
