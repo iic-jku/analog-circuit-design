@@ -180,7 +180,7 @@ tclcommand="set show_hidden_texts 1; xschem annotate_op"
 }
 C {devices/launcher.sym} 750 -540 0 0 {name=h3
 descr="Simulate" 
-tclcommand="xschem save; xschem netlist; xschem simulate"
+tclcommand="xschem save; xschem netlist; file mkdir $netlist_dir; write_data [save_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save; xschem simulate"
 }
 C {devices/vsource.sym} 720 -190 0 0 {name=Vdd value=1.5}
 C {devices/gnd.sym} 720 -140 0 0 {name=l3 lab=GND}
