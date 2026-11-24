@@ -9,7 +9,7 @@
 <meta name="author" content="Harald Pretl">
 <meta name="author" content="Michael Koefinger">
 <meta name="author" content="Simon Dorrer">
-<meta name="dcterms.date" content="2026-11-18">
+<meta name="dcterms.date" content="2026-11-24">
 
 <title>Analog (Integrated) Circuit Design</title>
 <style>
@@ -107,9 +107,9 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-67c19ae4ccf12187c21e9a49606d88c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-7161d6debfbbeb18c199e9e749415f29.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-67c19ae4ccf12187c21e9a49606d88c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-617cf3caa8875cc10634fc9bb1a184ba.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8af7fdd94d4b5e2a6faf425b6f4c61d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-617cf3caa8875cc10634fc9bb1a184ba.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -603,7 +603,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 18, 2026</p>
+      <p class="date">November 24, 2026</p>
     </div>
   </div>
   
@@ -2377,10 +2377,10 @@ I_\mathrm{out} = \frac{g_\mathrm{m}\cdot g_\mathrm{tail}}{2 g_\mathrm{m}+ g_\mat
 </ol>
 <p>Note that <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a> is closely related to the general case of a degenerated common-source transistor stage (see <a href="#fig-common-source-degenerated" class="quarto-xref">Figure&nbsp;32</a>). The effective transconductance <span class="math inline">\(g_\mathrm{m}'\)</span> of a degenerated CS stage is given by</p>
 <p><span class="math display">\[
-g_\mathrm{m}' = \frac{I_\mathrm{out}}{V_\mathrm{in}} = \frac{1}{g_\mathrm{m}^{-1} + R_\mathrm{degen}}.
+g_\mathrm{m}' = \frac{I_\mathrm{out}}{V_\mathrm{in}} = \frac{1}{g_\mathrm{m}^{-1} + R_\mathrm{deg}}.
 \]</span></p>
-<p>For the differential-pair half circuit in common-mode operation, the effective source degeneration is <span class="math inline">\(R_\mathrm{degen} = 2/g_\mathrm{tail}\)</span>, yielding <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a>.</p>
-<p>When no degeneration resistor is used, then <span class="math inline">\(g_\mathrm{m}' = g_\mathrm{m}\)</span>. If a degeneration of <span class="math inline">\(R_\mathrm{degen} \gg g_\mathrm{m}^{-1}\)</span> is used then <span class="math inline">\(g_\mathrm{m}' = 1 / R_\mathrm{degen}\)</span>. This result is worth memorizing.</p>
+<p>For the differential-pair half circuit in common-mode operation, the effective source degeneration is <span class="math inline">\(R_\mathrm{deg} = 2/g_\mathrm{tail}\)</span>, yielding <a href="#eq-differential-pair-cm" class="quarto-xref">Equation&nbsp;13</a>.</p>
+<p>When no degeneration resistor is used, then <span class="math inline">\(g_\mathrm{m}' = g_\mathrm{m}\)</span>. If a degeneration of <span class="math inline">\(R_\mathrm{deg} \gg g_\mathrm{m}^{-1}\)</span> is used then <span class="math inline">\(g_\mathrm{m}' = 1 / R_\mathrm{deg}\)</span>. This result is worth memorizing.</p>
 <div id="cell-fig-common-source-degenerated" class="cell" data-execution_count="22">
 <div class="cell-output cell-output-display">
 <div id="fig-common-source-degenerated" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -7135,14 +7135,14 @@ Widlar, R. J. 1971. <span>“<span class="nocase">New developments in IC voltage
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>Apache-2.0 license</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><div class="code-copy-outer-scaffold"><pre class="sourceCode quarto-appendix-bibtex code-with-copy"><code class="sourceCode bibtex">@online{pretl2026,
   author = {Pretl, Harald and Koefinger, Michael and Dorrer, Simon},
   title = {Analog {(Integrated)} {Circuit} {Design}},
-  date = {2026-11-18},
+  date = {2026-11-24},
   url = {https://iic-jku.github.io/analog-circuit-design},
   doi = {10.5281/zenodo.14387481},
   langid = {en-US}
 }
 </code></pre><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pretl2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pretl, Harald, Michael Koefinger, and Simon Dorrer. 2026. <span>“Analog
-(Integrated) Circuit Design.”</span> November 18. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
+(Integrated) Circuit Design.”</span> November 24. <a href="https://doi.org/10.5281/zenodo.14387481">https://doi.org/10.5281/zenodo.14387481</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
