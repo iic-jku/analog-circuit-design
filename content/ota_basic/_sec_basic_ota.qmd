@@ -16,7 +16,7 @@ limitations under the License.
 
 # A Basic 5-Transistor OTA {#sec-basic-ota}
 
-Armed with the insights of basic transistor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair), we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
+Prepared with the insights of basic transistor operation (@sec-first-steps and @sec-gmid-method) and the working knowledge of the current mirror (@sec-mosfet-diode and @sec-current-mirror) as well as the differential pair (@sec-diff-pair), we can now start to design our first real circuit. A fundamental (simple) circuit that is often used for basic tasks is the 5-transistor operational transconductance amplifier (OTA). A circuit diagram of this 5T-OTA is shown in @fig-basic-ota.
 
 {{< include /content/ota_basic/_fig_basic_ota.qmd >}}
 
@@ -271,7 +271,7 @@ Please take your time and carefully go through the explanations and derivations 
 
 ## 5T-OTA Sizing {#sec-basic-ota-sizing}
 
-Armed with the governing equations derived in @sec-basic-ota-small-signal, we can now size the MOSFETs in the OTA. We remember that we have to size $M_{1,2}$ and $M_{3,4}$ equally.
+Having the governing equations derived in @sec-basic-ota-small-signal available, we can now size the MOSFETs in the OTA. We remember that we have to size $M_{1,2}$ and $M_{3,4}$ equally.
 
 First, we need to select a proper $\gmid$ for the MOSFET. Remembering @sec-gmid-method, we see that for the input differential pair we should go for a large $\gm$, thus we select a $\gmid = 10$. As $\gds$ of $M_2$ could limit the dc gain (@eq-simple-ota-gain-dc), we go with a rather long $L = 5\,\mu\text{m}$. For current sources, a small $\gmid$ is a good idea, so we start with $\gmid=5$ (because we cannot go too low because of $V_\mathrm{ds,sat}$) and also an $L = 5\,\mu\text{m}$. The $\gmid$ is also useful to estimate the required drain-source voltage to keep a MOSFET in saturation (i.e., keep the $\gds$ small) with this approximate relationship:
 
